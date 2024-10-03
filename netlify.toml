@@ -1,0 +1,18 @@
+[build]
+  command = """
+    mike deploy --push --update-aliases ${DEPLOY_VERSION} latest
+    mike set-default --push latest
+  """
+  publish = "site"
+
+[build.environment]
+  PYTHON_VERSION = "3.8"
+
+[context.production]
+  command = """
+    mike deploy --push --update-aliases ${DEPLOY_VERSION} latest
+    mike set-default --push latest
+  """
+
+[context.branch-deploy]
+  command = "mike deploy --push ${DEPLOY_PRIME_URL#*/} latest"
