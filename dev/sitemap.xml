@@ -1,27 +1,387 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
-         <loc>https://hornetlabs.github.io/synchdb-docs/latest/</loc>
-         <lastmod>2024-10-03</lastmod>
+        <loc>None./</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="None"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/"/>
     </url>
     <url>
-         <loc>https://hornetlabs.github.io/synchdb-docs/latest/api-reference/</loc>
-         <lastmod>2024-10-03</lastmod>
+        <loc>Nonechangelog/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonechangelog/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/changelog/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/changelog/"/>
     </url>
     <url>
-         <loc>https://hornetlabs.github.io/synchdb-docs/latest/changelog/</loc>
-         <lastmod>2024-10-03</lastmod>
+        <loc>NoneUser%20Guide/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/"/>
     </url>
     <url>
-         <loc>https://hornetlabs.github.io/synchdb-docs/latest/user-guide/configuration/</loc>
-         <lastmod>2024-10-03</lastmod>
+        <loc>NoneUser%20Guide/configuration/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/configuration/"/>
     </url>
     <url>
-         <loc>https://hornetlabs.github.io/synchdb-docs/latest/user-guide/installation/</loc>
-         <lastmod>2024-10-03</lastmod>
+        <loc>NoneUser%20Guide/connector_auto_launcher/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/connector_auto_launcher/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/connector_auto_launcher/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/connector_auto_launcher/"/>
     </url>
     <url>
-         <loc>https://hornetlabs.github.io/synchdb-docs/latest/user-guide/usage/</loc>
-         <lastmod>2024-10-03</lastmod>
+        <loc>NoneUser%20Guide/custom_datatype_mapping/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/custom_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/custom_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/custom_datatype_mapping/"/>
+    </url>
+    <url>
+        <loc>NoneUser%20Guide/default_datatype_mapping/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/default_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/default_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/default_datatype_mapping/"/>
+    </url>
+    <url>
+        <loc>NoneUser%20Guide/installation/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/installation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/installation/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/installation/"/>
+    </url>
+    <url>
+        <loc>NoneUser%20Guide/prepare_tests_env/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/prepare_tests_env/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/prepare_tests_env/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/prepare_tests_env/"/>
+    </url>
+    <url>
+        <loc>NoneUser%20Guide/quick_start/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/quick_start/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/quick_start/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/quick_start/"/>
+    </url>
+    <url>
+        <loc>NoneUser%20Guide/set_offset/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/set_offset/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/set_offset/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/set_offset/"/>
+    </url>
+    <url>
+        <loc>NoneUser%20Guide/usage/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/usage/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/usage/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/usage/"/>
+    </url>
+    <url>
+        <loc>NoneUser%20Guide/utility_functions/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/utility_functions/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/utility_functions/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/utility_functions/"/>
+    </url>
+    <url>
+        <loc>Nonearchitecture/architecture/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonearchitecture/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/architecture/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/architecture/architecture/"/>
+    </url>
+    <url>
+        <loc>Nonearchitecture/batch_change_handling/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonearchitecture/batch_change_handling/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/architecture/batch_change_handling/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/architecture/batch_change_handling/"/>
+    </url>
+    <url>
+        <loc>Nonearchitecture/metadata_files/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonearchitecture/metadata_files/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/architecture/metadata_files/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/architecture/metadata_files/"/>
+    </url>
+    <url>
+        <loc>Nonees/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="None"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/"/>
+    </url>
+    <url>
+        <loc>Nonees/changelog/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/changelog/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonechangelog/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/changelog/"/>
+    </url>
+    <url>
+        <loc>Nonees/User%20Guide/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/"/>
+    </url>
+    <url>
+        <loc>Nonees/User%20Guide/configuration/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/configuration/"/>
+    </url>
+    <url>
+        <loc>Nonees/User%20Guide/connector_auto_launcher/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/connector_auto_launcher/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/connector_auto_launcher/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/connector_auto_launcher/"/>
+    </url>
+    <url>
+        <loc>Nonees/User%20Guide/custom_datatype_mapping/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/custom_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/custom_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/custom_datatype_mapping/"/>
+    </url>
+    <url>
+        <loc>Nonees/User%20Guide/default_datatype_mapping/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/default_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/default_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/default_datatype_mapping/"/>
+    </url>
+    <url>
+        <loc>Nonees/User%20Guide/installation/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/installation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/installation/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/installation/"/>
+    </url>
+    <url>
+        <loc>Nonees/User%20Guide/prepare_tests_env/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/prepare_tests_env/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/prepare_tests_env/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/prepare_tests_env/"/>
+    </url>
+    <url>
+        <loc>Nonees/User%20Guide/quick_start/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/quick_start/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/quick_start/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/quick_start/"/>
+    </url>
+    <url>
+        <loc>Nonees/User%20Guide/set_offset/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/set_offset/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/set_offset/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/set_offset/"/>
+    </url>
+    <url>
+        <loc>Nonees/User%20Guide/usage/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/usage/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/usage/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/usage/"/>
+    </url>
+    <url>
+        <loc>Nonees/User%20Guide/utility_functions/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/utility_functions/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/utility_functions/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/utility_functions/"/>
+    </url>
+    <url>
+        <loc>Nonees/architecture/architecture/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/architecture/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonearchitecture/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/architecture/architecture/"/>
+    </url>
+    <url>
+        <loc>Nonees/architecture/batch_change_handling/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/architecture/batch_change_handling/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonearchitecture/batch_change_handling/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/architecture/batch_change_handling/"/>
+    </url>
+    <url>
+        <loc>Nonees/architecture/metadata_files/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/architecture/metadata_files/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonearchitecture/metadata_files/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/architecture/metadata_files/"/>
+    </url>
+    <url>
+        <loc>Nonezh/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="None"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/"/>
+    </url>
+    <url>
+        <loc>Nonezh/changelog/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/changelog/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonechangelog/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/changelog/"/>
+    </url>
+    <url>
+        <loc>Nonezh/User%20Guide/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/"/>
+    </url>
+    <url>
+        <loc>Nonezh/User%20Guide/configuration/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/configuration/"/>
+    </url>
+    <url>
+        <loc>Nonezh/User%20Guide/connector_auto_launcher/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/connector_auto_launcher/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/connector_auto_launcher/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/connector_auto_launcher/"/>
+    </url>
+    <url>
+        <loc>Nonezh/User%20Guide/custom_datatype_mapping/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/custom_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/custom_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/custom_datatype_mapping/"/>
+    </url>
+    <url>
+        <loc>Nonezh/User%20Guide/default_datatype_mapping/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/default_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/default_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/default_datatype_mapping/"/>
+    </url>
+    <url>
+        <loc>Nonezh/User%20Guide/installation/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/installation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/installation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/installation/"/>
+    </url>
+    <url>
+        <loc>Nonezh/User%20Guide/prepare_tests_env/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/prepare_tests_env/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/prepare_tests_env/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/prepare_tests_env/"/>
+    </url>
+    <url>
+        <loc>Nonezh/User%20Guide/quick_start/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/quick_start/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/quick_start/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/quick_start/"/>
+    </url>
+    <url>
+        <loc>Nonezh/User%20Guide/set_offset/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/set_offset/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/set_offset/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/set_offset/"/>
+    </url>
+    <url>
+        <loc>Nonezh/User%20Guide/usage/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/usage/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/usage/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/usage/"/>
+    </url>
+    <url>
+        <loc>Nonezh/User%20Guide/utility_functions/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/User%20Guide/utility_functions/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="NoneUser%20Guide/utility_functions/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/User%20Guide/utility_functions/"/>
+    </url>
+    <url>
+        <loc>Nonezh/architecture/architecture/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/architecture/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonearchitecture/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/architecture/architecture/"/>
+    </url>
+    <url>
+        <loc>Nonezh/architecture/batch_change_handling/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/architecture/batch_change_handling/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonearchitecture/batch_change_handling/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/architecture/batch_change_handling/"/>
+    </url>
+    <url>
+        <loc>Nonezh/architecture/metadata_files/</loc>
+        <lastmod>2024-10-03</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="Nonezh/architecture/metadata_files/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="Nonearchitecture/metadata_files/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="Nonees/architecture/metadata_files/"/>
     </url>
 </urlset>
