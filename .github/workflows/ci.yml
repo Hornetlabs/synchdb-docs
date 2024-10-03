@@ -1,8 +1,10 @@
 name: ci 
 on:
   push:
-    branches:
+    branches: 
       - main
+    tags:
+      - 'v*'
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -13,8 +15,22 @@ jobs:
       - uses: actions/setup-python@v2
         with:
           python-version: 3.x
-      - run: pip install mkdocs-material mike
-      - run: git config user.name ci-bot
-      - run: git config user.email ci-bot@example.com
-      - run: mike deploy --push --update-aliases 0.1 latest
-      - run: mike set-default --push latest
+      - name: Install dependencies
+        run: |
+          pip install mkdocs-material
+          pip install mkdocs-minify-plugin
+          pip install mike
+          pip install pymdown-extensions
+      - name: Configure Git
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+      - name: Deploy documentation
+        run: |
+          if [[ ${{ github.ref }} =~ ^refs/tags/v ]]; then
+            VERSION=${GITHUB_REF#refs/tags/v}
+            mike deploy --push --update-aliases $VERSION latest
+            mike set-default --push latest
+          else
+            mike deploy --push dev
+          fi
