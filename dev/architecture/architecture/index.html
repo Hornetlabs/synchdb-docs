@@ -20,7 +20,7 @@
     
     
       
-        <title>SynchDB Architecture - SynchDB Documentation</title>
+        <title>Architecture - SynchDB Documentation</title>
       
     
     
@@ -62,7 +62,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#synchdb-architecture" class="md-skip">
+        <a href="#architecture" class="md-skip">
           Skip to content
         </a>
       
@@ -96,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              SynchDB Architecture
+              Architecture
             
           </span>
         </div>
@@ -400,15 +400,123 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Architecture
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    SynchDB Architecture
+    Architecture
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#archtecture-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      Archtecture Diagram
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Archtecture Diagram">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#debezium-runner-engine-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debezium Runner Engine (Java)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb-launcher" class="md-nav__link">
+    <span class="md-ellipsis">
+      SynchDB Launcher
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb-worker" class="md-nav__link">
+    <span class="md-ellipsis">
+      SynchDB Worker
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#format-converter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Format Converter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replication-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      Replication Agent
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#table-sync-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table Sync Agent
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jave-native-interface-jni" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jave Native Interface (JNI)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -426,7 +534,7 @@
         
   
   <span class="md-ellipsis">
-    Batch change handling
+    Batch Change Handling
   </span>
   
 
@@ -447,7 +555,7 @@
         
   
   <span class="md-ellipsis">
-    Metadata files
+    Metadata Files
   </span>
   
 
@@ -557,7 +665,7 @@
         
   
   <span class="md-ellipsis">
-    Connector auto launcher
+    Connector Auto Launcher
   </span>
   
 
@@ -578,7 +686,7 @@
         
   
   <span class="md-ellipsis">
-    Custom datatype mapping
+    Custom Data Type Mapping
   </span>
   
 
@@ -599,7 +707,7 @@
         
   
   <span class="md-ellipsis">
-    Default datatype mapping
+    Default Data Type Mapping
   </span>
   
 
@@ -641,7 +749,7 @@
         
   
   <span class="md-ellipsis">
-    Prepare tests env
+    Prepare Sample Heterogeneous Databases
   </span>
   
 
@@ -662,7 +770,7 @@
         
   
   <span class="md-ellipsis">
-    Quick start
+    Quick Start Guide
   </span>
   
 
@@ -683,7 +791,7 @@
         
   
   <span class="md-ellipsis">
-    Set offset
+    Set Custom Start Offset Values
   </span>
   
 
@@ -725,7 +833,7 @@
         
   
   <span class="md-ellipsis">
-    Utility functions
+    Utility Function List
   </span>
   
 
@@ -762,6 +870,92 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#archtecture-diagram" class="md-nav__link">
+    <span class="md-ellipsis">
+      Archtecture Diagram
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Archtecture Diagram">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#debezium-runner-engine-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      Debezium Runner Engine (Java)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb-launcher" class="md-nav__link">
+    <span class="md-ellipsis">
+      SynchDB Launcher
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb-worker" class="md-nav__link">
+    <span class="md-ellipsis">
+      SynchDB Worker
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#format-converter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Format Converter
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replication-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      Replication Agent
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#table-sync-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table Sync Agent
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jave-native-interface-jni" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jave Native Interface (JNI)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -775,7 +969,55 @@
                   
 
 
-<h1 id="synchdb-architecture">SynchDB Architecture<a class="headerlink" href="#synchdb-architecture" title="Permanent link">&para;</a></h1>
+<h1 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">&para;</a></h1>
+<h2 id="archtecture-diagram">Archtecture Diagram<a class="headerlink" href="#archtecture-diagram" title="Permanent link">&para;</a></h2>
+<p>SynchDB extension consists of six major components:
+* Debezium Runner Engine (Java)
+* SynchDB Launcher
+* SynchDB Worker
+* Format Converter
+* Replication Agent
+* Table Synch Agent (TBD)</p>
+<p>Refer to the architecture diagram for a visual representation of the components and their interactions.
+<img alt="img" src="https://www.highgo.ca/wp-content/uploads/2024/07/synchdb.drawio.png" /></p>
+<h3 id="debezium-runner-engine-java">Debezium Runner Engine (Java)<a class="headerlink" href="#debezium-runner-engine-java" title="Permanent link">&para;</a></h3>
+<ul>
+<li>A java application utilizing Debezium embedded library.</li>
+<li>Supports various connector implementations to replicate change data from various database types such as MySQL, Oracle, SQL Server, etc.</li>
+<li>Invoked by <code>SynchDB Worker</code> to initialize Debezium embedded library and receive change data.</li>
+<li>Send the change data to <code>SynchDB Worker</code> in generalized JSON format for further processing.</li>
+</ul>
+<h3 id="synchdb-launcher">SynchDB Launcher<a class="headerlink" href="#synchdb-launcher" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Responsible for creating and destroying SynchDB workers using PostgreSQL's background worker APIs.</li>
+<li>Configure each worker's connector type, destination database IPs, ports, etc.</li>
+</ul>
+<h3 id="synchdb-worker">SynchDB Worker<a class="headerlink" href="#synchdb-worker" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Instantiates a <code>Debezium Runner Engine</code> to replicate changes from a specific connector type.</li>
+<li>Communicate with Debezium Runner via JNI to receive change data in JSON formats.</li>
+<li>Transfer the JSON change data to <code>Format Converter</code> module for further processing.</li>
+</ul>
+<h3 id="format-converter">Format Converter<a class="headerlink" href="#format-converter" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Parse the JSON change data using PostgreSQL Jsonb APIs</li>
+<li>Transform DDL change details to PostgreSQL compatible SQL queries following user-defined translation rules.</li>
+<li>Transform DML change details to PostgreSQL compatible data representation by processing them based on column data types. It Produces raw HeapTupleData which can be fed directly to Heap Access Method within PostgreSQL for faster executions.</li>
+</ul>
+<h3 id="replication-agent">Replication Agent<a class="headerlink" href="#replication-agent" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Processes the outputs from <strong><code>Format Converter</code></strong>.</li>
+<li><strong><code>Format Converter</code></strong> will produce HeapTupleData format outputs, then <strong><code>Replication Agent</code></strong> will invoke PostgreSQL's heap access method routines to handle them.</li>
+<li>for DDL queries, <strong><code>Replication Agent</code></strong> will invoke PostgreSQL's SPI to handle them.</li>
+</ul>
+<h3 id="table-sync-agent">Table Sync Agent<a class="headerlink" href="#table-sync-agent" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Design details and implementation are not available yet. TBD</li>
+<li>Intended to provide a more efficient alternative to perform initial table synchronization.</li>
+</ul>
+<h2 id="jave-native-interface-jni">Jave Native Interface (JNI)<a class="headerlink" href="#jave-native-interface-jni" title="Permanent link">&para;</a></h2>
+<p>Java Native Interface (JNI) is a framework that allows Java applications to interact with native code written in languages like C or C++. It enables Java programs to call and be called by native applications and libraries, providing a bridge between Java’s platform independence and the performance advantages of native code. JNI is commonly used to integrate platform-specific features, optimize performance-critical sections of an application, or access legacy libraries that are not available in Java. It requires careful management of resources, as it involves switching between the Java Virtual Machine (JVM) and native environments, which can introduce complexity.</p>
+<p>SynchDB requires JNI to exchange resources between Debezium runner engine and SynchDB PostgreSQL extension. JNI is available with Java Installation (ex. openjdk).</p>
 
 
 

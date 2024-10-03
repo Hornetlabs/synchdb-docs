@@ -20,7 +20,7 @@
     
     
       
-        <title>Set offset - SynchDB Documentation</title>
+        <title>Set Custom Start Offset Values - SynchDB Documentation</title>
       
     
     
@@ -61,6 +61,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#set-custom-start-offset-values" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -91,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Set offset
+              Set Custom Start Offset Values
             
           </span>
         </div>
@@ -385,7 +390,7 @@
         
   
   <span class="md-ellipsis">
-    SynchDB Architecture
+    Architecture
   </span>
   
 
@@ -406,7 +411,7 @@
         
   
   <span class="md-ellipsis">
-    Batch change handling
+    Batch Change Handling
   </span>
   
 
@@ -427,7 +432,7 @@
         
   
   <span class="md-ellipsis">
-    Metadata files
+    Metadata Files
   </span>
   
 
@@ -542,7 +547,7 @@
         
   
   <span class="md-ellipsis">
-    Connector auto launcher
+    Connector Auto Launcher
   </span>
   
 
@@ -563,7 +568,7 @@
         
   
   <span class="md-ellipsis">
-    Custom datatype mapping
+    Custom Data Type Mapping
   </span>
   
 
@@ -584,7 +589,7 @@
         
   
   <span class="md-ellipsis">
-    Default datatype mapping
+    Default Data Type Mapping
   </span>
   
 
@@ -626,7 +631,7 @@
         
   
   <span class="md-ellipsis">
-    Prepare tests env
+    Prepare Sample Heterogeneous Databases
   </span>
   
 
@@ -647,7 +652,7 @@
         
   
   <span class="md-ellipsis">
-    Quick start
+    Quick Start Guide
   </span>
   
 
@@ -670,16 +675,84 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Set Custom Start Offset Values
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Set offset
+    Set Custom Start Offset Values
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#record-settable-offset-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Record Settable Offset Values
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pause-the-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pause the Connector
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-the-new-offset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set the new Offset
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resume-the-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resume the Connector
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -718,7 +791,7 @@
         
   
   <span class="md-ellipsis">
-    Utility functions
+    Utility Function List
   </span>
   
 
@@ -752,6 +825,52 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#record-settable-offset-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      Record Settable Offset Values
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pause-the-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pause the Connector
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-the-new-offset" class="md-nav__link">
+    <span class="md-ellipsis">
+      Set the new Offset
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resume-the-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resume the Connector
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -766,9 +885,62 @@
                   
 
 
-  <h1>Set offset</h1>
-
-
+<h1 id="set-custom-start-offset-values">Set Custom Start Offset Values<a class="headerlink" href="#set-custom-start-offset-values" title="Permanent link">&para;</a></h1>
+<p>A start offset value represents a point to start replication from in the similar way as PostgreSQL's resume LSN. When Debezium runner engine starts, it will start the replication from this offset value. Setting this offset value to a earlier value will cause Debezium runner engine to start replication from earlier records, possibly replicating duplicate data records. We should be extra cautious when setting start offset values on Debezium.</p>
+<h2 id="record-settable-offset-values">Record Settable Offset Values<a class="headerlink" href="#record-settable-offset-values" title="Permanent link">&para;</a></h2>
+<p>During operation, new offsets will be generated nd flushed to disk by Debezium runner engine. The last flushed offset can be retrieved from <code>synchdb_state_view()</code> utility command:</p>
+<div class="highlight"><pre><span></span><code>postgres=# select * from synchdb_state_view;
+ id | connector | conninfo_name  |  pid   |  state  |   err    |                                          last_dbz_offset
+----+-----------+----------------+--------+---------+----------+---------------------------------------------------------------------------------------------------
+  0 | mysql     | mysqlconn      | 461696 | syncing | no error | {&quot;ts_sec&quot;:1725644339,&quot;file&quot;:&quot;mysql-bin.000004&quot;,&quot;pos&quot;:138466,&quot;row&quot;:1,&quot;server_id&quot;:223344,&quot;event&quot;:2}
+  1 | sqlserver | sqlserverconn  | 461739 | syncing | no error | {&quot;event_serial_no&quot;:1,&quot;commit_lsn&quot;:&quot;00000100:00000c00:0003&quot;,&quot;change_lsn&quot;:&quot;00000100:00000c00:0002&quot;}
+  3 | null      |                |     -1 | stopped | no error | no offset
+  4 | null      |                |     -1 | stopped | no error | no offset
+  4 | null      |                |     -1 | stopped | no error | no offset
+  5 | null      |                |     -1 | stopped | no error | no offset
+  6 | null      |                |     -1 | stopped | no error | no offset
+  7 | null      |                |     -1 | stopped | no error | no offset
+  8 | null      |                |     -1 | stopped | no error | no offset
+  9 | null      |                |     -1 | stopped | no error | no offset
+ 10 | null      |                |     -1 | stopped | no error | no offset
+ 11 | null      |                |     -1 | stopped | no error | no offset
+ 12 | null      |                |     -1 | stopped | no error | no offset
+ 13 | null      |                |     -1 | stopped | no error | no offset
+ 14 | null      |                |     -1 | stopped | no error | no offset
+ 15 | null      |                |     -1 | stopped | no error | no offset
+ 16 | null      |                |     -1 | stopped | no error | no offset
+ 17 | null      |                |     -1 | stopped | no error | no offset
+ 18 | null      |                |     -1 | stopped | no error | no offset
+ 19 | null      |                |     -1 | stopped | no error | no offset
+ 20 | null      |                |     -1 | stopped | no error | no offset
+ 21 | null      |                |     -1 | stopped | no error | no offset
+ 22 | null      |                |     -1 | stopped | no error | no offset
+ 23 | null      |                |     -1 | stopped | no error | no offset
+ 24 | null      |                |     -1 | stopped | no error | no offset
+ 25 | null      |                |     -1 | stopped | no error | no offset
+ 26 | null      |                |     -1 | stopped | no error | no offset
+ 27 | null      |                |     -1 | stopped | no error | no offset
+ 28 | null      |                |     -1 | stopped | no error | no offset
+ 29 | null      |                |     -1 | stopped | no error | no offset
+</code></pre></div>
+<p>Depending on the connector type, this offset value differs. From the example above, the <code>mysql</code> connector's last flushed offset is <code>{"ts_sec":1725644339,"file":"mysql-bin.000004","pos":138466,"row":1,"server_id":223344,"event":2}</code> and <code>sqlserver</code>'s last flushed offset is <code>{"event_serial_no":1,"commit_lsn":"00000100:00000c00:0003","change_lsn":"00000100:00000c00:0002"}</code>. </p>
+<p>We should save this values regularly, so in case we run into a problem, we know the offset location in the past that can be set to resume the replication operation.</p>
+<h2 id="pause-the-connector">Pause the Connector<a class="headerlink" href="#pause-the-connector" title="Permanent link">&para;</a></h2>
+<p>A connector must be in a <code>paused</code> state before a new offset value can be set.</p>
+<p>Use <code>synchdb_pause_engine()</code> SQL function to pause a runnng connector. This will halt the Debezium runner engine from replicating from the heterogeneous database. When paused, it is possible to alter the Debezium connector's offset value to replicate from a specific point in the past using <code>synchdb_set_offset()</code> SQL routine. It takes <code>conninfo_name</code> as its argument which can be found from the output of <code>synchdb_get_state()</code> view.</p>
+<p>For example:
+<div class="highlight"><pre><span></span><code>SELECT synchdb_pause_engine(&#39;mysqlconn&#39;);
+</code></pre></div></p>
+<h2 id="set-the-new-offset">Set the new Offset<a class="headerlink" href="#set-the-new-offset" title="Permanent link">&para;</a></h2>
+<p>Use <code>synchdb_set_offset()</code> SQL function to change a connector worker's starting offset. This can only be done when the connector is put into <code>paused</code> state. The function takes 2 parameters, <code>conninfo_name</code> and <code>a valid offset string</code>, both of which can be found from the output of <code>synchdb_get_state()</code> view.</p>
+<p>For example:
+<div class="highlight"><pre><span></span><code>SELECT synchdb_set_offset(&#39;mysqlconn&#39;, &#39;{&quot;ts_sec&quot;:1725644339,&quot;file&quot;:&quot;mysql-bin.000004&quot;,&quot;pos&quot;:138466,&quot;row&quot;:1,&quot;server_id&quot;:223344,&quot;event&quot;:2}&#39;);
+</code></pre></div></p>
+<h2 id="resume-the-connector">Resume the Connector<a class="headerlink" href="#resume-the-connector" title="Permanent link">&para;</a></h2>
+<p>Use <code>synchdb_resume_engine()</code> SQL function to resume Debezium operation from a paused state. This function takes <code>connector name</code> as its only parameter, which can be found from the output of <code>synchdb_get_state()</code> view. The resumed Debezium runner engine will start the replication from the newly set offset value.</p>
+<p>For example:
+<div class="highlight"><pre><span></span><code>SELECT synchdb_resume_engine(&#39;mysqlconn&#39;);
+</code></pre></div></p>
 
 
 

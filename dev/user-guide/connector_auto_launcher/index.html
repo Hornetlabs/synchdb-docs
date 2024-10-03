@@ -20,7 +20,7 @@
     
     
       
-        <title>Connector auto launcher - SynchDB Documentation</title>
+        <title>Connector Auto Launcher - SynchDB Documentation</title>
       
     
     
@@ -61,6 +61,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#connector-auto-launcher" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -91,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Connector auto launcher
+              Connector Auto Launcher
             
           </span>
         </div>
@@ -385,7 +390,7 @@
         
   
   <span class="md-ellipsis">
-    SynchDB Architecture
+    Architecture
   </span>
   
 
@@ -406,7 +411,7 @@
         
   
   <span class="md-ellipsis">
-    Batch change handling
+    Batch Change Handling
   </span>
   
 
@@ -427,7 +432,7 @@
         
   
   <span class="md-ellipsis">
-    Metadata files
+    Metadata Files
   </span>
   
 
@@ -544,16 +549,66 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Connector Auto Launcher
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Connector auto launcher
+    Connector Auto Launcher
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#enable-synchdb-auto-launcher" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enable SynchDB Auto Launcher
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Known Issue
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -571,7 +626,7 @@
         
   
   <span class="md-ellipsis">
-    Custom datatype mapping
+    Custom Data Type Mapping
   </span>
   
 
@@ -592,7 +647,7 @@
         
   
   <span class="md-ellipsis">
-    Default datatype mapping
+    Default Data Type Mapping
   </span>
   
 
@@ -634,7 +689,7 @@
         
   
   <span class="md-ellipsis">
-    Prepare tests env
+    Prepare Sample Heterogeneous Databases
   </span>
   
 
@@ -655,7 +710,7 @@
         
   
   <span class="md-ellipsis">
-    Quick start
+    Quick Start Guide
   </span>
   
 
@@ -676,7 +731,7 @@
         
   
   <span class="md-ellipsis">
-    Set offset
+    Set Custom Start Offset Values
   </span>
   
 
@@ -718,7 +773,7 @@
         
   
   <span class="md-ellipsis">
-    Utility functions
+    Utility Function List
   </span>
   
 
@@ -752,6 +807,34 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#enable-synchdb-auto-launcher" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enable SynchDB Auto Launcher
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#known-issue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Known Issue
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -766,9 +849,22 @@
                   
 
 
-  <h1>Connector auto launcher</h1>
-
-
+<h1 id="connector-auto-launcher">Connector Auto Launcher<a class="headerlink" href="#connector-auto-launcher" title="Permanent link">&para;</a></h1>
+<h2 id="enable-synchdb-auto-launcher">Enable SynchDB Auto Launcher<a class="headerlink" href="#enable-synchdb-auto-launcher" title="Permanent link">&para;</a></h2>
+<p>A connection worker becomes eligible for automatic Launch when <code>synchdb_start_engine_bgw()</code> is issued on a particular <code>connector name</code>. Likewise, it becomes ineligible when <code>synchdb_stop_engine_bgw()</code> is issued. </p>
+<p>Automatic connector launcher can be enabled by:</p>
+<ul>
+<li>add <code>synchdb</code> to <code>shared_preload_libraries</code> GUC option in postgresql.conf</li>
+<li>set new GUC option <code>synchdb.synchdb_auto_launcher</code> to true in postgresql.conf</li>
+<li>restart the PostgreSQL server for the changes to take effect</li>
+</ul>
+<p>For example:
+<div class="highlight"><pre><span></span><code>shared_preload_libraries = &#39;synchdb&#39;
+synchdb.synchdb_auto_launcher = true
+</code></pre></div></p>
+<p>At startup, SynchDB extension will be preloaded very early. With <code>synchdb.synchdb_auto_launcher</code> set to true, SynchDB will spawn a <code>synchdb_auto_launcher</code> background worker that will retrieve all the conninfos in <code>synchdb_conninfo</code> table that is marked as <code>active</code> ( has <code>isactive</code> flag set to <code>true</code>). Then, it will start them automatically as a separete background worker in the same way as when <code>synchdb_start_engine_bgw()</code> is called.. <code>synchdb_auto_launcher</code> will exit after.</p>
+<h2 id="known-issue">Known Issue<a class="headerlink" href="#known-issue" title="Permanent link">&para;</a></h2>
+<p><code>synchdb_auto_launcher</code> worker will login to the default <code>postgres</code> database and try to find active conenctors from <code>synchdb_conninfo</code> table. If SynchDB has been installed from non-default database, then <code>synchdb_auto_launcher</code> will fail to find the table, and thus not automatically starting the connector worker. In the future, we will make <code>synchdb_auto_launcher</code> check for all the databases and automatically start conenctor workers based on every database's <code>synchdb_conninfo</code> tables.</p>
 
 
 

@@ -20,7 +20,7 @@
     
     
       
-        <title>Custom datatype mapping - SynchDB Documentation</title>
+        <title>Custom Data Type Mapping - SynchDB Documentation</title>
       
     
     
@@ -61,6 +61,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#custom-data-type-mapping" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -91,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Custom datatype mapping
+              Custom Data Type Mapping
             
           </span>
         </div>
@@ -385,7 +390,7 @@
         
   
   <span class="md-ellipsis">
-    SynchDB Architecture
+    Architecture
   </span>
   
 
@@ -406,7 +411,7 @@
         
   
   <span class="md-ellipsis">
-    Batch change handling
+    Batch Change Handling
   </span>
   
 
@@ -427,7 +432,7 @@
         
   
   <span class="md-ellipsis">
-    Metadata files
+    Metadata Files
   </span>
   
 
@@ -542,7 +547,7 @@
         
   
   <span class="md-ellipsis">
-    Connector auto launcher
+    Connector Auto Launcher
   </span>
   
 
@@ -565,16 +570,75 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Custom Data Type Mapping
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Custom datatype mapping
+    Custom Data Type Mapping
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#custom-rule-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Rule File
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#supported-postgresql-data-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supported PostgreSQL Data Type
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -592,7 +656,7 @@
         
   
   <span class="md-ellipsis">
-    Default datatype mapping
+    Default Data Type Mapping
   </span>
   
 
@@ -634,7 +698,7 @@
         
   
   <span class="md-ellipsis">
-    Prepare tests env
+    Prepare Sample Heterogeneous Databases
   </span>
   
 
@@ -655,7 +719,7 @@
         
   
   <span class="md-ellipsis">
-    Quick start
+    Quick Start Guide
   </span>
   
 
@@ -676,7 +740,7 @@
         
   
   <span class="md-ellipsis">
-    Set offset
+    Set Custom Start Offset Values
   </span>
   
 
@@ -718,7 +782,7 @@
         
   
   <span class="md-ellipsis">
-    Utility functions
+    Utility Function List
   </span>
   
 
@@ -752,6 +816,43 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#custom-rule-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Rule File
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#supported-postgresql-data-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Supported PostgreSQL Data Type
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Steps
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -766,9 +867,66 @@
                   
 
 
-  <h1>Custom datatype mapping</h1>
-
-
+<h1 id="custom-data-type-mapping">Custom Data Type Mapping<a class="headerlink" href="#custom-data-type-mapping" title="Permanent link">&para;</a></h1>
+<h2 id="custom-rule-file">Custom Rule File<a class="headerlink" href="#custom-rule-file" title="Permanent link">&para;</a></h2>
+<p>For each supported connector type, SynchDB has a default, built-in data type translation rule that maps heterogeneous data types to those compatible in PostgreSQL. This default rule can be partially overwritten with a custom JSON formatted rule file that is specified during <code>synchdb_add_conninfo()</code>. Synchdb seraches for specified rule file under $PGDATA directory where PostgreSQL server runs on. Here's an example of rule file:</p>
+<p>myrule.json
+<div class="highlight"><pre><span></span><code>{
+    &quot;translation_rules&quot;:
+    [
+        {
+            &quot;translate_from&quot;: &quot;LINESTRING&quot;,
+            &quot;translate_from_autoinc&quot;: false,
+            &quot;translate_to&quot;: &quot;TEXT&quot;,
+            &quot;translate_to_size&quot;: 0
+        },
+        {
+            &quot;translate_from&quot;: &quot;BIGINT UNSIGNED&quot;,
+            &quot;translate_from_autoinc&quot;: false,
+            &quot;translate_to&quot;: &quot;NUMERIC&quot;,
+            &quot;translate_to_size&quot;: -1
+        }
+    ]
+}
+</code></pre></div></p>
+<p>The rule file must contain a JSON array with name <code>"translation_rules"</code> that contains multiple objects:
+* "translate_from": the data type name from heterogeneous database to translate from.
+* "translate_from_autoinc": indicate if the data type specified in <code>"translate_from"</code> is marked as auto increment.
+* "translate_to": the PostgreSQL data type to translate to. See below for list of supported PostgreSQL data types.
+* "translate_to_size": indicate if we should transform the size of the data type specifed in <code>"translate_to"</code>. For example:
+    * 0: Remove any length specifier because the PostgreSQL data type translated to does not need length specifier. For example: TEXT
+    * -1: Use whatever length specifier from the source heterogeneous database (if available) and map it directly to the translated datatype. For example: VARCHAR.
+    * others: put any other values to force the size of translated data type. Use it with caution.</p>
+<h2 id="supported-postgresql-data-type">Supported PostgreSQL Data Type<a class="headerlink" href="#supported-postgresql-data-type" title="Permanent link">&para;</a></h2>
+<p>PostgreSQL supports a range of data types from native to complex data types. However, SyncDB only supports a subset of PostgreSQL data types as of now. More data type support is in the plan. This means that when defining a custom data type mapping rule file, we need to ensure the <code>translate_to</code> data type falls within the list of supported PostgreSQL data type below:</p>
+<ul>
+<li>BOOLEAN (BOOLOID)</li>
+<li>BIGINT (INT8OID)</li>
+<li>SMALLINT (INT2OID)</li>
+<li>INT (INT4OID)</li>
+<li>INTEGER (INT4OID)</li>
+<li>DOUBLE PRECISION (FLOAT8OID)</li>
+<li>REAL (FLOAT4OID)</li>
+<li>MONEY (MONEYOID)</li>
+<li>NUMERIC (NUMERICOID)</li>
+<li>CHAR (BPCHAROID)</li>
+<li>CHARACTER (BPCHAROID)</li>
+<li>TEXT (TEXTOID)</li>
+<li>VARCHAR (VARCHAROID)</li>
+<li>CHARACTER VARYING (VARCHAROID)</li>
+<li>TIMESTAMPTZ (TIMESTAMPTZOID)</li>
+<li>JSONB (JSONBOID)</li>
+<li>UUID (UUIDOID)</li>
+<li>VARBIT (VARBITOID)</li>
+<li>BIT VARYING (VARBITOID)</li>
+<li>BIT (BITOID)</li>
+<li>DATE (DATEOID)</li>
+<li>TIMESTAMP (TIMESTAMPOID)</li>
+<li>TIME (TIMEOID)</li>
+<li>BYTEA (BYTEAOID)</li>
+</ul>
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<p>The data type translation rule currently applies to all. In the future, we will have more granular control of the data type mapping by allowing a data type translation to happen only within specific tables or columns. Or automatically apply a function or expression to the value after the translation. (To be Determined)</p>
 
 
 

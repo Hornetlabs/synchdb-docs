@@ -61,6 +61,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#configuration" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -385,7 +390,7 @@
         
   
   <span class="md-ellipsis">
-    SynchDB Architecture
+    Architecture
   </span>
   
 
@@ -406,7 +411,7 @@
         
   
   <span class="md-ellipsis">
-    Batch change handling
+    Batch Change Handling
   </span>
   
 
@@ -427,7 +432,7 @@
         
   
   <span class="md-ellipsis">
-    Metadata files
+    Metadata Files
   </span>
   
 
@@ -523,6 +528,8 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -550,7 +557,7 @@
         
   
   <span class="md-ellipsis">
-    Connector auto launcher
+    Connector Auto Launcher
   </span>
   
 
@@ -571,7 +578,7 @@
         
   
   <span class="md-ellipsis">
-    Custom datatype mapping
+    Custom Data Type Mapping
   </span>
   
 
@@ -592,7 +599,7 @@
         
   
   <span class="md-ellipsis">
-    Default datatype mapping
+    Default Data Type Mapping
   </span>
   
 
@@ -634,7 +641,7 @@
         
   
   <span class="md-ellipsis">
-    Prepare tests env
+    Prepare Sample Heterogeneous Databases
   </span>
   
 
@@ -655,7 +662,7 @@
         
   
   <span class="md-ellipsis">
-    Quick start
+    Quick Start Guide
   </span>
   
 
@@ -676,7 +683,7 @@
         
   
   <span class="md-ellipsis">
-    Set offset
+    Set Custom Start Offset Values
   </span>
   
 
@@ -718,7 +725,7 @@
         
   
   <span class="md-ellipsis">
-    Utility functions
+    Utility Function List
   </span>
   
 
@@ -752,6 +759,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -766,9 +775,38 @@
                   
 
 
-  <h1>Configuration</h1>
-
-
+<h1 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h1>
+<p>SynchDB supports the following GUC variables in postgresql.conf:</p>
+<table>
+<thead>
+<tr>
+<th>GUC</th>
+<th>type</th>
+<th>default value</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>synchdb.naptime</td>
+<td>integer</td>
+<td>500</td>
+<td>The delay in milliseconds between each data polling from Debezium runner engine</td>
+</tr>
+<tr>
+<td>synchdb.dml_use_spi</td>
+<td>boolean</td>
+<td>false</td>
+<td>Option to use SPI to handle DML operations</td>
+</tr>
+<tr>
+<td>synchdb.synchdb_auto_launcher</td>
+<td>boolean</td>
+<td>true</td>
+<td>Option to automatically launch active SynchDB connector workers. This option only works when SynchDB is included in <code>shared_preload_library</code> GUC option</td>
+</tr>
+</tbody>
+</table>
 
 
 

@@ -20,7 +20,7 @@
     
     
       
-        <title>Default datatype mapping - SynchDB Documentation</title>
+        <title>Default Data Type Mapping - SynchDB Documentation</title>
       
     
     
@@ -61,6 +61,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#default-data-type-mapping" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -91,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Default datatype mapping
+              Default Data Type Mapping
             
           </span>
         </div>
@@ -385,7 +390,7 @@
         
   
   <span class="md-ellipsis">
-    SynchDB Architecture
+    Architecture
   </span>
   
 
@@ -406,7 +411,7 @@
         
   
   <span class="md-ellipsis">
-    Batch change handling
+    Batch Change Handling
   </span>
   
 
@@ -427,7 +432,7 @@
         
   
   <span class="md-ellipsis">
-    Metadata files
+    Metadata Files
   </span>
   
 
@@ -542,7 +547,7 @@
         
   
   <span class="md-ellipsis">
-    Connector auto launcher
+    Connector Auto Launcher
   </span>
   
 
@@ -563,7 +568,7 @@
         
   
   <span class="md-ellipsis">
-    Custom datatype mapping
+    Custom Data Type Mapping
   </span>
   
 
@@ -586,16 +591,66 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Default Data Type Mapping
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Default datatype mapping
+    Default Data Type Mapping
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mysql-default-data-type-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      MySQL Default Data Type Mapping
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-server-default-data-type-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL Server Default Data Type Mapping
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -634,7 +689,7 @@
         
   
   <span class="md-ellipsis">
-    Prepare tests env
+    Prepare Sample Heterogeneous Databases
   </span>
   
 
@@ -655,7 +710,7 @@
         
   
   <span class="md-ellipsis">
-    Quick start
+    Quick Start Guide
   </span>
   
 
@@ -676,7 +731,7 @@
         
   
   <span class="md-ellipsis">
-    Set offset
+    Set Custom Start Offset Values
   </span>
   
 
@@ -718,7 +773,7 @@
         
   
   <span class="md-ellipsis">
-    Utility functions
+    Utility Function List
   </span>
   
 
@@ -752,6 +807,34 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#mysql-default-data-type-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      MySQL Default Data Type Mapping
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-server-default-data-type-mapping" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQL Server Default Data Type Mapping
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -766,9 +849,120 @@
                   
 
 
-  <h1>Default datatype mapping</h1>
+<h1 id="default-data-type-mapping">Default Data Type Mapping<a class="headerlink" href="#default-data-type-mapping" title="Permanent link">&para;</a></h1>
+<p>The default data type mapping is a hash table built internally inside SynchDB with:
+* key: {data type, auto_increment} 
+* value: {data type, size}</p>
+<p>where:
+* data type: the string representation of a data type such as INT, TEXT, NUMERIC
+* auto_increment: a flag indicating if the data type has auto_increment attribute.
+* size: the translated size value. -1: no change, 0: no size specified</p>
+<h2 id="mysql-default-data-type-mapping">MySQL Default Data Type Mapping<a class="headerlink" href="#mysql-default-data-type-mapping" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>DatatypeHashEntry mysql_defaultTypeMappings[] =
+{
+    {{&quot;INT&quot;, true}, &quot;SERIAL&quot;, 0},
+    {{&quot;BIGINT&quot;, true}, &quot;BIGSERIAL&quot;, 0},
+    {{&quot;SMALLINT&quot;, true}, &quot;SMALLSERIAL&quot;, 0},
+    {{&quot;MEDIUMINT&quot;, true}, &quot;SERIAL&quot;, 0},
+    {{&quot;ENUM&quot;, false}, &quot;TEXT&quot;, 0},
+    {{&quot;SET&quot;, false}, &quot;TEXT&quot;, 0},
+    {{&quot;BIGINT&quot;, false}, &quot;BIGINT&quot;, 0},
+    {{&quot;BIGINT UNSIGNED&quot;, false}, &quot;NUMERIC&quot;, -1},
+    {{&quot;NUMERIC UNSIGNED&quot;, false}, &quot;NUMERIC&quot;, -1},
+    {{&quot;DEC&quot;, false}, &quot;DECIMAL&quot;, -1},
+    {{&quot;DEC UNSIGNED&quot;, false}, &quot;DECIMAL&quot;, -1},
+    {{&quot;DECIMAL UNSIGNED&quot;, false}, &quot;DECIMAL&quot;, -1},
+    {{&quot;FIXED&quot;, false}, &quot;DECIMAL&quot;, -1},
+    {{&quot;FIXED UNSIGNED&quot;, false}, &quot;DECIMAL&quot;, -1},
+    {{&quot;BIT(1)&quot;, false}, &quot;BOOLEAN&quot;, 0},
+    {{&quot;BIT&quot;, false}, &quot;BIT&quot;, -1},
+    {{&quot;BOOL&quot;, false}, &quot;BOOLEAN&quot;, -1},
+    {{&quot;DOUBLE&quot;, false}, &quot;DOUBLE PRECISION&quot;, 0},
+    {{&quot;DOUBLE PRECISION&quot;, false}, &quot;DOUBLE PRECISION&quot;, 0},
+    {{&quot;DOUBLE PRECISION UNSIGNED&quot;, false}, &quot;DOUBLE PRECISION&quot;, 0},
+    {{&quot;DOUBLE UNSIGNED&quot;, false}, &quot;DOUBLE PRECISION&quot;, 0},
+    {{&quot;REAL&quot;, false}, &quot;REAL&quot;, 0},
+    {{&quot;REAL UNSIGNED&quot;, false}, &quot;REAL&quot;, 0},
+    {{&quot;FLOAT&quot;, false}, &quot;REAL&quot;, 0},
+    {{&quot;FLOAT UNSIGNED&quot;, false}, &quot;REAL&quot;, 0},
+    {{&quot;INT&quot;, false}, &quot;INT&quot;, 0},
+    {{&quot;INT UNSIGNED&quot;, false}, &quot;BIGINT&quot;, 0},
+    {{&quot;INTEGER&quot;, false}, &quot;INT&quot;, 0},
+    {{&quot;INTEGER UNSIGNED&quot;, false}, &quot;BIGINT&quot;, 0},
+    {{&quot;MEDIUMINT&quot;, false}, &quot;INT&quot;, 0},
+    {{&quot;MEDIUMINT UNSIGNED&quot;, false}, &quot;INT&quot;, 0},
+    {{&quot;YEAR&quot;, false}, &quot;INT&quot;, 0},
+    {{&quot;SMALLINT&quot;, false}, &quot;SMALLINT&quot;, 0},
+    {{&quot;SMALLINT UNSIGNED&quot;, false}, &quot;INT&quot;, 0},
+    {{&quot;TINYINT&quot;, false}, &quot;SMALLINT&quot;, 0},
+    {{&quot;TINYINT UNSIGNED&quot;, false}, &quot;SMALLINT&quot;, 0},
+    {{&quot;DATETIME&quot;, false}, &quot;TIMESTAMP&quot;, -1},
+    {{&quot;TIMESTAMP&quot;, false}, &quot;TIMESTAMPTZ&quot;, -1},
+    {{&quot;BINARY&quot;, false}, &quot;BYTEA&quot;, 0},
+    {{&quot;VARBINARY&quot;, false}, &quot;BYTEA&quot;, 0},
+    {{&quot;BLOB&quot;, false}, &quot;BYTEA&quot;, 0},
+    {{&quot;MEDIUMBLOB&quot;, false}, &quot;BYTEA&quot;, 0},
+    {{&quot;LONGBLOB&quot;, false}, &quot;BYTEA&quot;, 0},
+    {{&quot;TINYBLOB&quot;, false}, &quot;BYTEA&quot;, 0},
+    {{&quot;LONG VARCHAR&quot;, false}, &quot;TEXT&quot;, -1},
+    {{&quot;LONGTEXT&quot;, false}, &quot;TEXT&quot;, -1},
+    {{&quot;MEDIUMTEXT&quot;, false}, &quot;TEXT&quot;, -1},
+    {{&quot;TINYTEXT&quot;, false}, &quot;TEXT&quot;, -1},
+    {{&quot;JSON&quot;, false}, &quot;JSONB&quot;, -1},
 
-
+    /* spatial types - map to TEXT by default */
+    {{&quot;GEOMETRY&quot;, false}, &quot;TEXT&quot;, -1},
+    {{&quot;GEOMETRYCOLLECTION&quot;, false}, &quot;TEXT&quot;, -1},
+    {{&quot;GEOMCOLLECTION&quot;, false}, &quot;TEXT&quot;, -1},
+    {{&quot;LINESTRING&quot;, false}, &quot;TEXT&quot;, -1},
+    {{&quot;MULTILINESTRING&quot;, false}, &quot;TEXT&quot;, -1},
+    {{&quot;MULTIPOINT&quot;, false}, &quot;TEXT&quot;, -1},
+    {{&quot;MULTIPOLYGON&quot;, false}, &quot;TEXT&quot;, -1},
+    {{&quot;POINT&quot;, false}, &quot;TEXT&quot;, -1},
+    {{&quot;POLYGON&quot;, false}, &quot;TEXT&quot;, -1}
+};
+</code></pre></div>
+<h2 id="sql-server-default-data-type-mapping">SQL Server Default Data Type Mapping<a class="headerlink" href="#sql-server-default-data-type-mapping" title="Permanent link">&para;</a></h2>
+<p><code>``
+DatatypeHashEntry sqlserver_defaultTypeMappings[] =
+{
+    {{"int identity", true}, "SERIAL", 0},
+    {{"bigint identity", true}, "BIGSERIAL", 0},
+    {{"smallint identity", true}, "SMALLSERIAL", 0},
+    {{"enum", false}, "TEXT", 0},
+    {{"int", false}, "INT", 0},
+    {{"bigint", false}, "BIGINT", 0},
+    {{"smallint", false}, "SMALLINT", 0},
+    {{"tinyint", false}, "SMALLINT", 0},
+    {{"numeric", false}, "NUMERIC", 0},
+    {{"decimal", false}, "NUMERIC", 0},
+    {{"bit(1)", false}, "BOOL", 0},
+    {{"bit", false}, "BIT", 0},
+    {{"money", false}, "MONEY", 0},
+    {{"smallmoney", false}, "MONEY", 0},
+    {{"real", false}, "REAL", 0},
+    {{"float", false}, "REAL", 0},
+    {{"date", false}, "DATE", 0},
+    {{"time", false}, "TIME", 0},
+    {{"datetime", false}, "TIMESTAMP", 0},
+    {{"datetime2", false}, "TIMESTAMP", 0},
+    {{"datetimeoffset", false}, "TIMESTAMPTZ", 0},
+    {{"smalldatetime", false}, "TIMESTAMP", 0},
+    {{"char", false}, "CHAR", 0},
+    {{"varchar", false}, "VARCHAR", -1},
+    {{"text", false}, "TEXT", 0},
+    {{"nchar", false}, "CHAR", 0},
+    {{"nvarchar", false}, "VARCHAR", -1},
+    {{"ntext", false}, "TEXT", 0},
+    {{"binary", false}, "BYTEA", 0},
+    {{"varbinary", false}, "BYTEA", 0},
+    {{"image", false}, "BYTEA", 0},
+    {{"uniqueidentifier", false}, "UUID", 0},
+    {{"xml", false}, "TEXT", 0},
+    /* spatial types - map to TEXT by default */
+    {{"geometry", false}, "TEXT", 0},
+    {{"geography", false}, "TEXT", 0},
+};</code></p>
 
 
 

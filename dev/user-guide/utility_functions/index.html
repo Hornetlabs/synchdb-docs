@@ -18,7 +18,7 @@
     
     
       
-        <title>Utility functions - SynchDB Documentation</title>
+        <title>Utility Function List - SynchDB Documentation</title>
       
     
     
@@ -59,6 +59,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#utility-function-list" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -89,7 +94,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Utility functions
+              Utility Function List
             
           </span>
         </div>
@@ -383,7 +388,7 @@
         
   
   <span class="md-ellipsis">
-    SynchDB Architecture
+    Architecture
   </span>
   
 
@@ -404,7 +409,7 @@
         
   
   <span class="md-ellipsis">
-    Batch change handling
+    Batch Change Handling
   </span>
   
 
@@ -425,7 +430,7 @@
         
   
   <span class="md-ellipsis">
-    Metadata files
+    Metadata Files
   </span>
   
 
@@ -540,7 +545,7 @@
         
   
   <span class="md-ellipsis">
-    Connector auto launcher
+    Connector Auto Launcher
   </span>
   
 
@@ -561,7 +566,7 @@
         
   
   <span class="md-ellipsis">
-    Custom datatype mapping
+    Custom Data Type Mapping
   </span>
   
 
@@ -582,7 +587,7 @@
         
   
   <span class="md-ellipsis">
-    Default datatype mapping
+    Default Data Type Mapping
   </span>
   
 
@@ -624,7 +629,7 @@
         
   
   <span class="md-ellipsis">
-    Prepare tests env
+    Prepare Sample Heterogeneous Databases
   </span>
   
 
@@ -645,7 +650,7 @@
         
   
   <span class="md-ellipsis">
-    Quick start
+    Quick Start Guide
   </span>
   
 
@@ -666,7 +671,7 @@
         
   
   <span class="md-ellipsis">
-    Set offset
+    Set Custom Start Offset Values
   </span>
   
 
@@ -710,16 +715,111 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Utility Function List
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Utility functions
+    Utility Function List
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb_add_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      synchdb_add_conninfo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb_start_engine_bgw" class="md-nav__link">
+    <span class="md-ellipsis">
+      synchdb_start_engine_bgw
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb_pause_engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      synchdb_pause_engine
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb_resume_engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      synchdb_resume_engine
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb_stop_engine_bgw" class="md-nav__link">
+    <span class="md-ellipsis">
+      synchdb_stop_engine_bgw
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb_state_view" class="md-nav__link">
+    <span class="md-ellipsis">
+      synchdb_state_view
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb_set_offset" class="md-nav__link">
+    <span class="md-ellipsis">
+      synchdb_set_offset
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -750,6 +850,79 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb_add_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      synchdb_add_conninfo
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb_start_engine_bgw" class="md-nav__link">
+    <span class="md-ellipsis">
+      synchdb_start_engine_bgw
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb_pause_engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      synchdb_pause_engine
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb_resume_engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      synchdb_resume_engine
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb_stop_engine_bgw" class="md-nav__link">
+    <span class="md-ellipsis">
+      synchdb_stop_engine_bgw
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb_state_view" class="md-nav__link">
+    <span class="md-ellipsis">
+      synchdb_state_view
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb_set_offset" class="md-nav__link">
+    <span class="md-ellipsis">
+      synchdb_set_offset
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -764,9 +937,72 @@
                   
 
 
-  <h1>Utility functions</h1>
-
-
+<h1 id="utility-function-list">Utility Function List<a class="headerlink" href="#utility-function-list" title="Permanent link">&para;</a></h1>
+<h2 id="synchdb_add_conninfo">synchdb_add_conninfo<a class="headerlink" href="#synchdb_add_conninfo" title="Permanent link">&para;</a></h2>
+<p>Used to create a new connector information:
+* <code>name</code> - a unique identifier that represents this connection info
+* <code>hostname</code> - the IP address of heterogeneous database.
+* <code>port</code> - the port number to connect to.
+* <code>username</code> - user name to use to connect.
+* <code>password</code> - password to authenticate the username.
+* <code>source database</code> (optional) - the database name to replicate changes from. For example, the database that exists in MySQL. If empty, all databases from MySQL are replicated.
+* <code>destination</code> database - the database to apply changes to - For example, the database that exists in PostgreSQL. Must be a valid database that exists.
+* <code>table</code> (optional) - expressed in the form of <code>[database].[table]</code> that must exists in MySQL so the engine will only replicate the specified tables. If empty, all tables are replicated.
+* <code>connector</code> - the connector to use (MySQL, Oracle, or SQLServer). Currently only MySQL and SQLServer are supported.
+* <code>rule file</code> - a JSON-formatted rule file placed under $PGDATA that this connector shall apply to its default data type translation rules. See below for more detail.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code>SELECT synchdb_add_conninfo(&#39;mysqlconn&#39;,&#39;127.0.0.1&#39;,3306,&#39;mysqluser&#39;, &#39;mysqlpwd&#39;, &#39;inventory&#39;, &#39;postgres&#39;, &#39;&#39;, &#39;mysql&#39;, &#39;myrule.json&#39;);
+</code></pre></div>
+<h2 id="synchdb_start_engine_bgw">synchdb_start_engine_bgw<a class="headerlink" href="#synchdb_start_engine_bgw" title="Permanent link">&para;</a></h2>
+<p>Used to start a connector:
+* <code>name</code> - the name of connector to start</p>
+<div class="highlight"><pre><span></span><code>SELECT synchdb_start_engine_bgw(&#39;mysqlconn&#39;);
+</code></pre></div>
+<h2 id="synchdb_pause_engine">synchdb_pause_engine<a class="headerlink" href="#synchdb_pause_engine" title="Permanent link">&para;</a></h2>
+<p>Used to pause a running connector:
+* <code>name</code> - the name of connector to pause</p>
+<div class="highlight"><pre><span></span><code>SELECT synchdb_pause_engine_bgw(&#39;mysqlconn&#39;);
+</code></pre></div>
+<h2 id="synchdb_resume_engine">synchdb_resume_engine<a class="headerlink" href="#synchdb_resume_engine" title="Permanent link">&para;</a></h2>
+<p>Used to resume a paused connector:
+* <code>name</code> - the name of connector to resume</p>
+<div class="highlight"><pre><span></span><code>SELECT synchdb_resume_engine(&#39;mysqlconn&#39;);
+</code></pre></div>
+<h2 id="synchdb_stop_engine_bgw">synchdb_stop_engine_bgw<a class="headerlink" href="#synchdb_stop_engine_bgw" title="Permanent link">&para;</a></h2>
+<p>Used to stop a paused or running connector:
+* <code>name</code> - the name of connector to stop</p>
+<div class="highlight"><pre><span></span><code>SELECT synchdb_stop_engine(&#39;mysqlconn&#39;);
+</code></pre></div>
+<h2 id="synchdb_state_view">synchdb_state_view<a class="headerlink" href="#synchdb_state_view" title="Permanent link">&para;</a></h2>
+<p>Used to examine all the running connectors and their states:
+<div class="highlight"><pre><span></span><code>SELECT * FROM synchdb_state_view();
+</code></pre></div></p>
+<ul>
+<li>id: unique identifier of a connector slot</li>
+<li>connector: the type of connector (mysql, oracle, sqlserver...etc)</li>
+<li>conninfo_name: the associated connection info name created by <code>synchdb_add_conninfo()</code></li>
+<li>pid: the PID of the connector worker process</li>
+<li>state: the state of the connector. Possible states are:<ul>
+<li>stopped</li>
+<li>initializing</li>
+<li>paused</li>
+<li>syncing</li>
+<li>parsing</li>
+<li>converting</li>
+<li>executing</li>
+<li>updating offset</li>
+<li>unknown</li>
+</ul>
+</li>
+<li>err: the last error message encountered by the worker which would have caused it to exit. This error could originated from PostgreSQL while processing a change, or originated from Debezium running engine while accessing data from heterogeneous database.</li>
+<li>last_dbz_offset: the last Debezium offset captured by synchdb. Note that this may not reflect the current and real-time offset value of the connector engine. Rather, this is shown as a checkpoint that we could restart from this offeet point if needed.</li>
+</ul>
+<h2 id="synchdb_set_offset">synchdb_set_offset<a class="headerlink" href="#synchdb_set_offset" title="Permanent link">&para;</a></h2>
+<p>Used to set a custom starting offset value:
+* <code>name</code> - the name of connector to set a new offset
+* <code>offset</code> - the offset value to set</p>
+<div class="highlight"><pre><span></span><code>SELECT synchdb_set_offset(&#39;mysqlconn&#39;, &#39;{&quot;ts_sec&quot;:1725644339,&quot;file&quot;:&quot;mysql-bin.000004&quot;,&quot;pos&quot;:138466,&quot;row&quot;:1,&quot;server_id&quot;:223344,&quot;event&quot;:2}&#39;);
+</code></pre></div>
 
 
 

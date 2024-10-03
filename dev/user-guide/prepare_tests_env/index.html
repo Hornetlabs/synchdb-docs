@@ -20,7 +20,7 @@
     
     
       
-        <title>Prepare tests env - SynchDB Documentation</title>
+        <title>Prepare Sample Heterogeneous Databases - SynchDB Documentation</title>
       
     
     
@@ -61,6 +61,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#prepare-sample-heterogeneous-databases" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -91,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Prepare tests env
+              Prepare Sample Heterogeneous Databases
             
           </span>
         </div>
@@ -385,7 +390,7 @@
         
   
   <span class="md-ellipsis">
-    SynchDB Architecture
+    Architecture
   </span>
   
 
@@ -406,7 +411,7 @@
         
   
   <span class="md-ellipsis">
-    Batch change handling
+    Batch Change Handling
   </span>
   
 
@@ -427,7 +432,7 @@
         
   
   <span class="md-ellipsis">
-    Metadata files
+    Metadata Files
   </span>
   
 
@@ -542,7 +547,7 @@
         
   
   <span class="md-ellipsis">
-    Connector auto launcher
+    Connector Auto Launcher
   </span>
   
 
@@ -563,7 +568,7 @@
         
   
   <span class="md-ellipsis">
-    Custom datatype mapping
+    Custom Data Type Mapping
   </span>
   
 
@@ -584,7 +589,7 @@
         
   
   <span class="md-ellipsis">
-    Default datatype mapping
+    Default Data Type Mapping
   </span>
   
 
@@ -628,16 +633,66 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Prepare Sample Heterogeneous Databases
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Prepare tests env
+    Prepare Sample Heterogeneous Databases
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prepare-a-sample-mysql-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prepare a Sample MySQL Database
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prepare-a-sample-sql-server-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prepare a Sample SQL Server Database
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -655,7 +710,7 @@
         
   
   <span class="md-ellipsis">
-    Quick start
+    Quick Start Guide
   </span>
   
 
@@ -676,7 +731,7 @@
         
   
   <span class="md-ellipsis">
-    Set offset
+    Set Custom Start Offset Values
   </span>
   
 
@@ -718,7 +773,7 @@
         
   
   <span class="md-ellipsis">
-    Utility functions
+    Utility Function List
   </span>
   
 
@@ -752,6 +807,34 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prepare-a-sample-mysql-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prepare a Sample MySQL Database
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prepare-a-sample-sql-server-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prepare a Sample SQL Server Database
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -766,9 +849,46 @@
                   
 
 
-  <h1>Prepare tests env</h1>
+<h1 id="prepare-sample-heterogeneous-databases">Prepare Sample Heterogeneous Databases<a class="headerlink" href="#prepare-sample-heterogeneous-databases" title="Permanent link">&para;</a></h1>
+<p>The procedures mentioned here are meant to quickly start up heterogeneous for quick verification and feature demostration. The necessary files and scripts for starting sample heterogeneous databases can be found at SynchDB repository <a href="https://github.com/Hornetlabs/synchdb">here</a></p>
+<h2 id="prepare-a-sample-mysql-database">Prepare a Sample MySQL Database<a class="headerlink" href="#prepare-a-sample-mysql-database" title="Permanent link">&para;</a></h2>
+<p>We can start a sample MySQL database for testing using docker compose. The user credentials are described in the <code>synchdb-mysql-test.yaml</code> file
+<div class="highlight"><pre><span></span><code>docker compose -f synchdb-mysql-test.yaml up -d
+</code></pre></div></p>
+<p>Login to MySQL as <code>root</code> and grant permissions to user <code>mysqluser</code> to perform real-time CDC
+<div class="highlight"><pre><span></span><code>mysql -h 127.0.0.1 -u root -p
 
+GRANT replication client on *.* to mysqluser;
+GRANT replication slave  on *.* to mysqluser;
+GRANT RELOAD ON *.* TO &#39;mysqluser&#39;@&#39;%&#39;;
+FLUSH PRIVILEGES;
+</code></pre></div></p>
+<p>Exit mysql client tool:
+<div class="highlight"><pre><span></span><code>\q
+</code></pre></div></p>
+<h2 id="prepare-a-sample-sql-server-database">Prepare a Sample SQL Server Database<a class="headerlink" href="#prepare-a-sample-sql-server-database" title="Permanent link">&para;</a></h2>
+<p>We can start a sample SQL Server database for testing using docker compose. The user credentials are described in the <code>synchdb-sqlserver-test.yaml</code> file
+<div class="highlight"><pre><span></span><code>docker compose -f synchdb-sqlserver-test.yaml up -d
+</code></pre></div>
+use synchdb-sqlserver-withssl-test.yaml file for the SQL Server with SSL certificate enabled.</p>
+<p>You may not have SQL Server client tool installed, you could login to SQL Server container to access its client tool.</p>
+<p>Find out the container ID for SQL server:
+<div class="highlight"><pre><span></span><code>id=$(docker ps | grep sqlserver | awk &#39;{print $1}&#39;)
+</code></pre></div></p>
+<p>Copy the database schema into SQL Server container:
+<div class="highlight"><pre><span></span><code>docker cp inventory.sql $id:/
+</code></pre></div></p>
+<p>Log in to SQL Server container:
+<div class="highlight"><pre><span></span><code>docker exec -it $id bash
+</code></pre></div></p>
+<p>Build the database according to the schema:
+<div class="highlight"><pre><span></span><code>/opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD -i /inventory.sql
+</code></pre></div></p>
+<p>Run some simple queries (add -N -C if you are using SSL enabled SQL Server):
+<div class="highlight"><pre><span></span><code>/opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD -d testDB -Q &quot;insert into orders(order_date, purchaser, quantity, product_id) values( &#39;2024-01-01&#39;, 1003, 2, 107)&quot;
 
+/opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD -d testDB -Q &quot;select * from orders&quot;
+</code></pre></div></p>
 
 
 

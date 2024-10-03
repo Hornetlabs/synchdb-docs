@@ -20,7 +20,7 @@
     
     
       
-        <title>Batch change handling - SynchDB Documentation</title>
+        <title>Batch Change Handling - SynchDB Documentation</title>
       
     
     
@@ -61,6 +61,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#batch-change-handling" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -91,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Batch change handling
+              Batch Change Handling
             
           </span>
         </div>
@@ -390,7 +395,7 @@
         
   
   <span class="md-ellipsis">
-    SynchDB Architecture
+    Architecture
   </span>
   
 
@@ -413,16 +418,75 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Batch Change Handling
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Batch change handling
+    Batch Change Handling
   </span>
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#batch-handling-on-success" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch Handling on Success
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#batch-handling-on-partial-success" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch Handling on Partial Success
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -440,7 +504,7 @@
         
   
   <span class="md-ellipsis">
-    Metadata files
+    Metadata Files
   </span>
   
 
@@ -550,7 +614,7 @@
         
   
   <span class="md-ellipsis">
-    Connector auto launcher
+    Connector Auto Launcher
   </span>
   
 
@@ -571,7 +635,7 @@
         
   
   <span class="md-ellipsis">
-    Custom datatype mapping
+    Custom Data Type Mapping
   </span>
   
 
@@ -592,7 +656,7 @@
         
   
   <span class="md-ellipsis">
-    Default datatype mapping
+    Default Data Type Mapping
   </span>
   
 
@@ -634,7 +698,7 @@
         
   
   <span class="md-ellipsis">
-    Prepare tests env
+    Prepare Sample Heterogeneous Databases
   </span>
   
 
@@ -655,7 +719,7 @@
         
   
   <span class="md-ellipsis">
-    Quick start
+    Quick Start Guide
   </span>
   
 
@@ -676,7 +740,7 @@
         
   
   <span class="md-ellipsis">
-    Set offset
+    Set Custom Start Offset Values
   </span>
   
 
@@ -718,7 +782,7 @@
         
   
   <span class="md-ellipsis">
-    Utility functions
+    Utility Function List
   </span>
   
 
@@ -752,6 +816,43 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#batch-handling-on-success" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch Handling on Success
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#batch-handling-on-partial-success" class="md-nav__link">
+    <span class="md-ellipsis">
+      Batch Handling on Partial Success
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -766,9 +867,15 @@
                   
 
 
-  <h1>Batch change handling</h1>
-
-
+<h1 id="batch-change-handling">Batch Change Handling<a class="headerlink" href="#batch-change-handling" title="Permanent link">&para;</a></h1>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>SynchDB periodically fetches a batch of change request from Debezium runner engine at a period of <code>synchdb.naptime</code> milliseconds (default 500). This batch of change request is then processed by SynchDB. If all the change requests within the batch have been processed successfully (parsed, transformed and applied to PostgreSQL), SynchDB will notify the Debezium runner engine that this batch has been completed. This signals Debezium runner to commit the offset up until the last successfully completed change record. With this mechanism in place, SynchDB is able to track each change record and instruct Debezium runner not to fetch an old change that has been processed before, or not to send a duplcate change record.</p>
+<h2 id="batch-handling-on-success">Batch Handling on Success<a class="headerlink" href="#batch-handling-on-success" title="Permanent link">&para;</a></h2>
+<p>If all change requests inside a batch have all been successfully processed, SynchDB simply sends a message to Debezium runner engine to mark the batch as processed and completed, which caused offsets to be committed and eventually flush to disk.</p>
+<p><img alt="img" src="https://www.highgo.ca/wp-content/uploads/2024/10/synchdb-Page-4.drawio.png" /></p>
+<h2 id="batch-handling-on-partial-success">Batch Handling on Partial Success<a class="headerlink" href="#batch-handling-on-partial-success" title="Permanent link">&para;</a></h2>
+<p>In the case when one of the change requests has failed to process due to internal PostgreSQL errors such as duplicate key violation, SynchDB will still notify Debezium runner engine about a partially completed batch. This notify message contains an indicator about the last successfully processed record. Debezium will then mark all the completed records as processed, while leaving unprocessed and failed records as they are. With this, when SynchDB and Debezium runner restart, they will resume from the last failed change record and will only proceed when the fault has been cleared.</p>
+<p><img alt="img" src="https://www.highgo.ca/wp-content/uploads/2024/10/synchdb-Page-5.drawio.png" /></p>
 
 
 

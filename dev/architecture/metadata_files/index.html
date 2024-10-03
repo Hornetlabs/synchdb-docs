@@ -20,7 +20,7 @@
     
     
       
-        <title>Metadata files - SynchDB Documentation</title>
+        <title>Metadata Files - SynchDB Documentation</title>
       
     
     
@@ -61,6 +61,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#metadata-files" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -91,7 +96,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Metadata files
+              Metadata Files
             
           </span>
         </div>
@@ -390,7 +395,7 @@
         
   
   <span class="md-ellipsis">
-    SynchDB Architecture
+    Architecture
   </span>
   
 
@@ -411,7 +416,7 @@
         
   
   <span class="md-ellipsis">
-    Batch change handling
+    Batch Change Handling
   </span>
   
 
@@ -434,12 +439,14 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Metadata files
+    Metadata Files
   </span>
   
 
@@ -550,7 +557,7 @@
         
   
   <span class="md-ellipsis">
-    Connector auto launcher
+    Connector Auto Launcher
   </span>
   
 
@@ -571,7 +578,7 @@
         
   
   <span class="md-ellipsis">
-    Custom datatype mapping
+    Custom Data Type Mapping
   </span>
   
 
@@ -592,7 +599,7 @@
         
   
   <span class="md-ellipsis">
-    Default datatype mapping
+    Default Data Type Mapping
   </span>
   
 
@@ -634,7 +641,7 @@
         
   
   <span class="md-ellipsis">
-    Prepare tests env
+    Prepare Sample Heterogeneous Databases
   </span>
   
 
@@ -655,7 +662,7 @@
         
   
   <span class="md-ellipsis">
-    Quick start
+    Quick Start Guide
   </span>
   
 
@@ -676,7 +683,7 @@
         
   
   <span class="md-ellipsis">
-    Set offset
+    Set Custom Start Offset Values
   </span>
   
 
@@ -718,7 +725,7 @@
         
   
   <span class="md-ellipsis">
-    Utility functions
+    Utility Function List
   </span>
   
 
@@ -752,6 +759,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -766,9 +775,21 @@
                   
 
 
-  <h1>Metadata files</h1>
-
-
+<h1 id="metadata-files">Metadata Files<a class="headerlink" href="#metadata-files" title="Permanent link">&para;</a></h1>
+<p>During Operation, Debezium Runner engine produces metadata files under $PGDATA/pg_synchdb. Currently 2 types of metadata files are generated and persisted:
+* offset file: contains the offset to resume the replication operation at start up
+* schema history file: contains the schema information to build all the tables for a replication. This is created during the initial data snapshot sync and can be updated during operation.</p>
+<p>These metadata filenames consist of:
+* (connector type)<em>(connector name)_offsets.dat
+* (connector type)</em>(connector name)_schemahistory.dat</p>
+<div class="highlight"><pre><span></span><code>ls $PGDATA/pg_synchdb
+mysql_mysqlconn_offsets.dat        sqlserver_sqlserverconn_offsets.dat
+mysql_mysqlconn_schemahistory.dat  sqlserver_sqlserverconn_schemahistory.dat
+</code></pre></div>
+<p>These binary files' contents can be viewed with hexdump command:
+<div class="highlight"><pre><span></span><code>hexdump -C $PGDATA/pg_synchdb/mysql_mysqlconn_offsets.dat
+hexdump -C $PGDATA/pg_synchdb/mysql_mysqlconn_schemahistory.dat
+</code></pre></div></p>
 
 
 
