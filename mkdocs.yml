@@ -1,10 +1,7 @@
 site_name: SynchDB Documentation
-site_description: Documentation for SynchDB PostgreSQL extension
-site_author: Hornetlabs
-site_url: https://hornetlabs.github.io/synchdb-docs/
-
 theme:
   name: material
+  language: en
   features:
     - navigation.tabs
     - navigation.sections
@@ -14,68 +11,49 @@ theme:
     - content.tabs.link
     - content.code.annotation
     - content.code.copy
-  palette:
-    - scheme: default
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-    - scheme: slate
-      primary: indigo
-      accent: indigo
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
 
-nav:
-  - Home: index.md
-  - User Guide:
-    - Installation: user-guide/installation.md
-    - Configuration: user-guide/configuration.md
-    - Usage: user-guide/usage.md
-  - API Reference: api-reference.md
-  - Changelog: changelog.md
+plugins:
+  - search
+  - i18n:
+      docs_structure: folder
+      languages:
+        - locale: en
+          default: true
+          name: English
+          build: true
+        - locale: es
+          name: Español
+          site_name: Documentación de SynchDB
+          build: true
+          nav_translations:
+            User Guide: Guía del usuario
+            Architecture: Arquitectura
+            Changelog: Registro de cambios
+        - locale: zh
+          name: 中文
+          site_name: SynchDB 文档
+          build: true
+          nav_translations:
+            User Guide: 用户指南
+            Architecture: 架构
+            Changelog: 变更日志
 
 markdown_extensions:
   - admonition
   - codehilite
   - footnotes
-  - meta
   - toc:
       permalink: true
   - pymdownx.arithmatex
-  - pymdownx.betterem:
-      smart_enable: all
+  - pymdownx.betterem
   - pymdownx.caret
   - pymdownx.critic
   - pymdownx.details
-  - pymdownx.emoji:
-      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.emoji
   - pymdownx.inlinehilite
   - pymdownx.magiclink
   - pymdownx.mark
   - pymdownx.smartsymbols
   - pymdownx.superfences
-  - pymdownx.tasklist:
-      custom_checkbox: true
+  - pymdownx.tasklist
   - pymdownx.tilde
-
-plugins:
-  - search
-  - minify:
-      minify_html: true
-  - mike:
-      version_selector: true
-      css_dir: css
-      javascript_dir: js
-      canonical_version: latest
-
-extra:
-  version:
-    provider: mike
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/Hornetlabs/synchdb
-
-copyright: Copyright &copy; 2023 Hornetlabs

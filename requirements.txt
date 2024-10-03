@@ -1,0 +1,5 @@
+mkdocs-material
+mkdocs-minify-plugin
+mike
+pymdown-extensions
+mkdocs-static-i18n
