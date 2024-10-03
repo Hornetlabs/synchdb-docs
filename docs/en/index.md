@@ -1,4 +1,4 @@
-# Home
+# Home 2
 
 SynchDB is a PostgreSQL extension for synchronizing data from different database sources.
 
@@ -21,4 +21,4 @@ It provides two key work modes that can be invoked using the built-in SQL functi
 
 ## Getting Started
 
-Check out our [Installation Guide](user-guide/installation.md) to get started with SynchDB.
+Check out our [Installation Guide](user-guide/installation) to get started with SynchDB.

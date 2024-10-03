@@ -21,4 +21,4 @@ El **modo de sincronización** copia tablas de bases de datos heterogéneas a Po
 
 ## Primeros pasos
 
-Consulte nuestra [Guía de instalación](user-guide/installation.md) para comenzar a utilizar SynchDB.
+Consulte nuestra [Guía de instalación](user-guide/installation) para comenzar a utilizar SynchDB.

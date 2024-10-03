@@ -26,7 +26,7 @@ plugins:
           site_name: Documentación de SynchDB
           build: true
           nav_translations:
-            User Guide: Guía del usuario
+            User guide: Guía del usuario
             Architecture: Arquitectura
             Changelog: Registro de cambios
         - locale: zh
@@ -34,7 +34,7 @@ plugins:
           site_name: SynchDB 文档
           build: true
           nav_translations:
-            User Guide: 用户指南
+            User guide: 用户指南
             Architecture: 架构
             Changelog: 变更日志
 

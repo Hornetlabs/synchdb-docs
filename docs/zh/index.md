@@ -19,4 +19,4 @@ SynchDB 是一个 PostgreSQL 扩展，旨在以快速可靠的方式将数据从
 
 ## 入门
 
-查看我们的 [安装指南](user-guide/installation.md) 以开始使用 SynchDB。
+查看我们的 [安装指南](user-guide/installation) 以开始使用 SynchDB。

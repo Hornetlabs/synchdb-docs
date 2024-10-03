@@ -1,3 +1,4 @@
+# 安装指南
 ## Requirement
 The following software is required to build and run SynchDB. The versions listed are the versions tested during development. Older versions may still work.
 * Java Development Kit 22. Download [here](https://www.oracle.com/ca-en/java/technologies/downloads/)
