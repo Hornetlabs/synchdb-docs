@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v2
         with:
@@ -23,9 +25,11 @@ jobs:
           pip install pymdown-extensions
       - name: Configure Git
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
       - name: Deploy documentation
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if [[ ${{ github.ref }} =~ ^refs/tags/v ]]; then
             VERSION=${GITHUB_REF#refs/tags/v}
