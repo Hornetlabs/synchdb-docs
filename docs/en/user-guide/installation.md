@@ -1,4 +1,6 @@
-## Requirement
+# Installation
+
+## Requirements
 The following software is required to build and run SynchDB. The versions listed are the versions tested during development. Older versions may still work.
 * Java Development Kit 22. Download [here](https://www.oracle.com/ca-en/java/technologies/downloads/)
 * Apache Maven 3.9.8. Download [here](https://maven.apache.org/download.cgi)
@@ -6,9 +8,7 @@ The following software is required to build and run SynchDB. The versions listed
 * Docker compose 2.28.1 (for testing). Refer to [here](https://docs.docker.com/compose/install/linux/)
 * Unix based operating system like Ubuntu 22.04 or MacOS
 
-## Build Procedure
-### Prepare Source
-
+## Prepare Source
 Clone the PostgreSQL source and switch to 16.3 release tag
 ```
 git clone https://github.com/postgres/postgres.git
@@ -23,8 +23,8 @@ cd contrib/
 git clone https://github.com/Hornetlabs/synchdb.git
 ```
 
-### Prepare Tools
-#### Maven
+## Prepare Tools
+### Install Maven
 If you are working on Ubuntu 22.04.4 LTS, install the Maven as below:
 ```
 sudo apt install maven
@@ -35,7 +35,7 @@ if you are using MacOS, you can use the brew command to install maven (refer (he
 brew install maven
 ```
 
-#### Install Java SDK (OpenJDK)
+### Install Java SDK (OpenJDK)
 If you are working on Ubuntu 22.04.4 LTS, install the OpenJDK  as below:
 ```
 sudo apt install openjdk-21-jdk
@@ -46,8 +46,8 @@ If you are working on MacOS, please install the JDK with brew command:
 brew install openjdk@22
 ```
 
-### Build and Install PostgreSQL
-This can be done by following the standard build and install procedure as described [here](https://www.postgresql.org/docs/current/install-make.html). Generally, it consists of:
+## Build and Install PostgreSQL
+Follow the official PostgreSQL documentation [here](https://www.postgresql.org/docs/current/install-make.html) to build and install PostgreSQL from source. Generally, the procedure consists of:
 
 ```
 cd /home/$USER/postgres
@@ -63,7 +63,7 @@ make
 sudo make install
 ```
 
-### Build Debezium Runner Engine
+## Build and Install Debezium Runner Engine
 With Java and Maven setup, we are ready to build Debezium Runner Engine. This installs the Debezium Runner Engine jar file to your PostgreSQL's lib folder.
 
 ```
@@ -72,7 +72,7 @@ make build_dbz
 sudo make install_dbz
 ```
 
-### Build SynchDB PostgreSQL Extension
+## Build and Install SynchDB PostgreSQL Extension
 With the Java `lib` and `include` installed in your system, SynchDB can be built by:
 
 ```
@@ -81,8 +81,8 @@ make
 sudo make install
 ```
 
-### Configure your Linker (Ubuntu)
-Lastly, we also need to tell your system's linker where the newly added Java library is located in your system.
+## Configure Your Linker (Ubuntu)
+Lastly, we also need to tell your system's linker where the newly added Java library is located in your system. The following procedure is based on Ubuntu 22.04.
 
 ```
 # Dynamically set JDK paths
@@ -102,6 +102,7 @@ Run ldconfig to reload:
 ```
 sudo ldconfig
 ```
+## Check Installation
 
 Ensure synchdo.so extension can link to libjvm Java library on your system:
 ```
