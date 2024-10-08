@@ -1,4 +1,10 @@
 site_name: SynchDB Documentation
+repo_url: https://github.com/Hornetlabs/synchdb-docs
+site_url: https://docs.synchdb.com/
+site_description: SynchDB is a PostgreSQL extension for synchronizing data from different database sources..
+site_author: Hornetlabs Technology Inc.
+copyright: Copyright &copy; 2024 Maintained by <a href="https://github.com/hornetlabs">Hornetlabs Technology</a>.
+
 theme:
   name: material
   language: en
@@ -11,6 +17,19 @@ theme:
     - content.tabs.link
     - content.code.annotation
     - content.code.copy
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
 
 plugins:
   - search
@@ -34,9 +53,15 @@ plugins:
           site_name: SynchDB 文档
           build: true
           nav_translations:
-            User guide: 用户指南
+            User Guide: 用户指南
             Architecture: 架构
             Changelog: 变更日志
+  - mike:
+      version_selector: true
+      css_dir: css
+      javascript_dir: js
+      canonical_version: latest
+  - print-site
 
 markdown_extensions:
   - admonition
@@ -57,3 +82,8 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tasklist
   - pymdownx.tilde
+
+extra:
+  versions_file: versions.json
+  version:
+    provider: mike

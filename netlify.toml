@@ -1,18 +1,24 @@
 [build]
-  command = """
-    mike deploy --push --update-aliases ${DEPLOY_VERSION} latest
-    mike set-default --push latest
-  """
   publish = "site"
+  command = "mkdocs build"
 
 [build.environment]
   PYTHON_VERSION = "3.8"
 
-[context.production]
-  command = """
-    mike deploy --push --update-aliases ${DEPLOY_VERSION} latest
-    mike set-default --push latest
-  """
+[[plugins]]
+  package = "netlify-plugin-cache"
+  [plugins.inputs]
+    paths = [
+      "site/.cache"
+    ]
 
-[context.branch-deploy]
-  command = "mike deploy --push ${DEPLOY_PRIME_URL#*/} latest"
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[context.production.environment]
+  MKDOCS_ENV = "production"
+
+[context.deploy-preview.environment]
+  MKDOCS_ENV = "preview"

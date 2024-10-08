@@ -1,12 +1,29 @@
-<div class="md-select">
-  <label>
-    <span class="md-select__label">Language</span>
-    <select class="md-select__inner" onchange="window.location.href=this.value">
-      {% for alt in config.extra.alternate %}
-        <option value="{{ alt.link }}" {% if alt.lang == config.theme.language %}selected{% endif %}>
-          {{ alt.name }}
-        </option>
-      {% endfor %}
-    </select>
-  </label>
-</div>
+{% extends "base.html" %}
+
+{% block languages %}
+  {% include "partials/language.html" %}
+{% endblock %}
+
+{% block content %}
+
+{% if page.url_to_print_page %}
+    <a href="{{ page.url_to_print_page }}" title="Print Site" class="md-content__button md-icon">
+        {% include ".icons/material/printer.svg" %}
+    </a>
+{% endif %} 
+
+{{ super() }}
+{% endblock content %}
+
+
+{% block repo %}
+    {% if page.url_to_print_page %}
+        <li class="nav-item">
+            <a href="{{ page.url_to_print_page }}" title="Print Site" class="nav-link">
+                <i class="fa fa-print"></i> Print
+            </a>
+        </li>
+    {% endif %}
+
+{{ super() }}
+{% endblock repo %}
