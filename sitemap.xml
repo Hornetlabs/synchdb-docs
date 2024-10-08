@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://docs.synchdb.com/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/changelog/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/changelog/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/changelog/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/changelog/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/architecture/architecture/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/architecture/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/architecture/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/architecture/architecture/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/architecture/batch_change_handling/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/architecture/batch_change_handling/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/architecture/batch_change_handling/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/architecture/batch_change_handling/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/architecture/metadata_files/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/architecture/metadata_files/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/architecture/metadata_files/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/architecture/metadata_files/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/user-guide/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/user-guide/configuration/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/configuration/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/user-guide/connector_auto_launcher/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/connector_auto_launcher/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/connector_auto_launcher/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/connector_auto_launcher/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/user-guide/custom_datatype_mapping/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/custom_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/custom_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/custom_datatype_mapping/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/user-guide/default_datatype_mapping/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/default_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/default_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/default_datatype_mapping/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/user-guide/installation/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/installation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/installation/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/installation/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/user-guide/prepare_tests_env/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/prepare_tests_env/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/prepare_tests_env/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/prepare_tests_env/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/user-guide/quick_start/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/quick_start/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/quick_start/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/quick_start/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/user-guide/set_offset/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/set_offset/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/set_offset/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/set_offset/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/user-guide/usage/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/usage/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/usage/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/usage/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/user-guide/utility_functions/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/utility_functions/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/utility_functions/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/utility_functions/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/es/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/es/changelog/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/changelog/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/changelog/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/changelog/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/es/architecture/architecture/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/architecture/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/architecture/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/architecture/architecture/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/es/architecture/batch_change_handling/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/architecture/batch_change_handling/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/architecture/batch_change_handling/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/architecture/batch_change_handling/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/es/architecture/metadata_files/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/architecture/metadata_files/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/architecture/metadata_files/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/architecture/metadata_files/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/es/user-guide/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/es/user-guide/configuration/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/configuration/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/es/user-guide/connector_auto_launcher/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/connector_auto_launcher/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/connector_auto_launcher/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/connector_auto_launcher/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/es/user-guide/custom_datatype_mapping/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/custom_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/custom_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/custom_datatype_mapping/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/es/user-guide/default_datatype_mapping/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/default_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/default_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/default_datatype_mapping/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/es/user-guide/installation/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/installation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/installation/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/installation/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/es/user-guide/prepare_tests_env/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/prepare_tests_env/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/prepare_tests_env/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/prepare_tests_env/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/es/user-guide/quick_start/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/quick_start/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/quick_start/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/quick_start/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/es/user-guide/set_offset/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/set_offset/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/set_offset/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/set_offset/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/es/user-guide/usage/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/usage/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/usage/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/usage/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/es/user-guide/utility_functions/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/utility_functions/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/utility_functions/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/utility_functions/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/zh/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/zh/changelog/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/changelog/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/changelog/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/changelog/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/zh/architecture/architecture/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/architecture/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/architecture/architecture/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/architecture/architecture/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/zh/architecture/batch_change_handling/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/architecture/batch_change_handling/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/architecture/batch_change_handling/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/architecture/batch_change_handling/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/zh/architecture/metadata_files/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/architecture/metadata_files/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/architecture/metadata_files/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/architecture/metadata_files/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/zh/user-guide/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/zh/user-guide/configuration/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/configuration/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/zh/user-guide/connector_auto_launcher/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/connector_auto_launcher/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/connector_auto_launcher/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/connector_auto_launcher/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/zh/user-guide/custom_datatype_mapping/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/custom_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/custom_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/custom_datatype_mapping/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/zh/user-guide/default_datatype_mapping/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/default_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/default_datatype_mapping/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/default_datatype_mapping/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/zh/user-guide/installation/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/installation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/installation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/installation/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/zh/user-guide/prepare_tests_env/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/prepare_tests_env/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/prepare_tests_env/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/prepare_tests_env/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/zh/user-guide/quick_start/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/quick_start/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/quick_start/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/quick_start/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/zh/user-guide/set_offset/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/set_offset/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/set_offset/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/set_offset/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/zh/user-guide/usage/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/usage/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/usage/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/usage/"/>
+    </url>
+    <url>
+        <loc>https://docs.synchdb.com/zh/user-guide/utility_functions/</loc>
+        <lastmod>2024-10-08</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/zh/user-guide/utility_functions/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/user-guide/utility_functions/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/es/user-guide/utility_functions/"/>
+    </url>
+</urlset>
