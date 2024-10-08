@@ -1,4 +1,5 @@
 mkdocs-material
 mkdocs-minify-plugin
 pymdown-extensions
+mike
 mkdocs-static-i18n
