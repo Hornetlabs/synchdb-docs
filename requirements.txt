@@ -1,5 +1,5 @@
 mkdocs-material
 mkdocs-minify-plugin
-mike
 pymdown-extensions
 mkdocs-static-i18n
+netlify-plugin-cache==1.0.3
