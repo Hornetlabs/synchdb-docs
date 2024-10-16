@@ -1,17 +1,28 @@
 # Utility Function List
 
 ## synchdb_add_conninfo
+
 Used to create a new connector information:
-* `name` - a unique identifier that represents this connection info
-* `hostname` - the IP address of heterogeneous database.
-* `port` - the port number to connect to.
-* `username` - user name to use to connect.
-* `password` - password to authenticate the username.
-* `source database` (optional) - the database name to replicate changes from. For example, the database that exists in MySQL. If empty, all databases from MySQL are replicated.
-* `destination` database - the database to apply changes to - For example, the database that exists in PostgreSQL. Must be a valid database that exists.
-* `table` (optional) - expressed in the form of `[database].[table]` that must exists in MySQL so the engine will only replicate the specified tables. If empty, all tables are replicated.
-* `connector` - the connector to use (MySQL, Oracle, or SQLServer). Currently only MySQL and SQLServer are supported.
-* `rule file` - a JSON-formatted rule file placed under $PGDATA that this connector shall apply to its default data type translation rules. See below for more detail.
+
+*  `name` - a unique identifier that represents this connection info
+
+*  `hostname` - the IP address of heterogeneous database.
+
+*  `port` - the port number to connect to.
+
+*  `username` - user name to use to connect.
+
+*  `password` - password to authenticate the username.
+
+*  `source database` (optional) - the database name to replicate changes from. For example, the database that exists in MySQL. If empty, all databases from MySQL are replicated.
+
+*  `destination` database - the database to apply changes to - For example, the database that exists in PostgreSQL. Must be a valid database that exists.
+
+*  `table` (optional) - expressed in the form of `[database].[table]` that must exists in MySQL so the engine will only replicate the specified tables. If empty, all tables are replicated.
+
+*  `connector` - the connector to use (MySQL, Oracle, or SQLServer). Currently only MySQL and SQLServer are supported.
+
+*  `rule file` - a JSON-formatted rule file placed under $PGDATA that this connector shall apply to its default data type translation rules. See below for more detail.
 
 Example:
 

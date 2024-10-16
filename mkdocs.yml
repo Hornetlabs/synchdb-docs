@@ -53,7 +53,7 @@ plugins:
           site_name: SynchDB 文档
           build: true
           nav_translations:
-            User Guide: 用户指南
+            User guide: 用户指南
             Architecture: 架构
             Changelog: 变更日志
   - mike:

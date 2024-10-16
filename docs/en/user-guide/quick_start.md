@@ -27,12 +27,12 @@ synchdb_add_conninfo takes these arguments:
 
 Examples:
 
-1. Create a MySQL connector called 'mysqlconn' to replicate from source database 'inventory' in MySQL to destination database 'postgres' in PostgreSQL, using rule file `myrule.json`:
+1. Create a MySQL connector called `mysqlconn` to replicate from source database `inventory` in MySQL to destination database `postgres` in PostgreSQL, using rule file `myrule.json`:
 ```
 SELECT synchdb_add_conninfo('mysqlconn', '127.0.0.1', 3306, 'mysqluser', 'mysqlpwd', 'inventory', 'postgres', '', 'mysql', 'myrule.json');
 ```
 
-2. Create a MySQL connector called 'mysqlconn2' to replicate from source database 'inventory' to destination database 'mysqldb2' in PostgreSQL using default transaltion rule:
+2. Create a MySQL connector called `mysqlconn2` to replicate from source database `inventory` to destination database `mysqldb2` in PostgreSQL using default transaltion rule:
 ```
 SELECT synchdb_add_conninfo('mysqlconn2', '127.0.0.1', 3306, 'mysqluser', 'mysqlpwd', 'inventory', 'mysqldb2', '', 'mysql', '');
 ```
@@ -42,7 +42,7 @@ SELECT synchdb_add_conninfo('mysqlconn2', '127.0.0.1', 3306, 'mysqluser', 'mysql
 SELECT synchdb_add_conninfo('sqlserverconn', '127.0.0.1', 1433, 'sa', 'Password!', 'testDB', 'sqlserverdb', '', 'sqlserver', '');
 ```
 
-4. Create a MySQL connector called 'mysqlconn3' to replicate from source database 'inventory's `orders` and `customers` tabls to destination database 'mysqldb3' in PostgreSQL using rule file `myrule2.json`:
+4. Create a MySQL connector called `mysqlconn3` to replicate from source database `inventory`s `orders` and `customers` tabls to destination database `mysqldb3` in PostgreSQL using rule file `myrule2.json`:
 ```
 SELECT synchdb_add_conninfo('mysqlconn3', '127.0.0.1', 3306, 'mysqluser', 'mysqlpwd', 'inventory', 'mysqldb3', 'inventory.orders,inventory.customers', 'mysql', 'myrule2.json');
 ```
@@ -120,22 +120,39 @@ postgres=# select * from synchdb_state_view;
  29 | null      |                |     -1 | stopped | no error | no offset
 ```
 
+
 Column Details:
+
 * id: unique identifier of a connector slot
+
 * connector: the type of connector (mysql, oracle, sqlserver...etc)
+
 * conninfo_name: the associated connection info name created by `synchdb_add_conninfo()`
+
 * pid: the PID of the connector worker process
+
 * state: the state of the connector. Possible states are:
-    * stopped
-    * initializing
-    * paused
-    * syncing
-    * parsing
-    * converting
-    * executing
-    * updating offset
-    * unknown
+
+* stopped
+
+* initializing
+
+* paused
+
+* syncing
+
+* parsing
+
+* converting
+
+* executing
+
+* updating offset
+
+* unknown
+
 * err: the last error message encountered by the worker which would have caused it to exit. This error could originated from PostgreSQL while processing a change, or originated from Debezium running engine while accessing data from heterogeneous database.
+
 * last_dbz_offset: the last Debezium offset captured by synchdb. Note that this may not reflect the current and real-time offset value of the connector engine. Rather, this is shown as a checkpoint that we could restart from this offeet point if needed.
 
 ## Stop a Connector

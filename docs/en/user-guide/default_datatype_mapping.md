@@ -119,4 +119,5 @@ DatatypeHashEntry sqlserver_defaultTypeMappings[] =
 	/* spatial types - map to TEXT by default */
 	{{"geometry", false}, "TEXT", 0},
 	{{"geography", false}, "TEXT", 0},
-};`
+};
+```
