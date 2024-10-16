@@ -1,3 +1,4 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5ead234b-270b-4b31-93e1-ea0e20774739/deploy-status)](https://app.netlify.com/sites/synchdbdocs/deploys)
 # SynchDB Documentation
 
 This repository contains the documentation for SynchDB, a PostgreSQL extension for synchronizing data from different database sources. The documentation is built using MkDocs with the Material theme and supports multiple languages.
