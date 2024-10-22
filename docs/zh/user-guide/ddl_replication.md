@@ -2,11 +2,11 @@
 
 SynchDB 支持以下 DDL 命令：
 
-* CREATE <table>
-* ALTER <table> ADD COLUMN
-* ALTER <table> DROP COLUMN
-* ALTER <table> ALTER COLUMN
-* DROP <table>
+* CREATE [table]
+* ALTER [table] ADD COLUMN
+* ALTER [table] DROP COLUMN
+* ALTER [table] ALTER COLUMN
+* DROP [table]
 
 ## CREATE TABLE
 SynchDB 能够在 CREATE TABLE 事件中捕获以下属性：

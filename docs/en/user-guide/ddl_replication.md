@@ -1,11 +1,11 @@
 # DDL Replication
 SynchDB supports the following DDL commands:
 
-* CREATE <table>
-* ALTER <table> ADD COLUMN
-* ALTER <table> DROP COLUMN
-* ALTER <table> ALTER COLUMN
-* DROP <table>
+* CREATE [table]
+* ALTER [table] ADD COLUMN
+* ALTER [table] DROP COLUMN
+* ALTER [table] ALTER COLUMN
+* DROP [table]
 
 ## CREATE TABLE
 SynchDB is able to capture the following properties during a CREATE TABLE event:
