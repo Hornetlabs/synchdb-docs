@@ -28,10 +28,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if [[ ${{ github.ref }} =~ ^refs/tags/v ]]; then
-            VERSION=${GITHUB_REF#refs/tags/v}
-            mike deploy --push --update-aliases $VERSION latest
-            mike set-default --push latest
-          else
-            mike deploy --push dev
-          fi
+          # if [[ ${{ github.ref }} =~ ^refs/tags/v ]]; then
+          #  VERSION=${GITHUB_REF#refs/tags/v}
+          #  mike deploy --push --update-aliases $VERSION latest
+          #  mike set-default --push latest
+          #else
+          #  mike deploy --push dev
+          #fi
+          mkdocs build
