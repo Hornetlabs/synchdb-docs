@@ -19,7 +19,7 @@ jobs:
           python-version: '3.x'
       - name: Install dependencies
         run: |
-          pip install mkdocs-material mkdocs-minify-plugin mike pymdown-extensions mkdocs-static-i18n
+          pip install -r requirements.txt
       - name: Configure Git
         run: |
           git config user.name github-actions[bot]
