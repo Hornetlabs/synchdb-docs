@@ -85,6 +85,7 @@ postgres=#
 ## Snapshot Modes
 
 The table below contains a list of snapshot modes SynchDB can support:
+
 |  **setting** 	|                                                                                                                             **description**                                                                                                                             	|
 |:------------:	|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:	|
 | always       	| The connector performs a snapshot every time that it starts. The snapshot includes the structure and data of the captured tables. After the snapshot completes, the connector begins to stream event records for subsequent database changes.                           	|
