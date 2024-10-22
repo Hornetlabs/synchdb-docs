@@ -9,6 +9,8 @@
 * 自动增量：表示数据类型是否具有自动增量属性的标志。
 * 大小：转换后的大小值。-1：不变，0：未指定大小
 
+可以通过使用规则文件定义转换数据类型规则来覆盖默认数据类型映射条目。有关更多信息，请参阅[转换规则文件](https://docs.synchdb.com/zh/user-guide/transform_rule_file/)。
+
 ## MySQL 默认数据类型映射
 ```
 DatatypeHashEntry mysql_defaultTypeMappings[] =

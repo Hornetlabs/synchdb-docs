@@ -14,16 +14,18 @@ This can be done with utility SQL function `synchdb_add_conninfo()`.
 
 synchdb_add_conninfo takes these arguments:
 
-* `name` - a unique identifier that represents this connection info
-* `hostname` - the IP address of the heterogeneous database.
-* `port` - the port number to connect to the heterogeneous database.
-* `username` - user name to use.
-* `password` - password to authenticate the username.
-* `source database` - this is the name of source database in heterogeneous database that we want to replicate changes from.
-* `destination` database - this is the name of destination database in PostgreSQL to apply changes to. It must be a valid database that exists in PostgreSQL.
-* `table` (optional) - expressed in the form of `[database].[table]` or `[database].[schema].[table]` that must exists in heterogeneous database so the engine will only replicate the specified tables. If left empty, all tables are replicated. Please note that tables not selected here will have their table schema replicated in PostgreSQL as well, however, only the data of the selected table will have their data replicated.
-* `connector` - the connector type to use (MySQL, Oracle, SQLServer... etc).
-* `rule file` - a JSON-formatted rule file placed under $PGDATA that this connector shall apply to its default data type translation rules.
+|        argumet        |                                                                                                                description                                                                                                                |
+|:--------------------: |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| name                  | a unique identifier that represents this connector info                                                                                                                                                                                   |
+| hostname              | the IP address or hostname of the heterogeneous database.                                                                                                                                                                                 |
+| port                  | the port number to connect to the heterogeneous database.                                                                                                                                                                                 |
+| username              | user name to use to authenticate with heterogeneous database.                                                                                                                                                                             |
+| password              | password to authenticate the username                                                                                                                                                                                                     |
+| source database       | this is the name of source database in heterogeneous database that we want to replicate changes from.                                                                                                                                     |
+| destination database  | this is the name of destination database in PostgreSQL to apply changes to. It must be a valid database that exists in PostgreSQL.                                                                                                        |
+| table                 | (optional) - expressed in the form of `[database].[table]` or `[database].[schema].[table]` that must exists in heterogeneous database so the engine will only replicate the specified tables. If left empty, all tables are replicated.  |
+| connector             | the connector type to use (MySQL, Oracle, SQLServer... etc).                                                                                                                                                                              |
+| rule file             | a JSON-formatted rule file placed under $PGDATA that this connector shall apply to its default data type translation rules. See [here](https://docs.synchdb.com/user-guide/transform_rule_file/) for more information                     |
 
 Examples:
 
@@ -49,9 +51,7 @@ SELECT synchdb_add_conninfo('mysqlconn3', '127.0.0.1', 3306, 'mysqluser', 'mysql
 
 ## Things to Note
 * It is possible to create multiple connectors connecting to the same connector type (ex, MySQL, SQLServer..etc). SynchDB will spawn separate connections to fetch change data.
-* Avoid creating 2 connectors connecting to the same heterogeneous database, same source database, tables and the same destination database. This could cause a conflict when both connectors start. In the future, we will add a column and table name mappings feature to allow a source table to be mapped to a different name on the destination to prevent such name conflict. In the meantime, please use different destination database instead.
 * User-defined X509 certificate and private key for TLS connection to remote database will be supported in near future. In the meantime, please ensure TLS settings are set to optional.
-
  
 
 ## Check Created Connection Info
@@ -90,71 +90,26 @@ postgres=# select * from synchdb_state_view;
 ----+-----------+----------------+--------+---------+----------+---------------------------------------------------------------------------------------------------
   0 | mysql     | mysqlconn      | 461696 | syncing | no error | {"ts_sec":1725644339,"file":"mysql-bin.000004","pos":138466,"row":1,"server_id":223344,"event":2}
   1 | sqlserver | sqlserverconn  | 461739 | syncing | no error | {"event_serial_no":1,"commit_lsn":"00000100:00000c00:0003","change_lsn":"00000100:00000c00:0002"}
+  2 | null      |                |     -1 | stopped | no error | no offset
   3 | null      |                |     -1 | stopped | no error | no offset
   4 | null      |                |     -1 | stopped | no error | no offset
-  4 | null      |                |     -1 | stopped | no error | no offset
   5 | null      |                |     -1 | stopped | no error | no offset
-  6 | null      |                |     -1 | stopped | no error | no offset
-  7 | null      |                |     -1 | stopped | no error | no offset
-  8 | null      |                |     -1 | stopped | no error | no offset
-  9 | null      |                |     -1 | stopped | no error | no offset
- 10 | null      |                |     -1 | stopped | no error | no offset
- 11 | null      |                |     -1 | stopped | no error | no offset
- 12 | null      |                |     -1 | stopped | no error | no offset
- 13 | null      |                |     -1 | stopped | no error | no offset
- 14 | null      |                |     -1 | stopped | no error | no offset
- 15 | null      |                |     -1 | stopped | no error | no offset
- 16 | null      |                |     -1 | stopped | no error | no offset
- 17 | null      |                |     -1 | stopped | no error | no offset
- 18 | null      |                |     -1 | stopped | no error | no offset
- 19 | null      |                |     -1 | stopped | no error | no offset
- 20 | null      |                |     -1 | stopped | no error | no offset
- 21 | null      |                |     -1 | stopped | no error | no offset
- 22 | null      |                |     -1 | stopped | no error | no offset
- 23 | null      |                |     -1 | stopped | no error | no offset
- 24 | null      |                |     -1 | stopped | no error | no offset
- 25 | null      |                |     -1 | stopped | no error | no offset
- 26 | null      |                |     -1 | stopped | no error | no offset
- 27 | null      |                |     -1 | stopped | no error | no offset
- 28 | null      |                |     -1 | stopped | no error | no offset
- 29 | null      |                |     -1 | stopped | no error | no offset
+  ...
+  ...
 ```
 
 
 Column Details:
 
-* id: unique identifier of a connector slot
-
-* connector: the type of connector (mysql, oracle, sqlserver...etc)
-
-* conninfo_name: the associated connection info name created by `synchdb_add_conninfo()`
-
-* pid: the PID of the connector worker process
-
-* state: the state of the connector. Possible states are:
-
-* stopped
-
-* initializing
-
-* paused
-
-* syncing
-
-* parsing
-
-* converting
-
-* executing
-
-* updating offset
-
-* unknown
-
-* err: the last error message encountered by the worker which would have caused it to exit. This error could originated from PostgreSQL while processing a change, or originated from Debezium running engine while accessing data from heterogeneous database.
-
-* last_dbz_offset: the last Debezium offset captured by synchdb. Note that this may not reflect the current and real-time offset value of the connector engine. Rather, this is shown as a checkpoint that we could restart from this offeet point if needed.
-
+| fields          	| description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      	|
+|-----------------	|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
+| id              	| unique identifier of a connector slot                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            	|
+| connector       	| the type of connector (mysql, oracle, sqlserver...etc)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           	|
+| conninfo_name   	| the associated connector info name created by `synchdb_add_conninfo()`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           	|
+| pid             	| the PID of the connector worker process                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          	|
+| state           	| the state of the connector. Possible states are: <br><br><ul><li>stopped - connector is not running</li><li>initializing - connector is initializing</li><li>paused - connector is paused</li><li>syncing - connector is regularly polling change events</li><li>parsing (the connector is parsing a received change event) </li><li>converting - connector is converting a change event to PostgreSQL representation</li><li>executing - connector is applying the converted change event to PostgreSQL</li><li>updating offset - connector is writing a new offset value to Debezium offset management</li><li>restarting - connector is restarting </li><li>unknown</li></ul> 	|
+| err             	| the last error message encountered by the worker which would have caused it to exit. This error could originated from PostgreSQL while processing a change, or originated from Debezium running engine while accessing data from heterogeneous database.                                                                                                                                                                                                                                                                                                                                                                                                                         	|
+| last_dbz_offset 	| the last Debezium offset captured by synchdb. Note that this may not reflect the current and real-time offset value of the connector engine. Rather, this is shown as a checkpoint that we could restart from this offeet point if needed.                                                                                                                                                                                                                                                                                                                                                                                                                                       	|
 ## Stop a Connector
 Use `synchdb_stop_engine_bgw()` SQL function to stop a running or paused connector worker. This function takes `conninfo_name` as its only parameter, which can be found from the output of `synchdb_get_state()` view.
 

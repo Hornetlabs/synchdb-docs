@@ -16,16 +16,21 @@ CREATE EXTENSION synchdb CASCADE;
 
 synchdb_add_conninfo 接受以下参数：
 
-* `name` - 代表此连接信息的唯一标识符
-* `hostname` - 异构数据库的 IP 地址。
-* `port` - 连接异构数据库的端口号。
-* `username` - 要使用的用户名。
-* `password` - 验证用户名的密码。
-* `source database` - 这是我们要从中复制更改的异构数据库中的源数据库名称。
-* `destination database` - 这是要应用更改的 PostgreSQL 中的目标数据库名称。它必须是 PostgreSQL 中存在的有效数据库。
-* `table`（可选）- 以 `[database].[table]` 或 `[database].[schema].[table]` 的形式表示，必须存在于异构数据库中，引擎将只复制指定的表。如果留空，将复制所有表。请注意，未在此选择的表也将在 PostgreSQL 中复制其表结构，但只有选定表的数据会被复制。
-* `connector` - 要使用的连接器类型（MySQL、Oracle、SQLServer 等）。
-* `rule file` - 放置在 $PGDATA 下的 JSON 格式规则文件，该连接器将应用于其默认数据类型转换规则。
+synchdb_add_conninfo 接受以下参数：
+
+|        参数            |                                                                                                                描述                                                                                                                |
+|:--------------------:  |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| 名称                   | 代表此连接器信息的唯一标识符                                                                                                                                                                                   |
+| 主机名                 | 异构数据库的 IP 地址或主机名                                                                                                                                                                                 |
+| 端口号                 | 连接到异构数据库的端口号                                                                                                                                                                                 |
+| 用户名                 | 用于验证异构数据库身份的用户名                                                                                                                                                                             |
+| 密码                   | 验证用户名的密码                                                                                                                                                                                                     |
+| 源数据库               | 我们希望从中复制更改的异构数据库中的源数据库的名称                                                                                                                                     |
+| 目标数据库             | 将更改应用到的 PostgreSQL 中的目标数据库的名称。它必须是 PostgreSQL 中存在的有效数据库。                                                                                                        |
+| 表                    | （可选） - 表达形式为 `[database].[table]` 或 `[database].[schema].[table]`，必须存在于异构数据库中，因此引擎将仅复制指定的表。如果留空，将复制所有表。                                                                                                    |
+| 连接器                | 要使用的连接器类型（MySQL，Oracle，SQLServer 等等）。                                                                                                                                                                              |
+| 规则文件              | 放置在 $PGDATA 下的 JSON 格式规则文件，该连接器将应用其默认的数据类型转换规则。更多信息请参见 [这里](https://docs.synchdb.com/user-guide/transform_rule_file/)。                     |
+
 
 示例：
 
@@ -50,7 +55,6 @@ SELECT synchdb_add_conninfo('mysqlconn3', '127.0.0.1', 3306, 'mysqluser', 'mysql
 ```
 ## 注意事项
 * 可以创建多个连接到同一连接器类型（如 MySQL、SQLServer 等）的连接器。SynchDB 将生成单独的连接来获取变更数据。
-* 避免创建两个连接到同一异构数据库、相同源数据库、表和相同目标数据库的连接器。这可能在两个连接器启动时造成冲突。将来，我们将添加列和表名映射功能，允许将源表映射到目标上的不同名称，以防止这种名称冲突。同时，请使用不同的目标数据库。
 * 近期将支持用户定义的 X509 证书和私钥，用于与远程数据库的 TLS 连接。同时，请确保 TLS 设置设为可选。
 
 ## 检查创建的连接信息
@@ -87,70 +91,24 @@ postgres=# select * from synchdb_state_view;
 ----+-----------+----------------+--------+---------+----------+---------------------------------------------------------------------------------------------------
   0 | mysql     | mysqlconn      | 461696 | syncing | no error | {"ts_sec":1725644339,"file":"mysql-bin.000004","pos":138466,"row":1,"server_id":223344,"event":2}
   1 | sqlserver | sqlserverconn  | 461739 | syncing | no error | {"event_serial_no":1,"commit_lsn":"00000100:00000c00:0003","change_lsn":"00000100:00000c00:0002"}
+  2 | null      |                |     -1 | stopped | no error | no offset
   3 | null      |                |     -1 | stopped | no error | no offset
   4 | null      |                |     -1 | stopped | no error | no offset
-  4 | null      |                |     -1 | stopped | no error | no offset
   5 | null      |                |     -1 | stopped | no error | no offset
-  6 | null      |                |     -1 | stopped | no error | no offset
-  7 | null      |                |     -1 | stopped | no error | no offset
-  8 | null      |                |     -1 | stopped | no error | no offset
-  9 | null      |                |     -1 | stopped | no error | no offset
- 10 | null      |                |     -1 | stopped | no error | no offset
- 11 | null      |                |     -1 | stopped | no error | no offset
- 12 | null      |                |     -1 | stopped | no error | no offset
- 13 | null      |                |     -1 | stopped | no error | no offset
- 14 | null      |                |     -1 | stopped | no error | no offset
- 15 | null      |                |     -1 | stopped | no error | no offset
- 16 | null      |                |     -1 | stopped | no error | no offset
- 17 | null      |                |     -1 | stopped | no error | no offset
- 18 | null      |                |     -1 | stopped | no error | no offset
- 19 | null      |                |     -1 | stopped | no error | no offset
- 20 | null      |                |     -1 | stopped | no error | no offset
- 21 | null      |                |     -1 | stopped | no error | no offset
- 22 | null      |                |     -1 | stopped | no error | no offset
- 23 | null      |                |     -1 | stopped | no error | no offset
- 24 | null      |                |     -1 | stopped | no error | no offset
- 25 | null      |                |     -1 | stopped | no error | no offset
- 26 | null      |                |     -1 | stopped | no error | no offset
- 27 | null      |                |     -1 | stopped | no error | no offset
- 28 | null      |                |     -1 | stopped | no error | no offset
- 29 | null      |                |     -1 | stopped | no error | no offset
+  ...
+  ...
 ```
 
 
-列详情：
+列详细信息：
 
-* id：连接器槽的唯一标识符
-
-* connector：连接器类型（mysql、oracle、sqlserver 等）
-
-* conninfo_name：由 `synchdb_add_conninfo()` 创建的关联连接信息名称
-
-* pid：连接器工作进程的 PID
-
-* state：连接器的状态。可能的状态有：
-
-* stopped（已停止）
-
-* initializing（初始化中）
-
-* paused（已暂停）
-
-* syncing（同步中）
-
-* parsing（解析中）
-
-* converting（转换中）
-
-* executing（执行中）
-
-* updating offset（更新偏移量）
-
-* unknown（未知）
-
-* err：工作进程遇到的最后一个错误消息，可能导致其退出。这个错误可能源自 PostgreSQL 处理变更时，或源自 Debezium 运行引擎访问异构数据库时。
-
-* last_dbz_offset：synchdb 捕获的最后一个 Debezium 偏移量。注意，这可能不反映连接器引擎的当前和实时偏移量值。相反，这显示为一个检查点，如果需要，我们可以从这个偏移点重新启动。
+| 字段            | 描述                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+|-----------------  |---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| id                | 连接器槽的唯一标识符                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| connector         | 连接器类型（mysql, oracle, sqlserver 等等）                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| conninfo_name     | 由 `synchdb_add_conninfo()` 创建的关联连接器信息名称                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| pid               | 连接器工作进程的 PID                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| state             | 连接器的状态。可能的状态为： <br><br><ul><li>stopped - 连接器未运行</li><li>initializing - 连接器正在初始化</li><li>paused - 连接器已暂停</li><li>
 
 ## 停止连接器
 使用 `synchdb_stop_engine_bgw()` SQL 函数停止正在运行或暂停的连接器工作进程。此函数以 `conninfo_name` 作为其唯一参数，可以从 `synchdb_get_state()` 视图的输出中找到。
