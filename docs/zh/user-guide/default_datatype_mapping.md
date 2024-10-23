@@ -12,7 +12,7 @@
 默认数据类型映射条目可以通过在规则文件中定义数据类型转换规则来覆盖。更多信息请参见[转换规则文件](https://docs.synchdb.com/user-guide/transform_rule_file/)。
 
 ## MySQL 默认数据类型映射
-```
+```c
 DatatypeHashEntry mysql_defaultTypeMappings[] =
 {
 	{{"INT", true}, "SERIAL", 0},
@@ -80,7 +80,7 @@ DatatypeHashEntry mysql_defaultTypeMappings[] =
 ```
 
 ## SQL Server 默认数据类型映射
-```
+```c
 DatatypeHashEntry mysql_defaultTypeMappings[] =
 {
 	{{"INT", true}, "SERIAL", 0},

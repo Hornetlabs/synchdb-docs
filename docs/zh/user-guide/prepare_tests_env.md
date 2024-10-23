@@ -9,7 +9,7 @@ docker compose -f synchdb-mysql-test.yaml up -d
 ```
 
 以 `root` 身份登录 MySQL，并授予 `mysqluser` 用户执行实时 CDC 的权限
-```
+```sql
 mysql -h 127.0.0.1 -u root -p
 
 GRANT replication client on *.* to mysqluser;

@@ -2,11 +2,11 @@
 
 SynchDB 在 postgresql.conf 中支持以下 GUC 变量：
 
-| GUC 变量                     	| 类型    	| 默认值    	| 描述                                                                                                                                             	|
-|-------------------------------	|---------	|-----------	|--------------------------------------------------------------------------------------------------------------------------------------------------	|
-| synchdb.naptime               	| integer 	| 500       	| 从 Debezium runner 引擎轮询数据的时间间隔（毫秒）                                                                                              	|
-| synchdb.dml_use_spi           	| boolean 	| false     	| 是否使用 SPI 处理 DML 操作                                                                                                                    	|
-| synchdb.synchdb_auto_launcher 	| boolean 	| true      	| 是否自动启动活跃的 SynchDB 连接器工作进程。此选项仅在 SynchDB 被包含在 `shared_preload_library` GUC 选项中时生效                            	|
+| GUC 变量 | 类型 | 默认值 | 描述 |
+|-|-|-|-|
+| synchdb.naptime | integer | 500 | 从 Debezium runner 引擎轮询数据的时间间隔（毫秒） |
+| synchdb.dml_use_spi | boolean | false | 是否使用 SPI 处理 DML 操作 |
+| synchdb.synchdb_auto_launcher | boolean | true | 是否自动启动活跃的 SynchDB 连接器工作进程。此选项仅在 SynchDB 被包含在 `shared_preload_library` GUC 选项中时生效 |
 
 ## 技术说明
 

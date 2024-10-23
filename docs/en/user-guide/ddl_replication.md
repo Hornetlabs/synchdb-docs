@@ -1,4 +1,4 @@
-# DDL Replication in SynchDB
+# DDL Replication
 
 ## Overview
 SynchDB provides comprehensive support for Data Definition Language (DDL) operations, allowing real-time schema synchronization across different database systems.
@@ -18,14 +18,14 @@ SynchDB captures these properties during CREATE TABLE events:
 
 | Property | Description |
 |----------|-------------|
-| **Table Name** | Fully Qualified Name (FQN) format |
-| **Column Names** | Individual column identifiers |
-| **Data Types** | Column data type specifications |
-| **Data Length** | Length/precision specifications (if applicable) |
-| **Unsigned Flag** | Unsigned constraints for numeric types |
-| **Nullability** | NULL/NOT NULL constraints |
-| **Default Values** | Default value expressions |
-| **Primary Keys** | Primary key column definitions |
+| Table Name | Fully Qualified Name (FQN) format |
+| Column Names | Individual column identifiers |
+| Data Types | Column data type specifications |
+| Data Length | Length/precision specifications (if applicable) |
+| Unsigned Flag | Unsigned constraints for numeric types |
+| Nullability | NULL/NOT NULL constraints |
+| Default Values | Default value expressions |
+| Primary Keys | Primary key column definitions |
 
 > **Note**: Additional CREATE TABLE properties are not currently supported
 
@@ -75,11 +75,18 @@ SQLServer does not natively supports DDL replication in streaming mode. The tabl
 
 #### Trigger CREATE TABLE event on SQLServer
 To create a new table on SQL Server and added to its CDC table list:
-```
-CREATE TABLE dbo.altertest (a int, b text);
+```sql
+CREATE TABLE dbo.altertest (
+	a INT,
+	b TEXT
+	);
 GO
 
-EXEC sys.sp_cdc_enable_table @source_schema = 'dbo', @source_name = 'altertest', @role_name = NULL, @supports_net_changes = 0, @capture_instance='dbo_altertest_1
+EXEC sys.sp_cdc_enable_table @source_schema = 'dbo',
+	@source_name = 'altertest',
+	@role_name = NULL,
+	@supports_net_changes = 0,
+	@capture_instance = 'dbo_altertest_1'
 GO
 ```
 
@@ -91,25 +98,38 @@ If an existing table is altered (add, drop or alter column), it needs to be expl
 For example:
 
 Alter a table in SQLServer:
-```
-ALTER TABLE altertest ADD c NVARCHAR(MAX), d INT DEFAULT 0 NOT NULL, e NVARCHAR(255) NOT NULL, f INT DEFAULT 5 NOT NULL, CONSTRAINT PK_altertest PRIMARY KEY (d, f);
+```sql
+ALTER TABLE altertest ADD c NVARCHAR(MAX),
+	d INT DEFAULT 0 NOT NULL,
+	e NVARCHAR(255) NOT NULL,
+	f INT DEFAULT 5 NOT NULL,
+	CONSTRAINT PK_altertest PRIMARY KEY (
+	d,
+	f
+	);
 GO
 ```
 
 Disable the old capture instance:
-```
-EXEC sys.sp_cdc_disable_table @source_schema='dbo', @source_name='altertest', @capture_instance='dbo_altertest_1';
+```sql
+EXEC sys.sp_cdc_disable_table @source_schema = 'dbo',
+	@source_name = 'altertest',
+	@capture_instance = 'dbo_altertest_1';
 GO
 ```
 
 Enable as a new capture intance:
-```
-EXEC sys.sp_cdc_enable_table @source_schema = 'dbo', @source_name = 'altertest', @role_name = NULL, @supports_net_changes = 0, @capture_instance = 'dbo_altertest_2';
+```sql
+EXEC sys.sp_cdc_enable_table @source_schema = 'dbo',
+	@source_name = 'altertest',
+	@role_name = NULL,
+	@supports_net_changes = 0,
+	@capture_instance = 'dbo_altertest_2';
 GO
 ```
 
 Add new record:
-```
+```sql
 INSERT INTO altertest VALUES(1, 's', 'c', 1, 'v', 5);
 GO
 ```

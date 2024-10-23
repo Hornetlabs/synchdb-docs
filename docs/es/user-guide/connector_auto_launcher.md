@@ -10,7 +10,7 @@ El lanzador automático de conectores se puede habilitar mediante:
 * Reiniciar el servidor PostgreSQL para que los cambios surtan efecto
 
 Por ejemplo:
-```
+```conf
 shared_preload_libraries = 'synchdb'
 synchdb.synchdb_auto_launcher = true
 ```

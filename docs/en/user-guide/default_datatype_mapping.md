@@ -15,7 +15,7 @@ The default data type mapping entries can be overwritten by defining a transform
 
 ## MySQL Default Data Type Mapping
 
-```
+```c
 DatatypeHashEntry mysql_defaultTypeMappings[] =
 {
 	{{"INT", true}, "SERIAL", 0},
@@ -84,7 +84,7 @@ DatatypeHashEntry mysql_defaultTypeMappings[] =
 
 ## SQL Server Default Data Type Mapping
 
-```
+```c
 DatatypeHashEntry sqlserver_defaultTypeMappings[] =
 {
 	{{"int identity", true}, "SERIAL", 0},

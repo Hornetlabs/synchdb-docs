@@ -8,7 +8,7 @@ docker compose -f synchdb-mysql-test.yaml up -d
 ```
 
 Login to MySQL as `root` and grant permissions to user `mysqluser` to perform real-time CDC
-```
+```sql
 mysql -h 127.0.0.1 -u root -p
 
 GRANT replication client on *.* to mysqluser;

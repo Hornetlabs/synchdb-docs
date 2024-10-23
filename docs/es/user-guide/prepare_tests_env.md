@@ -4,12 +4,12 @@ Los procedimientos mencionados aquí están destinados a iniciar rápidamente ba
 
 ## Preparar una Base de Datos MySQL de Ejemplo
 Podemos iniciar una base de datos MySQL de ejemplo para pruebas usando docker compose. Las credenciales de usuario están descritas en el archivo `synchdb-mysql-test.yaml`
-```
+```sh
 docker compose -f synchdb-mysql-test.yaml up -d
 ```
 
 Inicie sesión en MySQL como `root` y otorgue permisos al usuario `mysqluser` para realizar CDC en tiempo real
-```
+```sql
 mysql -h 127.0.0.1 -u root -p
 
 GRANT replication client on *.* to mysqluser;

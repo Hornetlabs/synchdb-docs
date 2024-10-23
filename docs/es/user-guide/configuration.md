@@ -2,11 +2,11 @@
 
 SynchDB admite las siguientes variables GUC en postgresql.conf:
 
-| Variable GUC                  	| Tipo    	| Valor Predeterminado 	| Descripción                                                                                                                                                	|
-|-------------------------------	|---------	|---------------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------	|
-| synchdb.naptime               	| integer 	| 500                 	| El retraso en milisegundos entre cada sondeo de datos del motor Debezium runner                                                                           	|
-| synchdb.dml_use_spi           	| boolean 	| false               	| Opción para usar SPI en el manejo de operaciones DML                                                                              	                        |
-| synchdb.synchdb_auto_launcher 	| boolean 	| true                	| Opción para lanzar automáticamente los trabajadores del conector SynchDB activos. Esta opción solo funciona cuando SynchDB está incluido en la opción GUC `shared_preload_library` 	|
+| Variable GUC | Tipo | Valor Predeterminado | Descripción |
+|-|-|-|-|
+| synchdb.naptime | integer | 500 | El retraso en milisegundos entre cada sondeo de datos del motor Debezium runner |
+| synchdb.dml_use_spi | boolean | false | Opción para usar SPI en el manejo de operaciones DML |
+| synchdb.synchdb_auto_launcher | boolean | true | Opción para lanzar automáticamente los trabajadores del conector SynchDB activos. Esta opción solo funciona cuando SynchDB está incluido en la opción GUC `shared_preload_library` |
 
 ## Notas Técnicas
 

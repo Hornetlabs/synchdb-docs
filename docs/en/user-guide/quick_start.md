@@ -5,7 +5,7 @@ It is very simple to start using SynchDB to perform data replication from hetero
 ## Install SynchDB Extension
 SynchDB extension requires pgcrypto to encrypt certain sensitive credential data. Please make sure it is installed prior to installing SynchDB. Alternatively, you can include `CASCADE` clause in `CREATE EXTENSION` to automatically install dependencies:
 
-```
+```sql
 CREATE EXTENSION synchdb CASCADE;
 ```
 
@@ -14,39 +14,64 @@ This can be done with utility SQL function `synchdb_add_conninfo()`.
 
 synchdb_add_conninfo takes these arguments:
 
-|        argumet        |                                                                                                                description                                                                                                                |
-|:--------------------: |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| name                  | a unique identifier that represents this connector info                                                                                                                                                                                   |
-| hostname              | the IP address or hostname of the heterogeneous database.                                                                                                                                                                                 |
-| port                  | the port number to connect to the heterogeneous database.                                                                                                                                                                                 |
-| username              | user name to use to authenticate with heterogeneous database.                                                                                                                                                                             |
-| password              | password to authenticate the username                                                                                                                                                                                                     |
-| source database       | this is the name of source database in heterogeneous database that we want to replicate changes from.                                                                                                                                     |
-| destination database  | this is the name of destination database in PostgreSQL to apply changes to. It must be a valid database that exists in PostgreSQL.                                                                                                        |
+|        argumet        | description |
+|-------------------- |-|
+| name                  | a unique identifier that represents this connector info |
+| hostname              | the IP address or hostname of the heterogeneous database. |
+| port                  | the port number to connect to the heterogeneous database. |
+| username              | user name to use to authenticate with heterogeneous database.|
+| password              | password to authenticate the username |
+| source database       | this is the name of source database in heterogeneous database that we want to replicate changes from.|
+| destination database  | this is the name of destination database in PostgreSQL to apply changes to. It must be a valid database that exists in PostgreSQL.|
 | table                 | (optional) - expressed in the form of `[database].[table]` or `[database].[schema].[table]` that must exists in heterogeneous database so the engine will only replicate the specified tables. If left empty, all tables are replicated.  |
-| connector             | the connector type to use (MySQL, Oracle, SQLServer... etc).                                                                                                                                                                              |
-| rule file             | a JSON-formatted rule file placed under $PGDATA that this connector shall apply to its default data type translation rules. See [here](https://docs.synchdb.com/user-guide/transform_rule_file/) for more information                     |
+| connector             | the connector type to use (MySQL, Oracle, SQLServer... etc).|
+| rule file             | a JSON-formatted rule file placed under $PGDATA that this connector shall apply to its default data type translation rules. See [here](https://docs.synchdb.com/user-guide/transform_rule_file/) for more information.|
 
 Examples:
 
 1. Create a MySQL connector called `mysqlconn` to replicate from source database `inventory` in MySQL to destination database `postgres` in PostgreSQL, using rule file `myrule.json`:
-```
-SELECT synchdb_add_conninfo('mysqlconn', '127.0.0.1', 3306, 'mysqluser', 'mysqlpwd', 'inventory', 'postgres', '', 'mysql', 'myrule.json');
+```sql
+SELECT synchdb_add_conninfo(
+    'mysqlconn',
+    '127.0.0.1',
+    3306,
+    'mysqluser',
+    'mysqlpwd',
+    'inventory',
+    'postgres',
+    '',
+    'mysql',
+    'myrule.json');
 ```
 
 2. Create a MySQL connector called `mysqlconn2` to replicate from source database `inventory` to destination database `mysqldb2` in PostgreSQL using default transaltion rule:
-```
-SELECT synchdb_add_conninfo('mysqlconn2', '127.0.0.1', 3306, 'mysqluser', 'mysqlpwd', 'inventory', 'mysqldb2', '', 'mysql', '');
+```sql
+SELECT synchdb_add_conninfo(
+    'mysqlconn2', '127.0.0.1', 3306, 'mysqluser', 
+    'mysqlpwd', 'inventory', 'mysqldb2', 
+    '', 'mysql', ''
+  );
 ```
 
 3. Create a SQLServer connector called 'sqlserverconn' to replicate from source database 'testDB' to destination database 'sqlserverdb' in PostgreSQL using default translation rule:
-```
-SELECT synchdb_add_conninfo('sqlserverconn', '127.0.0.1', 1433, 'sa', 'Password!', 'testDB', 'sqlserverdb', '', 'sqlserver', '');
+```sql
+SELECT 
+  synchdb_add_conninfo(
+    'sqlserverconn', '127.0.0.1', 1433, 
+    'sa', 'Password!', 'testDB', 'sqlserverdb', 
+    '', 'sqlserver', ''
+  );
 ```
 
 4. Create a MySQL connector called `mysqlconn3` to replicate from source database `inventory`s `orders` and `customers` tabls to destination database `mysqldb3` in PostgreSQL using rule file `myrule2.json`:
-```
-SELECT synchdb_add_conninfo('mysqlconn3', '127.0.0.1', 3306, 'mysqluser', 'mysqlpwd', 'inventory', 'mysqldb3', 'inventory.orders,inventory.customers', 'mysql', 'myrule2.json');
+```sql
+SELECT 
+  synchdb_add_conninfo(
+    'mysqlconn3', '127.0.0.1', 3306, 'mysqluser', 
+    'mysqlpwd', 'inventory', 'mysqldb3', 
+    'inventory.orders,inventory.customers', 
+    'mysql', 'myrule2.json'
+  );
 ```
 
 ## Things to Note
@@ -57,7 +82,7 @@ SELECT synchdb_add_conninfo('mysqlconn3', '127.0.0.1', 3306, 'mysqluser', 'mysql
 ## Check Created Connection Info
 All connection information are created in the table `synchdb_conninfo`. We are free to view its content and make modification as required. Please note that the password of a user credential is encrypted by pgcrypto using a key only known to synchdb. So please do not modify the password field or it may be decrypted incorrectly if tempered. See below for an example output:
 
-```
+```sql
 postgres=# \x
 Expanded display is on.
 
@@ -75,7 +100,7 @@ Use `synchdb_start_engine_bgw()` function to start a connector worker. It takes 
 
 For example, the following will spawn 2 background worker in PostgreSQL, one replicating from a MySQL database, the other from SQL Server
 
-```
+```sql
 select synchdb_start_engine_bgw('mysqlconn');
 select synchdb_start_engine_bgw('sqlserverconn');
 ```
@@ -84,7 +109,7 @@ select synchdb_start_engine_bgw('sqlserverconn');
 Use `synchdb_state_view()` view to examine all the running connectors and their states. Currently, synchdb can support up to 30 running workers.
 
 See below for an example output:
-```
+```sql
 postgres=# select * from synchdb_state_view;
  id | connector | conninfo_name  |  pid   |  state  |   err    |                                          last_dbz_offset
 ----+-----------+----------------+--------+---------+----------+---------------------------------------------------------------------------------------------------
@@ -101,15 +126,15 @@ postgres=# select * from synchdb_state_view;
 
 Column Details:
 
-| fields          	| description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      	|
-|-----------------	|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
-| id              	| unique identifier of a connector slot                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            	|
-| connector       	| the type of connector (mysql, oracle, sqlserver...etc)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           	|
-| conninfo_name   	| the associated connector info name created by `synchdb_add_conninfo()`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           	|
-| pid             	| the PID of the connector worker process                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          	|
-| state           	| the state of the connector. Possible states are: <br><br><ul><li>stopped - connector is not running</li><li>initializing - connector is initializing</li><li>paused - connector is paused</li><li>syncing - connector is regularly polling change events</li><li>parsing (the connector is parsing a received change event) </li><li>converting - connector is converting a change event to PostgreSQL representation</li><li>executing - connector is applying the converted change event to PostgreSQL</li><li>updating offset - connector is writing a new offset value to Debezium offset management</li><li>restarting - connector is restarting </li><li>unknown</li></ul> 	|
-| err             	| the last error message encountered by the worker which would have caused it to exit. This error could originated from PostgreSQL while processing a change, or originated from Debezium running engine while accessing data from heterogeneous database.                                                                                                                                                                                                                                                                                                                                                                                                                         	|
-| last_dbz_offset 	| the last Debezium offset captured by synchdb. Note that this may not reflect the current and real-time offset value of the connector engine. Rather, this is shown as a checkpoint that we could restart from this offeet point if needed.                                                                                                                                                                                                                                                                                                                                                                                                                                       	|
+| fields          | description |
+|-|-|
+| id              | unique identifier of a connector slot|
+| connector       | the type of connector (mysql, oracle, sqlserver...etc)|
+| conninfo_name   | the associated connector info name created by `synchdb_add_conninfo()`|
+| pid             | the PID of the connector worker process|
+| state           | the state of the connector. Possible states are: <br><br><ul><li>stopped - connector is not running</li><li>initializing - connector is initializing</li><li>paused - connector is paused</li><li>syncing - connector is regularly polling change events</li><li>parsing (the connector is parsing a received change event) </li><li>converting - connector is converting a change event to PostgreSQL representation</li><li>executing - connector is applying the converted change event to PostgreSQL</li><li>updating offset - connector is writing a new offset value to Debezium offset management</li><li>restarting - connector is restarting </li><li>unknown</li></ul> |
+| err             | the last error message encountered by the worker which would have caused it to exit. This error could originated from PostgreSQL while processing a change, or originated from Debezium running engine while accessing data from heterogeneous database. |
+| last_dbz_offset | the last Debezium offset captured by synchdb. Note that this may not reflect the current and real-time offset value of the connector engine. Rather, this is shown as a checkpoint that we could restart from this offeet point if needed.|
 
 
 ## Stop a Connector

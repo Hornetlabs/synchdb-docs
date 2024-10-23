@@ -5,7 +5,7 @@ A start offset value represents a point to start replication from in the similar
 ## Record Settable Offset Values
 During operation, new offsets will be generated nd flushed to disk by Debezium runner engine. The last flushed offset can be retrieved from `synchdb_state_view()` utility command:
 
-```
+```sql
 postgres=# select * from synchdb_state_view;
  id | connector | conninfo_name  |  pid   |  state  |   err    |                                          last_dbz_offset
 ----+-----------+----------------+--------+---------+----------+---------------------------------------------------------------------------------------------------
@@ -53,7 +53,7 @@ A connector must be in a `paused` state before a new offset value can be set.
 Use `synchdb_pause_engine()` SQL function to pause a runnng connector. This will halt the Debezium runner engine from replicating from the heterogeneous database. When paused, it is possible to alter the Debezium connector's offset value to replicate from a specific point in the past using `synchdb_set_offset()` SQL routine. It takes `conninfo_name` as its argument which can be found from the output of `synchdb_get_state()` view.
 
 For example:
-```
+```sql
 SELECT synchdb_pause_engine('mysqlconn');
 ```
 
@@ -61,8 +61,11 @@ SELECT synchdb_pause_engine('mysqlconn');
 Use `synchdb_set_offset()` SQL function to change a connector worker's starting offset. This can only be done when the connector is put into `paused` state. The function takes 2 parameters, `conninfo_name` and `a valid offset string`, both of which can be found from the output of `synchdb_get_state()` view.
 
 For example:
-```
-SELECT synchdb_set_offset('mysqlconn', '{"ts_sec":1725644339,"file":"mysql-bin.000004","pos":138466,"row":1,"server_id":223344,"event":2}');
+```sql
+SELECT 
+  synchdb_set_offset(
+    'mysqlconn', '{"ts_sec":1725644339,"file":"mysql-bin.000004","pos":138466,"row":1,"server_id":223344,"event":2}'
+  );
 ```
 
 ## Resume the Connector
@@ -70,6 +73,6 @@ SELECT synchdb_set_offset('mysqlconn', '{"ts_sec":1725644339,"file":"mysql-bin.0
 Use `synchdb_resume_engine()` SQL function to resume Debezium operation from a paused state. This function takes `connector name` as its only parameter, which can be found from the output of `synchdb_get_state()` view. The resumed Debezium runner engine will start the replication from the newly set offset value.
 
 For example:
-```
+```sql
 SELECT synchdb_resume_engine('mysqlconn');
 ```

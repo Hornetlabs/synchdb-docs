@@ -11,7 +11,7 @@
 
 ## 准备源代码
 克隆PostgreSQL源代码并切换到16.3发布标签
-```
+```sh linenums="1"
 git clone https://github.com/postgres/postgres.git
 cd postgres
 git checkout REL_16_3
@@ -19,7 +19,7 @@ git checkout REL_16_3
 
 在扩展文件夹中克隆SynchDB源代码
 注意：目前使用*(synchdb-devel)[https://github.com/Hornetlabs/synchdb/tree/synchdb-devel]*分支进行开发。
-```
+```sh linenums="1"
 cd contrib/
 git clone https://github.com/Hornetlabs/synchdb.git
 ```
@@ -27,30 +27,30 @@ git clone https://github.com/Hornetlabs/synchdb.git
 ## 准备工具
 ### 安装Maven
 如果您使用的是Ubuntu 22.04.4 LTS，按以下方式安装Maven：
-```
+```sh
 sudo apt install maven
 ```
 
 如果您使用的是MacOS，可以使用brew命令安装maven（关于如何安装Homebrew，请参考(这里)[https://brew.sh/]），无需其他设置：
-```
+```sh
 brew install maven
 ```
 
 ### 安装Java SDK (OpenJDK)
 如果您使用的是Ubuntu 22.04.4 LTS，按以下方式安装OpenJDK：
-```
+```sh
 sudo apt install openjdk-21-jdk
 ```
 
 如果您使用的是MacOS，请使用brew命令安装JDK：
-```
+```sh
 brew install openjdk@22
 ```
 
 ## 编译和安装PostgreSQL
 按照PostgreSQL官方文档[这里](https://www.postgresql.org/docs/current/install-make.html)从源代码编译和安装PostgreSQL。通常，步骤包括：
 
-```
+```sh linenums="1"
 cd /home/$USER/postgres
 ./configure
 make
@@ -58,7 +58,7 @@ sudo make install
 ```
 
 您还应该编译和安装默认扩展：
-```
+```sh linenums="1"
 cd /home/$USER/postgres/contrib
 make
 sudo make install
@@ -67,7 +67,7 @@ sudo make install
 ## 编译和安装Debezium Runner引擎
 配置好Java和Maven后，我们就可以编译Debezium Runner引擎了。这会将Debezium Runner Engine的jar文件安装到PostgreSQL的lib文件夹中。
 
-```
+```sh linenums="1"
 cd /home/$USER/postgres/contrib/synchdb
 make build_dbz
 sudo make install_dbz
@@ -76,7 +76,7 @@ sudo make install_dbz
 ## 编译和安装SynchDB PostgreSQL扩展
 在系统中安装Java的`lib`和`include`后，可以通过以下方式编译SynchDB：
 
-```
+```sh linenums="1"
 cd /home/$USER/postgres/contrib/synchdb
 make
 sudo make install
@@ -85,7 +85,7 @@ sudo make install
 ## 配置链接器（Ubuntu）
 最后，我们还需要告诉系统链接器新添加的Java库在系统中的位置。以下步骤基于Ubuntu 22.04。
 
-```
+```sh linenums="1"
 # 动态设置JDK路径
 JAVA_PATH=$(which java)
 JDK_HOME_PATH=$(readlink -f ${JAVA_PATH} | sed 's:/bin/java::')
@@ -99,20 +99,20 @@ sudo echo "$JDK_LIB_PATH/server" | sudo tee -a /etc/ld.so.conf.d/x86_64-linux-gn
 ```
 
 注意：对于使用M1/M2芯片的mac，需要将这两行添加到/etc/ld.so.conf.d/aarch64-linux-gnu.conf中
-```
+```sh linenums="1"
 sudo echo "$JDK_LIB_PATH"       ｜ sudo tee -a /etc/ld.so.conf.d/aarch64-linux-gnu.conf
 sudo echo "$JDK_LIB_PATH/server" | sudo tee -a /etc/ld.so.conf.d/aarch64-linux-gnu.conf
 ```
 
 运行ldconfig重新加载：
-```
+```sh
 sudo ldconfig
 ```
 
 ## 检查安装
 
 确保synchdb.so扩展可以链接到系统中的libjvm Java库：
-```
+```shsh linenums="1"
 ldd synchdb.so
         linux-vdso.so.1 (0x00007ffeae35a000)
         libjvm.so => /usr/lib/jdk-22.0.1/lib/server/libjvm.so (0x00007fc1276c1000)

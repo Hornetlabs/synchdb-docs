@@ -13,7 +13,7 @@ Las entradas del mapeo predeterminado de tipos de datos pueden sobrescribirse de
 
 ## MySQL Default Data Type Mapping
 
-```
+```c
 DatatypeHashEntry mysql_defaultTypeMappings[] =
 {
 	{{"INT", true}, "SERIAL", 0},
@@ -82,7 +82,7 @@ DatatypeHashEntry mysql_defaultTypeMappings[] =
 
 ## SQL Server Default Data Type Mapping
 
-```
+```c
 DatatypeHashEntry sqlserver_defaultTypeMappings[] =
 {
 	{{"int identity", true}, "SERIAL", 0},
