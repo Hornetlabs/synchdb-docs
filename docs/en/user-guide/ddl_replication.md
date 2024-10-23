@@ -1,63 +1,79 @@
-# DDL Replication
-SynchDB supports the following DDL commands:
+# DDL Replication in SynchDB
 
-* CREATE [table]
-* ALTER [table] ADD COLUMN
-* ALTER [table] DROP COLUMN
-* ALTER [table] ALTER COLUMN
-* DROP [table]
+## Overview
+SynchDB provides comprehensive support for Data Definition Language (DDL) operations, allowing real-time schema synchronization across different database systems.
 
-## CREATE TABLE
-SynchDB is able to capture the following properties during a CREATE TABLE event:
-* table name expressed in Fully Qualified Name (FQN).
-* name of each column.
-* data type of each column.
-* data length of each column if applicable. 
-* unsigned constraint of each column.
-* whether each column data is nullable.
-* default value expression of each column.
-* primary key column lists.
+## Supported DDL Commands
+SynchDB supports the following DDL operations:
 
-Other properties that can be specified during CREATE TABLE are not supported at the moment.
+✅ CREATE [table]  
+✅ ALTER [table] ADD COLUMN  
+✅ ALTER [table] DROP COLUMN  
+✅ ALTER [table] ALTER COLUMN  
+✅ DROP [table]  
 
-## DROP TABLE
-SynchDB is able to capture the DROP TABLE event with the property below:
-* table name expressed in FQN to be dropped
+## Detailed Command Support
+### CREATE TABLE
+SynchDB captures these properties during CREATE TABLE events:
 
-## ALTER TABLE ADD COLUMN
-SynchDB is able to capture the following properties during a ALTER TABLE ADD COLUMN event:
-* name of each added column.
-* data type of each added column.
-* data length of each added column if applicable. 
-* unsigned constraint of each added column.
-* whether each added column data is nullable.
-* default value expression of each added column.
-* primary key column lists including the added column if applicable.
+| Property | Description |
+|----------|-------------|
+| **Table Name** | Fully Qualified Name (FQN) format |
+| **Column Names** | Individual column identifiers |
+| **Data Types** | Column data type specifications |
+| **Data Length** | Length/precision specifications (if applicable) |
+| **Unsigned Flag** | Unsigned constraints for numeric types |
+| **Nullability** | NULL/NOT NULL constraints |
+| **Default Values** | Default value expressions |
+| **Primary Keys** | Primary key column definitions |
+
+> **Note**: Additional CREATE TABLE properties are not currently supported
+
+### DROP TABLE
+Captured properties:
+- Table name (in FQN format) to be dropped
+
+### ALTER TABLE ADD COLUMN
+Captures the following properties:
+
+| Property | Description |
+|----------|-------------|
+| Column Names | Names of newly added columns |
+| Data Types | Data types for new columns |
+| Data Length | Length specifications (if applicable) |
+| Unsigned Flag | Unsigned constraints |
+| Nullability | NULL/NOT NULL specifications |
+| Default Values | Default value expressions |
+| Primary Keys | Updated primary key definitions |
 
 Other properties that can be specified during ALTER TABLE ADD COLUMN  are not supported at the moment.
 
-## ALTER TABLE DROP COLUMN
-SynchDB is able to capture the ALTER TABLE DROP COLUMN event with the property below:
-* column names to be dropped.
+### ALTER TABLE DROP COLUMN
+Captures:
+- List of column names to be dropped
 
-## ALTER TABLE ALTER COLUMN
-SynchDB is able to capture the following properties during a ALTER TABLE ALTER COLUMN event:
-* Altered data type to an existing column.
-* Altered type length to an existing column.
-* Altered or dropped default value expression.
-* Altered or dropped `not null` constraint.
+### ALTER TABLE ALTER COLUMN
+Supported modifications:
+
+| Modification | Description |
+|--------------|-------------|
+| Data Type | Change column data type |
+| Type Length | Modify type length/precision |
+| Default Value | Alter/drop default values |
+| NOT NULL | Modify/drop NOT NULL constraint |
 
 Other properties that can be specified during ALTER TABLE ALTER COLUMN  are not supported at the moment.
 
-Please note that SynchDB only supports basic data type change on an existing column. For example, from INT to BIGINT or VARCHAR to TEXT. Complex data type changes such as TEXT to INT or INT to TIMESTAMP are not currently supported. This is because PostgreSQL requires the user to additioanlly supply a type casting function to perform the type casting as the result of complex data type change. SynchDB currently has to knowledge what type casting functions to use for specific type conversion. In the future, We may allow user to supply his or her own casting functions to use for specific type conversions via the rule file, but for now, it is not supported.
+Please note that SynchDB only supports basic data type change on an existing column. For example, `INT` → `BIGINT` or `VARCHAR` → `TEXT`. Complex data type changes such as  `TEXT` → `INT` or `INT` → `TIMESTAMP` are not currently supported. This is because PostgreSQL requires the user to additioanlly supply a type casting function to perform the type casting as the result of complex data type change. SynchDB currently has to knowledge what type casting functions to use for specific type conversion. In the future, We may allow user to supply his or her own casting functions to use for specific type conversions via the rule file, but for now, it is not supported.
 
-## MySQL DDL Change Events
+## Database-Specific Behavior
+### MySQL DDL Change Events
 Since MySQL logs both DDL and DML operations in the binlog, SynchDB is able to replicate both DDLs and DMLs as they happen. No special actions are needed on MySQL side to enable DDLs replication.
 
-## SQLServer DDL Change Events 
+### SQLServer DDL Change Events 
 SQLServer does not natively supports DDL replication in streaming mode. The table schema is constructed by SynchDB during initial snapshot construction phase when the connector is started for the very first time. After this phase, SynchDB will try to detect any schema changes but they need to be explicitly added to SQL server's CDC table list.
 
-### Trigger CREATE TABLE event on SQLServer
+#### Trigger CREATE TABLE event on SQLServer
 To create a new table on SQL Server and added to its CDC table list:
 ```
 CREATE TABLE dbo.altertest (a int, b text);
@@ -69,7 +85,7 @@ GO
 
 The command adds the table `dbo.altertest` to the CDC table list and would cause SynchDB to receive a CREATE TABLE DDL change event.
 
-### Trigger ALTER TABLE Events
+#### Trigger ALTER TABLE Events
 If an existing table is altered (add, drop or alter column), it needs to be explicitly updated to SQLServer's CDC table list, so that SynchDB will be able to receive the ALTER TABLE events.
 
 For example:

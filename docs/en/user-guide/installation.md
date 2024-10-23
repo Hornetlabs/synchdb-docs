@@ -2,6 +2,7 @@
 
 ## Requirements
 The following software is required to build and run SynchDB. The versions listed are the versions tested during development. Older versions may still work.
+
 * Java Development Kit 22. Download [here](https://www.oracle.com/ca-en/java/technologies/downloads/)
 * Apache Maven 3.9.8. Download [here](https://maven.apache.org/download.cgi)
 * PostgreSQL 16.3 Source. Git clone [here](https://github.com/postgres/postgres). Refer to this [wiki](https://wiki.postgresql.org/wiki/Compile_and_Install_from_source_code) for PostgreSQL build requirements
@@ -95,8 +96,15 @@ echo $JDK_LIB_PATH/server
 
 sudo echo "$JDK_LIB_PATH" ｜ sudo tee -a /etc/ld.so.conf.d/x86_64-linux-gnu.conf
 sudo echo "$JDK_LIB_PATH/server" | sudo tee -a /etc/ld.so.conf.d/x86_64-linux-gnu.conf
+
 ```
+
 Note, for mac with M1/M2 chips, you need to the two lines into /etc/ld.so.conf.d/aarch64-linux-gnu.conf
+
+```
+sudo echo "$JDK_LIB_PATH"       ｜ sudo tee -a /etc/ld.so.conf.d/aarch64-linux-gnu.conf
+sudo echo "$JDK_LIB_PATH/server" | sudo tee -a /etc/ld.so.conf.d/aarch64-linux-gnu.conf
+```
 
 Run ldconfig to reload:
 ```

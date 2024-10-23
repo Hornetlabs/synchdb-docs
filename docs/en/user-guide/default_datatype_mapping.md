@@ -1,10 +1,12 @@
 # Default Data Type Mapping
 
 The default data type mapping is a hash table built internally inside SynchDB with:
+
 * key: {data type, auto_increment} 
 * value: {data type, size}
 
 where:
+
 * data type: the string representation of a data type such as INT, TEXT, NUMERIC
 * auto_increment: a flag indicating if the data type has auto_increment attribute.
 * size: the translated size value. -1: no change, 0: no size specified

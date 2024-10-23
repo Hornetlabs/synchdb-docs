@@ -5,87 +5,83 @@
 ## 示例规则文件
 ```
 {
-        "transform_datatype_rules":
-        [
-                {
-                        "translate_from": "GEOMETRY",
-                        "translate_from_autoinc": false,
-                        "translate_to": "TEXT",
-                        "translate_to_size": -1
-                },
-                {
-                        "translate_from": "POINT",
-                        "translate_from_autoinc": false,
-                        "translate_to": "TEXT",
-                        "translate_to_size": -1
-                },
-                {
-                        "translate_from": "inventory.geom.g.GEOMETRY",
-                        "translate_from_autoinc": false,
-                        "translate_to": "GEOMETRY",
-                        "translate_to_size": 0
-                },
-                {
-                        "translate_from": "inventory.orders.quantity.INT",
-                        "translate_from_autoinc": false,
-                        "translate_to": "BIGINT",
-                        "translate_to_size": 0
-                }
-        ],
-        "transform_objectname_rules":
-        [
-                {
-                        "object_type": "table",
-                        "source_object": "inventory.orders",
-                        "destination_object": "schema1.orders"
-                },
-                {
-                        "object_type": "table",
-                        "source_object": "inventory.products",
-                        "destination_object": "products"
-                },
-                {
-                        "object_type": "column",
-                        "source_object": "inventory.orders.order_number",
-                        "destination_object": "ididid"
-                },
-                {
-                        "object_type": "column",
-                        "source_object": "inventory.orders.purchaser",
-                        "destination_object": "the_dude"
-                },
-                {
-                        "object_type": "column",
-                        "source_object": "inventory.orders.quantity",
-                        "destination_object": "the_numba"
-                },
-                {
-                        "object_type": "column",
-                        "source_object": "testDB.dbo.customers.first_name",
-                        "destination_object": "the_awesome_first_name"
-                }
-        ],
-        "transform_expression_rules":
-        [
-                {
-                        "transform_from": "inventory.orders.quantity",
-                        "transform_expression": "case when %d < 500 then 0 else %d end"
-                },
-                {
-                        "transform_from": "inventory.geom.g",
-                        "transform_expression": "ST_SetSRID(ST_GeomFromWKB(decode('%w', 'base64')),%s)"
-                },
-                {
-                        "transform_from": "inventory.products.name",
-                        "transform_expression": "'>>>>>' || '%d' || '<<<<<'"
-                },
-                {
-                        "transform_from": "inventory.products.description",
-                        "transform_expression": "'>>>>>' || '%d' || '<<<<<'"
-                }
-        ]
+  "transform_datatype_rules": [
+    {
+      "translate_from": "GEOMETRY",
+      "translate_from_autoinc": false,
+      "translate_to": "TEXT",
+      "translate_to_size": -1
+    },
+    {
+      "translate_from": "POINT",
+      "translate_from_autoinc": false,
+      "translate_to": "TEXT",
+      "translate_to_size": -1
+    },
+    {
+      "translate_from": "inventory.geom.g.GEOMETRY",
+      "translate_from_autoinc": false,
+      "translate_to": "GEOMETRY",
+      "translate_to_size": 0
+    },
+    {
+      "translate_from": "inventory.orders.quantity.INT",
+      "translate_from_autoinc": false,
+      "translate_to": "BIGINT",
+      "translate_to_size": 0
+    }
+  ],
+  "transform_objectname_rules": [
+    {
+      "object_type": "table",
+      "source_object": "inventory.orders",
+      "destination_object": "schema1.orders"
+    },
+    {
+      "object_type": "table",
+      "source_object": "inventory.products",
+      "destination_object": "products"
+    },
+    {
+      "object_type": "column",
+      "source_object": "inventory.orders.order_number",
+      "destination_object": "ididid"
+    },
+    {
+      "object_type": "column",
+      "source_object": "inventory.orders.purchaser",
+      "destination_object": "the_dude"
+    },
+    {
+      "object_type": "column",
+      "source_object": "inventory.orders.quantity",
+      "destination_object": "the_numba"
+    },
+    {
+      "object_type": "column",
+      "source_object": "testDB.dbo.customers.first_name",
+      "destination_object": "the_awesome_first_name"
+    }
+  ],
+  "transform_expression_rules": [
+    {
+      "transform_from": "inventory.orders.quantity",
+      "transform_expression": "case when %d < 500 then 0 else %d end"
+    },
+    {
+      "transform_from": "inventory.geom.g",
+      "transform_expression": "ST_SetSRID(ST_GeomFromWKB(decode('%w', 'base64')),%s)"
+    },
+    {
+      "transform_from": "inventory.products.name",
+      "transform_expression": "'>>>>>' || '%d' || '<<<<<'"
+    },
+    {
+      "transform_from": "inventory.products.description",
+      "transform_expression": "'>>>>>' || '%d' || '<<<<<'"
+    }
+  ]
 }
-
 ```
 ## 转换数据类型规则
 
@@ -102,51 +98,52 @@
 
 ### 支持的 PostgreSQL 数据类型
  
-SynchDB 支持以下 PostgreSQL 原生数据类型，可在创建表时进行转换。然而，仍然可以将外部数据类型转换为不在此列表中的 PostgreSQL 数据类型。例如，Postgis 添加的 GEOMETRY 数据类型。在这种情况下，表仍然会以 GEOMETRY 数据类型创建，但 SynchDB 接收到的数据将以 TEXT 格式化并插入。由你决定是否需要在应用到 PostgreSQL 之前通过表达式或 SQL 函数处理此数据（请参见下方的转换表达式规则）。
+SynchDB 支持以下 PostgreSQL 原生数据类型，可在创建表时进行转换。然而，仍然可以将外部数据类型转换为不在此列表中的 PostgreSQL 数据类型。例如，Postgis 添加的 `GEOMETRY` 数据类型。在这种情况下，表仍然会以 `GEOMETRY` 数据类型创建，但 SynchDB 接收到的数据将以 `TEXT` 格式化并插入。由你决定是否需要在应用到 PostgreSQL 之前通过表达式或 SQL 函数处理此数据（请参见下方的[转换表达式规则](#_5)）。
 
-* BOOLEAN (BOOLOID)
-* BIGINT (INT8OID)
-* SMALLINT (INT2OID)
-* INT (INT4OID)
-* INTEGER (INT4OID)
-* DOUBLE PRECISION (FLOAT8OID)
-* REAL (FLOAT4OID)
-* MONEY (MONEYOID)
-* NUMERIC (NUMERICOID)
-* CHAR (BPCHAROID)
-* CHARACTER (BPCHAROID)
-* TEXT (TEXTOID)
-* VARCHAR (VARCHAROID)
-* CHARACTER VARYING (VARCHAROID)
-* TIMESTAMPTZ (TIMESTAMPTZOID)
-* JSONB (JSONBOID)
-* UUID (UUIDOID)
-* VARBIT (VARBITOID)
-* BIT VARYING (VARBITOID)
-* BIT (BITOID)
-* DATE (DATEOID)
-* TIMESTAMP (TIMESTAMPOID)
-* TIME (TIMEOID)
-* BYTEA (BYTEAOID)
-
+```sql
+BOOLEAN (BOOLOID)
+BIGINT (INT8OID)
+SMALLINT (INT2OID)
+INT (INT4OID)
+INTEGER (INT4OID)
+DOUBLE PRECISION (FLOAT8OID)
+REAL (FLOAT4OID)
+MONEY (MONEYOID)
+NUMERIC (NUMERICOID)
+CHAR (BPCHAROID)
+CHARACTER (BPCHAROID)
+TEXT (TEXTOID)
+VARCHAR (VARCHAROID)
+CHARACTER VARYING (VARCHAROID)
+TIMESTAMPTZ (TIMESTAMPTZOID)
+JSONB (JSONBOID)
+UUID (UUIDOID)
+VARBIT (VARBITOID)
+BIT VARYING (VARBITOID)
+BIT (BITOID)
+DATE (DATEOID)
+TIMESTAMP (TIMESTAMPOID)
+TIME (TIMEOID)
+BYTEA (BYTEAOID)
+```
 ## 转换对象名称规则
 
 转换对象名称规则影响 SynchDB 如何将源表或列名从异构数据库映射到 PostgreSQL 的表或列名。
 
 可以通过名为 `"transform_objectname_rules"` 的 JSON 数组定义转换对象名称规则，数组中的每个元素必须包含以下对象：
 
-|                    	| 描述                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        	| 示例                                          	|
-|--------------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|------------------------------------------------	|
-| object type        	| 转换元素的对象类型。可以是： <br><br><ul><li> `table` 表示该转换适用于表名。 </li><li> `column` 表示该转换适用于列名。 </li></ul>                                                                                                                                                                                                                                                                                                                                                           	| table<br>column                                   	|
-| source_object      	| 源对象的全限定名称 (FQN)，来自异构数据库。 <br><br><ul><li> 如果 `object_type` 是 `table`，FQN 包含 [database].[schema].[table] 或 [database].[table]。 </li><li> 如果 `object_type` 是 `column`，FQN 包含 [database].[schema].[table].[column] 或 [database].[table].[column]。</li></ul><br> 请注意，一些异构数据库（如 SQL Server）对名称是区分大小写的，因此请确保正确构造 FQN，保持正确的大小写。                                                             	| mydb.myschema.mytable<br>yourdb.yourtable.yourcolumn 	|
-| destination_object 	| 在 PostgreSQL 中用于表示异构数据库中 `source_object` 的名称： <br><br><ul><li>如果 `object_type` 是 `table`，`destination_object` 可以包含一个可选的架构名和表名，之间以点分隔。如果未指明架构，则使用默认的 `public` 架构。</li><li> 如果 `object_type` 是 `column`，`destination_object` 只能包含列名（不包括架构）。</li></ul>                                                                                                                                                       	| myschema1.mytable1<br>mytable2<br>the_dude<br>the_numba 	|
+| | 描述 | 示例 |
+|-|-|-|
+| object type        | 转换元素的对象类型。可以是： <br><br><ul><li> `table` 表示该转换适用于表名。 </li><li> `column` 表示该转换适用于列名。 </li></ul>| table<br>column |
+| source_object      | 源对象的全限定名称 (FQN)，来自异构数据库。 <br><br><ul><li> 如果 `object_type` 是 `table`，FQN 包含 [database].[schema].[table] 或 [database].[table]。 </li><li> 如果 `object_type` 是 `column`，FQN 包含 [database].[schema].[table].[column] 或 [database].[table].[column]。</li></ul><br> 请注意，一些异构数据库（如 SQL Server）对名称是区分大小写的，因此请确保正确构造 FQN，保持正确的大小写。| mydb.myschema.mytable<br>yourdb.yourtable.yourcolumn |
+| destination_object 	| 在 PostgreSQL 中用于表示异构数据库中 `source_object` 的名称： <br><br><ul><li>如果 `object_type` 是 `table`，`destination_object` 可以包含一个可选的架构名和表名，之间以点分隔。如果未指明架构，则使用默认的 `public` 架构。</li><li> 如果 `object_type` 是 `column`，`destination_object` 只能包含列名（不包括架构）。</li></ul>| myschema1.mytable1<br>mytable2<br>the_dude<br>the_numba |
 
 如果表或列名没有匹配的转换对象名称规则，默认转换规则将自动应用，如下所示：
 
-| 远程对象 FQN                  	| PostgreSQL 端的默认对象名称转换规则                                                                                    	|
-|-----------------------------	|---------------------------------------------------------------------------------------------------------------------	|
-| [database].[table]          	| <ul><li> [database] 转换为 [schema]。 </li><li> [table] 转换为 [table]。</li></ul>                                    	|
-| [database].[schema].[table] 	| <ul><li> [database] 转换为 [schema]。</li><li> [schema] 被忽略。 </li><li> [table] 转换为 [table]。</li></ul>          	|
+| 远程对象 FQN                  | PostgreSQL 端的默认对象名称转换规则|
+|-|-|
+| [database].[table]          | <ul><li> [database] → [schema]。 </li><li> [table] → [table]。</li></ul>|
+| [database].[schema].[table] | <ul><li> [database] → [schema]。</li><li> [schema] 被忽略。 </li><li> [table] → [table]。</li></ul> |
 
 
 ## 转换表达式规则
@@ -155,7 +152,7 @@ SynchDB 支持以下 PostgreSQL 原生数据类型，可在创建表时进行转
 
 可以通过名为 `"transform_expression_rules"` 的 JSON 数组定义转换表达式规则，数组中的每个元素必须包含以下对象：
 
-|                      	| 描述                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          	| 示例                                                                                                                             	|
-|----------------------	|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|----------------------------------------------------------------------------------------------------------------------------------	|
-| transform_from       	| 远程列的全限定名称 (FQN)，可以是以下格式之一：<br><br><ul><li> [database].[schema].[table].[column] </li><li> [database].[table].[column] </li></ul>                                                                                                                                                                                                                                                                                                                 	| inventory.orders.quantity<br>testDB.dbo.products.description                                                                     	|
-| transform_expression 	| 要在接收到的数据上执行的表达式。可以使用以下占位符构造表达式：<br><br><ul><li> %d: 将被接收到的数据替换 </li><li> %w: 公认的二进制表示。当数据表示几何或地理数据时将存在此项 </li><li> %s: SRID。当数据表示几何或地理数据时将存在此项 </li></ul> <br><br> 表达式可以用 PostgreSQL 支持的任何标准 SQL 语法编写。 	| case when %d < 500 then 0 else %d end<br>ST_SetSRID(ST_GeomFromWKB(decode('%w', 'base64')),%s)<br>'>>>>>' || '%d' || '<<<<<' 	|
+| | 描述| 示例 |
+|-|-|-|
+| transform_from       | 远程列的全限定名称 (FQN)，可以是以下格式之一：<br><br><ul><li> [database].[schema].[table].[column] </li><li> [database].[table].[column] </li></ul>| inventory.orders.quantity<br>testDB.dbo.products.description|
+| transform_expression 	| 要在接收到的数据上执行的表达式。可以使用以下占位符构造表达式：<ul><li> %d: 将被接收到的数据替换 </li><li> %w: 公认的二进制表示。当数据表示几何或地理数据时将存在此项 </li><li> %s: SRID。当数据表示几何或地理数据时将存在此项 </li></ul> 表达式可以用 PostgreSQL 支持的任何标准 SQL 语法编写。 | 1. ```case when %d < 500 then 0 else %d end``` <br>  如果值小于 500，则设置为 0，否则保留原始值<br><br> 2.```ST_SetSRID(ST_GeomFromWKB(decode('%w', 'base64')),%s)``` <br>*将 base64 编码的 Well-Known Binary (WKB) 几何数据转换为具有指定空间参考系统 (SRID) 的 PostGIS 几何对象* <br><br>3. ```'>>>>>' \|\| '%d' \|\| '<<<<<'``` <br>在值周围添加可视标记|

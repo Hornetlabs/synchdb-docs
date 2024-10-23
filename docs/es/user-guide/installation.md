@@ -1,53 +1,53 @@
-## Requirement
-The following software is required to build and run SynchDB. The versions listed are the versions tested during development. Older versions may still work.
-* Java Development Kit 22. Download [here](https://www.oracle.com/ca-en/java/technologies/downloads/)
-* Apache Maven 3.9.8. Download [here](https://maven.apache.org/download.cgi)
-* PostgreSQL 16.3 Source. Git clone [here](https://github.com/postgres/postgres). Refer to this [wiki](https://wiki.postgresql.org/wiki/Compile_and_Install_from_source_code) for PostgreSQL build requirements
-* Docker compose 2.28.1 (for testing). Refer to [here](https://docs.docker.com/compose/install/linux/)
-* Unix based operating system like Ubuntu 22.04 or MacOS
+# Instalación
 
-## Build Procedure
-### Prepare Source
+## Requisitos
+Se requiere el siguiente software para construir y ejecutar SynchDB. Las versiones listadas son las versiones probadas durante el desarrollo. Las versiones anteriores pueden seguir funcionando.
+* Java Development Kit 22. Descargar [aquí](https://www.oracle.com/ca-en/java/technologies/downloads/)
+* Apache Maven 3.9.8. Descargar [aquí](https://maven.apache.org/download.cgi)
+* PostgreSQL 16.3 Source. Clonar Git [aquí](https://github.com/postgres/postgres). Consulte esta [wiki](https://wiki.postgresql.org/wiki/Compile_and_Install_from_source_code) para los requisitos de compilación de PostgreSQL
+* Docker compose 2.28.1 (para pruebas). Consultar [aquí](https://docs.docker.com/compose/install/linux/)
+* Sistema operativo basado en Unix como Ubuntu 22.04 o MacOS
 
-Clone the PostgreSQL source and switch to 16.3 release tag
+## Preparar Fuente
+Clone el código fuente de PostgreSQL y cambie a la etiqueta de la versión 16.3
 ```
 git clone https://github.com/postgres/postgres.git
 cd postgres
 git checkout REL_16_3
 ```
 
-Clone the SynchDB source from within the extension folder
-Note: Branch *(synchdb-devel)[https://github.com/Hornetlabs/synchdb/tree/synchdb-devel]* is used for development so far.
+Clone el código fuente de SynchDB desde dentro de la carpeta de extensiones
+Nota: La rama *(synchdb-devel)[https://github.com/Hornetlabs/synchdb/tree/synchdb-devel]* se usa para desarrollo hasta ahora.
 ```
 cd contrib/
 git clone https://github.com/Hornetlabs/synchdb.git
 ```
 
-### Prepare Tools
-#### Maven
-If you are working on Ubuntu 22.04.4 LTS, install the Maven as below:
+## Preparar Herramientas
+### Instalar Maven
+Si está trabajando en Ubuntu 22.04.4 LTS, instale Maven como se muestra a continuación:
 ```
 sudo apt install maven
 ```
 
-if you are using MacOS, you can use the brew command to install maven (refer (here)[https://brew.sh/] for how to install Homebrew) without any other settings:
+Si está usando MacOS, puede usar el comando brew para instalar maven (consulte (aquí)[https://brew.sh/] para saber cómo instalar Homebrew) sin ninguna otra configuración:
 ```
 brew install maven
 ```
 
-#### Install Java SDK (OpenJDK)
-If you are working on Ubuntu 22.04.4 LTS, install the OpenJDK  as below:
+### Instalar Java SDK (OpenJDK)
+Si está trabajando en Ubuntu 22.04.4 LTS, instale OpenJDK como se muestra a continuación:
 ```
 sudo apt install openjdk-21-jdk
 ```
 
-If you are working on MacOS, please install the JDK with brew command:
+Si está trabajando en MacOS, instale JDK con el comando brew:
 ```
 brew install openjdk@22
 ```
 
-### Build and Install PostgreSQL
-This can be done by following the standard build and install procedure as described [here](https://www.postgresql.org/docs/current/install-make.html). Generally, it consists of:
+## Compilar e Instalar PostgreSQL
+Siga la documentación oficial de PostgreSQL [aquí](https://www.postgresql.org/docs/current/install-make.html) para compilar e instalar PostgreSQL desde el código fuente. Generalmente, el procedimiento consiste en:
 
 ```
 cd /home/$USER/postgres
@@ -56,15 +56,15 @@ make
 sudo make install
 ```
 
-You should build and install the default extensions as well:
+También debe compilar e instalar las extensiones predeterminadas:
 ```
 cd /home/$USER/postgres/contrib
 make
 sudo make install
 ```
 
-### Build Debezium Runner Engine
-With Java and Maven setup, we are ready to build Debezium Runner Engine. This installs the Debezium Runner Engine jar file to your PostgreSQL's lib folder.
+## Compilar e Instalar el Motor Debezium Runner
+Con Java y Maven configurados, estamos listos para compilar el Motor Debezium Runner. Esto instala el archivo jar de Debezium Runner Engine en la carpeta lib de PostgreSQL.
 
 ```
 cd /home/$USER/postgres/contrib/synchdb
@@ -72,8 +72,8 @@ make build_dbz
 sudo make install_dbz
 ```
 
-### Build SynchDB PostgreSQL Extension
-With the Java `lib` and `include` installed in your system, SynchDB can be built by:
+## Compilar e Instalar la Extensión PostgreSQL de SynchDB
+Con la `lib` y el `include` de Java instalados en su sistema, SynchDB puede compilarse mediante:
 
 ```
 cd /home/$USER/postgres/contrib/synchdb
@@ -81,11 +81,11 @@ make
 sudo make install
 ```
 
-### Configure your Linker (Ubuntu)
-Lastly, we also need to tell your system's linker where the newly added Java library is located in your system.
+## Configurar su Enlazador (Ubuntu)
+Por último, también necesitamos indicarle al enlazador de su sistema dónde se encuentra la biblioteca Java recién agregada. El siguiente procedimiento está basado en Ubuntu 22.04.
 
 ```
-# Dynamically set JDK paths
+# Configurar dinámicamente las rutas de JDK
 JAVA_PATH=$(which java)
 JDK_HOME_PATH=$(readlink -f ${JAVA_PATH} | sed 's:/bin/java::')
 JDK_LIB_PATH=${JDK_HOME_PATH}/lib
@@ -96,14 +96,20 @@ echo $JDK_LIB_PATH/server
 sudo echo "$JDK_LIB_PATH" ｜ sudo tee -a /etc/ld.so.conf.d/x86_64-linux-gnu.conf
 sudo echo "$JDK_LIB_PATH/server" | sudo tee -a /etc/ld.so.conf.d/x86_64-linux-gnu.conf
 ```
-Note, for mac with M1/M2 chips, you need to the two lines into /etc/ld.so.conf.d/aarch64-linux-gnu.conf
+Nota: para mac con chips M1/M2, necesita agregar las dos líneas en /etc/ld.so.conf.d/aarch64-linux-gnu.conf
+```
+sudo echo "$JDK_LIB_PATH"       ｜ sudo tee -a /etc/ld.so.conf.d/aarch64-linux-gnu.conf
+sudo echo "$JDK_LIB_PATH/server" | sudo tee -a /etc/ld.so.conf.d/aarch64-linux-gnu.conf
+```
 
-Run ldconfig to reload:
+Ejecute ldconfig para recargar:
 ```
 sudo ldconfig
 ```
 
-Ensure synchdo.so extension can link to libjvm Java library on your system:
+## Verificar Instalación
+
+Asegúrese de que la extensión synchdb.so pueda enlazarse con la biblioteca Java libjvm en su sistema:
 ```
 ldd synchdb.so
         linux-vdso.so.1 (0x00007ffeae35a000)
@@ -114,5 +120,4 @@ ldd synchdb.so
         librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007fc127489000)
         libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fc1273a0000)
         /lib64/ld-linux-x86-64.so.2 (0x00007fc128b81000)
-
 ```

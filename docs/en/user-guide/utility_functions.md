@@ -1,98 +1,165 @@
-# Utility Function List
+# Function Reference
 
-## synchdb_add_conninfo
+## Connector Management
 
-Used to create a new connector information:
+### synchdb_add_conninfo
 
-|        argumet        |                                                                                                                description                                                                                                                |
-|:--------------------: |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| name                  | a unique identifier that represents this connector info                                                                                                                                                                                   |
-| hostname              | the IP address or hostname of the heterogeneous database.                                                                                                                                                                                 |
-| port                  | the port number to connect to the heterogeneous database.                                                                                                                                                                                 |
-| username              | user name to use to authenticate with heterogeneous database.                                                                                                                                                                             |
-| password              | password to authenticate the username                                                                                                                                                                                                     |
-| source database       | this is the name of source database in heterogeneous database that we want to replicate changes from.                                                                                                                                     |
-| destination database  | this is the name of destination database in PostgreSQL to apply changes to. It must be a valid database that exists in PostgreSQL.                                                                                                        |
-| table                 | (optional) - expressed in the form of `[database].[table]` or `[database].[schema].[table]` that must exists in heterogeneous database so the engine will only replicate the specified tables. If left empty, all tables are replicated.  |
-| connector             | the connector type to use (MySQL, Oracle, SQLServer... etc).                                                                                                                                                                              |
-| rule file             | a JSON-formatted rule file placed under $PGDATA that this connector shall apply to its default data type translation rules. See [here](https://docs.synchdb.com/user-guide/transform_rule_file/) for more information    
+**Purpose**: Creates a new connector configuration
 
-Example:
+**Parameters**:
 
+| Parameter | Description | Required | Example | Notes |
+|:-:|:-|:-:|:-|:-|
+| `name` | Unique identifier for this connector | ✓ | `'mysqlconn'` | Must be unique across all connectors |
+| `hostname` | IP/hostname of heterogeneous database | ✓ | `'127.0.0.1'` | Support IPv4, IPv6, and hostnames |
+| `port` | Port number for database connection | ✓ | `3306` | Default: MySQL(3306), SQLServer(1433) |
+| `username` | Authentication username | ✓ | `'mysqluser'` | Requires appropriate permissions |
+| `password` | Authentication password | ✓ | `'mysqlpwd'` | Stored securely |
+| `source database` | Source database name | ✓ | `'inventory'` | Must exist in source system |
+| `destination database` | Target PostgreSQL database | ✓ | `'postgres'` | Must exist in PostgreSQL |
+| `table` | Table specification pattern | ☐ | `'[db].[table]'` | Empty = replicate all tables |
+| `connector` | Connector type (`mysql`/`sqlserver`) | ✓ | `'mysql'` | See supported connectors above |
+| `rule file` | Data type translation rules | ☐ | `'myrule.json'` | Must be in $PGDATA directory |
+
+**Example Usage**:
+```sql
+-- MySQL Example
+SELECT synchdb_add_conninfo(
+    'mysqlconn',    -- Connector name
+    '127.0.0.1',    -- Host
+    3306,           -- Port
+    'mysqluser',    -- Username
+    'mysqlpwd',     -- Password
+    'inventory',    -- Source DB
+    'postgres',     -- Target DB
+    '',             -- Tables (empty for all)
+    'mysql',        -- Connector type
+    'myrule.json'   -- Rules file
+);
+
+-- SQL Server Example
+SELECT synchdb_add_conninfo(
+    'sqlserverconn',
+    '127.0.0.1',
+    1433,
+    'sa',
+    'MyPassword123',
+    'testDB',
+    'postgres',
+    'dbo.orders',   -- Specific table
+    'sqlserver',
+    'mssql_rules.json'
+);
 ```
-SELECT synchdb_add_conninfo('mysqlconn','127.0.0.1',3306,'mysqluser', 'mysqlpwd', 'inventory', 'postgres', '', 'mysql', 'myrule.json');
-```
 
-## synchdb_start_engine_bgw
-Used to start a connector:
-* `name` - the name of connector to start
+### Basic Control Functions
 
-```
+#### synchdb_start_engine_bgw
+**Purpose**: Initiates a connector
+```sql
 SELECT synchdb_start_engine_bgw('mysqlconn');
 ```
 
-## synchdb_pause_engine
-Used to pause a running connector:
-* `name` - the name of connector to pause
-
-```
+#### synchdb_pause_engine
+**Purpose**: Temporarily halts a running connector
+```sql
 SELECT synchdb_pause_engine_bgw('mysqlconn');
 ```
 
-## synchdb_resume_engine
-Used to resume a paused connector:
-* `name` - the name of connector to resume
-
-```
+#### synchdb_resume_engine
+**Purpose**: Resumes a paused connector
+```sql
 SELECT synchdb_resume_engine('mysqlconn');
 ```
 
-## synchdb_stop_engine_bgw
-Used to stop a paused or running connector:
-* `name` - the name of connector to stop
-
-```
+#### synchdb_stop_engine_bgw
+**Purpose**: Terminates a connector
+```sql
 SELECT synchdb_stop_engine('mysqlconn');
 ```
 
-## synchdb_state_view
-Used to examine all the running connectors and their states:
-```
+## State Management
+
+### synchdb_state_view
+**Purpose**: Monitors connector states and status
+
+```sql
 SELECT * FROM synchdb_state_view();
 ```
 
-| fields          	| description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      	|
-|-----------------	|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|
-| id              	| unique identifier of a connector slot                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            	|
-| connector       	| the type of connector (mysql, oracle, sqlserver...etc)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           	|
-| conninfo_name   	| the associated connector info name created by `synchdb_add_conninfo()`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           	|
-| pid             	| the PID of the connector worker process                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          	|
-| state           	| the state of the connector. Possible states are: <br><br><ul><li>stopped - connector is not running</li><li>initializing - connector is initializing</li><li>paused - connector is paused</li><li>syncing - connector is regularly polling change events</li><li>parsing (the connector is parsing a received change event) </li><li>converting - connector is converting a change event to PostgreSQL representation</li><li>executing - connector is applying the converted change event to PostgreSQL</li><li>updating offset - connector is writing a new offset value to Debezium offset management</li><li>restarting - connector is restarting </li><li>unknown</li></ul> 	|
-| err             	| the last error message encountered by the worker which would have caused it to exit. This error could originated from PostgreSQL while processing a change, or originated from Debezium running engine while accessing data from heterogeneous database.                                                                                                                                                                                                                                                                                                                                                                                                                         	|
-| last_dbz_offset 	| the last Debezium offset captured by synchdb. Note that this may not reflect the current and real-time offset value of the connector engine. Rather, this is shown as a checkpoint that we could restart from this offeet point if needed.                                                                                                                                                                                                                                                                                                                                                                                                                                       	|
-## synchdb_set_offset
-Used to set a custom starting offset value:
-* `name` - the name of connector to set a new offset
-* `offset` - the offset value to set
+**Return Fields**:
 
+| Field | Description | Type |
+|-|-|-|
+| `id` | Connector slot identifier | Integer |
+| `connector` | Connector type (`mysql` or `sqlserver`) | Text |
+| `conninfo_name` | Associated connector name | Text |
+| `pid` | Worker process ID | Integer |
+| `state` | Current connector state | Text |
+| `err` | Latest error message | Text |
+| `last_dbz_offset` | Last recorded Debezium offset | JSON |
+
+**Possible States**:
+
+- 🔴 `stopped` - Inactive
+- 🟡 `initializing` - Starting up
+- 🟠 `paused` - Temporarily halted
+- 🟢 `syncing` - Actively polling
+- 🔵 `parsing` - Processing events
+- 🟣 `converting` - Transforming data
+- ⚪ `executing` - Applying changes
+- 🟤 `updating offset` - Updating checkpoint
+- 🟨 `restarting` - Reinitializing
+- ⚫ `unknown` - Indeterminate state
+
+### synchdb_set_offset
+**Purpose**: Configures custom start position
+
+**Example for MySQL**:
+```sql
+SELECT synchdb_set_offset(
+    'mysqlconn', 
+    '{"ts_sec":1725644339,"file":"mysql-bin.000004","pos":138466,"row":1,"server_id":223344,"event":2}'
+);
 ```
-SELECT synchdb_set_offset('mysqlconn', '{"ts_sec":1725644339,"file":"mysql-bin.000004","pos":138466,"row":1,"server_id":223344,"event":2}');
+
+**Example for SQL Server**:
+```sql
+SELECT synchdb_set_offset(
+    'sqlserverconn',
+    '{"event_serial_no":1,"commit_lsn":"00000100:00000c00:0003","change_lsn":"00000100:00000c00:0002"}'
+);
 ```
 
-## synchdb_restart_connector
-Used to restart a connector in a different snapshot mode
-* `name` - the name of connector to restart. Must be running already.
-* `snapshot_mode` - the snapshot mode to use to restart
+## Snapshot Management
 
-This SQL function is useful to quickly restart a connector in different snapshot mode other than `initial` (the default snapshot mode). Refer to the table below for different snapshot modes that we can use:
+### synchdb_restart_connector
+**Purpose**: Reinitializes connector with specified snapshot mode
 
-|  **setting** 	|                                                                                                                             **description**                                                                                                                             	|
-|:------------:	|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:	|
-| always       	| The connector performs a snapshot every time that it starts. The snapshot includes the structure and data of the captured tables. After the snapshot completes, the connector begins to stream event records for subsequent database changes.                           	|
-| initial      	| The connector performs a database snapshot if not already done. After the snapshot completes, the connector begins to stream event records for subsequent database changes.                                                                                             	|
-| initial_only 	| The connector performs a database snapshot. After the snapshot completes, the connector stops, and does not stream event records for subsequent database changes.                                                                                                       	|
-| no_data      	| The connector captures the structure of all relevant tables, but not the data they contain.                                                                                                                                                                             	|
-| never        	| When the connector starts, rather than performing a snapshot, it immediately begins to stream event records for subsequent database changes.                                                                                                                            	|
-| recovery     	| Set this option to restore a database schema history that is lost or corrupted. After a restart, the connector runs a snapshot that rebuilds the topic from the source tables                                                                                           	|
-| when_needed  	| After the connector starts, it performs a snapshot only if it detects one of the following circumstances:<br><br><ul><li>It cannot detect any topic offsets</li><li>A previously recorded offset specifies a log position that is not available on the server</li></ul> 	| 
+**Snapshot Modes**:
 
+| Mode | Description | Use Case |
+|:-:|-|-|
+| `always` | Full snapshot on every start | Complete data verification |
+| `initial` | First-time snapshot only | Normal operations |
+| `initial_only` | One-time snapshot, then stop | Data migration |
+| `no_data` | Structure only, no data | Schema synchronization |
+| `never` | Skip snapshot, stream only | Real-time updates |
+| `recovery` | Rebuilds from source | Disaster recovery |
+| `when_needed` | Conditional snapshot | Automatic recovery |
+
+**Example**:
+```sql
+-- Restart with specific snapshot mode
+SELECT synchdb_restart_connector('mysqlconn', 'initial');
+```
+
+---
+📝 **Additional Notes**:
+
+- Always validate connector configuration before starting
+- Monitor system resources during snapshot operations
+- Back up PostgreSQL destination database before major operations
+- Test connectivity from PostgreSQL server to source database
+- Ensure source database has required permissions configured
+- Regular monitoring of error logs recommended
