@@ -1,5 +1,40 @@
 # 安装
 
+## 从软件包安装
+访问我们的[发布页面](https://github.com/Hornetlabs/synchdb/releases) 下载 synchdb 软件包。我们目前支持基于 Debian 的 Linux 系统（如 Ubuntu）上的 .deb 软件包。基于 CentOS 的 .rpm 软件包将在不久的将来得到支持。SynchDB .deb 软件包需要先安装 PostgreSQL。它所需的 PostgreSQL 版本在软件包名称中描述。例如，`postgresql-16-synchdb_1.0-1.22.04_amd64.deb` 是在 Ubuntu 22.04 上针对 PostgreSQL 16 构建的 .deb 包。
+
+### .deb 包
+
+1. 从官方 apt 存储库安装 PostgreSQL：
+```sh linenums="1"
+sudo apt install -y postgresql-common
+sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
+sudo apt install postgresql-16
+```
+
+2. 安装 Java 运行时环境：
+```sh linenums="1"
+sudo apt install openjdk-17-jre-headless
+```
+
+3. 更新共享库路径：
+```sh linenums="1"
+JAVA_PATH=$(which java)
+JRE_HOME_PATH=$(readlink -f ${JAVA_PATH} | sed 's:/bin/java::')
+JRE_LIB_PATH=${JDK_HOME_PATH}/lib
+echo "$JRE_LIB_PATH" | sudo tee /etc/ld.so.conf.d/java.conf
+sudo ldconfig
+```
+
+4. 安装 SynchDB：
+```sh linenums="1"
+dpkg -i postgresql-16-synchdb_1.0-1.22.04_amd64.deb
+```
+5. SynchDB 应该已准备就绪。请参阅 [快速入门](https://docs.synchdb.com/user-guide/quick_start/) 页面开始使用
+
+### .rpm 软件包
+待定
+
 ## 从预编译的二进制文件安装
 访问我们的[发布页面](https://github.com/Hornetlabs/synchdb/releases) 下载预编译二进制文件。我们目前支持基于 Debian 的 Linux 系统（如 Ubuntu）系统上的预编译二进制文件。其他平台将在不久的将来得到支持。SynchDB 预编译二进制文件需要先安装 PostgreSQL。它所需的 PostgreSQL 版本在包名称中描述。例如，`postgresql-16-synchdb_1.0-1.22.04_amd64.tar.gz` 是在 Ubuntu 22.04 上针对 PostgreSQL 16 编译的二进制文件。
 
@@ -36,41 +71,6 @@ sudo ldconfig
 ```
 
 6. SynchDB 应该已准备就绪。请参阅 [快速入门](https://docs.synchdb.com/user-guide/quick_start/) 页面开始使用
-
-## 从软件包安装
-访问我们的[发布页面](https://github.com/Hornetlabs/synchdb/releases) 下载 synchdb 软件包。我们目前支持基于 Debian 的 Linux 系统（如 Ubuntu）上的 .deb 软件包。基于 CentOS 的 .rpm 软件包将在不久的将来得到支持。SynchDB .deb 软件包需要先安装 PostgreSQL。它所需的 PostgreSQL 版本在软件包名称中描述。例如，`postgresql-16-synchdb_1.0-1.22.04_amd64.deb` 是在 Ubuntu 22.04 上针对 PostgreSQL 16 构建的 .deb 包。
-
-### .deb 包
-
-1. 从官方 apt 存储库安装 PostgreSQL：
-```sh linenums="1"
-sudo apt install -y postgresql-common
-sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
-sudo apt install postgresql-16
-```
-
-2. 安装 Java 运行时环境：
-```sh linenums="1"
-sudo apt install openjdk-17-jre-headless
-```
-
-3. 更新共享库路径：
-```sh linenums="1"
-JAVA_PATH=$(which java)
-JRE_HOME_PATH=$(readlink -f ${JAVA_PATH} | sed 's:/bin/java::')
-JRE_LIB_PATH=${JDK_HOME_PATH}/lib
-echo "$JRE_LIB_PATH" | sudo tee /etc/ld.so.conf.d/java.conf
-sudo ldconfig
-```
-
-4. 安装 SynchDB：
-```sh linenums="1"
-dpkg -i postgresql-16-synchdb_1.0-1.22.04_amd64.deb
-```
-5. SynchDB 应该已准备就绪。请参阅 [快速入门](https://docs.synchdb.com/user-guide/quick_start/) 页面开始使用
-
-### .rpm 软件包
-待定
 
 ## 源代码编译及安装
 此选项要求您从源代码构建和安装 PostgreSQL 和 SynchDB。

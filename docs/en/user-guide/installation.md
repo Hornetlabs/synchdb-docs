@@ -1,5 +1,40 @@
 # Installation
 
+## Install from Packages
+visit our release page [here](https://github.com/Hornetlabs/synchdb/releases) to download a synchdb packages on supported platforms. We currently support .deb packages on Debian-based Linux systems such as Ubuntu. CentOS based .rpm packages will be supported in the near future. The SynchDB .deb package requires PostgreSQL to be installed first. The version of PostgreSQL it requires is described in the package name. For example, `postgresql-16-synchdb_1.0-1.22.04_amd64.deb` is a SynchDB .deb package built on Ubuntu 22.04 against PostgreSQL 16. 
+
+### .deb Packages
+
+1. Install PostgreSQL from official apt repository:
+```sh linenums="1"
+sudo apt install -y postgresql-common
+sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
+sudo apt install postgresql-16
+```
+
+2. Install Java Runtime Environment:
+```sh linenums="1"
+sudo apt install openjdk-17-jre-headless
+```
+
+3. Update shared library path:
+```sh linenums="1"
+JAVA_PATH=$(which java)
+JRE_HOME_PATH=$(readlink -f ${JAVA_PATH} | sed 's:/bin/java::')
+JRE_LIB_PATH=${JDK_HOME_PATH}/lib
+echo "$JRE_LIB_PATH" | sudo tee /etc/ld.so.conf.d/java.conf
+sudo ldconfig
+```
+
+4. Install SynchDB:
+```sh linenums="1"
+dpkg -i postgresql-16-synchdb_1.0-1.22.04_amd64.deb
+```
+5. SynchDB should be ready to go. Refer to [quick start](https://docs.synchdb.com/user-guide/quick_start/) page to get started
+
+### .rpm Packages
+TBD
+
 ## Install from Pre-compiled Binaries
 visit our release page [here](https://github.com/Hornetlabs/synchdb/releases) to download a pre-compiled binaries on supported platforms. We currently support pre-compiled binaries on Debian-based Linux systems such as Ubuntu. Other platforms will be supported in the near future. SynchDB pre-compiled binaries requires existing PostgreSQL to be installed first. The version of PostgreSQL it requires is described in the package name. For example, `postgresql-16-synchdb_1.0-1.22.04_amd64.tar.gz` is tar.gz package built on Ubuntu 22.04 against PostgreSQL 16. 
 
@@ -36,41 +71,6 @@ sudo ldconfig
 ```
 
 6. SynchDB should be ready to go. Refer to [quick start](https://docs.synchdb.com/user-guide/quick_start/) page to get started
-
-## Install from Packages
-visit our release page [here](https://github.com/Hornetlabs/synchdb/releases) to download a synchdb packages on supported platforms. We currently support .deb packages on Debian-based Linux systems such as Ubuntu. CentOS based .rpm packages will be supported in the near future. The SynchDB .deb package requires PostgreSQL to be installed first. The version of PostgreSQL it requires is described in the package name. For example, `postgresql-16-synchdb_1.0-1.22.04_amd64.deb` is a SynchDB .deb package built on Ubuntu 22.04 against PostgreSQL 16. 
-
-### .deb Packages
-
-1. Install PostgreSQL from official apt repository:
-```sh linenums="1"
-sudo apt install -y postgresql-common
-sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
-sudo apt install postgresql-16
-```
-
-2. Install Java Runtime Environment:
-```sh linenums="1"
-sudo apt install openjdk-17-jre-headless
-```
-
-3. Update shared library path:
-```sh linenums="1"
-JAVA_PATH=$(which java)
-JRE_HOME_PATH=$(readlink -f ${JAVA_PATH} | sed 's:/bin/java::')
-JRE_LIB_PATH=${JDK_HOME_PATH}/lib
-echo "$JRE_LIB_PATH" | sudo tee /etc/ld.so.conf.d/java.conf
-sudo ldconfig
-```
-
-4. Install SynchDB:
-```sh linenums="1"
-dpkg -i postgresql-16-synchdb_1.0-1.22.04_amd64.deb
-```
-5. SynchDB should be ready to go. Refer to [quick start](https://docs.synchdb.com/user-guide/quick_start/) page to get started
-
-### .rpm Packages
-TBD
 
 ## Install from Source
 This option requires you to build both PostgreSQL and SynchDB from source code.
