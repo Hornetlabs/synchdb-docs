@@ -48,6 +48,18 @@ plugins:
             User guide: Guía del usuario
             Architecture: Arquitectura
             Changelog: Registro de cambios
+            User guide: Guía del usuario
+            Installation: Instalación
+            Prepare Sample Heterogeneous Databases: Preparar Bases de Datos Heterogéneas de Ejemplo
+            Quick Start Guide: Guía de Inicio Rápido
+            Configuration: Configuración
+            Default Data Type Mapping: Mapeo de Tipos de Datos Predeterminado
+            Transform Rule File: Archivo de Reglas de Transformación
+            Connector Auto Launcher: Lanzador Automático de Conectores
+            DDL Replication: Replicación DDL
+            Selective Table Synchronization: Sincronización Selectiva de Tablas
+            Custom Start Offset Value: Establecer Valor de Desplazamiento Inicial
+            Function Reference: Referencia de Funciones
         - locale: zh
           name: 中文
           site_name: SynchDB 文档
@@ -56,12 +68,37 @@ plugins:
             User guide: 用户指南
             Architecture: 架构
             Changelog: 变更日志
+            Installation: 安装指南
+            Prepare Sample Heterogeneous Databases: 准备异构数据库示例
+            Quick Start Guide: 快速入门指南
+            Configuration: 配置说明
+            Default Data Type Mapping: 默认数据类型映射
+            Transform Rule File: 转换规则文件
+            Connector Auto Launcher: 连接器自动启动器
+            DDL Replication: DDL复制
+            Selective Table Synchronization: 选择性表同步
+            Custom Start Offset Value: 设置自定义起始偏移值
+            Function Reference: 函数参考
   - mike:
       version_selector: true
       css_dir: css
       javascript_dir: js
       canonical_version: latest
   - print-site
+
+nav:
+  - User guide:
+    - Installation: user-guide/installation.md
+    - Prepare Sample Heterogeneous Databases: user-guide/prepare_tests_env.md
+    - Quick Start Guide: user-guide/quick_start.md
+    - Configuration: user-guide/configuration.md
+    - Default Data Type Mapping: user-guide/default_datatype_mapping.md
+    - Transform Rule File: user-guide/transform_rule_file.md
+    - Connector Auto Launcher: user-guide/connector_auto_launcher.md
+    - DDL Replication: user-guide/ddl_replication.md
+    - Selective Table Synchronization: user-guide/selective_table_sync.md
+    - Custom Start Offset Value: user-guide/set_offset.md
+    - Function Reference: user-guide/utility_functions.md
 
 markdown_extensions:
   - admonition
