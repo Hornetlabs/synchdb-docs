@@ -21,7 +21,7 @@ sudo apt install openjdk-17-jre-headless
 ```sh linenums="1"
 JAVA_PATH=$(which java)
 JRE_HOME_PATH=$(readlink -f ${JAVA_PATH} | sed 's:/bin/java::')
-JRE_LIB_PATH=${JDK_HOME_PATH}/lib
+JRE_LIB_PATH=${JRE_HOME_PATH}/lib
 echo "$JRE_LIB_PATH" | sudo tee /etc/ld.so.conf.d/java.conf
 sudo ldconfig
 ```
@@ -65,7 +65,7 @@ sudo apt install openjdk-17-jre-headless
 ```sh linenums="1"
 JAVA_PATH=$(which java)
 JRE_HOME_PATH=$(readlink -f ${JAVA_PATH} | sed 's:/bin/java::')
-JRE_LIB_PATH=${JDK_HOME_PATH}/lib
+JRE_LIB_PATH=${JRE_HOME_PATH}/lib
 echo "$JRE_LIB_PATH" | sudo tee /etc/ld.so.conf.d/java.conf
 sudo ldconfig
 ```
