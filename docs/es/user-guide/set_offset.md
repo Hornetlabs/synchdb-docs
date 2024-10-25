@@ -1,4 +1,7 @@
-# Configurar Valores de Offset de Inicio Personalizados
+---
+weight: 100
+---
+# Valores de desplazamiento inicial personalizados
 
 Un valor de offset de inicio representa un punto desde el cual comenzar la replicación, de manera similar al LSN de reanudación de PostgreSQL. Cuando el motor Debezium runner inicia, comenzará la replicación desde este valor de offset. Establecer este valor de offset a un valor anterior hará que el motor Debezium runner comience la replicación desde registros anteriores, posiblemente replicando registros de datos duplicados. Debemos ser extremadamente cautelosos al establecer valores de offset de inicio en Debezium.
 

@@ -1,3 +1,6 @@
+---
+weight: 70
+---
 # Connector Auto Launcher
 
 ## Enable SynchDB Auto Launcher

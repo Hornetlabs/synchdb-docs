@@ -1,3 +1,6 @@
+---
+weight: 30
+---
 # Guía de Inicio Rápido
 
 Es muy sencillo comenzar a usar SynchDB para realizar replicación de datos desde bases de datos heterogéneas a PostgreSQL, siempre que tenga la información de conexión correcta para sus bases de datos heterogéneas.

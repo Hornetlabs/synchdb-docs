@@ -1,3 +1,6 @@
+---
+weight: 10
+---
 # Installation
 
 ## Install from Packages

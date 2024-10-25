@@ -1,3 +1,6 @@
+---
+weight: 80
+---
 # Replicación DDL
 
 ## Descripción General

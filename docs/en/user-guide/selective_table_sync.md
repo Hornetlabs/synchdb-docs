@@ -1,3 +1,6 @@
+---
+weight: 90
+---
 # Selective Table Synchronization
 
 It is possible to select only specific tables from remote heterogeneous database to focus on replication. This could prevent resources being spent on replicating unwanted tables. 

@@ -1,5 +1,8 @@
-# Prepare Sample Heterogeneous Databases
-The procedures mentioned here are meant to quickly start up heterogeneous for quick verification and feature demostration. The necessary files and scripts for starting sample heterogeneous databases can be found at SynchDB repository [here](https://github.com/Hornetlabs/synchdb)
+---
+weight: 20
+---
+# Quick Test Environment
+The procedures mentioned here are meant to quickly start up heterogeneous for quick verification and feature demostration. The necessary files and scripts for starting sample heterogeneous databases can be found at SynchDB repository [here](https://github.com/Hornetlabs/synchdb/testenv/)
 
 ## Prepare a Sample MySQL Database
 We can start a sample MySQL database for testing using docker compose. The user credentials are described in the `synchdb-mysql-test.yaml` file

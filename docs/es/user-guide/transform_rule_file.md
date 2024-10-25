@@ -1,3 +1,6 @@
+---
+weight: 60
+---
 # Archivo de Reglas de Transformación
 
 El archivo de reglas de transformación es un archivo de configuración adicional escrito en formato JSON que describe varias reglas de transformación que un conector SynchDB debe seguir al recibir datos de tabla desde una base de datos heterogénea remota. Este archivo debe colocarse en el directorio `$PGDATA` y se selecciona cuando se crea un conector utilizando la función SQL `synchdb_add_conninfo()`. Es posible no utilizar un archivo de reglas de transformación personalizado al crear un nuevo conector; en este caso, se aplicarán las reglas de transformación predeterminadas.

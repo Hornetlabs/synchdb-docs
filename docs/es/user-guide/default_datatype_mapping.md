@@ -1,3 +1,6 @@
+---
+weight: 50
+---
 # Mapeo Predeterminado de Tipos de Datos
 
 El mapeo predeterminado de tipos de datos es una tabla hash construida internamente dentro de SynchDB con:

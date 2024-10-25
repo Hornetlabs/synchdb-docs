@@ -1,3 +1,6 @@
+---
+weight: 90
+---
 # Sincronización Selectiva de Tablas
 
 Es posible seleccionar solo tablas específicas de una base de datos heterogénea remota para enfocarse en la replicación. Esto podría evitar que se gasten recursos en replicar tablas no deseadas. 

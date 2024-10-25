@@ -1,3 +1,6 @@
+---
+weight: 10
+---
 # Lanzador Automático de Conectores
 
 ## Habilitar el Lanzador Automático de SynchDB

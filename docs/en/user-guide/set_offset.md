@@ -1,4 +1,7 @@
-# Set Custom Start Offset Values
+---
+weight: 100
+---
+# Custom Start Offset Values
 
 A start offset value represents a point to start replication from in the similar way as PostgreSQL's resume LSN. When Debezium runner engine starts, it will start the replication from this offset value. Setting this offset value to a earlier value will cause Debezium runner engine to start replication from earlier records, possibly replicating duplicate data records. We should be extra cautious when setting start offset values on Debezium.
 

@@ -1,3 +1,6 @@
+---
+weight: 50
+---
 # Default Data Type Mapping
 
 The default data type mapping is a hash table built internally inside SynchDB with:

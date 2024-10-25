@@ -1,3 +1,6 @@
+---
+weight: 40
+---
 # 配置说明
 
 SynchDB 在 postgresql.conf 中支持以下 GUC 变量：

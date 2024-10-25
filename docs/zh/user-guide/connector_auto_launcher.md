@@ -1,4 +1,7 @@
-# 连接器自动启动器
+---
+weight: 70
+---
+# 自动启动器
 
 ## 启用 SynchDB 自动启动器
 当对特定 `connector name` 执行 `synchdb_start_engine_bgw()` 时，连接工作进程将具备自动启动资格。同样，当执行 `synchdb_stop_engine_bgw()` 时，将取消此资格。

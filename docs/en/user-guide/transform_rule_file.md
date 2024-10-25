@@ -1,3 +1,6 @@
+---
+weight: 60
+---
 # Transform Rule File
 
 Transform rule file is an additional configuration file written in JSON format that describes several transform rules that a SynchDB connector should follow when receiving a table data from remote heterogeneous database. This file shall be put under `$PGDATA` directory and is selected when a connector is created using `synchdb_add_conninfo()` SQL function. It is possible not to use a custom transform rule file when creating a new connector, in this case, default transfom rules will be applied.

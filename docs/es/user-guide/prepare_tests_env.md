@@ -1,6 +1,9 @@
-# Preparar Bases de Datos Heterogéneas de Ejemplo
+---
+weight: 20
+---
+# Entorno de prueba rápida
 
-Los procedimientos mencionados aquí están destinados a iniciar rápidamente bases de datos heterogéneas para verificación rápida y demostración de funcionalidades. Los archivos y scripts necesarios para iniciar bases de datos heterogéneas de ejemplo se pueden encontrar en el repositorio de SynchDB [aquí](https://github.com/Hornetlabs/synchdb)
+Los procedimientos mencionados aquí están destinados a iniciar rápidamente bases de datos heterogéneas para verificación rápida y demostración de funcionalidades. Los archivos y scripts necesarios para iniciar bases de datos heterogéneas de ejemplo se pueden encontrar en el repositorio de SynchDB [aquí](https://github.com/Hornetlabs/synchdb/testenv/)
 
 ## Preparar una Base de Datos MySQL de Ejemplo
 Podemos iniciar una base de datos MySQL de ejemplo para pruebas usando docker compose. Las credenciales de usuario están descritas en el archivo `synchdb-mysql-test.yaml`

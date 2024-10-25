@@ -1,5 +1,8 @@
-# 准备异构数据库样本
-此处提到的步骤旨在快速启动异构数据库，以便快速验证和功能演示。启动样本异构数据库所需的文件和脚本可以在 SynchDB 仓库 [这里](https://github.com/Hornetlabs/synchdb) 找到。
+---
+weight:  20
+---
+# 快速测试环境
+此处提到的步骤旨在快速启动异构数据库，以便快速验证和功能演示。启动样本异构数据库所需的文件和脚本可以在 SynchDB 仓库 [这里](https://github.com/Hornetlabs/synchdb/testenv/) 找到。
 
 ## 准备一个样本 MySQL 数据库
 我们可以使用 docker compose 启动一个样本 MySQL 数据库进行测试。用户凭证在 `synchdb-mysql-test.yaml` 文件中描述。
