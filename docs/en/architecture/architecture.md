@@ -1,6 +1,7 @@
 # Architecture
 ## Archtecture Diagram
 SynchDB extension consists of six major components:
+
 * Debezium Runner Engine (Java)
 * SynchDB Launcher
 * SynchDB Worker

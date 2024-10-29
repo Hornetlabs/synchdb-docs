@@ -1,6 +1,7 @@
 # 架构
 ## 架构图
 SynchDB 扩展由六个主要组件组成：
+
 * Debezium 运行引擎（Java）
 * SynchDB 启动器
 * SynchDB 工作器
