@@ -93,7 +93,6 @@ plugins:
       css_dir: css
       javascript_dir: js
       canonical_version: latest
-  - mkdocs-nav-weight
   - awesome-pages
   - print-site
 
