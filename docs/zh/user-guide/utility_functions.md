@@ -19,9 +19,22 @@ weight: 110
 | `password` | 身份验证密码 | ✓ | `'mysqlpwd'` | 安全存储 |
 | `source database` | 源数据库名称 | ✓ | `'inventory'` | 必须存在于源系统中 |
 | `destination database` | 目标PostgreSQL数据库 | ✓ | `'postgres'` | 必须存在于PostgreSQL中 |
-| `table` | 表规范模式 | ☐ | `'[db].[table]'` | 空=复制所有表 |
+| `table` | 表规范模式 | ☐ | `'[db].[table]'` | 空=复制所有表，支持正则表达式（例如，mydb.testtable*），使用 `file:` 前缀使连接器从 JSON 文件读取表列表（例如，file:/path/to/filelist.json）。文件格式见下文 |
 | `connector` | 连接器类型(`mysql`/`sqlserver`) | ✓ | `'mysql'` | 参见上述支持的连接器 |
 | `rule file` | 数据类型转换规则 | ☐ | `'myrule.json'` | 必须位于$PGDATA目录中 |
+
+**Table列表文件示例**:
+```json
+{
+    "table_list":
+    [
+        "mydb.table1",
+        "mydb.table2",
+        "mydb.table3",
+        "mydb.table4"
+    ]
+}
+```
 
 **使用示例**:
 ```sql
@@ -62,6 +75,11 @@ SELECT synchdb_add_conninfo(
 SELECT synchdb_start_engine_bgw('mysqlconn');
 ```
 
+您还可以包含快照模式来启动连接器，否则将默认使用“initial”模式。请参阅下面的不同快照模式列表。
+```sql
+SELECT synchdb_start_engine_bgw('mysqlconn', 'no_data');
+```
+
 #### synchdb_pause_engine
 **用途**: 暂停运行中的连接器
 ```sql
@@ -78,6 +96,26 @@ SELECT synchdb_resume_engine('mysqlconn');
 **用途**: 终止连接器
 ```sql
 SELECT synchdb_stop_engine('mysqlconn');
+```
+
+### synchdb_log_jvm_meminfo
+**用途**: 使 Java 虚拟机 (JVM) 输出当前heap和non-heap使用情况统计信息到 PostgreSQL log 文件。
+```sql
+SELECT synchdb_log_jvm_meminfo('mysqlconn');
+```
+
+检查 PostgreSQL 日志文件：
+```
+2024-12-09 14:34:21.910 PST [25491] LOG:  Requesting memdump for mysqlconn connector
+2024-12-09 14:34:21 WARN  DebeziumRunner:297 - Heap Memory:
+2024-12-09 14:34:21 WARN  DebeziumRunner:298 -   Used: 19272600 bytes
+2024-12-09 14:34:21 WARN  DebeziumRunner:299 -   Committed: 67108864 bytes
+2024-12-09 14:34:21 WARN  DebeziumRunner:300 -   Max: 2147483648 bytes
+2024-12-09 14:34:21 WARN  DebeziumRunner:302 - Non-Heap Memory:
+2024-12-09 14:34:21 WARN  DebeziumRunner:303 -   Used: 42198864 bytes
+2024-12-09 14:34:21 WARN  DebeziumRunner:304 -   Committed: 45023232 bytes
+2024-12-09 14:34:21 WARN  DebeziumRunner:305 -   Max: -1 bytes
+
 ```
 
 ## 状态管理

@@ -20,9 +20,22 @@ weight: 110
 | `password` | Authentication password | ✓ | `'mysqlpwd'` | Stored securely |
 | `source database` | Source database name | ✓ | `'inventory'` | Must exist in source system |
 | `destination database` | Target PostgreSQL database | ✓ | `'postgres'` | Must exist in PostgreSQL |
-| `table` | Table specification pattern | ☐ | `'[db].[table]'` | Empty = replicate all tables |
+| `table` | Table specification pattern | ☐ | `'[db].[table]'` | Empty = replicate all tables, support regular expressions (for example, mydb.testtable*), use `file:` prefix to make connector read table list from a JSON file (for example, file:/path/to/filelist.json). See below for file format |
 | `connector` | Connector type (`mysql`/`sqlserver`) | ✓ | `'mysql'` | See supported connectors above |
 | `rule file` | Data type translation rules | ☐ | `'myrule.json'` | Must be in $PGDATA directory |
+
+**Tablelist File Example**:
+```json
+{
+    "table_list":
+    [
+        "mydb.table1",
+        "mydb.table2",
+        "mydb.table3",
+        "mydb.table4"
+    ]
+}
+```
 
 **Example Usage**:
 ```sql
@@ -61,6 +74,10 @@ SELECT synchdb_add_conninfo(
 **Purpose**: Initiates a connector
 ```sql
 SELECT synchdb_start_engine_bgw('mysqlconn');
+```
+You may also include snapshot mode to start the connector with, otherwise the `initial` mode will be used by default. See below for list of different snapshot modes.
+```sql
+SELECT synchdb_start_engine_bgw('mysqlconn', 'no_data');
 ```
 
 #### synchdb_pause_engine
@@ -134,6 +151,25 @@ SELECT synchdb_set_offset(
 );
 ```
 
+### synchdb_log_jvm_meminfo
+**Purpose**: Cause the Java Virtual Machine (JVM) to log the current heap and non-heap usages statistics.
+```sql
+SELECT synchdb_log_jvm_meminfo('mysqlconn');
+```
+
+Check the PostgreSQL log file:
+```
+2024-12-09 14:34:21.910 PST [25491] LOG:  Requesting memdump for mysqlconn connector
+2024-12-09 14:34:21 WARN  DebeziumRunner:297 - Heap Memory:
+2024-12-09 14:34:21 WARN  DebeziumRunner:298 -   Used: 19272600 bytes
+2024-12-09 14:34:21 WARN  DebeziumRunner:299 -   Committed: 67108864 bytes
+2024-12-09 14:34:21 WARN  DebeziumRunner:300 -   Max: 2147483648 bytes
+2024-12-09 14:34:21 WARN  DebeziumRunner:302 - Non-Heap Memory:
+2024-12-09 14:34:21 WARN  DebeziumRunner:303 -   Used: 42198864 bytes
+2024-12-09 14:34:21 WARN  DebeziumRunner:304 -   Committed: 45023232 bytes
+2024-12-09 14:34:21 WARN  DebeziumRunner:305 -   Max: -1 bytes
+
+```
 ## Snapshot Management
 
 ### synchdb_restart_connector

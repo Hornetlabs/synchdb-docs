@@ -6,7 +6,7 @@ weight: 60
 转换规则文件是一个以 JSON 格式编写的附加配置文件，描述了 SynchDB 连接器在从远程异构数据库接收表数据时应遵循的多个转换规则。该文件应放置在 `$PGDATA` 目录下，并在使用 `synchdb_add_conninfo()` SQL 函数创建连接器时选择该文件。创建新连接器时可以不使用自定义转换规则文件，在这种情况下，将应用默认的转换规则。
 
 ## 示例规则文件
-```
+```json
 {
   "transform_datatype_rules": [
     {
@@ -83,7 +83,15 @@ weight: 60
       "transform_from": "inventory.products.description",
       "transform_expression": "'>>>>>' || '%d' || '<<<<<'"
     }
-  ]
+  ],
+  "ssl_rules":
+  {
+      "ssl_mode": "disabled",
+      "ssl_keystore": null,
+      "ssl_keystore_pass": null,
+      "ssl_truststore": null,
+      "ssl_truststore_pass": null
+  }
 }
 ```
 ## 转换数据类型规则
@@ -159,3 +167,15 @@ BYTEA (BYTEAOID)
 |-|-|-|
 | transform_from       | 远程列的全限定名称 (FQN)，可以是以下格式之一：<br><br><ul><li> [database].[schema].[table].[column] </li><li> [database].[table].[column] </li></ul>| inventory.orders.quantity<br>testDB.dbo.products.description|
 | transform_expression 	| 要在接收到的数据上执行的表达式。可以使用以下占位符构造表达式：<ul><li> %d: 将被接收到的数据替换 </li><li> %w: 公认的二进制表示。当数据表示几何或地理数据时将存在此项 </li><li> %s: SRID。当数据表示几何或地理数据时将存在此项 </li></ul> 表达式可以用 PostgreSQL 支持的任何标准 SQL 语法编写。 | 1. ```case when %d < 500 then 0 else %d end``` <br>  如果值小于 500，则设置为 0，否则保留原始值<br><br> 2.```ST_SetSRID(ST_GeomFromWKB(decode('%w', 'base64')),%s)``` <br>*将 base64 编码的 Well-Known Binary (WKB) 几何数据转换为具有指定空间参考系统 (SRID) 的 PostGIS 几何对象* <br><br>3. ```'>>>>>' \|\| '%d' \|\| '<<<<<'``` <br>在值周围添加可视标记|
+
+## SSL 规则配置
+
+如果需要 SSL 来建立与远程数据库的连接，则此部分是必需的。
+
+| | 字段| 描述 |
+|-|-|-|
+| ssl_mode | 可以是以下之一：<br><ul><li> “disabled” - 不使用 SSL。</li><li> “preferred” - 如果服务器支持，则使用 SSL。</li><li> “required” - 必须使用 SSL 来建立连接。</li><li> “verify_ca” - 连接器与服务器建立 TLS，还将根据配置的信任库验证服务器的 TLS 证书。</li><li> “verify_identity” - 与 verify_ca 相同的行为，但它还会检查服务器证书的通用名称以匹配系统的主机名。|
+| ssl_keystore | 密钥库文件的路径 |
+| ssl_keystore_pass | 访问密钥库文件的密码 |
+| ssl_truststore | 信任库文件的路径 |
+| ssl_truststore_pass |访问信任库文件的密码 |

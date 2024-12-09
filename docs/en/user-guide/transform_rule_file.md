@@ -83,7 +83,15 @@ Transform rule file is an additional configuration file written in JSON format t
       "transform_from": "inventory.products.description",
       "transform_expression": "'>>>>>' || '%d' || '<<<<<'"
     }
-  ]
+  ],
+  "ssl_rules":
+  {
+      "ssl_mode": "disabled",
+      "ssl_keystore": null,
+      "ssl_keystore_pass": null,
+      "ssl_truststore": null,
+      "ssl_truststore_pass": null
+  }
 }
 ```
 ## Transform Data Type Rules
@@ -159,3 +167,14 @@ Transform data type rules can be defined with a JSON array with name `"transform
 | **transform_from**      | the Fully Qualified Name (FQN) of a remote column that can be one of these formats:<br><ul><li> [database].[schema].[table].[column] </li><li> [database].[table].[column] </li></ul>| inventory.orders.quantity<br>testDB.dbo.products.description|
 | **transform_expression** | the expression to execute on the received data. You can use these placeholder tokens to construct an expression: <br><ul><li> %d: will be swapped with the received data </li><li> %w: Well-known binary representation. Will be present if the data represents a geometry or geography data </li><li> %s: SRID. Will be present if the data represents a geometry or geography data </li></ul> <br> the expression can be written in any standard SQL syntax supported by PostgreSQL. | 1. ```case when %d < 500 then 0 else %d end``` <br> sets a value to 0 if it's less than 500, otherwise keeps its original value <br><br> 2.```ST_SetSRID(ST_GeomFromWKB(decode('%w', 'base64')),%s)``` <br>*Converts base64-encoded Well-Known Binary (WKB) geometry data to a PostGIS geometry object with a specified spatial reference system (SRID)* <br><br>3. ```'>>>>>' \|\| '%d' \|\| '<<<<<'``` <br>adds visual markers around a value|
 
+## SSL Rules
+
+If SSL is required to establish connection to a remote database, this section is required. 
+
+| Field           | Description |
+|-|-|
+| ssl_mode         | can be one of: <br><ul><li> "disabled" - no SSL is used. </li><li> "preferred" - SSL is used if server supports it. </li><li> "required" - SSL must be used to establish a connection. </li><li> "verify_ca" - connector establishes TLS with the server and will also verify server's TLS certificate against configured truststore. </li><li> "verify_identity" - same behavior as verify_ca but it also checks the server certificate's common name to match the hostname of the system. |
+| ssl_keystore | path to the keystore file |
+| ssl_keystore_pass | password to access the keystore file |
+| ssl_truststore | path to the truststore file |
+| ssl_truststore_pass | password to access the truststore file |
