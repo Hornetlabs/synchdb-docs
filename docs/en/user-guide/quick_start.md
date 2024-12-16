@@ -80,6 +80,7 @@ SELECT
 ## Things to Note
 * It is possible to create multiple connectors connecting to the same connector type (ex, MySQL, SQLServer..etc). SynchDB will spawn separate connections to fetch change data.
 * User-defined X509 certificate and private key for TLS connection to remote database will be supported in near future. In the meantime, please ensure TLS settings are set to optional.
+* If SSL is required to establish the connection, refer to [here](https://docs.synchdb.com/user-guide/transform_rule_file/) to learn how to configure SSL settings in the rule file per conenctor
  
 
 ## Check Created Connection Info
@@ -133,11 +134,44 @@ Column Details:
 |-|-|
 | id              | unique identifier of a connector slot|
 | connector       | the type of connector (mysql, oracle, sqlserver...etc)|
-| conninfo_name   | the associated connector info name created by `synchdb_add_conninfo()`|
+| name   | the associated connector info name created by `synchdb_add_conninfo()`|
 | pid             | the PID of the connector worker process|
-| state           | the state of the connector. Possible states are: <br><br><ul><li>stopped - connector is not running</li><li>initializing - connector is initializing</li><li>paused - connector is paused</li><li>syncing - connector is regularly polling change events</li><li>parsing (the connector is parsing a received change event) </li><li>converting - connector is converting a change event to PostgreSQL representation</li><li>executing - connector is applying the converted change event to PostgreSQL</li><li>updating offset - connector is writing a new offset value to Debezium offset management</li><li>restarting - connector is restarting </li><li>unknown</li></ul> |
+| state           | the state of the connector. Possible states are: <br><br><ul><li>stopped - connector is not running</li><li>initializing - connector is initializing</li><li>paused - connector is paused</li><li>syncing - connector is regularly polling change events</li><li>parsing (the connector is parsing a received change event) </li><li>converting - connector is converting a change event to PostgreSQL representation</li><li>executing - connector is applying the converted change event to PostgreSQL</li><li>updating offset - connector is writing a new offset value to Debezium offset management</li><li>restarting - connector is restarting </li><li>dumping memory - connector is dumping JVM memory summary in log file </li><li>unknown</li></ul> |
 | err             | the last error message encountered by the worker which would have caused it to exit. This error could originated from PostgreSQL while processing a change, or originated from Debezium running engine while accessing data from heterogeneous database. |
 | last_dbz_offset | the last Debezium offset captured by synchdb. Note that this may not reflect the current and real-time offset value of the connector engine. Rather, this is shown as a checkpoint that we could restart from this offeet point if needed.|
+
+## Check Connector Running Statistics
+Use `synchdb_stats_view()` view to examine the statistic information of all connectors. These statistics record cumulative measurements about different types of change events a connector has processed so far. Currently these statistic values are stored in shared memory and not persisted to disk. Persist statistics data is a feature to be added in near future.
+
+See below for an example output:
+```sql
+postgres=# select * from synchdb_stats_view;
+   connector   | ddls |  dmls   |  reads  | creates | updates | deletes | bad_events | total_events | batches_done | avg_batch_size
+---------------+------+---------+---------+---------+---------+---------+------------+--------------+--------------+----------------
+ mysqltpccconn |   22 | 3887111 | 3263746 |  208684 |  400241 |   14440 |      14444 |      3901573 |         2441 |           1598
+               |    0 |       0 |       0 |       0 |       0 |       0 |          0 |            0 |            0 |              0
+               |    0 |       0 |       0 |       0 |       0 |       0 |          0 |            0 |            0 |              0
+               |    0 |       0 |       0 |       0 |       0 |       0 |          0 |            0 |            0 |              0
+               |    0 |       0 |       0 |       0 |       0 |       0 |          0 |            0 |            0 |              0
+  ...
+  ...
+```
+
+Column Details:
+
+| fields | description |
+|-|-|
+| name | the associated connector info name created by `synchdb_add_conninfo()`|
+| ddls | number of DDLs operations completed |
+| dmls | number of DMLs operations completed |
+| reads | number of READ events completed during initial snapshot stage |
+| creates | number of CREATES events completed during CDC stage |
+| updates | number of UPDATES events completed during CDC stage |
+| deletes | number of DELETES events completed during CDC stage |
+| bad_events | number of bad events ignored (such as empty events, unsupported DDL events..etc) |
+| total_events | total number of events processed (including bad_events) |
+| batches_done | number of batches completed |
+| avg_batch_size | average batch size (total_events / batches_done) |
 
 
 ## Stop a Connector

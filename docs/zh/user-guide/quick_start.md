@@ -80,6 +80,7 @@ SELECT
 ## 注意事项
 * 可以创建多个连接到同一类型连接器（如 MySQL、SQLServer 等）的连接器。SynchDB 将生成单独的连接来获取更改数据。
 * 用户自定义的 X509 证书和用于远程数据库 TLS 连接的私钥将在不久的将来得到支持。同时，请确保将 TLS 设置配置为可选。
+* 如果需要 SSL 来建立连接，请参阅[此处](https://docs.synchdb.com/user-guide/transform_rule_file/) 了解如何在每个连接器的规则文件中配置 SSL 设置
 
 ## 检查已创建的连接信息
 所有连接信息都创建在表 `synchdb_conninfo` 中。我们可以查看其内容并根据需要进行修改。请注意，用户凭证的密码是由 pgcrypto 使用仅 synchdb 知道的密钥加密的。因此，请不要修改密码字段，否则如果被篡改可能会解密错误。以下是输出示例：
@@ -131,11 +132,45 @@ postgres=# select * from synchdb_state_view;
 |-|-|
 | id              | 连接器槽的唯一标识符 |
 | connector       | 连接器类型（mysql、oracle、sqlserver 等）|
-| conninfo_name   | 由 `synchdb_add_conninfo()` 创建的关联连接器信息名称 |
+| name   | 由 `synchdb_add_conninfo()` 创建的关联连接器信息名称 |
 | pid             | 连接器工作进程的 PID |
-| state           | 连接器的状态。可能的状态有：<br><ul><li>stopped - 连接器未运行</li><li>initializing - 连接器正在初始化</li><li>paused - 连接器已暂停</li><li>syncing - 连接器正在定期轮询更改事件</li><li>parsing - 连接器正在解析收到的更改事件</li><li>converting - 连接器正在将更改事件转换为 PostgreSQL 表示</li><li>executing - 连接器正在将转换后的更改事件应用到 PostgreSQL</li><li>updating offset - 连接器正在向 Debezium 偏移量管理写入新的偏移量值</li><li>restarting - 连接器正在重启</li><li>unknown</li></ul> |
+| state           | 连接器的状态。可能的状态有：<br><ul><li>stopped - 连接器未运行</li><li>initializing - 连接器正在初始化</li><li>paused - 连接器已暂停</li><li>syncing - 连接器正在定期轮询更改事件</li><li>parsing - 连接器正在解析收到的更改事件</li><li>converting - 连接器正在将更改事件转换为 PostgreSQL 表示</li><li>executing - 连接器正在将转换后的更改事件应用到 PostgreSQL</li><li>updating offset - 连接器正在向 Debezium 偏移量管理写入新的偏移量值</li><li>restarting - 连接器正在重启</li><li>dumping memory - 连接器正在输出 JVM 内存使用信息到 log 文件</li><li>unknown</li></ul> |
 | err             | 工作进程遇到的最后一个错误消息，该错误可能导致其退出。此错误可能源自 PostgreSQL 处理更改时，或源自 Debezium 运行引擎从异构数据库访问数据时 |
 | last_dbz_offset | synchdb 捕获的最后一个 Debezium 偏移量。请注意，这可能不反映连接器引擎的当前和实时偏移量值。相反，这显示为一个检查点，如果需要，我们可以从这个偏移量点重新启动 |
+
+## 检查连接器运行统计信息
+使用 `synchdb_stats_view()` 视图检查所有连接器的统计信息。这些统计信息记录了连接器迄今为止处理的不同类型的更改事件的累积测量值。当前，这些统计值存储在共享内存中，而不是持久保存到磁盘。持久统计数据是近期要添加的功能。
+
+以下是输出示例：
+```sql
+postgres=# select * from synchdb_stats_view;
+   connector   | ddls |  dmls   |  reads  | creates | updates | deletes | bad_events | total_events | batches_done | avg_batch_size
+---------------+------+---------+---------+---------+---------+---------+------------+--------------+--------------+----------------
+ mysqltpccconn |   22 | 3887111 | 3263746 |  208684 |  400241 |   14440 |      14444 |      3901573 |         2441 |           1598
+               |    0 |       0 |       0 |       0 |       0 |       0 |          0 |            0 |            0 |              0
+               |    0 |       0 |       0 |       0 |       0 |       0 |          0 |            0 |            0 |              0
+               |    0 |       0 |       0 |       0 |       0 |       0 |          0 |            0 |            0 |              0
+               |    0 |       0 |       0 |       0 |       0 |       0 |          0 |            0 |            0 |              0
+  ...
+  ...
+```
+
+列详情：
+
+| 字段 | 描述 |
+|-|-|
+| name | 由 `synchdb_add_conninfo()` 创建的关联连接器信息名称|
+| ddls | 完成的 DDL 操作数 |
+| dmls | 完成的 DML 操作数 |
+| reads | 初始快照阶段完成的读取事件数 |
+| creates | CDC 阶段完成的创建事件数 |
+| updates | CDC 阶段完成的更新事件数 |
+| delets | CDC 阶段完成的删除事件数 |
+| bad_events |忽略的不良事件数（例如空事件、不支持的 DDL 事件等）|
+| total_events | 处理的事件总数（包括 bad_events）|
+| batches_done | 完成的批次数 |
+| avg_batch_size | 平均批次大小（total_events / batches_done）|
+
 
 ## 停止连接器
 使用 SQL 函数 `synchdb_stop_engine_bgw()` 停止正在运行或暂停的连接器工作进程。此函数以 `conninfo_name` 作为其唯一参数，可以从 `synchdb_get_state()` 视图的输出中找到。

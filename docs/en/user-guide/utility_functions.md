@@ -113,7 +113,7 @@ SELECT * FROM synchdb_state_view();
 |-|-|-|
 | `id` | Connector slot identifier | Integer |
 | `connector` | Connector type (`mysql` or `sqlserver`) | Text |
-| `conninfo_name` | Associated connector name | Text |
+| `name` | Associated connector name | Text |
 | `pid` | Worker process ID | Integer |
 | `state` | Current connector state | Text |
 | `err` | Latest error message | Text |
@@ -130,7 +130,29 @@ SELECT * FROM synchdb_state_view();
 - ⚪ `executing` - Applying changes
 - 🟤 `updating offset` - Updating checkpoint
 - 🟨 `restarting` - Reinitializing
+- ⚪ `dumping memory` - JVM is prepaaring to dump memory info in log file
 - ⚫ `unknown` - Indeterminate state
+
+### synchdb_stats_view
+**Purpose**: Collects connector processing statistics cumulatiely
+
+```sql
+SELECT * FROM synchdb_stats_view();
+```
+
+| Field | Description | Type |
+|-|-|-|
+| name | Associated connector name | Text |
+| ddls | Number of DDLs operations completed | Bigint |
+| dmls | Number of DMLs operations completed | Bigint |
+| reads | Number of READ events completed during initial snapshot stage | Bigint |
+| creates | Number of CREATES events completed during CDC stage | Bigint |
+| updates | Number of UPDATES events completed during CDC stage | Bigint |
+| deletes | Number of DELETES events completed during CDC stage | Bigint |
+| bad_events | Number of bad events ignored (such as empty events, unsupported DDL events..etc) | Bigint |
+| total_events | Total number of events processed (including bad_events) | Bigint |
+| batches_done | Number of batches completed | Bigint |
+| avg_batch_size | Average batch size (total_events / batches_done) | Bigint |
 
 ### synchdb_set_offset
 **Purpose**: Configures custom start position
@@ -170,6 +192,7 @@ Check the PostgreSQL log file:
 2024-12-09 14:34:21 WARN  DebeziumRunner:305 -   Max: -1 bytes
 
 ```
+
 ## Snapshot Management
 
 ### synchdb_restart_connector

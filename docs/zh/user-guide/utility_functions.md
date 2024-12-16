@@ -133,7 +133,7 @@ SELECT * FROM synchdb_state_view();
 |-|-|-|
 | `id` | 连接器槽标识符 | Integer |
 | `connector` | 连接器类型(`mysql`或`sqlserver`) | Text |
-| `conninfo_name` | 关联的连接器名称 | Text |
+| `name` | 关联的连接器名称 | Text |
 | `pid` | 工作进程ID | Integer |
 | `state` | 当前连接器状态 | Text |
 | `err` | 最新错误消息 | Text |
@@ -150,7 +150,29 @@ SELECT * FROM synchdb_state_view();
 - ⚪ `executing` - 应用更改中
 - 🟤 `updating offset` - 更新检查点中
 - 🟨 `restarting` - 重启中
+- ⚪ `dumping memory` - 正在输出 JVM 内存信息到 log 文件
 - ⚫ `unknown` - 未知状态
+
+### synchdb_stats_view
+**用途**：累计收集连接器处理统计信息
+
+```sql
+SELECT * FROM synchdb_stats_view();
+```
+
+| 字段 | 说明 | 类型 |
+|-|-|-|
+| name | 关联的连接器名称 | Text |
+| ddls | 已完成的 DDL 操作数 | Bigint |
+| dmls | 已完成的 DML 操作数 | Bigint |
+| reads | 初始快照阶段完成的 READ 事件数 | Bigint |
+| creating | CDC 阶段完成的 CREATES 事件数 | Bigint |
+| updates | CDC 阶段完成的 UPDATES 事件数 | Bigint |
+| deletes | CDC 阶段完成的 DELETES 事件数 | Bigint |
+| bad_events | 忽略的坏事件数（例如空事件、不支持的 DDL 事件等）| Bigint |
+| total_events |处理的事件总数（包括 bad_events） | Bigint |
+| batches_done | 完成的批次数 | Bigint |
+| avg_batch_size | 平均批次大小（total_events / batches_done） | Bigint |
 
 ### synchdb_set_offset
 **用途**: 配置自定义起始位置
