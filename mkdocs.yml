@@ -52,6 +52,7 @@ plugins:
             Batch Change Handling: Manejo de Cambios por Lotes
             Metadata Files: Archivos de Metadatos
             User guide: Guía del usuario
+            Remote Database Setups: configuración de base de datos remota
             Installation: Instalación
             Prepare Sample Databases: Preparar Bases de Datos de Ejemplo
             Quick Start: Inicio Rápido
@@ -77,6 +78,7 @@ plugins:
             Metadata Files: 元数据文件
             User guide: 用户指南
             Installation: 安装
+            Remote Database Setups: 异构数据库设置
             Prepare Sample Databases: 准备示例数据库
             Quick Start: 快速入门
             Configuration: 配置
