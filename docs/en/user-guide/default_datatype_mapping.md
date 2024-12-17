@@ -112,7 +112,7 @@ DatatypeHashEntry sqlserver_defaultTypeMappings[] =
 	{{"datetime2", false}, "TIMESTAMP", 0},
 	{{"datetimeoffset", false}, "TIMESTAMPTZ", 0},
 	{{"smalldatetime", false}, "TIMESTAMP", 0},
-	{{"char", false}, "CHAR", 0},
+	{{"char", false}, "CHAR", -1},
 	{{"varchar", false}, "VARCHAR", -1},
 	{{"text", false}, "TEXT", 0},
 	{{"nchar", false}, "CHAR", 0},

@@ -20,3 +20,10 @@ mysql_mysqlconn_schemahistory.dat  sqlserver_sqlserverconn_schemahistory.dat
 hexdump -C $PGDATA/pg_synchdb/mysql_mysqlconn_offsets.dat
 hexdump -C $PGDATA/pg_synchdb/mysql_mysqlconn_schemahistory.dat
 ```
+
+## 重置连接器
+连接器可以重置（重新复制和重新同步）所有指定表，只需：
+
+* 停止连接器
+* 删除偏移量和架构历史文件
+* 启动连接器

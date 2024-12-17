@@ -7,7 +7,7 @@ SynchDB supports the following GUC variables in postgresql.conf. These are commo
 
 | GUC Variable| Type | Default Value | Description |
 |-|-|-|-|
-| synchdb.naptime | integer | 500 | The delay in milliseconds between each data polling from Debezium runner engine |
+| synchdb.naptime | integer | 100 | The delay in milliseconds between each data polling from Debezium runner engine |
 | synchdb.dml_use_spi | boolean | false | Option to use SPI to handle DML operations |
 | synchdb.synchdb_auto_launcher | boolean | true | Option to automatically launch active SynchDB connector workers. This option only works when SynchDB is included in `shared_preload_library` GUC option |
 | synchdb.dbz_batch_size | integer | 2048 | The maximum number of change events produced by Debezium embedded engine for SynchDB to process. This batch of changes is processed within a single transaction by SynchDB |

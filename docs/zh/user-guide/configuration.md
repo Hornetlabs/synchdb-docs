@@ -7,7 +7,7 @@ SynchDB 在 postgresql.conf 中支持以下 GUC 变量。这些是适用于 Sync
 
 | GUC 变量 | 类型 | 默认值 | 描述 |
 |-|-|-|-|
-| synchdb.naptime | integer | 500 | 从 Debezium runner 引擎轮询数据的时间间隔（毫秒） |
+| synchdb.naptime | integer | 100 | 从 Debezium runner 引擎轮询数据的时间间隔（毫秒） |
 | synchdb.dml_use_spi | boolean | false | 是否使用 SPI 处理 DML 操作 |
 | synchdb.synchdb_auto_launcher | boolean | true | 是否自动启动活跃的 SynchDB 连接器工作进程。此选项仅在 SynchDB 被包含在 `shared_preload_library` GUC 选项中时生效 |
 | synchdb.dbz_batch_size | integer | 2048 | Debezium 嵌入式引擎生成的 SynchDB 可处理的最大变更事件数。此批次变更由 SynchDB 在单个事务中处理 |
