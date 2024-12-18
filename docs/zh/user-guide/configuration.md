@@ -23,12 +23,13 @@ SynchDB 在 postgresql.conf 中支持以下 GUC 变量。这些是适用于 Sync
 | synchdb.dbz_incremental_snapshot_watermarking_strategy | 字符串 | “insert-insert | Debezium 嵌入式引擎用于解决增量快照期间潜在冲突的水印策略。可能的值是“insert-insert”和“insert-delete”|
 | synchdb.dbz_offset_flush_interval_ms | integer | 60000 | Debezium 嵌入式引擎将偏移数据刷新到磁盘的间隔（以毫秒为单位）|
 | synchdb.dbz_capture_only_selected_table_ddl | boolean | true | Debezium 嵌入式引擎是否应在初始快照期间捕获所有表（false）或选定表（true）的模式 |
+| synchdb.max_connector_workers | integer | 30 | 最大的连接器后台进程数量 |
 
 ## 技术说明
 
 - GUC（Grand Unified Configuration）是 PostgreSQL 中的全局配置参数
 - 这些值需要在 `postgresql.conf` 文件中设置
-- 修改配置后需要重启服务器才能生效, 或者使用 `SET` 命令更改当前 PostgreSQL 会话中的值。
+- 修改配置后需要重启服务器才能生效
 - `shared_preload_library` 是一个关键的系统配置，决定了启动时加载哪些库
 
 ## 配置示例
@@ -47,6 +48,7 @@ synchdb.dbz_incremental_snapshot_chunk_size=4096                        # 增量
 synchdb.dbz_incremental_snapshot_watermarking_strategy='insert_insert'  # 使用 insert_insert 水印策略
 synchdb.dbz_offset_flush_interval_ms=60000                              # 如果需要，每分钟将偏移数据刷新到磁盘
 synchdb.dbz_capture_only_selected_table_ddl=false                       # Debezium 将仅捕获选定表的模式，而不是所有表
+synchdb.max_connector_workers=false                                     # 最多允许 10 个连接器
 ```
 
 ## 使用建议
@@ -104,6 +106,10 @@ synchdb.dbz_capture_only_selected_table_ddl=false                       # Debezi
     - 较低的值：更频繁地更新偏移文件，更多的 IO，故障恢复后重新处理的旧批次较少
     - 较高的值：更不频繁地更新偏移文件，更少的 IO，故障恢复后重新处理的旧批次较多
     - 建议将其设置为 60000，这是 Debezium 的建议
+
+12. **synchdb.max_connector_workers**
+    - 较低的值：一次可以运行的连接器工作器越少，共享内存需求越少
+    - 较高的值：一次可以运行的连接器工作器越多，共享内存需求越多
 
 ## 性能考虑
 

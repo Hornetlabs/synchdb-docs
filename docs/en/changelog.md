@@ -14,13 +14,16 @@ This release focuses on bug fixes and performance enhancements following the v1.
 * added several new GUCs that can be adjusted to tune the performance of Debezium Runner. Refer to [here](../user-guide/configuration.md) for complete list.
 * added a debug SQL function `synchdb_log_jvm_meminfo(name)` that causes specified connector to output current JVM heap memory usage summary in PostgreSQL log file.
 * added a new VIEW `synchdb_stats_view` that prints statistic information for all connectors. More detail [here](../user-guide/utility_functions).
+* added a new SQL function `synchdb_reset_stats(name)` to clear statistic information of specified connector. More detail [here](../user-guide/utility_functions).
 * added a mess creation script to quickly generate test tables and data on MySQL database type.
 
 ### Changed
 * synchdb_state_view(): added a new field called `stage` that indicates the current stage of a connector (value can either be `Initial Snapshot` or `Change Data Capture`).
+* synchdb_state_view(): will only show state of valid connectors.
 * removed sending "partial batch completion" notification to Debezium Runner in case of error, because a batch is now handled by one PostgreSQL transaction, and partial completion is not allowed.
 * SSL related parameters per connector can now be specified in the [rule file](../user-guide/transform_rule_file).
-* The maximum heap memory to allocate to JVM that runs the Debezium Runner can now be configured via GUC.
+* the maximum heap memory to allocate to JVM that runs the Debezium Runner can now be configured via GUC.
+* max number of connector background worker is now configurable instead of hardcoded 30.
 
 ### Fixed
 * fixed rapid memory buildups in Debezium runner in JVM by adding a throttle control in the receiving of change events.

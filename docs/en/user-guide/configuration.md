@@ -23,12 +23,13 @@ SynchDB supports the following GUC variables in postgresql.conf. These are commo
 | synchdb.dbz_incremental_snapshot_watermarking_strategy | string | "insert-insert | The watermarking strategy used by Debezium embedded engine to resolve potential conflicts during incremental snapshot. Possible values are "insert-insert" and "insert-delete" |
 | synchdb.dbz_offset_flush_interval_ms | integer | 60000 | The interval in milliseconds that Debezium embedded engine flushes offset data to disk |
 | synchdb.dbz_capture_only_selected_table_ddl | boolean | true | whether or not Debezium embedded engine should capture the schema of all tables (false) or selected tables(true) during initial snapshot |
+| synchdb.max_connector_workers | integer | 30 | the maximum number of connector workers that can be running at a time |
 
 ## Technical Notes
 
 - GUC (Grand Unified Configuration) variables are global configuration parameters in PostgreSQL
 - Values are set in the `postgresql.conf` file
-- Changes require a server restart to take effect, or use `SET` command to change the value in the current PostgreSQL session.
+- Changes require a server restart to take effect
 - `shared_preload_library` is a critical system configuration that determines which libraries are loaded at startup
 
 ## Configuration Examples
@@ -48,6 +49,7 @@ synchdb.dbz_incremental_snapshot_chunk_size=4096                        # Increm
 synchdb.dbz_incremental_snapshot_watermarking_strategy='insert_insert'  # Use insert_insert watermarking strategy
 synchdb.dbz_offset_flush_interval_ms=60000                              # Flush offset data to disk every minute if needed    
 synchdb.dbz_capture_only_selected_table_ddl=false                       # Debezium will only capture the schema of selected tables rather than all tables
+synchdb.max_connector_workers=10                                        # 10 connector workers can be run at a time
 ```
 
 ## Usage Recommendations
@@ -106,6 +108,9 @@ synchdb.dbz_capture_only_selected_table_ddl=false                       # Debezi
     - Higher values: Less frequent update to offset file, less IO, more old batches to re-preocess after fault restored
     - Recommended to set it to 60000 as Debezium's recommendation
 
+12. **synchdb.max_connector_workers**
+    - Lower values: less connector workers can be run at a time, less shared memory requirement
+    - Higher values: more connector workers can be run at a time, more shared memory requirement
 
 ## Performance Considerations
 

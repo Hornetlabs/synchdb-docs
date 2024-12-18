@@ -174,6 +174,13 @@ SELECT * FROM synchdb_stats_view();
 | batches_done | 完成的批次数 | Bigint |
 | avg_batch_size | 平均批次大小（total_events / batches_done） | Bigint |
 
+### synchdb_reset_stats
+**用途**：重置指定连接器的所有统计信息
+
+```sql
+SELECT synchdb_reset_stats('mysqlconn');
+```
+
 ### synchdb_set_offset
 **用途**: 配置自定义起始位置
 

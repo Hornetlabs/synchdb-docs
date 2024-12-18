@@ -154,6 +154,13 @@ SELECT * FROM synchdb_stats_view();
 | batches_done | Number of batches completed | Bigint |
 | avg_batch_size | Average batch size (total_events / batches_done) | Bigint |
 
+### synchdb_reset_stats
+**Purpose**: Resets all statistic information of given connector name
+
+```sql
+SELECT synchdb_reset_stats('mysqlconn');
+```
+
 ### synchdb_set_offset
 **Purpose**: Configures custom start position
 

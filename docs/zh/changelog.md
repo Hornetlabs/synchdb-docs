@@ -15,13 +15,16 @@
 * 添加多个可以调整 Debezium Runner 性能的 GUC。完整列表请参阅[此处](../user-guide/configuration.md)。
 * 添加一个调试 SQL 函数 `synchdb_log_jvm_meminfo(name)`，该函数使指定的连接器在 PostgreSQL 日志文件中输出当前 JVM 堆内存使用情况摘要。
 * 添加一个新视图 `synchdb_stats_view`，用于打印所有连接器的统计信息。更多详细信息请参阅[此处](../user-guide/utility_functions)。
+* 增加了新的SQL函数 `synchdb_reset_stats(name)` 来清除指定连接器的统计信息。更多详细信息请参阅[此处](../user-guide/utility_functions)。
 * 添加一个测试数据创建脚本，用于快速生成 MySQL 数据库类型的测试表和数据。
 
 ### 变更
 * synchdb_state_view()：添加了一个名为 `stage` 的新字段，用于标识 connector 的当前阶段（值可以是 `Initial Snapshot` 或 `Change Data Capture`）。
+* synchdb_state_view()：仅显示有效连接器的状态。
 * 删除了在发生错误时向 Debezium Runner 发送 “部分批处理完成” 通知，因为批处理现在由一个 PostgreSQL 事务处理，且不允许部分完成。
 * 现在可以在 [规则文件](../user-guide/transform_rule_file) 中指定 connector 所需的 SSL 相关参数。
 * 现在可以通过 GUC 配置分配给运行 Debezium Runner 的 JVM 的最大堆内存。
+* 现在可以配置连接器后台进程的最大数量，而不是硬编码的 30。
 
 ### 修复
 * 在 Debezium runner 内添加节流控制，修复了 Debezium Runner 在数据量大时内存快速积累问题。
