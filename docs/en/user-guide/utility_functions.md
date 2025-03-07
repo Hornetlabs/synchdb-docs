@@ -19,10 +19,9 @@ weight: 110
 | `username` | Authentication username | ✓ | `'mysqluser'` | Requires appropriate permissions |
 | `password` | Authentication password | ✓ | `'mysqlpwd'` | Stored securely |
 | `source database` | Source database name | ✓ | `'inventory'` | Must exist in source system |
-| `destination database` | Target PostgreSQL database | ✓ | `'postgres'` | Must exist in PostgreSQL |
+| `destination database` | Target PostgreSQL database | ✓ | `'postgres'` | (deprecated) will always be adjusted to the same database where SynchDB is installed |
 | `table` | Table specification pattern | ☐ | `'[db].[table]'` | Empty = replicate all tables, support regular expressions (for example, mydb.testtable*), use `file:` prefix to make connector read table list from a JSON file (for example, file:/path/to/filelist.json). See below for file format |
 | `connector` | Connector type (`mysql`/`sqlserver`) | ✓ | `'mysql'` | See supported connectors above |
-| `rule file` | Data type translation rules | ☐ | `'myrule.json'` | Must be in $PGDATA directory |
 
 **Tablelist File Example**:
 ```json
@@ -49,8 +48,7 @@ SELECT synchdb_add_conninfo(
     'inventory',    -- Source DB
     'postgres',     -- Target DB
     '',             -- Tables (empty for all)
-    'mysql',        -- Connector type
-    'myrule.json'   -- Rules file
+    'mysql'         -- Connector type
 );
 
 -- SQL Server Example
@@ -63,39 +61,139 @@ SELECT synchdb_add_conninfo(
     'testDB',
     'postgres',
     'dbo.orders',   -- Specific table
-    'sqlserver',
-    'mssql_rules.json'
+    'sqlserver'
+);
+
+-- Oracle Example
+SELECT synchdb_add_conninfo(
+    'oracleconn',
+    '127.0.0.1',
+    1521,
+    'c##dbzuser',
+    'dbz',
+    'mydb',
+    'postgres',
+    '',   -- all tables
+    'oracle'
 );
 ```
 
-### Basic Control Functions
+### synchdb_add_objmap
+**Purpose**: Adds an object mapping rule per connector
 
-#### synchdb_start_engine_bgw
-**Purpose**: Initiates a connector
+| Parameter | Description | Required | Example | Notes |
+|:-:|:-|:-:|:-|:-|
+| `name` | Unique identifier for this connector | ✓ | `'mysqlconn'` | Must be unique across all connectors |
+| `object type` | type of object mapping | ✓ | `'table'` | can be `table` to map a table name, `column` to map a column name, `datatype` to map a data type, or `transform` to run a data transform expression |
+| `source object` | source object represented as fully-qualified name | ✓ | `inventory.customers` | the object name as represented in the remote database |
+| `destination object` | destination object name | ✓ | `'schema1.people'` | The destination object name in PostgreSQL side. Can be a fully-qualified table name, a column name, a data type or transform expression |
+
+```sql
+SELECT synchdb_add_objmap('mysqlconn','table','inventory.customers','schema1.people');
+SELECT synchdb_add_objmap('mysqlconn','column','inventory.customers.email','contact');
+SELECT synchdb_add_objmap('mysqlconn','datatype','point|false','text|0');
+SELECT synchdb_add_objmap('mysqlconn','datatype','inventory.geom.g','geometry|0');
+SELECT synchdb_add_objmap('mysqlconn','transform','inventory.products.name','''>>>>>'' || ''%d'' || ''<<<<<''');
+```
+**Ways to represent a `table` mapping:**
+* `source object` represents the table in fully-qualified name in remote database
+* `destination object` represents the table name in PostgreSQL. It can be just a name (default to public schema) or in schema.name format. 
+
+**Ways to represent a `column` mapping:**
+* `source object` represents the column in fully-qualified name in remote database
+* `destination object` represents the column name in PostgreSQL. No need to format it as fully-qualified column name.
+
+**Ways to represent a `datatype` mapping:**
+* `source object` can be expressed as one of:
+    * a fully-qualified column (inventory.geom.g). This means the data type mapping applies to this particular column only.
+    * a general data type string (int). Use a pipe (|) to add if it is a autoincrement data type (int|true for autoincremented int) or (int|false for a non-autoincremented int). This means data type mapping applies to all data type with the matching condition.
+
+* `destination object` should be expressed as a general data type string that exists in PostgreSQL. Use a pipe (|) to overwrite the size (text|0 to overwrite the size to 0 because text is variable size) or (varchar|-1 to use whatever size that comes with the change event)
+
+**Ways to represent a `transform` mapping:**
+* `source object` represents the column to be transformed
+* `destination object` represents an expression to be run on the column data before it is applied to PostgreSQL. Use %d as a placeholder for input column data. In case of geometry type, use %w for WKB and %s for SRID. 
+
+### synchdb_add_extra_conninfo
+**Purpose**: Configures extra connector parameters to an existing connector created by `synchdb_add_conninfo`
+
+| Parameter | Description | Required | Example | Notes |
+|:-:|:-|:-:|:-|:-|
+| `name` | Unique identifier for this connector | ✓ | `'mysqlconn'` | Must be unique across all connectors |
+| `ssl_mode` | SSL mode | ☐ | `'verify_ca'` | can be one of: <br><ul><li> "disabled" - no SSL is used. </li><li> "preferred" - SSL is used if server supports it. </li><li> "required" - SSL must be used to establish a connection. </li><li> "verify_ca" - connector establishes TLS with the server and will also verify server's TLS certificate against configured truststore. </li><li> "verify_identity" - same behavior as verify_ca but it also checks the server certificate's common name to match the hostname of the system. |
+| `ssl_keystore` | keystore path | ☐ | `/path/to/keystore` | path to the keystore file |
+| `ssl_keystore_pass` | keystore password | ☐ | `'mykeystorepass'` | password to access the keystore file |
+| `ssl_truststore` | trust store path | ☐ | `'/path/to/truststore'` | path to the truststore file |
+| `ssl_truststore_pass` | trust store password | ☐ | `'mytruststorepass'` | password to access the truststore file |
+
+
+```sql
+SELECT synchdb_add_extra_conninfo('mysqlconn', 'verify_ca', '/path/to/keystore', 'mykeystorepass', '/path/to/truststore', 'mytruststorepass');
+```
+
+### synchdb_del_extra_conninfo
+**Purpose**: Deletes extra connector paramters created by `synchdb_add_extra_conninfo`
+```sql
+SELECT synchdb_del_extra_conninfo('mysqlconn');
+```
+
+### synchdb_del_conninfo
+**Purpose**: Deletes connector information created by `synchdb_add_conninfo`
+```sql
+SELECT synchdb_del_extra_conninfo('mysqlconn');
+```
+
+### synchdb_del_objmap
+**Purpose**: Disables object mapping records created by `synchdb_add_objmap`
+
+| Parameter | Description | Required | Example | Notes |
+|:-:|:-|:-:|:-|:-|
+| `name` | Unique identifier for this connector | ✓ | `'mysqlconn'` | Must be unique across all connectors |
+| `object type` | type of object mapping | ✓ | `'table'` | can be `table` to map a table name, `column` to map a column name, `datatype` to map a data type, or `transform` to run a data transform expression |
+| `source object` | source object represented as fully-qualified name | ✓ | `inventory.customers` | the object name as represented in the remote database |
+
+```sql
+SELECT synchdb_del_extra_conninfo('mysqlconn', 'transform', 'inventory.products.name');
+```
+
+## Basic Control Functions
+
+### synchdb_start_engine_bgw
+**Purpose**: Starts a connector
 ```sql
 SELECT synchdb_start_engine_bgw('mysqlconn');
 ```
 You may also include snapshot mode to start the connector with, otherwise the `initial` mode will be used by default. See below for list of different snapshot modes.
 ```sql
+-- capture table schema and proceed to stream new changes
 SELECT synchdb_start_engine_bgw('mysqlconn', 'no_data');
+
+-- always re-capture table schema, existing data and proceed to stream new changes
+SELECT synchdb_start_engine_bgw('mysqlconn', 'always');
 ```
 
-#### synchdb_pause_engine
+### synchdb_pause_engine
 **Purpose**: Temporarily halts a running connector
 ```sql
 SELECT synchdb_pause_engine_bgw('mysqlconn');
 ```
 
-#### synchdb_resume_engine
+### synchdb_resume_engine
 **Purpose**: Resumes a paused connector
 ```sql
 SELECT synchdb_resume_engine('mysqlconn');
 ```
 
-#### synchdb_stop_engine_bgw
+### synchdb_stop_engine_bgw
 **Purpose**: Terminates a connector
 ```sql
 SELECT synchdb_stop_engine('mysqlconn');
+```
+
+### synchdb_reload_objmap
+**Purpose**: Causes a connector to load object mapping rules again
+```sql
+SELECT synchdb_reload_objmap('mysqlconn');
 ```
 
 ## State Management
@@ -111,10 +209,10 @@ SELECT * FROM synchdb_state_view();
 
 | Field | Description | Type |
 |-|-|-|
-| `id` | Connector slot identifier | Integer |
-| `connector` | Connector type (`mysql` or `sqlserver`) | Text |
 | `name` | Associated connector name | Text |
+| `connector_type` | Connector type (`mysql` or `sqlserver`) | Text |
 | `pid` | Worker process ID | Integer |
+| `stage` | Current connector stage | Text |
 | `state` | Current connector state | Text |
 | `err` | Latest error message | Text |
 | `last_dbz_offset` | Last recorded Debezium offset | JSON |
@@ -132,6 +230,12 @@ SELECT * FROM synchdb_state_view();
 - 🟨 `restarting` - Reinitializing
 - ⚪ `dumping memory` - JVM is prepaaring to dump memory info in log file
 - ⚫ `unknown` - Indeterminate state
+
+**Possible Stages**:
+
+- `initial snapshot` - connector is performing initial snapshot (building table schema and optionally the initial data)
+- `change data capture` - connector is streaming subsequent table changes (CDC)
+- `schema sync` - connector is copying table schema only
 
 ### synchdb_stats_view
 **Purpose**: Collects connector processing statistics cumulatiely
@@ -200,6 +304,27 @@ Check the PostgreSQL log file:
 
 ```
 
+### synchdb_att_view
+**Purpose**: Displays a side-by-side view of a connector's data type, name mapping and transform rule relationships between foreign and local tables.
+
+```sql
+SELECT * FROM synchdb_att_view();
+```
+
+**Return Fields**:
+
+| Field | Description | Type |
+|-|-|-|
+| `name` | Connector identifier | Text |
+| `attnum` | Attribute number | Integer |
+| `ext_tbname` | table name as appeared remotely | Text |
+| `pg_tbname` | mapped table name in PostgreSQL | Text |
+| `ext_attname` | column name as appeared remotely | Text |
+| `pg_attname` | mapped column name in PostgreSQL | Text |
+| `ext_atttypename` | data type as appeared remotely | Text |
+| `pg_atttypename` | mapped data type in PostgreSQL | Text |
+| `transform` | transform expression | Text |
+
 ## Snapshot Management
 
 ### synchdb_restart_connector
@@ -216,11 +341,15 @@ Check the PostgreSQL log file:
 | `never` | Skip snapshot, stream only | Real-time updates |
 | `recovery` | Rebuilds from source | Disaster recovery |
 | `when_needed` | Conditional snapshot | Automatic recovery |
+| `schemasync` | Structure only, no data, no CDC | normal operations |
 
 **Example**:
 ```sql
 -- Restart with specific snapshot mode
 SELECT synchdb_restart_connector('mysqlconn', 'initial');
+
+-- Start with specific snapshot mode
+SELECT synchdb_start_engine_bgw('mysqlconn', 'always');
 ```
 
 ---

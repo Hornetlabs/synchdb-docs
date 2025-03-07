@@ -159,3 +159,99 @@ GO
 
 ### When Table Schema Changed While CDC is Enabled
 If a table has already been added to the CDC capture list and being captured by SynchDB already, any schema change that has happened to this table on SQLServer needs to be re-added back to the CDC capture list to generate a proper DDL ALTER TABLE event to SynchDB. Refer to [DDL Replication](https://docs.synchdb.com/user-guide/transform_rule_file/) page for more information.
+
+## Set up Oracle for SynchDB
+The following examples are based on container database `FREE` and pluggable database `FREEPDB1`
+### Set a Password for Sys User
+```sql
+sqlplus / as sysdba
+	Alter user sys identified by oracle;
+Exit
+```
+
+### Configure logminer
+```sql
+sqlplus /nolog
+
+	CONNECT sys/oracle as sysdba;
+	alter system set db_recovery_file_dest_size = 10G;
+	alter system set db_recovery_file_dest = '/opt/oracle/oradata/recovery_area' scope=spfile;
+	shutdown immediate;
+	startup mount;
+	alter database archivelog;
+	alter database open;
+	archive log list;
+exit
+```
+
+### Create a logminer User
+```sql
+sqlplus sys/oracle@//localhost:1521/FREE as sysdba
+
+	ALTER DATABASE ADD SUPPLEMENTAL LOG DATA;
+	ALTER PROFILE DEFAULT LIMIT FAILED_LOGIN_ATTEMPTS UNLIMITED;
+	exit;
+
+sqlplus sys/oracle@//localhost:1521/FREE as sysdba
+
+	CREATE TABLESPACE LOGMINER_TBS DATAFILE '/opt/oracle/oradata/FREE/logminer_tbs.dbf' SIZE 25M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
+	exit;
+	
+sqlplus sys/oracle@//localhost:1521/FREEPDB1 as sysdba
+
+	CREATE TABLESPACE LOGMINER_TBS DATAFILE '/opt/oracle/oradata/FREE/FREEPDB1/logminer_tbs.dbf' SIZE 25M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
+	exit;
+
+sqlplus sys/oracle@//localhost:1521/FREE as sysdba
+
+	CREATE USER c##dbzuser IDENTIFIED BY dbz DEFAULT TABLESPACE LOGMINER_TBS QUOTA UNLIMITED ON LOGMINER_TBS CONTAINER=ALL;
+	
+	GRANT CREATE SESSION TO c##dbzuser CONTAINER=ALL;
+	GRANT SET CONTAINER TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ON V_$DATABASE TO c##dbzuser CONTAINER=ALL;
+	GRANT FLASHBACK ANY TABLE TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ANY TABLE TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT_CATALOG_ROLE TO c##dbzuser CONTAINER=ALL;
+	GRANT EXECUTE_CATALOG_ROLE TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ANY TRANSACTION TO c##dbzuser CONTAINER=ALL;
+	GRANT LOGMINING TO c##dbzuser CONTAINER=ALL;
+	
+	GRANT SELECT ANY DICTIONARY TO c##dbzuser CONTAINER=ALL;
+	
+	GRANT CREATE TABLE TO c##dbzuser CONTAINER=ALL;
+	GRANT LOCK ANY TABLE TO c##dbzuser CONTAINER=ALL;
+	GRANT CREATE SEQUENCE TO c##dbzuser CONTAINER=ALL;
+	
+	GRANT EXECUTE ON DBMS_LOGMNR TO c##dbzuser CONTAINER=ALL;
+	GRANT EXECUTE ON DBMS_LOGMNR_D TO c##dbzuser CONTAINER=ALL;
+	
+	GRANT SELECT ON V_$LOG TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ON V_$LOG_HISTORY TO c##dbzuser CONTAINER=ALL;
+	
+	GRANT SELECT ON V_$LOGMNR_LOGS TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ON V_$LOGMNR_CONTENTS TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ON V_$LOGMNR_PARAMETERS TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ON V_$LOGFILE TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ON V_$ARCHIVED_LOG TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ON V_$ARCHIVE_DEST_STATUS TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ON V_$TRANSACTION TO c##dbzuser CONTAINER=ALL; 
+	GRANT SELECT ON V_$MYSTAT TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ON V_$STATNAME TO c##dbzuser CONTAINER=ALL; 
+	
+	GRANT EXECUTE ON DBMS_WORKLOAD_REPOSITORY TO C##DBZUSER;
+	GRANT SELECT ON DBA_HIST_SNAPSHOT TO C##DBZUSER;
+	GRANT EXECUTE ON DBMS_WORKLOAD_REPOSITORY TO PUBLIC;
+	
+	
+	Exit
+
+```
+
+### Enable Supplemental Log Data for Tables Designated for Capture
+This configuration needs to be run on each table designzted for catpure in order to correctly handle the UPDATE and DELETE operations.
+
+```sql
+ALTER TABLE customer ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+ALTER TABLE products ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+... etc
+```

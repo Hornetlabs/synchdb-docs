@@ -60,3 +60,17 @@ Run some simple queries (add -N -C if you are using SSL enabled SQL Server):
 
 /opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD -d testDB -Q "select * from orders"
 ```
+
+## Prepare a Sample Oracle Database
+We can use the free Oracle database docker image provided by Oracle for testing and evaluation of SynchDB. It comes with a free container database `FREE` and a pluggable database `FREEPDB1`
+```
+docker run -d -p 1521:1521 container-registry.oracle.com/database/free:latest
+```
+
+Find out the container ID and login to it:
+```
+id=$(docker ps | grep oracle | awk '{print $1}')
+docker exec -it $id bash
+```
+
+Follow the procedure described [here](https://docs.synchdb.com/user-guide/remote_database_setups/) to set up logminer and logminer user

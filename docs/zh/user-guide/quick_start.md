@@ -12,7 +12,7 @@ SynchDB 扩展需要 pgcrypto 来加密某些敏感的凭证数据。请确保�
 CREATE EXTENSION synchdb CASCADE;
 ```
 
-## 创建连接信息
+## 创建连接器
 这可以通过实用程序 SQL 函数 `synchdb_add_conninfo()` 来完成。
 
 synchdb_add_conninfo 接受以下参数：
@@ -25,10 +25,9 @@ synchdb_add_conninfo 接受以下参数：
 | username              | 用于异构数据库身份验证的用户名 |
 | password              | 用于验证用户名的密码 |
 | source database       | 这是我们要从中复制更改的异构数据库中的源数据库名称 |
-| destination database  | 这是要应用更改的 PostgreSQL 中的目标数据库名称。它必须是 PostgreSQL 中存在的有效数据库 |
+| destination database  |（已弃用）始终默认使用与安装 synchDB 相同的数据库 |
 | table                 | (可选) - 以 `[database].[table]` 或 `[database].[schema].[table]` 的形式表示，必须存在于异构数据库中，这样引擎将只复制指定的表。如果留空，则复制所有表 |
 | connector             | 要使用的连接器类型（MySQL、Oracle、SQLServer 等）|
-| rule file             | 放置在 $PGDATA 下的 JSON 格式规则文件，此连接器将应用于其默认数据类型转换规则。更多信息请参见[此处](https://docs.synchdb.com/user-guide/transform_rule_file/) |
 
 示例：
 
@@ -43,38 +42,34 @@ SELECT synchdb_add_conninfo(
     'inventory',
     'postgres',
     '',
-    'mysql',
-    'myrule.json');
+    'mysql');
 ```
 
-2. 创建一个名为 `mysqlconn2` 的 MySQL 连接器，使用默认转换规则从源数据库 `inventory` 复制到 PostgreSQL 中的目标数据库 `mysqldb2`：
+2. 创建一个名为 `mysqlconn2` 的 MySQL 连接器，使用默认转换规则从源数据库 `inventory` 复制到 PostgreSQL 中的目标数据库 `postgres`：
 ```sql
 SELECT synchdb_add_conninfo(
     'mysqlconn2', '127.0.0.1', 3306, 'mysqluser', 
-    'mysqlpwd', 'inventory', 'mysqldb2', 
-    '', 'mysql', ''
-  );
+    'mysqlpwd', 'inventory', 'postgres', 
+    '', 'mysql');
 ```
 
-3. 创建一个名为 'sqlserverconn' 的 SQLServer 连接器，使用默认转换规则从源数据库 'testDB' 复制到 PostgreSQL 中的目标数据库 'sqlserverdb'：
+3. 创建一个名为 'sqlserverconn' 的 SQLServer 连接器，使用默认转换规则从源数据库 'testDB' 复制到 PostgreSQL 中的目标数据库 'postgres'：
 ```sql
 SELECT 
   synchdb_add_conninfo(
     'sqlserverconn', '127.0.0.1', 1433, 
-    'sa', 'Password!', 'testDB', 'sqlserverdb', 
-    '', 'sqlserver', ''
-  );
+    'sa', 'Password!', 'testDB', 'postgres', 
+    '', 'sqlserver');
 ```
 
-4. 创建一个名为 `mysqlconn3` 的 MySQL 连接器，使用规则文件 `myrule2.json` 从源数据库 `inventory` 的 `orders` 和 `customers` 表复制到 PostgreSQL 中的目标数据库 `mysqldb3`：
+4. 创建一个名为 `mysqlconn3` 的 MySQL 连接器，使用规则文件 `myrule2.json` 从源数据库 `inventory` 的 `orders` 和 `customers` 表复制到 PostgreSQL 中的目标数据库 `postgres`：
 ```sql
 SELECT 
   synchdb_add_conninfo(
     'mysqlconn3', '127.0.0.1', 3306, 'mysqluser', 
-    'mysqlpwd', 'inventory', 'mysqldb3', 
+    'mysqlpwd', 'inventory', 'postgres', 
     'inventory.orders,inventory.customers', 
-    'mysql', 'myrule2.json'
-  );
+    'mysql');
 ```
 
 ## 注意事项
@@ -90,12 +85,19 @@ postgres=# \x
 Expanded display is on.
 
 postgres=# select * from synchdb_conninfo;
--[ RECORD 1 ]-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-name | mysqlconn
-data | {"pwd": "\\xc30d040703024828cc4d982e47b07bd23901d03e40da5995d2a631fb89d49f748b87247aee94070f71ecacc4990c3e71cad9f68d57c440de42e35bcc78fd145feab03452e454284289db", "port": 3306, "user": "mysqluser", "dstdb": "postgres", "srcdb": "inventory", "table": "null", "hostname": "192.168.1.86", "connector": "mysql"i, "myrule.json"}
--[ RECORD 2 ]-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-name | sqlserverconn
-data | {"pwd": "\\xc30d0407030231678e1bb0f8d3156ad23a010ca3a4b0ad35ed148f8181224885464cdcfcec42de9834878e2311b343cd184fde65e0051f75d6a12d5c91d0a0403549fe00e4219215eafe1b", "port": 1433, "user": "sa", "dstdb": "sqlserverdb", "srcdb": "testDB", "table": "null", "hostname": "192.168.1.86", "connector": "sqlserver", "null"}
+-[ RECORD 1 ]-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+name     | sqlserverconn
+isactive | t
+data     | {"pwd": "\\xc30d0407030245ca4a983b6304c079d23a0191c6dabc1683e4f66fc538db65b9ab2788257762438961f8201e6bcefafa60460fbf441e55d844e7f27b31745f04e7251c0123a159540676c4", "port": 1433, "user": "sa", "dstdb": "postgres", "srcdb": "testDB", "table": "null", "hostname": "192.168.1.86", "connector": "sqlserver"}
+-[ RECORD 2 ]-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+name     | mysqlconn
+isactive | t
+data     | {"pwd": "\\xc30d04070302986aff858065e96b62d23901b418a1f0bfdf874ea9143ec096cd648a1588090ee840de58fb6ba5a04c6430d8fe7f7d466b70a930597d48b8d31e736e77032cb34c86354e", "port": 3306, "user": "mysqluser", "dstdb": "postgres", "srcdb": "inventory", "table": "null", "hostname": "192.168.1.86", "connector": "mysql"}
+-[ RECORD 3 ]-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+name     | oracleconn
+isactive | t
+data     | {"pwd": "\\xc30d04070302e3baf1293d0d553066d234014f6fc52e6eea425884b1f65f1955bf504b85062dfe538ca2e22bfd6db9916662406fc45a3a530b7bf43ce4cfaa2b049a1c9af8", "port": 1528, "user": "c##dbzuser", "dstdb": "postgres", "srcdb": "FREE", "table": "null", "hostname": "192.168.1.86", "connector": "oracle"}
+
 ```
 
 ## 启动连接器
@@ -106,34 +108,32 @@ data | {"pwd": "\\xc30d0407030231678e1bb0f8d3156ad23a010ca3a4b0ad35ed148f8181224
 ```sql
 select synchdb_start_engine_bgw('mysqlconn');
 select synchdb_start_engine_bgw('sqlserverconn');
+select synchdb_start_engine_bgw('oracleconn');
 ```
 
 ## 检查连接器运行状态
-使用 `synchdb_state_view()` 视图检查所有正在运行的连接器及其状态。目前，synchdb 最多可以支持 30 个运行中的工作进程。
+使用“synchdb_state_view()”检查所有连接器的运行状态。
 
 以下是输出示例：
-```sql
+``` SQL
 postgres=# select * from synchdb_state_view;
- id | connector | conninfo_name  |  pid   |  state  |   err    |                                          last_dbz_offset
-----+-----------+----------------+--------+---------+----------+---------------------------------------------------------------------------------------------------
-  0 | mysql     | mysqlconn      | 461696 | syncing | no error | {"ts_sec":1725644339,"file":"mysql-bin.000004","pos":138466,"row":1,"server_id":223344,"event":2}
-  1 | sqlserver | sqlserverconn  | 461739 | syncing | no error | {"event_serial_no":1,"commit_lsn":"00000100:00000c00:0003","change_lsn":"00000100:00000c00:0002"}
-  2 | null      |                |     -1 | stopped | no error | no offset
-  3 | null      |                |     -1 | stopped | no error | no offset
-  4 | null      |                |     -1 | stopped | no error | no offset
-  5 | null      |                |     -1 | stopped | no error | no offset
-  ...
-  ...
+     name      | connector_type |  pid   |        stage        |  state  |   err    |                                           last_dbz_offset
+---------------+----------------+--------+---------------------+---------+----------+------------------------------------------------------------------------------------------------------
+ sqlserverconn | sqlserver      | 579820 | change data capture | polling | no error | {"commit_lsn":"0000006a:00006608:0003","snapshot":true,"snapshot_completed":false}
+ mysqlconn     | mysql          | 579845 | change data capture | polling | no error | {"ts_sec":1741301103,"file":"mysql-bin.000009","pos":574318212,"row":1,"server_id":223344,"event":2}
+ oracleconn    | oracle         | 580053 | change data capture | polling | no error | offset file not flushed yet
+(3 rows)
+
 ```
 
 列详情：
 
 | 字段            | 描述 |
 |-|-|
-| id              | 连接器槽的唯一标识符 |
-| connector       | 连接器类型（mysql、oracle、sqlserver 等）|
 | name   | 由 `synchdb_add_conninfo()` 创建的关联连接器信息名称 |
+| connector_type       | 连接器类型（mysql、oracle、sqlserver 等）|
 | pid             | 连接器工作进程的 PID |
+| stage           | 连接器工作阶段 |
 | state           | 连接器的状态。可能的状态有：<br><ul><li>stopped - 连接器未运行</li><li>initializing - 连接器正在初始化</li><li>paused - 连接器已暂停</li><li>syncing - 连接器正在定期轮询更改事件</li><li>parsing - 连接器正在解析收到的更改事件</li><li>converting - 连接器正在将更改事件转换为 PostgreSQL 表示</li><li>executing - 连接器正在将转换后的更改事件应用到 PostgreSQL</li><li>updating offset - 连接器正在向 Debezium 偏移量管理写入新的偏移量值</li><li>restarting - 连接器正在重启</li><li>dumping memory - 连接器正在输出 JVM 内存使用信息到 log 文件</li><li>unknown</li></ul> |
 | err             | 工作进程遇到的最后一个错误消息，该错误可能导致其退出。此错误可能源自 PostgreSQL 处理更改时，或源自 Debezium 运行引擎从异构数据库访问数据时 |
 | last_dbz_offset | synchdb 捕获的最后一个 Debezium 偏移量。请注意，这可能不反映连接器引擎的当前和实时偏移量值。相反，这显示为一个检查点，如果需要，我们可以从这个偏移量点重新启动 |

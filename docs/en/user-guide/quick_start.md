@@ -12,7 +12,7 @@ SynchDB extension requires pgcrypto to encrypt certain sensitive credential data
 CREATE EXTENSION synchdb CASCADE;
 ```
 
-## Create a Connection Info
+## Create a Connector
 This can be done with utility SQL function `synchdb_add_conninfo()`.
 
 synchdb_add_conninfo takes these arguments:
@@ -25,10 +25,9 @@ synchdb_add_conninfo takes these arguments:
 | username              | user name to use to authenticate with heterogeneous database.|
 | password              | password to authenticate the username |
 | source database       | this is the name of source database in heterogeneous database that we want to replicate changes from.|
-| destination database  | this is the name of destination database in PostgreSQL to apply changes to. It must be a valid database that exists in PostgreSQL.|
+| destination database  | (deprecated) always defaults to the same database as where synchDB is installed |
 | table                 | (optional) - expressed in the form of `[database].[table]` or `[database].[schema].[table]` that must exists in heterogeneous database so the engine will only replicate the specified tables. If left empty, all tables are replicated.  |
 | connector             | the connector type to use (MySQL, Oracle, SQLServer... etc).|
-| rule file             | a JSON-formatted rule file placed under $PGDATA that this connector shall apply to its default data type translation rules. See [here](https://docs.synchdb.com/user-guide/transform_rule_file/) for more information.|
 
 Examples:
 
@@ -43,38 +42,34 @@ SELECT synchdb_add_conninfo(
     'inventory',
     'postgres',
     '',
-    'mysql',
-    'myrule.json');
+    'mysql');
 ```
 
-2. Create a MySQL connector called `mysqlconn2` to replicate from source database `inventory` to destination database `mysqldb2` in PostgreSQL using default transaltion rule:
+2. Create a MySQL connector called `mysqlconn2` to replicate from source database `inventory` to destination database `postgres` in PostgreSQL:
 ```sql
 SELECT synchdb_add_conninfo(
     'mysqlconn2', '127.0.0.1', 3306, 'mysqluser', 
-    'mysqlpwd', 'inventory', 'mysqldb2', 
-    '', 'mysql', ''
-  );
+    'mysqlpwd', 'inventory', 'postgres', 
+    '', 'mysql');
 ```
 
-3. Create a SQLServer connector called 'sqlserverconn' to replicate from source database 'testDB' to destination database 'sqlserverdb' in PostgreSQL using default translation rule:
+3. Create a SQLServer connector called 'sqlserverconn' to replicate from source database 'testDB' to destination database 'postgres' in PostgreSQL:
 ```sql
 SELECT 
   synchdb_add_conninfo(
     'sqlserverconn', '127.0.0.1', 1433, 
     'sa', 'Password!', 'testDB', 'sqlserverdb', 
-    '', 'sqlserver', ''
-  );
+    '', 'sqlserver');
 ```
 
-4. Create a MySQL connector called `mysqlconn3` to replicate from source database `inventory`s `orders` and `customers` tabls to destination database `mysqldb3` in PostgreSQL using rule file `myrule2.json`:
+4. Create a MySQL connector called `mysqlconn3` to replicate from source database `inventory`s `orders` and `customers` tabls to destination database `postgres` in PostgreSQL:
 ```sql
 SELECT 
   synchdb_add_conninfo(
     'mysqlconn3', '127.0.0.1', 3306, 'mysqluser', 
     'mysqlpwd', 'inventory', 'mysqldb3', 
     'inventory.orders,inventory.customers', 
-    'mysql', 'myrule2.json'
-  );
+    'mysql');
 ```
 
 ## Things to Note
@@ -91,12 +86,20 @@ postgres=# \x
 Expanded display is on.
 
 postgres=# select * from synchdb_conninfo;
--[ RECORD 1 ]-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-name | mysqlconn
-data | {"pwd": "\\xc30d040703024828cc4d982e47b07bd23901d03e40da5995d2a631fb89d49f748b87247aee94070f71ecacc4990c3e71cad9f68d57c440de42e35bcc78fd145feab03452e454284289db", "port": 3306, "user": "mysqluser", "dstdb": "postgres", "srcdb": "inventory", "table": "null", "hostname": "192.168.1.86", "connector": "mysql"i, "myrule.json"}
--[ RECORD 2 ]-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-name | sqlserverconn
-data | {"pwd": "\\xc30d0407030231678e1bb0f8d3156ad23a010ca3a4b0ad35ed148f8181224885464cdcfcec42de9834878e2311b343cd184fde65e0051f75d6a12d5c91d0a0403549fe00e4219215eafe1b", "port": 1433, "user": "sa", "dstdb": "sqlserverdb", "srcdb": "testDB", "table": "null", "hostname": "192.168.1.86", "connector": "sqlserver", "null"}
+-[ RECORD 1 ]-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+name     | sqlserverconn
+isactive | t
+data     | {"pwd": "\\xc30d0407030245ca4a983b6304c079d23a0191c6dabc1683e4f66fc538db65b9ab2788257762438961f8201e6bcefafa60460fbf441e55d844e7f27b31745f04e7251c0123a159540676c4", "port": 1433, "user": "sa", "dstdb": "postgres", "srcdb": "testDB", "table": "null", "hostname": "192.168.1.86", "connector": "sqlserver"}
+-[ RECORD 2 ]-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+name     | mysqlconn
+isactive | t
+data     | {"pwd": "\\xc30d04070302986aff858065e96b62d23901b418a1f0bfdf874ea9143ec096cd648a1588090ee840de58fb6ba5a04c6430d8fe7f7d466b70a930597d48b8d31e736e77032cb34c86354e", "port": 3306, "user": "mysqluser", "dstdb": "postgres", "srcdb": "inventory", "table": "null", "hostname": "192.168.1.86", "connector": "mysql"}
+-[ RECORD 3 ]-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+name     | oracleconn
+isactive | t
+data     | {"pwd": "\\xc30d04070302e3baf1293d0d553066d234014f6fc52e6eea425884b1f65f1955bf504b85062dfe538ca2e22bfd6db9916662406fc45a3a530b7bf43ce4cfaa2b049a1c9af8", "port": 1528, "user": "c##dbzuser", "dstdb": "postgres", "srcdb": "FREE", "table": "null", "hostname": "192.168.1.86", "connector": "oracle"}
+
+
 ```
 
 ## Start a Connector
@@ -107,35 +110,32 @@ For example, the following will spawn 2 background worker in PostgreSQL, one rep
 ```sql
 select synchdb_start_engine_bgw('mysqlconn');
 select synchdb_start_engine_bgw('sqlserverconn');
+select synchdb_start_engine_bgw('oracleconn');
 ```
 
 ## Check Connector Running State
-Use `synchdb_state_view()` view to examine all the running connectors and their states. Currently, synchdb can support up to 30 running workers.
+Use `synchdb_state_view()` to examine all connectors' running states.
 
 See below for an example output:
-```sql
+``` SQL
 postgres=# select * from synchdb_state_view;
- id | connector | conninfo_name  |  pid   |  state  |   err    |                                          last_dbz_offset
-----+-----------+----------------+--------+---------+----------+---------------------------------------------------------------------------------------------------
-  0 | mysql     | mysqlconn      | 461696 | syncing | no error | {"ts_sec":1725644339,"file":"mysql-bin.000004","pos":138466,"row":1,"server_id":223344,"event":2}
-  1 | sqlserver | sqlserverconn  | 461739 | syncing | no error | {"event_serial_no":1,"commit_lsn":"00000100:00000c00:0003","change_lsn":"00000100:00000c00:0002"}
-  2 | null      |                |     -1 | stopped | no error | no offset
-  3 | null      |                |     -1 | stopped | no error | no offset
-  4 | null      |                |     -1 | stopped | no error | no offset
-  5 | null      |                |     -1 | stopped | no error | no offset
-  ...
-  ...
-```
+     name      | connector_type |  pid   |        stage        |  state  |   err    |                                           last_dbz_offset
+---------------+----------------+--------+---------------------+---------+----------+------------------------------------------------------------------------------------------------------
+ sqlserverconn | sqlserver      | 579820 | change data capture | polling | no error | {"commit_lsn":"0000006a:00006608:0003","snapshot":true,"snapshot_completed":false}
+ mysqlconn     | mysql          | 579845 | change data capture | polling | no error | {"ts_sec":1741301103,"file":"mysql-bin.000009","pos":574318212,"row":1,"server_id":223344,"event":2}
+ oracleconn    | oracle         | 580053 | change data capture | polling | no error | offset file not flushed yet
+(3 rows)
 
+```
 
 Column Details:
 
 | fields          | description |
 |-|-|
-| id              | unique identifier of a connector slot|
-| connector       | the type of connector (mysql, oracle, sqlserver...etc)|
 | name   | the associated connector info name created by `synchdb_add_conninfo()`|
+| connector_type       | the type of connector (mysql, oracle, sqlserver...etc)|
 | pid             | the PID of the connector worker process|
+| stage           | the stage of the connector worker process|
 | state           | the state of the connector. Possible states are: <br><br><ul><li>stopped - connector is not running</li><li>initializing - connector is initializing</li><li>paused - connector is paused</li><li>syncing - connector is regularly polling change events</li><li>parsing (the connector is parsing a received change event) </li><li>converting - connector is converting a change event to PostgreSQL representation</li><li>executing - connector is applying the converted change event to PostgreSQL</li><li>updating offset - connector is writing a new offset value to Debezium offset management</li><li>restarting - connector is restarting </li><li>dumping memory - connector is dumping JVM memory summary in log file </li><li>unknown</li></ul> |
 | err             | the last error message encountered by the worker which would have caused it to exit. This error could originated from PostgreSQL while processing a change, or originated from Debezium running engine while accessing data from heterogeneous database. |
 | last_dbz_offset | the last Debezium offset captured by synchdb. Note that this may not reflect the current and real-time offset value of the connector engine. Rather, this is shown as a checkpoint that we could restart from this offeet point if needed.|

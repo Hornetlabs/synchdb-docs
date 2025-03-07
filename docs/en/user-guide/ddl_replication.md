@@ -70,8 +70,8 @@ Other properties that can be specified during ALTER TABLE ALTER COLUMN  are not 
 Please note that SynchDB only supports basic data type change on an existing column. For example, `INT` → `BIGINT` or `VARCHAR` → `TEXT`. Complex data type changes such as  `TEXT` → `INT` or `INT` → `TIMESTAMP` are not currently supported. This is because PostgreSQL requires the user to additioanlly supply a type casting function to perform the type casting as the result of complex data type change. SynchDB currently has to knowledge what type casting functions to use for specific type conversion. In the future, We may allow user to supply his or her own casting functions to use for specific type conversions via the rule file, but for now, it is not supported.
 
 ## Database-Specific Behavior
-### MySQL DDL Change Events
-Since MySQL logs both DDL and DML operations in the binlog, SynchDB is able to replicate both DDLs and DMLs as they happen. No special actions are needed on MySQL side to enable DDLs replication.
+### MySQL and Oracle DDL Change Events
+Since MySQL logs both DDL and DML operations in the binlog and Oracles logs the same to logminer, SynchDB is able to replicate both DDLs and DMLs as they happen. No special actions are needed on MySQL or Oracle side to enable DDLs replication.
 
 ### SQLServer DDL Change Events 
 SQLServer does not natively supports DDL replication in streaming mode. The table schema is constructed by SynchDB during initial snapshot construction phase when the connector is started for the very first time. After this phase, SynchDB will try to detect any schema changes but they need to be explicitly added to SQL server's CDC table list.

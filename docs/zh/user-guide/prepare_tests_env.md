@@ -61,3 +61,17 @@ docker exec -it $id bash
 
 /opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD -d testDB -Q "select * from orders"
 ```
+
+## 准备一个示例 Oracle 数据库
+我们可以使用 Oracle 提供的免费 Oracle 数据库 docker 镜像来测试和评估 SynchDB。它附带一个免费的容器数据库 `FREE` 和一个可插入数据库 `FREEPDB1`
+```
+docker run -d -p 1521:1521 container-registry.oracle.com/database/free:latest
+```
+
+找出容器 ID 并登录：
+```
+id=$(docker ps | grep oracle | awk '{print $1}')
+docker exec -it $id bash
+```
+
+按照[此处](https://docs.synchdb.com/zh/user-guide/remote_database_setups/) 中描述的步骤设置 logminer 和 logminer 用户

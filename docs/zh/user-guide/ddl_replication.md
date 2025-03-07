@@ -71,7 +71,7 @@ SynchDB 在 CREATE TABLE 事件期间捕获以下属性：
 
 ## 数据库特定行为
 ### MySQL DDL 更改事件
-由于 MySQL 在 binlog 中同时记录 DDL 和 DML 操作，SynchDB 能够在它们发生时复制 DDL 和 DML。在 MySQL 端不需要特殊操作来启用 DDL 复制。
+由于 MySQL 在 binlog 和 Oracle 在 logminer 中同时记录 DDL 和 DML 操作，SynchDB 能够在它们发生时复制 DDL 和 DML。在 MySQL 和 Oracle 端不需要特殊操作来启用 DDL 复制。
 
 ### SQLServer DDL 更改事件
 SQLServer 在流模式下不原生支持 DDL 复制。表架构是在连接器首次启动时的初始快照构建阶段由 SynchDB 构建的。在此阶段之后，SynchDB 将尝试检测任何架构更改，但需要明确将其添加到 SQL Server 的 CDC 表列表中。

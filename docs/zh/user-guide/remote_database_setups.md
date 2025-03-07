@@ -159,3 +159,101 @@ GO
 
 ### 当启用 CDC 时表架构发生更改
 如果某个表已添加到 CDC 捕获列表并已被 SynchDB 捕获，则需要将 SQLServer 上此表发生的任何架构更改重新添加回 CDC 捕获列表，以向 SynchDB 生成正确的 DDL ALTER TABLE 事件。有关更多信息，请参阅 [DDL 复制](https://docs.synchdb.com/user-guide/transform_rule_file/) 页面。
+
+## 为 SynchDB 设置 Oracle
+
+以下示例基于容器数据库 `FREE` 和可插拔数据库 `FREEPDB1`:
+
+### 为 Sys 用户设置密码
+```sql
+sqlplus / as sysdba
+	Alter user sys identified by oracle;
+Exit
+```
+
+### 配置日志挖掘器
+```sql
+sqlplus /nolog
+
+	CONNECT sys/oracle as sysdba;
+	alter system set db_recovery_file_dest_size = 10G;
+	alter system set db_recovery_file_dest = '/opt/oracle/oradata/recovery_area' scope=spfile;
+	shutdown immediate;
+	startup mount;
+	alter database archivelog;
+	alter database open;
+	archive log list;
+exit
+```
+
+### 创建 logminer 用户
+```sql
+sqlplus sys/oracle@//localhost:1521/FREE as sysdba
+
+	ALTER DATABASE ADD SUPPLEMENTAL LOG DATA;
+	ALTER PROFILE DEFAULT LIMIT FAILED_LOGIN_ATTEMPTS UNLIMITED;
+	exit;
+
+sqlplus sys/oracle@//localhost:1521/FREE as sysdba
+
+	CREATE TABLESPACE LOGMINER_TBS DATAFILE '/opt/oracle/oradata/FREE/logminer_tbs.dbf' SIZE 25M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
+	exit;
+	
+sqlplus sys/oracle@//localhost:1521/FREEPDB1 as sysdba
+
+	CREATE TABLESPACE LOGMINER_TBS DATAFILE '/opt/oracle/oradata/FREE/FREEPDB1/logminer_tbs.dbf' SIZE 25M REUSE AUTOEXTEND ON MAXSIZE UNLIMITED;
+	exit;
+
+sqlplus sys/oracle@//localhost:1521/FREE as sysdba
+
+	CREATE USER c##dbzuser IDENTIFIED BY dbz DEFAULT TABLESPACE LOGMINER_TBS QUOTA UNLIMITED ON LOGMINER_TBS CONTAINER=ALL;
+	
+	GRANT CREATE SESSION TO c##dbzuser CONTAINER=ALL;
+	GRANT SET CONTAINER TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ON V_$DATABASE TO c##dbzuser CONTAINER=ALL;
+	GRANT FLASHBACK ANY TABLE TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ANY TABLE TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT_CATALOG_ROLE TO c##dbzuser CONTAINER=ALL;
+	GRANT EXECUTE_CATALOG_ROLE TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ANY TRANSACTION TO c##dbzuser CONTAINER=ALL;
+	GRANT LOGMINING TO c##dbzuser CONTAINER=ALL;
+	
+	GRANT SELECT ANY DICTIONARY TO c##dbzuser CONTAINER=ALL;
+	
+	GRANT CREATE TABLE TO c##dbzuser CONTAINER=ALL;
+	GRANT LOCK ANY TABLE TO c##dbzuser CONTAINER=ALL;
+	GRANT CREATE SEQUENCE TO c##dbzuser CONTAINER=ALL;
+	
+	GRANT EXECUTE ON DBMS_LOGMNR TO c##dbzuser CONTAINER=ALL;
+	GRANT EXECUTE ON DBMS_LOGMNR_D TO c##dbzuser CONTAINER=ALL;
+	
+	GRANT SELECT ON V_$LOG TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ON V_$LOG_HISTORY TO c##dbzuser CONTAINER=ALL;
+	
+	GRANT SELECT ON V_$LOGMNR_LOGS TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ON V_$LOGMNR_CONTENTS TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ON V_$LOGMNR_PARAMETERS TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ON V_$LOGFILE TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ON V_$ARCHIVED_LOG TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ON V_$ARCHIVE_DEST_STATUS TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ON V_$TRANSACTION TO c##dbzuser CONTAINER=ALL; 
+	GRANT SELECT ON V_$MYSTAT TO c##dbzuser CONTAINER=ALL;
+	GRANT SELECT ON V_$STATNAME TO c##dbzuser CONTAINER=ALL; 
+	
+	GRANT EXECUTE ON DBMS_WORKLOAD_REPOSITORY TO C##DBZUSER;
+	GRANT SELECT ON DBA_HIST_SNAPSHOT TO C##DBZUSER;
+	GRANT EXECUTE ON DBMS_WORKLOAD_REPOSITORY TO PUBLIC;
+	
+	
+	Exit
+
+```
+
+### 为指定捕获表启用补充日志数据
+需要在每个被捕获的表运行此配置，以便正确处理 UPDATE 和 DELETE 操作。
+
+```sql
+ALTER TABLE customer ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+ALTER TABLE products ADD SUPPLEMENTAL LOG DATA (ALL) COLUMNS;
+... etc
+```
