@@ -83,7 +83,7 @@ plugins:
             Quick Start: 快速入门
             Configuration: 配置
             Default Data Type Mapping: 默认数据类型映射
-            Object Mapping Rules: 数据映射规则
+            Object Mapping Rules: 对象映射规则
             Connector Auto Launcher: 连接器自动启动器
             DDL Replication: DDL复制
             Selective Table Sync: 选择性表同步
