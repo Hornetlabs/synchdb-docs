@@ -19,8 +19,7 @@ SELECT synchdb_add_conninfo(
     'inventory',
     'postgres', 
     'inventory.orders,inventory.products',
-    'mysql',
-    'myrule.json'
+    'mysql'
 );
 ```
 
@@ -32,10 +31,10 @@ SELECT synchdb_start_engine_bgw('mysqlconn');
 
 检查连接器状态和新表：
 ```
-postgres=# SELECT * FROM synchdb_state_view WHERE conninfo_name='mysqlconn';
- id | connector | conninfo_name |  pid   |  state  |   err    |       last_dbz_offset
-----+-----------+---------------+--------+---------+----------+-----------------------------
-  0 | mysql     | mysqlconn     | 807536 | syncing | no error | offset file not flushed yet
+postgres=# Select name, state, err from synchdb_state_view;
+     name      |  state  |   err
+---------------+---------+----------
+ mysqlconn     | polling | no error
 (1 row)
 
 postgres=# SET search_path TO inventory;

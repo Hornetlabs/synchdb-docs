@@ -14,7 +14,7 @@ where:
 * auto_increment: a flag indicating if the data type has auto_increment attribute.
 * size: the translated size value. -1: no change, 0: no size specified
 
-The default data type mapping entries can be overwritten by defining a object mapping rules with a rule file. See [object mapping rules](https://docs.synchdb.com/user-guide/transform_rule_file/) for more information.
+The default data type mapping entries can be overwritten by defining a object mapping rules. See [object mapping rules](https://docs.synchdb.com/user-guide/object_mapping_rules/) for more information.
 
 ## MySQL Default Data Type Mapping
 

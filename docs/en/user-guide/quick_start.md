@@ -31,7 +31,7 @@ synchdb_add_conninfo takes these arguments:
 
 Examples:
 
-1. Create a MySQL connector called `mysqlconn` to replicate from source database `inventory` in MySQL to destination database `postgres` in PostgreSQL, using rule file `myrule.json`:
+1. Create a MySQL connector called `mysqlconn` to replicate from source database `inventory` in MySQL to destination database `postgres` in PostgreSQL:
 ```sql
 SELECT synchdb_add_conninfo(
     'mysqlconn',
@@ -149,12 +149,7 @@ postgres=# select * from synchdb_stats_view;
    connector   | ddls |  dmls   |  reads  | creates | updates | deletes | bad_events | total_events | batches_done | avg_batch_size
 ---------------+------+---------+---------+---------+---------+---------+------------+--------------+--------------+----------------
  mysqltpccconn |   22 | 3887111 | 3263746 |  208684 |  400241 |   14440 |      14444 |      3901573 |         2441 |           1598
-               |    0 |       0 |       0 |       0 |       0 |       0 |          0 |            0 |            0 |              0
-               |    0 |       0 |       0 |       0 |       0 |       0 |          0 |            0 |            0 |              0
-               |    0 |       0 |       0 |       0 |       0 |       0 |          0 |            0 |            0 |              0
-               |    0 |       0 |       0 |       0 |       0 |       0 |          0 |            0 |            0 |              0
-  ...
-  ...
+
 ```
 
 Column Details:

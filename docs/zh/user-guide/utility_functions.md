@@ -304,6 +304,27 @@ SELECT synchdb_log_jvm_meminfo('mysqlconn');
 
 ```
 
+### synchdb_att_view
+**用途**：并排显示连接器的数据类型、名称映射和外部表与本地表之间的转换规则关系。
+
+```sql
+SELECT * FROM synchdb_att_view();
+```
+
+**返回字段**：
+
+| 字段 | 描述 | 类型 |
+|-|-|-|
+|`name` | 连接器标识符 | 文本 |
+|`attnum` | 属性编号 | 整数 |
+|`ext_tbname` | 远程显示的表名 | 文本 |
+|`pg_tbname` | PostgreSQL 中的映射表名 | 文本 |
+|`ext_attname` | 远程显示的列名 | 文本 |
+|`pg_attname` | PostgreSQL 中的映射列名 | 文本 |
+|`ext_atttypename` | 远程显示的数据类型 | 文本 |
+|`pg_atttypename` | PostgreSQL 中的映射数据类型 |文本 |
+| `transform` | 转换表达式 | 文本 |
+
 ## 快照管理
 
 ### synchdb_restart_connector
