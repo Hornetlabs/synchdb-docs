@@ -58,7 +58,7 @@ plugins:
             Quick Start: Inicio Rápido
             Configuration: Configuración
             Default Data Type Mapping: Mapeo de Tipos de Datos Predeterminado
-            Transform Rule File: Archivo de Reglas de Transformación
+            Object Mapping Rules: Reglas de mapeo de objetos
             Connector Auto Launcher: Lanzador Automático de Conectores
             DDL Replication: Replicación DDL
             Selective Table Sync: Sincronización Selectiva de Tablas
@@ -83,7 +83,7 @@ plugins:
             Quick Start: 快速入门
             Configuration: 配置
             Default Data Type Mapping: 默认数据类型映射
-            Transform Rule File: 转换规则文件
+            Object Mapping Rules: 数据映射规则
             Connector Auto Launcher: 连接器自动启动器
             DDL Replication: DDL复制
             Selective Table Sync: 选择性表同步
@@ -111,7 +111,7 @@ nav:
    - Quick Start: user-guide/quick_start.md
    - Configuration: user-guide/configuration.md
    - Default Data Type Mapping: user-guide/default_datatype_mapping.md
-   - Transform Rule File: user-guide/transform_rule_file.md
+   - Object Mapping Rules: user-guide/object_mapping_rules.md
    - Connector Auto Launcher: user-guide/connector_auto_launcher.md
    - DDL Replication: user-guide/ddl_replication.md
    - Selective Table Sync: user-guide/selective_table_sync.md
