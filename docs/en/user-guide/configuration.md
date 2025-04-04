@@ -24,6 +24,9 @@ SynchDB supports the following GUC variables in postgresql.conf. These are commo
 | synchdb.dbz_offset_flush_interval_ms | integer | 60000 | The interval in milliseconds that Debezium embedded engine flushes offset data to disk |
 | synchdb.dbz_capture_only_selected_table_ddl | boolean | true | whether or not Debezium embedded engine should capture the schema of all tables (false) or selected tables(true) during initial snapshot |
 | synchdb.max_connector_workers | integer | 30 | the maximum number of connector workers that can be running at a time |
+| synchdb.error_handling_strategy | enum | "exit" | configures the error handling strategy of a connector worker. Possible values are "exit" for exiting on error, "skip" for continuing on error, "retry" for retrying on error |
+| synchdb.dbz_log_level | enum | "warn" | the log level setting for Debezium Runner. Possible values are "debug", "info", "warn", "error", "all", "fatal", "off", "trace" |
+| synchdb.log_change_on_error | boolean | true | whether the connector should log the original JSON change event in case of error |
 
 ## Technical Notes
 
@@ -50,6 +53,9 @@ synchdb.dbz_incremental_snapshot_watermarking_strategy='insert_insert'  # Use in
 synchdb.dbz_offset_flush_interval_ms=60000                              # Flush offset data to disk every minute if needed    
 synchdb.dbz_capture_only_selected_table_ddl=false                       # Debezium will only capture the schema of selected tables rather than all tables
 synchdb.max_connector_workers=10                                        # 10 connector workers can be run at a time
+synchdb.error_handling_strategy='retry'                                 # connector should retry on error
+synchdb.dbz_log_leve='error'                                            # Debezium Runner should log error messages only
+synchdb.log_change_on_error=true                                        # log JSON change event on error
 ```
 
 ## Usage Recommendations

@@ -48,6 +48,7 @@ plugins:
             User guide: Guía del usuario
             Home: Inicio
             Architecture: Arquitectura
+            Components: Componentes
             Overview: Visión General
             Batch Change Handling: Manejo de Cambios por Lotes
             Metadata Files: Archivos de Metadatos
@@ -72,6 +73,7 @@ plugins:
           nav_translations:
             User guide: 用户指南
             Architecture: 架构
+            Components: 组件架构
             Home: 主页
             Overview: 概述
             Batch Change Handling: 批量变更处理
@@ -102,6 +104,7 @@ nav:
  - Home: index.md
  - Architecture:
    - Overview: architecture/architecture.md
+   - Components: architecture/components.md
    - Batch Change Handling: architecture/batch_change_handling.md
    - Metadata Files: architecture/metadata_files.md
  - User guide:

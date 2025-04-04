@@ -24,6 +24,9 @@ SynchDB 在 postgresql.conf 中支持以下 GUC 变量。这些是适用于 Sync
 | synchdb.dbz_offset_flush_interval_ms | integer | 60000 | Debezium 嵌入式引擎将偏移数据刷新到磁盘的间隔（以毫秒为单位）|
 | synchdb.dbz_capture_only_selected_table_ddl | boolean | true | Debezium 嵌入式引擎是否应在初始快照期间捕获所有表（false）或选定表（true）的模式 |
 | synchdb.max_connector_workers | integer | 30 | 最大的连接器后台进程数量 |
+| synchdb.error_handling_strategy | enum | "exit" | 配置连接器工作器的错误处理策略。可能的值有“exit”表示出错时退出，“skip”表示出错时继续，“retry”表示出错时重试 |
+| synchdb.dbz_log_level | enum | "warn" | Debezium Runner 的日志级别设置。可能的值有“debug”，“info”，“warn”，“error”，“all”，“fatal”，“off”，“trace” |
+| synchdb.log_change_on_error | boolean | true | 连接器是否应在发生错误时记录原始 JSON 更改事件 |
 
 ## 技术说明
 
@@ -49,6 +52,9 @@ synchdb.dbz_incremental_snapshot_watermarking_strategy='insert_insert'  # 使用
 synchdb.dbz_offset_flush_interval_ms=60000                              # 如果需要，每分钟将偏移数据刷新到磁盘
 synchdb.dbz_capture_only_selected_table_ddl=false                       # Debezium 将仅捕获选定表的模式，而不是所有表
 synchdb.max_connector_workers=false                                     # 最多允许 10 个连接器
+synchdb.error_handling_strategy='retry'                                 # 连接器应在发生错误时重试
+synchdb.dbz_log_leve='error'                                            # Debezium Runner 应仅记录错误消息
+synchdb.log_change_on_error=true                                        # 发生错误时记录 JSON 更改事件
 ```
 
 ## 使用建议
