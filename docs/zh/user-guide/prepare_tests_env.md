@@ -75,3 +75,24 @@ docker exec -it $id bash
 ```
 
 按照[此处](https://docs.synchdb.com/zh/user-guide/remote_database_setups/) 中描述的步骤设置 logminer 和 logminer 用户
+
+## 使用 CI 脚本准备测试数据库
+示例 MySQL、SQL Server 和 Oracle 数据库也可以使用位于源存储库下 `ci/` 文件夹中的脚本进行准备。该脚本需要 docker 和 docker-compose 才能运行，并且基本上遵循与上述相同的步骤。
+
+准备用于测试的 MySQL 数据库：
+```
+export DBTYPE=mysql
+ci/setup-remotedbs.sh
+```
+
+准备用于测试的 SQL Server 数据库：
+```
+export DBTYPE=sqlserver
+ci/setup-remotedbs.sh
+```
+
+准备用于测试的 Oracle 数据库：
+```
+export DBTYPE=oracle
+ci/setup-remotedbs.sh
+```

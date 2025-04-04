@@ -74,3 +74,25 @@ docker exec -it $id bash
 ```
 
 Follow the procedure described [here](https://docs.synchdb.com/user-guide/remote_database_setups/) to set up logminer and logminer user
+
+
+## Use CI Script to Prepare Test Databases
+Example MySQL, SQL Server and Oracle databases can also be prepared using a script, located in `ci/` folder under the source repository. The script requires docker and docker-compose to run and basically follow the same procedures as described above.
+
+Prepare MySQL database for test:
+```
+export DBTYPE=mysql
+ci/setup-remotedbs.sh
+```
+
+Prepare SQL Server database for test:
+```
+export DBTYPE=sqlserver
+ci/setup-remotedbs.sh
+```
+
+Prepare Oracle database for test:
+```
+export DBTYPE=oracle
+ci/setup-remotedbs.sh
+```
