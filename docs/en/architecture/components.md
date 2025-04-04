@@ -1,8 +1,8 @@
 # Component Architecture
-## Component Diagram
-![img](https://www.highgo.ca/wp-content/uploads/2025/04/synchdb-component-diag3.png)
+## SynchDB Worker Component Diagram
+![img](https://www.highgo.ca/wp-content/uploads/2025/04/synchdb-component-diag4.png)
 
-Each SynchDB worker consists of components and modules as shown in the component diagram and listed below:
+A SynchDB Worker is a PostgreSQL background worker initiated and started by the SynchDB extension. It is responsible for initializing Java Virtual Machine (JVM), run Debezium runner, which is the Java part of SynchDB that utilizes the embedded Debezium engine to obtain change events from heterogeneous database sources. Each SynchDB worker consists of components and modules as shown in the component diagram and listed below:
 
 1. Event Fetcher
 2. JVM + DBZ Initializer
@@ -17,7 +17,7 @@ Each SynchDB worker consists of components and modules as shown in the component
 11. Executor API
 
 ### 1) Event Fetcher
-The Event Fetcher is primarily responsible for fetching a batch of JSON change events from embedded Debezium Runner running inside Java Virtual Machine (JVM). This is done via Java Native Interface (JNI) library by periodically calling a JAVA method that returns a JAVA `List` of `String`, which represents each change request in JSON. This `List` represents a `Batch` of JSON change events. JNI library is invoked again to iterate over this `List`, cast the contents from JAVA `String` to C string and send it to `4) JSON Parser` for further processing. The frequency of fetch is configurable via [`synchdb.naptime`](https://docs.synchdb.com/user-guide/configuration/), and the maximum size of the batch can be configured via [`synchdb.dbz_batch_size`](https://docs.synchdb.com/user-guide/configuration/).
+The Event Fetcher is primarily responsible for fetching a batch of JSON change events from embedded Debezium Runner running inside JVM. This is done via Java Native Interface (JNI) library by periodically calling a JAVA method that returns a JAVA `List` of `String`, which represents each change request in JSON. This `List` represents a `Batch` of JSON change events. JNI library is invoked again to iterate over this `List`, cast the contents from JAVA `String` to C string and send it to `4) JSON Parser` for further processing. The frequency of fetch is configurable via [`synchdb.naptime`](https://docs.synchdb.com/user-guide/configuration/), and the maximum size of the batch can be configured via [`synchdb.dbz_batch_size`](https://docs.synchdb.com/user-guide/configuration/).
 
 When a batch is completed, meaning all the change events inside have been processed, it will invoke `markBatchComplete()` JAVA method via JNI to indicate that this batch has been completed successfully. This would cause the Debezium Runner to commit and advance the offset. More about batch management can he found [here](https://docs.synchdb.com/architecture/batch_change_handling/).
 
@@ -300,3 +300,28 @@ the SPI Client component exists under the Replication Agent, which serves as a b
 
 ### 11) Executor APIs
 Also residing in the Replication Agent. This component is responsible for initialize a executor context, open the table, acquire proper locks, create TupleTableSlot (TTS) from the output of DML Converter, call the executor API to execute INSERT, UPDATE, DELETE operations and do resource cleanup. This is generally a much faster approach to do data operations than SPI because it does not need to parse an input query string likst SPI does.
+
+## Debezium Runner Component Diagram
+
+![img](https://www.highgo.ca/wp-content/uploads/2025/04/synchdb-dbzrunner-component2.png)
+
+Debezium Runner is part of SynchDB component residing on Java side of the deployment. It is the main faciliator between embedded Debezium engine (Java) and SynchDB Worker (C). It provides several Java methods that SynchDB worker can interact via JNI library. These interactions include initializing a Debezium engine, start or stop the engine, obtain a batch of change events and mark a batch as done. These operations are essential for ensuring replication consistency. Main components are:
+
+1. Parameter Class
+2. Controller
+3. Emitter
+4. Batch Manager
+
+### 1) Parameter Class
+The parameter class represents a JAVA class that include a list of exposed parameters and methods that allow SynchDB Worker to set/get the parameter values. These parameters affect how Debezium Runner and the embedded Debezium perform. These parameters have also been exposed to PostgreSQL GUCs so that SynchDB worker could invoke the respective methods to set the parameter values. This is currently the only way to pass configuration from C based SynchDB Worker to JAVA based Debezium Runner.
+
+### 2) Controller
+The controller allows SynchDB to start or stop the Embedded Debezium Engine. This is done via several JAVA methods that SynchDB Worker can invoke to control Debezium Engine.
+
+### 3) Emitter
+The emitter represents a JAVA method that is periodically invoked by the "Event Fetcher" component in SynchDB Worker. It is mainly responsible to pop a batch from "4) Batch Manager", formulate it into a List of JSON events as String and return it to "Event Fetcher" via JNI. If Batch Manager has no batch available, it will return NULL and no processing will happen on the "Event Fetcher" side.
+
+### 4) Batch Manager
+The Batch Manager is mainly responsible for receiving new batches originated from Embedded Debezium Engine and stores it in its internal queue. This queue is much smaller and is different from the Batch Queue inside Embedded Debezium Engine in the component diagram. When Batch Manager's internal queue is full, a throttle control will activate to temporarily halt the event generation from Debezium side until this small batch queue has free space. A batch is taken away from the queue only when the "Emitter" receives a fetch request from "Event Fetcher" and pops a batch from batch manager.
+
+Batch manager also assigns a batch ID to each batch popped, sent to emitter and eventually to the SynchDB worker to process. This unique ID is stored in its interal hash table along with a "committer" object associated with it. These pieces of information is important to keep track. When SynchDB worker finishes a batch, it will invoke a Mark Batch Completion method within the Batch Manager, the same batch ID is also included, which helps the Batch Manager to look up the corresponding "committer" object. The committer object is then used to notify the Embedded Debezium Engine that a batch is completed, forcing it to commit and move its internal offset forward. This ensures that the same batch will not be processed again (no duplication) in case of engine restarts.
