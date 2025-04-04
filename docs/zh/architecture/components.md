@@ -1,22 +1,19 @@
-# 组件
+# 组件架构
 ## 组件图
 ![img](https://www.highgo.ca/wp-content/uploads/2025/04/synchdb-component-diag3.png)
 
 每个 SynchDB 工作器都由组件图所示并列的组件和模块组成：
-* SynchDB 工作器
-  1. 事件获取器
-  2. JVM + DBZ 初始化程序
-  3. 请求处理器
-* 格式转换器
-  4. JSON 解析器
-  5. 对象映射引擎
-  6. 统计信息收集器
-  7. DDL 转换器
-  8. DML 转换器
-  9. 错误处理程序
-* 复制代理
-  10. SPI 客户端
-  11. 执行器 API
+1. 事件获取器
+2. JVM + DBZ 初始化程序
+3. 请求处理器
+4. JSON 解析器
+5. 对象映射引擎
+6. 统计信息收集器
+7. DDL 转换器
+8. DML 转换器
+9. 错误处理程序
+10. SPI 客户端
+11. 执行器 API
 
 ### 1) 事件获取器
 事件获取器主要负责从运行在 Java 虚拟机 (JVM) 中的嵌入式 Debezium Runner 获取一批 JSON 变更事件。此操作通过 Java 接口 (JNI) 库完成，通过定期调用 JAVA 函数返回一个 JAVA `String` 列表，该列表以 JSON 格式表示每个变更请求。此列表 表示一批 JSON 变更事件。再次调用 JNI 库来迭代此 `List`，将内容从 JAVA `String` 转换为 C 字符串，并将其发送到 `4) JSON 解析器` 进行进一步处理。获取频率可通过 [`synchdb.naptime`](https://docs.synchdb.com/zh/user-guide/configuration/) 配置，批次的最大大小可通过 [`synchdb.dbz_batch_size`](https://docs.synchdb.com/zh/user-guide/configuration/) 配置。

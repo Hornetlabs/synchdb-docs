@@ -1,22 +1,20 @@
-# Components
+# Component Architecture
 ## Component Diagram
 ![img](https://www.highgo.ca/wp-content/uploads/2025/04/synchdb-component-diag3.png)
 
 Each SynchDB worker consists of components and modules as shown in the component diagram and listed below:
-* SynchDB Worker
-	1. Event Fetcher
-	2. JVM + DBZ Initializer
-	3. Request Handler
-* Format Converter
-	4. JSON Parser
-	5. Object Mapping Engine
-	6. Stats Collector
-	7. DDL Converter
-	8. DML Converter
-	9. Error Handler
-* Replication Agent
-	10. SPI Client
-	11. Executor API
+
+1. Event Fetcher
+2. JVM + DBZ Initializer
+3. Request Handler
+4. JSON Parser
+5. Object Mapping Engine
+6. Stats Collector
+7. DDL Converter
+8. DML Converter
+9. Error Handler
+10. SPI Client
+11. Executor API
 
 ### 1) Event Fetcher
 The Event Fetcher is primarily responsible for fetching a batch of JSON change events from embedded Debezium Runner running inside Java Virtual Machine (JVM). This is done via Java Native Interface (JNI) library by periodically calling a JAVA method that returns a JAVA `List` of `String`, which represents each change request in JSON. This `List` represents a `Batch` of JSON change events. JNI library is invoked again to iterate over this `List`, cast the contents from JAVA `String` to C string and send it to `4) JSON Parser` for further processing. The frequency of fetch is configurable via [`synchdb.naptime`](https://docs.synchdb.com/user-guide/configuration/), and the maximum size of the batch can be configured via [`synchdb.dbz_batch_size`](https://docs.synchdb.com/user-guide/configuration/).
