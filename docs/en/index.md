@@ -4,31 +4,40 @@
   <img src="images/synchdblogo.png" alt="synchdb" width="400">
 </p>
 
-## About SynchDB
+## **About SynchDB**
 
-SynchDB is a PostgreSQL extension designed to replicate data from heterogeneous databases (such as MySQL, MS SQLServer and Oracle) directly to PostgreSQL in a fast and reliable way. SynchDB is responsible for initiating connection to these heterogeneous databases, obtaining change events, transforming them to PostgreSQL equivalent data strucutres and finally applying them in PostgreSQL. No middleware or third-party software is required to orchestrate this data synchronization.
+SynchDB is a PostgreSQL extension that enables fast and reliable replication from heterogeneous databases — such as MySQL, SQL Server, and Oracle — directly into PostgreSQL. Unlike traditional data pipelines, SynchDB handles the entire synchronization and data conversion process natively within PostgreSQL, without requiring any middleware or external orchestration tools. It mainly manages the following end-to-end tasks:
 
-SynchDB is powered by Java based Debezium Embedded engine which provides several types of connectors to interact with different heterogeneous database types. Learn more about Debezium [here](https://debezium.io/documentation/reference/stable/index.html).
+* Establishes and maintains connections to external databases
+* Captures change events from source systems
+* Transforms these events into PostgreSQL-compatible formats
+* Applies them to PostgreSQL
 
-## Notable Features
+At its core, SynchDB integrates the Debezium Embedded Engine, a powerful Java-based change data capture (CDC) library that supports multiple database connectors. SynchDB bridges PostgreSQL's C-based runtime and Debezium's Java environment using the Java Native Interface (JNI), enabling seamless cooperation between both worlds.
+
+This architecture allows PostgreSQL to leverage the rich ecosystem of Debezium connectors while keeping the extension lightweight, flexible, and easy to deploy.
+
+🔗 Learn more about Debezium [here](https://debezium.io/documentation/reference/stable/index.html).
+
+## **Notable Features**
 
 - Efficient data synchronization
-- Support MySQL, SQL Server and Oracle databases
-- Flexible data transformation rules
+- Support replication from MySQL, SQL Server and Oracle databases
+- Flexible data transformation rules, including table names, column names, data types and custom data transform expression
 - Easy integration with existing PostgreSQL databases
 - Initial snapshot and Change Data Capture (CDC) modes
 - Support DDL and DML logical replication
 - Global connector state, error and statistic provisioning
 
-## System Requirement
+## **System Requirement**
 - PostgreSQL 16 or 17
 - Java Runetime Envirnment（JRE) 17 or above
 
-## Version History
+## **Version History**
 
 - [SynchDB v1.0](https://github.com/Hornetlabs/synchdb/releases/tag/v1.0)
 - [SynchDB v1.0 Beta1](https://github.com/Hornetlabs/synchdb/releases/tag/v1.0_beta1)
 
-## Getting Started
+## **Getting Started**
 
 Check out our [Installation Guide](user-guide/installation/) to get started with SynchDB.

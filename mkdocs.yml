@@ -46,7 +46,7 @@ plugins:
           build: true
           nav_translations:
             User guide: Guía del usuario
-            Home: Inicio
+            About: Inicio
             Architecture: Arquitectura
             Components: Componentes
             Overview: Visión General
@@ -74,7 +74,7 @@ plugins:
             User guide: 用户指南
             Architecture: 架构
             Components: 组件架构
-            Home: 主页
+            About: 关于
             Overview: 概述
             Batch Change Handling: 批量变更处理
             Metadata Files: 元数据文件
@@ -101,7 +101,7 @@ plugins:
   - print-site
 
 nav:
- - Home: index.md
+ - About: index.md
  - Architecture:
    - Overview: architecture/architecture.md
    - Components: architecture/components.md
