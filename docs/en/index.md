@@ -1,6 +1,6 @@
 # About
 
-![img](../images/synchdblogo.png)
+![img](images/synchdblogo.png)
 
 ## About SynchDB
 
