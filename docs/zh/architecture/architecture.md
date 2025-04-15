@@ -30,7 +30,7 @@ SynchDB 扩展包含两个代码空间（Java 和 C），JNI 位于两者之间�
 * 配置每个工作器的连接器类型、目标数据库 IP、端口等。
 
 ### **SynchDB 工作器**
-* 实例化 `Debezium Runner` 以从特定连接器类型复制变更。
+* 初始化 Java 虚拟机环境（JVM) 且实例化 `Debezium Runner` 以从特定连接器类型复制变更。
 * 通过 JNI 与 Debezium Runner 通信，以接收 JSON 格式的变更数据。
 * 将 JSON 变更事件传输到 `Format Converter` 模块进行进一步处理。
 
@@ -48,7 +48,7 @@ SynchDB 扩展包含两个代码空间（Java 和 C），JNI 位于两者之间�
 * 设计细节和实现尚不可用。待定
 * 旨在提供一种更高效的替代方案来执行初始表同步。
 
-## **Jave 原生接口 (JNI)**
+## **Java 原生接口 (JNI)**
 Java 原生接口 (JNI) 是一个框架，允许 Java 应用程序与用 C 或 C++ 等语言编写的原生代码进行交互。它使 Java 程序能够调用原生应用程序和库，并被这些应用程序和库调用，从而在 Java 的平台独立性和原生代码的性能优势之间架起了一座桥梁。JNI 通常用于集成平台特定的功能、优化应用程序中性能关键部分，或访问 Java 中不可用的旧库。它需要谨慎管理资源，因为它涉及在 Java 虚拟机 (JVM) 和原生环境之间切换，这可能会增加复杂性。
 
 SynchDB 需要 JNI 在 Debezium 运行引擎和 SynchDB PostgreSQL 扩展之间交换资源。JNI 可在 Java 安装（例如 openjdk）中使用。

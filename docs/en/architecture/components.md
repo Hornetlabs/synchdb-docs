@@ -1,6 +1,6 @@
 # Component Architecture
 ## SynchDB Worker Component Diagram
-![img](https://www.highgo.ca/wp-content/uploads/2025/04/synchdb-component-diag4.png)
+![img](images/synchdb-component-diag.png)
 
 A SynchDB Worker is a PostgreSQL background worker initiated and started by the SynchDB extension. It is responsible for initializing Java Virtual Machine (JVM), run Debezium runner, which is the Java part of SynchDB that utilizes the embedded Debezium engine to obtain change events from heterogeneous database sources. Each SynchDB worker consists of components and modules as shown in the component diagram and listed below:
 
