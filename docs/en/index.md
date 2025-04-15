@@ -1,15 +1,17 @@
-# Home
+# About
 
-SynchDB is a PostgreSQL extension capable of real-time Change Data Capture (CDC) from different database sources.
+![img](../images/synchdblogo.png)
 
-## Introduction
+## About SynchDB
 
-SynchDB is a PostgreSQL extension designed to replicate data from one or more heterogeneous databases (such as MySQL, MS SQLServer, Oracle, etc.) directly to PostgreSQL in a fast and reliable way. PostgreSQL serves as the destination from multiple heterogeneous database sources. No middleware or third-party software is required to orchestrate the data synchronization as SynchDB extension itself is capable of handling all the data synchronization needs.
+SynchDB is a PostgreSQL extension designed to replicate data from heterogeneous databases (such as MySQL, MS SQLServer and Oracle) directly to PostgreSQL in a fast and reliable way. SynchDB is responsible for initiating connection to these heterogeneous databases, obtaining change events, transforming them to PostgreSQL equivalent data strucutres and finally applying them in PostgreSQL. No middleware or third-party software is required to orchestrate this data synchronization.
+
+SynchDB is powered by Java based Debezium Embedded engine which provides several types of connectors to interact with different heterogeneous database types. Learn more about Debezium [here](https://debezium.io/documentation/reference/stable/index.html).
 
 ## Notable Features
 
 - Efficient data synchronization
-- Support for multiple database sources
+- Support MySQL, SQL Server and Oracle databases
 - Flexible data transformation rules
 - Easy integration with existing PostgreSQL databases
 - Initial snapshot and Change Data Capture (CDC) modes
@@ -17,7 +19,7 @@ SynchDB is a PostgreSQL extension designed to replicate data from one or more he
 - Global connector state, error and statistic provisioning
 
 ## System Requirement
-- PostgreSQL 16
+- PostgreSQL 16 or 17
 - Java Runetime Envirnment（JRE) 17 or above
 
 ## Version History
