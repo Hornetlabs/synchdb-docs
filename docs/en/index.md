@@ -1,6 +1,8 @@
 # About
 
-![img](images/synchdblogo.png)
+<p align="center">
+  <img src="images/synchdblogo.png" alt="synchdb" width="400">
+</p>
 
 ## About SynchDB
 
