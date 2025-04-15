@@ -6,10 +6,12 @@
 SynchDB 扩展包含两个代码空间（Java 和 C），JNI 位于两者之间作为协调员。
 
 **Java**
+
 * Debezium Runner
 * 嵌入式 Debezium 引擎
 
 **C**
+
 * SynchDB 启动器
 * SynchDB Worker
 * 格式转换器
