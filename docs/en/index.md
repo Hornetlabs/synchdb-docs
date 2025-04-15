@@ -40,4 +40,4 @@ This architecture allows PostgreSQL to leverage the rich ecosystem of Debezium c
 
 ## **Getting Started**
 
-Check out our [Installation Guide](user-guide/installation/) to get started with SynchDB.
+Learn more about SynchDB architecture decisions [here](architecture/archiitecture/) or check out the [Installation Guide](user-guide/installation/) to get started with SynchDB.

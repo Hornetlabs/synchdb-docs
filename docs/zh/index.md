@@ -40,4 +40,4 @@ SynchDB 的核心集成了 Debezium 嵌入式引擎，这是一个基于 Java �
 
 ## **获取已开始**
 
-查看我们的[安装指南](user-guide/installation/)，开始使用 SynchDB。
+了解有关 SynchDB 架构决策的更多信息，请点击[此处](architecture/architecture/) 或查看[安装指南](user-guide/installation/) 以开始使用 SynchDB。
