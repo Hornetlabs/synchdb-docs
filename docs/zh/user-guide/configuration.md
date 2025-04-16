@@ -18,11 +18,11 @@ SynchDB 在 postgresql.conf 中支持以下 GUC 变量。这些是适用于 Sync
 | synchdb.jvm_max_heap_size | integer | 1024 | 启动连接器时分配给 Java 虚拟机 (JVM) 的最大heap内存大小（以 MB 为单位）。 |
 | synchdb.dbz_snapshot_thread_num | integer | 2 | Debezium 嵌入式连接器在初始快照期间应产生的线程数。请注意，根据 Debezium，多线程快照是一项“孵化功能” |
 | synchdb.dbz_snapshot_fetch_size | integer | 0 | Debezium 嵌入式连接器在初始快照期间应一次获取的行数。将其设置为 0 以让引擎自动选择 |
-| synchdb.<br>dbz_snapshot_min_row_</br><br>to_stream_results</br> | integer | 0 | 在初始快照期间，Debezium 嵌入式引擎切换到流模式之前远程表应包含的最小行数。将其设置为 0 以始终切换到流模式 |
-| synchdb.<br>dbz_incremental_</br><br>snapshot_chunk_size</br> | integer | 2048 | 在增量快照期间，Debezium 嵌入式引擎为 SynchDB 生成的更改事件的最大数量 |
-| synchdb.<br>dbz_incremental_</br><br>snapshot_watermarking_strategy</br> | 字符串 | “insert-insert | Debezium 嵌入式引擎用于解决增量快照期间潜在冲突的水印策略。可能的值是“insert-insert”和“insert-delete”|
+| synchdb.<br>dbz_snapshot_min_row_<br>to_stream_results | integer | 0 | 在初始快照期间，Debezium 嵌入式引擎切换到流模式之前远程表应包含的最小行数。将其设置为 0 以始终切换到流模式 |
+| synchdb.<br>dbz_incremental_<br>snapshot_chunk_size | integer | 2048 | 在增量快照期间，Debezium 嵌入式引擎为 SynchDB 生成的更改事件的最大数量 |
+| synchdb.<br>dbz_incremental_<br>snapshot_watermarking_strategy | 字符串 | “insert-insert | Debezium 嵌入式引擎用于解决增量快照期间潜在冲突的水印策略。可能的值是“insert-insert”和“insert-delete”|
 | synchdb.dbz_offset_flush_interval_ms | integer | 60000 | Debezium 嵌入式引擎将偏移数据刷新到磁盘的间隔（以毫秒为单位）|
-| synchdb.<br>dbz_capture_only_selected_table_ddl</br> | boolean | true | Debezium 嵌入式引擎是否应在初始快照期间捕获所有表（false）或选定表（true）的模式 |
+| synchdb.<br>dbz_capture_only_selected_table_ddl | boolean | true | Debezium 嵌入式引擎是否应在初始快照期间捕获所有表（false）或选定表（true）的模式 |
 | synchdb.max_connector_workers | integer | 30 | 最大的连接器后台进程数量 |
 | synchdb.error_handling_strategy | enum | "exit" | 配置连接器工作器的错误处理策略。可能的值有“exit”表示出错时退出，“skip”表示出错时继续，“retry”表示出错时重试 |
 | synchdb.dbz_log_level | enum | "warn" | Debezium Runner 的日志级别设置。可能的值有“debug”，“info”，“warn”，“error”，“all”，“fatal”，“off”，“trace” |
