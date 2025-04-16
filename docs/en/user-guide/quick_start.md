@@ -3,7 +3,7 @@ weight: 30
 ---
 # Quick Start Guide
 
-It is very simple to start using SynchDB to perform data replication from heterogeneous databases to PostgreSQL given that you have the correct connection information to your heterogeneous databases. Make sure you have already done the installation steps described [here](https://docs.synchdb.com/user-guide/installation/)
+It is very simple to start using SynchDB to perform data replication from heterogeneous databases to PostgreSQL given that you have the correct connection information to your heterogeneous databases. Make sure you have already done the installation steps described [here](https://docs.synchdb.com/user-guide/installation/) and prepared [sample databases](https://docs.synchdb.com/user-guide/prepare_tests_env/) to test if you have not already.
 
 ## **Create SynchDB Extension**
 

@@ -3,7 +3,7 @@ weight:  30
 ---
 # 快速入门指南
 
-只要您拥有正确的异构数据库连接信息，就可以非常轻松地开始使用 SynchDB 将数据从异构数据库复制到 PostgreSQL。请确保您已完成[此处](https://docs.synchdb.com/user-guide/installation/) 中描述的安装步骤。
+只要您拥有正确的异构数据库连接信息，就可以非常轻松地开始使用 SynchDB 将数据从异构数据库复制到 PostgreSQL。请确保您已完成[此处](https://docs.synchdb.com/zh/user-guide/installation/) 中描述的安装步骤，并准备好[示例数据库](https://docs.synchdb.com/zh/user-guide/prepare_tests_env/)进行测试（如果您尚未完成）。
 
 ## **创建 SynchDB 扩展**
 
