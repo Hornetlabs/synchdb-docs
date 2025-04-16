@@ -5,7 +5,8 @@ weight: 90
 
 It is possible to select only specific tables from remote heterogeneous database to focus on replication. This could prevent resources being spent on replicating unwanted tables. 
 
-## Select Desired Tables and Start it for the First Time
+## **Select Desired Tables and Start it for the First Time**
+
 Table selection is done during connector creation phase via `synchdb_add_conninfo()` where we specify a list of tables (expressed in FQN, separated by a comma) to replicate from.
 
 For example, the following command creates a connector that only replicates change from `inventory.orders` and `inventory.products` tables from remote MySQL database.
@@ -29,7 +30,8 @@ Starting this connector for the very first time will trigger an initial snapshot
 SELECT synchdb_start_engine_bgw('mysqlconn');
 ```
 
-### Verify the Connector State and Tables
+### **Verify the Connector State and Tables**
+
 Examine the connector state and the new tables:
 ```sql
 postgres=# Select name, state, err from synchdb_state_view;
@@ -57,7 +59,8 @@ postgres=#
 
 Once the snapshot is complete, the `mysqlconn` connector will continue capturing subsequent changes to the `inventory.orders` and `inventory.products` tables.
 
-## Add More Tables to Replicate During Run Time.
+## **Add More Tables to Replicate During Run Time.**
+**
 The `mysqlconn` from previous section has already completed the initial snapshot and obtained the table schemas of the selected table. If we would like to add more tables to replicate from, we will need to notify the Debezium engine about the updated table section and perform the initial snapshot again. Here's how it is done:
 
 1. Update the `synchdb_conninfo` table to include additional tables.
@@ -75,7 +78,8 @@ This forces Debezium to re-snapshot all the specified tables, even if two of the
 
 Be mindful that if the heterogeneous database type does not support DDL replication (such as SQLServer), we may get a data conflict error when the snapshot is being rebuilt on the 2 tables previously selected for replication. If this is the case, we may need to drop or truncate them before restarting the connector with snapshot mode = 'always'.
 
-### Verify the Updated Tables
+### **Verify the Updated Tables**
+
 Now, we can examine our tables again:
 ```sql
 postgres=# SET search_path TO inventory;
@@ -98,7 +102,7 @@ postgres=#
 
 ```
 
-## Snapshot Modes
+## **Snapshot Modes**
 
 SynchDB offers different snapshot modes, depending on your replication needs:
 

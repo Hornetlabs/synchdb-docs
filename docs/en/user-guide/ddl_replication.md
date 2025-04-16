@@ -3,10 +3,12 @@ weight: 80
 ---
 # DDL Replication
 
-## Overview
+## **Overview**
+
 SynchDB provides comprehensive support for Data Definition Language (DDL) operations, allowing real-time schema synchronization across different database systems.
 
-## Supported DDL Commands
+## **Supported DDL Commands**
+
 SynchDB supports the following DDL operations:
 
 ✅ CREATE [table]  
@@ -15,8 +17,10 @@ SynchDB supports the following DDL operations:
 ✅ ALTER [table] ALTER COLUMN  
 ✅ DROP [table]  
 
-## Detailed Command Support
-### CREATE TABLE
+## **Detailed Command Support**
+
+### **CREATE TABLE**
+
 SynchDB captures these properties during CREATE TABLE events:
 
 | Property | Description |
@@ -32,11 +36,13 @@ SynchDB captures these properties during CREATE TABLE events:
 
 > **Note**: Additional CREATE TABLE properties are not currently supported
 
-### DROP TABLE
+### **DROP TABLE**
+
 Captured properties:
 - Table name (in FQN format) to be dropped
 
-### ALTER TABLE ADD COLUMN
+### **ALTER TABLE ADD COLUMN**
+
 Captures the following properties:
 
 | Property | Description |
@@ -51,11 +57,13 @@ Captures the following properties:
 
 Other properties that can be specified during ALTER TABLE ADD COLUMN  are not supported at the moment.
 
-### ALTER TABLE DROP COLUMN
+### **ALTER TABLE DROP COLUMN**
+
 Captures:
 - List of column names to be dropped
 
-### ALTER TABLE ALTER COLUMN
+### **ALTER TABLE ALTER COLUMN**
+
 Supported modifications:
 
 | Modification | Description |
@@ -69,14 +77,18 @@ Other properties that can be specified during ALTER TABLE ALTER COLUMN  are not 
 
 Please note that SynchDB only supports basic data type change on an existing column. For example, `INT` → `BIGINT` or `VARCHAR` → `TEXT`. Complex data type changes such as  `TEXT` → `INT` or `INT` → `TIMESTAMP` are not currently supported. This is because PostgreSQL requires the user to additioanlly supply a type casting function to perform the type casting as the result of complex data type change. SynchDB currently has to knowledge what type casting functions to use for specific type conversion. In the future, We may allow user to supply his or her own casting functions to use for specific type conversions via the rule file, but for now, it is not supported.
 
-## Database-Specific Behavior
-### MySQL and Oracle DDL Change Events
+## **Database-Specific Behavior**
+
+### **MySQL and Oracle DDL Change Events**
+
 Since MySQL logs both DDL and DML operations in the binlog and Oracles logs the same to logminer, SynchDB is able to replicate both DDLs and DMLs as they happen. No special actions are needed on MySQL or Oracle side to enable DDLs replication.
 
-### SQLServer DDL Change Events 
+### **SQLServer DDL Change Events **
+
 SQLServer does not natively supports DDL replication in streaming mode. The table schema is constructed by SynchDB during initial snapshot construction phase when the connector is started for the very first time. After this phase, SynchDB will try to detect any schema changes but they need to be explicitly added to SQL server's CDC table list.
 
-#### Trigger CREATE TABLE event on SQLServer
+#### **Trigger CREATE TABLE event on SQLServer**
+
 To create a new table on SQL Server and added to its CDC table list:
 ```sql
 CREATE TABLE dbo.altertest (
@@ -95,7 +107,8 @@ GO
 
 The command adds the table `dbo.altertest` to the CDC table list and would cause SynchDB to receive a CREATE TABLE DDL change event.
 
-#### Trigger ALTER TABLE Events
+#### **Trigger ALTER TABLE Events**
+
 If an existing table is altered (add, drop or alter column), it needs to be explicitly updated to SQLServer's CDC table list, so that SynchDB will be able to receive the ALTER TABLE events.
 
 For example:

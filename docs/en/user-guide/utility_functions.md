@@ -3,9 +3,11 @@ weight: 110
 ---
 # Function Reference
 
-## Connector Management
+This page documents all the SQL functions / views added by SynchDB.
 
-### synchdb_add_conninfo
+## **Connector Management**
+
+### **synchdb_add_conninfo**
 
 **Purpose**: Creates a new connector configuration
 
@@ -78,7 +80,8 @@ SELECT synchdb_add_conninfo(
 );
 ```
 
-### synchdb_add_objmap
+### **synchdb_add_objmap**
+
 **Purpose**: Adds an object mapping rule per connector
 
 | Parameter | Description | Required | Example | Notes |
@@ -114,7 +117,8 @@ SELECT synchdb_add_objmap('mysqlconn','transform','inventory.products.name','''>
 * `source object` represents the column to be transformed
 * `destination object` represents an expression to be run on the column data before it is applied to PostgreSQL. Use %d as a placeholder for input column data. In case of geometry type, use %w for WKB and %s for SRID. 
 
-### synchdb_add_extra_conninfo
+### **synchdb_add_extra_conninfo**
+
 **Purpose**: Configures extra connector parameters to an existing connector created by `synchdb_add_conninfo`
 
 | Parameter | Description | Required | Example | Notes |
@@ -131,19 +135,22 @@ SELECT synchdb_add_objmap('mysqlconn','transform','inventory.products.name','''>
 SELECT synchdb_add_extra_conninfo('mysqlconn', 'verify_ca', '/path/to/keystore', 'mykeystorepass', '/path/to/truststore', 'mytruststorepass');
 ```
 
-### synchdb_del_extra_conninfo
+### **synchdb_del_extra_conninfo**
+
 **Purpose**: Deletes extra connector paramters created by `synchdb_add_extra_conninfo`
 ```sql
 SELECT synchdb_del_extra_conninfo('mysqlconn');
 ```
 
-### synchdb_del_conninfo
+### **synchdb_del_conninfo**
+
 **Purpose**: Deletes connector information created by `synchdb_add_conninfo`
 ```sql
 SELECT synchdb_del_extra_conninfo('mysqlconn');
 ```
 
-### synchdb_del_objmap
+### **synchdb_del_objmap**
+
 **Purpose**: Disables object mapping records created by `synchdb_add_objmap`
 
 | Parameter | Description | Required | Example | Notes |
@@ -156,9 +163,10 @@ SELECT synchdb_del_extra_conninfo('mysqlconn');
 SELECT synchdb_del_extra_conninfo('mysqlconn', 'transform', 'inventory.products.name');
 ```
 
-## Basic Control Functions
+## **Basic Control Functions**
 
-### synchdb_start_engine_bgw
+### **synchdb_start_engine_bgw**
+
 **Purpose**: Starts a connector
 ```sql
 SELECT synchdb_start_engine_bgw('mysqlconn');
@@ -172,33 +180,38 @@ SELECT synchdb_start_engine_bgw('mysqlconn', 'no_data');
 SELECT synchdb_start_engine_bgw('mysqlconn', 'always');
 ```
 
-### synchdb_pause_engine
+### **synchdb_pause_engine**
+
 **Purpose**: Temporarily halts a running connector
 ```sql
 SELECT synchdb_pause_engine_bgw('mysqlconn');
 ```
 
-### synchdb_resume_engine
+### **synchdb_resume_engine**
+
 **Purpose**: Resumes a paused connector
 ```sql
 SELECT synchdb_resume_engine('mysqlconn');
 ```
 
-### synchdb_stop_engine_bgw
+### **synchdb_stop_engine_bgw**
+
 **Purpose**: Terminates a connector
 ```sql
 SELECT synchdb_stop_engine('mysqlconn');
 ```
 
-### synchdb_reload_objmap
+### **synchdb_reload_objmap**
+
 **Purpose**: Causes a connector to load object mapping rules again
 ```sql
 SELECT synchdb_reload_objmap('mysqlconn');
 ```
 
-## State Management
+## **State Management**
 
-### synchdb_state_view
+### **synchdb_state_view**
+
 **Purpose**: Monitors connector states and status
 
 ```sql
@@ -237,7 +250,8 @@ SELECT * FROM synchdb_state_view();
 - `change data capture` - connector is streaming subsequent table changes (CDC)
 - `schema sync` - connector is copying table schema only
 
-### synchdb_stats_view
+### **synchdb_stats_view**
+
 **Purpose**: Collects connector processing statistics cumulatiely
 
 ```sql
@@ -258,14 +272,16 @@ SELECT * FROM synchdb_stats_view();
 | batches_done | Number of batches completed | Bigint |
 | avg_batch_size | Average batch size (total_events / batches_done) | Bigint |
 
-### synchdb_reset_stats
+### **synchdb_reset_stats**
+
 **Purpose**: Resets all statistic information of given connector name
 
 ```sql
 SELECT synchdb_reset_stats('mysqlconn');
 ```
 
-### synchdb_set_offset
+### **synchdb_set_offset**
+
 **Purpose**: Configures custom start position
 
 **Example for MySQL**:
@@ -284,7 +300,8 @@ SELECT synchdb_set_offset(
 );
 ```
 
-### synchdb_log_jvm_meminfo
+### **synchdb_log_jvm_meminfo**
+
 **Purpose**: Cause the Java Virtual Machine (JVM) to log the current heap and non-heap usages statistics.
 ```sql
 SELECT synchdb_log_jvm_meminfo('mysqlconn');
@@ -304,7 +321,8 @@ Check the PostgreSQL log file:
 
 ```
 
-### synchdb_att_view
+### **synchdb_att_view**
+
 **Purpose**: Displays a side-by-side view of a connector's data type, name mapping and transform rule relationships between foreign and local tables.
 
 ```sql
@@ -325,9 +343,10 @@ SELECT * FROM synchdb_att_view();
 | `pg_atttypename` | mapped data type in PostgreSQL | Text |
 | `transform` | transform expression | Text |
 
-## Snapshot Management
+## **Snapshot Management**
 
-### synchdb_restart_connector
+### **synchdb_restart_connector**
+
 **Purpose**: Reinitializes connector with specified snapshot mode
 
 **Snapshot Modes**:

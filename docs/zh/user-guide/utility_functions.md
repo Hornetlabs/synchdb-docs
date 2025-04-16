@@ -2,9 +2,12 @@
 weight: 110
 ---
 # 函数参考
-## 连接器管理
 
-### synchdb_add_conninfo
+此页面记录了 SynchDB 添加的所有 SQL 函数/视图。
+
+## **连接器管理**
+
+### **synchdb_add_conninfo**
 
 **用途**: 创建新的连接器配置
 
@@ -79,7 +82,8 @@ SELECT synchdb_add_conninfo(
 );
 ```
 
-### synchdb_add_objmap
+### **synchdb_add_objmap**
+
 **目的**：为每个连接器添加一个对象映射规则
 
 | 参数 | 说明 | 必需 | 示例 | 注释 |
@@ -115,7 +119,8 @@ SELECT synchdb_add_objmap('mysqlconn','transform','inventory.products.name','''>
 * `source object` 表示要转换的列
 * `destination object` 表示在将列数据应用于 PostgreSQL 之前要在列数据上运行的表达式。使用 %d 作为输入列数据的占位符。如果是几何类型，则使用 %w 表示 WKB，使用 %s 表示 SRID。
 
-### synchdb_add_extra_conninfo
+### **synchdb_add_extra_conninfo**
+
 **用途**：为由 `synchdb_add_conninfo` 创建的现有连接器配置额外的连接器参数
 
 | 参数 | 说明 | 必需 | 示例 | 注释 |
@@ -131,19 +136,22 @@ SELECT synchdb_add_objmap('mysqlconn','transform','inventory.products.name','''>
 SELECT synchdb_add_extra_conninfo('mysqlconn', 'verify_ca', '/path/to/keystore', 'mykeystorepass', '/path/to/truststore', 'mytruststorepass');
 ```
 
-### synchdb_del_extra_conninfo
+### **synchdb_del_extra_conninfo**
+
 **用途**：删除由 `synchdb_add_extra_conninfo` 创建的额外连接器参数
 ```sql
 SELECT synchdb_del_extra_conninfo('mysqlconn');
 ```
 
-### synchdb_del_conninfo
+### **synchdb_del_conninfo**
+
 **用途**：删除由 `synchdb_add_conninfo` 创建的连接器信息
 ```sql
 SELECT synchdb_del_extra_conninfo('mysqlconn');
 ```
 
-### synchdb_del_objmap
+### **synchdb_del_objmap**
+
 **用途**：禁用由 `synchdb_add_objmap` 创建的对象映射记录
 
 | 参数 | 说明 | 必需 | 示例 | 注释 |
@@ -156,9 +164,10 @@ SELECT synchdb_del_extra_conninfo('mysqlconn');
 SELECT synchdb_del_extra_conninfo('mysqlconn', 'transform', 'inventory.products.name');
 ```
 
-## 基本控制函数
+## **基本控制函数**
 
-### synchdb_start_engine_bgw
+### **synchdb_start_engine_bgw**
+
 **用途**: 启动连接器
 ```sql
 SELECT synchdb_start_engine_bgw('mysqlconn');
@@ -173,33 +182,38 @@ SELECT synchdb_start_engine_bgw('mysqlconn', 'no_data');
 SELECT synchdb_start_engine_bgw('mysqlconn', 'always');
 ```
 
-### synchdb_pause_engine
+### **synchdb_pause_engine**
+
 **用途**: 暂停运行中的连接器
 ```sql
 SELECT synchdb_pause_engine_bgw('mysqlconn');
 ```
 
-### synchdb_resume_engine
+### **synchdb_resume_engine**
+
 **用途**: 恢复已暂停的连接器
 ```sql
 SELECT synchdb_resume_engine('mysqlconn');
 ```
 
-### synchdb_stop_engine_bgw
+### **synchdb_stop_engine_bgw**
+
 **用途**: 终止连接器
 ```sql
 SELECT synchdb_stop_engine('mysqlconn');
 ```
 
-### synchdb_reload_objmap
+### **synchdb_reload_objmap**
+
 **目的**：使连接器再次加载对象映射规则
 ```sql
 SELECT synchdb_reload_objmap('mysqlconn');
 ```
 
-## 状态管理
+## **状态管理**
 
-### synchdb_state_view
+### **synchdb_state_view**
+
 **用途**: 监控连接器状态
 
 ```sql
@@ -238,7 +252,8 @@ SELECT * FROM synchdb_state_view();
 - `change data capture` - 连接器正在流式传输后续表变更（CDC）
 - `schema sync` - 连接器仅复制表架构
 
-### synchdb_stats_view
+### **synchdb_stats_view**
+
 **用途**：累计收集连接器处理统计信息
 
 ```sql
@@ -259,14 +274,16 @@ SELECT * FROM synchdb_stats_view();
 | batches_done | 完成的批次数 | Bigint |
 | avg_batch_size | 平均批次大小（total_events / batches_done） | Bigint |
 
-### synchdb_reset_stats
+### **synchdb_reset_stats**
+
 **用途**：重置指定连接器的所有统计信息
 
 ```sql
 SELECT synchdb_reset_stats('mysqlconn');
 ```
 
-### synchdb_set_offset
+### **synchdb_set_offset**
+
 **用途**: 配置自定义起始位置
 
 **MySQL示例**:
@@ -284,7 +301,8 @@ SELECT synchdb_set_offset(
     '{"event_serial_no":1,"commit_lsn":"00000100:00000c00:0003","change_lsn":"00000100:00000c00:0002"}'
 );
 ```
-### synchdb_log_jvm_meminfo
+### **synchdb_log_jvm_meminfo**
+
 **用途**: 使 Java 虚拟机 (JVM) 输出当前heap和non-heap使用情况统计信息到 PostgreSQL log 文件。
 ```sql
 SELECT synchdb_log_jvm_meminfo('mysqlconn');
@@ -304,7 +322,8 @@ SELECT synchdb_log_jvm_meminfo('mysqlconn');
 
 ```
 
-### synchdb_att_view
+### **synchdb_att_view**
+
 **用途**：并排显示连接器的数据类型、名称映射和外部表与本地表之间的转换规则关系。
 
 ```sql
@@ -325,9 +344,10 @@ SELECT * FROM synchdb_att_view();
 |`pg_atttypename` | PostgreSQL 中的映射数据类型 |文本 |
 | `transform` | 转换表达式 | 文本 |
 
-## 快照管理
+## **快照管理**
 
-### synchdb_restart_connector
+### **synchdb_restart_connector**
+
 **用途**: 使用指定的快照模式重新初始化连接器
 
 **快照模式**:
