@@ -4,6 +4,58 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## **[SynchDB 1.1](https://github.com/Hornetlabs/synchdb/releases/tag/v1.1) - 2025-04-17**
+
+This release introduces support for the Oracle connector, along with robust data type transformation capabilities tailored for Oracle sources. SynchDB's core data processing engine has been significantly improved to handle complex and diverse combinations of data transformations more reliably.
+
+Performance has also been enhanced across multiple areas. Redundant iterations and catalog lookups have been eliminated through intelligent caching, and JSON parsing performance has been significantly improved by adopting more efficient PostgreSQL JSON parser APIs. These enhancements reduce overhead and contribute to faster, more scalable replication.
+
+SynchDB now fully supports PostgreSQL 16, 17 and IvorySQL 4.4, ensuring compatibility with the latest PostgreSQL-based platforms. In addition, the process for defining custom transformation rules has been refined with the integration of an object mapping management utility, offering a more intuitive and maintainable way to configure and extend transformation logic.
+
+### **Added**
+
+* added Oracle connector support.
+* added support for PostgreSQL 16, 17 and IvorySQL 4.4
+* added support for Oracle's variable size/scale data type `NUMBER` processing. 
+* added a new GUC `synchdb.error_handling_strategy` to control the strategy to handle an error: can be skip, exit or retry.
+* added a new GUC `synchdb.dbz_log_level to control` the log level of log4j used by Debezium runner engine.
+* added a new table `synchdb_attribute` that stores all the remote table attribute information that synchdb is currently capturing.
+* added a new view `synchdb_att_view` that shows a side-by-side comparison of data type, table and column name mappings.
+* added a new tabled `synchdb_objmap` to store differet object mapping entries.
+* added a new SQL function `synchdb_add_objamp()` to add new object mapping entries. It supports table name, column name, data type and transform expressions.
+* added a new SQL function `synchdb_reload_objmap()` to force a connector to reload object mapping entries.
+* added a new snapshot mode called `schemasync` in which the connector will obtain schemas info from remote database, create the synchronized tables and switch to paused state
+* added `synchdb_add_extra_conninfo()` function to configure extra SSL related connection parameters to a connector.
+* added `synchdb_del_extra_conninfo()` function to remove all extra parameters created by `synchdb_add_extra_conninfo()`.
+* added `synchdb_del_conninfo()` function to remove an existing connector info, delete all the meta data and object mappings associated and shut it down as needed.
+* added `synchdb_del_objmap()` to disable and remove a object mapping entry.
+
+### **Changed**
+
+* when processing ALTER TABLE change events, synchdb will only adds a primary key when the table itself has no primary key.
+* removed the ability to configure a connector in `synchdb_add_conninfo()` to connect to a different destination PostgreSQL database other than the one where synchdb is installed.
+* at the end of every DDL change event processing, synchdb will now make an update on the new `synchdb_attribute` table.
+* normalized all the data type mapping entries to use lower case letters.
+* a connector will correct the table name, column name and data type when the configured object mapping differs from current values upon starting or reloading.
+* `rulefile` has been replaced by `synchdb_add_objmap()` utilities.
+* All ID-based SQL function column definitions have their data types changed from `TEXT` to `NAME`.
+* removed the `rulefile` parameter from `synchdb_add_conninfo()`.
+* optimize DML parser to use cached hash table as cache rather than accessing the catalog and rebuilding the hash at every change event.
+* DML parser now uses more efficient JSONB API calls for increased performance.
+ * added source timestamp, dbz ttimestamp and pg timestamp of last batch's first and last change event in `synchdb_get_stats`. These represent the timing between data generation, dbz processing and pg processing.
+ * optimize JNI calls to use cached JNI handle rather than recreating at every change event.
+ * enhanced the way Synchdb marks a batch as complete by just marking the first and last change event within a batch, rather than all events.
+ * revamped the data processing engine to be more modular in design so it can handle more complex data type mappings.
+ * non-native data types are now processed based on their category rather than treating them all as texts.
+
+### **Fixed**
+
+* fixed an issue where SPI update or delete could fail to update or delete by including only the primary key fields in WHERE clause.
+* fixed an issue with ALTER TABLE to error out when attempting to add a duplicate primary key.
+* fixed an issue where synchdb occasionally incorrectly looks up a column's schema value from the json change event, causing subsequent processing to fail.
+* fixed an issue in 'skip on error' mode to panic due to error stack overflow.
+* fixed an issue in ALTER TABLE ADD and DROP column where it was not aware that the column name may have be mapped to a different value in PostgreSQL.
+
 ## **[SynchDB 1.0](https://github.com/Hornetlabs/synchdb/releases/tag/v1.0) - 2024-12-24**
  
 This release focuses on bug fixes and performance enhancements following the v1.0 Beta1 release that generally makes it more usable under moderate to high data loads. A lot more Debezium tuning related parameters have also been exposed as PostgreSQL GUCs, allowing user to test with different parameters.

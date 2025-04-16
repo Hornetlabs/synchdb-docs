@@ -4,6 +4,57 @@
 本文格式基于 [Keep a Changelog](http://keepachangelog.com/)，
 且本项目遵循 [语义化版本](http://semver.org/)。
 
+## **[SynchDB 1.1](https://github.com/Hornetlabs/synchdb/releases/tag/v1.1) - 2025-04-17**
+
+此版本引入了对 Oracle 连接器的支持，以及针对 Oracle 数据源量身定制的强大数据类型转换功能。SynchDB 的核心数据处理引擎得到了显著改进，能够更可靠地处理复杂多样的数据转换组合。
+
+性能也在多个方面得到了提升。通过智能缓存消除了冗余迭代和目录查找，并通过采用更高效的 PostgreSQL JSON 解析器 API 显著提升了 JSON 解析性能。这些增强功能降低了开销，并有助于实现更快、更可扩展的复制。
+
+SynchDB 现在完全支持 PostgreSQL 16, 17 和 IvorySQL 4.4，确保与最新的基于 PostgreSQL 的平台兼容。此外，通过集成对象映射管理实用程序，定义自定义转换规则的流程得到了改进，提供了一种更直观、更易于维护的转换逻辑配置和扩展方式。
+
+### **新增**
+
+* 新增 Oracle 连接器支持。
+* 新增 PostgreSQL 16, 17 和 IvorySQL 4.4 的支持。
+* 新增 Oracle 可变大小/规模数据类型 `NUMBER` 处理的支持。
+* 新增 GUC `synchdb.error_handling_strategy` 来控制错误处理策略：可以是跳过、退出或重试。
+* 新增 GUC `synchdb.dbz_log_level` 来控制 Debezium 运行引擎使用的 log4j 日志级别。
+* 新增表 `synchdb_attribute`，用于存储 synchdb 当前捕获的所有远程表属性信息。
+* 新增视图 `synchdb_att_view`，用于并排显示数据类型、表和列名映射的比较。
+* 新增表 `synchdb_objmap`，用于存储不同的对象映射条目。
+* 新增 SQL 函数 `synchdb_add_objamp()`，用于添加新的对象映射条目。该函数支持表名、列名、数据类型和转换表达式。
+* 新增 SQL 函数 `synchdb_reload_objmap()`，用于强制连接器重新加载对象映射条目。
+* 新增 `schemasync` 的新快照模式，在该模式下，连接器将从远程数据库获取模式信息，创建同步表并切换到暂停状态。
+* 新增 `synchdb_add_extra_conninfo()` 函数，用于为连接器配置额外的 SSL 相关连接参数。
+* 新增 `synchdb_del_extra_conninfo()` 函数，用于删除 `synchdb_add_extra_conninfo()` 创建的所有额外参数。
+* 新增 `synchdb_del_conninfo()` 函数，用于删除现有连接器信息、所有相关的元数据和对象映射，并根据需要关闭连接器。
+* 新增 `synchdb_del_objmap()` 函数，用于禁用和移除对象映射条目。
+
+### **已更改**
+
+* 处理 ALTER TABLE 变更事件时，synchdb 仅在表本身没有主键时添加主键。
+* 移除了在 `synchdb_add_conninfo()` 中配置的目标数据库名。 默认使用 synchdb 安装的所在数据库名。
+* 在每个 DDL 变更事件处理结束时，synchdb 现在都会对新的 `synchdb_attribute` 表进行更新。
+* 将所有数据类型映射条目规范化为使用小写字母。
+* 当启动或重新加载时，如果配置的对象映射与当前值不同，连接器将更正表名、列名和数据类型。
+* `rulefile` 已被 `synchdb_add_objmap()` 实用程序取代。
+* 所有基于 ID 的 SQL 函数列定义的数据类型均已从 `TEXT` 更改为 `NAME`。
+* 从 `synchdb_add_conninfo()` 中移除了 `rulefile` 参数。
+* 优化 DML 解析器，使用缓存的哈希表作为缓存，而不是在每次发生变更事件时访问目录并重建哈希。
+* DML 解析器现在使用更高效的 JSONB API 调用来提升性能。
+* 在 `synchdb_get_stats` 中添加了上一个批次的第一个和最后一个变更事件的源时间戳、dbz 时间戳和 pg 时间戳。这些时间戳代表了数据生成、dbz 处理和 pg 处理之间的时间。
+* 优化 JNI 调用，使用缓存的 JNI 对象，而不是在每次发生变更事件时重新创建。
+* 增强了 Synchdb 将批次标记为完成的方式，只需标记批次中的第一个和最后一个变更事件，而不是所有事件。
+* 改进了数据处理引擎，使其在设计上更加模块化，以便能够处理更复杂的数据类型映射。
+* 现在根据非原生数据类型的类别进行处理，而不是将它们全部视为文本。
+
+### **已修复**
+
+* 修复了 SPI 更新或删除操作因在 WHERE 子句中仅包含主键字段而无法更新或删除的问题。
+* 修复了 ALTER TABLE 尝试添加重复主键时出错的问题。
+* 修复了 synchdb 偶尔会从 json 更改事件中错误地查找列的架构值，从而导致后续处理失败的问题。
+* 修复了“skip on error”模式下由于错误堆栈溢出而导致崩溃的问题。
+* 修复了 ALTER TABLE ADD 和 DROP 列中未意识到列名可能已映射到 PostgreSQL 中的其他值的问题。
 
 ## **[SynchDB 1.0](https://github.com/Hornetlabs/synchdb/releases/tag/v1.0) - 2024-12-24**
 
