@@ -1,4 +1,5 @@
 # Metadata Files
+
 During Operation, Debezium Runner engine produces metadata files under $PGDATA/pg_synchdb. Currently 2 types of metadata files are generated and persisted:
 * offset file: contains the offset to resume the replication operation at start up
 * schema history file: contains the schema information to build all the tables for a replication. This is created during the initial data snapshot sync and can be updated during operation.
