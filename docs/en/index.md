@@ -35,6 +35,7 @@ This architecture allows PostgreSQL to leverage the rich ecosystem of Debezium c
 
 ## **Version History**
 
+- [SynchDB v1.1](https://github.com/Hornetlabs/synchdb/releases/tag/v1.1)
 - [SynchDB v1.0](https://github.com/Hornetlabs/synchdb/releases/tag/v1.0)
 - [SynchDB v1.0 Beta1](https://github.com/Hornetlabs/synchdb/releases/tag/v1.0_beta1)
 

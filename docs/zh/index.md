@@ -35,6 +35,7 @@ SynchDB 的核心集成了 Debezium 嵌入式引擎，这是一个基于 Java �
 
 ## **版本历史**
 
+- [SynchDB v1.1](https://github.com/Hornetlabs/synchdb/releases/tag/v1.1)
 - [SynchDB v1.0](https://github.com/Hornetlabs/synchdb/releases/tag/v1.0)
 - [SynchDB v1.0 Beta1](https://github.com/Hornetlabs/synchdb/releases/tag/v1.0_beta1)
 
