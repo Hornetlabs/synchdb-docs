@@ -1,7 +1,7 @@
 # Architecture
 ## **Overall Archtecture Diagram**
 
-![img](../../images/synchdbarch.png)
+![img](/images/synchdbarch.png)
 
 SynchDB extension consists of 2 code spaces (Java and C) with JNI sitting in between them as facilitator.
 

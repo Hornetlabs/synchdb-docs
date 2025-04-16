@@ -1,7 +1,7 @@
 # 架构
 ## **总体架构图**
 
-![img](../images/synchdbarch.png)
+![img](/images/synchdbarch.png)
 
 SynchDB 扩展包含两个代码空间（Java 和 C），JNI 位于两者之间作为协调员。
 
