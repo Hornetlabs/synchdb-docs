@@ -28,14 +28,14 @@ SynchDB supports the following GUC variables in postgresql.conf. These are commo
 | synchdb.dbz_log_level | enum | "warn" | the log level setting for Debezium Runner. Possible values are "debug", "info", "warn", "error", "all", "fatal", "off", "trace" |
 | synchdb.log_change_on_error | boolean | true | whether the connector should log the original JSON change event in case of error |
 
-## Technical Notes
+## **Technical Notes**
 
 - GUC (Grand Unified Configuration) variables are global configuration parameters in PostgreSQL
 - Values are set in the `postgresql.conf` file
 - Changes require a server restart to take effect
-- `shared_preload_library` is a critical system configuration that determines which libraries are loaded at startup
+- `shared_preload_library` is a critical system configuration that determines which libraries are loaded at startup, synchdb must be put here to enable [connector auto launcher](https://docs.synchdb.com/user-guide/connector_auto_launcher/)
 
-## Configuration Examples
+## **Configuration Examples**
 
 ```conf
 # Example configuration in postgresql.conf
@@ -58,7 +58,7 @@ synchdb.dbz_log_leve='error'                                            # Debezi
 synchdb.log_change_on_error=true                                        # log JSON change event on error
 ```
 
-## Usage Recommendations
+## **Usage Recommendations**
 
 1. **synchdb.naptime**
     - Lower values: Higher update frequency but more system load
@@ -118,7 +118,7 @@ synchdb.log_change_on_error=true                                        # log JS
     - Lower values: less connector workers can be run at a time, less shared memory requirement
     - Higher values: more connector workers can be run at a time, more shared memory requirement
 
-## Performance Considerations
+## **Performance Considerations**
 
 - Adjust `synchdb.naptime` based on system load and latency requirements
 - Adjust `synchdb.dbz_batch_size` and `synchdb.dbz_queue_size` higher to increase processing throughput
@@ -129,21 +129,23 @@ synchdb.log_change_on_error=true                                        # log JS
 - Set `synchdb.dbz_snapshot_thread_num` to match number of CPU cores
 - Set `synchdb.dbz_min_row_to_stream_results` to 0 to always use stream mode to reduce memory usage
 
-## Common Use Cases
+## **Common Use Cases**
 
-### High-Throughput Systems
+### **High-Throughput Systems**
+
 ```conf
-synchdb.naptime = 100           # Faster polling for real-time updates
+synchdb.naptime = 10            # Faster polling for real-time updates
 synchdb.dml_use_spi = false     # Standard DML for better performance
-synchdb.dbz_batch_size = 4096
-synchdb.dbz_queue_size = 8192
+synchdb.dbz_batch_size = 16384
+synchdb.dbz_queue_size = 32768
 synchdb.jvm_max_heap_size = 2048
 synchdb.dbz_snapshot_thread_num = 4
 synchdb.dbz_snapshot_fetch_size = 0
 synchdb.dbz_min_row_to_stream_results = 0
 ```
 
-### Resource-Constrained Systems
+### **Resource-Constrained Systems**
+
 ```conf
 synchdb.naptime = 1000          # Reduced polling frequency
 synchdb.dml_use_spi = false     # Minimize additional overhead
@@ -155,7 +157,8 @@ synchdb.dbz_snapshot_fetch_size = 0
 synchdb.dbz_min_row_to_stream_results = 0
 ```
 
-### Development/Testing
+### **Development/Testing**
+
 ```conf
 synchdb.naptime = 500           # Default polling
 synchdb.dml_use_spi = true      # Enable advanced features for testing
@@ -167,7 +170,7 @@ synchdb.dbz_snapshot_fetch_size = 0
 synchdb.dbz_min_row_to_stream_results = 0
 ```
 
-## Troubleshooting
+## **Troubleshooting**
 
 1. **High CPU Usage**
     - Increase `synchdb.naptime`
@@ -192,7 +195,7 @@ synchdb.dbz_min_row_to_stream_results = 0
     - Increase `synchdb.jvm_max_heap_size`
     - Increase `shared_buffers`
 
-## Best Practices
+## **Best Practices**
 
 1. **Initial Setup**
     - Start with default values

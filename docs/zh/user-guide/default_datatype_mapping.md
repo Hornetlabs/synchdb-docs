@@ -12,9 +12,9 @@ weight: 50
 * 自动增量：表示数据类型是否具有自动增量属性的标志
 * 大小：转换后的大小值。-1：无变化，0：未指定大小
 
-可以通过定义对象映射规则来覆盖默认的数据类型映射关系。更多信息请参见[转换规则文件](https://docs.synchdb.com/user-guide/transform_rule_file/)。
+可以通过定义对象映射规则来覆盖默认的数据类型映射关系。更多信息请参见[转换规则文件](https://docs.synchdb.com/zh/user-guide/object_mapping_rules/)。
 
-## MySQL 默认数据类型映射
+## **MySQL 默认数据类型映射**
 ```c
 datatypehashentry mysql_defaulttypemappings[] =
 {
@@ -82,7 +82,7 @@ datatypehashentry mysql_defaulttypemappings[] =
 
 ```
 
-## SQL Server 默认数据类型映射
+## **SQL Server 默认数据类型映射**
 ```c
 datatypehashentry sqlserver_defaulttypemappings[] =
 {
@@ -125,7 +125,7 @@ datatypehashentry sqlserver_defaulttypemappings[] =
 };
 ```
 
-## Oracle 默认数据类型映射
+## **Oracle 默认数据类型映射**
 
 ```c
 DatatypeHashEntry oracle_defaultTypeMappings[] =

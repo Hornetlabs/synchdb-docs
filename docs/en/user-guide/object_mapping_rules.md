@@ -5,7 +5,7 @@ weight: 60
 
 SynchDB has a default name and data type mapping rules to handle incoming change events. In most cases, the defaults work fine. However, if you have specific transform requirements or when the defaults do not work for you, you can configure your own object mapping rules to a particular connector. Please follow the workflow below to review and adjust any particular object mapping rules.
 
-## Create a Connector and Start it in `schemasync` Mode
+## **Create a Connector and Start it in `schemasync` Mode**
 
 `schemasync` is a special mode that makes the connector connects to remote database and attempt to sync only the schema of designated tables. After this is done, the connector is put to `paused` state and user is able to review all the tables and data types created using the default rules and make change if needed.
 
@@ -23,7 +23,7 @@ SELECT synchdb_add_conninfo(
 
 SELECT synchdb_start_engine_bgw('mysqlconn', 'schemasync');
 ```
-## Ensure the connector is put to paused state
+## **Ensure the connector is put to paused state**
 ```sql
 SELECT name, connector_type, pid, stage, state FROM synchdb_state_view;
      name      | connector_type |  pid   |    stage    |  state
@@ -32,7 +32,8 @@ SELECT name, connector_type, pid, stage, state FROM synchdb_state_view;
 
 ```
 
-## Review the tables created by default mapping rules
+## **Review the tables created by default mapping rules**
+
 ```sql
 postgres=# select * from synchdb_att_view;
    name    | type  | attnum |         ext_tbname         |         pg_tbname          | ext_attname | pg_attname  | ext_atttypename | pg_atttypename | transform
@@ -61,7 +62,7 @@ postgres=# select * from synchdb_att_view;
 
 ```
 
-## Define custom mapping rules
+## **Define custom mapping rules**
 User can use `synchdb_add_objmap` function to create custom mapping rules. It can be used to map table name, column name, data types and defines a data transform expression rule
 
 ```sql
@@ -74,7 +75,7 @@ SELECT synchdb_add_objmap('mysqlconn','datatype','inventory.orders.quantity','bi
 SELECT synchdb_add_objmap('mysqlconn','transform','inventory.products.name','''>>>>>'' || ''%d'' || ''<<<<<''');
 ```
 
-## Review all object mapping rules created so far
+## **Review all object mapping rules created so far**
 ```sql
 postgres=# select * from synchdb_objmap;
    name    |  objtype  | enabled |            srcobj             |           dstobj
@@ -90,14 +91,14 @@ postgres=# select * from synchdb_objmap;
 
 ```
 
-## Reload the object mapping rules
+## **Reload the object mapping rules**
 Once all custom rules have been defined, we need to signal the connector to load them. This will cause the connector to read and apply the object mapping rules. If it sees a discrepancy between current PostgreSQL values and the object mapping values, it will attempt to correct the mapping.
 ```sql
 SELECT synchdb_reload_objmap('mysqlconn');
 
 ```
 
-## Review `synchdb_att_view` again for changes
+## **Review `synchdb_att_view` again for changes**
 ```sql
 SELECT * from synchdb_att_view;
    name    | type  | attnum |         ext_tbname         |         pg_tbname          | ext_attname | pg_attname  | ext_atttypename | pg_atttypename |         transform
@@ -124,7 +125,7 @@ SELECT * from synchdb_att_view;
  mysqlconn | mysql |      2 | inventory.products_on_hand | inventory.products_on_hand | quantity    | quantity    | INT             | int8           |
 ```
 
-## Resume the connector or redo the entire snapshot
+## **Resume the connector or redo the entire snapshot**
 Once the object mappings have been confirmed correct, we can resume the connector. Please note that, resume will proceed to streaming only the new table changes. The existing data of the tables will not be copied.
 ```sql
 SELECT synchdb_resume_engine('mysqlconn');

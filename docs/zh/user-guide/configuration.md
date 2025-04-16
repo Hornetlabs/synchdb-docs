@@ -28,14 +28,14 @@ SynchDB 在 postgresql.conf 中支持以下 GUC 变量。这些是适用于 Sync
 | synchdb.dbz_log_level | enum | "warn" | Debezium Runner 的日志级别设置。可能的值有“debug”，“info”，“warn”，“error”，“all”，“fatal”，“off”，“trace” |
 | synchdb.log_change_on_error | boolean | true | 连接器是否应在发生错误时记录原始 JSON 更改事件 |
 
-## 技术说明
+## **技术说明**
 
 - GUC（Grand Unified Configuration）是 PostgreSQL 中的全局配置参数
 - 这些值需要在 `postgresql.conf` 文件中设置
 - 修改配置后需要重启服务器才能生效
-- `shared_preload_library` 是一个关键的系统配置，决定了启动时加载哪些库
+- `shared_preload_library` 是一个关键的系统配置，它决定了启动时加载哪些库，synchdb 必须放在这里才能启用 [连接器自动启动器](https://docs.synchdb.com/zh/user-guide/connector_auto_launcher/)
 
-## 配置示例
+## **配置示例**
 
 ```conf
 # postgresql.conf 配置示例
@@ -57,7 +57,7 @@ synchdb.dbz_log_leve='error'                                            # Debezi
 synchdb.log_change_on_error=true                                        # 发生错误时记录 JSON 更改事件
 ```
 
-## 使用建议
+## **使用建议**
 
 1. **synchdb.naptime**
     - 较低的值：更新频率更高，但系统负载更大
@@ -117,7 +117,7 @@ synchdb.log_change_on_error=true                                        # 发生
     - 较低的值：一次可以运行的连接器工作器越少，共享内存需求越少
     - 较高的值：一次可以运行的连接器工作器越多，共享内存需求越多
 
-## 性能考虑
+## **性能考虑**
 
 - 根据系统负载和延迟要求调整 `synchdb.naptime`
 - 调高 `synchdb.dbz_batch_size` 和 `synchdb.dbz_queue_size` 以增加处理吞吐量
@@ -128,21 +128,21 @@ synchdb.log_change_on_error=true                                        # 发生
 - 将 `synchdb.dbz_snapshot_thread_num` 设置为与 CPU 核心数匹配
 - 将 `synchdb.dbz_min_row_to_stream_results` 设置为 0，以始终使用流模式来减少内存使用量
 
-## 常见使用场景
+## **常见使用场景**
 
-### 高吞吐量系统
+### **高吞吐量系统**
 ```conf
-synchdb.naptime = 100           # 更快的轮询以实现实时更新
+synchdb.naptime = 10            # 更快的轮询以实现实时更新
 synchdb.dml_use_spi = false     # 标准 DML 以获得更好的性能
-synchdb.dbz_batch_size = 4096
-synchdb.dbz_queue_size = 8192
+synchdb.dbz_batch_size = 16384
+synchdb.dbz_queue_size = 32768
 synchdb.jvm_max_heap_size = 2048
 synchdb.dbz_snapshot_thread_num = 4
 synchdb.dbz_snapshot_fetch_size = 0
 synchdb.dbz_min_row_to_stream_results = 0
 ```
 
-### 资源受限系统
+### **资源受限系统**
 ```conf
 synchdb.naptime = 1000          # 降低轮询频率
 synchdb.dml_use_spi = false     # 最小化额外开销
@@ -154,7 +154,7 @@ synchdb.dbz_snapshot_fetch_size = 0
 synchdb.dbz_min_row_to_stream_results = 0
 ```
 
-### 开发/测试环境
+### **开发/测试环境**
 ```conf
 synchdb.naptime = 500           # 默认轮询间隔
 synchdb.dml_use_spi = true      # 启用高级功能进行测试
@@ -166,7 +166,7 @@ synchdb.dbz_snapshot_fetch_size = 0
 synchdb.dbz_min_row_to_stream_results = 0
 ```
 
-## 故障排除
+## **故障排除**
 
 1. **CPU 使用率高**
     - 增加 `synchdb.naptime` 值
@@ -191,7 +191,7 @@ synchdb.dbz_min_row_to_stream_results = 0
     - 增加 `synchdb.jvm_max_heap_size`
     - 增加 `shared_buffers`
 
-## 最佳实践
+## **最佳实践**
 
 1. **初始设置**
     - 从默认值开始
@@ -208,7 +208,7 @@ synchdb.dbz_min_row_to_stream_results = 0
     - 监控数据同步延迟
     - 记录配置更改
 
-## 补充说明
+## **补充说明**
 
 1. **性能优化**
     - 在高负载情况下适当增加 `naptime`

@@ -16,7 +16,7 @@ where:
 
 The default data type mapping entries can be overwritten by defining a object mapping rules. See [object mapping rules](https://docs.synchdb.com/user-guide/object_mapping_rules/) for more information.
 
-## MySQL Default Data Type Mapping
+## **MySQL Default Data Type Mapping**
 
 ```c
 datatypehashentry mysql_defaulttypemappings[] =
@@ -84,7 +84,7 @@ datatypehashentry mysql_defaulttypemappings[] =
 };
 ```
 
-## SQL Server Default Data Type Mapping
+## **SQL Server Default Data Type Mapping**
 
 ```c
 datatypehashentry sqlserver_defaulttypemappings[] =
@@ -128,7 +128,7 @@ datatypehashentry sqlserver_defaulttypemappings[] =
 };
 ```
 
-## Oracle Default Data Type Mapping
+## **Oracle Default Data Type Mapping**
 
 ```c
 DatatypeHashEntry oracle_defaultTypeMappings[] =
