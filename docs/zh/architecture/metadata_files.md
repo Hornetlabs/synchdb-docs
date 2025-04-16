@@ -22,7 +22,8 @@ hexdump -C $PGDATA/pg_synchdb/mysql_mysqlconn_offsets.dat
 hexdump -C $PGDATA/pg_synchdb/mysql_mysqlconn_schemahistory.dat
 ```
 
-## 重置连接器
+## **重置连接器**
+
 连接器可以重置（重新复制和重新同步）所有指定表，只需：
 
 * 停止连接器

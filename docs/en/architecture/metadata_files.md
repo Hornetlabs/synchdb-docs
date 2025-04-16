@@ -22,7 +22,8 @@ hexdump -C $PGDATA/pg_synchdb/mysql_mysqlconn_offsets.dat
 hexdump -C $PGDATA/pg_synchdb/mysql_mysqlconn_schemahistory.dat
 ```
 
-## Reset Connector
+## **Reset Connector**
+
 A connector can be reset (re-copy and re-synchronize) specified tables, simply by：
 
 * stop the connector 
