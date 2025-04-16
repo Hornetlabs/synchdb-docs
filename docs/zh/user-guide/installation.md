@@ -33,7 +33,7 @@ sudo ldconfig
 ```sh linenums="1"
 dpkg -i synchdb-1.1-1.ub22.pg16_x86_64.deb
 ```
-5. SynchDB 应该已准备就绪。请参阅 [快速入门](https://docs.synchdb.com/user-guide/quick_start/) 页面开始使用
+5. SynchDB 应该已准备就绪。请参阅 [快速入门](https://docs.synchdb.com/zh/user-guide/quick_start/) 页面开始使用
 
 ### **.rpm 软件包**
 
@@ -62,7 +62,7 @@ sudo ldconfig
 ```sh linenums="1"
 sudo dnf install -y synchdb-1.1-1.el9.pg16.x86_64.rpm
 ```
-5. SynchDB 应该已准备就绪。请参阅 [快速入门](https://docs.synchdb.com/user-guide/quick_start/) 页面开始使用
+5. SynchDB 应该已准备就绪。请参阅 [快速入门](https://docs.synchdb.com/zh/user-guide/quick_start/) 页面开始使用
 
 ## **从预编译的二进制文件安装**
 
@@ -101,7 +101,7 @@ echo "$JRE_LIB_PATH" | sudo tee /etc/ld.so.conf.d/java.conf
 sudo ldconfig
 ```
 
-6. SynchDB 应该已准备就绪。请参阅 [快速入门](https://docs.synchdb.com/user-guide/quick_start/) 页面开始使用
+6. SynchDB 应该已准备就绪。请参阅 [快速入门](https://docs.synchdb.com/zh/user-guide/quick_start/) 页面开始使用
 
 ## **源代码编译及安装**
 

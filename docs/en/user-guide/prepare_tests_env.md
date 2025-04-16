@@ -2,9 +2,11 @@
 weight: 20
 ---
 # Quick Test Environment
-The procedures mentioned here are meant to quickly start up heterogeneous for quick verification and feature demostration. The necessary files and scripts for starting sample heterogeneous databases can be found at SynchDB repository [here](https://github.com/Hornetlabs/synchdb/testenv/)
 
-## Prepare a Sample MySQL Database
+The procedures mentioned here are meant to quickly spin up a external database for verification and feature demostration of Synchdb. The necessary files and scripts for starting sample heterogeneous databases can be found at SynchDB repository [here](https://github.com/Hornetlabs/synchdb/testenv/)
+
+## **Prepare a Sample MySQL Database**
+
 We can start a sample MySQL database for testing using docker compose. The user credentials are described in the `synchdb-mysql-test.yaml` file
 ```
 docker compose -f synchdb-mysql-test.yaml up -d
@@ -25,7 +27,8 @@ Exit mysql client tool:
 \q
 ```
 
-## Prepare a Sample SQL Server Database
+## **Prepare a Sample SQL Server Database**
+
 We can start a sample SQL Server database for testing using docker compose. The user credentials are described in the `synchdb-sqlserver-test.yaml` file
 ```
 docker compose -f synchdb-sqlserver-test.yaml up -d
@@ -61,7 +64,8 @@ Run some simple queries (add -N -C if you are using SSL enabled SQL Server):
 /opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD -d testDB -Q "select * from orders"
 ```
 
-## Prepare a Sample Oracle Database
+## **Prepare a Sample Oracle Database**
+
 We can use the free Oracle database docker image provided by Oracle for testing and evaluation of SynchDB. It comes with a free container database `FREE` and a pluggable database `FREEPDB1`
 ```
 docker run -d -p 1521:1521 container-registry.oracle.com/database/free:latest
@@ -76,7 +80,8 @@ docker exec -it $id bash
 Follow the procedure described [here](https://docs.synchdb.com/user-guide/remote_database_setups/) to set up logminer and logminer user
 
 
-## Use CI Script to Prepare Test Databases
+## **Use CI Script to Prepare Test Databases**
+
 Example MySQL, SQL Server and Oracle databases can also be prepared using a script, located in `ci/` folder under the source repository. The script requires docker and docker-compose to run and basically follow the same procedures as described above.
 
 Prepare MySQL database for test:

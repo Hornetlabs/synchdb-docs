@@ -3,16 +3,18 @@ weight:  30
 ---
 # 快速入门指南
 
-只要您拥有正确的异构数据库连接信息，使用 SynchDB 从异构数据库复制数据到 PostgreSQL 是非常简单的。
+只要您拥有正确的异构数据库连接信息，就可以非常轻松地开始使用 SynchDB 将数据从异构数据库复制到 PostgreSQL。请确保您已完成[此处](https://docs.synchdb.com/user-guide/installation/) 中描述的安装步骤。
 
-## 安装 SynchDB 扩展
+## **创建 SynchDB 扩展**
+
 SynchDB 扩展需要 pgcrypto 来加密某些敏感的凭证数据。请确保在安装 SynchDB 之前已安装它。或者，您可以在 `CREATE EXTENSION` 中包含 `CASCADE` 子句来自动安装依赖项：
 
 ```sql
 CREATE EXTENSION synchdb CASCADE;
 ```
 
-## 创建连接器
+## **创建连接器**
+
 这可以通过实用程序 SQL 函数 `synchdb_add_conninfo()` 来完成。
 
 synchdb_add_conninfo 接受以下参数：
@@ -72,12 +74,8 @@ SELECT
     'mysql');
 ```
 
-## 注意事项
-* 可以创建多个连接到同一类型连接器（如 MySQL、SQLServer 等）的连接器。SynchDB 将生成单独的连接来获取更改数据。
-* 用户自定义的 X509 证书和用于远程数据库 TLS 连接的私钥将在不久的将来得到支持。同时，请确保将 TLS 设置配置为可选。
-* 如果需要 SSL 来建立连接，请参阅[此处](https://docs.synchdb.com/user-guide/transform_rule_file/) 了解如何在每个连接器的规则文件中配置 SSL 设置
+## **检查已创建的连接信息**
 
-## 检查已创建的连接信息
 所有连接信息都创建在表 `synchdb_conninfo` 中。我们可以查看其内容并根据需要进行修改。请注意，用户凭证的密码是由 pgcrypto 使用仅 synchdb 知道的密钥加密的。因此，请不要修改密码字段，否则如果被篡改可能会解密错误。以下是输出示例：
 
 ```sql
@@ -100,7 +98,8 @@ data     | {"pwd": "\\xc30d04070302e3baf1293d0d553066d234014f6fc52e6eea425884b1f
 
 ```
 
-## 启动连接器
+## **启动连接器**
+
 使用函数 `synchdb_start_engine_bgw()` 启动连接器工作进程。它接受一个参数，即上面创建的连接名称。此命令将生成一个新的后台工作进程，使用指定的配置连接到异构数据库。
 
 例如，以下命令将在 PostgreSQL 中生成 2 个后台工作进程，一个从 MySQL 数据库复制，另一个从 SQL Server 复制：
@@ -111,7 +110,8 @@ select synchdb_start_engine_bgw('sqlserverconn');
 select synchdb_start_engine_bgw('oracleconn');
 ```
 
-## 检查连接器运行状态
+## **检查连接器运行状态**
+
 使用“synchdb_state_view()”检查所有连接器的运行状态。
 
 以下是输出示例：
@@ -138,16 +138,17 @@ postgres=# select * from synchdb_state_view;
 | err             | 工作进程遇到的最后一个错误消息，该错误可能导致其退出。此错误可能源自 PostgreSQL 处理更改时，或源自 Debezium 运行引擎从异构数据库访问数据时 |
 | last_dbz_offset | synchdb 捕获的最后一个 Debezium 偏移量。请注意，这可能不反映连接器引擎的当前和实时偏移量值。相反，这显示为一个检查点，如果需要，我们可以从这个偏移量点重新启动 |
 
-## 检查连接器运行统计信息
-使用 `synchdb_stats_view()` 视图检查所有连接器的统计信息。这些统计信息记录了连接器迄今为止处理的不同类型的更改事件的累积测量值。当前，这些统计值存储在共享内存中，而不是持久保存到磁盘。持久统计数据是近期要添加的功能。
+## **检查连接器运行统计信息**
+
+使用 `synchdb_stats_view()` 视图检查所有连接器的统计信息。这些统计信息记录了连接器迄今为止处理过的各种类型变更事件的累积测量值。目前，这些统计值存储在共享内存中，并未持久化到磁盘。持久化统计数据是近期计划添加的功能。统计信息会在每次批次成功完成后更新，其中包含该批次中第一个和最后一个变更事件的多个时间戳。通过查看这些时间戳，我们可以粗略地了解完成批次处理所需的时间，以及数据生成和由 Debezium 和 PostgreQSL 处理之间的延迟。
 
 以下是输出示例：
 ```sql
 postgres=# select * from synchdb_stats_view;
-   connector   | ddls |  dmls   |  reads  | creates | updates | deletes | bad_events | total_events | batches_done | avg_batch_size
----------------+------+---------+---------+---------+---------+---------+------------+--------------+--------------+----------------
- mysqltpccconn |   22 | 3887111 | 3263746 |  208684 |  400241 |   14440 |      14444 |      3901573 |         2441 |           1598
-
+    name    | ddls | dmls | reads | creates | updates | deletes | bad_events | total_events | batches_done | avg_batch_size | first_src_ts  | first_dbz_ts  |  first_pg_ts  |  last_src_ts  |  last_dbz_ts  |  last_pg_ts
+------------+------+------+-------+---------+---------+---------+------------+--------------+--------------+----------------+---------------+---------------+---------------+---------------+---------------+---------------
+ oracleconn |    1 |    1 |     0 |       1 |       0 |       0 |          0 |            2 |            1 |              2 | 1744398189000 | 1744398230893 | 1744398231243 | 1744398198000 | 1744398230950 | 1744398231244
+(1 row)
 ```
 
 列详情：
@@ -165,9 +166,15 @@ postgres=# select * from synchdb_stats_view;
 | total_events | 处理的事件总数（包括 bad_events）|
 | batches_done | 完成的批次数 |
 | avg_batch_size | 平均批次大小（total_events / batches_done）|
+| first_src_ts | 外部数据库生成最后一个批次的第一个事件的时间戳（纳秒）|
+| first_dbz_ts | Debezium 引擎处理最后一个批次的第一个事件的时间戳（纳秒）|
+| first_pg_ts | 最后一个批次的第一个事件应用到 PostgreSQL 的时间戳（纳秒）|
+| last_src_ts | 外部数据库生成最后一个批次的最后一个事件的时间戳（纳秒）|
+| last_dbz_ts | Debezium 引擎处理最后一个批次的最后一个事件的时间戳（纳秒）|
+| last_pg_ts | 最后一个批次的最后一个事件应用到 PostgreSQL 的时间戳（纳秒）|
 
+## **停止连接器**
 
-## 停止连接器
 使用 SQL 函数 `synchdb_stop_engine_bgw()` 停止正在运行或暂停的连接器工作进程。此函数以 `conninfo_name` 作为其唯一参数，可以从 `synchdb_get_state()` 视图的输出中找到。
 
 例如：
@@ -176,3 +183,11 @@ select synchdb_stop_engine_bgw('mysqlconn');
 ```
 
 `synchdb_stop_engine_bgw()` 函数还会将连接信息标记为 `inactive`，这可以防止此工作进程在服务器重启时自动重新启动。
+
+## **移除连接器**
+使用 `synchdb_del_conninfo()` SQL 函数从 SynchDB 中移除连接器。这将清除该连接器上的[元数据文件](https://docs.synchdb.com/zh/architecture/metadata_files/)以及所有[对象映射](https://docs.synchdb.com/zh/user-guide/object_mapping_rules/)。
+
+例如：
+```
+select synchdb_del_conninfo('mysqlconn');
+```

@@ -3,16 +3,18 @@ weight: 30
 ---
 # Quick Start Guide
 
-It is very simple to start using SynchDB to perform data replication from heterogeneous databases to PostgreSQL given that you have the correct connection information to your heterogeneous databases.
+It is very simple to start using SynchDB to perform data replication from heterogeneous databases to PostgreSQL given that you have the correct connection information to your heterogeneous databases. Make sure you have already done the installation steps described [here](https://docs.synchdb.com/user-guide/installation/)
 
-## Install SynchDB Extension
+## **Create SynchDB Extension**
+
 SynchDB extension requires pgcrypto to encrypt certain sensitive credential data. Please make sure it is installed prior to installing SynchDB. Alternatively, you can include `CASCADE` clause in `CREATE EXTENSION` to automatically install dependencies:
 
 ```sql
 CREATE EXTENSION synchdb CASCADE;
 ```
 
-## Create a Connector
+## **Create a Connector**
+
 This can be done with utility SQL function `synchdb_add_conninfo()`.
 
 synchdb_add_conninfo takes these arguments:
@@ -72,13 +74,8 @@ SELECT
     'mysql');
 ```
 
-## Things to Note
-* It is possible to create multiple connectors connecting to the same connector type (ex, MySQL, SQLServer..etc). SynchDB will spawn separate connections to fetch change data.
-* User-defined X509 certificate and private key for TLS connection to remote database will be supported in near future. In the meantime, please ensure TLS settings are set to optional.
-* If SSL is required to establish the connection, refer to [here](https://docs.synchdb.com/user-guide/transform_rule_file/) to learn how to configure SSL settings in the rule file per conenctor
- 
+## **Check Created Connection Info**
 
-## Check Created Connection Info
 All connection information are created in the table `synchdb_conninfo`. We are free to view its content and make modification as required. Please note that the password of a user credential is encrypted by pgcrypto using a key only known to synchdb. So please do not modify the password field or it may be decrypted incorrectly if tempered. See below for an example output:
 
 ```sql
@@ -102,7 +99,8 @@ data     | {"pwd": "\\xc30d04070302e3baf1293d0d553066d234014f6fc52e6eea425884b1f
 
 ```
 
-## Start a Connector
+## **Start a Connector**
+
 Use `synchdb_start_engine_bgw()` function to start a connector worker. It takes one argument which is the connection  name created above. This command will spawn a new background worker to connect to the heterogeneous database with the specified configurations.
 
 For example, the following will spawn 2 background worker in PostgreSQL, one replicating from a MySQL database, the other from SQL Server
@@ -140,16 +138,17 @@ Column Details:
 | err             | the last error message encountered by the worker which would have caused it to exit. This error could originated from PostgreSQL while processing a change, or originated from Debezium running engine while accessing data from heterogeneous database. |
 | last_dbz_offset | the last Debezium offset captured by synchdb. Note that this may not reflect the current and real-time offset value of the connector engine. Rather, this is shown as a checkpoint that we could restart from this offeet point if needed.|
 
-## Check Connector Running Statistics
-Use `synchdb_stats_view()` view to examine the statistic information of all connectors. These statistics record cumulative measurements about different types of change events a connector has processed so far. Currently these statistic values are stored in shared memory and not persisted to disk. Persist statistics data is a feature to be added in near future.
+## **Check Connector Running Statistics**
+
+Use `synchdb_stats_view()` view to examine the statistic information of all connectors. These statistics record cumulative measurements about different types of change events a connector has processed so far. Currently these statistic values are stored in shared memory and not persisted to disk. Persist statistics data is a feature to be added in near future. The statistic information is updated at every successful completion of a batch and it contains several timestamps of the first and last change event within that batch. By looking at these timestamps, we can roughly tell the time it takes to finish processing the batch and the delay between when the data is generated, and processed by both Debezium and PostgreQSL.
 
 See below for an example output:
 ```sql
 postgres=# select * from synchdb_stats_view;
-   connector   | ddls |  dmls   |  reads  | creates | updates | deletes | bad_events | total_events | batches_done | avg_batch_size
----------------+------+---------+---------+---------+---------+---------+------------+--------------+--------------+----------------
- mysqltpccconn |   22 | 3887111 | 3263746 |  208684 |  400241 |   14440 |      14444 |      3901573 |         2441 |           1598
-
+    name    | ddls | dmls | reads | creates | updates | deletes | bad_events | total_events | batches_done | avg_batch_size | first_src_ts  | first_dbz_ts  |  first_pg_ts  |  last_src_ts  |  last_dbz_ts  |  last_pg_ts
+------------+------+------+-------+---------+---------+---------+------------+--------------+--------------+----------------+---------------+---------------+---------------+---------------+---------------+---------------
+ oracleconn |    1 |    1 |     0 |       1 |       0 |       0 |          0 |            2 |            1 |              2 | 1744398189000 | 1744398230893 | 1744398231243 | 1744398198000 | 1744398230950 | 1744398231244
+(1 row)
 ```
 
 Column Details:
@@ -167,9 +166,16 @@ Column Details:
 | total_events | total number of events processed (including bad_events) |
 | batches_done | number of batches completed |
 | avg_batch_size | average batch size (total_events / batches_done) |
+| first_src_ts | the timestamp in nanoseconds when the last batch's first event is produced at the external database |
+| first_dbz_ts | the timestamp in nanoseconds when the last batch's first event is processed by Debezium Engine |
+| first_pg_ts | the timestamp in nanoseconds when the last batch's first event is applied to PostgreSQL |
+| last_src_ts | the timestamp in nanoseconds when the last batch's last event is produced at the external database |
+| last_dbz_ts | the timestamp in nanoseconds when the last batch's last event is processed by Debezium Engine |
+| last_pg_ts | the timestamp in nanoseconds when the last batch's last event is applied to PostgreSQL |
 
 
-## Stop a Connector
+## **Stop a Connector**
+
 Use `synchdb_stop_engine_bgw()` SQL function to stop a running or paused connector worker. This function takes `conninfo_name` as its only parameter, which can be found from the output of `synchdb_get_state()` view.
 
 For example:
@@ -179,3 +185,10 @@ select synchdb_stop_engine_bgw('mysqlconn');
 
 `synchdb_stop_engine_bgw()` function also marks a connection info as `inactive`, which prevents the this worker from automatic-relaunch at server restarts. See below for more details.
 
+## **Remove a Connector**
+Use `synchdb_del_conninfo()` SQL function to remove a connector from SynchDB. This will wipe out the [metadata files](https://docs.synchdb.com/architecture/metadata_files/) and also any [object mappings](https://docs.synchdb.com/user-guide/object_mapping_rules/) created on that connector.
+
+For example:
+```
+select synchdb_del_conninfo('mysqlconn');
+```

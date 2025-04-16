@@ -2,9 +2,11 @@
 weight:  20
 ---
 # 快速测试环境
-此处提到的步骤旨在快速启动异构数据库，以便快速验证和功能演示。启动样本异构数据库所需的文件和脚本可以在 SynchDB 仓库 [这里](https://github.com/Hornetlabs/synchdb/testenv/) 找到。
 
-## 准备一个样本 MySQL 数据库
+此处提到的步骤旨在快速启动外部数据库，用于 Synchdb 的验证和功能演示。启动示例异构数据库所需的文件和脚本可以在 SynchDB 代码库中找到（此处）(https://github.com/Hornetlabs/synchdb/testenv/)。
+
+## **准备一个样本 MySQL 数据库**
+
 我们可以使用 docker compose 启动一个样本 MySQL 数据库进行测试。用户凭证在 `synchdb-mysql-test.yaml` 文件中描述。
 
 ```
@@ -26,7 +28,8 @@ FLUSH PRIVILEGES;
 \q
 ```
 
-## 准备一个样本 SQL Server 数据库
+## **准备一个样本 SQL Server 数据库**
+
 我们可以使用 docker compose 启动一个样本 SQL Server 数据库进行测试。用户凭证在 `synchdb-sqlserver-test.yaml` 文件中描述。
 ```
 docker compose -f synchdb-sqlserver-test.yaml up -d
@@ -62,7 +65,8 @@ docker exec -it $id bash
 /opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD -d testDB -Q "select * from orders"
 ```
 
-## 准备一个示例 Oracle 数据库
+## **准备一个示例 Oracle 数据库**
+
 我们可以使用 Oracle 提供的免费 Oracle 数据库 docker 镜像来测试和评估 SynchDB。它附带一个免费的容器数据库 `FREE` 和一个可插入数据库 `FREEPDB1`
 ```
 docker run -d -p 1521:1521 container-registry.oracle.com/database/free:latest
@@ -76,7 +80,8 @@ docker exec -it $id bash
 
 按照[此处](https://docs.synchdb.com/zh/user-guide/remote_database_setups/) 中描述的步骤设置 logminer 和 logminer 用户
 
-## 使用 CI 脚本准备测试数据库
+## **使用 CI 脚本准备测试数据库**
+
 示例 MySQL、SQL Server 和 Oracle 数据库也可以使用位于源存储库下 `ci/` 文件夹中的脚本进行准备。该脚本需要 docker 和 docker-compose 才能运行，并且基本上遵循与上述相同的步骤。
 
 准备用于测试的 MySQL 数据库：
