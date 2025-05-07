@@ -6,7 +6,7 @@ SynchDB periodically fetches a batch of change request from Debezium runner engi
 ## **Batch Handling**
 SynchDB processes a batch within one transaction. This means the change events inside a batch are either all or none processed. When all the changes have been successfully processed, SynchDB simply sends a message to Debezium runner engine to mark the batch as processed and completed. This action causes offsets to be committed and eventually flush to disk. An offset represents a logical location during a replication similar to the LSN (Log Seqeuence Number) in PostgreSQL.
 
-![img](/images/synchdb-batch-new.png)
+![img](/images/synchdb-batch-new.jpg)
 
 
 If a batch of changes are partially successful on PostgreSQL, it would cause the transaction to rollback and SynchDB will not notify Debezium runner about batch completion. When the connector is restarted, the same batch will resume processing again. 

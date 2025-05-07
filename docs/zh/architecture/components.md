@@ -1,7 +1,7 @@
 # 组件架构
 ## **SynchDB Worker 组件图**
 
-![img](/images/synchdb-component-diag.png)
+![img](/images/synchdb-component-diag.jpg)
 
 SynchDB Worker 是由 SynchDB 扩展发起和启动的 PostgreSQL 后台工作进程。它负责初始化 Java 虚拟机 (JVM)，运行 Debezium Runner模块，（它是 SynchDB 的 Java 部分），利用嵌入式 Debezium 引擎从异构数据库源获取更改事件。每个 SynchDB 工作进程都由下面列出的组件和模块组成：
 
@@ -33,7 +33,7 @@ JVM + DBZ 初始化程序主要负责实例化新的 JVM 环境并在其中运�
 
 请求处理器主要负责检查和处理来自 SynchDB 用户的任何传入状态更改请求。此类状态更改请求的示例包括从“同步”到“暂停”，从“暂停”到“更新偏移”等。以下是 synchdb 的状态图。更多信息可以在 [此处](https://docs.synchdb.com/zh/user-guide/utility_functions/#state-management) 找到。
 
-![img](/images/synchdb-state-diag.png)
+![img](/images/synchdb-state-diag.jpg)
 
 ### **4) JSON 解析器**
 
@@ -248,11 +248,11 @@ DML 转换器由几个例程组成，这些例程可以处理特定的输入数�
 
 下图显示了受支持的本机数据类型列表以及 SynchDB 如何根据其性质（或类别）将它们分组在一起。例如，数字组包含所有本质上是数字的整数或浮点数据类型。如果数据包含非数字字符，它们将给出错误。同样，不同的数据类型组需要特定的数据格式才能应用。
 
-![img](/images/synchdb-native-types5.png)
+![img](/images/synchdb-native-types5.jpg)
 
 现在 DML 转换器知道如何在 PostgreSQL 端为这些受支持的本机数据类型生成数据，然后它会查看 DBZ 元数据以了解源数据的表示方式。这是必要的，因为 Debezium 引擎可能会对数据进行编码以打包更多需要在处理数据之前解码的信息，或者使用结构来表示复杂的数据类型，如几何图形。如果不知道 Debezium 如何表示数据，数据处理可能会产生不理想的结果，导致 PostgreSQL 在应用期间出错。以下是 Debezium 可以表示有效负载数据的格式类型列表：
 
-![img](/images/synchdb-dbztype.png)
+![img](/images/synchdb-dbztype.jpg)
 
 有了这两条信息，DML 转换器就知道输入是什么样子，输出应该是什么样子。它将从其函数矩阵中选择最佳处理程序来处理数据。例如，如果目标类型为“FLOAT4”，源数据类型格式为“DBZTYPE_BYTES”，则将选择函数“handle_base64_to_numeric()”来处理数据。所选函数负责解码二进制输入并将其计算为数字。
 
@@ -314,7 +314,7 @@ SPI Client 组件存在于 Replication Agent 下，它充当 PostgreSQL 核心�
 
 ## **Debezium Runner 组件图**
 
-![img](/images/synchdb-dbzrunner-component2.png)
+![img](/images/synchdb-dbzrunner-component2.jpg)
 
 Debezium Runner 是 SynchDB 组件的一部分，位于部署的 Java 端。它是嵌入式 Debezium 引擎 (Java) 和 SynchDB Worker (C) 之间的主要促进者。它提供了 SynchDB Worker 可以通过 JNI 库进行交互的几种 Java 函数。这些交互包括初始化 Debezium 引擎、启动或停止引擎、获取一批更改事件以及将一批标记为已完成。这些操作对于确保复制一致性至关重要。主要组件包括：
 

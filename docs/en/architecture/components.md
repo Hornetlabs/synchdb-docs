@@ -1,7 +1,7 @@
 # Component Architecture
 ## **SynchDB Worker Component Diagram**
 
-![img](/images/synchdb-component-diag.png)
+![img](/images/synchdb-component-diag.jpg)
 
 A SynchDB Worker is a PostgreSQL background worker initiated and started by the SynchDB extension. It is responsible for initializing Java Virtual Machine (JVM), run Debezium runner, which is the Java part of SynchDB that utilizes the embedded Debezium engine to obtain change events from heterogeneous database sources. Each SynchDB worker consists of components and modules as shown in the component diagram and listed below:
 
@@ -33,7 +33,7 @@ Please note that each SynchDB worker will initialize and run a JVM instance, so 
 
 The Request Handler is primarily responsible for checking and handling any incoming state change request from the SynchDB user. Examples of such state change requests include going from "SYNCING" to "PAUSED", from "PAUSED" to "UPDATE OFFSET" ...etc. Below is the state diagram of synchdb. More information can be found [here](https://docs.synchdb.com/user-guide/utility_functions/#state-management).
 
-![img](/images/synchdb-state-diag.png)
+![img](/images/synchdb-state-diag.jpg)
 
 ### **4) JSON Parser**
 
@@ -250,11 +250,11 @@ The routine selection starts by looking at the data type created at the PostgreS
 
 The image below shows the list of supported native data types and how SynchDB groups them together based on their nature (or category). For example, the numeric group contains all integer or float data types that are numeric in nature. They will give error if the data contains non-numeric characters. Likewise, different groups of data types requires a sepcific format of data in order to apply.
 
-![img](/images/synchdb-native-types5.png)
+![img](/images/synchdb-native-types5.jpg)
 
 Now that DML Converter knows how to produce the data for these supported native data types on the PostgreSQL side, it then looks at the DBZ metadata to learn how the source data is represented. This is needed because Debezium engine may encode the payload data to pack more information that requires decoding prior to processing the data, or use a structure to represent complex data types like Geometry. Without knowing how Debezium represents the data, the data processing is likely to produce undesired results, causing PostgreSQL to error during apply. Below is the list of formatting types that Debezium could represent a payload data with:
 
-![img](/images/synchdb-dbztype.png)
+![img](/images/synchdb-dbztype.jpg)
 
 With these 2 pieces of information, DML Converter knows what the input looks like and what the output should look like. It will select the best handler from its function matrix to process the data. For example, if destination type is `FLOAT4`, and source data type is formatted as `DBZTYPE_BYTES`, the function `handle_base64_to_numeric()` will be selected to process the data. The selected function is responsible for decode the binary input and compute it as a numeric. 
 
@@ -318,7 +318,7 @@ Also residing in the Replication Agent. This component is responsible for initia
 
 ## **Debezium Runner Component Diagram**
 
-![img](/images/synchdb-dbzrunner-component2.png)
+![img](/images/synchdb-dbzrunner-component2.jpg)
 
 Debezium Runner is part of SynchDB component residing on Java side of the deployment. It is the main faciliator between embedded Debezium engine (Java) and SynchDB Worker (C). It provides several Java methods that SynchDB worker can interact via JNI library. These interactions include initializing a Debezium engine, start or stop the engine, obtain a batch of change events and mark a batch as done. These operations are essential for ensuring replication consistency. Main components are:
 
