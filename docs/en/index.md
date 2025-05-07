@@ -1,7 +1,7 @@
 # About
 
 <p align="center">
-  <img src="images/synchdblogo.png" alt="synchdb" width="400">
+  <img src="images/synchdblogo.jpg" alt="synchdb" width="400">
 </p>
 
 ## **About SynchDB**
