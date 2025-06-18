@@ -110,8 +110,8 @@ nav:
    - Overview: architecture/architecture.md
    - Components: architecture/components.md
    - Batch Processing: architecture/batch_change_handling.md
-   - Non-Native Data Type Processing: architecture/non_native_datatype_processing.md
-   - Native Data Type Processing: architecture/native_datatype_processing.md
+   - Non-Native Data Type Processing: architecture/non_native_datatype_handling.md
+   - Native Data Type Processing: architecture/native_datatype_handling.md
    - Debezium Metadata Files: architecture/metadata_files.md
  - User guide:
    - Installation: user-guide/installation.md
