@@ -1,4 +1,4 @@
-# SynchDB Extension Component Architecture - C
+# SynchDB Component Architecture - C
 
 ## **SynchDB Worker Component Diagram**
 

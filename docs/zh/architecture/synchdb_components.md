@@ -1,4 +1,4 @@
-# SynchDB 扩展组件架构 - C
+# SynchDB 组件架构 - C
 
 ## **SynchDB Worker 组件图**
 

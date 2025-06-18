@@ -76,7 +76,7 @@ plugins:
           build: true
           nav_translations:
             User guide: 用户指南
-            Architecture: 架构
+            Architecture: 架构概述
             SynchDB Components: SynchDB组件架构
             Debezium Runner Components: Debezium Runner组件架构
             Non-Native Data Type Processing: 非原生数据类型处理
@@ -111,7 +111,7 @@ plugins:
 nav:
  - Home: index.md
  - Architecture:
-   - Overview: architecture/architecture.md
+   - Architecture Overview: architecture/architecture.md
    - SynchDB Components: architecture/synchdb_components.md
    - Debezium Runner Components: architecture/debezium_runner_components.md
    - Batch Processing: architecture/batch_change_handling.md

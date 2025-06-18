@@ -1,4 +1,5 @@
 # 架构概述
+
 ## **总体架构图**
 
 ![img](/images/synchdbarch.jpg)
@@ -26,10 +27,10 @@ SynchDB 扩展包含两个代码空间（Java 和 C），JNI 位于两者之间�
 
 这是一个 Java 驱动程序，它利用 Debezium 嵌入式引擎以及各种连接到不同数据库源的“连接器”。它是实现从多个数据库供应商进行逻辑复制的关键底层组件。它的主要职责是连接到指定的远程数据库，并定期获取其更改并将其转换为通用的 JSON 结构。然后，此 JSON 结构将传递给“C 语言 SynchDB 扩展”进行处理，并最终将更改应用于 PostgreSQL。
 
-Debezium Runner 组件架构](https://docs.synchdb.com/zh/architecture/debezium_runner_components/)
+[Debezium Runner 组件架构](https://docs.synchdb.com/zh/architecture/debezium_runner_components/)
 
 ### **SynchDB 扩展 - C**
 
 这是初始化 Java 虚拟机 (JVM) 并在其上运行 Debezium Runner 的主要入口点。它会定期从 Debezium Runner 获取一批 JSON 变更事件，处理这些数据并将其应用到 PostgreSQL。它还负责通知 Debezium 已成功完成一批 JSON 变更事件，以便两个组件在复制进度方面保持同步。
 
-SynchDB 扩展组件架构](https://docs.synchdb.com/zh/architecture/synchdb_components/)
+[SynchDB 扩展组件架构](https://docs.synchdb.com/zh/architecture/synchdb_components/)
