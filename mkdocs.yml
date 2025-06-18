@@ -76,7 +76,7 @@ plugins:
           build: true
           nav_translations:
             User guide: 用户指南
-            Architecture: 架构概述
+            Architecture Overview: 架构概述
             SynchDB Components: SynchDB组件架构
             Debezium Runner Components: Debezium Runner组件架构
             Non-Native Data Type Processing: 非原生数据类型处理
