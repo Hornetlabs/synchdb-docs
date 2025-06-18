@@ -1,4 +1,4 @@
-# 架构
+# 架构概述
 ## **总体架构图**
 
 ![img](/images/synchdbarch.jpg)

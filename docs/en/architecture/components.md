@@ -243,46 +243,9 @@ DML Converter consists of several routines that can handle a particular input da
 
 The routine selection starts by looking at the data type created at the PostgreSQL, which can be divided into 2 types, each with slightly different handling techniques:
 
-* native data types.
-* non-native data types.
+* [native data types](https://docs.synchdb.com/architecture/native_datatype_handling/).
+* [non-native data types]((https://docs.synchdb.com/architecture/non_native_datatype_handling/).
 
-#### **Handling Native Data Types**
-
-The image below shows the list of supported native data types and how SynchDB groups them together based on their nature (or category). For example, the numeric group contains all integer or float data types that are numeric in nature. They will give error if the data contains non-numeric characters. Likewise, different groups of data types requires a sepcific format of data in order to apply.
-
-![img](/images/synchdb-native-types5.jpg)
-
-Now that DML Converter knows how to produce the data for these supported native data types on the PostgreSQL side, it then looks at the DBZ metadata to learn how the source data is represented. This is needed because Debezium engine may encode the payload data to pack more information that requires decoding prior to processing the data, or use a structure to represent complex data types like Geometry. Without knowing how Debezium represents the data, the data processing is likely to produce undesired results, causing PostgreSQL to error during apply. Below is the list of formatting types that Debezium could represent a payload data with:
-
-![img](/images/synchdb-dbztype.jpg)
-
-With these 2 pieces of information, DML Converter knows what the input looks like and what the output should look like. It will select the best handler from its function matrix to process the data. For example, if destination type is `FLOAT4`, and source data type is formatted as `DBZTYPE_BYTES`, the function `handle_base64_to_numeric()` will be selected to process the data. The selected function is responsible for decode the binary input and compute it as a numeric. 
-
-
-#### **Handling Non-Native Data Types**
-It is possible that a table contains a column data type that is custom created by the user or created by another installed extension. In this case, the native data type handling mentioned above will not work becasue the type is not listed in the list of supported native data types. Instead, the DML Converter accesses the catalog, obtains the OID of the non-native data type, and looks up its "category" as defined in PostgreSQL. Below is a list of category supported by PostgreSQL as of version 17:
-
-```
-#define  TYPCATEGORY_INVALID	'\0'
-#define  TYPCATEGORY_ARRAY		'A'
-#define  TYPCATEGORY_BOOLEAN	'B'
-#define  TYPCATEGORY_COMPOSITE	'C'
-#define  TYPCATEGORY_DATETIME	'D'
-#define  TYPCATEGORY_ENUM		'E'
-#define  TYPCATEGORY_GEOMETRIC	'G'
-#define  TYPCATEGORY_NETWORK	'I'
-#define  TYPCATEGORY_NUMERIC	'N'
-#define  TYPCATEGORY_PSEUDOTYPE 'P'
-#define  TYPCATEGORY_RANGE		'R'
-#define  TYPCATEGORY_STRING		'S'
-#define  TYPCATEGORY_TIMESPAN	'T'
-#define  TYPCATEGORY_USER		'U'
-#define  TYPCATEGORY_BITSTRING	'V'
-#define  TYPCATEGORY_UNKNOWN	'X'
-
-```
-
-The category tells DML Converter about the nature of the data type (numeric? string? datetime? ...etc) to help the converter select the right routine to process. For most cases, using type category paired with the DBZ metadata that describes how the input data payload is formatted is sufficient to select the right routine to process the data. However, in some cases, it may not be sufficient. For example, custom DATE, TIME, TIMESTAMP date types could all be categorized under `TYPCATEGORY_DATETIME`, so the converter does not know if it is working with a DATE, TIME or TIMESTAMP as each would produce different time formats. Currently, the covnerter looks for certain keywords from the data type name to identify. In the future, we may expose this part to let the user tell the converter exactly which routine to use should there be an ambiguity. Another example would be `TYPCATEGORY_USER` and `TYPCATEGORY_GEOMETRIC` which does not clearly indicate the data format. For these categories, the converter currently does not perform any further processing as it simply leaves the data payload as is. PostgreSQL may or may not reject such unprocessed data. This is why the transform feature next is important to give the DML converter a final chance to correct its data payload.
 
 #### **Data Transformation**
 After the input data has been processed by the logics as described above, the converter will then check if the user has configured a `transform expression` that shall be applied to the processed data before applying to PostgreSQL. A transform expression could be any PostgreSQL expressions, commands, or SQL functions that could be run on a psql prompt. It uses the `%d` as a placeholder character that will be replaced with the processed data during the transformation. For example, a transform expression "'>>>>>' || '%d' || '<<<<<'" will prepend and append additional characters to the processed string data. 

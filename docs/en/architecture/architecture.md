@@ -1,4 +1,4 @@
-# Architecture
+# Architecture Overview
 ## **Overall Archtecture Diagram**
 
 ![img](/images/synchdbarch.jpg)

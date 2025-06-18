@@ -9,9 +9,3 @@ SynchDB 在一个事务内处理一批变更（也叫一个 batch）。这意味
 ![img](/images/synchdb-batch-new.jpg)
 
 如果一批更改在 PostgreSQL 上部分成功，则会导致事务回滚，并且 SynchDB 不会通知 Debezium 运行器批处理已完成。当连接器重新启动时，同一批将再次恢复处理。
-
-## **潜在冲突**
-如果 PostgreSQL 成功处理了一个批次，但在向 Debezium 发送批次完成请求之前遇到断电，则会导致 SynchDB 在重新启动时收到相同的批次请求，因为 Debezium 认为该批次尚未处理，但实际上已经处理。这将导致批次因数据重复而失败。
-
-该问题已记录为 [issue 108](https://github.com/Hornetlabs/synchdb/issues/108)，预计在不久的将来解决。
-

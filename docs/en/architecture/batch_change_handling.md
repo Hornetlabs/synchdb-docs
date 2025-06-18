@@ -8,10 +8,4 @@ SynchDB processes a batch within one transaction. This means the change events i
 
 ![img](/images/synchdb-batch-new.jpg)
 
-
 If a batch of changes are partially successful on PostgreSQL, it would cause the transaction to rollback and SynchDB will not notify Debezium runner about batch completion. When the connector is restarted, the same batch will resume processing again. 
-
-## **Potential Conflicts**
-If a batch is successfully processed by PostgreSQL, but encountered a power outage right before it sends a batch completion request to Debezium, it would cause SynchDB to receive the same batch request when it restarts, because Debezium thinks this batch has not been processed but in fact it has. This would cause the batch to fail due to duplicate data. 
-
-This issue is logged as [issue 108](https://github.com/Hornetlabs/synchdb/issues/108) and is to be addressed in near future.
