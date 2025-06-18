@@ -49,6 +49,8 @@ plugins:
             Home: Inicio
             Architecture: Arquitectura
             Components: Componentes
+            Non-Native Data Type Processing: Procesamiento de tipos de datos no nativos
+            Native Data Type Processing: Procesamiento de tipos de datos nativos
             Overview: Visión General
             Batch Change Handling: Manejo de Cambios por Lotes
             Metadata Files: Archivos de Metadatos
@@ -74,6 +76,8 @@ plugins:
             User guide: 用户指南
             Architecture: 架构
             Components: 组件架构
+            Non-Native Data Type Processing: 非原生数据类型处理
+            Native Data Type Processing: 原生数据类型处理
             Home: 主页
             Overview: 概述
             Batch Change Handling: 批量变更处理
@@ -105,8 +109,10 @@ nav:
  - Architecture:
    - Overview: architecture/architecture.md
    - Components: architecture/components.md
-   - Batch Change Handling: architecture/batch_change_handling.md
-   - Metadata Files: architecture/metadata_files.md
+   - Batch Processing: architecture/batch_change_handling.md
+   - Non-Native Data Type Processing: architecture/non_native_datatype_processing.md
+   - Native Data Type Processing: architecture/native_datatype_processing.md
+   - Debezium Metadata Files: architecture/metadata_files.md
  - User guide:
    - Installation: user-guide/installation.md
    - Remote Database Setups: user-guide/remote_database_setups.md

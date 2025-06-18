@@ -244,7 +244,7 @@ DML Converter consists of several routines that can handle a particular input da
 The routine selection starts by looking at the data type created at the PostgreSQL, which can be divided into 2 types, each with slightly different handling techniques:
 
 * [native data types](https://docs.synchdb.com/architecture/native_datatype_handling/).
-* [non-native data types]((https://docs.synchdb.com/architecture/non_native_datatype_handling/).
+* [non-native data types](https://docs.synchdb.com/architecture/non_native_datatype_handling/).
 
 
 #### **Data Transformation**
