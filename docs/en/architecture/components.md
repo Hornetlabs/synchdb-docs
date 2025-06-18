@@ -253,22 +253,9 @@ After the input data has been processed by the logics as described above, the co
 So, if a non-native data type has category TYPCATEGORY_USER, DML Converter does not have a suitable routine to process this data and will leave it as is, we can define a transform expression to call a custom SQL function from where it knows how to properly handle the data and produce a suitable output. For example, the expression, "to_my_composite_type('%d')" will call a user-defined SQL function `to_my_composite_type` with the data as input. The expression must have a return value as it will be fed into PostgreSQL during apply.
 
 
-
 ### **9) Error Handler**
 
-The Error Handler is primarily responsible for handling any error that could arise from each stage of data synchronization. Format Converter supports several error handling strategies that can be configured via "synchdb.error_handling_strategy" parameters with possible options listed below:
-
-#### **exit (default)**
-
-This is the default error strategy, which causes the connector worker to exit when an error has occured. The batch that it is currently working on, which resulted in error will not be marked as completed and the change events that have been successfully completed in the same batch will not be committed. User is expected to check the error message as returned in `synchdb_state_view()` or the log file to resolve the error. When the connector worker is restarted, the connector will automatically retry the same batch that has failed previously.
-
-#### **retry**
-
-This strategy adds a `restart_time` of 5 second to the connector worker, which causes PostgreSQL's bgworker engine to automatically start the worker every 5 second should it has exited. This means that when an error occurs, the connector worker will still exit, but unlike the `exit` strategy above, it will automatically be restarted by bgworker engine, which will retry on the same batch that has failed. It will continue to exit and restart until the error has been resolved.
-
-#### **skip**
-
-As the name suggests, when in `skip` error strategy, any error that the connector worker encountered will not cause the worker to exit, the error messages, however, will still be written to the log or `synchdb_state_view()`, but the connector itself will ignore the error and move on to processing the next change event and even the next batch. 
+The Error Handler is primarily responsible for handling any error that could arise from each stage of data synchronization. Format Converter supports several error handling strategies that can be configured via "synchdb.error_handling_strategy" parameters. Details can be found [here](https://docs.synchdb.com/user-guide/configure_error_strategies/).
 
 
 ### **10) SPI Client**

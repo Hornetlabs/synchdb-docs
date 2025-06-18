@@ -68,6 +68,7 @@ plugins:
             Set Offset: Establecer Desplazamiento
             Utility Functions: Funciones de Utilidad
             Changelog: Registro de Cambios
+            Configure Error Strategies: Configurar estrategias de error
         - locale: zh
           name: 中文
           site_name: SynchDB 文档
@@ -96,6 +97,7 @@ plugins:
             Set Offset: 设置偏移量
             Utility Functions: 实用函数
             Changelog: 变更日志
+            Configure Error Strategies: 配置错误处理策略
   - mike:
       version_selector: true
       css_dir: css
@@ -126,6 +128,7 @@ nav:
    - Selective Table Sync: user-guide/selective_table_sync.md
    - Set Offset: user-guide/set_offset.md
    - Utility Functions: user-guide/utility_functions.md
+   - Configure Error Strategies: user-guide/configure_error_strategies.md
  - Changelog: changelog.md
  # - Homepage: https://www.synchdb.com
 
