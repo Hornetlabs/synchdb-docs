@@ -5,54 +5,30 @@
 
 SynchDB extension consists of 2 code spaces (Java and C) with JNI sitting in between them as facilitator.
 
-**Java**
+**Debezium Runner - Java**
 
-* Debezium Runner
+* Debezium Runner Driver
 * Embedded Debezium Engine
 
-**C**
+**SynchDB Extension - C**
 
 * SynchDB Launcher
 * SynchDB Worker
 * Format Converter
 * Replication Agent
-* Table Synch Agent (To be determined)
 
-### **Debezium Runner (Java)**
-* The main java driver that utilizes the `Embedded Debezium Engine`.
-* Creates, controls, manages and configures the `Embedded Debezium Engine`.
-* Contains routines to be invoked by the components on the `C side` via `JNI`.
+The 2 code spaces are interconnected via Java Native Interface (JNI), which is a framework that allows Java applications to interact with native code written in languages like C or C++ and vice versa. It enables Java programs to call and be called by native applications and libraries, providing a bridge between Java’s platform independence and the performance advantages of native code. JNI is commonly used to integrate platform-specific features, optimize performance-critical sections of an application, or access legacy libraries that are not available in Java. It requires careful management of resources, as it involves switching between the Java Virtual Machine (JVM) and native environments, which can introduce complexity.
 
-### **Embedded Debezium Engine (Java)**
-* Supports various connector implementations to replicate change data from various database types such as MySQL, Oracle, SQL Server, etc.
-* Connects and maintains connections with external databases and fetches their change events.
+For this reason, SynchDB requires JNI to exchange resources between Debezium runner engine and SynchDB PostgreSQL extension. JNI is available with Java Installation (ex. openjdk).
 
-### **SynchDB Launcher**
-* Responsible for creating and destroying SynchDB workers using PostgreSQL's background worker APIs.
-* Configure each worker's connector type, destination database IPs, ports, etc.
+### **Debezium Runner - Java**
 
-### **SynchDB Worker**
-* Initialize `Java Virtual Machine (JVM)` and instantiates a `Debezium Runner` to replicate changes from a specific connector type.
-* Communicate with Debezium Runner via JNI to receive change data in JSON formats.
-* Transfer the JSON change event to `Format Converter` module for further processing.
+This is the driver program in Java that utilizes the Debezium Embedded Engine with various `connectors` to different database sources. This is the key underlying components that make logical replication from multiple database vendors possible. Its main responsibility is to connect to the specified remote database and periodically fetch its changes and convert them to a common JSON structure. This JSON structure is then passed down to `SynchDB Extension in C` to process and eventually apply the changes to PostgreSQL.
 
-### **Format Converter**
-* Parse the JSON change event using PostgreSQL Jsonb APIs
-* Transform DDL change details to PostgreSQL compatible SQL queries following user-defined translation rules.
-* Transform DML change details to PostgreSQL compatible data representation by processing them based on column data types. It Produces raw HeapTupleData which can be fed directly to Heap Access Method within PostgreSQL for faster executions.
+[Debezium Runner Component Architecture](https://docs.synchdb.com/architecture/debezium_runner_components/)
 
-### **Replication Agent**
-* Processes the outputs from **`Format Converter`**.
-* **`Format Converter`** will produce HeapTupleData format outputs, then **`Replication Agent`** will invoke PostgreSQL's heap access method routines to handle them.
-* for DDL queries, **`Replication Agent`** will invoke PostgreSQL's SPI to handle them.
+### **SynchDB Extension - C**
 
-### **Table Sync Agent**
-* Design details and implementation are not available yet. TBD
-* Intended to provide a more efficient alternative to perform initial table synchronization.
+This is the main entrypoint that initializes a Java Virtual Machine (JVM) and run Debezium Runner on it. It periodically fetches a batch of JSON change events from Debezium Runner, process the data and apply them to PostgreSQL. It is also responsible for notifying Debezium that it has successfully completed a batch of JSON change events so that both components are synchronized in terms of replication progress. 
 
-## **Java Native Interface (JNI)**
-Java Native Interface (JNI) is a framework that allows Java applications to interact with native code written in languages like C or C++. It enables Java programs to call and be called by native applications and libraries, providing a bridge between Java’s platform independence and the performance advantages of native code. JNI is commonly used to integrate platform-specific features, optimize performance-critical sections of an application, or access legacy libraries that are not available in Java. It requires careful management of resources, as it involves switching between the Java Virtual Machine (JVM) and native environments, which can introduce complexity.
-
-SynchDB requires JNI to exchange resources between Debezium runner engine and SynchDB PostgreSQL extension. JNI is available with Java Installation (ex. openjdk).
-
-
+[SynchDB Extension Component Architecture](https://docs.synchdb.com/architecture/synchdb_components/)

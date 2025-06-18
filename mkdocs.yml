@@ -48,7 +48,8 @@ plugins:
             User guide: Guía del usuario
             Home: Inicio
             Architecture: Arquitectura
-            Components: Componentes
+            SynchDB Components: Arquitectura de componentes de SynchDB
+            Debezium Runner Components: Arquitectura de componentes de Debezium Runner
             Non-Native Data Type Processing: Procesamiento de tipos de datos no nativos
             Native Data Type Processing: Procesamiento de tipos de datos nativos
             Overview: Visión General
@@ -76,7 +77,8 @@ plugins:
           nav_translations:
             User guide: 用户指南
             Architecture: 架构
-            Components: 组件架构
+            SynchDB Components: SynchDB组件架构
+            Debezium Runner Components: Debezium Runner组件架构
             Non-Native Data Type Processing: 非原生数据类型处理
             Native Data Type Processing: 原生数据类型处理
             Home: 主页
@@ -110,7 +112,8 @@ nav:
  - Home: index.md
  - Architecture:
    - Overview: architecture/architecture.md
-   - Components: architecture/components.md
+   - SynchDB Components: architecture/synchdb_components.md
+   - Debezium Runner Components: architecture/debezium_runner_components.md
    - Batch Processing: architecture/batch_change_handling.md
    - Non-Native Data Type Processing: architecture/non_native_datatype_handling.md
    - Native Data Type Processing: architecture/native_datatype_handling.md

@@ -5,12 +5,12 @@
 
 SynchDB 扩展包含两个代码空间（Java 和 C），JNI 位于两者之间作为协调员。
 
-**Java**
+**Debezium Runner - Java**
 
-* Debezium Runner
+* Debezium Runner 驱动程序
 * 嵌入式 Debezium 引擎
 
-**C**
+**SynchDB 扩展 - C**
 
 * SynchDB 启动器
 * SynchDB Worker
@@ -18,39 +18,18 @@ SynchDB 扩展包含两个代码空间（Java 和 C），JNI 位于两者之间�
 * 复制代理
 * 表同步代理（待定）
 
-### **Debezium Runner (Java)**
-* 使用“嵌入式 Debezium 引擎”的主要 Java 驱动程序。
-* 创建、控制、管理和配置“嵌入式 Debezium 引擎”。
-* 包含由“C 端”组件通过“JNI”调用的例程。
+这两个代码空间通过 Java 原生接口 (JNI) 互连。JNI 是一个框架，允许 Java 应用程序与用 C 或 C++ 等语言编写的原生代码交互，反之亦然。它使 Java 程序能够调用原生应用程序和库，并被原生应用程序和库调用，从而在 Java 的平台独立性和原生代码的性能优势之间架起了一座桥梁。JNI 通常用于集成特定于平台的功能、优化应用程序中性能关键部分，或访问 Java 中不可用的旧库。它需要谨慎管理资源，因为它涉及在 Java 虚拟机 (JVM) 和本机环境之间切换，这可能会增加复杂性。
 
-### **嵌入式 Debezium 引擎 (Java)**
-* 支持各种连接器实现，以便从各种数据库类型（例如 MySQL、Oracle、SQL Server 等）复制变更数据。
-* 连接并维护与外部数据库的连接，并获取其变更事件。
+因此，SynchDB 需要 JNI 在 Debezium 运行器引擎和 SynchDB PostgreSQL 扩展之间交换资源。JNI 可在 Java 安装（例如 openjdk）中使用。
 
-### **SynchDB 启动器**
-* 负责使用 PostgreSQL 的后台工作器 API 创建和销毁 SynchDB 工作器。
-* 配置每个工作器的连接器类型、目标数据库 IP、端口等。
+### **Debezium Runner - Java**
 
-### **SynchDB 工作器**
-* 初始化 Java 虚拟机环境（JVM) 且实例化 `Debezium Runner` 以从特定连接器类型复制变更。
-* 通过 JNI 与 Debezium Runner 通信，以接收 JSON 格式的变更数据。
-* 将 JSON 变更事件传输到 `Format Converter` 模块进行进一步处理。
+这是一个 Java 驱动程序，它利用 Debezium 嵌入式引擎以及各种连接到不同数据库源的“连接器”。它是实现从多个数据库供应商进行逻辑复制的关键底层组件。它的主要职责是连接到指定的远程数据库，并定期获取其更改并将其转换为通用的 JSON 结构。然后，此 JSON 结构将传递给“C 语言 SynchDB 扩展”进行处理，并最终将更改应用于 PostgreSQL。
 
-### **格式转换器**
-* 使用 PostgreSQL Jsonb API 解析 JSON 变更事件
-* 根据用户定义的转换规则，将 DDL 变更详情转换为与 PostgreSQL 兼容的 SQL 查询。
-* 根据列数据类型进行处理，将 DML 变更详情转换为与 PostgreSQL 兼容的数据表示形式。它会生成原始的 HeapTupleData，可以直接将其输入到 PostgreSQL 中的堆访问方法，以加快执行速度。
+Debezium Runner 组件架构](https://docs.synchdb.com/zh/architecture/debezium_runner_components/)
 
-### **复制代理**
-* 处理**格式转换器**的输出。
-* **格式转换器**将生成 HeapTupleData 格式的输出，然后**复制代理**将调用 PostgreSQL 的堆访问方法例程来处理它们。
-* 对于 DDL 查询，**复制代理**将调用 PostgreSQL 的 SPI 来处理它们。
+### **SynchDB 扩展 - C**
 
-### **表同步代理**
-* 设计细节和实现尚不可用。待定
-* 旨在提供一种更高效的替代方案来执行初始表同步。
+这是初始化 Java 虚拟机 (JVM) 并在其上运行 Debezium Runner 的主要入口点。它会定期从 Debezium Runner 获取一批 JSON 变更事件，处理这些数据并将其应用到 PostgreSQL。它还负责通知 Debezium 已成功完成一批 JSON 变更事件，以便两个组件在复制进度方面保持同步。
 
-## **Java 原生接口 (JNI)**
-Java 原生接口 (JNI) 是一个框架，允许 Java 应用程序与用 C 或 C++ 等语言编写的原生代码进行交互。它使 Java 程序能够调用原生应用程序和库，并被这些应用程序和库调用，从而在 Java 的平台独立性和原生代码的性能优势之间架起了一座桥梁。JNI 通常用于集成平台特定的功能、优化应用程序中性能关键部分，或访问 Java 中不可用的旧库。它需要谨慎管理资源，因为它涉及在 Java 虚拟机 (JVM) 和原生环境之间切换，这可能会增加复杂性。
-
-SynchDB 需要 JNI 在 Debezium 运行引擎和 SynchDB PostgreSQL 扩展之间交换资源。JNI 可在 Java 安装（例如 openjdk）中使用。
+SynchDB 扩展组件架构](https://docs.synchdb.com/zh/architecture/synchdb_components/)

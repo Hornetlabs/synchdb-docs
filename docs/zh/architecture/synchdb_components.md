@@ -1,4 +1,5 @@
-# 组件架构
+# SynchDB 扩展组件架构 - C
+
 ## **SynchDB Worker 组件图**
 
 ![img](/images/synchdb-component-diag.jpg)
@@ -261,32 +262,3 @@ SPI Client 组件存在于 Replication Agent 下，它充当 PostgreSQL 核心�
 ### **11) 执行器 API**
 
 也驻留在复制代理中。此组件负责初始化执行器上下文、打开表、获取适当的锁、从 DML 转换器的输出创建 TupleTableSlot (TTS)、调用执行器 API 执行 INSERT、UPDATE、DELETE 操作并进行资源清理。这通常是一种比 SPI 更快的数据操作方法，因为它不需要像 SPI 那样解析输入查询字符串。
-
-## **Debezium Runner 组件图**
-
-![img](/images/synchdb-dbzrunner-component2.jpg)
-
-Debezium Runner 是 SynchDB 组件的一部分，位于部署的 Java 端。它是嵌入式 Debezium 引擎 (Java) 和 SynchDB Worker (C) 之间的主要促进者。它提供了 SynchDB Worker 可以通过 JNI 库进行交互的几种 Java 函数。这些交互包括初始化 Debezium 引擎、启动或停止引擎、获取一批更改事件以及将一批标记为已完成。这些操作对于确保复制一致性至关重要。主要组件包括：
-
-1. 参数配置
-2. 控制器
-3. 发射器
-4. 批处理管理器
-
-### **1) 参数配置**
-
-参数配置表示一个 JAVA class结构，其中包含允许 SynchDB Worker 设置/获取参数值的公开参数和函数列表。这些参数会影响 Debezium Runner 和嵌入式 Debezium 的执行情况。这些参数也已暴露给 PostgreSQL GUC，以便 SynchDB Worker 可以调用相应的函数来设置参数值。这是目前将配置从基于 C 的 SynchDB Worker 传递到基于 JAVA 的 Debezium Runner 的唯一方法。
-
-### **2) 控制器**
-
-控制器允许 SynchDB 启动或停止嵌入式 Debezium Engine。
-
-### **3) 发射器**
-
-发射器表示由 SynchDB Worker 中的“事件获取器”组件定期调用的 JAVA 函数。它主要负责从“4) 批处理管理器”弹出batch，将其格式化为 JSON 事件列表作为字符串，并通过 JNI 将其返回到“事件获取器”。如果批处理管理器没有可用的batch，它将返回 NULL，并且“事件获取器”端不会发生任何处理。
-
-### **4) 批处理管理器**
-
-批处理管理器主要负责接收来自嵌入式 Debezium 引擎的新批处理并将其存储在其内部队列中。此队列小得多，与组件图中嵌入式 Debezium 引擎内的批处理队列不同。当批处理管理器的内部队列已满时，节流阀控制将激活，以暂时停止来自 Debezium 端的事件生成，直到此小批处理队列有可用空间。只有当“发射器”收到来自“事件获取器”的获取请求并从批处理管理器弹出批处理时，才会从队列中取出批处理。
-
-批处理管理器还为每个弹出的批处理分配一个批处理 ID，发送到发射器，最终发送到 SynchDB 工作器进行处理。此唯一 ID 与与其关联的“提交者”对象一起存储在其内部哈希表中。这些信息对于跟踪很重要。当 SynchDB 工作程序完成一个批次时，它将调用批次管理器中的“标记批次完成”方法，其中还包含相同的批次 ID，这有助于批次管理器查找相应的“提交者”对象。然后，提交者对象用于通知嵌入式 Debezium 引擎批次已完成，强制其提交并将其内部偏移量向前移动。这可确保在引擎重新启动的情况下不会再次处理同一个批次（不会重复）。
