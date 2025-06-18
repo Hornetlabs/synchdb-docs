@@ -1,7 +1,7 @@
 ---
 weight: 40
 ---
-# Configuration
+# SynchDB Configuration
 
 SynchDB supports the following GUC variables in postgresql.conf. These are common parameters that apply the all connectors managed by SynchDB:
 

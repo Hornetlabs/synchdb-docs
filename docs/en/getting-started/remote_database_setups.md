@@ -1,7 +1,7 @@
 ---
 weight: 15
 ---
-# Remote Database Setups
+# Source Database Setups
 
 Before Synchdb can interact with an external, heterogeneous database and start the replication, it needs to be configured according to the procedure below.
 
