@@ -118,12 +118,13 @@ nav:
    - Non-Native Data Type Processing: architecture/non_native_datatype_handling.md
    - Native Data Type Processing: architecture/native_datatype_handling.md
    - Debezium Metadata Files: architecture/metadata_files.md
+ - Getting Started:
+   - Installation: getting-started/installation.md
+   - Remote Database Setups: getting-started/remote_database_setups.md
+   - Prepare Sample Databases: getting-started/prepare_tests_env.md
+   - Quick Start: getting-started/quick_start.md
+   - Configuration: getting-started/configuration.md   
  - User guide:
-   - Installation: user-guide/installation.md
-   - Remote Database Setups: user-guide/remote_database_setups.md
-   - Prepare Sample Databases: user-guide/prepare_tests_env.md
-   - Quick Start: user-guide/quick_start.md
-   - Configuration: user-guide/configuration.md
    - Default Data Type Mapping: user-guide/default_datatype_mapping.md
    - Object Mapping Rules: user-guide/object_mapping_rules.md
    - Connector Auto Launcher: user-guide/connector_auto_launcher.md
