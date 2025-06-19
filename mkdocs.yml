@@ -136,7 +136,7 @@ nav:
  - Monitoring:
    - Statistic View: monitoring/stats_view.md
    - State View: monitoring/state_view.md
-   # - Attribute View: monitoring/attr_view.md
+   - Attribute View: monitoring/attr_view.md
    - JVM Memory Usage: monitoring/jvm_mem.md
  - Tutorial:
    # - MySQL CDC to PostgreSQL: tutorial/mysql_cdc_to_postgresql.md
