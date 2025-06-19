@@ -1,5 +1,5 @@
 site_name: SynchDB Documentation
-repo_url: https://github.com/Hornetlabs/synchdb-docs
+repo_url: https://github.com/Hornetlabs/synchdb
 site_url: https://docs.synchdb.com/
 site_description: SynchDB is a PostgreSQL extension for synchronizing data from different database sources..
 site_author: Hornetlabs Technology Inc.

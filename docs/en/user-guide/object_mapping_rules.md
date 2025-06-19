@@ -18,7 +18,7 @@ This utility function can be used to configure table name, column name, data typ
 * `source object` represents the table in fully-qualified name in remote database
 * `destination object` represents the table name in PostgreSQL. It can be just a name (default to public schema) or in schema.name format. 
 
-This example maps `inventory.customers` table in the source table to `schema1.people` in PostgreSQL.
+This example maps `inventory.customers` table in the source database to `schema1.people` in PostgreSQL.
 ```sql
 SELECT synchdb_add_objmap('mysqlconn','table','inventory.customers','schema1.people');
 ```

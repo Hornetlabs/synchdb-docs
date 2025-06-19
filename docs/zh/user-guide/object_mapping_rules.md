@@ -18,7 +18,7 @@ SynchDB 具有默认的名称和数据类型映射规则来处理传入的更改
 * `source object` 表示远程数据库中以完全限定名称表示的表
 * `destination object` 表示 PostgreSQL 中的表名。它可以只是一个名称（默认为公共架构）或 schema.name 格式。
 
-此示例将源表中的 `inventory.customers` 表映射到 PostgreSQL 中的 `schema1.people`。
+此示例将源数据库中的 `inventory.customers` 表映射到 PostgreSQL 中的 `schema1.people`。
 ```sql
 SELECT synchdb_add_objmap('mysqlconn','table','inventory.customers','schema1.people');
 ```
