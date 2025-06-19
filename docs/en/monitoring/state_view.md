@@ -22,7 +22,27 @@ Column Details:
 | name   | the associated connector info name created by `synchdb_add_conninfo()`|
 | connector_type       | the type of connector (mysql, oracle, sqlserver...etc)|
 | pid             | the PID of the connector worker process|
-| stage           | the stage of the connector worker process|
-| state           | the state of the connector. Possible states are: <br><br><ul><li>stopped - connector is not running</li><li>initializing - connector is initializing</li><li>paused - connector is paused</li><li>syncing - connector is regularly polling change events</li><li>parsing (the connector is parsing a received change event) </li><li>converting - connector is converting a change event to PostgreSQL representation</li><li>executing - connector is applying the converted change event to PostgreSQL</li><li>updating offset - connector is writing a new offset value to Debezium offset management</li><li>restarting - connector is restarting </li><li>dumping memory - connector is dumping JVM memory summary in log file </li><li>unknown</li></ul> |
+| stage           | the stage of the connector. See below.|
+| state           | the state of the connector. See below.|
 | err             | the last error message encountered by the worker which would have caused it to exit. This error could originated from PostgreSQL while processing a change, or originated from Debezium running engine while accessing data from heterogeneous database. |
 | last_dbz_offset | the last Debezium offset captured by synchdb. Note that this may not reflect the current and real-time offset value of the connector engine. Rather, this is shown as a checkpoint that we could restart from this offeet point if needed.|
+
+**Possible States**:
+
+- 🔴 `stopped` - Inactive
+- 🟡 `initializing` - Starting up
+- 🟠 `paused` - Temporarily halted
+- 🟢 `syncing` - Actively polling
+- 🔵 `parsing` - Processing events
+- 🟣 `converting` - Transforming data
+- ⚪ `executing` - Applying changes
+- 🟤 `updating offset` - Updating checkpoint
+- 🟨 `restarting` - Reinitializing
+- ⚪ `dumping memory` - JVM is prepaaring to dump memory info in log file
+- ⚫ `unknown` - Indeterminate state
+
+**Possible Stages**:
+
+- `initial snapshot` - connector is performing initial snapshot (building table schema and optionally the initial data)
+- `change data capture` - connector is streaming subsequent table changes (CDC)
+- `schema sync` - connector is copying table schema only (no data)

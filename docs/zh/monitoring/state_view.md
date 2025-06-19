@@ -22,7 +22,27 @@ postgres=# select * from synchdb_state_view;
 | name | 由 `synchdb_add_conninfo()` 创建的关联连接器信息名称 |
 | connector_type | 连接器类型（mysql、oracle、sqlserver 等）|
 | pid | 连接器工作进程的 PID |
-| stage | 连接器工作进程的阶段 |
-| state | 连接器的状态。可能的状态有：<br><br><ul><li>已停止 - 连接器未运行</li><li>正在初始化 - 连接器正在初始化</li><li>已暂停 - 连接器已暂停</li><li>正在同步 - 连接器正在定期轮询变更事件</li><li>正在解析（连接器正在解析收到的变更事件）</li><li>正在转换 - 连接器正在将变更事件转换为 PostgreSQL 表示</li><li>正在执行 - 连接器正在将转换后的变更事件应用到 PostgreSQL</li><li>正在更新偏移量 - 连接器正在将新的偏移量值写入 Debezium 偏移量管理</li><li>正在重启 - 连接器正在重启</li><li>正在转储内存 - 连接器正在将 JVM 内存摘要转储到日志文件中</li><li>未知</li></ul> |
-| err | 工作进程遇到的最后一条可能导致其退出的错误消息。此错误可能源于 PostgreSQL 处理更改时，也可能源于 Debezium 运行引擎访问异构数据库数据时。|
-| last_dbz_offset | synchdb 捕获的最后一个 Debezium 偏移量。请注意，这可能无法反映连接器引擎的当前和实时偏移量值。相反，它显示为一个检查点，我们可以根据需要从此偏移点重新启动。|
+| stage | 连接器的阶段。见下文。|
+| state | 连接器的状态。见下文。|
+| err | 工作进程遇到的最后一个可能导致其退出的错误消息。此错误可能源于 PostgreSQL 处理更改时，也可能源于 Debezium 运行引擎访问异构数据库数据时。|
+| last_dbz_offset | synchdb 捕获的最后一个 Debezium 偏移量。请注意，这可能无法反映连接器引擎的当前实时偏移量值。相反，它显示为一个检查点，我们可以根据需要从此偏移量点重新启动。|
+
+**可能的状态**：
+
+- 🔴 `stopped` - 非活动
+- 🟡 `initializing` - 正在启动
+- 🟠 `paused` - 暂时停止
+- 🟢 `syncing` - 正在主动轮询
+- 🔵 `parsing` - 正在处理事件
+- 🟣 `converting` - 正在转换数据
+- ⚪ `executing` - 正在应用更改
+- 🟤 `updating offset` - 正在更新检查点
+- 🟨 `restarting` - 正在重新初始化
+- ⚪ `dumping memory` - JVM 正在准备将内存信息转储到日志文件
+- ⚫ `unknown` - 不确定状态
+
+**可能的状态**：
+
+- `initial snapping` - 连接器正在执行初始快照（构建表结构以及可选的初始数据）
+- `change data capture` - 连接器正在流式传输后续表更改 (CDC)
+- `schema sync` - 连接器仅复制表架构（无数据）

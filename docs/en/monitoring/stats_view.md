@@ -34,3 +34,14 @@ Column Details:
 | last_src_ts | the timestamp in nanoseconds when the last batch's last event is produced at the external database |
 | last_dbz_ts | the timestamp in nanoseconds when the last batch's last event is processed by Debezium Engine |
 | last_pg_ts | the timestamp in nanoseconds when the last batch's last event is applied to PostgreSQL |
+
+
+**Note: the statistic information is not persistent and will be wiped if PostgreSQL shuts down or restarts**
+
+## **synchdb_reset_stats**
+
+**Purpose**: Resets all statistic information of given connector name
+
+```sql
+SELECT synchdb_reset_stats('mysqlconn');
+```

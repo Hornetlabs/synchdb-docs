@@ -33,3 +33,13 @@ postgres=# select * from synchdb_stats_view;
 | last_src_ts | 外部数据库生成最后一个批次的最后一个事件的时间戳（纳秒）|
 | last_dbz_ts | Debezium 引擎处理最后一个批次的最后一个事件的时间戳（纳秒）|
 | last_pg_ts | 最后一个批次的最后一个事件应用到 PostgreSQL 的时间戳（纳秒）|
+
+**注意：统计信息不是持久化的，如果 PostgreSQL 关闭或重启，统计信息将被清除**
+
+## **synchdb_reset_stats**
+
+**用途**：重置指定连接器名称的所有统计信息
+
+```sql
+SELECT synchdb_reset_stats('mysqlconn');
+```
