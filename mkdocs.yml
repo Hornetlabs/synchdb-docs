@@ -131,7 +131,7 @@ nav:
    - SynchDB Configuration: getting-started/configuration.md     
    - Prepare Sample Databases: getting-started/prepare_tests_env.md
    - Quick Start: getting-started/quick_start.md
- # - Monitoring:
+ - Monitoring:
    - Statistic View: monitoring/stats_view.md
    - State View: monitoring/state_view.md
    # - Attribute View: monitoring/attr_view.md
