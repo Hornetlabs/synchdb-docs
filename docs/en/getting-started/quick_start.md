@@ -15,89 +15,35 @@ CREATE EXTENSION synchdb CASCADE;
 
 ## **Create a Connector**
 
-This can be done with utility SQL function `synchdb_add_conninfo()`.
+Here are some examples to create a basic connector for each supported source database type.
 
-synchdb_add_conninfo takes these arguments:
-
-|        argumet        | description |
-|-------------------- |-|
-| name                  | a unique identifier that represents this connector info |
-| hostname              | the IP address or hostname of the heterogeneous database. |
-| port                  | the port number to connect to the heterogeneous database. |
-| username              | user name to use to authenticate with heterogeneous database.|
-| password              | password to authenticate the username |
-| source database       | this is the name of source database in heterogeneous database that we want to replicate changes from.|
-| destination database  | (deprecated) always defaults to the same database as where synchDB is installed |
-| table                 | (optional) - expressed in the form of `[database].[table]` or `[database].[schema].[table]` that must exists in heterogeneous database so the engine will only replicate the specified tables. If left empty, all tables are replicated.  |
-| connector             | the connector type to use (MySQL, Oracle, SQLServer... etc).|
-
-Examples:
-
-1. Create a MySQL connector called `mysqlconn` to replicate from source database `inventory` in MySQL to destination database `postgres` in PostgreSQL:
+1. Create a MySQL connector called `mysqlconn` to replicate all tables under `inventory` in MySQL to destination database `postgres` in PostgreSQL:
 ```sql
 SELECT synchdb_add_conninfo(
-    'mysqlconn',
-    '127.0.0.1',
-    3306,
-    'mysqluser',
-    'mysqlpwd',
-    'inventory',
-    'postgres',
-    '',
-    'mysql');
-```
-
-2. Create a MySQL connector called `mysqlconn2` to replicate from source database `inventory` to destination database `postgres` in PostgreSQL:
-```sql
-SELECT synchdb_add_conninfo(
-    'mysqlconn2', '127.0.0.1', 3306, 'mysqluser', 
+    'mysqlconn', '127.0.0.1', 3306, 'mysqluser', 
     'mysqlpwd', 'inventory', 'postgres', 
-    '', 'mysql');
+    'null', 'null', 'mysql');
 ```
 
-3. Create a SQLServer connector called 'sqlserverconn' to replicate from source database 'testDB' to destination database 'postgres' in PostgreSQL:
+2. Create a SQLServer connector called `sqlserverconn` to replicate all tables under `testDB` to destination database 'postgres' in PostgreSQL:
 ```sql
 SELECT 
   synchdb_add_conninfo(
     'sqlserverconn', '127.0.0.1', 1433, 
-    'sa', 'Password!', 'testDB', 'sqlserverdb', 
-    '', 'sqlserver');
+    'sa', 'Password!', 'testDB', 'postgres', 
+    'null', 'null', 'sqlserver');
 ```
 
-4. Create a MySQL connector called `mysqlconn3` to replicate from source database `inventory`s `orders` and `customers` tabls to destination database `postgres` in PostgreSQL:
+3. Create a Oracle connector called `oracleconn` to replicate all tables under `FREE` to destination database 'postgres' in PostgreSQL:
 ```sql
 SELECT 
   synchdb_add_conninfo(
-    'mysqlconn3', '127.0.0.1', 3306, 'mysqluser', 
-    'mysqlpwd', 'inventory', 'mysqldb3', 
-    'inventory.orders,inventory.customers', 
-    'mysql');
+    'oracleconn', '127.0.0.1', 1521, 
+    'c##dbzuser', 'dbz', 'FREE', 'postgres', 
+    'null', 'null', 'oracle');
 ```
 
-## **Check Created Connection Info**
-
-All connection information are created in the table `synchdb_conninfo`. We are free to view its content and make modification as required. Please note that the password of a user credential is encrypted by pgcrypto using a key only known to synchdb. So please do not modify the password field or it may be decrypted incorrectly if tempered. See below for an example output:
-
-```sql
-postgres=# \x
-Expanded display is on.
-
-postgres=# select * from synchdb_conninfo;
--[ RECORD 1 ]-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-name     | sqlserverconn
-isactive | t
-data     | {"pwd": "\\xc30d0407030245ca4a983b6304c079d23a0191c6dabc1683e4f66fc538db65b9ab2788257762438961f8201e6bcefafa60460fbf441e55d844e7f27b31745f04e7251c0123a159540676c4", "port": 1433, "user": "sa", "dstdb": "postgres", "srcdb": "testDB", "table": "null", "hostname": "192.168.1.86", "connector": "sqlserver"}
--[ RECORD 2 ]-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-name     | mysqlconn
-isactive | t
-data     | {"pwd": "\\xc30d04070302986aff858065e96b62d23901b418a1f0bfdf874ea9143ec096cd648a1588090ee840de58fb6ba5a04c6430d8fe7f7d466b70a930597d48b8d31e736e77032cb34c86354e", "port": 3306, "user": "mysqluser", "dstdb": "postgres", "srcdb": "inventory", "table": "null", "hostname": "192.168.1.86", "connector": "mysql"}
--[ RECORD 3 ]-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-name     | oracleconn
-isactive | t
-data     | {"pwd": "\\xc30d04070302e3baf1293d0d553066d234014f6fc52e6eea425884b1f65f1955bf504b85062dfe538ca2e22bfd6db9916662406fc45a3a530b7bf43ce4cfaa2b049a1c9af8", "port": 1528, "user": "c##dbzuser", "dstdb": "postgres", "srcdb": "FREE", "table": "null", "hostname": "192.168.1.86", "connector": "oracle"}
-
-
-```
+Successful creation will have a record under `synchdb_conninfo` table. More details on creating a connector can be found [here](https://docs.synchdb.com/user-guide/create_a_connector/)
 
 ## **Start a Connector**
 

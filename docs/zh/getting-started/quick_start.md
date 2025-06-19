@@ -15,88 +15,35 @@ CREATE EXTENSION synchdb CASCADE;
 
 ## **创建连接器**
 
-这可以通过实用程序 SQL 函数 `synchdb_add_conninfo()` 来完成。
+以下是为每种受支持的源数据库类型创建基本连接器的一些示例。
 
-synchdb_add_conninfo 接受以下参数：
-
-|        参数        | 描述 |
-|-------------------- |-|
-| name                  | 表示此连接器信息的唯一标识符 |
-| hostname              | 异构数据库的 IP 地址或主机名 |
-| port                  | 连接异构数据库的端口号 |
-| username              | 用于异构数据库身份验证的用户名 |
-| password              | 用于验证用户名的密码 |
-| source database       | 这是我们要从中复制更改的异构数据库中的源数据库名称 |
-| destination database  |（已弃用）始终默认使用与安装 synchDB 相同的数据库 |
-| table                 | (可选) - 以 `[database].[table]` 或 `[database].[schema].[table]` 的形式表示，必须存在于异构数据库中，这样引擎将只复制指定的表。如果留空，则复制所有表 |
-| connector             | 要使用的连接器类型（MySQL、Oracle、SQLServer 等）|
-
-示例：
-
-1. 创建一个名为 `mysqlconn` 的 MySQL 连接器，使用规则文件 `myrule.json` 从 MySQL 中的源数据库 `inventory` 复制到 PostgreSQL 中的目标数据库 `postgres`：
+1. 创建一个名为 `mysqlconn` 的 MySQL 连接器，将 MySQL 中 `inventory` 下的所有表复制到 PostgreSQL 中的目标数据库 `postgres`：
 ```sql
 SELECT synchdb_add_conninfo(
-    'mysqlconn',
-    '127.0.0.1',
-    3306,
-    'mysqluser',
-    'mysqlpwd',
-    'inventory',
-    'postgres',
-    '',
-    'mysql');
+'mysqlconn2', '127.0.0.1', 3306, 'mysqluser',
+'mysqlpwd', 'inventory', 'postgres',
+'null', 'null', 'mysql');
 ```
 
-2. 创建一个名为 `mysqlconn2` 的 MySQL 连接器，使用默认转换规则从源数据库 `inventory` 复制到 PostgreSQL 中的目标数据库 `postgres`：
+2. 创建一个名为 `sqlserverconn` 的 SQLServer 连接器，将 `testDB` 下的所有表复制到 PostgreSQL 中的目标数据库 `postgres`：
 ```sql
-SELECT synchdb_add_conninfo(
-    'mysqlconn2', '127.0.0.1', 3306, 'mysqluser', 
-    'mysqlpwd', 'inventory', 'postgres', 
-    '', 'mysql');
+SELECT
+synchdb_add_conninfo(
+'sqlserverconn', '127.0.0.1', 1433,
+'sa', 'Password!', 'testDB', 'postgres',
+'null', 'null', 'sqlserver');
 ```
 
-3. 创建一个名为 'sqlserverconn' 的 SQLServer 连接器，使用默认转换规则从源数据库 'testDB' 复制到 PostgreSQL 中的目标数据库 'postgres'：
+3. 创建一个名为 `oracleconn` 的 Oracle 连接器，将 `FREE` 下的所有表复制到 PostgreSQL 中的目标数据库 `postgres`：
 ```sql
-SELECT 
-  synchdb_add_conninfo(
-    'sqlserverconn', '127.0.0.1', 1433, 
-    'sa', 'Password!', 'testDB', 'postgres', 
-    '', 'sqlserver');
+SELECT
+synchdb_add_conninfo(
+'oracleconn', '127.0.0.1', 1521,
+'c##dbzuser', 'dbz', 'FREE', 'postgres',
+'null', 'null', 'oracle');
 ```
 
-4. 创建一个名为 `mysqlconn3` 的 MySQL 连接器，使用规则文件 `myrule2.json` 从源数据库 `inventory` 的 `orders` 和 `customers` 表复制到 PostgreSQL 中的目标数据库 `postgres`：
-```sql
-SELECT 
-  synchdb_add_conninfo(
-    'mysqlconn3', '127.0.0.1', 3306, 'mysqluser', 
-    'mysqlpwd', 'inventory', 'postgres', 
-    'inventory.orders,inventory.customers', 
-    'mysql');
-```
-
-## **检查已创建的连接信息**
-
-所有连接信息都创建在表 `synchdb_conninfo` 中。我们可以查看其内容并根据需要进行修改。请注意，用户凭证的密码是由 pgcrypto 使用仅 synchdb 知道的密钥加密的。因此，请不要修改密码字段，否则如果被篡改可能会解密错误。以下是输出示例：
-
-```sql
-postgres=# \x
-Expanded display is on.
-
-postgres=# select * from synchdb_conninfo;
--[ RECORD 1 ]-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-name     | sqlserverconn
-isactive | t
-data     | {"pwd": "\\xc30d0407030245ca4a983b6304c079d23a0191c6dabc1683e4f66fc538db65b9ab2788257762438961f8201e6bcefafa60460fbf441e55d844e7f27b31745f04e7251c0123a159540676c4", "port": 1433, "user": "sa", "dstdb": "postgres", "srcdb": "testDB", "table": "null", "hostname": "192.168.1.86", "connector": "sqlserver"}
--[ RECORD 2 ]-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-name     | mysqlconn
-isactive | t
-data     | {"pwd": "\\xc30d04070302986aff858065e96b62d23901b418a1f0bfdf874ea9143ec096cd648a1588090ee840de58fb6ba5a04c6430d8fe7f7d466b70a930597d48b8d31e736e77032cb34c86354e", "port": 3306, "user": "mysqluser", "dstdb": "postgres", "srcdb": "inventory", "table": "null", "hostname": "192.168.1.86", "connector": "mysql"}
--[ RECORD 3 ]-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-name     | oracleconn
-isactive | t
-data     | {"pwd": "\\xc30d04070302e3baf1293d0d553066d234014f6fc52e6eea425884b1f65f1955bf504b85062dfe538ca2e22bfd6db9916662406fc45a3a530b7bf43ce4cfaa2b049a1c9af8", "port": 1528, "user": "c##dbzuser", "dstdb": "postgres", "srcdb": "FREE", "table": "null", "hostname": "192.168.1.86", "connector": "oracle"}
-
-```
+创建成功后，`synchdb_conninfo` 表下将有一条记录。有关创建连接器的更多详细信息，请参阅[此处](https://docs.synchdb.com/zh/user-guide/create_a_connector/)
 
 ## **启动连接器**
 
