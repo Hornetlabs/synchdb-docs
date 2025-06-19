@@ -47,9 +47,7 @@ Successful creation will have a record under `synchdb_conninfo` table. More deta
 
 ## **Start a Connector**
 
-Use `synchdb_start_engine_bgw()` function to start a connector worker. It takes one argument which is the connection  name created above. This command will spawn a new background worker to connect to the heterogeneous database with the specified configurations.
-
-For example, the following will spawn 2 background worker in PostgreSQL, one replicating from a MySQL database, the other from SQL Server
+Use `synchdb_start_engine_bgw()` function to start a connector worker. It takes one argument which is the connection name created above. This command will start the connector in the default snapshot mode called `initial`, which will replicate the schema of all designated tables and their initial data in PostgreSQL.
 
 ```sql
 select synchdb_start_engine_bgw('mysqlconn');
@@ -58,9 +56,9 @@ select synchdb_start_engine_bgw('oracleconn');
 ```
 
 ## Check Connector Running State
-Use `synchdb_state_view()` to examine all connectors' running states.
+Use `synchdb_state_view()` to examine all connectors' running states. 
 
-See below for an example output:
+If everything works fine, we should see outputs similar to below.
 ``` SQL
 postgres=# select * from synchdb_state_view;
      name      | connector_type |  pid   |        stage        |  state  |   err    |                                           last_dbz_offset
@@ -72,53 +70,40 @@ postgres=# select * from synchdb_state_view;
 
 ```
 
-Column Details:
+If there is an error during connector start, perhaps due to connectivity, incorrect user credentials or source database settings, the error message shall be captured and displayed as `err` in the connector state output.
 
-| fields          | description |
-|-|-|
-| name   | the associated connector info name created by `synchdb_add_conninfo()`|
-| connector_type       | the type of connector (mysql, oracle, sqlserver...etc)|
-| pid             | the PID of the connector worker process|
-| stage           | the stage of the connector worker process|
-| state           | the state of the connector. Possible states are: <br><br><ul><li>stopped - connector is not running</li><li>initializing - connector is initializing</li><li>paused - connector is paused</li><li>syncing - connector is regularly polling change events</li><li>parsing (the connector is parsing a received change event) </li><li>converting - connector is converting a change event to PostgreSQL representation</li><li>executing - connector is applying the converted change event to PostgreSQL</li><li>updating offset - connector is writing a new offset value to Debezium offset management</li><li>restarting - connector is restarting </li><li>dumping memory - connector is dumping JVM memory summary in log file </li><li>unknown</li></ul> |
-| err             | the last error message encountered by the worker which would have caused it to exit. This error could originated from PostgreSQL while processing a change, or originated from Debezium running engine while accessing data from heterogeneous database. |
-| last_dbz_offset | the last Debezium offset captured by synchdb. Note that this may not reflect the current and real-time offset value of the connector engine. Rather, this is shown as a checkpoint that we could restart from this offeet point if needed.|
+More on running states [here](https://docs.synchdb.com/monitoring/state_view/), and also running statistics [here](https://docs.synchdb.com/monitoring/stats_view/).
 
-## **Check Connector Running Statistics**
+## Check the Tables and Data
+By default, the source tables will be replicated to a new schema under the current postgreSQL database with the same name as the source database name. We can update the search path to view the new tables in different schema.
 
-Use `synchdb_stats_view()` view to examine the statistic information of all connectors. These statistics record cumulative measurements about different types of change events a connector has processed so far. Currently these statistic values are stored in shared memory and not persisted to disk. Persist statistics data is a feature to be added in near future. The statistic information is updated at every successful completion of a batch and it contains several timestamps of the first and last change event within that batch. By looking at these timestamps, we can roughly tell the time it takes to finish processing the batch and the delay between when the data is generated, and processed by both Debezium and PostgreQSL.
-
-See below for an example output:
+For example:
 ```sql
-postgres=# select * from synchdb_stats_view;
-    name    | ddls | dmls | reads | creates | updates | deletes | bad_events | total_events | batches_done | avg_batch_size | first_src_ts  | first_dbz_ts  |  first_pg_ts  |  last_src_ts  |  last_dbz_ts  |  last_pg_ts
-------------+------+------+-------+---------+---------+---------+------------+--------------+--------------+----------------+---------------+---------------+---------------+---------------+---------------+---------------
- oracleconn |    1 |    1 |     0 |       1 |       0 |       0 |          0 |            2 |            1 |              2 | 1744398189000 | 1744398230893 | 1744398231243 | 1744398198000 | 1744398230950 | 1744398231244
-(1 row)
+postgres=# set search_path=public,free,inventory;
+SET
+postgres=# \d
+                 List of relations
+  Schema   |        Name        |   Type   | Owner
+-----------+--------------------+----------+--------
+ free      | orders             | table    | ubuntu
+ inventory | addresses          | table    | ubuntu
+ inventory | addresses_id_seq   | sequence | ubuntu
+ inventory | customers          | table    | ubuntu
+ inventory | customers_id_seq   | sequence | ubuntu
+ inventory | geom               | table    | ubuntu
+ inventory | geom_id_seq        | sequence | ubuntu
+ inventory | perf_test_1        | table    | ubuntu
+ inventory | products           | table    | ubuntu
+ inventory | products_id_seq    | sequence | ubuntu
+ inventory | products_on_hand   | table    | ubuntu
+ public    | synchdb_att_view   | view     | ubuntu
+ public    | synchdb_attribute  | table    | ubuntu
+ public    | synchdb_conninfo   | table    | ubuntu
+ public    | synchdb_objmap     | table    | ubuntu
+ public    | synchdb_state_view | view     | ubuntu
+ public    | synchdb_stats_view | view     | ubuntu
+(17 rows)
 ```
-
-Column Details:
-
-| fields | description |
-|-|-|
-| name | the associated connector info name created by `synchdb_add_conninfo()`|
-| ddls | number of DDLs operations completed |
-| dmls | number of DMLs operations completed |
-| reads | number of READ events completed during initial snapshot stage |
-| creates | number of CREATES events completed during CDC stage |
-| updates | number of UPDATES events completed during CDC stage |
-| deletes | number of DELETES events completed during CDC stage |
-| bad_events | number of bad events ignored (such as empty events, unsupported DDL events..etc) |
-| total_events | total number of events processed (including bad_events) |
-| batches_done | number of batches completed |
-| avg_batch_size | average batch size (total_events / batches_done) |
-| first_src_ts | the timestamp in nanoseconds when the last batch's first event is produced at the external database |
-| first_dbz_ts | the timestamp in nanoseconds when the last batch's first event is processed by Debezium Engine |
-| first_pg_ts | the timestamp in nanoseconds when the last batch's first event is applied to PostgreSQL |
-| last_src_ts | the timestamp in nanoseconds when the last batch's last event is produced at the external database |
-| last_dbz_ts | the timestamp in nanoseconds when the last batch's last event is processed by Debezium Engine |
-| last_pg_ts | the timestamp in nanoseconds when the last batch's last event is applied to PostgreSQL |
-
 
 ## **Stop a Connector**
 

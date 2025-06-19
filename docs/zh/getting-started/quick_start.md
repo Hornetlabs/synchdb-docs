@@ -72,53 +72,40 @@ postgres=# select * from synchdb_state_view;
 (3 rows)
 
 ```
+如果连接器启动过程中出现错误，可能是由于连接性、用户凭据不正确或源数据库设置错误，则应捕获错误消息并在连接器状态输出中显示为 “err”。
 
-列详情：
+有关运行状态的更多信息，请参见[此处](https://docs.synchdb.com/zh/monitoring/state_view/)，以及运行统计信息，请参见[此处](https://docs.synchdb.com/zh/monitoring/stats_view/)。
 
-| 字段            | 描述 |
-|-|-|
-| name   | 由 `synchdb_add_conninfo()` 创建的关联连接器信息名称 |
-| connector_type       | 连接器类型（mysql、oracle、sqlserver 等）|
-| pid             | 连接器工作进程的 PID |
-| stage           | 连接器工作阶段 |
-| state           | 连接器的状态。可能的状态有：<br><ul><li>stopped - 连接器未运行</li><li>initializing - 连接器正在初始化</li><li>paused - 连接器已暂停</li><li>syncing - 连接器正在定期轮询更改事件</li><li>parsing - 连接器正在解析收到的更改事件</li><li>converting - 连接器正在将更改事件转换为 PostgreSQL 表示</li><li>executing - 连接器正在将转换后的更改事件应用到 PostgreSQL</li><li>updating offset - 连接器正在向 Debezium 偏移量管理写入新的偏移量值</li><li>restarting - 连接器正在重启</li><li>dumping memory - 连接器正在输出 JVM 内存使用信息到 log 文件</li><li>unknown</li></ul> |
-| err             | 工作进程遇到的最后一个错误消息，该错误可能导致其退出。此错误可能源自 PostgreSQL 处理更改时，或源自 Debezium 运行引擎从异构数据库访问数据时 |
-| last_dbz_offset | synchdb 捕获的最后一个 Debezium 偏移量。请注意，这可能不反映连接器引擎的当前和实时偏移量值。相反，这显示为一个检查点，如果需要，我们可以从这个偏移量点重新启动 |
+## 检查表和数据
+默认情况下，源表将被复制到当前 postgreSQL 数据库下与源数据库同名的新架构中。我们可以更新搜索路径以查看不同架构中的新表。
 
-## **检查连接器运行统计信息**
-
-使用 `synchdb_stats_view()` 视图检查所有连接器的统计信息。这些统计信息记录了连接器迄今为止处理过的各种类型变更事件的累积测量值。目前，这些统计值存储在共享内存中，并未持久化到磁盘。持久化统计数据是近期计划添加的功能。统计信息会在每次批次成功完成后更新，其中包含该批次中第一个和最后一个变更事件的多个时间戳。通过查看这些时间戳，我们可以粗略地了解完成批次处理所需的时间，以及数据生成和由 Debezium 和 PostgreQSL 处理之间的延迟。
-
-以下是输出示例：
+例如：
 ```sql
-postgres=# select * from synchdb_stats_view;
-    name    | ddls | dmls | reads | creates | updates | deletes | bad_events | total_events | batches_done | avg_batch_size | first_src_ts  | first_dbz_ts  |  first_pg_ts  |  last_src_ts  |  last_dbz_ts  |  last_pg_ts
-------------+------+------+-------+---------+---------+---------+------------+--------------+--------------+----------------+---------------+---------------+---------------+---------------+---------------+---------------
- oracleconn |    1 |    1 |     0 |       1 |       0 |       0 |          0 |            2 |            1 |              2 | 1744398189000 | 1744398230893 | 1744398231243 | 1744398198000 | 1744398230950 | 1744398231244
-(1 row)
+postgres=# set search_path=public,free,inventory;
+SET
+postgres=# \d
+                 List of relations
+  Schema   |        Name        |   Type   | Owner
+-----------+--------------------+----------+--------
+ free      | orders             | table    | ubuntu
+ inventory | addresses          | table    | ubuntu
+ inventory | addresses_id_seq   | sequence | ubuntu
+ inventory | customers          | table    | ubuntu
+ inventory | customers_id_seq   | sequence | ubuntu
+ inventory | geom               | table    | ubuntu
+ inventory | geom_id_seq        | sequence | ubuntu
+ inventory | perf_test_1        | table    | ubuntu
+ inventory | products           | table    | ubuntu
+ inventory | products_id_seq    | sequence | ubuntu
+ inventory | products_on_hand   | table    | ubuntu
+ public    | synchdb_att_view   | view     | ubuntu
+ public    | synchdb_attribute  | table    | ubuntu
+ public    | synchdb_conninfo   | table    | ubuntu
+ public    | synchdb_objmap     | table    | ubuntu
+ public    | synchdb_state_view | view     | ubuntu
+ public    | synchdb_stats_view | view     | ubuntu
+(17 rows)
 ```
-
-列详情：
-
-| 字段 | 描述 |
-|-|-|
-| name | 由 `synchdb_add_conninfo()` 创建的关联连接器信息名称|
-| ddls | 完成的 DDL 操作数 |
-| dmls | 完成的 DML 操作数 |
-| reads | 初始快照阶段完成的读取事件数 |
-| creates | CDC 阶段完成的创建事件数 |
-| updates | CDC 阶段完成的更新事件数 |
-| delets | CDC 阶段完成的删除事件数 |
-| bad_events |忽略的不良事件数（例如空事件、不支持的 DDL 事件等）|
-| total_events | 处理的事件总数（包括 bad_events）|
-| batches_done | 完成的批次数 |
-| avg_batch_size | 平均批次大小（total_events / batches_done）|
-| first_src_ts | 外部数据库生成最后一个批次的第一个事件的时间戳（纳秒）|
-| first_dbz_ts | Debezium 引擎处理最后一个批次的第一个事件的时间戳（纳秒）|
-| first_pg_ts | 最后一个批次的第一个事件应用到 PostgreSQL 的时间戳（纳秒）|
-| last_src_ts | 外部数据库生成最后一个批次的最后一个事件的时间戳（纳秒）|
-| last_dbz_ts | Debezium 引擎处理最后一个批次的最后一个事件的时间戳（纳秒）|
-| last_pg_ts | 最后一个批次的最后一个事件应用到 PostgreSQL 的时间戳（纳秒）|
 
 ## **停止连接器**
 
@@ -135,6 +122,6 @@ select synchdb_stop_engine_bgw('mysqlconn');
 使用 `synchdb_del_conninfo()` SQL 函数从 SynchDB 中移除连接器。这将清除该连接器上的[元数据文件](https://docs.synchdb.com/zh/architecture/metadata_files/)以及所有[对象映射](https://docs.synchdb.com/zh/user-guide/object_mapping_rules/)。
 
 例如：
-```
+```sql
 select synchdb_del_conninfo('mysqlconn');
 ```

@@ -70,6 +70,9 @@ plugins:
             Utility Functions: Funciones de Utilidad
             Changelog: Registro de Cambios
             Configure Error Strategies: Configurar estrategias de error
+            Create a Connector: Crear un conector
+            Statistic View: Vista de estadísticas
+            State View: Vista de estado
         - locale: zh
           name: 中文
           site_name: SynchDB 文档
@@ -100,6 +103,9 @@ plugins:
             Utility Functions: 实用函数
             Changelog: 变更日志
             Configure Error Strategies: 配置错误处理策略
+            Create a Connector: 创建连接器
+            Statistic View: 统计视图
+            State View: 状态视图
   - mike:
       version_selector: true
       css_dir: css
@@ -126,8 +132,8 @@ nav:
    - Prepare Sample Databases: getting-started/prepare_tests_env.md
    - Quick Start: getting-started/quick_start.md
  # - Monitoring:
-   # - Statistic View: monitoring/stats_view.md
-   # - State View: monitoring/state_view.md
+   - Statistic View: monitoring/stats_view.md
+   - State View: monitoring/state_view.md
    # - Attribute View: monitoring/attr_view.md
    # - JVM Memory Usage: monitoring/jvm_mem.md
  - Tutorial:
