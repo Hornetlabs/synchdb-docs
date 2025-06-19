@@ -128,6 +128,7 @@ nav:
    - Non-Native Data Type Processing: architecture/non_native_datatype_handling.md
    - Native Data Type Processing: architecture/native_datatype_handling.md
    - Debezium Metadata Files: architecture/metadata_files.md
+   - DDL Replication: architecture/ddl_replication.md
    # - Test Framework: architecture/test_framework.md
  - Getting Started:
    - Installation: getting-started/installation.md
@@ -158,8 +159,7 @@ nav:
    - Customize Object Mapping and Transformation: user-guide/object_mapping_rules.md
    - Secured Connection: user-guide/secured_connection.md
    - Configure Error Strategies: user-guide/configure_error_strategies.md
-   - DDL Replication: user-guide/ddl_replication.md
-   - Set Offset: user-guide/set_offset.md
+   - Configure Replication Offset: user-guide/set_offset.md
    # - Utility Functions: user-guide/utility_functions.md
  - Changelog: changelog.md
  # - Homepage: https://www.synchdb.com
