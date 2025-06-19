@@ -1,137 +1,78 @@
----
-weight: 60
----
-# Object Mapping Rules
+# Configure Object Mapping and Transform Rules
 
-SynchDB has a default name and data type mapping rules to handle incoming change events. In most cases, the defaults work fine. However, if you have specific transform requirements or when the defaults do not work for you, you can configure your own object mapping rules to a particular connector. Please follow the workflow below to review and adjust any particular object mapping rules.
+SynchDB has a default name and data type mapping rules to handle incoming change events. In most cases, the defaults work fine. However, if you have specific transform requirements or when the defaults do not work for you, you can configure your own object mapping rules to a particular connector. 
 
-## **Create a Connector and Start it in `schemasync` Mode**
+## **synchdb_add_objmap**
 
-`schemasync` is a special mode that makes the connector connects to remote database and attempt to sync only the schema of designated tables. After this is done, the connector is put to `paused` state and user is able to review all the tables and data types created using the default rules and make change if needed.
+This utility function can be used to configure table name, column name, data types as well as transform rules. it takes 4 parameters:
 
+| Parameter | Description | Required | Example | Notes |
+|:-:|:-|:-:|:-|:-|
+| `name` | Unique identifier for this connector | ✓ | `'mysqlconn'` | Must be unique across all connectors |
+| `object type` | type of object mapping | ✓ | `'table'` | can be `table` to map a table name, `column` to map a column name, `datatype` to map a data type, or `transform` to run a data transform expression |
+| `source object` | source object represented as fully-qualified name | ✓ | `inventory.customers` | the object name as represented in the remote database |
+| `destination object` | destination object name | ✓ | `'schema1.people'` | The destination object name in PostgreSQL side. Can be a fully-qualified table name, a column name, a data type or transform expression |
+
+## **Configure Table Name Mappings**
+
+* `source object` represents the table in fully-qualified name in remote database
+* `destination object` represents the table name in PostgreSQL. It can be just a name (default to public schema) or in schema.name format. 
+
+This example maps `inventory.customers` table in the source table to `schema1.people` in PostgreSQL.
 ```sql
-SELECT synchdb_add_conninfo(
-    'mysqlconn',
-    '127.0.0.1',
-    3306,
-    'mysqluser',
-    'mysqlpwd',
-    'inventory',
-    'postgres',
-    '',
-    'mysql');
-
-SELECT synchdb_start_engine_bgw('mysqlconn', 'schemasync');
-```
-## **Ensure the connector is put to paused state**
-```sql
-SELECT name, connector_type, pid, stage, state FROM synchdb_state_view;
-     name      | connector_type |  pid   |    stage    |  state
----------------+----------------+--------+-------------+---------
- mysqlconn     | mysql          | 579845 | schema sync | polling
-
-```
-
-## **Review the tables created by default mapping rules**
-
-```sql
-postgres=# select * from synchdb_att_view;
-   name    | type  | attnum |         ext_tbname         |         pg_tbname          | ext_attname | pg_attname  | ext_atttypename | pg_atttypename | transform
------------+-------+--------+----------------------------+----------------------------+-------------+-------------+-----------------+----------------+-----------
- mysqlconn | mysql |      1 | inventory.addresses        | inventory.addresses        | id          | id          | INT             | int4           |
- mysqlconn | mysql |      2 | inventory.addresses        | inventory.addresses        | customer_id | customer_id | INT             | int4           |
- mysqlconn | mysql |      3 | inventory.addresses        | inventory.addresses        | street      | street      | VARCHAR         | varchar        |
- mysqlconn | mysql |      4 | inventory.addresses        | inventory.addresses        | city        | city        | VARCHAR         | varchar        |
- mysqlconn | mysql |      5 | inventory.addresses        | inventory.addresses        | state       | state       | VARCHAR         | varchar        |
- mysqlconn | mysql |      6 | inventory.addresses        | inventory.addresses        | zip         | zip         | VARCHAR         | varchar        |
- mysqlconn | mysql |      7 | inventory.addresses        | inventory.addresses        | type        | type        | ENUM            | text           |
- mysqlconn | mysql |      1 | inventory.customers        | inventory.customers        | id          | id          | INT             | int4           |
- mysqlconn | mysql |      2 | inventory.customers        | inventory.customers        | first_name  | first_name  | VARCHAR         | varchar        |
- mysqlconn | mysql |      3 | inventory.customers        | inventory.customers        | last_name   | last_name   | VARCHAR         | varchar        |
- mysqlconn | mysql |      4 | inventory.customers        | inventory.customers        | email       | email       | VARCHAR         | varchar        |
- mysqlconn | mysql |      1 | inventory.geom             | inventory.geom             | id          | id          | INT             | int4           |
- mysqlconn | mysql |      2 | inventory.geom             | inventory.geom             | g           | g           | GEOMETRY        | text           |
- mysqlconn | mysql |      3 | inventory.geom             | inventory.geom             | h           | h           | GEOMETRY        | text           |
- mysqlconn | mysql |      1 | inventory.products         | inventory.products         | id          | id          | INT             | int4           |
- mysqlconn | mysql |      2 | inventory.products         | inventory.products         | name        | name        | VARCHAR         | varchar        |
- mysqlconn | mysql |      3 | inventory.products         | inventory.products         | description | description | VARCHAR         | varchar        |
- mysqlconn | mysql |      4 | inventory.products         | inventory.products         | weight      | weight      | FLOAT           | float4         |
- mysqlconn | mysql |      1 | inventory.products_on_hand | inventory.products_on_hand | product_id  | product_id  | INT             | int4           |
- mysqlconn | mysql |      2 | inventory.products_on_hand | inventory.products_on_hand | quantity    | quantity    | INT             | int4           |
-(20 rows)
-
-```
-
-## **Define custom mapping rules**
-User can use `synchdb_add_objmap` function to create custom mapping rules. It can be used to map table name, column name, data types and defines a data transform expression rule
-
-```sql
-SELECT synchdb_add_objmap('mysqlconn','table','inventory.products','stuff');
 SELECT synchdb_add_objmap('mysqlconn','table','inventory.customers','schema1.people');
-SELECT synchdb_add_objmap('mysqlconn','column','inventory.customers.last_name','family_name');
+```
+
+## **Configure Column Name Mappings**
+
+* `source object` represents the column in fully-qualified name in remote database
+* `destination object` represents the column name in PostgreSQL. No need to format it as fully-qualified column name.
+
+This example maps `inventory.customers.emaiL` column in the source table to `contact` in PostgreSQL.
+```sql
 SELECT synchdb_add_objmap('mysqlconn','column','inventory.customers.email','contact');
+```
+
+## **Configure Data Type Mappings**
+
+* `source object` can be expressed as one of:
+    * a fully-qualified column (inventory.geom.g). This means the data type mapping applies to this particular column only.
+    * a general data type string (int). Use a pipe (|) to add if it is a autoincrement data type (int|true for autoincremented int) or (int|false for a non-autoincremented int). This means data type mapping applies to all data type with the matching condition.
+
+* `destination object` should be expressed as a general data type string that exists in PostgreSQL. Use a pipe (|) to overwrite the size (text|0 to overwrite the size to 0 because text is variable size) or (varchar|-1 to use whatever size that comes with the change event)
+
+This example maps all non-autoincrement `point` data type to `text` data type in PostgreSQL.
+```sql
+SELECT synchdb_add_objmap('mysqlconn','datatype','point|false','text|0');
+```
+
+This example maps the table `inventory.geom`'s column `g`'s data type to `geometry` in PostgreSQL.
+```sql
 SELECT synchdb_add_objmap('mysqlconn','datatype','inventory.geom.g','geometry|0');
-SELECT synchdb_add_objmap('mysqlconn','datatype','inventory.orders.quantity','bigint|0');
+```
+
+## **Configure Transform Rules**
+
+* `source object` represents the column to be transformed
+* `destination object` represents an expression to be run on the column data before it is applied to PostgreSQL. Use %d as a placeholder for input column data. In case of geometry type, use %w for WKB and %s for SRID. 
+
+This example will prepend '>>>>>' and append '<<<<<' to whatever value SynchDB receives for column 'inventory.products.name'
+```sql
 SELECT synchdb_add_objmap('mysqlconn','transform','inventory.products.name','''>>>>>'' || ''%d'' || ''<<<<<''');
 ```
 
-## **Review all object mapping rules created so far**
+This example will always add 500 to whatever value SynchDB receives for column 'inventory.orders.quantity':
 ```sql
-postgres=# select * from synchdb_objmap;
-   name    |  objtype  | enabled |            srcobj             |           dstobj
------------+-----------+---------+-------------------------------+----------------------------
- mysqlconn | table     | t       | inventory.products            | stuff
- mysqlconn | column    | t       | inventory.customers.last_name | family_name
- mysqlconn | column    | t       | inventory.customers.email     | contact
- mysqlconn | table     | t       | inventory.customers           | schema1.people
- mysqlconn | transform | t       | inventory.products.name       | '>>>>>' || '%d' || '<<<<<'
- mysqlconn | datatype  | t       | inventory.geom.g              | geometry|0
- mysqlconn | datatype  | t       | inventory.orders.quantity     | bigint|0
-(7 rows)
-
+SELECT synchdb_add_objmap('mysqlconn','transform','inventory.orders.quantity','%d + 500');
 ```
 
-## **Reload the object mapping rules**
-Once all custom rules have been defined, we need to signal the connector to load them. This will cause the connector to read and apply the object mapping rules. If it sees a discrepancy between current PostgreSQL values and the object mapping values, it will attempt to correct the mapping.
+## **Apply the Rules**
+
+If the connector is not running, the rules are automatically applied at the next startup via `synchdb_start_engine_bgw`.
+
+If the connector is already running, the rules are not automatically applied, we have to tell the connector to reload the object mapping rules and apply using utility function `synchdb_reload_objmap`.
+
 ```sql
 SELECT synchdb_reload_objmap('mysqlconn');
-
 ```
 
-## **Review `synchdb_att_view` again for changes**
-```sql
-SELECT * from synchdb_att_view;
-   name    | type  | attnum |         ext_tbname         |         pg_tbname          | ext_attname | pg_attname  | ext_atttypename | pg_atttypename |         transform
------------+-------+--------+----------------------------+----------------------------+-------------+-------------+-----------------+----------------+----------------------------
- mysqlconn | mysql |      1 | inventory.addresses        | inventory.addresses        | id          | id          | INT             | int4           |
- mysqlconn | mysql |      2 | inventory.addresses        | inventory.addresses        | customer_id | customer_id | INT             | int4           |
- mysqlconn | mysql |      3 | inventory.addresses        | inventory.addresses        | street      | street      | VARCHAR         | varchar        |
- mysqlconn | mysql |      4 | inventory.addresses        | inventory.addresses        | city        | city        | VARCHAR         | varchar        |
- mysqlconn | mysql |      5 | inventory.addresses        | inventory.addresses        | state       | state       | VARCHAR         | varchar        |
- mysqlconn | mysql |      6 | inventory.addresses        | inventory.addresses        | zip         | zip         | VARCHAR         | varchar        |
- mysqlconn | mysql |      7 | inventory.addresses        | inventory.addresses        | type        | type        | ENUM            | text           |
- mysqlconn | mysql |      1 | inventory.customers        | schema1.people             | id          | id          | INT             | int4           |
- mysqlconn | mysql |      2 | inventory.customers        | schema1.people             | first_name  | first_name  | VARCHAR         | varchar        |
- mysqlconn | mysql |      3 | inventory.customers        | schema1.people             | last_name   | family_name | VARCHAR         | varchar        |
- mysqlconn | mysql |      4 | inventory.customers        | schema1.people             | email       | contact     | VARCHAR         | varchar        |
- mysqlconn | mysql |      1 | inventory.geom             | inventory.geom             | id          | id          | INT             | int4           |
- mysqlconn | mysql |      2 | inventory.geom             | inventory.geom             | g           | g           | GEOMETRY        | geometry           |
- mysqlconn | mysql |      3 | inventory.geom             | inventory.geom             | h           | h           | GEOMETRY        | text           |
- mysqlconn | mysql |      1 | inventory.products         | public.stuff               | id          | id          | INT             | int4           |
- mysqlconn | mysql |      2 | inventory.products         | public.stuff               | name        | name        | VARCHAR         | varchar        | '>>>>>' || '%d' || '<<<<<'
- mysqlconn | mysql |      3 | inventory.products         | public.stuff               | description | description | VARCHAR         | varchar        |
- mysqlconn | mysql |      4 | inventory.products         | public.stuff               | weight      | weight      | FLOAT           | float4         |
- mysqlconn | mysql |      1 | inventory.products_on_hand | inventory.products_on_hand | product_id  | product_id  | INT             | int4           |
- mysqlconn | mysql |      2 | inventory.products_on_hand | inventory.products_on_hand | quantity    | quantity    | INT             | int8           |
-```
-
-## **Resume the connector or redo the entire snapshot**
-Once the object mappings have been confirmed correct, we can resume the connector. Please note that, resume will proceed to streaming only the new table changes. The existing data of the tables will not be copied.
-```sql
-SELECT synchdb_resume_engine('mysqlconn');
-```
-
-To capture the table's existing data, we can also redo the entire snapshot with the new object mapping rules:
-```sql
-SELECT synchdb_restart_connector('mysqlconn', 'always');
-```

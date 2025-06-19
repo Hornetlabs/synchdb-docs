@@ -1,146 +1,77 @@
----
-weight: 60
----
+# 配置对象映射和转换规则
 
-# 对象映射规则
+SynchDB 具有默认的名称和数据类型映射规则来处理传入的更改事件。大多数情况下，默认规则即可正常工作。但是，如果您有特定的转换要求，或者默认规则不适合您，则可以为特定连接器配置自己的对象映射规则。
 
-SynchDB 具有默认名称和数据类型映射规则来处理传入的更改事件。在大多数情况下，默认规则都可以正常工作。但是，如果您有特定的转换要求，或者默认规则不适合您，则可以将自己的对象映射规则配置到特定连接器。请按照以下工作流程查看和调整任何特定的对象映射规则。
+## **synchdb_add_objmap**
 
-## **创建连接器并以 `schemasync` 模式启动它**
+此实用函数可用于配置表名、列名、数据类型以及转换规则。它需要 4 个参数：
 
-`schemasync` 是一种特殊模式，它使连接器连接到远程数据库并尝试仅同步指定表的架构。完成此操作后，连接器将处于 `暂停` 状态，用户可以查看使用默认规则创建的所有表和数据类型，并在需要时进行更改。
+| 参数 | 描述 | 必需 | 示例 | 备注 |
+|:-:|:-|:-:|:-|:-|
+| `name` | 此连接器的唯一标识符 | ✓ | `'mysqlconn'` | 必须在所有连接器中唯一 |
+| `object type` | 对象映射的类型 | ✓ | `'table'` |可以是 `table` 来映射表名，`column` 来映射列名，`datatype` 来映射数据类型，或 `transform` 来运行数据转换表达式 |
+| `source object` | 以完全限定名称表示的源对象 | ✓ | `inventory.customers` | 远程数据库中的对象名称 |
+| `destination object` | 目标对象名称 | ✓ | `'schema1.people'` | PostgreSQL 端的目标对象名称。可以是完全限定表名、列名、数据类型或转换表达式 |
 
+## **配置表名映射**
+
+* `source object` 表示远程数据库中以完全限定名称表示的表
+* `destination object` 表示 PostgreSQL 中的表名。它可以只是一个名称（默认为公共架构）或 schema.name 格式。
+
+此示例将源表中的 `inventory.customers` 表映射到 PostgreSQL 中的 `schema1.people`。
 ```sql
-SELECT synchdb_add_conninfo(
-    'mysqlconn',
-    '127.0.0.1',
-    3306,
-    'mysqluser',
-    'mysqlpwd',
-    'inventory',
-    'postgres',
-    '',
-    'mysql');
-
-SELECT synchdb_start_engine_bgw('mysqlconn', 'schemasync');
-```
-
-## **确保连接器处于暂停状态**
-
-```sql
-SELECT name, connector_type, pid, stage, state FROM synchdb_state_view;
-     name      | connector_type |  pid   |    stage    |  state
----------------+----------------+--------+-------------+---------
- mysqlconn     | mysql          | 579845 | schema sync | polling
-
-```
-
-## **查看默认创建的表的映射规则**
-
-```sql
-postgres=# select * from synchdb_att_view;
-   name    | type  | attnum |         ext_tbname         |         pg_tbname          | ext_attname | pg_attname  | ext_atttypename | pg_atttypename | transform
------------+-------+--------+----------------------------+----------------------------+-------------+-------------+-----------------+----------------+-----------
- mysqlconn | mysql |      1 | inventory.addresses        | inventory.addresses        | id          | id          | INT             | int4           |
- mysqlconn | mysql |      2 | inventory.addresses        | inventory.addresses        | customer_id | customer_id | INT             | int4           |
- mysqlconn | mysql |      3 | inventory.addresses        | inventory.addresses        | street      | street      | VARCHAR         | varchar        |
- mysqlconn | mysql |      4 | inventory.addresses        | inventory.addresses        | city        | city        | VARCHAR         | varchar        |
- mysqlconn | mysql |      5 | inventory.addresses        | inventory.addresses        | state       | state       | VARCHAR         | varchar        |
- mysqlconn | mysql |      6 | inventory.addresses        | inventory.addresses        | zip         | zip         | VARCHAR         | varchar        |
- mysqlconn | mysql |      7 | inventory.addresses        | inventory.addresses        | type        | type        | ENUM            | text           |
- mysqlconn | mysql |      1 | inventory.customers        | inventory.customers        | id          | id          | INT             | int4           |
- mysqlconn | mysql |      2 | inventory.customers        | inventory.customers        | first_name  | first_name  | VARCHAR         | varchar        |
- mysqlconn | mysql |      3 | inventory.customers        | inventory.customers        | last_name   | last_name   | VARCHAR         | varchar        |
- mysqlconn | mysql |      4 | inventory.customers        | inventory.customers        | email       | email       | VARCHAR         | varchar        |
- mysqlconn | mysql |      1 | inventory.geom             | inventory.geom             | id          | id          | INT             | int4           |
- mysqlconn | mysql |      2 | inventory.geom             | inventory.geom             | g           | g           | GEOMETRY        | text           |
- mysqlconn | mysql |      3 | inventory.geom             | inventory.geom             | h           | h           | GEOMETRY        | text           |
- mysqlconn | mysql |      1 | inventory.products         | inventory.products         | id          | id          | INT             | int4           |
- mysqlconn | mysql |      2 | inventory.products         | inventory.products         | name        | name        | VARCHAR         | varchar        |
- mysqlconn | mysql |      3 | inventory.products         | inventory.products         | description | description | VARCHAR         | varchar        |
- mysqlconn | mysql |      4 | inventory.products         | inventory.products         | weight      | weight      | FLOAT           | float4         |
- mysqlconn | mysql |      1 | inventory.products_on_hand | inventory.products_on_hand | product_id  | product_id  | INT             | int4           |
- mysqlconn | mysql |      2 | inventory.products_on_hand | inventory.products_on_hand | quantity    | quantity    | INT             | int4           |
-(20 rows)
-
-```
-
-## **定义自定义映射规则**
-
-用户可以使用`synchdb_add_objmap`函数创建自定义映射规则。它可用于映射表名、列名、数据类型并定义数据转换表达式规则
-
-```sql
-SELECT synchdb_add_objmap('mysqlconn','table','inventory.products','stuff');
 SELECT synchdb_add_objmap('mysqlconn','table','inventory.customers','schema1.people');
-SELECT synchdb_add_objmap('mysqlconn','column','inventory.customers.last_name','family_name');
-SELECT synchdb_add_objmap('mysqlconn','column','inventory.customers.email','contact');
-SELECT synchdb_add_objmap('mysqlconn','datatype','inventory.geom.g','geometry|0');
-SELECT synchdb_add_objmap('mysqlconn','datatype','inventory.orders.quantity','bigint|0');
-SELECT synchdb_add_objmap('mysqlconn','transform','inventory.products.name','''>>>>>'' || ''%d'' || ''<<<<<''');
 ```
 
-## **审查迄今为止创建的所有对象映射规则**
+## **配置列名映射**
 
+* `源对象` 表示远程数据库中完全限定名称的列
+* `目标对象` 表示 PostgreSQL 中的列名。无需将其格式化为完全限定列名。
+
+此示例将源表中的 `inventory.customers.email` 列映射到 PostgreSQL 中的 `contact`。
 ```sql
-postgres=# select * from synchdb_objmap;
-   name    |  objtype  | enabled |            srcobj             |           dstobj
------------+-----------+---------+-------------------------------+----------------------------
- mysqlconn | table     | t       | inventory.products            | stuff
- mysqlconn | column    | t       | inventory.customers.last_name | family_name
- mysqlconn | column    | t       | inventory.customers.email     | contact
- mysqlconn | table     | t       | inventory.customers           | schema1.people
- mysqlconn | transform | t       | inventory.products.name       | '>>>>>' || '%d' || '<<<<<'
- mysqlconn | datatype  | t       | inventory.geom.g              | geometry|0
- mysqlconn | datatype  | t       | inventory.orders.quantity     | bigint|0
-(7 rows)
-
+SELECT synchdb_add_objmap('mysqlconn','column','inventory.customers.email','contact');
 ```
 
-## **重新加载对象映射规则**
+## **配置数据类型映射**
 
-一旦定义了所有自定义规则，我们就需要向连接器发出信号来加载它们。这将导致连接器读取并应用对象映射规则。如果它发现当前 PostgreSQL 值与对象映射值之间存在差异，它将尝试更正映射。
+* `源对象` 可以表示为以下之一：
+* 完全限定列 (inventory.geom.g)。这意味着数据类型映射仅适用于此特定列。
+* 通用数据类型字符串 (int)。如果是自增数据类型，请使用竖线 (|) 添加（int|true 表示自增 int），否则使用竖线 (|) 添加（int|false 表示非自增 int）。这意味着数据类型映射适用于所有符合条件的数据类型。
+
+* `destination object` 应表示为 PostgreSQL 中存在的通用数据类型字符串。使用竖线 (|) 覆盖大小（text|0 将大小覆盖为 0，因为 text 是可变大小）或（varchar|-1 使用 change 事件附带的任何大小）。
+
+此示例将所有非自增 `point` 数据类型映射到 PostgreSQL 中的 `text` 数据类型。
+```sql
+SELECT synchdb_add_objmap('mysqlconn','datatype','point|false','text|0');
+```
+
+此示例将表 `inventory.geom` 的列 `g` 的数据类型映射到 PostgreSQL 中的 `geometry`。
+```sql
+SELECT synchdb_add_objmap('mysqlconn','datatype','inventory.geom.g','geometry|0');
+```
+
+## **配置转换规则**
+
+* `源对象` 表示要转换的列
+* `目标对象` 表示在将列数据应用于 PostgreSQL 之前要对其运行的表达式。使用 %d 作为输入列数据的占位符。如果是几何类型，则使用 %w 表示 WKB，%s 表示 SRID。
+
+此示例将在 SynchDB 收到的“inventory.products.name”列的值前添加“>>>>>”并在其后添加“<<<<<”。
+```sql
+SELECT synchdb_add_objmap('mysqlconn','transform','inventory.products.name','''>>>>'' || ''%d'' || ''<<<<<''');
+```
+
+此示例将始终在 SynchDB 收到的“inventory.orders.quantity”列的值后添加 500：
+```sql
+SELECT synchdb_add_objmap('mysqlconn','transform','inventory.orders.quantity','%d + 500');
+```
+
+## ** 使用规则**
+
+如果连接器未运行，规则会在下次启动时通过 `synchdb_start_engine_bgw` 自动应用。
+
+如果连接器已在运行，规则不会自动应用，我们必须告诉连接器重新加载对象映射规则，并使用实用函数 `synchdb_reload_objmap` 来应用规则。
 
 ```sql
 SELECT synchdb_reload_objmap('mysqlconn');
-
-```
-
-## **再次检查 `synchdb_att_view` 是否有变化**
-
-```sql
-SELECT * from synchdb_att_view;
-   name    | type  | attnum |         ext_tbname         |         pg_tbname          | ext_attname | pg_attname  | ext_atttypename | pg_atttypename |         transform
------------+-------+--------+----------------------------+----------------------------+-------------+-------------+-----------------+----------------+----------------------------
- mysqlconn | mysql |      1 | inventory.addresses        | inventory.addresses        | id          | id          | INT             | int4           |
- mysqlconn | mysql |      2 | inventory.addresses        | inventory.addresses        | customer_id | customer_id | INT             | int4           |
- mysqlconn | mysql |      3 | inventory.addresses        | inventory.addresses        | street      | street      | VARCHAR         | varchar        |
- mysqlconn | mysql |      4 | inventory.addresses        | inventory.addresses        | city        | city        | VARCHAR         | varchar        |
- mysqlconn | mysql |      5 | inventory.addresses        | inventory.addresses        | state       | state       | VARCHAR         | varchar        |
- mysqlconn | mysql |      6 | inventory.addresses        | inventory.addresses        | zip         | zip         | VARCHAR         | varchar        |
- mysqlconn | mysql |      7 | inventory.addresses        | inventory.addresses        | type        | type        | ENUM            | text           |
- mysqlconn | mysql |      1 | inventory.customers        | schema1.people             | id          | id          | INT             | int4           |
- mysqlconn | mysql |      2 | inventory.customers        | schema1.people             | first_name  | first_name  | VARCHAR         | varchar        |
- mysqlconn | mysql |      3 | inventory.customers        | schema1.people             | last_name   | family_name | VARCHAR         | varchar        |
- mysqlconn | mysql |      4 | inventory.customers        | schema1.people             | email       | contact     | VARCHAR         | varchar        |
- mysqlconn | mysql |      1 | inventory.geom             | inventory.geom             | id          | id          | INT             | int4           |
- mysqlconn | mysql |      2 | inventory.geom             | inventory.geom             | g           | g           | GEOMETRY        | geometry           |
- mysqlconn | mysql |      3 | inventory.geom             | inventory.geom             | h           | h           | GEOMETRY        | text           |
- mysqlconn | mysql |      1 | inventory.products         | public.stuff               | id          | id          | INT             | int4           |
- mysqlconn | mysql |      2 | inventory.products         | public.stuff               | name        | name        | VARCHAR         | varchar        | '>>>>>' || '%d' || '<<<<<'
- mysqlconn | mysql |      3 | inventory.products         | public.stuff               | description | description | VARCHAR         | varchar        |
- mysqlconn | mysql |      4 | inventory.products         | public.stuff               | weight      | weight      | FLOAT           | float4         |
- mysqlconn | mysql |      1 | inventory.products_on_hand | inventory.products_on_hand | product_id  | product_id  | INT             | int4           |
- mysqlconn | mysql |      2 | inventory.products_on_hand | inventory.products_on_hand | quantity    | quantity    | INT             | int8           |
-```
-
-## **恢复连接器或重做整个快照**
-
-一旦确认对象映射正确，我们就可以恢复连接器。请注意，恢复只会继续流式传输新的表更改。不会复制表的现有数据。
-```sql
-SELECT synchdb_resume_engine('mysqlconn');
-```
-
-要捕获表的现有数据，我们还可以使用新的对象映射规则重做整个快照：
-```sql
-SELECT synchdb_restart_connector('mysqlconn', 'always');
 ```
