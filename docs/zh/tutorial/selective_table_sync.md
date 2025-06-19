@@ -1,15 +1,15 @@
 ---
 weight: 90
 ---
-# Selective Table Synchronization
+# 选择性表同步
 
-It is possible to select only specific tables from remote heterogeneous database to focus on replication. This could prevent resources being spent on replicating unwanted tables. 
+可以从远程异构数据库中仅选择特定表进行同步，从而避免将资源浪费在复制不需要的表上。
 
-## **Select Desired Tables and Start it for the First Time**
+## **选择所需表并首次启动**
 
-Table selection is done during connector creation phase via `synchdb_add_conninfo()` where we specify a list of tables (expressed in FQN, separated by a comma) to replicate from.
+表的选择是在连接器创建阶段通过 `synchdb_add_conninfo()` 完成的，我们指定一个要从中复制的表列表（以 FQN 表示，以逗号分隔）。
 
-For example, the following command creates a connector that only replicates change from `inventory.orders` and `inventory.products` tables from remote MySQL database.
+例如，以下命令创建一个连接器，该连接器仅从远程 MySQL 数据库的 `inventory.orders` 和 `inventory.products` 表复制更改。
 ```sql
 SELECT synchdb_add_conninfo(
     'mysqlconn', 
@@ -20,19 +20,20 @@ SELECT synchdb_add_conninfo(
     'inventory', 
     'postgres', 
     'inventory.orders,inventory.products', 
+    'null'
     'mysql'
 );
 ```
 
-Starting this connector for the very first time will trigger an initial snapshot being performed and selected 2 tables' schema and data will be replicated.
+首次启动此连接器将触发执行初始快照，并将复制选定的 2 个表的模式和数据。
 
 ```sql
 SELECT synchdb_start_engine_bgw('mysqlconn');
 ```
 
-### **Verify the Connector State and Tables**
+### **验证连接器状态和表**
 
-Examine the connector state and the new tables:
+检查连接器状态和新表：
 ```sql
 postgres=# Select name, state, err from synchdb_state_view;
      name      |  state  |   err
@@ -57,30 +58,35 @@ postgres=# \d
 postgres=#
 ```
 
-Once the snapshot is complete, the `mysqlconn` connector will continue capturing subsequent changes to the `inventory.orders` and `inventory.products` tables.
+快照完成后，`mysqlconn` 连接器将继续捕获 `inventory.orders` 和 `inventory.products` 表的后续更改。
 
-## **Add More Tables to Replicate During Run Time.**
-**
-The `mysqlconn` from previous section has already completed the initial snapshot and obtained the table schemas of the selected table. If we would like to add more tables to replicate from, we will need to notify the Debezium engine about the updated table section and perform the initial snapshot again. Here's how it is done:
+## **在运行时添加更多要复制的表**
 
-1. Update the `synchdb_conninfo` table to include additional tables.
-2. In this example, we add the `inventory.customers` table to the sync list:
+上一节中的 `mysqlconn` 已经完成了初始快照，并获取了所选表的表结构。如果我们想要添加更多要复制的表，则需要将更新的表部分通知给 Debezium 引擎，并再次执行初始快照。操作方法如下：
+
+1. 更新 `synchdb_conninfo` 表以包含其他表。
+2. 在此示例中，我们将 `inventory.customers` 表添加到同步列表：
 ```sql
-UPDATE synchdb_conninfo 
-SET data = jsonb_set(data, '{table}', '"inventory.orders,inventory.products,inventory.customers"') 
+UPDATE synchdb_conninfo
+SET data = jsonb_set(data, '{table}', '"inventory.orders,inventory.products,inventory.customers"')
 WHERE name = 'mysqlconn';
 ```
-3. Restart the connector with the snapshot mode set to `always` to perform another initial snapshot:
+3. 配置快照表参数，使其仅包含新表 `inventory.customers`，这样 SynchDB 就不会尝试重建已完成快照的两张表。
+```sql
+UPDATE synchdb_conninfo
+SET data = jsonb_set(data, '{snapshottable}', '"inventory.customers"')
+WHERE name = 'mysqlconn';
+```
+4. 重启连接器，并将快照模式设置为 `always`，以执行另一次初始快照：
 ```sql
 SELECT synchdb_restart_connector('mysqlconn', 'always');
 ```
-This forces Debezium to re-snapshot all the specified tables, even if two of them already have the data. 
+这将强制 Debezium 仅对新表 `inventory.customers` 重新创建快照，同时保留旧表 `inventory.orders` 和 `inventory.products` 不变。快照完成后，所有表的 CDC 将恢复。
 
-Be mindful that if the heterogeneous database type does not support DDL replication (such as SQLServer), we may get a data conflict error when the snapshot is being rebuilt on the 2 tables previously selected for replication. If this is the case, we may need to drop or truncate them before restarting the connector with snapshot mode = 'always'.
 
-### **Verify the Updated Tables**
+### **验证更新后的表**
 
-Now, we can examine our tables again:
+现在，我们可以再次检查这些表：
 ```sql
 postgres=# SET search_path TO inventory;
 SET
@@ -102,16 +108,16 @@ postgres=#
 
 ```
 
-## **Snapshot Modes**
+## **快照模式**
 
-SynchDB offers different snapshot modes, depending on your replication needs:
+SynchDB 提供不同的快照模式，具体取决于您的复制需求：
 
-|  **setting** |**description**|
+| **设置** |**描述**|
 |:-:|-|
-| always       | The connector performs a snapshot every time that it starts. The snapshot includes the structure and data of the captured tables. After the snapshot completes, the connector begins to stream event records for subsequent database changes.|
-| initial (default)      | The connector performs a database snapshot if not already done. After the snapshot completes, the connector begins to stream event records for subsequent database changes.|
-| initial_only | The connector performs a database snapshot. After the snapshot completes, the connector stops, and does not stream event records for subsequent database changes.|
-| no_data      | The connector captures the structure of all relevant tables, but not the data they contain.|
-| never        | When the connector starts, rather than performing a snapshot, it immediately begins to stream event records for subsequent database changes.|
-| recovery     | Set this option to restore a database schema history that is lost or corrupted. After a restart, the connector runs a snapshot that rebuilds the topic from the source tables|
-| when_needed  | After the connector starts, it performs a snapshot only if it detects one of the following circumstances:<br><ul><li>It cannot detect any topic offsets</li><li>A previously recorded offset specifies a log position that is not available on the server</li></ul> | 
+| always | 连接器每次启动时都会执行快照。快照包含已捕获表的结构和数据。快照完成后，连接器开始流式传输后续数据库更改的事件记录。|
+| initial（默认）| 如果尚未执行，连接器将执行数据库快照。快照完成后，连接器开始流式传输后续数据库更改的事件记录。|
+| initial_only | 连接器执行数据库快照。快照完成后，连接器将停止，并且不会流式传输后续数据库更改的事件记录。|
+| no_data | 连接器捕获所有相关表的结构，但不捕获它们包含的数据。|
+| never | 连接器启动时，它会立即开始流式传输后续数据库更改的事件记录，而不是执行快照。|
+| recovery | 设置此选项可恢复丢失或损坏的数据库架构历史记录。重启后，连接器将运行快照，从源表重建主题|
+| when_needed | 连接器启动后，仅当检测到以下情况之一时才执行快照：<br><ul><li>无法检测到任何主题偏移量</li><li>先前记录的偏移量指定的日志位置在服务器上不可用</li></ul> |

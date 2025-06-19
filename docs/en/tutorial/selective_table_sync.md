@@ -60,7 +60,7 @@ postgres=#
 Once the snapshot is complete, the `mysqlconn` connector will continue capturing subsequent changes to the `inventory.orders` and `inventory.products` tables.
 
 ## **Add More Tables to Replicate During Run Time.**
-**
+
 The `mysqlconn` from previous section has already completed the initial snapshot and obtained the table schemas of the selected table. If we would like to add more tables to replicate from, we will need to notify the Debezium engine about the updated table section and perform the initial snapshot again. Here's how it is done:
 
 1. Update the `synchdb_conninfo` table to include additional tables.
@@ -70,13 +70,18 @@ UPDATE synchdb_conninfo
 SET data = jsonb_set(data, '{table}', '"inventory.orders,inventory.products,inventory.customers"') 
 WHERE name = 'mysqlconn';
 ```
-3. Restart the connector with the snapshot mode set to `always` to perform another initial snapshot:
+3. Configure the snapshot table parameter to include only the new table `inventory.customers` to that SynchDB does not try to rebuild the 2 tables that have already finished the snapshot.
+```sql
+UPDATE synchdb_conninfo 
+SET data = jsonb_set(data, '{snapshottable}', '"inventory.customers"') 
+WHERE name = 'mysqlconn';
+``` 
+4. Restart the connector with the snapshot mode set to `always` to perform another initial snapshot:
 ```sql
 SELECT synchdb_restart_connector('mysqlconn', 'always');
 ```
-This forces Debezium to re-snapshot all the specified tables, even if two of them already have the data. 
+This forces Debezium to re-snapshot only the new table `inventory.customers` while leaving the old tables `inventory.orders` and `inventory.products` untouched. The CDC for all tables will resume once snapshot is complete. 
 
-Be mindful that if the heterogeneous database type does not support DDL replication (such as SQLServer), we may get a data conflict error when the snapshot is being rebuilt on the 2 tables previously selected for replication. If this is the case, we may need to drop or truncate them before restarting the connector with snapshot mode = 'always'.
 
 ### **Verify the Updated Tables**
 
