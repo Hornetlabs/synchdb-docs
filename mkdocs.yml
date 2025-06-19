@@ -140,7 +140,7 @@ nav:
    # - Schema Only Synchronization: tutorial/schema_only_sync.md
    # - Multi Source Replication: tutorial/multi_source_replication.md
  - User guide:
-   # - Create a Connector: user-guide/create_a_connector.md
+   - Create a Connector: user-guide/create_a_connector.md
    # - Start/Stop a Connector: user-guide/start_stop_connector.md
    - Automatic Connector Launcher: user-guide/connector_auto_launcher.md  
    - Default Data Type Mapping: user-guide/default_datatype_mapping.md
