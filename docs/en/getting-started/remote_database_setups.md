@@ -168,7 +168,7 @@ GO
 
 ### **When Table Schema Changed While CDC is Enabled**
 
-If a table has already been added to the CDC capture list and being captured by SynchDB already, any schema change that has happened to this table on SQLServer needs to be re-added back to the CDC capture list to generate a proper DDL ALTER TABLE event to SynchDB. Refer to [DDL Replication](https://docs.synchdb.com/user-guide/ddl_replication/) page for more information.
+If a table has already been added to the CDC capture list and being captured by SynchDB already, any schema change that has happened to this table on SQLServer needs to be re-added back to the CDC capture list to generate a proper DDL ALTER TABLE event to SynchDB. Refer to [DDL Replication](https://docs.synchdb.com/architecture/ddl_replication/) page for more information.
 
 ## **Set up Oracle for SynchDB**
 

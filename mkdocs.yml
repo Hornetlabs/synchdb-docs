@@ -75,6 +75,7 @@ plugins:
             State View: Vista de estado
             Start/Stop a Connector: Iniciar/Detener un conector
             Object Mapping Workflow: Flujo de trabajo de mapeo de objetos
+            MySQL CDC to PostgreSQL: CDC de MySQL a PostgreSQL
         - locale: zh
           name: 中文
           site_name: SynchDB 文档
@@ -110,6 +111,7 @@ plugins:
             State View: 状态视图
             Start/Stop a Connector: 启动/停止连接器
             Object Mapping Workflow: 对象映射工作流程
+            MySQL CDC to PostgreSQL: MySQL CDC 到 PostgreSQL
   - mike:
       version_selector: true
       css_dir: css
@@ -142,7 +144,7 @@ nav:
    - Attribute View: monitoring/attr_view.md
    - JVM Memory Usage: monitoring/jvm_mem.md
  - Tutorial:
-   # - MySQL CDC to PostgreSQL: tutorial/mysql_cdc_to_postgresql.md
+   - MySQL CDC to PostgreSQL: tutorial/mysql_cdc_to_postgresql.md
    # - SQL Server CDC to PostgreSQL: tutorial/sqlserver_cdc_to_postgresql.md
    # - Oracle CDC to PostgreSQL: tutorial/oracle_cdc_to_postgresql.md
    - Selective Table Replication: tutorial/selective_table_sync.md
