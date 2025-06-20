@@ -2,7 +2,7 @@
 
 ## 为 SynchDB 准备 MySQL 数据库
 
-在使用 SynchDB 从 MySQL 复制之前，需要按照[此处](https://docs.synchdb.com/getting-started/remote_database_setups/) 概述的步骤配置 MySQL
+在使用 SynchDB 从 MySQL 复制之前，需要按照[此处](https://docs.synchdb.com/zh/getting-started/remote_database_setups/) 概述的步骤配置 MySQL
 
 ## 创建 MySQL 连接器
 
