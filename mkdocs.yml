@@ -189,3 +189,8 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tasklist
   - pymdownx.tilde
+
+extra:
+  analytics:
+    github:
+      repository: Hornetlabs/synchdb
