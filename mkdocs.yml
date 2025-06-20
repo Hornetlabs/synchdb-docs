@@ -1,6 +1,7 @@
 site_name: SynchDB Documentation
 repo_url: https://github.com/Hornetlabs/synchdb
 site_url: https://docs.synchdb.com/
+edit_uri: https://github.com/Hornetlabs/synchdb
 site_description: SynchDB is a PostgreSQL extension for synchronizing data from different database sources..
 site_author: Hornetlabs Technology Inc.
 copyright: Copyright &copy; 2024 Maintained by <a href="https://github.com/hornetlabs">Hornetlabs Technology </a>. <a href="https://www.netlify.com/"><img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deployed by Netlify" width="114" height="51"></a>
@@ -189,8 +190,3 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tasklist
   - pymdownx.tilde
-
-extra:
-  analytics:
-    github:
-      repository: Hornetlabs/synchdb
