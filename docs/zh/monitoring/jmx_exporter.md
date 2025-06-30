@@ -49,14 +49,14 @@ synchdb_add_jmx_exporter_conninfo() 和 synchdb_del_jmx_exporter_conninfo() 函�
 
 ```
 synchdb_add_jmx_exporter_conninfo(
-connector_name TEXT,
-exporter_jar_path TEXT,
-exporter_port INTEGER,
-config_file_path TEXT
+	name TEXT,
+	exporter_jar_path TEXT,
+	exporter_port INTEGER,
+	config_file_path TEXT
 );
 
 synchdb_del_jmx_exporter_conninfo(
-name text
+	name text
 )
 
 ```

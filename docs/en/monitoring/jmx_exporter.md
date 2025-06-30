@@ -49,7 +49,7 @@ The synchdb_add_jmx_exporter_conninfo() and synchdb_del_jmx_exporter_conninfo() 
 
 ```
 synchdb_add_jmx_exporter_conninfo(
-    connector_name TEXT,
+    name TEXT,
     exporter_jar_path TEXT,
     exporter_port INTEGER,
     config_file_path TEXT
