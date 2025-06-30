@@ -1,16 +1,17 @@
 # JMX MBEAN 监控
 
-## JMX（Java 管理扩展）
+## **JMX（Java 管理扩展）**
+
 JMX，即 Java 管理扩展，是一种 Java 技术，提供用于管理和监控应用程序、系统对象、设备和面向服务的网络的工具。它允许开发人员公开应用程序信息，并允许外部工具访问和交互这些信息，以进行监控和管理。
 
-## Debezium 的 JMX MBean
+## **Debezium 的 JMX MBean**
 Debezium 连接器通过连接器的 MBean 名称（MBean 标签等于连接器名称）公开指标。这些指标特定于每个连接器实例，提供有关连接器快照、流式传输和模式历史记录进程行为的数据。
 
-## 使用 synchdb_add_jmx_conninfo() 在连接器上启用 JMX，或使用 synchdb_del_jmx_conninfo() 禁用
+## **使用 synchdb_add_jmx_conninfo() 在连接器上启用 JMX，或使用 synchdb_del_jmx_conninfo() 禁用**
 synchdb_add_jmx_conninfo() 函数将 JMX 监控配置添加到现有连接器。这可以通过 JConsole 或 Prometheus JMX Exporter 等工具启用运行时监控和诊断。synchdb_del_jmx_conninfo() 可用于禁用 JMX。
 
 **函数签名**
-**Function Signature**
+
 synchdb_add_jmx_conninfo(
     name text,
     jmx_listenaddr text,
@@ -47,7 +48,8 @@ synchdb_del_jmx_conninfo(
 | **`jmx_ssl_truststore`** | *(text)*<br>保存受信任 CA 证书的信任库 (JKS) 的路径。如果配置了双向 TLS，则用于验证客户端身份。|
 | **`jmx_ssl_truststore_pass`** | *(文本)*<br>信任库文件的密码。
 
-### JMX 身份验证的密码和访问文件
+### **JMX 身份验证的密码和访问文件**
+
 在 JVM 配置中启用 JMX 身份验证（即设置 jmx_auth = true）时，您必须提供两个文件：
 
 密码文件 - 定义用户名及其密码。
@@ -60,14 +62,16 @@ JVM 使用这些文件来控制哪些用户可以连接以及他们被允许执�
 
 此文件存储有效的 JMX 用户名及其对应的密码。
 
-格式：
+**格式：**
+
 ```
 # Format: username password
 <username> <password>
 
 ```
 
-例子：
+**例子：**
+
 ```
 monitorRole mySecretPassword
 controlRole anotherSecretPassword
@@ -75,6 +79,7 @@ controlRole anotherSecretPassword
 ```
 
 **文件权限**：
+
 确保两个文件均归运行 JVM 的用户所有，且具有受限的权限：
 
 ```
@@ -83,7 +88,7 @@ chown youruser:youruser jmxpwd.file jmxacc.file
 
 ```
 
-## synchdb_add_jmx_conninfo 示例
+## **synchdb_add_jmx_conninfo 示例**
 
 **启用无需身份验证和 SSL 的 JMX MBean：**
 
@@ -161,7 +166,8 @@ SELECT synchdb_add_jmx_conninfo(
 	'truststorepass');		-- SSL trust store password
 ```
 
-## 使用 jconsole 可视化 JMX 指标
+## **使用 jconsole 可视化 JMX 指标**
+
 当启动一个配置了 JMX 的连接器时，JMX 服务将在指定的端口号上运行。我们可以使用 Java 发行版自带的 jconsole 连接到 JMX 服务器。可以通过 JVM（连接器工作进程）PID 或 IP 地址和端口号进行本地连接。如果启用了身份验证，则还需要用户名和密码。如果不使用身份验证，则这些可以留空。
 
 ![img](/images/jmx.jpg)
@@ -172,7 +178,7 @@ SELECT synchdb_add_jmx_conninfo(
 ![img](/images/jmx3.jpg)
 ![img](/images/jmx4.jpg)
 
-## 可视化 Debezium JMX MBean
+## **可视化 Debezium JMX MBean**
 
 最后一个选项卡是 MBean，其中包含 Debezium 针对架构历史记录、快照和流式传输阶段的特定指标。
 

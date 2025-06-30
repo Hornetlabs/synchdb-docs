@@ -1,15 +1,19 @@
 # JMX MBEAN Monitoring
 
-## JMX (Java Management Extensions)
+## **JMX (Java Management Extensions)**
+
 JMX, or Java Management Extensions, is a Java technology that provides tools for managing and monitoring applications, system objects, devices, and service-oriented networks. It allows developers to expose application information and enables external tools to access and interact with this information for monitoring and management purposes.
 
-## JMX MBean for Debezium
+## **JMX MBean for Debezium**
+
 Debezium connectors expose metrics via the MBean name for the connector with MBean tag equals to the connector name. These metrics, which are specific to each connector instance, provide data about the behavior of the connector’s snapshot, streaming, and schema history processes. 
 
-## Enable JMX on a Connector with synchdb_add_jmx_conninfo() or disable with synchdb_del_jmx_conninfo()
-The synchdb_add_jmx_conninfo() function adds JMX monitoring configuration to an existing connector. This enables runtime monitoring and diagnostics via tools like JConsole or Prometheus JMX Exporter.
+## **Enable JMX on a Connector with synchdb_add_jmx_conninfo() or disable with synchdb_del_jmx_conninfo()**
+
+The synchdb_add_jmx_conninfo() function adds JMX monitoring configuration to an existing connector. This enables runtime monitoring and diagnostics via tools like JConsole or Prometheus JMX Exporter.synchdb_del_jmx_conninfo() can be used to disable JMX.
 
 **Function Signature**
+
 synchdb_add_jmx_conninfo(
     name text,
     jmx_listenaddr text,
@@ -47,7 +51,8 @@ synchdb_del_jmx_conninfo(
 | **`jmx_ssl_truststore`**      | *(text)*<br>Path to the truststore (JKS) that holds trusted CA certificates. Used to verify client identities if mutual TLS is configured.                            |
 | **`jmx_ssl_truststore_pass`** | *(text)*<br>Password for the truststore file.                                                                                                                         |
 
-### Password and Access Files for JMX Authentication
+### **Password and Access Files for JMX Authentication**
+
 When enabling JMX authentication in your JVM configuration (i.e., setting jmx_auth = true), you must provide two files:
 
 Password File – defines usernames and their passwords.
@@ -60,14 +65,14 @@ These files are used by the JVM to control who can connect and what they are all
 
 This file stores valid JMX usernames and their corresponding passwords.
 
-Format:
+**Format:**
 ```
 # Format: username password
 <username> <password>
 
 ```
 
-Example:
+**Example:**
 
 ```
 monitorRole mySecretPassword
@@ -106,7 +111,7 @@ chown youruser:youruser jmxpwd.file jmxacc.file
 
 ```
 
-## synchdb_add_jmx_conninfo Examples
+## **synchdb_add_jmx_conninfo Examples**
 
 **Enable JMX MBean with no authentication and no SSL:**
 
@@ -184,11 +189,11 @@ SELECT synchdb_add_jmx_conninfo(
 	'truststorepass');		-- SSL trust store password
 ```
 
-## Visualize JMX metrics with jconsole
+## **Visualize JMX metrics with jconsole**
+
 When a connector with JMX configuration is started, the JMX service will be running on the designated port number. We can use `jconsole` that comes with Java distribution to connect to JMX server. It is possible to connect locally via the JVM (connector worker) PID or via IP address and port number. If authentication is enabled, username and password are required as well. If no authentication is used, these can be left empty.
 
 ![img](/images/jmx.jpg)
-
 
 Once connected, we can view all the details about JVM's operating metrics such as CPU, memory, class utilization, threads...etc. 
 
@@ -196,7 +201,7 @@ Once connected, we can view all the details about JVM's operating metrics such a
 ![img](/images/jmx3.jpg)
 ![img](/images/jmx4.jpg)
 
-## Visualize Debezium JMX MBeans
+## **Visualize Debezium JMX MBeans**
 
 The last tab is MBeans, which contains the Debezium specific metrics for schema history, snapshot and streaming stages.
 
