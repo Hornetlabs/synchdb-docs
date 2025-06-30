@@ -12,6 +12,7 @@ synchdb_add_jmx_conninfo() 函数将 JMX 监控配置添加到现有连接器。
 
 **函数签名**
 
+```
 synchdb_add_jmx_conninfo(
     name text,
     jmx_listenaddr text,
@@ -27,10 +28,12 @@ synchdb_add_jmx_conninfo(
     jmx_ssl_truststore text,
     jmx_ssl_truststore_pass text
 )
-
+```
+```
 synchdb_del_jmx_conninfo(
     name text
 )
+```
 
 | 参数 | 描述 |
 | ----------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
