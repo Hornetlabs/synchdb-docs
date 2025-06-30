@@ -51,11 +51,11 @@ synchdb_del_jmx_conninfo(
 | **`jmx_ssl_truststore`**      | *(text)*<br>Path to the truststore (JKS) that holds trusted CA certificates. Used to verify client identities if mutual TLS is configured.                            |
 | **`jmx_ssl_truststore_pass`** | *(text)*<br>Password for the truststore file.                                                                                                                         |
 
-### **Password and Access Files for JMX Authentication**
+## **Password and Access Files for JMX Authentication**
 
 When enabling JMX authentication in your JVM configuration (i.e., setting jmx_auth = true), you must provide two files:
 
-**Password File**:
+### **Password File**:
 
 This file stores valid JMX usernames and their corresponding passwords.
 
@@ -76,7 +76,7 @@ controlRole anotherSecretPassword
 
 monitorRole and controlRole are example usernames. Replace mySecretPassword and anotherSecretPassword with strong passwords of your choice. You can define multiple users.
 
-**Access File**:
+### **Access File**:
 
 This file defines what each user is allowed to do via JMX. Possible access levels:
 
@@ -96,7 +96,9 @@ monitorRole readonly
 controlRole readwrite
 
 ```
-**File Permissions**:
+
+### **File Permissions**:
+
 Make sure both files are owned by the user running the JVM, and have restricted permissions:
 
 ```

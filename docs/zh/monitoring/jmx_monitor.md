@@ -48,11 +48,11 @@ synchdb_del_jmx_conninfo(
 | **`jmx_ssl_truststore`** | *(text)*<br>保存受信任 CA 证书的信任库 (JKS) 的路径。如果配置了双向 TLS，则用于验证客户端身份。|
 | **`jmx_ssl_truststore_pass`** | *(文本)*<br>信任库文件的密码。
 
-### **JMX 身份验证的密码和访问文件**
+## **JMX 身份验证的密码和访问文件**
 
 在 JVM 配置中启用 JMX 身份验证（即设置 jmx_auth = true）时，您必须提供两个文件：
 
-**密码文件**：
+### **密码文件**：
 
 此文件存储有效的 JMX 用户名及其对应的密码。
 
@@ -72,7 +72,28 @@ controlRole anotherSecretPassword
 
 ```
 
-**文件权限**：
+### **访问文件**：
+
+此文件定义了每个用户可以通过 JMX 执行的操作。可能的访问级别：
+
+* readonly – 可以查看 MBean，但不能修改。
+* readwrite – 可以查看和修改 MBean。
+
+格式：
+```
+# 格式：用户名 访问级别
+<用户名> <访问权限>
+
+```
+
+示例：
+```
+monitorRole readonly
+controlRole readwrite
+
+```
+
+### **文件权限**：
 
 确保两个文件均归运行 JVM 的用户所有，且具有受限的权限：
 
