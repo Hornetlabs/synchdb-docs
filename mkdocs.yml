@@ -80,6 +80,7 @@ plugins:
             SQL Server CDC to PostgreSQL: CDC de SQL Server a PostgreSQL
             Oracle CDC to PostgreSQL: CDC de Oracle a PostgreSQL
             Table Snapshot and Re-snapshot: Instantánea de tabla y nueva instantánea
+            JMX Monitor Settings: Configuración del monitor JMX
         - locale: zh
           name: 中文
           site_name: SynchDB 文档
@@ -119,6 +120,7 @@ plugins:
             SQL Server CDC to PostgreSQL: SQL Server CDC 到 PostgreSQL
             Oracle CDC to PostgreSQL: Oracle CDC 到 PostgreSQL
             Table Snapshot and Re-snapshot: 表快照和重新快照
+            JMX Monitor Settings: JMX 监视器设置
   - mike:
       version_selector: true
       css_dir: css
@@ -150,6 +152,7 @@ nav:
    - State View: monitoring/state_view.md
    - Attribute View: monitoring/attr_view.md
    - JVM Memory Usage: monitoring/jvm_mem.md
+   - JMX Monitor Settings: monitoring/jmx_monitor.md
  - Tutorial:
    - MySQL CDC to PostgreSQL: tutorial/mysql_cdc_to_postgresql.md
    - SQL Server CDC to PostgreSQL: tutorial/sqlserver_cdc_to_postgresql.md
