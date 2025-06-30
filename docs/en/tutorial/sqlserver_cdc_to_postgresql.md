@@ -1,6 +1,6 @@
 # SQL Server CDC to PostgreSQL
 
-## Prepare SQL Server Databasea for SynchDB
+## Prepare SQL Server Database for SynchDB
 
 Before SynchDB can be used to replicate from SQL Server, SQL Server needs to be configured according to the procedure outlined [here](https://docs.synchdb.com/getting-started/remote_database_setups/)
 

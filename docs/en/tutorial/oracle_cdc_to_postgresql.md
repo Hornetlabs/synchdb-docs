@@ -1,6 +1,6 @@
 # Oracle CDC to PostgreSQL
 
-## Prepare Oracle Databasea for SynchDB
+## Prepare Oracle Database for SynchDB
 
 Before SynchDB can be used to replicate from Oracle, Oracle needs to be configured according to the procedure outlined [here](https://docs.synchdb.com/getting-started/remote_database_setups/)
 

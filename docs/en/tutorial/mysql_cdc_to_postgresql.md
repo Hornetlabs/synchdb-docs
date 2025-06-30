@@ -1,6 +1,6 @@
 # MySQL CDC to PostgreSQL
 
-## Prepare MySQL Databasea for SynchDB
+## Prepare MySQL Database for SynchDB
 
 Before SynchDB can be used to replicate from MySQL, MySQL needs to be configured according to the procedure outlined [here](https://docs.synchdb.com/getting-started/remote_database_setups/)
 
