@@ -55,12 +55,6 @@ synchdb_del_jmx_conninfo(
 
 When enabling JMX authentication in your JVM configuration (i.e., setting jmx_auth = true), you must provide two files:
 
-Password File – defines usernames and their passwords.
-
-Access File – defines access levels for those users.
-
-These files are used by the JVM to control who can connect and what they are allowed to do.
-
 **Password File**:
 
 This file stores valid JMX usernames and their corresponding passwords.
