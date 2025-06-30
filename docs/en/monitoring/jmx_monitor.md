@@ -30,12 +30,11 @@ synchdb_add_jmx_conninfo(
     jmx_ssl_truststore text,
     jmx_ssl_truststore_pass text
 )
-```
 
-```
 synchdb_del_jmx_conninfo(
     name text
 )
+
 ```
 
 | Parameter                     | Description                                                                                                                                                           |
