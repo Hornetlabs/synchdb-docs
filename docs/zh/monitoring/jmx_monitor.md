@@ -8,7 +8,7 @@ JMX，即 Java 管理扩展，是一种 Java 技术，提供用于管理和监�
 Debezium 连接器通过连接器的 MBean 名称（MBean 标签等于连接器名称）公开指标。这些指标特定于每个连接器实例，提供有关连接器快照、流式传输和模式历史记录进程行为的数据。
 
 ## **使用 synchdb_add_jmx_conninfo() 在连接器上启用 JMX，或使用 synchdb_del_jmx_conninfo() 禁用**
-synchdb_add_jmx_conninfo() 函数将 JMX 监控配置添加到现有连接器。这可以通过 JConsole 或 Prometheus JMX Exporter 等工具启用运行时监控和诊断。synchdb_del_jmx_conninfo() 可用于禁用 JMX。
+synchdb_add_jmx_conninfo() 和 synchdb_del_jmx_conninfo() 函数用于向现有连接器添加或删除 JMX 监控配置。这允许通过 JConsole 等工具进行运行时监控和诊断。
 
 **函数签名**
 

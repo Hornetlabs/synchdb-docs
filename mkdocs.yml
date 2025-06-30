@@ -81,6 +81,9 @@ plugins:
             Oracle CDC to PostgreSQL: CDC de Oracle a PostgreSQL
             Table Snapshot and Re-snapshot: Instantánea de tabla y nueva instantánea
             JMX Monitor Settings: Configuración del monitor JMX
+            JVM Memory Usage: Uso de memoria de JVM
+            Attribute View: Vista de atributos
+            JMX Exporter Settings: Configuración del exportador JMX
         - locale: zh
           name: 中文
           site_name: SynchDB 文档
@@ -121,6 +124,9 @@ plugins:
             Oracle CDC to PostgreSQL: Oracle CDC 到 PostgreSQL
             Table Snapshot and Re-snapshot: 表快照和重新快照
             JMX Monitor Settings: JMX 监视器设置
+            JVM Memory Usage: JVM内存使用情况
+            Attribute View: 属性视图
+            JMX Exporter Settings: JMX exporter 设置：
   - mike:
       version_selector: true
       css_dir: css
@@ -153,6 +159,7 @@ nav:
    - Attribute View: monitoring/attr_view.md
    - JVM Memory Usage: monitoring/jvm_mem.md
    - JMX Monitor Settings: monitoring/jmx_monitor.md
+   - JMX Exporter Settings: monitoring/jmx_exporter.md
  - Tutorial:
    - MySQL CDC to PostgreSQL: tutorial/mysql_cdc_to_postgresql.md
    - SQL Server CDC to PostgreSQL: tutorial/sqlserver_cdc_to_postgresql.md

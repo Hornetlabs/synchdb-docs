@@ -10,7 +10,7 @@ Debezium connectors expose metrics via the MBean name for the connector with MBe
 
 ## **Enable JMX on a Connector with synchdb_add_jmx_conninfo() or disable with synchdb_del_jmx_conninfo()**
 
-The synchdb_add_jmx_conninfo() function adds JMX monitoring configuration to an existing connector. This enables runtime monitoring and diagnostics via tools like JConsole or Prometheus JMX Exporter.synchdb_del_jmx_conninfo() can be used to disable JMX.
+The synchdb_add_jmx_conninfo() and synchdb_del_jmx_conninfo() functions adds or deletes JMX monitoring configuration to or from an existing connector. This enables runtime monitoring and diagnostics via tools like JConsole. 
 
 **Function Signature**
 
