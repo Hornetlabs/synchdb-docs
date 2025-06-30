@@ -79,6 +79,7 @@ plugins:
             MySQL CDC to PostgreSQL: CDC de MySQL a PostgreSQL
             SQL Server CDC to PostgreSQL: CDC de SQL Server a PostgreSQL
             Oracle CDC to PostgreSQL: CDC de Oracle a PostgreSQL
+            Table Snapshot and Re-snapshot: Instantánea de tabla y nueva instantánea
         - locale: zh
           name: 中文
           site_name: SynchDB 文档
@@ -117,6 +118,7 @@ plugins:
             MySQL CDC to PostgreSQL: MySQL CDC 到 PostgreSQL
             SQL Server CDC to PostgreSQL: SQL Server CDC 到 PostgreSQL
             Oracle CDC to PostgreSQL: Oracle CDC 到 PostgreSQL
+            Table Snapshot and Re-snapshot: 表快照和重新快照
   - mike:
       version_selector: true
       css_dir: css
@@ -154,7 +156,7 @@ nav:
    - Oracle CDC to PostgreSQL: tutorial/oracle_cdc_to_postgresql.md
    - Selective Table Replication: tutorial/selective_table_sync.md
    # - Data Transformation: tutorial/data_transformation.md
-   # - Table Snapshot and Re-snapshot: tutorial/table_snapshot_resnapshot.md
+   - Table Snapshot and Re-snapshot: tutorial/table_snapshot_resnapshot.md
    # - Schema Only Synchronization: tutorial/schema_only_sync.md
    # - Multi Source Replication: tutorial/multi_source_replication.md
    - Object Mapping Workflow: tutorial/object_mapping_workflow.md
