@@ -84,6 +84,7 @@ plugins:
             JVM Memory Usage: Uso de memoria de JVM
             Attribute View: Vista de atributos
             JMX Exporter Settings: Configuración del exportador JMX
+            Configure Openlog Replicator for Oracle Connector: Configurar Openlog Replicator para Oracle Connector
         - locale: zh
           name: 中文
           site_name: SynchDB 文档
@@ -126,7 +127,8 @@ plugins:
             JMX Monitor Settings: JMX 监视器设置
             JVM Memory Usage: JVM内存使用情况
             Attribute View: 属性视图
-            JMX Exporter Settings: JMX exporter 设置：
+            JMX Exporter Settings: JMX exporter 设置
+            Configure Openlog Replicator for Oracle Connector: 为 Oracle Connector 配置 Openlog Replicator
   - mike:
       version_selector: true
       css_dir: css
@@ -179,6 +181,7 @@ nav:
    - Secured Connection: user-guide/secured_connection.md
    - Configure Error Strategies: user-guide/configure_error_strategies.md
    - Configure Replication Offset: user-guide/set_offset.md
+   - Configure Openlog Replicator for Oracle Connector: user-guide/configure_olr.md
    # - Utility Functions: user-guide/utility_functions.md
  - Changelog: changelog.md
  # - Homepage: https://www.synchdb.com
