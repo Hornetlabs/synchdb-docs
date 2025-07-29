@@ -125,7 +125,7 @@ git checkout REL_16_3
 ```
 
 Clone the SynchDB source from within the extension folder
-Note: Branch *(synchdb-devel)[https://github.com/Hornetlabs/synchdb/tree/synchdb-devel]* is used for development so far.
+Note: Branch *[synchdb-devel](https://github.com/Hornetlabs/synchdb/tree/synchdb-devel)* is used for development so far.
 ```sh linenums="1"
 cd contrib/
 git clone https://github.com/Hornetlabs/synchdb.git
@@ -140,7 +140,7 @@ If you are working on Ubuntu 22.04.4 LTS, install the Maven as below:
 sudo apt install maven
 ```
 
-if you are using MacOS, you can use the brew command to install maven (refer (here)[https://brew.sh/] for how to install Homebrew) without any other settings:
+if you are using MacOS, you can use the brew command to install maven (refer [here](https://brew.sh/) for how to install Homebrew) without any other settings:
 ```sh
 brew install maven
 ```
