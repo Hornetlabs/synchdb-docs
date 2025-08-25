@@ -54,9 +54,9 @@ SELECT synchdb_resume_engine('mysqlconn');
 
 ## **Stop or Restart a Running Connector**
 
-Stops a running connector with `synchdb_stop_engine`
+Stops a running connector with `synchdb_stop_engine_bgw`
 ```sql
-SELECT synchdb_stop_engine('mysqlconn');
+SELECT synchdb_stop_engine_bgw('mysqlconn');
 ```
 
 Restarts a running connector with `synchdb_restart_connector` with a different snapshot mode.

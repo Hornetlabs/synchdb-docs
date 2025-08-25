@@ -53,9 +53,9 @@ SELECT synchdb_resume_engine('mysqlconn');
 
 ## **停止或重启正在运行的连接器**
 
-使用 `synchdb_stop_engine` 停止正在运行的连接器。
+使用 `synchdb_stop_engine_bgw` 停止正在运行的连接器。
 ```sql
-SELECT synchdb_stop_engine('mysqlconn');
+SELECT synchdb_stop_engine_bgw('mysqlconn');
 ```
 
 使用 `synchdb_restart_connector` 以不同的快照模式重启正在运行的连接器。

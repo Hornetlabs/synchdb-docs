@@ -72,7 +72,7 @@ synchdb_del_jmx_exporter_conninfo(
 ```sql
 SELECT synchdb_add_jmx_exporter_conninfo(
 	'mysqlconn',	-- existing connector name
-	'/path/to/jmx_exporter/jar'		-- path to JMX exporter java agent jar
+	'/path/to/jmx_exporter/jar',		-- path to JMX exporter java agent jar
 	9404,			-- JMX exporter running port
 	'/path/to/jmx/conf');		-- path to JMX exporter conf file
 
@@ -112,3 +112,5 @@ debezium_mysql_connector_metrics_connected{context="streaming",server="synchdb-c
 ## Prometheus and Graphana
 
 Once we have confirmed the metrics can be obtained via HTTP, then we can configure this endpoint to prometheus system and have it to `scrape` them all. Then we can create a prometheus data source in graphana and create a dashboard out of it. Please refer to prometheus and graphana [tutorial](https://grafana.com/docs/grafana/latest/getting-started/get-started-grafana-prometheus/) on how to do so.
+
+For quick test, you could also use the `ezdeploy` tool to quickly deploy prometheus and grafana with built-in dashboard templates for Synchdb. Refer to the [Quick Start Guide](getting-started/quick_start/) for mode details. 

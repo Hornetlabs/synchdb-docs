@@ -71,7 +71,7 @@ synchdb_del_jmx_exporter_conninfo(
 ```sql
 SELECT synchdb_add_jmx_exporter_conninfo(
 	'mysqlconn',	-- existing connector name
-	'/path/to/jmx_exporter/jar'		-- path to JMX exporter java agent jar
+	'/path/to/jmx_exporter/jar',		-- path to JMX exporter java agent jar
 	9404,			-- JMX exporter running port
 	'/path/to/jmx/conf');		-- path to JMX exporter conf file
 
@@ -110,3 +110,5 @@ debezium_mysql_connector_metrics_connected{context="streaming",server="synchdb-c
 ## Prometheus 和 Graphana
 
 一旦我们确认可以通过 HTTP 获取指标，就可以将此端点配置到 Prometheus 系统，并让其“抓取”所有指标。然后，我们可以在 graphana 中创建一个 Prometheus 数据源，并使用它创建一个仪表板。请参阅 Prometheus 和 graphana [教程](https://grafana.com/docs/grafana/latest/getting-started/get-started-grafana-prometheus/) 了解如何操作。
+
+为了快速测试，您还可以使用 `ezdeploy` 工具快速部署 prometheus 和 grafana，并使用 Synchdb 内置的仪表板模板。有关模式详细信息，请参阅 [快速入门指南](getting-started/quick_start/)。
