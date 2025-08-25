@@ -433,6 +433,7 @@ admin
 ![img](/images/grafana-dashboards.jpg)
 
 **选择所需模板：**
+
 * Java 虚拟机 - JVM 资源信息
 * SynchDB MySQL 仪表板 - MySQL 连接器信息
 * SynchDB SQLServer 仪表板 - SQLServer 连接器信息

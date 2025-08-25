@@ -16,7 +16,7 @@ git clone https://github.com/Hornetlabs/synchdb
 
 ## **ezdeploy.sh**
 
-This tool requires `docker`, and `docker-compose` (or `docker compose`) and must be run on Linux. It prints a list of deployment options:
+This tool requires `docker`, and `docker-compose` (or `docker compose`) and must be run on Linux. It prints a list of deployment options when run:
 
 ```bash
 
