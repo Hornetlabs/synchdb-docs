@@ -39,6 +39,11 @@ SynchDB 的核心集成了 Debezium 嵌入式引擎，这是一个基于 Java �
 - [SynchDB v1.0](https://github.com/Hornetlabs/synchdb/releases/tag/v1.0)
 - [SynchDB v1.0 Beta1](https://github.com/Hornetlabs/synchdb/releases/tag/v1.0_beta1)
 
-## **获取已开始**
+## **快速入门**
 
-了解有关 SynchDB 架构决策的更多信息，请点击[此处](architecture/architecture/) 或查看[安装指南](getting-started/installation/) 以开始使用 SynchDB。
+开始使用 SynchDB 的最快方法是使用预编译的 Docker 镜像以及源数据库系统（MySQL、SQL Server、Oracle 等）的配套镜像，所有这些镜像均由源存储库中的 `ezdeploy.sh` 工具驱动。此交互式工具可以启动 SynchDB、一个或多个源数据库，以及可选的 Prometheus + Grafana 用于监控，非常适合进行快速的端到端测试。请参阅 [快速入门指南](getting-started/quick_start/)。
+
+其他实用链接：
+* [SynchDB 架构决策](architecture/architecture/)
+* [安装指南](getting-started/installation/)
+* [源数据库设置](getting-started/remote_database_setups/)

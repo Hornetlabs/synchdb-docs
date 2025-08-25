@@ -41,4 +41,9 @@ This architecture allows PostgreSQL to leverage the rich ecosystem of Debezium c
 
 ## **Getting Started**
 
-Learn more about SynchDB architecture decisions [here](architecture/architecture/) or check out the [Installation Guide](getting-started/installation/) to get started with SynchDB.
+The quickest way to get started with SynchDB is to use the pre-compiled Docker images together with the companion images for source database systems (MySQL, SQL Server, Oracle, etc.), all driven by the `ezdeploy.sh` tool in the source repository. This interactive tool can spin up SynchDB, one or more source databases, and optional Prometheus + Grafana for monitoring, perfect for a fast end-to-end smoke test. For step-by-step instructions, refer to the [Quick Start Guide](getting-started/quick_start/).
+
+Other useful linkes:
+* [SynchDB Architecture Decisions](architecture/architecture/)
+* [Installation Guide](getting-started/installation/)
+* [Source Database Setups](getting-started/remote_database_setups/)

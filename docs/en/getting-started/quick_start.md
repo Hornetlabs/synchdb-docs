@@ -3,62 +3,245 @@ weight: 30
 ---
 # Quick Start Guide
 
-It is very simple to start using SynchDB to perform data replication from heterogeneous databases to PostgreSQL given that you have the correct connection information to your heterogeneous databases. Make sure you have already done the installation steps described [here](https://docs.synchdb.com/user-guide/installation/) and prepared [sample databases](https://docs.synchdb.com/user-guide/prepare_tests_env/) to test if you have not already.
+The fastest way to try SynchDB is with the pre-built Docker images for SynchDB and companion sources (MySQL, SQL Server, Oracle, etc.). Use the repo’s `ezdeploy.sh` (Linux only) to guide you with simple interactive prompts to spin up your chosen sources plus optional Prometheus/Grafana, so you can validate capture and replication in minutes. 
 
-## **Create SynchDB Extension**
+## **Download Source Repository**
 
-SynchDB extension requires pgcrypto to encrypt certain sensitive credential data. Please make sure it is installed prior to installing SynchDB. Alternatively, you can include `CASCADE` clause in `CREATE EXTENSION` to automatically install dependencies:
+The source repository can be downloaded from github [here](https://github.com/Hornetlabs/synchdb) or use `git clone`:
+
+```bash
+git clone https://github.com/Hornetlabs/synchdb
+
+```
+
+## **ezdeploy.sh**
+
+This tool requires `docker`, and `docker-compose` (or `docker compose`) and must be run on Linux. It prints a list of deployment options:
+
+```bash
+
+./ezdeploy.sh
+----------------------------------
+-----> Welcome to ezdeploy! <-----
+----------------------------------
+
+please select a quick deploy option:
+         1) synchdb only
+         2) synchdb + mysql
+         3) synchdb + sqlserver
+         4) synchdb + oracle23ai
+         5) synchdb + oracle19c
+         6) synchdb + olr(oracle19c)
+         7) synchdb + all source databases
+         8) custom deployment
+         9) deploy monitoring
+        10) teardown deployment
+enter your selection:
+
+```
+
+* For synchdb deployment only, use option `1)`.
+* For synchdb + 1 source database, use option `2)` to `6)`.
+* For synchdb + all source databases, use option `7)`.
+* For synchdb + custom source databases, use option `8)`.
+* For prometheus and grafana monitoring deployment, use option `9)`.
+* to teardown all deployment, use option `10)`.
+
+## **Access Details of Source Database Deployments for Testing**
+
+**MySQL:**
+* database: inventory
+* schema: N/A
+* user: mysqluser
+* password: mysqlpwd
+
+**Sqlserver:**
+* database: testDB
+* schema: dbo
+* user: sa
+* password: Password!
+
+**Oracle23ai:**
+* database: FREE
+* schema: c##dbzuser
+* user: c##dbzuser
+* password: dbz
+
+**Oracle19c:**
+* database: FREE
+* schema: DBZUSER
+* user: DBZUSER
+* password: dbz
+
+**Openlog Replicator (OLR):**
+* service name: ORACLE
+
+## **Access Synchdb with psql**
+
+Once deployed, synchdb can be accessed by:
+
+```bash
+docker exec -it synchdb bash -c "psql -d postgres"
+
+```
+
+Once connected, create the `synchdb` extension:
 
 ```sql
 CREATE EXTENSION synchdb CASCADE;
+
 ```
 
 ## **Create a Connector**
 
 Here are some examples to create a basic connector for each supported source database type.
 
-1. Create a MySQL connector called `mysqlconn` to replicate all tables under `inventory` in MySQL to destination database `postgres` in PostgreSQL:
+**MySQL:**
 ```sql
-SELECT synchdb_add_conninfo(
-    'mysqlconn', '127.0.0.1', 3306, 'mysqluser', 
-    'mysqlpwd', 'inventory', 'postgres', 
-    'null', 'null', 'mysql');
+SELECT synchdb_add_conninfo('mysqlconn',
+                            'mysql',
+                            3306,
+                            'mysqluser',
+                            'mysqlpwd',
+                            'inventory',
+                            'postgres',
+                            'null',
+                            'null',
+                            'mysql');
+
 ```
 
-2. Create a SQLServer connector called `sqlserverconn` to replicate all tables under `testDB` to destination database 'postgres' in PostgreSQL:
+**Sqlserver:**
 ```sql
-SELECT 
-  synchdb_add_conninfo(
-    'sqlserverconn', '127.0.0.1', 1433, 
-    'sa', 'Password!', 'testDB', 'postgres', 
-    'null', 'null', 'sqlserver');
+SELECT synchdb_add_conninfo('sqlserverconn',
+                            'sqlserver', 
+                            1433,
+                            'sa',
+                            'Password!',
+                            'testDB',
+                            'postgres',
+                            'null',
+                            'null',
+                            'sqlserver');
+
 ```
 
-3. Create a Oracle connector called `oracleconn` to replicate all tables under `FREE` to destination database 'postgres' in PostgreSQL:
+**Oracle23ai:**
 ```sql
-SELECT 
-  synchdb_add_conninfo(
-    'oracleconn', '127.0.0.1', 1521, 
-    'c##dbzuser', 'dbz', 'FREE', 'postgres', 
-    'null', 'null', 'oracle');
+SELECT synchdb_add_conninfo('oracleconn',
+                            'oracle',
+                            1521,
+                            'c##dbzuser',
+                            'dbz',
+                            'FREE',
+                            'postgres',
+                            'null',
+                            'null',
+                            'oracle');
+
 ```
 
-Successful creation will have a record under `synchdb_conninfo` table. More details on creating a connector can be found [here](https://docs.synchdb.com/user-guide/create_a_connector/)
+**Oracle19c:**
+```sql
+SELECT synchdb_add_conninfo('ora19cconn',
+                            'ora19c',
+                            1521,
+                            'DBZUSER',
+                            'dbz',
+                            'FREE',
+                            'postgres',
+                            'null',
+                            'null',
+                            'oracle');
+
+```
+
+**View Created Connectors:**
+
+```sql
+SELECT * FROM synchdb_conninfo;
+
+```
+
+More details on creating a connector can be found [here](https://docs.synchdb.com/user-guide/create_a_connector/)
+
+## **Create JMX Exporter - Optional**
+
+Here are some examples to enable JMX exporter for monitoring (If Prometheus + Grafana have been pre-deployed by `ezdeploy.sh`):
+
+**MySQL:**
+```sql
+SELECT synchdb_add_jmx_exporter_conninfo(
+                            'mysqlconn',
+                            '/home/ubuntu/jmx_prometheus_javaagent-1.3.0.jar',
+                            9404,
+                            '/home/ubuntu/jmxexport.conf');
+
+```
+
+**Sqlserver:**
+```sql
+SELECT synchdb_add_jmx_exporter_conninfo(
+                            'sqlserverconn',
+                            '/home/ubuntu/jmx_prometheus_javaagent-1.3.0.jar',
+                            9405,
+                            '/home/ubuntu/jmxexport.conf');
+
+```
+
+**Oracle23ai:**
+```sql
+SELECT synchdb_add_jmx_exporter_conninfo(
+                            'oracleconn',
+                            '/home/ubuntu/jmx_prometheus_javaagent-1.3.0.jar',
+                            9406,
+                            '/home/ubuntu/jmxexport.conf');
+
+```
+
+**Oracle19c:**
+```sql
+SELECT synchdb_add_jmx_exporter_conninfo(
+                            'ora19cconn',
+                            '/home/ubuntu/jmx_prometheus_javaagent-1.3.0.jar',
+                            9407,
+                            '/home/ubuntu/jmxexport.conf');
+
+```
+
+More details on creating a JMX Exporter can be found [here](https://docs.synchdb.com/monitoring/jmx_exporter/)
 
 ## **Start a Connector**
 
-Use `synchdb_start_engine_bgw()` function to start a connector worker. It takes one argument which is the connection name created above. This command will start the connector in the default snapshot mode called `initial`, which will replicate the schema of all designated tables and their initial data in PostgreSQL.
-
+**MySQL:**
 ```sql
-select synchdb_start_engine_bgw('mysqlconn');
-select synchdb_start_engine_bgw('sqlserverconn');
-select synchdb_start_engine_bgw('oracleconn');
+SELECT synchdb_start_engine_bgw('mysqlconn');
+
 ```
 
+**Sqlserver:**
+```sql
+SELECT synchdb_start_engine_bgw('sqlserverconn');
+
+```
+
+**Oracle23ai:**
+```sql
+SELECT synchdb_start_engine_bgw('oracleconn');
+
+```
+
+**Oracle19c:**
+```sql
+SELECT synchdb_start_engine_bgw('ora19cconn');
+```
+
+More details on connector start can be found [here](https://docs.synchdb.com/user-guide/start_stop_connector/)
+
 ## Check Connector Running State
+
 Use `synchdb_state_view()` to examine all connectors' running states. 
 
-If everything works fine, we should see outputs similar to below.
 ``` SQL
 postgres=# select * from synchdb_state_view;
      name      | connector_type |  pid   |        stage        |  state  |   err    |                                           last_dbz_offset
@@ -66,20 +249,20 @@ postgres=# select * from synchdb_state_view;
  sqlserverconn | sqlserver      | 579820 | change data capture | polling | no error | {"commit_lsn":"0000006a:00006608:0003","snapshot":true,"snapshot_completed":false}
  mysqlconn     | mysql          | 579845 | change data capture | polling | no error | {"ts_sec":1741301103,"file":"mysql-bin.000009","pos":574318212,"row":1,"server_id":223344,"event":2}
  oracleconn    | oracle         | 580053 | change data capture | polling | no error | offset file not flushed yet
+ ora19cconn    | oracle         | 593421 | change data capture | polling | no error | offset file not flushed yet
 (3 rows)
 
 ```
 
-If there is an error during connector start, perhaps due to connectivity, incorrect user credentials or source database settings, the error message shall be captured and displayed as `err` in the connector state output.
-
 More on running states [here](https://docs.synchdb.com/monitoring/state_view/), and also running statistics [here](https://docs.synchdb.com/monitoring/stats_view/).
 
-## Check the Tables and Data
-By default, the source tables will be replicated to a new schema under the current postgreSQL database with the same name as the source database name. We can update the search path to view the new tables in different schema.
 
-For example:
+## Check the Tables and Data from Initial Snapshot
+By default, the connector will perform a `initial` snapshot to capture both the table schema and initial data, convert and apply them to PostgreSQL under different `schema`. You should see something similar to the following:
+
+**MySQL:**
 ```sql
-postgres=# set search_path=public,free,inventory;
+postgres=# SET search_path=public,inventory;
 SET
 postgres=# \d
                  List of relations
@@ -105,21 +288,155 @@ postgres=# \d
 (17 rows)
 ```
 
-## **Stop a Connector**
+**Sqlserver:**
+```sql
+postgres=# SET search_path=public,testdb;
+SET
+postgres=# \d
+                  List of relations
+ Schema |          Name           |   Type   | Owner
+--------+-------------------------+----------+--------
+ public | synchdb_att_view        | view     | ubuntu
+ public | synchdb_attribute       | table    | ubuntu
+ public | synchdb_conninfo        | table    | ubuntu
+ public | synchdb_objmap          | table    | ubuntu
+ public | synchdb_state_view      | view     | ubuntu
+ public | synchdb_stats_view      | view     | ubuntu
+ testdb | customers               | table    | ubuntu
+ testdb | customers_id_seq        | sequence | ubuntu
+ testdb | orders                  | table    | ubuntu
+ testdb | orders_order_number_seq | sequence | ubuntu
+ testdb | products                | table    | ubuntu
+ testdb | products_id_seq         | sequence | ubuntu
+ testdb | products_on_hand        | table    | ubuntu
+(13 rows)
 
-Use `synchdb_stop_engine_bgw()` SQL function to stop a running or paused connector worker. This function takes `conninfo_name` as its only parameter, which can be found from the output of `synchdb_get_state()` view.
-
-For example:
 ```
-select synchdb_stop_engine_bgw('mysqlconn');
+
+**Oracle23ai and Oracle19c:**
+```sql
+postgres=# SET search_path=public,free;
+SET
+postgres=# \d
+              List of relations
+ Schema |        Name        | Type  | Owner
+--------+--------------------+-------+--------
+ free   | orders             | table | ubuntu
+ public | synchdb_att_view   | view  | ubuntu
+ public | synchdb_attribute  | table | ubuntu
+ public | synchdb_conninfo   | table | ubuntu
+ public | synchdb_objmap     | table | ubuntu
+ public | synchdb_state_view | view  | ubuntu
+ public | synchdb_stats_view | view  | ubuntu
+(7 rows)
+
+```
+## Similate an INSERT Event and Observe CDC
+
+We can use `docker exec` to similate an INSERT for each connector type and observe the Change Data Capture (CDC).
+
+**MySQL:**
+```bash
+docker exec -i mysql mysql -D inventory -umysqluser -pmysqlpwd -e "INSERT INTO orders(order_date, purchaser, quantity, product_id) VALUES ('2025-12-12', 1002, 10000, 102)"
+
 ```
 
-`synchdb_stop_engine_bgw()` function also marks a connection info as `inactive`, which prevents the this worker from automatic-relaunch at server restarts. See below for more details.
+```sql
+postgres=# SELECT * from inventory.orders;
+ order_number | order_date | purchaser | quantity | product_id
+--------------+------------+-----------+----------+------------
+        10001 | 2016-01-16 |      1001 |        1 |        102
+        10002 | 2016-01-17 |      1002 |        2 |        105
+        10003 | 2016-02-19 |      1002 |        2 |        106
+        10004 | 2016-02-21 |      1003 |        1 |        107
+        10005 | 2025-12-12 |      1002 |    10000 |        102
+(5 rows)
 
-## **Remove a Connector**
-Use `synchdb_del_conninfo()` SQL function to remove a connector from SynchDB. This will wipe out the [metadata files](https://docs.synchdb.com/architecture/metadata_files/) and also any [object mappings](https://docs.synchdb.com/user-guide/object_mapping_rules/) created on that connector.
-
-For example:
 ```
-select synchdb_del_conninfo('mysqlconn');
+
+**Sqlserver:**
+```bash
+docker exec -i mysql mysql -D inventory -umysqluser -pmysqlpwd -e "INSERT INTO orders(order_date, purchaser, quantity, product_id) VALUES ('2025-12-12', 1002, 10000, 102)"
+
+```
+
+```sql
+postgres=# SELECT * from testdb.orders;
+ order_number | order_date | purchaser | quantity | product_id
+--------------+------------+-----------+----------+------------
+        10001 | 2016-01-16 |      1001 |        1 |        102
+        10002 | 2016-01-17 |      1002 |        2 |        105
+        10003 | 2016-02-19 |      1002 |        2 |        106
+        10004 | 2016-02-21 |      1003 |        1 |        107
+        10005 | 2025-12-12 |      1002 |    10000 |        102
+(5 rows)
+
+```
+
+**Oracle23ai:**
+```bash
+echo -ne "INSERT INTO orders(order_number, order_date, purchaser, quantity, product_id) VALUES (10006, TO_DATE('2025-12-12', 'YYYY-MM-DD'), 1002, 10000, 102);\n" | docker exec -i oracle sqlplus c##dbzuser/dbz@//localhost:1521/FREE
+
+```
+
+```sql
+postgres=# SELECT * FROM free.orders;
+ order_number |     order_date      | purchaser | quantity | product_id
+--------------+---------------------+-----------+----------+------------
+        10001 | 2024-01-01 00:00:00 |      1003 |        2 |        107
+        10002 | 2024-01-01 00:00:00 |      1003 |        2 |        107
+        10003 | 2024-01-01 00:00:00 |      1003 |        2 |        107
+        10004 | 2024-01-01 00:00:00 |      1003 |        2 |        107
+        10005 | 2025-12-12 00:00:00 |      1002 |    10000 |        102
+(5 rows)
+
+```
+
+**Oracle19c:**
+```bash
+echo -ne "INSERT INTO orders(order_number, order_date, purchaser, quantity, product_id) VALUES (10005, TO_DATE('2025-12-12', 'YYYY-MM-DD'), 1002, 10000, 102);\n" | docker exec -i ora19c sqlplus DBZUSER/dbz@//localhost:1521/FREE
+
+```
+
+```sql
+postgres=# SELECT * FROM free.orders;
+ order_number |     order_date      | purchaser | quantity | product_id
+--------------+---------------------+-----------+----------+------------
+        10001 | 2024-01-01 00:00:00 |      1003 |        2 |        107
+        10002 | 2024-01-01 00:00:00 |      1003 |        2 |        107
+        10003 | 2024-01-01 00:00:00 |      1003 |        2 |        107
+        10004 | 2024-01-01 00:00:00 |      1003 |        2 |        107
+        10005 | 2025-12-12 00:00:00 |      1002 |    10000 |        102
+(5 rows)
+
+```
+
+## **Stop and Remove a Connector**
+
+**MySQL:**
+```sql
+SELECT synchdb_stop_engine_bgw('mysqlconn');
+SELECT synchdb_del_conninfo('mysqlconn');
+
+```
+
+**Sqlserver:**
+```sql
+SELECT synchdb_stop_engine_bgw('sqlserverconn');
+SELECT synchdb_del_conninfo('sqlserverconn');
+
+```
+
+**Oracle23ai:**
+```sql
+SELECT synchdb_stop_engine_bgw('oracleconn');
+SELECT synchdb_del_conninfo('oracleconn');
+
+```
+
+**Oracle19c:**
+```sql
+SELECT synchdb_stop_engine_bgw('ora19cconn');
+SELECT synchdb_del_conninfo('ora19cconn');
+
 ```
