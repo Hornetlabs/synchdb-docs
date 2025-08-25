@@ -158,6 +158,27 @@ SELECT synchdb_add_conninfo('ora19cconn',
 
 ```
 
+**OLR(Oracle19c):**
+```sql
+SELECT synchdb_add_conninfo('olrconn',
+                            'ora19c',
+                            1521,
+                            'DBZUSER',
+                            'dbz',
+                            'FREE',
+                            'postgres',
+                            'null',
+                            'null',
+                            'olr');
+
+SELECT synchdb_add_olr_conninfo('olrconn',
+                                'OpenLogReplicator',
+                                7070,
+                                'ORACLE');
+
+```
+
+
 **查看已创建的连接器：**
 
 ```sql
@@ -238,6 +259,12 @@ SELECT synchdb_start_engine_bgw('oracleconn');
 SELECT synchdb_start_engine_bgw('ora19cconn');
 ```
 
+**OLR(Oracle19c):**
+```sql
+SELECT synchdb_start_engine_bgw('olrconn');
+
+```
+
 有关连接器启动的更多详细信息，请参见[此处]（https://docs.synchdb.com/zh/user-guide/start_stop_connector/）
 
 ## **检查连接器运行状态**
@@ -246,14 +273,15 @@ SELECT synchdb_start_engine_bgw('ora19cconn');
 
 以下是输出示例：
 ``` SQL
-postgres=# select * from synchdb_state_view;
+postgres=# SELECT * FROM synchdb_state_view;
      name      | connector_type |  pid   |        stage        |  state  |   err    |                                           last_dbz_offset
 ---------------+----------------+--------+---------------------+---------+----------+------------------------------------------------------------------------------------------------------
  sqlserverconn | sqlserver      | 579820 | change data capture | polling | no error | {"commit_lsn":"0000006a:00006608:0003","snapshot":true,"snapshot_completed":false}
  mysqlconn     | mysql          | 579845 | change data capture | polling | no error | {"ts_sec":1741301103,"file":"mysql-bin.000009","pos":574318212,"row":1,"server_id":223344,"event":2}
  oracleconn    | oracle         | 580053 | change data capture | polling | no error | offset file not flushed yet
  ora19cconn    | oracle         | 593421 | change data capture | polling | no error | offset file not flushed yet
-(3 rows)
+ olrconn       | oracle         | 601235 | change data capture | polling | no error | offset file not flushed yet
+(5 rows)
 
 ```
 
@@ -315,7 +343,7 @@ postgres=# \d
 
 ```
 
-**Oracle23ai and Oracle19c:**
+**Oracle23ai， Oracle19c 和 OLR:**
 ```sql
 postgres=# SET search_path=public,free;
 SET
@@ -395,7 +423,7 @@ postgres=# SELECT * FROM free.orders;
 
 ```
 
-**Oracle19c:**
+**Oracle19c 和 OLR:**
 ```bash
 echo -ne "INSERT INTO orders(order_number, order_date, purchaser, quantity, product_id) VALUES (10005, TO_DATE('2025-12-12', 'YYYY-MM-DD'), 1002, 10000, 102);\n" | docker exec -i ora19c sqlplus DBZUSER/dbz@//localhost:1521/FREE
 
@@ -483,5 +511,12 @@ SELECT synchdb_del_conninfo('oracleconn');
 ```sql
 SELECT synchdb_stop_engine_bgw('ora19cconn');
 SELECT synchdb_del_conninfo('ora19cconn');
+
+```
+
+**OLR(Oracle19c):**
+```sql
+SELECT synchdb_stop_engine_bgw('olrconn');
+SELECT synchdb_del_conninfo('olrconn');
 
 ```
