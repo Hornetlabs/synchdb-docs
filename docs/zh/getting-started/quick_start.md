@@ -414,6 +414,47 @@ postgres=# SELECT * FROM free.orders;
 
 ```
 
+## Grafana 上的连接器指标 - 可选
+
+![img](/images/grafana-home.jpg)
+
+如果您选择使用 `ezdeploy.sh` 部署监控，并在启动连接器之前调用了可选的 `synchdb_add_jmx_exporter_conninfo()`，则连接器指标将在 Grafana 上可用。
+
+**访问 Grafana：**
+http://localhost:3000/
+
+**默认登录名：**
+admin
+admin
+
+**首次登录时需要更改密码。**
+
+**导航到仪表板菜单：**
+![img](/images/grafana-dashboards.jpg)
+
+**选择所需模板：**
+* Java 虚拟机 - JVM 资源信息
+* SynchDB MySQL 仪表板 - MySQL 连接器信息
+* SynchDB SQLServer 仪表板 - SQLServer 连接器信息
+* SynchDB Oracle 仪表板 - Oracle 连接器信息
+
+**选择所需实例：**
+每个启用 JMX 导出器的连接器都绑定到一个专用端口号，以便 Prometheus 可以从中获取数据。使用实例下拉菜单按端口号选择连接器。
+
+![img](/images/grafana-instance.jpg)
+
+**Java 虚拟机仪表板：**
+![img](/images/grafana-jvm.jpg)
+
+**MySQL 仪表板：**
+![img](/images/grafana-mysql.jpg)
+
+**SQLServer 仪表板：**
+![img](/images/grafana-sqlserver.jpg)
+
+**Oracle 仪表板：**
+![img](/images/grafana-oracle.jpg)
+
 ## **停止并移除连接器**
 
 **MySQL:**

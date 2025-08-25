@@ -411,6 +411,48 @@ postgres=# SELECT * FROM free.orders;
 
 ```
 
+## Connector Metrics on Grafana - Optional
+
+![img](/images/grafana-home.jpg)
+
+Connector metrics will be available on Grafana if you choose to deploy monitoring using `ezdeploy.sh` and have called the optional `synchdb_add_jmx_exporter_conninfo()` before starting the connector. 
+
+**Access Grafana:**
+http://localhost:3000/
+
+**Default Login:**
+admin
+admin
+
+**You will be required to change password on first time login.**
+
+**Nativate to the dashboards menu:**
+![img](/images/grafana-dashboards.jpg)
+
+**Select desired templates:**
+* Java Virtual Machine - resource information about JVM
+* SynchDB MySQL Dashboard - information about MySQL connector
+* SynchDB SQLServer Dashboard - information about SQLServer connector
+* SynchDB Oracle Dashboard - information about Oracle connector
+
+
+**Select desired Instance:**
+Each connector with JMX exporter enabled is bound to a dedicated port number so that prometheus can fetch the data from. Use the instance drop-down menu to select a connector by port number.
+
+![img](/images/grafana-instance.jpg)
+
+**Java Virtual Machine Dashboard:**
+![img](/images/grafana-jvm.jpg)
+
+**MySQL Dashboard:**
+![img](/images/grafana-mysql.jpg)
+
+**SQLServer Dashboard:**
+![img](/images/grafana-sqlserver.jpg)
+
+**Oracle Dashboard:**
+![img](/images/grafana-oracle.jpg)
+
 ## **Stop and Remove a Connector**
 
 **MySQL:**
