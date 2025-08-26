@@ -55,7 +55,7 @@ plugins:
             Native Data Type Processing: Procesamiento de tipos de datos nativos
             Overview: Visión General
             Batch Processing: Manejo de Cambios por Lotes
-            Metadata Files: Archivos de Metadatos
+            Debezium Metadata Files: Debezium Archivos de Metadatos
             User guide: Guía del usuario
             Source Database Setup: configuración de base de datos remota
             Installation: Instalación
@@ -86,13 +86,18 @@ plugins:
             JMX Exporter Settings: Configuración del exportador JMX
             Configure Openlog Replicator for Oracle Connector: Configurar Openlog Replicator para Oracle Connector
             Openlog Replicator Event Processor: Procesador de eventos del replicador Openlog
+            Getting Started: Empezando
+            Monitoring: escucha
+            Tutorial: Tutorial
+            Secured Connection: Conexión segura
+            Configure Replication Offset: Configurar el desplazamiento de replicación
         - locale: zh
           name: 中文
           site_name: SynchDB 文档
           build: true
           nav_translations:
             User guide: 用户指南
-            Architecture Overview: 架构概述
+            Architecture: 架构
             SynchDB Components: SynchDB组件架构
             Debezium Runner Components: Debezium Runner组件架构
             Non-Native Data Type Processing: 非原生数据类型处理
@@ -100,7 +105,7 @@ plugins:
             Home: 主页
             Overview: 概述
             Batch Processing: 批量处理
-            Metadata Files: 元数据文件
+            Debezium Metadata Files: Debezium 元数据文件
             User guide: 用户指南
             Installation: 安装
             Source Database Setup: 源数据库设置
@@ -131,6 +136,12 @@ plugins:
             JMX Exporter Settings: JMX exporter 设置
             Configure Openlog Replicator for Oracle Connector: 为 Oracle Connector 配置 Openlog Replicator
             Openlog Replicator Event Processor: Openlog Replicator 事件处理器
+            Debezium Event Processor: Debezium 事件处理器
+            Getting Started: 快速入门
+            Monitoring: 监控
+            Tutorial: 教程
+            Secured Connection: 安全连接
+            Configure Replication Offset: 配置复制偏移
   - mike:
       version_selector: true
       css_dir: css
