@@ -1,10 +1,10 @@
-# SynchDB 组件架构 - C
+# Debezium 事件处理器 - C
 
-## **SynchDB Worker 组件图**
+## **Debezium 事件处理器组件图**
 
 ![img](/images/synchdb-component-diag.jpg)
 
-SynchDB Worker 是由 SynchDB 扩展发起和启动的 PostgreSQL 后台工作进程。它负责初始化 Java 虚拟机 (JVM)，运行 Debezium Runner模块，（它是 SynchDB 的 Java 部分），利用嵌入式 Debezium 引擎从异构数据库源获取更改事件。每个 SynchDB 工作进程都由下面列出的组件和模块组成：
+Debezium 事件处理器是由 SynchDB 扩展发起和启动的 PostgreSQL 后台工作进程。它负责初始化 Java 虚拟机 (JVM)，运行 Debezium Runner模块，（它是 SynchDB 的 Java 部分），利用嵌入式 Debezium 引擎从异构数据库源获取更改事件。每个 SynchDB 工作进程都由下面列出的组件和模块组成：
 
 1. 事件获取器
 2. JVM + DBZ 初始化程序

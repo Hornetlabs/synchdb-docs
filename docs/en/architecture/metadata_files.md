@@ -6,20 +6,20 @@ During Operation, Debezium Runner engine produces metadata files under $PGDATA/p
 
 These metadata filenames consist of:
 
-* (connector type)_(connector name)_offsets.dat
+* (connector type)_(connector name)_(destination database)_offsets.dat
 
-* (connector type)_(connector name)_schemahistory.dat
+* (connector type)_(connector name)_(destination_database)_schemahistory.dat
 
 ```
 ls $PGDATA/pg_synchdb
-mysql_mysqlconn_offsets.dat        sqlserver_sqlserverconn_offsets.dat
-mysql_mysqlconn_schemahistory.dat  sqlserver_sqlserverconn_schemahistory.dat
+mysql_mysqlconn_postgres_offsets.dat        sqlserver_sqlserverconn_postgres_offsets.dat
+mysql_mysqlconn_postgres_schemahistory.dat  sqlserver_sqlserverconn_postgres_schemahistory.dat
 ```
 
 These binary files' contents can be viewed with hexdump command:
 ```
-hexdump -C $PGDATA/pg_synchdb/mysql_mysqlconn_offsets.dat
-hexdump -C $PGDATA/pg_synchdb/mysql_mysqlconn_schemahistory.dat
+hexdump -C $PGDATA/pg_synchdb/mysql_mysqlconn_postgres_offsets.dat
+hexdump -C $PGDATA/pg_synchdb/mysql_mysqlconn_postgres_schemahistory.dat
 ```
 
 ## **Reset Connector**

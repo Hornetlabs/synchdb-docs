@@ -6,20 +6,20 @@
 
 这些元数据文件名由以下部分组成：
 
-* (连接器类型)_(连接器名称)_offsets.dat
+* (连接器类型)_(连接器名称)_(目标数据库)_offsets.dat
 
-* (连接器类型)_(连接器名称)_schemahistory.dat
+* (连接器类型)_(连接器名称)_(目标数据库)_schemahistory.dat
 
 ```
 ls $PGDATA/pg_synchdb
-mysql_mysqlconn_offsets.dat        sqlserver_sqlserverconn_offsets.dat
-mysql_mysqlconn_schemahistory.dat  sqlserver_sqlserverconn_schemahistory.dat
+mysql_mysqlconn_postgres_offsets.dat        sqlserver_sqlserverconn_postgres_offsets.dat
+mysql_mysqlconn_postgres_schemahistory.dat  sqlserver_sqlserverconn_postgres_schemahistory.dat
 ```
 
 这些二进制文件的内容可以使用 hexdump 命令查看：
 ```
-hexdump -C $PGDATA/pg_synchdb/mysql_mysqlconn_offsets.dat
-hexdump -C $PGDATA/pg_synchdb/mysql_mysqlconn_schemahistory.dat
+hexdump -C $PGDATA/pg_synchdb/mysql_mysqlconn_postgres_offsets.dat
+hexdump -C $PGDATA/pg_synchdb/mysql_mysqlconn_postgres_schemahistory.dat
 ```
 
 ## **重置连接器**

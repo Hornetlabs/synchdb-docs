@@ -85,6 +85,7 @@ plugins:
             Attribute View: Vista de atributos
             JMX Exporter Settings: Configuración del exportador JMX
             Configure Openlog Replicator for Oracle Connector: Configurar Openlog Replicator para Oracle Connector
+            Openlog Replicator Event Processor: Procesador de eventos del replicador Openlog
         - locale: zh
           name: 中文
           site_name: SynchDB 文档
@@ -129,6 +130,7 @@ plugins:
             Attribute View: 属性视图
             JMX Exporter Settings: JMX exporter 设置
             Configure Openlog Replicator for Oracle Connector: 为 Oracle Connector 配置 Openlog Replicator
+            Openlog Replicator Event Processor: Openlog Replicator 事件处理器
   - mike:
       version_selector: true
       css_dir: css
@@ -141,8 +143,9 @@ nav:
  - Home: index.md
  - Architecture:
    - Architecture Overview: architecture/architecture.md
-   - SynchDB Components: architecture/synchdb_components.md
+   - Debezium Event Processor: architecture/debezium_event_processor.md
    - Debezium Runner Components: architecture/debezium_runner_components.md
+   - Openlog Replicator Event Processor: architecture/openlog_replicator_event_processor.md
    - Batch Processing: architecture/batch_change_handling.md
    - Non-Native Data Type Processing: architecture/non_native_datatype_handling.md
    - Native Data Type Processing: architecture/native_datatype_handling.md

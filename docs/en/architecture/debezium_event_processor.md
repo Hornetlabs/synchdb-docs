@@ -1,10 +1,10 @@
-# SynchDB Component Architecture - C
+# Debezium Event Processor - C
 
-## **SynchDB Worker Component Diagram**
+## **Debezium Event Processor Component Diagram**
 
 ![img](/images/synchdb-component-diag.jpg)
 
-A SynchDB Worker is a PostgreSQL background worker initiated and started by the SynchDB extension. It is responsible for initializing Java Virtual Machine (JVM), run Debezium runner, which is the Java part of SynchDB that utilizes the embedded Debezium engine to obtain change events from heterogeneous database sources. Each SynchDB worker consists of components and modules as shown in the component diagram and listed below:
+Debezium Event Processor is a PostgreSQL background worker initiated and started by the SynchDB extension. It is responsible for initializing Java Virtual Machine (JVM), run Debezium runner, which is the Java part of SynchDB that utilizes the embedded Debezium engine to obtain change events from heterogeneous database sources. Each SynchDB worker consists of components and modules as shown in the component diagram and listed below:
 
 1. Event Fetcher
 2. JVM + DBZ Initializer

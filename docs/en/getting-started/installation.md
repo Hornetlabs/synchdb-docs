@@ -221,6 +221,8 @@ make WITH_OLR=1
 sudo make WITH_OLR=1 install
 ```
 
+**Warning**: Openlog Replicator Connector support requires both `libprotobuf-c` and `oracle parser`.
+
 ### Configure your Linker to find Java (Ubuntu)
 Lastly, we also need to tell your system's linker where the newly added Java library (libjvm.so) is located in your system.
 
