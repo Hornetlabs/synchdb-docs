@@ -57,7 +57,7 @@ plugins:
             Batch Processing: Manejo de Cambios por Lotes
             Metadata Files: Archivos de Metadatos
             User guide: Guía del usuario
-            Source Database Configuration: configuración de base de datos remota
+            Source Database Setup: configuración de base de datos remota
             Installation: Instalación
             Prepare Sample Databases: Preparar Bases de Datos de Ejemplo
             Quick Start: Inicio Rápido
@@ -102,7 +102,7 @@ plugins:
             Metadata Files: 元数据文件
             User guide: 用户指南
             Installation: 安装
-            Source Database Configuration: 源数据库设置
+            Source Database Setup: 源数据库设置
             Prepare Sample Databases: 准备示例数据库
             Quick Start: 快速入门
             SynchDB Configuration: SynchDB 配置
@@ -151,9 +151,9 @@ nav:
    # - Test Framework: architecture/test_framework.md
  - Getting Started:
    - Installation: getting-started/installation.md
-   - Source Database Configuration: getting-started/remote_database_setups.md   
+   - Source Database Setup: getting-started/remote_database_setups.md   
    - SynchDB Configuration: getting-started/configuration.md     
-   - Prepare Sample Databases: getting-started/prepare_tests_env.md
+   #- Prepare Sample Databases: getting-started/prepare_tests_env.md
    - Quick Start: getting-started/quick_start.md
  - Monitoring:
    - Statistic View: monitoring/stats_view.md
