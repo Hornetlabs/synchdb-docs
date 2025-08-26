@@ -47,7 +47,7 @@ enter your selection:
 * For prometheus and grafana monitoring deployment, use option `9)`.
 * to teardown all deployment, use option `10)`.
 
-## **Access Details of Source Database Deployments for Testing**
+## **Access Details of Source Databases for Testing**
 
 **MySQL:**
 
@@ -300,7 +300,6 @@ postgres=# \d
                  List of relations
   Schema   |        Name        |   Type   | Owner
 -----------+--------------------+----------+--------
- free      | orders             | table    | ubuntu
  inventory | addresses          | table    | ubuntu
  inventory | addresses_id_seq   | sequence | ubuntu
  inventory | customers          | table    | ubuntu
@@ -317,7 +316,7 @@ postgres=# \d
  public    | synchdb_objmap     | table    | ubuntu
  public    | synchdb_state_view | view     | ubuntu
  public    | synchdb_stats_view | view     | ubuntu
-(17 rows)
+(16 rows)
 ```
 
 **Sqlserver:**
@@ -449,14 +448,8 @@ postgres=# SELECT * FROM free.orders;
 
 Connector metrics will be available on Grafana if you choose to deploy monitoring using `ezdeploy.sh` and have called the optional `synchdb_add_jmx_exporter_conninfo()` before starting the connector. 
 
-**Access Grafana:**
-http://localhost:3000/
-
-**Default Login:**
-admin
-admin
-
-**You will be required to change password on first time login.**
+* **Access Grafana:** http://localhost:3000/
+* **Default Login:** admin/admin (You will be required to change password on first time login)
 
 **Nativate to the dashboards menu:**
 ![img](/images/grafana-dashboards.jpg)

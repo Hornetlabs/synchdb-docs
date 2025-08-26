@@ -48,7 +48,7 @@ enter your selection:
 * 对于 prometheus 和 grafana 监控部署，请使用选项 `9)`。
 * 要拆除所有部署，请使用选项 `10)`。
 
-## **测试源数据库部署的访问详情**
+## **测试源数据库访问详情**
 
 **MySQL:**
 
@@ -302,7 +302,6 @@ postgres=# \d
                  List of relations
   Schema   |        Name        |   Type   | Owner
 -----------+--------------------+----------+--------
- free      | orders             | table    | ubuntu
  inventory | addresses          | table    | ubuntu
  inventory | addresses_id_seq   | sequence | ubuntu
  inventory | customers          | table    | ubuntu
@@ -319,7 +318,7 @@ postgres=# \d
  public    | synchdb_objmap     | table    | ubuntu
  public    | synchdb_state_view | view     | ubuntu
  public    | synchdb_stats_view | view     | ubuntu
-(17 rows)
+(16 rows)
 ```
 
 **Sqlserver:**
@@ -452,14 +451,8 @@ postgres=# SELECT * FROM free.orders;
 
 如果您选择使用 `ezdeploy.sh` 部署监控，并在启动连接器之前调用了可选的 `synchdb_add_jmx_exporter_conninfo()`，则连接器指标将在 Grafana 上可用。
 
-**访问 Grafana：**
-http://localhost:3000/
-
-**默认登录名：**
-admin
-admin
-
-**首次登录时需要更改密码。**
+* **访问 Grafana:** http://localhost:3000/
+* **默认登录名:** admin/admin (首次登录时需要更改密码)
 
 **导航到仪表板菜单：**
 ![img](/images/grafana-dashboards.jpg)
