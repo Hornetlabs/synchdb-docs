@@ -126,7 +126,7 @@ plugins:
             Oracle CDC to PostgreSQL: Oracle CDC 到 PostgreSQL
             Table Snapshot and Re-snapshot: 表快照和重新快照
             JMX Monitor Settings: JMX 监视器设置
-            JVM Memory Usage: JVM内存使用情况
+            JVM Memory Usage: JVM 内存使用情况
             Attribute View: 属性视图
             JMX Exporter Settings: JMX exporter 设置
             Configure Openlog Replicator for Oracle Connector: 为 Oracle Connector 配置 Openlog Replicator
