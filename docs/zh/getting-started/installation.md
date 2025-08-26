@@ -113,11 +113,15 @@ sudo ldconfig
 
 * Java Development Kit 22. 下载地址：[点击这里](https://www.oracle.com/ca-en/java/technologies/downloads/)
 * Apache Maven 3.9.8. 下载地址：[点击这里](https://maven.apache.org/download.cgi)
-* PostgreSQL 16.3 源代码. Git克隆地址：[点击这里](https://github.com/postgres/postgres). PostgreSQL编译要求请参考此[wiki](https://wiki.postgresql.org/wiki/Compile_and_Install_from_source_code)
+* PostgreSQL 源代码. Git克隆地址：[点击这里](https://github.com/postgres/postgres). PostgreSQL编译要求请参考此[wiki](https://wiki.postgresql.org/wiki/Compile_and_Install_from_source_code)
 * Docker compose 2.28.1 (用于测试). 参考[安装指南](https://docs.docker.com/compose/install/linux/)
 * 基于Unix的操作系统，如Ubuntu 22.04或MacOS
 
-### **准备源代码**
+**Openlog Replicator 连接器支持的额外要求（如果在构建过程中启用）**
+
+* libprotobuf-c v1.5.2。请参阅[此处](https://github.com/protobuf-c/protobuf-c.git) 从源代码构建。
+
+### **准备源代码（以16.3为例）**
 
 克隆PostgreSQL源代码并切换到16.3发布标签
 ```sh linenums="1"
@@ -135,37 +139,37 @@ git clone https://github.com/Hornetlabs/synchdb.git
 
 ### **准备工具**
 
-#### **安装Maven**
-
-如果您使用的是Ubuntu 22.04.4 LTS，按以下方式安装Maven：
-```sh
+#### --> Maven
+``` BASH
+## 在 Ubuntu 上
 sudo apt install maven
-```
 
-如果您使用的是MacOS，可以使用brew命令安装maven（关于如何安装Homebrew，请参考(这里)[https://brew.sh/]），无需其他设置：
-```sh
+## 在 MacOS 上
 brew install maven
 ```
 
-#### **安装Java SDK (OpenJDK)**
-
-如果您使用的是Ubuntu 22.04.4 LTS，按以下方式安装OpenJDK：
-```sh
+#### --> Java (OpenJDK)
+如果您使用的是 Ubuntu 22.04.4 LTS，请按如下方式安装 OpenJDK：
+``` BASH
+## 在 Ubuntu 上
 sudo apt install openjdk-21-jdk
-```
 
-如果您使用的是MacOS，请使用brew命令安装JDK：
-```sh
+## 在 MacOS 上
 brew install openjdk@22
 ```
+
+#### --> libprotobuf-c（可选）
+如果要构建 SynchDB 并支持 openlog replicator，则需要此库。请参阅[此处](https://github.com/protobuf-c/protobuf-c.git) 从源代码构建。
 
 ### **编译和安装PostgreSQL**
 
 按照PostgreSQL官方文档[这里](https://www.postgresql.org/docs/current/install-make.html)从源代码编译和安装PostgreSQL。通常，步骤包括：
 
+**警告**：SynchDB 依赖 pgcrypto 来加密和解密敏感访问信息。请确保 PostgreSQL 支持 SSL。
+
 ```sh linenums="1"
 cd /home/$USER/postgres
-./configure
+./configure --with-ssl=openssl --enable-cassert
 make
 sudo make install
 ```
@@ -177,32 +181,52 @@ make
 sudo make install
 ```
 
-### **编译和安装Debezium Runner引擎**
+### 构建 SynchDB 主要组件
 
-配置好Java和Maven后，我们就可以编译Debezium Runner引擎了。这会将Debezium Runner Engine的jar文件安装到PostgreSQL的lib文件夹中。
+#### --> 构建 Debezium Runner Engine
+以下命令将构建 Debezium Runner Engine jar 文件并将其安装到 PostgreSQL 的 lib 文件夹中。
 
-```sh linenums="1"
+``` BASH
 cd /home/$USER/postgres/contrib/synchdb
 make build_dbz
 sudo make install_dbz
 ```
 
-### **编译和安装SynchDB PostgreSQL扩展**
+#### --> 构建 Oracle 解析器（可选）
+此 Oracle 解析器（一个共享库）是 IvorySQL Oracle 解析器的修改版和独立版本，Openlog 复制器需要它来处理传入的 Oracle DDL 语句。以下命令将 Oracle 解析器安装到 PostgreSQL 的 lib 文件夹中。
 
-在系统中安装Java的`lib`和`include`后，可以通过以下方式编译SynchDB：
+如果 SynchDB 构建时支持 Openlog 复制器，则需要此解析器。
 
-```sh linenums=**"1"
+```BASH
+cd /home/$USER/postgres/contrib/synchdb
+make clean_oracle_parser
+make oracle_parser
+sudo make install_oracle_parser
+```
+
+#### --> 构建 SynchDB
+以下命令将构建 SynchDB 扩展并将其安装到 PostgreSQL 的 lib 和共享文件夹中。
+
+``` BASH
 cd /home/$USER/postgres/contrib/synchdb
 make
 sudo make install
 ```
 
-### **配置链接器（Ubuntu）**
+SynchDB 可以在构建时添加额外的 Openlog Replicator Connector 支持。
 
-最后，我们还需要告诉系统链接器新添加的Java库在系统中的位置。以下步骤基于Ubuntu 22.04。
+```BASH
+cd /home/$USER/postgres/contrib/synchdb
+make WITH_OLR=1 clean
+make WITH_OLR=1
+sudo make WITH_OLR=1 install
+```
 
-```sh linenums="1"
-# 动态设置JDK路径
+### 配置 Linker 以访问 Java（Ubuntu）
+最后，我们还需要告诉系统的 Linker 新添加的 Java 库 (libjvm.so) 在系统中的位置。
+
+``` BASH
+# 动态设置 JDK 路径
 JAVA_PATH=$(which java)
 JDK_HOME_PATH=$(readlink -f ${JAVA_PATH} | sed 's:/bin/java::')
 JDK_LIB_PATH=${JDK_HOME_PATH}/lib
@@ -213,29 +237,39 @@ echo $JDK_LIB_PATH/server
 sudo echo "$JDK_LIB_PATH" ｜ sudo tee -a /etc/ld.so.conf.d/x86_64-linux-gnu.conf
 sudo echo "$JDK_LIB_PATH/server" | sudo tee -a /etc/ld.so.conf.d/x86_64-linux-gnu.conf
 ```
+注意，对于搭载 M1/M2 芯片的 Mac，链接器文件位于 /etc/ld.so.conf.d/aarch64-linux-gnu.conf
 
-注意：对于使用M1/M2芯片的mac，需要将这两行添加到/etc/ld.so.conf.d/aarch64-linux-gnu.conf中
-```sh linenums="1"
-sudo echo "$JDK_LIB_PATH"       ｜ sudo tee -a /etc/ld.so.conf.d/aarch64-linux-gnu.conf
-sudo echo "$JDK_LIB_PATH/server" | sudo tee -a /etc/ld.so.conf.d/aarch64-linux-gnu.conf
-```
-
-运行ldconfig重新加载：
-```sh
+运行 ldconfig 重新加载：
+``` BASH
 sudo ldconfig
+
 ```
 
-### **检查安装**
-
-确保synchdb.so扩展可以链接到系统中的libjvm Java库：
-```shsh linenums="1"
+确保 synchdo.so 扩展可以链接到系统上的 libjvm Java 库：
+``` BASH
 ldd synchdb.so
-        linux-vdso.so.1 (0x00007ffeae35a000)
-        libjvm.so => /usr/lib/jdk-22.0.1/lib/server/libjvm.so (0x00007fc1276c1000)
-        libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fc127498000)
-        libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fc127493000)
-        libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fc12748e000)
-        librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007fc127489000)
-        libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fc1273a0000)
-        /lib64/ld-linux-x86-64.so.2 (0x00007fc128b81000)
+linux-vdso.so.1 (0x00007ffeae35a000)
+libjvm.so => /usr/lib/jdk-22.0.1/lib/server/libjvm.so (0x00007fc1276c1000)
+libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fc127498000)
+libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fc127493000)
+libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fc12748e000)
+librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007fc127489000)
+libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fc1273a0000)
+/lib64/ld-linux-x86-64.so.2 (0x00007fc128b81000)
+
+```
+
+如果 SynchDB 构建时支持 openlog replicator，请确保它可以链接到你系统上的 libprotobuf-c 库：
+``` BASH
+ldd synchdb.so
+linux-vdso.so.1 (0x00007ffde6ba5000)
+libjvm.so => /home/ubuntu/java/jdk-22.0.1/lib/server/libjvm.so (0x00007f3c8e191000)
+libprotobuf-c.so.1 => /usr/local/lib/libprotobuf-c.so.1 (0x00007f3c8e186000)
+libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f3c8df5d000)
+libdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007f3c8df58000)
+libpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007f3c8df53000)
+librt.so.1 => /lib/x86_64-linux-gnu/librt.so.1 (0x00007f3c8df4c000)
+libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f3c8de65000)
+/lib64/ld-linux-x86-64.so.2 (0x00007f3c8f69e000)
+
 ```

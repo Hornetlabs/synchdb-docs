@@ -29,9 +29,22 @@ This architecture allows PostgreSQL to leverage the rich ecosystem of Debezium c
 - Support DDL and DML logical replication
 - Global connector state, error and statistic provisioning
 
-## **System Requirement**
-- PostgreSQL 16 or 17
-- Java Runetime Envirnment（JRE) 17 or above
+## **Supported PostgreSQL Versions**
+
+- PostgreSQL: 16, 17
+- IvorySQL: 4
+
+## **Supported Source Databasess**
+
+- MySQL: 8.0.x, 8.2
+- SQL Server: 2017, 2019, 2022
+- Oracle: 12c, 19c, 21c, 23ai
+- Openlog Replicator: 1.3.0
+
+## **Required Third Party Libraries**
+
+- Java Runtime Environment（JRE) 17 or above
+- libprotobuf-c v1.5.2 (optional for Openlog Replicator support)
 
 ## **Version History**
 

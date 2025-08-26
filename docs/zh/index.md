@@ -29,9 +29,22 @@ SynchDB 的核心集成了 Debezium 嵌入式引擎，这是一个基于 Java �
 - 支持 DDL 和 DML 逻辑复制
 - 全局连接器状态、错误和统计信息配置
 
-## **系统要求**
-- PostgreSQL 16 或 17
-- Java 运行时环境（JRE）17 或更高版本
+## **支持的 PostgreSQL 版本**
+
+- PostgreSQL：16、17
+- IvorySQL：4
+
+## **支持的源数据库**
+
+- MySQL：8.0.x、8.2
+- SQL Server：2017、2019、2022
+- Oracle：12c、19c、21c、23ai
+- Openlog Replicator：1.3.0
+
+## **所需的第三方库**
+
+- Java Runtime Environment（JRE）17 或更高版本
+- libprotobuf-c v1.5.2（如果需要 Openlog Replicator 支持）
 
 ## **版本历史**
 

@@ -84,20 +84,32 @@ docker exec -it $id bash
 
 示例 MySQL、SQL Server 和 Oracle 数据库也可以使用位于源存储库下 `ci/` 文件夹中的脚本进行准备。该脚本需要 docker 和 docker-compose 才能运行，并且基本上遵循与上述相同的步骤。
 
-准备用于测试的 MySQL 数据库：
+准备 MySQL 数据库进行测试：
 ```
-export DBTYPE=mysql
-ci/setup-remotedbs.sh
+DBTYPE=mysql ci/setup-remotebs.sh
+
 ```
 
-准备用于测试的 SQL Server 数据库：
+准备 SQL Server 数据库进行测试：
 ```
-export DBTYPE=sqlserver
-ci/setup-remotedbs.sh
+DBTYPE=sqlserver ci/setup-remotebs.sh
+
 ```
 
-准备用于测试的 Oracle 数据库：
+准备 Oracle 数据库进行测试：
 ```
-export DBTYPE=oracle
-ci/setup-remotedbs.sh
+DBTYPE=oracle ci/setup-remotebs.sh
+
+```
+
+准备 Oracle19c 数据库进行测试：
+```
+DBTYPE=ora19c ci/setup-remotebs.sh
+
+```
+
+使用 Openlog Replicator 准备 Oracle19c 数据库进行测试：
+```
+DBTYPE=olr OLRVER=1.3.0 ci/setup-remotebs.sh
+
 ```

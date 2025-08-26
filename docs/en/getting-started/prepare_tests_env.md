@@ -86,18 +86,30 @@ Example MySQL, SQL Server and Oracle databases can also be prepared using a scri
 
 Prepare MySQL database for test:
 ```
-export DBTYPE=mysql
-ci/setup-remotedbs.sh
+DBTYPE=mysql ci/setup-remotedbs.sh
+
 ```
 
 Prepare SQL Server database for test:
 ```
-export DBTYPE=sqlserver
-ci/setup-remotedbs.sh
+DBTYPE=sqlserver ci/setup-remotedbs.sh
+
 ```
 
-Prepare Oracle database for test:
+Prepare Oracle23ai database for test:
 ```
-export DBTYPE=oracle
-ci/setup-remotedbs.sh
+DBTYPE=oracle ci/setup-remotedbs.sh
+
+```
+
+Prepare Oracle19c database for test:
+```
+DBTYPE=ora19c ci/setup-remotedbs.sh
+
+```
+
+Prepare Oracle19c database with Openlog Replicator for test:
+```
+DBTYPE=olr OLRVER=1.3.0 ci/setup-remotedbs.sh
+
 ```
