@@ -19,7 +19,16 @@ synchdb_add_conninfo takes these arguments:
 | destination database  | (deprecated) always defaults to the same database as where synchDB is installed |
 | table                 | (optional) - expressed in the form of `[database].[table]` or `[database].[schema].[table]` that must exists in heterogeneous database so the engine will only replicate the specified tables. If left empty, all tables are replicated. Alternatively, a table list file can be specified with `file:` prefix  |
 | snapshot table        | (optional) - expressed in the form of `[database].[table]` or `[database].[schema].[table]` that must exists in the `table` setting above, so the engine will only rebuild the snapshot of these tables if snapshot mode is set to `always`. If left empty or null, all tables specified in `table` setting above will be rebuilt when snapshot mode is set to `always`. Alternatively, a snapshot table list file can be specified with `file:` prefix|
-| connector             | the connector type to use (MySQL, Oracle, SQLServer... etc).|
+| connector             | the connector type (See below) |
+
+## **Connector Types**
+
+SynchDb supports these connector types:
+
+* mysql         -> MySQL database
+* sqlserver     -> Microsoft SQL Server database
+* oracle        -> Oracle database
+* olr           -> Native Openlog Replicator
 
 ## **Check Created Connectors**
 

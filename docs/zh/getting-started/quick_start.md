@@ -5,19 +5,9 @@ weight:  30
 
 尝试 SynchDB 的最快方法是使用 SynchDB 及其配套源（MySQL、SQL Server、Oracle 等）的预构建 Docker 镜像。使用仓库的 `ezdeploy.sh`（仅限 Linux）命令，它会通过简单的交互式提示引导您启动所选源以及可选的 Prometheus/Grafana，以便您在几分钟内验证捕获和复制操作。
 
-
-## **下载源码仓库**
-
-源码仓库可以从 GitHub [此处](https://github.com/Hornetlabs/synchdb) 下载，也可以使用 `git clone` 命令：
-
-```bash
-git clone https://github.com/Hornetlabs/synchdb
-
-```
-
 ## **ezdeploy.sh**
 
-此工具需要 `docker` 和 `docker-compose`（或 `docker compose`），并且必须在 Linux 上运行。它打印出部署选项列表：
+此工具可从 SynchDB 源码仓库 [此处](https://github.com/Hornetlabs/synchdb) 下载。它需要 `docker` 和 `docker-compose`（或 `docker compose`），并且必须在 Linux 上运行。运行时会打印部署选项列表：
 
 ```bash
 

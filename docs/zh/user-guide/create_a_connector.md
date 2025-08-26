@@ -19,7 +19,16 @@ synchdb_add_conninfo 接受以下参数：
 | 目标数据库 | （已弃用）始终默认使用与 synchDB 安装位置相同的数据库 |
 | 表 |（可选）- 以 `[database].[table]` 或 `[database].[schema].[table]` 的形式表示，该参数必须存在于异构数据库中，因此引擎将仅复制指定的表。如果留空，则复制所有表。或者，可以使用 `file:` 前缀指定表列表文件 |
 | 快照表 |（可选）- 以 `[database].[table]` 或 `[database].[schema].[table]` 的形式表示，该参数必须存在于上述 `table` 设置中，因此引擎仅在快照模式设置为 `always` 时才会重建这些表的快照。如果留空或为 null，则当快照模式设置为 `always` 时，将重建上述 `table` 设置中指定的所有表。或者，可以使用 `file:` 前缀指定快照表列表文件 |
-| 连接器 | 要使用的连接器类型（MySQL、Oracle、SQLServer 等）。|
+| 连接器 | 要使用的连接器类型（如下）。|
+
+## **连接器类型**
+
+SynchDb 支持以下连接器类型：
+
+* mysql -> MySQL 数据库
+* sqlserver -> Microsoft SQL Server 数据库
+* oracle -> Oracle 数据库
+* olr -> 原生 Openlog Replicator
 
 ## **检查已创建的连接器**
 

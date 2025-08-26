@@ -5,18 +5,9 @@ weight: 30
 
 The fastest way to try SynchDB is with the pre-built Docker images for SynchDB and companion sources (MySQL, SQL Server, Oracle, etc.). Use the repo’s `ezdeploy.sh` (Linux only) to guide you with simple interactive prompts to spin up your chosen sources plus optional Prometheus/Grafana, so you can validate capture and replication in minutes. 
 
-## **Download Source Repository**
-
-The source repository can be downloaded from github [here](https://github.com/Hornetlabs/synchdb) or use `git clone`:
-
-```bash
-git clone https://github.com/Hornetlabs/synchdb
-
-```
-
 ## **ezdeploy.sh**
 
-This tool requires `docker`, and `docker-compose` (or `docker compose`) and must be run on Linux. It prints a list of deployment options when run:
+This tool can be downloaded from SynchDB source repository [here](https://github.com/Hornetlabs/synchdb). It requires `docker`, and `docker-compose` (or `docker compose`) and must be run on Linux. It prints a list of deployment options when run:
 
 ```bash
 
