@@ -50,24 +50,28 @@ enter your selection:
 ## **Access Details of Source Database Deployments for Testing**
 
 **MySQL:**
+
 * database: inventory
 * schema: N/A
 * user: mysqluser
 * password: mysqlpwd
 
 **Sqlserver:**
+
 * database: testDB
 * schema: dbo
 * user: sa
 * password: Password!
 
 **Oracle23ai:**
+
 * database: FREE
 * schema: c##dbzuser
 * user: c##dbzuser
 * password: dbz
 
 **Oracle19c:**
+
 * database: FREE
 * schema: DBZUSER
 * user: DBZUSER

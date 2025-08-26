@@ -51,24 +51,28 @@ enter your selection:
 ## **测试源数据库部署的访问详情**
 
 **MySQL:**
+
 * 数据库：inventory
 * 模式：N/A
 * 用户：mysqluser
 * 密码：mysqlpwd
 
 **Sqlserver:**
+
 * 数据库：testDB
 * 模式：dbo
 * 用户：sa
 * 密码：Password!
 
 **Oracle23ai:**
+
 * 数据库：FREE
 * 模式：c##dbzuser
 * 用户：c##dbzuser
 * 密码：dbz
 
 **Oracle19c:**
+
 * 数据库：FREE
 * 模式：DBZUSER
 * 用户：DBZUSER
