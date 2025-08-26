@@ -4,11 +4,11 @@ weight: 10
 # 安装
 
 ## **从软件包安装**
-访问我们的[发布页面](https://github.com/Hornetlabs/synchdb/releases) 下载 synchdb 软件包。它所需的 PostgreSQL 版本在软件包名称中描述。例如，`synchdb-1.1-1.ub22.pg16_x86_64.deb` 是在 Ubuntu 22.04 上针对 PostgreSQL 16 构建的 .deb 包。
+访问我们的[发布页面](https://github.com/Hornetlabs/synchdb/releases) 下载 synchdb 软件包。
 
 ### **.deb 包**
 
-1. 从官方 apt 存储库安装 PostgreSQL：
+1. 从官方 apt 存储库安装 PostgreSQL（版本 16 为例）：
 ```sh linenums="1"
 sudo apt install -y postgresql-common
 sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
@@ -37,7 +37,7 @@ dpkg -i synchdb-1.1-1.ub22.pg16_x86_64.deb
 
 ### **.rpm 软件包**
 
-1. 从官方 rpm 仓库安装 PostgreSQL：
+1. 从官方 rpm 仓库安装 PostgreSQL（版本 16 为例）：
 其他 PostgreSQL 版本的官方 rpm 下载说明，请参考此处 (https://www.postgresql.org/download/linux/redhat/)
 ```sh linenums="1"
 sudo dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
@@ -159,7 +159,7 @@ brew install openjdk@22
 ```
 
 #### --> libprotobuf-c（可选）
-如果要构建 SynchDB 并支持 openlog replicator，则需要此库。请参阅[此处](https://github.com/protobuf-c/protobuf-c.git) 从源代码构建。
+**警告**：如果要构建 SynchDB 并支持 openlog replicator，则需要此库。请参阅[此处](https://github.com/protobuf-c/protobuf-c.git) 从源代码构建。
 
 ### **编译和安装PostgreSQL**
 
@@ -195,7 +195,7 @@ sudo make install_dbz
 #### --> 构建 Oracle 解析器（可选）
 此 Oracle 解析器（一个共享库）是 IvorySQL Oracle 解析器的修改版和独立版本，Openlog 复制器需要它来处理传入的 Oracle DDL 语句。以下命令将 Oracle 解析器安装到 PostgreSQL 的 lib 文件夹中。
 
-如果 SynchDB 构建时支持 Openlog 复制器，则需要此解析器。
+**警告**：如果 SynchDB 构建时支持 Openlog 复制器，则需要此解析器。
 
 ```BASH
 cd /home/$USER/postgres/contrib/synchdb
@@ -221,6 +221,8 @@ make WITH_OLR=1 clean
 make WITH_OLR=1
 sudo make WITH_OLR=1 install
 ```
+
+**警告**：Openlog Replicator Connector 支持需要“libprotobuf-c”和“oracle parser”。
 
 ### 配置 Linker 以访问 Java（Ubuntu）
 最后，我们还需要告诉系统的 Linker 新添加的 Java 库 (libjvm.so) 在系统中的位置。

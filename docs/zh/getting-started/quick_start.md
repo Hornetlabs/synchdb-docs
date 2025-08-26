@@ -79,6 +79,7 @@ enter your selection:
 * 密码：dbz
 
 **Openlog Replicator (OLR)：**
+
 * 服务名称：ORACLE
 
 ## **使用 psql 访问 Synchdb**

@@ -5,11 +5,11 @@ weight: 10
 
 ## **Install from Packages**
 
-visit our release page [here](https://github.com/Hornetlabs/synchdb/releases) to download a synchdb packages on supported platforms. The version of PostgreSQL a package requires is described in the package name. For example, `synchdb-1.1-1.ub22.pg16_x86_64.deb` is a SynchDB .deb package built on Ubuntu 22.04 against PostgreSQL 16. 
+visit our release page [here](https://github.com/Hornetlabs/synchdb/releases) to download a synchdb packages on supported platforms.
 
 ### **.deb Packages**
 
-1. Install PostgreSQL from official apt repository:
+1. Install PostgreSQL from official apt repository (version 16 as example):
 ```sh linenums="1"
 sudo apt install -y postgresql-common
 sudo /usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
@@ -38,7 +38,7 @@ dpkg -i synchdb-1.1-1.ub22.pg16_x86_64.deb
 
 ### **.rpm Packages**
 
-1. Install PostgreSQL from official rpm repository:
+1. Install PostgreSQL from official rpm repository (version 16 as example):
 Refer to official PostgreSQL rpm download instructions for other PostgreSQL versions [here](https://www.postgresql.org/download/linux/redhat/)
 ```sh linenums="1"
 sudo dnf install -y https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
@@ -157,7 +157,7 @@ brew install openjdk@22
 ```
 
 #### --> libprotobuf-c (optional)
-This library is needed if SynchDB is to be built with openlog replicator support. Refer to [here](https://github.com/protobuf-c/protobuf-c.git) to build from source.
+**Warning**: This library is needed if SynchDB is to be built with openlog replicator support. Refer to [here](https://github.com/protobuf-c/protobuf-c.git) to build from source.
 
 
 ### **Build and Install PostgreSQL**
@@ -194,7 +194,7 @@ sudo make install_dbz
 #### --> Build Oracle Parser (optional)
 This Oracle parser (a shared library) is a modified and isoalted version of IvorySQL's Oracle parser required by openlog replicator to process incoming Oracle DDL statements. The commands below install Oracle Parser to your PostgreSQL's lib folder.
 
-Required if SynchDB is built with openlog replicator support.
+**Warning**: Required if SynchDB is built with openlog replicator support.
 
 ```BASH
 cd /home/$USER/postgres/contrib/synchdb

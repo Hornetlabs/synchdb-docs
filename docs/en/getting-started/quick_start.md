@@ -78,6 +78,7 @@ enter your selection:
 * password: dbz
 
 **Openlog Replicator (OLR):**
+
 * service name: ORACLE
 
 ## **Access Synchdb with psql**
