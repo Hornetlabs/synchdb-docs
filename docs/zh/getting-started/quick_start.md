@@ -183,6 +183,19 @@ SELECT * FROM synchdb_conninfo;
 
 有关创建连接器的更多详细信息，请参阅[此处](https://docs.synchdb.com/zh/user-guide/create_a_connector/)
 
+## **创建对象映射**
+
+默认情况下，源数据库名称将映射到目标数据库中的架构名称。可以使用对象映射来更改此架构名称。让我们从基于 Oracle 的连接器中更改“orders”表的目标架构，其余部分保留默认值。
+
+```sql
+SELECT synchdb_add_objmap('oracleconn','table','free.c##dbzuser.orders','oracle23ai.orders');
+SELECT synchdb_add_objmap('ora19cconn','table','free.dbzuser.orders','oracle19c.orders');
+SELECT synchdb_add_objmap('olrconn','table','free.dbzuser.orders','olr.orders');
+
+```
+
+有关创建对象映射的更多详细信息，请参见[此处]（https://docs.synchdb.com/zh/user-guide/object_mapping_rules/）
+
 ## **创建 JMX 导出器 - 可选**
 
 以下是一些启用 JMX 导出器进行监控的示例（如果已通过 `ezdeploy.sh` 预先部署了 Prometheus + Grafana）：
@@ -266,6 +279,11 @@ SELECT synchdb_start_engine_bgw('olrconn');
 
 使用“synchdb_state_view()”检查所有连接器的运行状态。
 
+``` SQL
+SELECT * FROM synchdb_state_view;
+
+```
+
 以下是输出示例：
 ``` SQL
 postgres=# SELECT * FROM synchdb_state_view;
@@ -287,73 +305,87 @@ postgres=# SELECT * FROM synchdb_state_view;
 
 **MySQL:**
 ```sql
-postgres=# SET search_path=public,inventory;
-SET
-postgres=# \d
-                 List of relations
-  Schema   |        Name        |   Type   | Owner
------------+--------------------+----------+--------
- inventory | addresses          | table    | ubuntu
- inventory | addresses_id_seq   | sequence | ubuntu
- inventory | customers          | table    | ubuntu
- inventory | customers_id_seq   | sequence | ubuntu
- inventory | geom               | table    | ubuntu
- inventory | geom_id_seq        | sequence | ubuntu
- inventory | perf_test_1        | table    | ubuntu
- inventory | products           | table    | ubuntu
- inventory | products_id_seq    | sequence | ubuntu
- inventory | products_on_hand   | table    | ubuntu
- public    | synchdb_att_view   | view     | ubuntu
- public    | synchdb_attribute  | table    | ubuntu
- public    | synchdb_conninfo   | table    | ubuntu
- public    | synchdb_objmap     | table    | ubuntu
- public    | synchdb_state_view | view     | ubuntu
- public    | synchdb_stats_view | view     | ubuntu
-(16 rows)
+\dt inventory.*
+
+```
+
+```sql
+\dt inventory.*
+               List of relations
+  Schema   |       Name       | Type  | Owner
+-----------+------------------+-------+--------
+ inventory | addresses        | table | ubuntu
+ inventory | customers        | table | ubuntu
+ inventory | geom             | table | ubuntu
+ inventory | orders           | table | ubuntu
+ inventory | products         | table | ubuntu
+ inventory | products_on_hand | table | ubuntu
+(6 rows)
 ```
 
 **Sqlserver:**
 ```sql
-postgres=# SET search_path=public,testdb;
-SET
-postgres=# \d
-                  List of relations
- Schema |          Name           |   Type   | Owner
---------+-------------------------+----------+--------
- public | synchdb_att_view        | view     | ubuntu
- public | synchdb_attribute       | table    | ubuntu
- public | synchdb_conninfo        | table    | ubuntu
- public | synchdb_objmap          | table    | ubuntu
- public | synchdb_state_view      | view     | ubuntu
- public | synchdb_stats_view      | view     | ubuntu
- testdb | customers               | table    | ubuntu
- testdb | customers_id_seq        | sequence | ubuntu
- testdb | orders                  | table    | ubuntu
- testdb | orders_order_number_seq | sequence | ubuntu
- testdb | products                | table    | ubuntu
- testdb | products_id_seq         | sequence | ubuntu
- testdb | products_on_hand        | table    | ubuntu
-(13 rows)
+\dt testdb.*
 
 ```
 
-**Oracle23ai， Oracle19c 和 OLR:**
 ```sql
-postgres=# SET search_path=public,free;
-SET
-postgres=# \d
-              List of relations
- Schema |        Name        | Type  | Owner
---------+--------------------+-------+--------
- free   | orders             | table | ubuntu
- public | synchdb_att_view   | view  | ubuntu
- public | synchdb_attribute  | table | ubuntu
- public | synchdb_conninfo   | table | ubuntu
- public | synchdb_objmap     | table | ubuntu
- public | synchdb_state_view | view  | ubuntu
- public | synchdb_stats_view | view  | ubuntu
-(7 rows)
+\dt testdb.*
+             List of relations
+ Schema |       Name       | Type  | Owner
+--------+------------------+-------+--------
+ testdb | customers        | table | ubuntu
+ testdb | orders           | table | ubuntu
+ testdb | products         | table | ubuntu
+ testdb | products_on_hand | table | ubuntu
+(4 rows)
 
+```
+
+**Oracle23ai**
+```sql
+\dt oracle23ai.*
+
+```
+
+```sql
+\dt oracle23ai.*
+          List of relations
+   Schema   |  Name  | Type  | Owner
+------------+--------+-------+--------
+ oracle23ai | orders | table | ubuntu
+(1 row)
+
+```
+
+**Oracle19c**
+```sql
+\dt oracle19c.*
+
+```
+
+```sql
+\dt oracle19c.*
+          List of relations
+  Schema   |  Name  | Type  | Owner
+-----------+--------+-------+--------
+ oracle19c | orders | table | ubuntu
+(1 row)
+```
+
+**OLR**
+```sql
+\dt olr.*
+
+```
+
+```sql
+\dt olr.*
+        List of relations
+ Schema |  Name  | Type  | Owner
+--------+--------+-------+--------
+ olr    | orders | table | ubuntu
+(1 row)
 ```
 
 ## 模拟 INSERT 事件并观察变更数据捕获 (CDC)
@@ -405,7 +437,7 @@ echo -ne "INSERT INTO orders(order_number, order_date, purchaser, quantity, prod
 ```
 
 ```sql
-postgres=# SELECT * FROM free.orders;
+postgres=# SELECT * FROM oracle23ai.orders;
  order_number |     order_date      | purchaser | quantity | product_id
 --------------+---------------------+-----------+----------+------------
         10001 | 2024-01-01 00:00:00 |      1003 |        2 |        107
@@ -417,14 +449,33 @@ postgres=# SELECT * FROM free.orders;
 
 ```
 
-**Oracle19c 和 OLR:**
+**Oracle19c:**
 ```bash
 echo -ne "INSERT INTO orders(order_number, order_date, purchaser, quantity, product_id) VALUES (10005, TO_DATE('2025-12-12', 'YYYY-MM-DD'), 1002, 10000, 102);\n" | docker exec -i ora19c sqlplus DBZUSER/dbz@//localhost:1521/FREE
 
 ```
 
 ```sql
-postgres=# SELECT * FROM free.orders;
+postgres=# SELECT * FROM oracle19c.orders;
+ order_number |     order_date      | purchaser | quantity | product_id
+--------------+---------------------+-----------+----------+------------
+        10001 | 2024-01-01 00:00:00 |      1003 |        2 |        107
+        10002 | 2024-01-01 00:00:00 |      1003 |        2 |        107
+        10003 | 2024-01-01 00:00:00 |      1003 |        2 |        107
+        10004 | 2024-01-01 00:00:00 |      1003 |        2 |        107
+        10005 | 2025-12-12 00:00:00 |      1002 |    10000 |        102
+(5 rows)
+
+```
+
+**OLR:**
+```bash
+echo -ne "INSERT INTO orders(order_number, order_date, purchaser, quantity, product_id) VALUES (10005, TO_DATE('2025-12-12', 'YYYY-MM-DD'), 1002, 10000, 102);\n" | docker exec -i ora19c sqlplus DBZUSER/dbz@//localhost:1521/FREE
+
+```
+
+```sql
+postgres=# SELECT * FROM olr.orders;
  order_number |     order_date      | purchaser | quantity | product_id
 --------------+---------------------+-----------+----------+------------
         10001 | 2024-01-01 00:00:00 |      1003 |        2 |        107
