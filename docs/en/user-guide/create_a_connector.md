@@ -28,7 +28,7 @@ SynchDb supports these connector types:
 * mysql         -> MySQL database
 * sqlserver     -> Microsoft SQL Server database
 * oracle        -> Oracle database
-* olr           -> Native Openlog Replicator
+* olr           -> Native Openlog Replicator (BETA)
 
 ## **Check Created Connectors**
 
@@ -54,6 +54,8 @@ data     | {"pwd": "\\xc30d04070302e3baf1293d0d553066d234014f6fc52e6eea425884b1f
 
 
 ```
+
+<<<**IMPORTANT**>>> Native Openlog Replicator connector currently does not support specifying whitelist tables via `table` and `snapshot tables` parameters so the sections below do not apply to Native Openlog Replicator connector.
 
 ## **Use a Table List File to Specify Tables**
 

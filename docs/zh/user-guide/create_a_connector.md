@@ -28,7 +28,7 @@ SynchDb 支持以下连接器类型：
 * mysql -> MySQL 数据库
 * sqlserver -> Microsoft SQL Server 数据库
 * oracle -> Oracle 数据库
-* olr -> 原生 Openlog Replicator
+* olr -> 原生 Openlog Replicator (BETA)
 
 ## **检查已创建的连接器**
 
@@ -54,6 +54,8 @@ data     | {"pwd": "\\xc30d04070302e3baf1293d0d553066d234014f6fc52e6eea425884b1f
 
 
 ```
+
+<<<**重要**>>> 本机 Openlog Replicator 连接器当前不支持通过“table”和“snapshot table”参数指定白名单表，因此以下部分不适用于本机 Openlog Replicator 连接器。
 
 ## **使用表列表文件指定表**
 
