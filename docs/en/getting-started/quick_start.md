@@ -432,7 +432,7 @@ postgres=# SELECT * from testdb.orders;
 
 **Oracle23ai:**
 ```bash
-echo -ne "INSERT INTO orders(order_number, order_date, purchaser, quantity, product_id) VALUES (10006, TO_DATE('2025-12-12', 'YYYY-MM-DD'), 1002, 10000, 102);\n" | docker exec -i oracle sqlplus c##dbzuser/dbz@//localhost:1521/FREE
+echo -ne "INSERT INTO orders(order_number, order_date, purchaser, quantity, product_id) VALUES (10005, TO_DATE('2025-12-12', 'YYYY-MM-DD'), 1002, 10000, 102);\n" | docker exec -i oracle sqlplus c##dbzuser/dbz@//localhost:1521/FREE
 
 ```
 
