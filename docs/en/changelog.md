@@ -4,6 +4,57 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## **[SynchDB 1.2](https://github.com/Hornetlabs/synchdb/releases/tag/v1.2) - 2025-09-03**
+
+SynchDB 1.2 introduces introduces a native Openlog Replicator connector (BETA), enhanced monitoring with JMX and Grafana, and a new ezdeploy.sh tool for quick deployments and testing. It also adds snapshot table selection, performance improvements, and key fixes, while addressing connector isolation and stability issues.
+
+### **Added**
+
+#### [Native Openlog Replicator Connector](https://docs.synchdb.com/user-guide/configure_olr/) - BETA
+* Added `synchdb_add_olr_conninfo` and `synchdb_del_olr_conninfo` to enable or disable openlog replicator based streaming.
+* Added a new connector type `olr`, which is a native (no Debezium) openlog replicator client that stream Oracle database changes from an external Openlog Replicator service. 
+* Supported DMLs: insert, update delete
+* Supported DDLs: CREATE TABLE, DROP TABLE, ALTER TABLE MODIFY, ALTER TABLE ADD/DROP COLUMN, ALTER TABLE ADD/DROP CONSTRAINT, TRUNCATE
+* Based on libprotobuf-c to communiate with Openlog Replicator and IvorySQL's Oracle parser to process incoming DDL query events,
+* Supported snapshot modes: initial, initial_only, no_data, always, never
+* Supported batching, schema history, and offset management just like other Debezium based connectors.
+* Supported Debezium-based Openlog Replicator connector in addition to native.
+
+#### [Monitoring](https://docs.synchdb.com/monitoring/jmx_monitor/)
+
+* Added `synchdb_add_jmx_conninfo` and `synchdb_del_jmx_conninfo` to enable or disable JMX based monitoring.
+* Added `synchdb_add_jmx_exporter_conninfo` and `synchdb_del_jmx_exporter_conninfo` to enable and disable monitoring support with Prometheus and Grafana.
+* Added Grafana based dashboard templates for supported Debezium based connectors (MySQL, SQL Server and Oracle).
+
+#### [ezdeploy.sh](https://docs.synchdb.com/getting-started/quick_start/)
+* Added `ezdeploy.sh` tool that can quickly deploy a pre-build SynchDB and selected source database types to do quick connector testing.
+* supported deployment: MySQL, SQL Server, Oracle23ai, Oracle19c, Openlog Replicator 1.3.0
+* supported Prometheus and Grafana deployment with preloaded dashboards.
+* Supported pre-compiled SynchDB v1.2 for quick deployment + tests
+
+
+### **Changed**
+
+* Added a new argument called `snapshot table` in `synchdb_add_conninfo` to allow users to select which tables to redo initial snapshot when started in `always` snapshot mode.
+* Updated pytest framework to support hammerdb based TPC tests for Oracle.
+* Enhanced the performance of event polling between Debezium engine and SynchDB by using direct buffer instead of frequent JNI calls. 
+* When a connector is resumed via `synchdb_resume_engine`, it will always resume in `initial` snapshot mode rather than the mode it was first started with.
+* `synchdb_state_view` and `synchdb_stats_view` will now only display connector information created by the current SynchDB extension. Connectors created by other SynchDB extensions in different databases will not be shown.
+
+
+### **Fixed**
+
+* Fixed a crash in `spi_execute_select_one()` where it would return a reference that has been destroyed by SPI memory context at the end of a successful SPI execution.
+* Resolved compilation issues with SynchDB when PostgreSQL is built with cassert.
+* Fixed an issue where multiple connectors created with the same name by multiple SynchDB extensions (created in different databases) overwrite each other's shared memory data.
+
+### **Known Issues and Additional Info**
+
+* Native Openlog Replicator Connector currently stream all tables under specified database. Table Filtering is to be configured in Openlog Replicator rather than SynchDB.
+* Prometheus and Grafana based monitoring require JMX Exporter which can be downloaded [here](https://github.com/prometheus/jmx_exporter)
+
+
+
 ## **[SynchDB 1.1](https://github.com/Hornetlabs/synchdb/releases/tag/v1.1) - 2025-04-17**
 
 SynchDB 1.1 introduces Oracle connector support, enhanced data type transformation capabilities, and significantly improved core data processing engine. This update enhances performance through intelligent caching and optimized JSON parsing, while extending compatibility with PostgreSQL 16, 17, and IvorySQL 4.4.

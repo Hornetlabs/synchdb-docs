@@ -292,7 +292,7 @@ postgres=# SELECT * FROM synchdb_state_view;
  mysqlconn     | mysql          | 579845 | initial snapshot | polling | no error | {"ts_sec":1741301103,"file":"mysql-bin.000009","pos":574318212,"row":1,"server_id":223344,"event":2}
  oracleconn    | oracle         | 580053 | initial snapshot | polling | no error | offset file not flushed yet
  ora19cconn    | oracle         | 593421 | initial snapshot | polling | no error | offset file not flushed yet
- olrconn       | oracle         | 601235 | schema sync      | polling | no error | offset file not flushed yet
+ olrconn       | oracle         | 601235 | initial snapshot | polling | no error | offset file not flushed yet
 (5 rows)
 
 ```

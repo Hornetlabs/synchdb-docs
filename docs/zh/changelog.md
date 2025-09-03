@@ -4,6 +4,53 @@
 本文格式基于 [Keep a Changelog](http://keepachangelog.com/)，
 且本项目遵循 [语义化版本](http://semver.org/)。
 
+## **[SynchDB 1.2](https://github.com/Hornetlabs/synchdb/releases/tag/v1.2) - 2025-09-03**
+
+SynchDB 1.2 引入了原生 Openlog Replicator 连接器（测试版）、增强的 JMX 和 Grafana 监控功能，以及用于快速部署和测试的全新 ezdeploy.sh 工具。此外，它还增加了快照表选择功能、性能改进和关键修复，同时解决了连接器隔离和稳定性问题。
+
+### **新增**
+
+#### [原生 Openlog Replicator 连接器](https://docs.synchdb.com/user-guide/configure_olr/) - 测试版
+* 新增 `synchdb_add_olr_conninfo` 和 `synchdb_del_olr_conninfo`，用于启用或禁用基于 Openlog Replicator 的流式传输。
+* 添加了新的连接器类型“olr”，它是一个原生（非 Debezium）Openlog 复制器客户端，可从外部 Openlog Replicator 服务流式传输 Oracle 数据库更改。
+* 支持的 DML：插入、更新/删除
+* 支持的 DDL：创建表、删除表、修改表、添加/删除列、添加/删除约束、截断
+* 基于 libprotobuf-c 与 Openlog Replicator 和 IvorySQL 的 Oracle 解析器通信，以处理传入的 DDL 查询事件。
+* 支持的快照模式：initial、initial_only、no_data、always、never
+* 与其他基于 Debezium 的连接器一样，支持批处理、模式历史记录和偏移量管理。
+* 除原生连接器外，还支持基于 Debezium 的 Openlog Replicator 连接器。
+
+#### [监控](https://docs.synchdb.com/monitoring/jmx_monitor/)
+
+* 新增 `synchdb_add_jmx_conninfo` 和 `synchdb_del_jmx_conninfo`，用于启用或禁用基于 JMX 的监控。
+* 新增 `synchdb_add_jmx_exporter_conninfo` 和 `synchdb_del_jmx_exporter_conninfo`，用于启用或禁用 Prometheus 和 Grafana 的监控支持。
+* 新增基于 Grafana 的仪表板模板，用于支持基于 Debezium 的连接器（MySQL、SQL Server 和 Oracle）。
+
+#### [ezdeploy.sh](https://docs.synchdb.com/getting-started/quick_start/)
+* 新增 `ezdeploy.sh` 工具，可快速部署预构建的 SynchDB 和所选的源数据库类型，以便快速进行连接器测试。
+* 支持部署：MySQL、SQL Server、Oracle23ai、Oracle19c、Openlog Replicator 1.3.0
+* 支持预加载仪表板的 Prometheus 和 Grafana 部署。
+* 支持预编译的 SynchDB v1.2，以便快速部署和测试。
+
+### **变更**
+
+* 在 `synchdb_add_conninfo` 中添加了一个名为 `snapshot table` 的新参数，允许用户在以 `always` 快照模式启动时选择要重做初始快照的表。
+* 更新了 pytest 框架，以支持基于 hammerdb 的 Oracle TPC 测试。
+* 通过使用直接缓冲区代替频繁的 JNI 调用，增强了 Debezium 引擎和 SynchDB 之间事件轮询的性能。
+* 当连接器通过 `synchdb_resume_engine` 恢复时，它将始终以 `initial` 快照模式恢复，而不是首次启动时的模式。
+* `synchdb_state_view` 和 `synchdb_stats_view` 现在仅显示当前 SynchDB 扩展创建的连接器信息。其他 SynchDB 扩展在不同数据库中创建的连接器将不显示。
+
+### **已修复**
+
+* 修复了 `spi_execute_select_one()` 函数崩溃的问题，该函数在 SPI 执行成功后会返回一个已被 SPI 内存上下文销毁的引用。
+* 解决了使用 cassert 构建 PostgreSQL 时 SynchDB 的编译问题。
+* 修复了多个 SynchDB 扩展（创建于不同数据库中）创建的同名连接器会相互覆盖共享内存数据的问题。
+
+### **已知问题及其他信息**
+
+* 原生 Openlog Replicator 连接器目前会流式传输指定数据库下的所有表。表过滤功能需要在 Openlog Replicator 中配置，而不是在 SynchDB 中。
+* 基于 Prometheus 和 Grafana 的监控需要 JMX Exporter，可以从[此处](https://github.com/prometheus/jmx_exporter) 下载
+
 ## **[SynchDB 1.1](https://github.com/Hornetlabs/synchdb/releases/tag/v1.1) - 2025-04-17**
 
 SynchDB 1.1 版本引入了 Oracle 连接器支持，增强了数据类型转换能力，并显著改进了核心数据处理引擎。本次更新通过智能缓存和优化的 JSON 解析，提升了性能表现，同时扩展了与 PostgreSQL 16、17 和 IvorySQL 4.4 的兼容性。
