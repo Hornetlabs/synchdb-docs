@@ -27,6 +27,7 @@ SynchDB 在 postgresql.conf 中支持以下 GUC 变量。这些是适用于 Sync
 | synchdb.error_handling_strategy | enum | "exit" | 配置连接器工作器的错误处理策略。可能的值有“exit”表示出错时退出，“skip”表示出错时继续，“retry”表示出错时重试 |
 | synchdb.dbz_log_level | enum | "warn" | Debezium Runner 的日志级别设置。可能的值有“debug”，“info”，“warn”，“error”，“all”，“fatal”，“off”，“trace” |
 | synchdb.log_change_on_error | boolean | true | 连接器是否应在发生错误时记录原始 JSON 更改事件 |
+| synchdb.jvm_max_direct_buffer_size | 整数 | 1024 | 分配用于保存 JSON 更改事件的最大直接缓冲区大小（以 MB 为单位）|
 
 ## **技术说明**
 

@@ -27,6 +27,7 @@ SynchDB supports the following GUC variables in postgresql.conf. These are commo
 | synchdb.error_handling_strategy | enum | "exit" | configures the error handling strategy of a connector worker. Possible values are "exit" for exiting on error, "skip" for continuing on error, "retry" for retrying on error |
 | synchdb.dbz_log_level | enum | "warn" | the log level setting for Debezium Runner. Possible values are "debug", "info", "warn", "error", "all", "fatal", "off", "trace" |
 | synchdb.log_change_on_error | boolean | true | whether the connector should log the original JSON change event in case of error |
+| synchdb.jvm_max_direct_buffer_size | integer | 1024 | The maximum direct buffer size in MB to be allocated to hold JSON change events |
 
 ## **Technical Notes**
 

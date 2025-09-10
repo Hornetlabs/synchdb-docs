@@ -92,6 +92,7 @@ plugins:
             Tutorial: Tutorial
             Secured Connection: Conexión segura
             Configure Replication Offset: Configurar el desplazamiento de replicación
+            Configure Infinispan: Configurar Infinispan
         - locale: zh
           name: 中文
           site_name: SynchDB 文档
@@ -144,6 +145,7 @@ plugins:
             Tutorial: 教程
             Secured Connection: 安全连接
             Configure Replication Offset: 配置复制偏移
+            Configure Infinispan: 配置 infinispan
   - mike:
       version_selector: true
       css_dir: css
@@ -198,6 +200,7 @@ nav:
    - Configure Error Strategies: user-guide/configure_error_strategies.md
    - Configure Replication Offset: user-guide/set_offset.md
    - Configure Openlog Replicator for Oracle Connector: user-guide/configure_olr.md
+   - Configure Infinispan: user-guide/configure_infinispan.md
    # - Utility Functions: user-guide/utility_functions.md
  - Changelog: changelog.md
  # - Homepage: https://www.synchdb.com
