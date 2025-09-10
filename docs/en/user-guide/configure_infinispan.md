@@ -96,29 +96,36 @@ END;
 **Behaviors Under Large Transaction**
 
 1. no infinispan setting + low JVM heap (synchdb.jvm_max_heap_size=128)
+
 --> OutOfMemory error will occur
 
 2. low JVM heap (128) + high infinispan off heap (2048)
+
 --> large transaction handled successfully
 
 3. low JVM heap (128) + low infinispan off heap (128)
+
 --> passivation will occur
 --> `ispn_[connector name]_[destination database name]` size will grow during processing and reduce once large transaction finished processing
 --> large transaction handled successfully but at slower speed.
 
 4. low JVM heap (128) + high infinispan heap (2048)
+
 --> OutOfMemory error will occur
 --> do not configure infinispan to use more heap memory than JVM max heap.
 
 5. low JVM heap (128) + low infinispan heap (64)
+
 --> passivation will occur
 --> `ispn_[connector name]_[destination database name]` size will grow during processing and reduce once large transaction finished processing
 --> not recommended as half of the JVM heap can potentially be used by infinispan and may not have enough left for other Debezium operations
 
 6. low JVM heap (128) + same infinispan heap (128)
+
 --> not recommended as all of the JVM heap can potentially be used by infinispan and eventually causing OutOfMemory error
 
 7. high JVM heap (2048) + low infinispan heap (128)
+
 --> passivation will occur
 --> `ispn_[connector name]_[destination database name]` size will grow during processing and reduce once large transaction finished processing
 --> large transaction handled successfully

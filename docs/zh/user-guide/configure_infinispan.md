@@ -94,29 +94,36 @@ END;
 **大事务下的行为**
 
 1. 未设置 infinispan + 低 JVM heap size (128)
+
 --> 将发生 OutOfMemory 错误
 
 2. 低 JVM heap size (128) + 高 infinispan heap size (2048)
+
 --> 大型事务成功处理
 
 3. 低 JVM heap size (128) + 低 infinispan heap size (128)
+
 --> 将发生钝化
 --> `ispn_[连接器名称]_[目标数据库名称]` 大小在处理过程中会增加，大型事务处理完成后会减小
 --> 大型事务已成功处理，但速度较慢。
 
 4. 低 JVM heap size (128) + 高 infinispan heap size (2048)
+
 --> 将发生 OutOfMemory 错误
 --> 请勿将 infinispan 配置 heap size 超过 JVM 最大 heap 内存
 
 5. 较低的 JVM heap size (128) + 较低的 infinispan heap size (64)
+
 --> 将发生钝化
 --> `ispn_[连接器名称]_[目标数据库名称]` 的大小将在处理过程中增加，并在大型事务处理完成后减小。
 --> 不建议使用，因为 infinispan 可能会占用一半的 JVM heap，而剩余空间可能不足以用于其他 Debezium 操作。
 
 6. 低 JVM heap size (128) + 相同的 infinispan heap size (128)
+
 --> 不建议使用，因为 infinispan 可能会占用所有 JVM 堆空间，最终导致 OutOfMemory 错误。
 
 7. 高 JVM heap size (2048) + 低 infinispan heap size (128)
+
 --> 将发生钝化。
 --> `ispn_[连接器名称]_[目标数据库名称]` 的大小在处理过程中会增加，并在大型事务处理完成后减小。
 --> 大型事务处理成功。
