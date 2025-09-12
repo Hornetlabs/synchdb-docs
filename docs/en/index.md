@@ -39,7 +39,7 @@ This architecture allows PostgreSQL to leverage the rich ecosystem of Debezium c
 - MySQL: 8.0.x, 8.2
 - SQL Server: 2017, 2019, 2022
 - Oracle: 12c, 19c, 21c, 23ai
-- Openlog Replicator: 1.3.0
+- Openlog Replicator: 1.3.0 ~ 1.8.5
 
 ## **Required Third Party Libraries**
 
@@ -48,6 +48,7 @@ This architecture allows PostgreSQL to leverage the rich ecosystem of Debezium c
 
 ## **Version History**
 
+- [SynchDB v1.2](https://github.com/Hornetlabs/synchdb/releases/tag/v1.2)
 - [SynchDB v1.1](https://github.com/Hornetlabs/synchdb/releases/tag/v1.1)
 - [SynchDB v1.0](https://github.com/Hornetlabs/synchdb/releases/tag/v1.0)
 - [SynchDB v1.0 Beta1](https://github.com/Hornetlabs/synchdb/releases/tag/v1.0_beta1)

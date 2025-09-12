@@ -39,7 +39,7 @@ SynchDB 的核心集成了 Debezium 嵌入式引擎，这是一个基于 Java �
 - MySQL：8.0.x、8.2
 - SQL Server：2017、2019、2022
 - Oracle：12c、19c、21c、23ai
-- Openlog Replicator：1.3.0
+- Openlog Replicator：1.3.0 ~ 1.8.5
 
 ## **所需的第三方库**
 
@@ -48,6 +48,7 @@ SynchDB 的核心集成了 Debezium 嵌入式引擎，这是一个基于 Java �
 
 ## **版本历史**
 
+- [SynchDB v1.2](https://github.com/Hornetlabs/synchdb/releases/tag/v1.2)
 - [SynchDB v1.1](https://github.com/Hornetlabs/synchdb/releases/tag/v1.1)
 - [SynchDB v1.0](https://github.com/Hornetlabs/synchdb/releases/tag/v1.0)
 - [SynchDB v1.0 Beta1](https://github.com/Hornetlabs/synchdb/releases/tag/v1.0_beta1)
