@@ -23,6 +23,7 @@
 
 SynchDB 的 OLR 支持基于以下配置示例构建。
 
+**Version 1.3.0**
 ```json
 {
   "version": "1.3.0",
@@ -74,6 +75,59 @@ SynchDB 的 OLR 支持基于以下配置示例构建。
 
 ```
 
+**Version 1.8.5**
+```json
+{
+  "version": "1.8.5",
+  "source": [
+    {
+      "alias": "SOURCE",
+      "name": "ORACLE",
+      "reader": {
+        "type": "online",
+        "user": "DBZUSER",
+        "password": "dbz",
+        "server": "//ora19c:1521/FREE"
+      },
+      "format": {
+        "type": "json",
+        "column": 2,
+        "db": 3,
+        "interval-dts": 9,
+        "interval-ytm": 4,
+        "message": 2,
+        "rid": 1,
+        "schema": 7,
+        "timestamp-all": 1,
+        "scn-type": 1
+      },
+      "memory": {
+        "min-mb": 64,
+        "max-mb": 1024,
+        "swap-path": "/opt/OpenLogReplicator/olrswap"
+      },
+      "filter": {
+        "table": [
+          {"owner": "DBZUSER", "table": ".*"}
+        ]
+      },
+      "flags": 32
+    }
+  ],
+  "target": [
+    {
+      "alias": "DEBEZIUM",
+      "source": "SOURCE",
+      "writer": {
+        "type": "network",
+        "uri": "0.0.0.0:7070"
+      }
+    }
+  ]
+}
+
+```
+
 请注意以下几点：
 
 - "source"."name": "ORACLE" -> 通过 `synchdb_add_olr_conninfo()` 定义 OLR 参数时，此字段应与 `olr_source` 值匹配（见下文）
@@ -82,6 +136,7 @@ SynchDB 的 OLR 支持基于以下配置示例构建。
 - "source"."reader"."server" -> 通过 `synchdb_add_conninfo()` 创建连接器时，此字段应包含 `hostname`、`port` 和 `source database` 的值
 - "source"."filter"."table":[] -> 这会过滤 Openlog Replicator 捕获的变更事件。<<<**重要**>>>：这是目前从 Oracle 过滤变更事件的唯一方法，因为 SynchDB 中的 OLR 实现目前不进行任何过滤。（通过 `synchdb_add_conninfo()` 创建连接器时，`table` 和 `snapshot table` 的值会被忽略。）
 - "format":{} -> 基于 Debezium 或原生 Openlog Replicator 连接器提取的特定 Paylod 格式。请按照指定的方式使用这些值。
+- “memory”.“swap-path” -> 这告诉 OLR 在内存不足的情况下将交换文件写入哪里。
 - "target".[0].."writer"."type": -> 必须指定 `network`，因为 Debezium 和原生 Openlog Replicator 连接器都通过网络与 Openlog Replicator 通信。
 - "target".[0].."writer"."uri": -> 这是 Openlog Replicator 监听的绑定主机和端口，SynchDB 应该能够在通过 `synchdb_add_olr_conninfo()` 定义 OLR 参数时通过 `olr_host` 和 `olr_port` 访问该主机和端口。
 
