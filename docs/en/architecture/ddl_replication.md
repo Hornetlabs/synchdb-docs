@@ -9,13 +9,23 @@ SynchDB provides comprehensive support for Data Definition Language (DDL) operat
 
 ## **Supported DDL Commands**
 
-SynchDB supports the following DDL operations:
+SynchDB supports the following general DDL operations for Debezium based connectors (MySQL, SQL Server, Oracle):
 
 ✅ CREATE [table]  
 ✅ ALTER [table] ADD COLUMN  
 ✅ ALTER [table] DROP COLUMN  
 ✅ ALTER [table] ALTER COLUMN  
-✅ DROP [table]  
+✅ DROP [table]
+
+For Openlog Replicator based connector these Oracle DDL syntax is supported: 
+
+✅ CREATE [table]
+✅ DROP [table]
+✅ ALTER [table] MODIFY
+✅ ALTER [table] ADD COLUMN
+✅ ALTER [table] DROP COLUMN
+✅ ALTER [table] ADD CONSTRAINT
+✅ ALTER [table] DROP CONSTRAINT
 
 ## **Detailed Command Support**
 

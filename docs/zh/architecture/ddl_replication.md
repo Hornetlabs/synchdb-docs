@@ -17,6 +17,16 @@ SynchDB 支持以下 DDL 操作：
 ✅ ALTER [table] ALTER COLUMN  
 ✅ DROP [table]  
 
+对于基于 Openlog Replicator 的连接器，支持以下 Oracle DDL 语法：
+
+✅ CREATE [table]
+✅ DROP [table]
+✅ ALTER [table] MODIFY
+✅ ALTER [table] ADD COLUMN
+✅ ALTER [table] DROP COLUMN
+✅ ALTER [table] ADD CONSTRAINT
+✅ ALTER [table] DROP CONSTRAINT
+
 ## **详细命令支持**
 
 ### **CREATE TABLE**
