@@ -156,6 +156,42 @@ The converter currently can handle these Oracle DDL operations:
 * ALTER TABLE ADD CONSTRAINT
 * ALTER TABLE DROP CONSTRAINT
 
+#### Limitations
+
+The following Oracle features declared in DDL commands are not supported by Openlog Replicator connector:
+
+* virtual columns
+* quoted table or column names with space
+* Index organized tables (IOT)
+* `CREATE TABLE AS` clauses
+* `CREATE TYPE` clauses
+* `CREATE TABLE OF` caluses
+* `ALTER TABLE MODIFY name DEFAULT`
+* `ALTER TABLE MODIFY name NOT NULL`
+* `ALTER TABLE MODIFY name NULL`
+* `ALTER TABLE MODIFY name SET UNUSED`
+* `ALTER TABLE MODIFY name DROP UNUSED COLUMNS`
+
+
+The following constraints clauses are accpeted but ignored by Openlog Replicator connector:
+
+* ENABLE VALIDATE
+* ENABLE NOVALIDATE
+* DISABLE VALIDATE
+* DISABLE NOVALIDATE
+
+The following is treated as DEFAULT NULL:
+
+* DEFAULT ON NULL 'expr'
+* DEFAULT 'expr'
+
+The following can only take one set of column definition rather than multiple
+
+* `ALTER TABLE MODIFY ADD ...` 
+* `ALTER TABLE MODIFY (ADD ...)` 
+
+<**NOTE**> More limitations may be updated here as we discover them.
+
 ### **7) DML Converter**
 
 The DML Converter is responsible for converting the DML data produced by the "JSON Parser" to a format that can be understood by PostgreSQL. For DMLs, SynchDB relies on PostgreSQL's executor APIs to directly apply the data to PostgreSQL, so the output of the conversion is in TupleTableSlot (TTS) format in which PostgreSQL executor understands. To produce the correct TTS for PostgreSQL, DML Converter relies on:

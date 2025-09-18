@@ -154,6 +154,41 @@ DDL 转换器负责将“JSON 解析器”生成的 DDL 数据转换为 PostgreS
 * 修改表添加约束
 * 修改表删除约束
 
+#### 限制
+
+Openlog Replicator 连接器不支持以下在 DDL 命令中声明的 Oracle 特性：
+
+* 虚拟列
+* 带空格的引用表名或列名
+* 索引组织表 (IOT)
+* `CREATE TABLE AS` 子句
+* `CREATE TYPE` 子句
+* `CREATE TABLE OF` 子句
+* `ALTER TABLE MODIFY name DEFAULT`
+* `ALTER TABLE MODIFY name NOT NULL`
+* `ALTER TABLE MODIFY name NULL`
+* `ALTER TABLE MODIFY name SET UNUSED`
+* `ALTER TABLE MODIFY name DROP UNUSED COLUMNS`
+
+Openlog Replicator 连接器接受但忽略以下约束子句：
+
+* ENABLE VALIDATE
+* ENABLE NOVALIDATE
+* DISABLE VALIDATE
+* DISABLE NOVALIDATE
+
+以下内容将被视为 DEFAULT NULL：
+
+* DEFAULT ON NULL 'expr'
+* DEFAULT 'expr'
+
+以下语句只能接受一组列定义，而不能接受多组。
+
+* `ALTER TABLE MODIFY ADD ...`
+* `ALTER TABLE MODIFY (ADD ...)`
+
+<**注意**> 更多限制可能会在我们发现后在此处更新。
+
 ### **7) DML 转换器**
 
 DML 转换器负责将“JSON 解析器”生成的 DML 数据转换为 PostgreSQL 可以理解的格式。对于 DML，SynchDB 依赖 PostgreSQL 的执行器 API 将数据直接应用于 PostgreSQL，因此转换的输出为 PostgreSQL 执行器可以理解的 TupleTableSlot (TTS) 格式。为了生成适用于 PostgreSQL 的正确 TTS，DML 转换器依赖于：
