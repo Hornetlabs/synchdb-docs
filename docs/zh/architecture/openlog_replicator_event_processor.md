@@ -169,6 +169,7 @@ Openlog Replicator 连接器不支持以下在 DDL 命令中声明的 Oracle 特
 * `ALTER TABLE MODIFY name NULL`
 * `ALTER TABLE MODIFY name SET UNUSED`
 * `ALTER TABLE MODIFY name DROP UNUSED COLUMNS`
+* `ALTER TABLE RENAME`
 
 Openlog Replicator 连接器接受但忽略以下约束子句：
 
@@ -186,6 +187,8 @@ Openlog Replicator 连接器接受但忽略以下约束子句：
 
 * `ALTER TABLE MODIFY ADD ...`
 * `ALTER TABLE MODIFY (ADD ...)`
+* `ALTER TABLE MODIFY DROP ...` 
+* `ALTER TABLE MODIFY (DROP ...)` 
 
 <**注意**> 更多限制可能会在我们发现后在此处更新。
 

@@ -171,6 +171,7 @@ The following Oracle features declared in DDL commands are not supported by Open
 * `ALTER TABLE MODIFY name NULL`
 * `ALTER TABLE MODIFY name SET UNUSED`
 * `ALTER TABLE MODIFY name DROP UNUSED COLUMNS`
+* `ALTER TABLE RENAME`
 
 
 The following constraints clauses are accpeted but ignored by Openlog Replicator connector:
@@ -189,6 +190,8 @@ The following can only take one set of column definition rather than multiple
 
 * `ALTER TABLE MODIFY ADD ...` 
 * `ALTER TABLE MODIFY (ADD ...)` 
+* `ALTER TABLE MODIFY DROP ...` 
+* `ALTER TABLE MODIFY (DROP ...)` 
 
 <**NOTE**> More limitations may be updated here as we discover them.
 
