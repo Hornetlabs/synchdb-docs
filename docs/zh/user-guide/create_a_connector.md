@@ -21,6 +21,8 @@ synchdb_add_conninfo 接受以下参数：
 | 快照表 |（可选）- 以 `[database].[table]` 或 `[database].[schema].[table]` 的形式表示，该参数必须存在于上述 `table` 设置中，因此引擎仅在快照模式设置为 `always` 时才会重建这些表的快照。如果留空或为 null，则当快照模式设置为 `always` 时，将重建上述 `table` 设置中指定的所有表。或者，可以使用 `file:` 前缀指定快照表列表文件 |
 | 连接器 | 要使用的连接器类型（如下）。|
 
+<<**注意**>> 如果連接器類型為“olr”，SynchDB 仍將使用 Debezium 執行初始快照，初始快照包含“table”和“snapshot table”參數中指定的表和快照表。完成後，SynchDB 將連接到 Openlog Replicator 進行複製，而不會過濾「table」參數中指定的所需表。表過濾是在 Openlog Replicator 的配置中完成的。因此，請確保 Openlog Replicator 和 SynchDB 連接器的「table」過濾參數配置一致，以避免潛在的差異。
+
 ## **连接器类型**
 
 SynchDb 支持以下连接器类型：

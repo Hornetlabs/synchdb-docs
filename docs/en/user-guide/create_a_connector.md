@@ -21,6 +21,8 @@ synchdb_add_conninfo takes these arguments:
 | snapshot table        | (optional) - expressed in the form of `[database].[table]` or `[database].[schema].[table]` that must exists in the `table` setting above, so the engine will only rebuild the snapshot of these tables if snapshot mode is set to `always`. If left empty or null, all tables specified in `table` setting above will be rebuilt when snapshot mode is set to `always`. Alternatively, a snapshot table list file can be specified with `file:` prefix|
 | connector             | the connector type (See below) |
 
+<<**Note**>> If connector type is `olr`, SynchDB will still use Debezium to perform an initial snapshot with tables and snapshot tables as specified in `table` and `snapshot table` parameters. After this is done, SynchDB will connect to Openlog Replicator for replication without filtering desired tables specified in `table` parameter. The table filtering is instead done on the Openlog Replicator's configuration. So, please ensure that both Openlog Replicator and SynchDB connector's `table` filtering parameters are configured consistently to avoid potential descrepancies
+
 ## **Connector Types**
 
 SynchDb supports these connector types:
