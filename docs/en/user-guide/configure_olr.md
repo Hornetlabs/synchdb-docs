@@ -228,7 +228,7 @@ SELECT synchdb_del_olr_conninfo('olrconn');
 * If OLR configurations are absent, SynchDB uses logmining strategy to stream changes.
 * Restarting the connector is required after modifying its OLR configuration.
 
-## **Behavior Notes for Debezium based Openlog Replicator Connector**
+## **Behavior Notes for Native based Openlog Replicator Connector**
 
 * Currently at BETA version.
 * SynchDB manages connections to Openlog Replicator and streams changes without using Debezium.

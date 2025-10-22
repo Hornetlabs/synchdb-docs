@@ -228,7 +228,7 @@ SELECT synchdb_del_olr_conninfo('olrconn');
 * 如果 OLR 配置缺失，SynchDB 将使用日志挖掘策略来流式传输变更。
 * 修改 OLR 配置后，需要重新启动连接器。
 
-## **基于 Debezium 的 Openlog Replicator 连接器的行为说明**
+## **原生的 Openlog Replicator 连接器的行为说明**
 
 * 目前为 BETA 版本。
 * SynchDB 管理与 Openlog Replicator 的连接，并在不使用 Debezium 的情况下流式传输变更。

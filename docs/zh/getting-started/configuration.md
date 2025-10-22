@@ -27,7 +27,12 @@ SynchDB 在 postgresql.conf 中支持以下 GUC 变量。这些是适用于 Sync
 | synchdb.error_handling_strategy | enum | "exit" | 配置连接器工作器的错误处理策略。可能的值有“exit”表示出错时退出，“skip”表示出错时继续，“retry”表示出错时重试 |
 | synchdb.dbz_log_level | enum | "warn" | Debezium Runner 的日志级别设置。可能的值有“debug”，“info”，“warn”，“error”，“all”，“fatal”，“off”，“trace” |
 | synchdb.log_change_on_error | boolean | true | 连接器是否应在发生错误时记录原始 JSON 更改事件 |
-| synchdb.jvm_max_direct_buffer_size | 整数 | 1024 | 分配用于保存 JSON 更改事件的最大直接缓冲区大小（以 MB 为单位）|
+| synchdb.jvm_max_direct_buffer_size | integer | 1024 | 分配用于保存 JSON 更改事件的最大直接缓冲区大小（以 MB 为单位）|
+| synchdb.dbz_logminer_stream_mode | enum | "uncommitted" | 基於 Debezium 的 Oracle 連接器的流模式。預設值為uncommitted，這表示透過 Debezium 從 Oracle 串流傳輸的所有變更均未提交。這表明 Debezium 必須執行一些工作來確保事務和所有相關變更的完整性。設定為 "committed" 會將這項工作轉移到 Oralce 端 |
+| synchdb.olr_connect_timeout_ms | integer | 5000 |（僅影響 OLR 連接器）連接到 OpenLog 複製器服務時的連線逾時時間（以毫秒為單位）|
+| synchdb.olr_read_timeout_m | integer | 5000 |（僅影響 OLR 連接器）從套接字讀取時的讀取逾時時間（以毫秒為單位）|
+| synchdb.olr_snapshot_engine | enum | "debezium" | （僅影響 OLR 連接器）指定底層引擎完成初始快照程序。可以是“debezium”或“fdw”。如果選擇“fdw”，則需要確保在 |
+| synchdb.cdc_start_delay_ms | integer | 0 | 初始快照完成後、CDC 流開始前等待的延遲時間。 |
 
 ## **技术说明**
 

@@ -45,6 +45,7 @@ This architecture allows PostgreSQL to leverage the rich ecosystem of Debezium c
 
 - Java Runtime Environment（JRE) 17 or above
 - libprotobuf-c v1.5.2 (optional for Openlog Replicator support)
+- oracle_fdw v2.8.0 (needed if you choose to use fdw based initial snapshot for OLR connector)
 
 ## **Version History**
 

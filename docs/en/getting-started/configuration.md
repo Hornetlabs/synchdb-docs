@@ -28,6 +28,12 @@ SynchDB supports the following GUC variables in postgresql.conf. These are commo
 | synchdb.dbz_log_level | enum | "warn" | the log level setting for Debezium Runner. Possible values are "debug", "info", "warn", "error", "all", "fatal", "off", "trace" |
 | synchdb.log_change_on_error | boolean | true | whether the connector should log the original JSON change event in case of error |
 | synchdb.jvm_max_direct_buffer_size | integer | 1024 | The maximum direct buffer size in MB to be allocated to hold JSON change events |
+| synchdb.dbz_logminer_stream_mode | enum | "uncommitted" | The streaming mode for Debezium based Oracle connector. The default is uncommitted, which means all the changes streamed from Oracle via Debezium is uncommitted. This indicates Debezium has to do some work to ensure the integrity of transactions and all associated changes. Setting to "committed" shifts this work on Oralce side |
+| synchdb.olr_connect_timeout_ms | integer | 5000 | (affects OLR connector only) the connect timeout in milliseconds when connecting to openlog replicator service |
+| synchdb.olr_read_timeout_m | integer | 5000 | (affects OLR connector only) the read timeout in milliseconds when reading from a socket |
+| synchdb.olr_snapshot_engine | enum | "debezium" | (affects OLR connector only) the underlining engine to complete the initial snapshot process. Could be "debezium" or "fdw". If "fdw" is selected, you need to ensure "oracle_fdw" is installed prior |
+| synchdb.cdc_start_delay_ms | integer | 0 | a delay waited after initial snapshot completes and before CDC streaming begins. |
+
 
 ## **Technical Notes**
 

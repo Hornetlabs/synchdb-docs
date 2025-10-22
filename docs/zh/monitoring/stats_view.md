@@ -1,45 +1,97 @@
-# 连接器统计信息
+# 連接器統計訊息
 
-## **检查连接器运行统计信息**
+## **檢查連接器運行統計信息**
 
-使用 `synchdb_stats_view()` 视图检查所有连接器的统计信息。这些统计信息记录了连接器迄今为止处理的不同类型变更事件的累积测量值。目前，这些统计值存储在共享内存中，而不是持久化到磁盘。持久化统计数据是近期将要添加的功能。统计信息会在每次批次成功完成后更新，其中包含该批次中第一个和最后一个变更事件的多个时间戳。通过查看这些时间戳，我们可以粗略地估算出处理完该批次所需的时间，以及数据生成和由 Debezium 和 PostgreQSL 处理之间的延迟。
+SynchDB 會記錄每個連接器的統計信息。這些統計信息與 Debezium 或 JVM 基於 JMX 的統計不同，儘管它們可能具有相似或重疊的參數。
 
-请参阅以下示例输出：
+統計信息分為三類：
+
+* 常規統計信息
+* 快照統計訊息
+* CDC 統計信息
+
+請注意，這些統計信息不是持久化的，在 PostgreSQL 重新啟動後會遺失/重置。
+
+## **常規統計信息**
+
+透過 synchdb_genstats 視圖取得：
 ```sql
-postgres=# select * from synchdb_stats_view;
-    name    | ddls | dmls | reads | creates | updates | deletes | bad_events | total_events | batches_done | avg_batch_size | first_src_ts  | first_dbz_ts  |  first_pg_ts  |  last_src_ts  |  last_dbz_ts  |  last_pg_ts
-------------+------+------+-------+---------+---------+---------+------------+--------------+--------------+----------------+---------------+---------------+---------------+---------------+---------------+---------------
- oracleconn |    1 |    1 |     0 |       1 |       0 |       0 |          0 |            2 |            1 |              2 | 1744398189000 | 1744398230893 | 1744398231243 | 1744398198000 | 1744398230950 | 1744398231244
+select * from synchdb_genstats;
+
+  name   | bad_events | total_events | batches_done | average_batch_size | first_src_ts  |  first_pg_ts  |  last_src_ts  |  last_pg_ts
+---------+------------+--------------+--------------+--------------------+---------------+---------------+---------------+---------------
+ olrconn |        191 |          453 |           14 |                 32 | 1761170446000 | 1761170450120 | 1761170448000 | 1761170450120
 (1 row)
 ```
-列详情：
+
+列詳情：
 
 | 字段 | 描述 |
 |-|-|
-| 名称 | 由 `synchdb_add_conninfo()` 创建的关联连接器信息名称 |
-| ddls | 已完成的 DDL 操作数 |
-| dmls | 已完成的 DML 操作数 |
-| reads | 初始快照阶段完成的 READ 事件数 |
-| create | CDC 阶段完成的 CREATES 事件数 |
-| updates | CDC 阶段完成的 UPDATES 事件数 |
-| deletes | CDC 阶段完成的 DELETES 事件数 |
-| bad_events | 忽略的不良事件数（例如空事件、不支持的 DDL 事件等）|
-| total_events | 已处理的事件总数（包括 bad_events）|
-| batches_done | 已完成的批次数 |
-| avg_batch_size | 平均批次大小（total_events / batches_done）|
-| first_src_ts | 外部数据库生成最后一个批次的第一个事件的时间戳（纳秒）|
-| first_dbz_ts | Debezium 引擎处理最后一个批次的第一个事件的时间戳（纳秒）|
-| first_pg_ts | 最后一个批次的第一个事件应用到 PostgreSQL 的时间戳（纳秒）|
-| last_src_ts | 外部数据库生成最后一个批次的最后一个事件的时间戳（纳秒）|
-| last_dbz_ts | Debezium 引擎处理最后一个批次的最后一个事件的时间戳（纳秒）|
-| last_pg_ts | 最后一个批次的最后一个事件应用到 PostgreSQL 的时间戳（纳秒）|
+| 名稱 | 由 `synchdb_add_conninfo()` 建立的關聯連接器資訊名稱 |
+| bad_events | 忽略的錯誤事件數量（例如空事件、不支援的 DDL 事件等）|
+| total_events |已處理的事件總數（包括 bad_events）|
+| batches_done | 已完成的批次數 |
+| average_batch_size | 平均批次大小 (total_events / batches_done) |
+| first_src_ts | 最後一個批次的第一個事件在外部資料庫產生的時間戳記（以毫秒為單位）|
+| first_pg_ts | 最後一個批次的第一個事件應用到 PostgreSQL 的時間戳（以毫秒為單位）|
+| last_src_ts | 最後一個批次的最後一個事件在外部資料庫產生的時間戳記（以毫秒為單位）|
+| last_pg_ts | 最後一個批次的最後一個事件應用到 PostgreSQL 的時間戳（以毫秒為單位）|
 
-**注意：统计信息不是持久化的，如果 PostgreSQL 关闭或重启，统计信息将被清除**
+## **快照統計信息**
+
+透過 synchdb_snapstats 視圖取得：
+```sql
+select * from synchdb_snapstats;
+
+  name   | tables |  rows  | snapshot_begin_ts | snapshot_end_ts
+---------+--------+--------+-------------------+-----------------
+ olrconn |      2 | 100032 |     1761160017191 |   1761160033250
+(1 row)
+
+```
+
+列詳情：
+
+| 字段 | 描述 |
+|-|-|
+| 名稱 | 由 `synchdb_add_conninfo()` 建立的關聯連接器資訊名稱 |
+| 表 | 快照過程中遷移的表格模式數量 |
+| 行 | 快照過程中遷移的行數 |
+| 快照開始時間 | 快照開始時間的時間戳記（以毫秒為單位）|
+| 快照結束時間 | 快照結束時間的時間戳記（以毫秒為單位）|
+
+## **CDC 統計信息**
+
+透過 synchdb_cdcstats 視圖取得：
+```sql
+select * from synchdb_cdcstats;
+
+  name   | ddls | dmls | creates | updates | deletes | txs | truncates
+---------+------+------+---------+---------+---------+-----+-----------
+ olrconn |  161 |  124 |      10 |      47 |      67 | 562 |         0
+(1 row)
+
+
+```
+
+列詳情：
+
+| 字段 | 描述 |
+|-|-|
+| name | 由 `synchdb_add_conninfo()` 建立的關聯連接器資訊名稱 |
+| ddls | 已完成的 DDL 運算元 |
+| dmls | 已完成的 DML 運算元 |
+| creates | CDC 階段完成的 CREATES 事件數 |
+| updates | CDC 階段完成的 UPDATES 事件數 |
+| deletes | CDC 階段完成的 DELETES 事件數 |
+| txs | 處理的事務事件數，例如 begin 和 commit |
+| truncates | 處理的 truncate 事件數 |
 
 ## **synchdb_reset_stats**
 
-**用途**：重置指定连接器名称的所有统计信息
+**用途**：重置指定連接器名稱的所有統計信息
 
 ```sql
-SELECT synchdb_reset_stats('mysqlconn');
+SELECT synchdb_reset_stats('olrconn');
 ```
