@@ -94,6 +94,7 @@ plugins:
             Configure Replication Offset: Configurar el desplazamiento de replicación
             Configure Infinispan: Configurar Infinispan
             Configure Snapshot Engine: Configurar el motor de instantáneas
+            FDW Based Snapshot: Instantánea basada en FDW
         - locale: zh
           name: 中文
           site_name: SynchDB 文档
@@ -148,6 +149,7 @@ plugins:
             Configure Replication Offset: 配置复制偏移
             Configure Infinispan: 配置 infinispan
             Configure Snapshot Engine: 配置快照引擎
+            FDW Based Snapshot: 基於FDW的快照
   - mike:
       version_selector: true
       css_dir: css
@@ -168,6 +170,7 @@ nav:
    - Native Data Type Processing: architecture/native_datatype_handling.md
    - Debezium Metadata Files: architecture/metadata_files.md
    - DDL Replication: architecture/ddl_replication.md
+   - FDW Based Snapshot: architecture/fdw_based_snapshot.md
    # - Test Framework: architecture/test_framework.md
  - Getting Started:
    - Installation: getting-started/installation.md
