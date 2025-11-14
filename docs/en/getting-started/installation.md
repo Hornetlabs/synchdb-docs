@@ -119,7 +119,29 @@ The following software is required to build and run SynchDB. The versions listed
 
 * libprotobuf-c v1.5.2. Refer to [here](https://github.com/protobuf-c/protobuf-c.git) to build from source.
 
-### **Prepare Source (Using 16.3 as example)**
+**The following is required if you would like to use FDW based snapshot**
+
+* OCI v23.9.0. Refer to here for more information
+* oracle_fdw v2.8.0. Refer to here to build from source
+
+
+### **Default SynchDB Build - Support MySQL, SQLServer and Oracle Connectors**
+
+If you already have PostgreSQL installed, you can build and install Default SynchDB with PGXS. Please note that your PostgreSQL installation must have pgcrypto extension as required by SynchDB.
+
+```sh
+USE_PGXS=1 make PG_CONFIG=$(which pg_config)
+USE_PGXS=1 make build_dbz PG_CONFIG=$(which pg_config)
+
+sudo USE_PGXS=1 make PG_CONFIG=$(which pg_config) install
+sudo USE_PGXS=1 make install_dbz PG_CONFIG=$(which pg_config)
+```
+
+### **Build SynchDB with Openlog Replicator Connector Support**
+
+To build Synchdb with Openlog Replicator Connector support, an additional Synchdb Oracle Parser component must be built as well. This component is based on IvorySQL's Oracle Parser, modified to suit SynchDB and it requires PostgreSQL backend source codes to build successfully. Here's the procedure:
+
+#### **Prepare Source (Using 16.3 as example)**
 
 Clone the PostgreSQL source and switch to 16.3 release tag
 ```sh linenums="1"
@@ -135,34 +157,9 @@ cd contrib/
 git clone https://github.com/Hornetlabs/synchdb.git
 ```
 
-### **Prepare Tools**
+#### **Build and Install PostgreSQL**
 
-#### --> Maven
-``` BASH
-## on Ubuntu
-sudo apt install maven
-
-## on MacOS
-brew install maven
-```
-
-#### --> Java (OpenJDK)
-If you are working on Ubuntu 22.04.4 LTS, install the OpenJDK  as below:
-``` BASH
-## on Ubuntu
-sudo apt install openjdk-21-jdk
-
-## on MacOS
-brew install openjdk@22
-```
-
-#### --> libprotobuf-c (optional)
-**Warning**: This library is needed if SynchDB is to be built with openlog replicator support. Refer to [here](https://github.com/protobuf-c/protobuf-c.git) to build from source.
-
-
-### **Build and Install PostgreSQL**
-
-Follow the official PostgreSQL documentation [here](https://www.postgresql.org/docs/current/install-make.html) to build and install PostgreSQL from source. Generally, the procedure consists of:
+This can be done by following the standard build and install procedure as described [here](https://www.postgresql.org/docs/current/install-make.html) 
 
 **Warning**: SynchDB depends on pgcrypto to encrypt and decrypt sensitive access information. Please ensure PostgreSQL is built with SSL support.
 
@@ -173,55 +170,29 @@ make
 sudo make install
 ```
 
-You should build and install the default extensions as well:
+Build the required pgcrypto extension
 ```sh linenums="1"
-cd /home/$USER/postgres/contrib
+cd /home/$USER/postgres/contrib/pgcrypto
 make
 sudo make install
 ```
 
-### Build SynchDB Main Components
+#### Build SynchDB with Additional Openlog Replicator Connector Support
 
-#### --> Build Debezium Runner Engine
-The commands below build and install the Debezium Runner Engine jar file to your PostgreSQL's lib folder.
-
-``` BASH
+```sh linenums="1"
+# build and install debezium runner
 cd /home/$USER/postgres/contrib/synchdb
 make build_dbz
 sudo make install_dbz
-```
 
-#### --> Build Oracle Parser (optional)
-This Oracle parser (a shared library) is a modified and isoalted version of IvorySQL's Oracle parser required by openlog replicator to process incoming Oracle DDL statements. The commands below install Oracle Parser to your PostgreSQL's lib folder.
-
-**Warning**: Required if SynchDB is built with openlog replicator support.
-
-```BASH
-cd /home/$USER/postgres/contrib/synchdb
-make clean_oracle_parser
+# build and install oracle parser
 make oracle_parser
 sudo make install_oracle_parser
-```
 
-#### --> Build SynchDB
-The commands below build and install SynchDB extension to your PostgreSQL's lib and share folder.
-
-``` BASH
-cd /home/$USER/postgres/contrib/synchdb
-make
-sudo make install
-```
-
-SynchDB can be built with additional Openlog Replicator Connector support
-
-```BASH
-cd /home/$USER/postgres/contrib/synchdb
-make WITH_OLR=1 clean
+# build and install synchdb
 make WITH_OLR=1
 sudo make WITH_OLR=1 install
 ```
-
-**Warning**: Openlog Replicator Connector support requires both `libprotobuf-c` and `oracle parser`.
 
 ### Configure your Linker to find Java (Ubuntu)
 Lastly, we also need to tell your system's linker where the newly added Java library (libjvm.so) is located in your system.

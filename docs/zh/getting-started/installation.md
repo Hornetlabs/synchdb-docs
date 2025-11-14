@@ -121,51 +121,54 @@ sudo ldconfig
 
 * libprotobuf-c v1.5.2。请参阅[此处](https://github.com/protobuf-c/protobuf-c.git) 从源代码构建。
 
-### **准备源代码（以16.3为例）**
+**如果您想使用基於 FDW 的快照，則需要以下內容：**
 
-克隆PostgreSQL源代码并切换到16.3发布标签
+* OCI v23.9.0。更多資訊請參閱[此處](https://docs.synchdb.com/user-guide/configure_snapshot_engine/)。
+* oracle_fdw v2.8.0。如何從原始碼建置？請參閱[此處](https://github.com/laurenz/oracle_fdw)。
+
+### **預設 SynchDB 建置 - 支援 MySQL、SQL Server 和 Oracle 連接器**
+
+如果您已安裝 PostgreSQL，則可以使用 PGXS 建置並安裝預設 SynchDB。請注意，您的 PostgreSQL 安裝必須包含 SynchDB 所需的 pgcrypto 插件。
+
+```sh
+USE_PGXS=1 make PG_CONFIG=$(which pg_config)
+USE_PGXS=1 make build_dbz PG_CONFIG=$(which pg_config)
+
+sudo USE_PGXS=1 make PG_CONFIG=$(which pg_config) install
+sudo USE_PGXS=1 make install_dbz PG_CONFIG=$(which pg_config)
+
+```
+
+### **建構支援 Openlog Replicator 連接器的 SynchDB**
+
+要建置支援 Openlog Replicator 連接器的 SynchDB，還需要建置一個額外的 SynchDB Oracle 解析器元件。此元件基於 IvorySQL 的 Oracle 解析器，並針對 SynchDB 進行了修改，需要 PostgreSQL 後端原始程式碼才能成功建置。以下是具體步驟：
+
+#### **准备源代码（以16.3为例）**
+
+複製 PostgreSQL 原始碼並切換到 16.3 版本標籤
+
 ```sh linenums="1"
 git clone https://github.com/postgres/postgres.git
 cd postgres
 git checkout REL_16_3
+
 ```
 
-在扩展文件夹中克隆SynchDB源代码
-注意：目前使用*(synchdb-devel)[https://github.com/Hornetlabs/synchdb/tree/synchdb-devel]*分支进行开发。
+從擴充資料夾內克隆 SynchDB 原始碼
+
+注意：目前使用分支 *(synchdb-devel)[https://github.com/Hornetlabs/synchdb/tree/synchdb-devel]* 進行開發。
+
 ```sh linenums="1"
 cd contrib/
 git clone https://github.com/Hornetlabs/synchdb.git
+
 ```
 
-### **准备工具**
+#### **编译和安装PostgreSQL**
 
-#### --> Maven
-``` BASH
-## 在 Ubuntu 上
-sudo apt install maven
+您可以按照[此處](https://www.postgresql.org/docs/current/install-make.html)中所述的標準建置和安裝流程完成此操作。
 
-## 在 MacOS 上
-brew install maven
-```
-
-#### --> Java (OpenJDK)
-如果您使用的是 Ubuntu 22.04.4 LTS，请按如下方式安装 OpenJDK：
-``` BASH
-## 在 Ubuntu 上
-sudo apt install openjdk-21-jdk
-
-## 在 MacOS 上
-brew install openjdk@22
-```
-
-#### --> libprotobuf-c（可选）
-**警告**：如果要构建 SynchDB 并支持 openlog replicator，则需要此库。请参阅[此处](https://github.com/protobuf-c/protobuf-c.git) 从源代码构建。
-
-### **编译和安装PostgreSQL**
-
-按照PostgreSQL官方文档[这里](https://www.postgresql.org/docs/current/install-make.html)从源代码编译和安装PostgreSQL。通常，步骤包括：
-
-**警告**：SynchDB 依赖 pgcrypto 来加密和解密敏感访问信息。请确保 PostgreSQL 支持 SSL。
+**警告**：SynchDB 依賴 pgcrypto 來加密和解密敏感的存取資訊。請確保 PostgreSQL 已建置並啟用 SSL 支援。
 
 ```sh linenums="1"
 cd /home/$USER/postgres
@@ -174,55 +177,32 @@ make
 sudo make install
 ```
 
-您还应该编译和安装默认扩展：
+建置所需的 pgcrypto 擴展
+
 ```sh linenums="1"
-cd /home/$USER/postgres/contrib
+cd /home/$USER/postgres/contrib/pgcrypto
 make
 sudo make install
+
 ```
 
-### 构建 SynchDB 主要组件
+#### 建置 SynchDB 並新增 Openlog Replicator 連接器支持
 
-#### --> 构建 Debezium Runner Engine
-以下命令将构建 Debezium Runner Engine jar 文件并将其安装到 PostgreSQL 的 lib 文件夹中。
-
-``` BASH
+```sh linenums="1"
+# 建置並安裝 debezium runner
 cd /home/$USER/postgres/contrib/synchdb
 make build_dbz
 sudo make install_dbz
-```
 
-#### --> 构建 Oracle 解析器（可选）
-此 Oracle 解析器（一个共享库）是 IvorySQL Oracle 解析器的修改版和独立版本，Openlog 复制器需要它来处理传入的 Oracle DDL 语句。以下命令将 Oracle 解析器安装到 PostgreSQL 的 lib 文件夹中。
-
-**警告**：如果 SynchDB 构建时支持 Openlog 复制器，则需要此解析器。
-
-```BASH
-cd /home/$USER/postgres/contrib/synchdb
-make clean_oracle_parser
+# 建置並安裝 Oracle 解析器
 make oracle_parser
 sudo make install_oracle_parser
-```
 
-#### --> 构建 SynchDB
-以下命令将构建 SynchDB 扩展并将其安装到 PostgreSQL 的 lib 和共享文件夹中。
-
-``` BASH
-cd /home/$USER/postgres/contrib/synchdb
-make
-sudo make install
-```
-
-SynchDB 可以在构建时添加额外的 Openlog Replicator Connector 支持。
-
-```BASH
-cd /home/$USER/postgres/contrib/synchdb
-make WITH_OLR=1 clean
+# 建置並安裝 synchdb
 make WITH_OLR=1
 sudo make WITH_OLR=1 install
-```
 
-**警告**：Openlog Replicator Connector 支持需要“libprotobuf-c”和“oracle parser”。
+```
 
 ### 配置 Linker 以访问 Java（Ubuntu）
 最后，我们还需要告诉系统的 Linker 新添加的 Java 库 (libjvm.so) 在系统中的位置。
