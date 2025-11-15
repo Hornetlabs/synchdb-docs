@@ -4,6 +4,8 @@
 
 为了确保与远程数据库的连接安全，我们需要为 `synchdb_add_conninfo` 创建的连接器配置额外的 SSL 相关参数。SSL 证书和私钥必须打包为 Java 密钥库文件，并附带密码。这些信息随后会通过 synchdb_add_extra_conninfo() 传递给 SynchDB。
 
+<<**重要提示**>> Openlog Replicator 連接器不支援安全連接
+
 ## **synchdb_add_extra_conninfo**
 
 **用途**：为 `synchdb_add_conninfo` 创建的现有连接器配置额外的连接器参数

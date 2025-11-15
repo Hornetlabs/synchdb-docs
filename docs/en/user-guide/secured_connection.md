@@ -4,6 +4,7 @@
 
 to secure the connection to remote database, we need to configure additional SSL related parameters to a connector that has been created by `synchdb_add_conninfo`. The SSL certificates and private keys must be packaged as Java keystore file with a passphrase. These information is then passed to SynchDB via synchdb_add_extra_conninfo().
 
+<<**IMPORTANT**>> Secured connection is not available for Openlog Replicator Connector
 
 ## **synchdb_add_extra_conninfo**
 

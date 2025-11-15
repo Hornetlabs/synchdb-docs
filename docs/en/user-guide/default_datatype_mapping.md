@@ -19,7 +19,7 @@ The default data type mapping entries can be overwritten by defining a object ma
 ## **MySQL Default Data Type Mapping**
 
 ```c
-datatypehashentry mysql_defaulttypemappings[] =
+DatatypeHashEntry mysql_defaultTypeMappings[] =
 {
 	{{"int", true}, "serial", 0},
 	{{"bigint", true}, "bigserial", 0},
@@ -70,8 +70,6 @@ datatypehashentry mysql_defaulttypemappings[] =
 	{{"mediumtext", false}, "text", -1},
 	{{"tinytext", false}, "text", -1},
 	{{"json", false}, "jsonb", -1},
-
-	/* spatial types - map to text by default */
 	{{"geometry", false}, "text", -1},
 	{{"geometrycollection", false}, "text", -1},
 	{{"geomcollection", false}, "text", -1},
@@ -87,7 +85,7 @@ datatypehashentry mysql_defaulttypemappings[] =
 ## **SQL Server Default Data Type Mapping**
 
 ```c
-datatypehashentry sqlserver_defaulttypemappings[] =
+DatatypeHashEntry sqlserver_defaultTypeMappings[] =
 {
 	{{"int identity", true}, "serial", 0},
 	{{"bigint identity", true}, "bigserial", 0},
@@ -97,8 +95,8 @@ datatypehashentry sqlserver_defaulttypemappings[] =
 	{{"bigint", false}, "bigint", 0},
 	{{"smallint", false}, "smallint", 0},
 	{{"tinyint", false}, "smallint", 0},
-	{{"numeric", false}, "numeric", 0},
-	{{"decimal", false}, "numeric", 0},
+	{{"numeric", false}, "numeric", -1},
+	{{"decimal", false}, "numeric", -1},
 	{{"bit(1)", false}, "bool", 0},
 	{{"bit", false}, "bit", 0},
 	{{"money", false}, "money", 0},
@@ -121,8 +119,10 @@ datatypehashentry sqlserver_defaulttypemappings[] =
 	{{"varbinary", false}, "bytea", 0},
 	{{"image", false}, "bytea", 0},
 	{{"uniqueidentifier", false}, "uuid", 0},
-	{{"xml", false}, "text", 0},
-	/* spatial types - map to text by default */
+	{{"xml", false}, "xml", 0},
+	{{"json", false}, "jsonb", -1},
+	{{"hierarchyid", false}, "text", 0},
+	{{"vector", false}, "text", 0},
 	{{"geometry", false}, "text", 0},
 	{{"geography", false}, "text", 0},
 };
@@ -196,10 +196,16 @@ DatatypeHashEntry oracle_defaultTypeMappings[] =
 	{{"rowid", false}, "text", 0},
 	{{"urowid", false}, "text", 0},
 	{{"xmltype", false}, "text", 0},
-	/* large objects */
 	{{"bfile", false}, "text", 0},
 	{{"blob", false}, "bytea", 0},
 	{{"clob", false}, "text", 0},
-	{{"nclob", false}, "text", 0}
+	{{"nclob", false}, "text", 0},
+	{{"sdo_geometry", false}, "text", 0},
+	{{"sdo_topo_geometry", false}, "text", 0},
+	{{"sdo_georaster", false}, "text", 0},
+	{{"uritype", false}, "text", 0},
+	{{"anytype", false}, "text", 0},
+	{{"anydata", false}, "text", 0},
+	{{"anydataset", false}, "text", 0},
 };
 ```

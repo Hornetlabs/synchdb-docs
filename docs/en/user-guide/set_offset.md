@@ -15,7 +15,7 @@ postgres=# select name, last_dbz_offset from synchdb_state_view;
 ---------------+------------------------------------------------------------------------------------------------------
  sqlserverconn | {"commit_lsn":"0000006a:00006608:0003","snapshot":true,"snapshot_completed":false}
  mysqlconn     | {"ts_sec":1741301103,"file":"mysql-bin.000009","pos":574318212,"row":1,"server_id":223344,"event":2}
- oracleconn    | offset file not flushed yet
+ oracleconn    | {"commit_scn":"2311579","snapshot_scn":"2311578","scn":"2311578"}
 (3 rows)
 
 ```
