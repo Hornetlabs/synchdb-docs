@@ -4,6 +4,69 @@
 本文格式基于 [Keep a Changelog](http://keepachangelog.com/)，
 且本项目遵循 [语义化版本](http://semver.org/)。
 
+## **[SynchDB 1.3](https://github.com/Hornetlabs/synchdb/releases/tag/v1.3) - 2025-11-25**
+
+SynchDB 1.3 憑藉全新的基於 FDW 的快照引擎，顯著提升了效能，初始快照速度遠超 Debezium。這項改進使得 OpenLog Replicator (OLR) 連接器成為一個完全原生的快照 + CDC 管線（無需使用 Debezium），從而顯著降低了大型 Oracle 資料集的延遲和開銷。平台支援也得到了擴展。 SynchDB 現在可在 PostgreSQL 18 和 IvorySQL 5 上運行，並針對整個系統進行了一系列效能最佳化和 I/O 改進。
+
+### **新增**
+
+#### [基於 FDW 的快照引擎](https://docs.synchdb.com/architecture/fdw_based_snapshot/)
+
+* 基於 FDW 的快照引擎比 Debezium 的初始快照流程速度更快。
+* 新增 GUC 參數“synchdb.snapshot_engine”，用於選擇快照引擎，可以是“debezium”或“fdw”。
+* 新增 GUC 參數“synchdb.cdc_start_delay_ms”，用於在初始快照完成後、CDC 啟動前新增毫秒延遲。
+* 新增 GUC 參數“synchdb.fdw_migrate_with_subtx”，用於在基於 FDW 的快照流程中是否使用子交易遷移每個資料表。
+* 僅適用於透過 [oracle_fdw](https://github.com/laurenz/oracle_fdw) 2.8.0 連接的 Openlog Replicator 和 Oracle 連接器類型。其他連接器類型可能會在未來的版本中得到支援。
+* 支援重試機制：如果某些表快照失敗，錯誤訊息將保存到 synchdb_fdw_snapshot_errors_xxx 表中，可以透過恢復連接器進行重試。成功快照的表將保留。
+* 如果使用「schemasync」或「nodata」快照模式，FDW 引擎將僅同步表模式。
+* 透過 FDW 引擎建立的表格和資料受「synchdb_objmap」中定義的名稱和表達式轉換規則的約束。
+* 新增函數 synchdb_translate_datatype()，該函數會根據所選連接器類型傳回 SynchDB 的資料類型轉換結果。
+
+#### [改進的統計視圖](https://docs.synchdb.com/monitoring/stats_view/)
+
+* 改進了統計視圖，將不同的統計資料分組到適當的類別。
+* 已移除 synchdb_stats_view() 函數。
+* 新增了 synchdb_genstats 視圖，用於記錄已處理事件批次的統計資料。
+* 新增了 synchdb_snapstats 視圖，用於記錄初始快照過程的統計資料。
+* 新增了 synchdb_cdcstats 視圖，用於記錄 CDC 流程的統計資料。
+
+#### PostgreSQL 18 和 IvorySQL 5 相容性
+
+* SynchDB 與 PostgreSQL 18 和 IvorySQL 5 相容。
+* 在 IvorySQL 5 下以「oracle」相容模式運行基於 FDW 的快照時，由於 PL/pgSQL 函數是用 PostgreSQL 標準編寫的，因此在快照期間，該模式將切換回「pg」模式。
+* SynchDB 將在 SynchDB 工作進程中將“ivorysql.identifier_case_switch”設定設為“normal”，以防止字母大小寫被錯誤地反轉。
+* 將 liboracle_parser.so 及其內部的 oracle_raw_parser() 符號重新命名為 libsynchdb_oracle_parser.so 和 synchdb_oracle_raw_parser()，以防止符號名稱與 IvorySQL 衝突。
+
+### **变更**
+
+* Openlog Replicator 連接器：增強了 Oracle 解析器，以支援更多約束運算子：enable、disable、novalidate 和 validate。
+* Openlog Replicator 連接器：增強了 Oracle 解析器，以支援帶有括號和不帶括號的 MODIFY 子句。
+* Openlog Replicator 連接器：增強了 Oracle 解析器，以支援 DEFAULT ON NULL 子句。
+* Openlog Replicator 連接器：透過移除一個預掃描循環來提高處理效能。
+* Openlog Replicator 連接器：最佳化了以 PostgreSQL 文字類型處理非空終止事件的操作，從而減少了一次複製操作。 (PG17+)
+* Openlog Replicator 連接器：預設讀取緩衝區大小變更為 128MB
+* Openlog Replicator 連接器：新增 GUC 參數“synchdb.olr_read_timeout_ms”，用於設定讀取逾時時間。
+* Openlog Replicator 連接器：新增 GUC 參數“synchdb.olr_connect_timeout_ms”，用於設定連線逾時時間。
+* Openlog Replicator 連接器：將忽略 Debezium 建立的「log_mining_flush」表。
+* 更新了所有連接器類型的預設資料類型映射
+* 更健壯的 JSON 處理：不再因為 JSON 元素查找失敗而崩潰
+
+### 已修復
+
+* Openlog Replicator 連接器：修正了在 PostgreSQL 16 下執行時間 Oracle 解析器解析失敗的問題。
+* Openlog Replicator 連接器：修正了將包含系統擁有者的意外 DDL 語句錯誤地傳遞給 SynchDB 的問題。
+* Openlog Replicator 連接器：調整了 SCN 和 C_SCN 值，使其恢復 CDC 時使用偏移檔案中儲存的值，而不是加 1，從而避免在復原時跳過先前失敗的變更事件。
+* SynchDB 現在允許來源表或模式名稱包含空格。
+* 修正了對負十進制值處理不正確的問題。
+* 修正了對大十進制溢出值處理不正確的問題。
+* 修正了 Oracle 預設 NUMBER 資料類型對應中錯誤地省略長度和小數位數的問題。
+* 修正了 MySQL 連接器中帶有自增屬性的缺失預設資料類型映射
+
+### 已知問題和其他信息
+
+* SynchDB 在將傳入的表名、模式名和列名套用到 PostgreSQL 之前，總是會將它們規範化為小寫字母。如果來源表支援名稱相同但大小寫不同的對象，則會出現問題。例如，'mytable' 和 'MYTABLE' 在 MySQL 和 Oracle 中被視為不同的表名。問題連結[此處](https://github.com/Hornetlabs/synchdb/issues/194)
+* 目前尚不支援基於 FDW 的 MySQL 和 SQL Server 快照，我們可能會在未來的版本中新增支援。更多資訊[此處](https://github.com/Hornetlabs/synchdb/issues/190)
+
 ## **[SynchDB 1.2](https://github.com/Hornetlabs/synchdb/releases/tag/v1.2) - 2025-09-04**
 
 SynchDB 1.2 引入了原生 Openlog Replicator 连接器（测试版）、增强的 JMX 和 Grafana 监控功能，以及用于快速部署和测试的全新 ezdeploy.sh 工具。此外，它还增加了快照表选择功能、性能改进和关键修复，同时解决了连接器隔离和稳定性问题。

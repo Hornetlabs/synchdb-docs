@@ -31,8 +31,8 @@ This architecture allows PostgreSQL to leverage the rich ecosystem of Debezium c
 
 ## **Supported PostgreSQL Versions**
 
-- PostgreSQL: 16, 17
-- IvorySQL: 4
+- PostgreSQL: 16, 17, 18
+- IvorySQL: 4, 5
 
 ## **Supported Source Databasess**
 
@@ -49,6 +49,7 @@ This architecture allows PostgreSQL to leverage the rich ecosystem of Debezium c
 
 ## **Version History**
 
+- [SynchDB v1.3](https://github.com/Hornetlabs/synchdb/releases/tag/v1.3)
 - [SynchDB v1.2](https://github.com/Hornetlabs/synchdb/releases/tag/v1.2)
 - [SynchDB v1.1](https://github.com/Hornetlabs/synchdb/releases/tag/v1.1)
 - [SynchDB v1.0](https://github.com/Hornetlabs/synchdb/releases/tag/v1.0)

@@ -4,6 +4,70 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## **[SynchDB 1.3](https://github.com/Hornetlabs/synchdb/releases/tag/v1.3) - 2025-11-25**
+
+SynchDB 1.3 delivers a major performance enhancement with the new FDW-based snapshot engine, offering significantly faster initial snapshot performance over Debezium. This advancement makes OpenLog Replicator (OLR) connector a fully native snapshot + CDC pipeline (no Debezium is used) with significantly reduced latency and overhead for large Oracle datasets. Platform support has been broadened as well. SynchDB now runs on PostgreSQL 18 and IvorySQL 5, accompanied by a series of performance optimizations and I/O improvements across the system.
+
+### Added
+
+#### [FDW-based Snapshot Engine](https://docs.synchdb.com/architecture/fdw_based_snapshot/)
+
+* FDW-based snapshot provides a much faster alternative to Debezium's initial snapshot process
+* Added a new GUC parameter "synchdb.snapshot_engine" to select snapshot engine, can be "debezium" or "fdw"
+* Added a new GUC parameter "synchdb.cdc_start_delay_ms" to add a millisecond delay that needs to be waited after initial snapshot is completed and before CDC is started.
+* Added a new GUC parameter "synchdb.fdw_migrate_with_subtx" to use sub-transactions to migrate each table or not during FDW-based snapshot process.
+* Applicable only to Openlog Replicator and Oracle connector types via [oracle_fdw](https://github.com/laurenz/oracle_fdw) 2.8.0. Other connector types may be supported in future releases.
+* Supported a retry mechanism: If some tables fail to snapshot, the error messages will be saved to synchdb_fdw_snapshot_errors_xxx table and can be retried by resuming the connector. Tables that succeeded will remain.
+* If 'schemasync' or 'nodata' snapshot mode is used, FDW-engine will synchronize table schemas only.
+* Tables and data created via FDW-engine are subject to name and expression transformation rules as defined in "synchdb_objmap" 
+* Added a new function synchdb_translate_datatype() that returns SynchDB's data type translation results based on selected connector type.
+
+
+#### [Revamped Statistics Views](https://docs.synchdb.com/monitoring/stats_view/)
+
+* Revamped statistics view to group different statistics to proper categories.
+* synchdb_stats_view() has been removed
+* Added a new view called synchdb_genstats that records statistics about batches of events processed
+* Added a new view called synchdb_snapstats that records statistics about initial snapshot process
+* Added a new view called synchdb_cdcstats that records statistics about CDC process
+
+#### PostgreSQL 18 and IvorySQL 5 Compatibility
+
+* SynchDB is compatible with PostgreSQL 18 and IvorySQL 5.
+* When running FDW-based snapshot under IvorySQL 5 in 'oracle' compatible mode, this mode will be switched back to 'pg' mode for the duration of the snapshot because the PL/pgSQL functions are written in PostgreSQL standard.
+* Synchdb will set "ivorysql.identifier_case_switch" settings to 'normal' in SynchDB workers to prevent letter casing being reversed undesirably.
+* Renamed liboracle_parser.so and oracle_raw_parser() symbol inside to libsynchdb_oracle_parser.so and synchdb_oracle_raw_parser() to prevent symbol name conflicts with IvorySQL.
+
+### Changed
+
+* Openlog Replicator Connector: Enhanced Oracle parser to support more contraint operators: enable, disable, novalidate, validate
+* Openlog Replicator Connector: Enhanced Oracle parser to support MODIFY clauses with and without paraenthesis
+* Openlog Replicator Connector: Enhanced Oracle parser to support DEFAULT ON NULL clauses.
+* Openlog Replicator Connector: Improve processing performance by removing one pre-scan loop.
+* Openlog Replicator Connector: Optimized non-null terminated event processing as PostgreSQL text type to save one copy operation. (PG17+)
+* Openlog Replicator Connector: default read buffer size changed to 128MB
+* Openlog Replicator Connector: added a new GUC parameter "synchdb.olr_read_timeout_ms" to configure read timeout.
+* Openlog Replicator Connector: added a new GUC parameter "synchdb.olr_connect_timeout_ms" to configure connect timeout.
+* Openlog Replicator Connector: will ignore "log_mining_flush" table created by Debezium.
+* Updated default data type mappings for all connector types
+* More robust JSON processing: no longer crashes when a JSON element fails to look up 
+
+### Fixed
+
+* Openlog Replicator Connector: fixed an issue where Oracle parser fails to parse when running under PostgreSQL 16
+* Openlog Replicator Connector: fixed an issue where unexpected DDL statement with system owner get passed to SynchDB by mistake
+* Openlog Replicator Connector: Adjusted the SCN and C_SCN values to resume CDC as stored in the offset file rather than adding 1 to them, which could potentially skip a previously failed change event upon resume.
+* Synchdb now allows source table or schema names to contain spaces.
+* Fixed the incorrect processing of negative decimal values.
+* Fixed the incorrect processing of large decimal overflow values. 
+* Fixed an issue in Oracle's default data type mappings for NUMBER that omits the length and scale by mistake.
+* Fixed the missing default data type mappings with auto_increment attributes for mysql connector
+
+### Known Issues and Additional Info
+
+* SynchDB always normalize incoming table, schema and column names to lowercase letters before applying them to PostgreSQL, this is a problem if source table supports objects with the same name but in different cases. For example, 'mytable' and 'MYTABLE' are considered different in MySQL and Oracle. Link to the issue [here](https://github.com/Hornetlabs/synchdb/issues/194)
+* FDW-based snapshot for MySQL and SQL server are not supported yet and we may add support for them in future releases. More info [here](https://github.com/Hornetlabs/synchdb/issues/190)
+
 ## **[SynchDB 1.2](https://github.com/Hornetlabs/synchdb/releases/tag/v1.2) - 2025-09-04**
 
 SynchDB 1.2 introduces introduces a native Openlog Replicator connector (BETA), enhanced monitoring with JMX and Grafana, and a new ezdeploy.sh tool for quick deployments and testing. It also adds snapshot table selection, performance improvements, and key fixes, while addressing connector isolation and stability issues.

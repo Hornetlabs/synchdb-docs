@@ -31,8 +31,8 @@ SynchDB 的核心集成了 Debezium 嵌入式引擎，这是一个基于 Java �
 
 ## **支持的 PostgreSQL 版本**
 
-- PostgreSQL：16、17
-- IvorySQL：4
+- PostgreSQL：16、17、18
+- IvorySQL：4、5
 
 ## **支持的源数据库**
 
@@ -48,6 +48,7 @@ SynchDB 的核心集成了 Debezium 嵌入式引擎，这是一个基于 Java �
 
 ## **版本历史**
 
+- [SynchDB v1.3](https://github.com/Hornetlabs/synchdb/releases/tag/v1.3)
 - [SynchDB v1.2](https://github.com/Hornetlabs/synchdb/releases/tag/v1.2)
 - [SynchDB v1.1](https://github.com/Hornetlabs/synchdb/releases/tag/v1.1)
 - [SynchDB v1.0](https://github.com/Hornetlabs/synchdb/releases/tag/v1.0)
