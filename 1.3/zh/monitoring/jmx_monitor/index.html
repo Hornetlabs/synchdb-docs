@@ -1,0 +1,2456 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="SynchDB is a PostgreSQL extension for synchronizing data from different database sources..">
+      
+      
+        <meta name="author" content="Hornetlabs Technology Inc.">
+      
+      
+        <link rel="canonical" href="https://docs.synchdb.com/latest/zh/monitoring/jmx_monitor/">
+      
+      
+        <link rel="prev" href="../jvm_mem/">
+      
+      
+        <link rel="next" href="../jmx_exporter/">
+      
+      
+        
+          <link rel="alternate" href="../../../monitoring/jmx_monitor/" hreflang="en">
+        
+          <link rel="alternate" href="../../../es/monitoring/jmx_monitor/" hreflang="es">
+        
+          <link rel="alternate" href="./" hreflang="zh">
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>JMX 监视器设置 - SynchDB 文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-material.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-material.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#jmx-mbean" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../" title="SynchDB 文档" class="md-header__button md-logo" aria-label="SynchDB 文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SynchDB 文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              JMX 监视器设置
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="选择当前语言">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../monitoring/jmx_monitor/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../../es/monitoring/jmx_monitor/" hreflang="es" class="md-select__link">
+              Español
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="zh" class="md-select__link">
+              中文
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Hornetlabs/synchdb" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/architecture/" class="md-tabs__link">
+          
+  
+  
+  架构
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/installation/" class="md-tabs__link">
+          
+  
+  
+  快速入门
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../stats_view/" class="md-tabs__link">
+          
+  
+  
+  监控
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tutorial/mysql_cdc_to_postgresql/" class="md-tabs__link">
+          
+  
+  
+  教程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../user-guide/create_a_connector/" class="md-tabs__link">
+          
+  
+  
+  用户指南
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../changelog/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  变更日志
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="SynchDB 文档" class="md-nav__button md-logo" aria-label="SynchDB 文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SynchDB 文档
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Hornetlabs/synchdb" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    主页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    架构
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    架构
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    架构概述
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/debezium_event_processor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debezium 事件处理器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/debezium_runner_components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debezium Runner组件架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/openlog_replicator_event_processor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Openlog Replicator 事件处理器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/batch_change_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    批量处理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/non_native_datatype_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    非原生数据类型处理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/native_datatype_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    原生数据类型处理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/metadata_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debezium 元数据文件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/ddl_replication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DDL复制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/fdw_based_snapshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基於FDW的快照
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    快速入门
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    快速入门
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    安装
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/remote_database_setups/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    源数据库设置
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SynchDB 配置
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/quick_start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    快速入门
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    监控
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    监控
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stats_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    统计视图
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../state_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    状态视图
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../attr_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    属性视图
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jvm_mem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JVM 内存使用情况
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JMX 监视器设置
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JMX 监视器设置
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#jmxjava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JMX（Java 管理扩展）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debezium-jmx-mbean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debezium 的 JMX MBean
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb_add_jmx_conninfo-jmx-synchdb_del_jmx_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用 synchdb_add_jmx_conninfo() 在连接器上启用 JMX，或使用 synchdb_del_jmx_conninfo() 禁用
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jmx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JMX 身份验证的密码和访问文件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="JMX 身份验证的密码和访问文件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        密码文件：
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        访问文件：
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        文件权限：
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb_add_jmx_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_add_jmx_conninfo 示例
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jconsole-jmx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用 jconsole 可视化 JMX 指标
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debezium-jmx-mbean_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        可视化 Debezium JMX MBean
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jmx_exporter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JMX exporter 设置
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    教程
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    教程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/mysql_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MySQL CDC 到 PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/sqlserver_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Server CDC 到 PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/oracle_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle CDC 到 PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/selective_table_sync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    选择性表同步
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/table_snapshot_resnapshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    表快照和重新快照
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/object_mapping_workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    对象映射工作流程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    用户指南
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    用户指南
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/create_a_connector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    创建连接器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/start_stop_connector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    启动/停止连接器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/connector_auto_launcher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    连接器自动启动器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/default_datatype_mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    默认数据类型映射
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/object_mapping_rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自定义对象映射和转换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/secured_connection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    安全连接
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/configure_error_strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    配置错误处理策略
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/set_offset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    配置复制偏移
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/configure_olr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    为 Oracle 连接器配置 Openlog Replicator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/configure_infinispan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    配置 infinispan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/configure_snapshot_engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    配置快照引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    变更日志
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#jmxjava" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JMX（Java 管理扩展）
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debezium-jmx-mbean" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debezium 的 JMX MBean
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb_add_jmx_conninfo-jmx-synchdb_del_jmx_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用 synchdb_add_jmx_conninfo() 在连接器上启用 JMX，或使用 synchdb_del_jmx_conninfo() 禁用
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jmx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JMX 身份验证的密码和访问文件
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="JMX 身份验证的密码和访问文件">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        密码文件：
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        访问文件：
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        文件权限：
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb_add_jmx_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_add_jmx_conninfo 示例
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jconsole-jmx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用 jconsole 可视化 JMX 指标
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debezium-jmx-mbean_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        可视化 Debezium JMX MBean
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="jmx-mbean">JMX MBEAN 监控<a class="headerlink" href="#jmx-mbean" title="Permanent link">&para;</a></h1>
+<h2 id="jmxjava"><strong>JMX（Java 管理扩展）</strong><a class="headerlink" href="#jmxjava" title="Permanent link">&para;</a></h2>
+<p>JMX，即 Java 管理扩展，是一种 Java 技术，提供用于管理和监控应用程序、系统对象、设备和面向服务的网络的工具。它允许开发人员公开应用程序信息，并允许外部工具访问和交互这些信息，以进行监控和管理。</p>
+<h2 id="debezium-jmx-mbean"><strong>Debezium 的 JMX MBean</strong><a class="headerlink" href="#debezium-jmx-mbean" title="Permanent link">&para;</a></h2>
+<p>Debezium 连接器通过连接器的 MBean 名称（MBean 标签等于连接器名称）公开指标。这些指标特定于每个连接器实例，提供有关连接器快照、流式传输和模式历史记录进程行为的数据。</p>
+<h2 id="synchdb_add_jmx_conninfo-jmx-synchdb_del_jmx_conninfo"><strong>使用 synchdb_add_jmx_conninfo() 在连接器上启用 JMX，或使用 synchdb_del_jmx_conninfo() 禁用</strong><a class="headerlink" href="#synchdb_add_jmx_conninfo-jmx-synchdb_del_jmx_conninfo" title="Permanent link">&para;</a></h2>
+<p>synchdb_add_jmx_conninfo() 和 synchdb_del_jmx_conninfo() 函数用于向现有连接器添加或删除 JMX 监控配置。这允许通过 JConsole 等工具进行运行时监控和诊断。</p>
+<p><strong>函数签名</strong></p>
+<div class="highlight"><pre><span></span><code>synchdb_add_jmx_conninfo(
+    name text,
+    jmx_listenaddr text,
+    jmx_port integer,
+    jmx_rmiserveraddr text,
+    jmx_rmiport integer,
+    jmx_auth boolean,
+    jmx_auth_passwdfile text,
+    jmx_auth_accessfile text,
+    jmx_ssl boolean,
+    jmx_ssl_keystore text,
+    jmx_ssl_keystore_pass text,
+    jmx_ssl_truststore text,
+    jmx_ssl_truststore_pass text
+)
+
+synchdb_del_jmx_conninfo(
+    name text
+)
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>name</code></strong></td>
+<td><em>(文本)</em><br>要添加 JMX 配置的现有连接器的名称。必须已存在于 <code>synchdb_conninfo</code> 中。</td>
+</tr>
+<tr>
+<td><strong><code>jmx_listenaddr</code></strong></td>
+<td><em>(文本)</em><br>JVM 将在其上侦听 JMX 连接的 IP 地址。使用 <code>'0.0.0.0'</code> 侦听所有网络接口，或指定特定 IP。</td>
+</tr>
+<tr>
+<td><strong><code>jmx_port</code></strong></td>
+<td><em>(整数)</em><br>JMX 通信的本地端口（用于客户端发现）。必须处于打开状态且未使用。</td>
+</tr>
+<tr>
+<td><strong><code>jmx_rmiserveraddr</code></strong></td>
+<td><em>(文本)</em><br>远程 JMX 客户端（例如 JConsole）用于连接 JVM 的公共/外部 IP 地址。通常设置为主机的外部 IP。</td>
+</tr>
+<tr>
+<td><strong><code>jmx_rmiport</code></strong></td>
+<td><em>(整数)</em><br>用于实际 JMX 对象通信的 RMI 服务器端口。此端口也必须在防火墙和网络设置中打开。通常与 <code>jmx_port</code> 相同。</td>
+</tr>
+<tr>
+<td><strong><code>jmx_auth</code></strong></td>
+<td><em>(布尔值)</em><br>是否启用 JMX 身份验证？如果为 <code>true</code>，客户端必须提供存储在以下文件中的用户名/密码。</td>
+</tr>
+<tr>
+<td><strong><code>jmx_auth_passwdfile</code></strong></td>
+<td><em>(文本)</em><br>用于 JMX 身份验证的密码文件的路径。如果不使用身份验证，请传递 <code>'null'</code>。</td>
+</tr>
+<tr>
+<td><strong><code>jmx_auth_accessfile</code></strong></td>
+<td><em>(text)</em><br>定义角色（例如 <code>monitor</code>、<code>control</code>）的访问控制文件的路径。仅在启用身份验证时才需要。如果不使用身份验证，请传递 <code>'null'</code></td>
+</tr>
+<tr>
+<td><strong><code>jmx_ssl</code></strong></td>
+<td><em>(boolean)</em><br>是否为 JMX 连接启用 SSL 加密？设置为 <code>true</code> 以确保通信安全。</td>
+</tr>
+<tr>
+<td><strong><code>jmx_ssl_keystore</code></strong></td>
+<td><em>(text)</em><br>包含服务器私钥和证书的密钥库文件（JKS 格式）的路径。如果 <code>jmx_ssl = true</code>，则为必填项。</td>
+</tr>
+<tr>
+<td><strong><code>jmx_ssl_keystore_pass</code></strong></td>
+<td><em>(text)</em><br>密钥库文件的密码。</td>
+</tr>
+<tr>
+<td><strong><code>jmx_ssl_truststore</code></strong></td>
+<td><em>(text)</em><br>保存受信任 CA 证书的信任库 (JKS) 的路径。如果配置了双向 TLS，则用于验证客户端身份。</td>
+</tr>
+<tr>
+<td><strong><code>jmx_ssl_truststore_pass</code></strong></td>
+<td><em>(文本)</em><br>信任库文件的密码。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="jmx"><strong>JMX 身份验证的密码和访问文件</strong><a class="headerlink" href="#jmx" title="Permanent link">&para;</a></h2>
+<p>在 JVM 配置中启用 JMX 身份验证（即设置 jmx_auth = true）时，您必须提供两个文件：</p>
+<h3 id="_1"><strong>密码文件</strong>：<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<p>此文件存储有效的 JMX 用户名及其对应的密码。</p>
+<p><strong>格式：</strong></p>
+<div class="highlight"><pre><span></span><code># Format: username password
+&lt;username&gt; &lt;password&gt;
+</code></pre></div>
+<p><strong>例子：</strong></p>
+<div class="highlight"><pre><span></span><code>monitorRole mySecretPassword
+controlRole anotherSecretPassword
+</code></pre></div>
+<h3 id="_2"><strong>访问文件</strong>：<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>此文件定义了每个用户可以通过 JMX 执行的操作。可能的访问级别：</p>
+<ul>
+<li>readonly – 可以查看 MBean，但不能修改。</li>
+<li>readwrite – 可以查看和修改 MBean。</li>
+</ul>
+<p>格式：
+<div class="highlight"><pre><span></span><code># 格式：用户名 访问级别
+&lt;用户名&gt; &lt;访问权限&gt;
+</code></pre></div></p>
+<p>示例：
+<div class="highlight"><pre><span></span><code>monitorRole readonly
+controlRole readwrite
+</code></pre></div></p>
+<h3 id="_3"><strong>文件权限</strong>：<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>确保两个文件均归运行 JVM 的用户所有，且具有受限的权限：</p>
+<div class="highlight"><pre><span></span><code>chmod 600 jmxpwd.file jmxacc.file
+chown youruser:youruser jmxpwd.file jmxacc.file
+</code></pre></div>
+<h2 id="synchdb_add_jmx_conninfo"><strong>synchdb_add_jmx_conninfo 示例</strong><a class="headerlink" href="#synchdb_add_jmx_conninfo" title="Permanent link">&para;</a></h2>
+<p><strong>启用无需身份验证和 SSL 的 JMX MBean：</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_jmx_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w">    </span><span class="c1">-- existing connector name</span>
+<span class="w">    </span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span><span class="w">      </span><span class="c1">-- JMX listen address</span>
+<span class="w">    </span><span class="mi">9010</span><span class="p">,</span><span class="w">           </span><span class="c1">-- JMX listen port</span>
+<span class="w">    </span><span class="s1">&#39;10.55.13.17&#39;</span><span class="p">,</span><span class="w">  </span><span class="c1">-- JMX RMI server address - for remote client connect</span>
+<span class="w">    </span><span class="mi">9010</span><span class="p">,</span><span class="w">           </span><span class="c1">-- JMX RMI server port - for remoet client connect</span>
+<span class="w">    </span><span class="k">false</span><span class="p">,</span><span class="w">          </span><span class="c1">-- use authentication?</span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- password file for authentication</span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- access file for authentication</span>
+<span class="w">    </span><span class="k">false</span><span class="p">,</span><span class="w">          </span><span class="c1">-- use SSL?</span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL keystore path</span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL keystore password</span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL trust store</span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">);</span><span class="w">        </span><span class="c1">-- SSL trust store password</span>
+</code></pre></div>
+<p><strong>启用带有身份验证的 JMX MBean</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_jmx_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w">    </span><span class="c1">-- existing connector name</span>
+<span class="w">    </span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span><span class="w">      </span><span class="c1">-- JMX listen address</span>
+<span class="w">    </span><span class="mi">9010</span><span class="p">,</span><span class="w">           </span><span class="c1">-- JMX listen port</span>
+<span class="w">    </span><span class="s1">&#39;10.55.13.17&#39;</span><span class="p">,</span><span class="w">  </span><span class="c1">-- JMX RMI server address - for remote client connect</span>
+<span class="w">    </span><span class="mi">9010</span><span class="p">,</span><span class="w">           </span><span class="c1">-- JMX RMI server port - for remoet client connect</span>
+<span class="w">    </span><span class="k">true</span><span class="p">,</span><span class="w">           </span><span class="c1">-- use authentication?</span>
+<span class="w">    </span><span class="s1">&#39;/path/to/passwd.file&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- password file for authentication</span>
+<span class="w">    </span><span class="s1">&#39;/path/to/access.file&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- access file for authentication</span>
+<span class="w">    </span><span class="k">false</span><span class="p">,</span><span class="w">          </span><span class="c1">-- use SSL?</span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL keystore path</span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL keystore password</span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL trust store</span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">);</span><span class="w">        </span><span class="c1">-- SSL trust store password</span>
+</code></pre></div>
+<p><strong>启用带有身份验证和 SSL 的 JMX MBean，无需 SSL 客户端验证</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_jmx_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w">    </span><span class="c1">-- existing connector name</span>
+<span class="w">    </span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span><span class="w">      </span><span class="c1">-- JMX listen address</span>
+<span class="w">    </span><span class="mi">9010</span><span class="p">,</span><span class="w">           </span><span class="c1">-- JMX listen port</span>
+<span class="w">    </span><span class="s1">&#39;10.55.13.17&#39;</span><span class="p">,</span><span class="w">  </span><span class="c1">-- JMX RMI server address - for remote client connect</span>
+<span class="w">    </span><span class="mi">9010</span><span class="p">,</span><span class="w">           </span><span class="c1">-- JMX RMI server port - for remoet client connect</span>
+<span class="w">    </span><span class="k">true</span><span class="p">,</span><span class="w">           </span><span class="c1">-- use authentication?</span>
+<span class="w">    </span><span class="s1">&#39;/path/to/passwd.file&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- password file for authentication</span>
+<span class="w">    </span><span class="s1">&#39;/path/to/access.file&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- access file for authentication</span>
+<span class="w">    </span><span class="k">true</span><span class="p">,</span><span class="w">           </span><span class="c1">-- use SSL?</span>
+<span class="w">    </span><span class="s1">&#39;/path/to/keystore&#39;</span><span class="p">,</span><span class="w">            </span><span class="c1">-- SSL keystore path</span>
+<span class="w">    </span><span class="s1">&#39;keystorepass&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL keystore password</span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL trust store</span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">);</span><span class="w">        </span><span class="c1">-- SSL trust store password</span>
+</code></pre></div>
+<p><strong>启用具有身份验证和 SSL + SSL 客户端验证的 JMX MBean</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_jmx_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w">    </span><span class="c1">-- existing connector name</span>
+<span class="w">    </span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span><span class="w">      </span><span class="c1">-- JMX listen address</span>
+<span class="w">    </span><span class="mi">9010</span><span class="p">,</span><span class="w">           </span><span class="c1">-- JMX listen port</span>
+<span class="w">    </span><span class="s1">&#39;10.55.13.17&#39;</span><span class="p">,</span><span class="w">  </span><span class="c1">-- JMX RMI server address - for remote client connect</span>
+<span class="w">    </span><span class="mi">9010</span><span class="p">,</span><span class="w">           </span><span class="c1">-- JMX RMI server port - for remoet client connect</span>
+<span class="w">    </span><span class="k">true</span><span class="p">,</span><span class="w">           </span><span class="c1">-- use authentication?</span>
+<span class="w">    </span><span class="s1">&#39;/path/to/passwd.file&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- password file for authentication</span>
+<span class="w">    </span><span class="s1">&#39;/path/to/access.file&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- access file for authentication</span>
+<span class="w">    </span><span class="k">true</span><span class="p">,</span><span class="w">           </span><span class="c1">-- use SSL?</span>
+<span class="w">    </span><span class="s1">&#39;/path/to/keystore&#39;</span><span class="p">,</span><span class="w">            </span><span class="c1">-- SSL keystore path</span>
+<span class="w">    </span><span class="s1">&#39;keystorepass&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL keystore password</span>
+<span class="w">    </span><span class="s1">&#39;/path/to/truststore&#39;</span><span class="p">,</span><span class="w">          </span><span class="c1">-- SSL trust store</span>
+<span class="w">    </span><span class="s1">&#39;truststorepass&#39;</span><span class="p">);</span><span class="w">      </span><span class="c1">-- SSL trust store password</span>
+</code></pre></div>
+<h2 id="jconsole-jmx"><strong>使用 jconsole 可视化 JMX 指标</strong><a class="headerlink" href="#jconsole-jmx" title="Permanent link">&para;</a></h2>
+<p>当启动一个配置了 JMX 的连接器时，JMX 服务将在指定的端口号上运行。我们可以使用 Java 发行版自带的 jconsole 连接到 JMX 服务器。可以通过 JVM（连接器工作进程）PID 或 IP 地址和端口号进行本地连接。如果启用了身份验证，则还需要用户名和密码。如果不使用身份验证，则这些可以留空。</p>
+<p><img alt="img" src="/images/jmx.jpg" /></p>
+<p>连接成功后，我们可以查看 JVM 运行指标的所有详细信息，例如 CPU、内存、类利用率、线程数等。</p>
+<p><img alt="img" src="/images/jmx2.jpg" />
+<img alt="img" src="/images/jmx3.jpg" />
+<img alt="img" src="/images/jmx4.jpg" /></p>
+<h2 id="debezium-jmx-mbean_1"><strong>可视化 Debezium JMX MBean</strong><a class="headerlink" href="#debezium-jmx-mbean_1" title="Permanent link">&para;</a></h2>
+<p>最后一个选项卡是 MBean，其中包含 Debezium 针对架构历史记录、快照和流式传输阶段的特定指标。</p>
+<p><img alt="img" src="/images/jmx5.jpg" />
+<img alt="img" src="/images/jmx6.jpg" />
+<img alt="img" src="/images/jmx7.jpg" /></p>
+<p>根据连接器类型，MBean 指标可能会有所不同。有关捕获指标列表，请参阅 Debezium 连接器文档：</p>
+<ul>
+<li><a href="https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-snapshot-metrics">MySQL 的 MBean</a></li>
+<li><a href="https://debezium.io/documentation/reference/stable/connectors/sqlserver.html#sqlserver-snapshot-metrics">SQL Server 的 MBean</a></li>
+<li><a href="https://debezium.io/documentation/reference/stable/connectors/oracle.html#oracle-snapshot-metrics">Oracle 的 MBean</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 Maintained by <a href="https://github.com/hornetlabs">Hornetlabs Technology </a>. <a href="https://www.netlify.com/"><img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deployed by Netlify" width="114" height="51"></a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../js/print-site.js"></script>
+      
+        <script src="../../../js/print-site.js"></script>
+      
+        <script src="../../../js/print-site.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2652 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="SynchDB is a PostgreSQL extension for synchronizing data from different database sources..">
+      
+      
+        <meta name="author" content="Hornetlabs Technology Inc.">
+      
+      
+        <link rel="canonical" href="https://docs.synchdb.com/latest/es/getting-started/configuration/">
+      
+      
+        <link rel="prev" href="../remote_database_setups/">
+      
+      
+        <link rel="next" href="../quick_start/">
+      
+      
+        
+          <link rel="alternate" href="../../../getting-started/configuration/" hreflang="en">
+        
+          <link rel="alternate" href="./" hreflang="es">
+        
+          <link rel="alternate" href="../../../zh/getting-started/configuration/" hreflang="zh">
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>SynchDB Configuración - Documentación de SynchDB</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-material.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#synchdb-configuration" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../" title="Documentación de SynchDB" class="md-header__button md-logo" aria-label="Documentación de SynchDB" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentación de SynchDB
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              SynchDB Configuración
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Seleccionar idioma">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../getting-started/configuration/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="es" class="md-select__link">
+              Español
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../../zh/getting-started/configuration/" hreflang="zh" class="md-select__link">
+              中文
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Hornetlabs/synchdb" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/architecture/" class="md-tabs__link">
+          
+  
+  
+  Arquitectura
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../installation/" class="md-tabs__link">
+          
+  
+  
+  Empezando
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../monitoring/stats_view/" class="md-tabs__link">
+          
+  
+  
+  escucha
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tutorial/mysql_cdc_to_postgresql/" class="md-tabs__link">
+          
+  
+  
+  Tutorial
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../user-guide/create_a_connector/" class="md-tabs__link">
+          
+  
+  
+  Guía del usuario
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../changelog/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Registro de Cambios
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="Documentación de SynchDB" class="md-nav__button md-logo" aria-label="Documentación de SynchDB" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Documentación de SynchDB
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Hornetlabs/synchdb" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arquitectura
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descripción general de la arquitectura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/debezium_event_processor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debezium Event Processor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/debezium_runner_components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura de componentes de Debezium Runner
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/openlog_replicator_event_processor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Procesador de eventos del replicador Openlog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/batch_change_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manejo de Cambios por Lotes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/non_native_datatype_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Procesamiento de tipos de datos no nativos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/native_datatype_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Procesamiento de tipos de datos nativos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/metadata_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debezium Archivos de Metadatos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/ddl_replication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Replicación DDL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/fdw_based_snapshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instantánea basada en FDW
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Empezando
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Empezando
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../remote_database_setups/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    configuración de base de datos remota
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SynchDB Configuración
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SynchDB Configuración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#technical-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Examples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-recommendations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage Recommendations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Considerations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Use Cases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Use Cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-throughput-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        High-Throughput Systems
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resource-constrained-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resource-Constrained Systems
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#developmenttesting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Development/Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Best Practices
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quick_start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    escucha
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    escucha
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/stats_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vista de estadísticas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/state_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vista de estado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/attr_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vista de atributos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/jvm_mem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Uso de memoria de JVM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/jmx_monitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración del monitor JMX
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/jmx_exporter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración del exportador JMX
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/mysql_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CDC de MySQL a PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/sqlserver_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CDC de SQL Server a PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/oracle_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CDC de Oracle a PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/selective_table_sync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sincronización Selectiva de Tablas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/table_snapshot_resnapshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instantánea de tabla y nueva instantánea
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/object_mapping_workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flujo de trabajo de mapeo de objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guía del usuario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guía del usuario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/create_a_connector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crear un conector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/start_stop_connector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iniciar/Detener un conector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/connector_auto_launcher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lanzador Automático de Conectores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/default_datatype_mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mapeo de Tipos de Datos Predeterminado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/object_mapping_rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Personalizar la asignación y transformación de objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/secured_connection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conexión segura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/configure_error_strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurar estrategias de error
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/set_offset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurar el desplazamiento de replicación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/configure_olr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurar Openlog Replicator para Oracle Connector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/configure_infinispan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurar Infinispan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/configure_snapshot_engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurar el motor de instantáneas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registro de Cambios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#technical-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Notes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Examples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage-recommendations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage Recommendations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-considerations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Considerations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Common Use Cases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Common Use Cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#high-throughput-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        High-Throughput Systems
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resource-constrained-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resource-Constrained Systems
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#developmenttesting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Development/Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Best Practices
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="synchdb-configuration">SynchDB Configuration<a class="headerlink" href="#synchdb-configuration" title="Permanent link">&para;</a></h1>
+<p>SynchDB supports the following GUC variables in postgresql.conf. These are common parameters that apply the all connectors managed by SynchDB:</p>
+<table>
+<thead>
+<tr>
+<th>GUC Variable</th>
+<th>Type</th>
+<th>Default Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>synchdb.naptime</td>
+<td>integer</td>
+<td>100</td>
+<td>The delay in milliseconds between each data polling from Debezium runner engine</td>
+</tr>
+<tr>
+<td>synchdb.dml_use_spi</td>
+<td>boolean</td>
+<td>false</td>
+<td>Option to use SPI to handle DML operations</td>
+</tr>
+<tr>
+<td>synchdb.synchdb_auto_launcher</td>
+<td>boolean</td>
+<td>true</td>
+<td>Option to automatically launch active SynchDB connector workers. This option only works when SynchDB is included in <code>shared_preload_library</code> GUC option</td>
+</tr>
+<tr>
+<td>synchdb.dbz_batch_size</td>
+<td>integer</td>
+<td>2048</td>
+<td>The maximum number of change events produced by Debezium embedded engine for SynchDB to process. This batch of changes is processed within a single transaction by SynchDB</td>
+</tr>
+<tr>
+<td>synchdb.dbz_queue_size</td>
+<td>integer</td>
+<td>8192</td>
+<td>The maximum size (measured in number of change events) of Debezium embedded engine's change event queue. It should be set at least twice of <code>synchdb.dbz_batch_size</code></td>
+</tr>
+<tr>
+<td>synchdb.dbz_connect_timeout_ms</td>
+<td>integer</td>
+<td>30000</td>
+<td>The timeout value in milliseconds for Debezium embedded engine to established an initial connection to a remote database</td>
+</tr>
+<tr>
+<td>synchdb.dbz_query_timeout_ms</td>
+<td>integer</td>
+<td>600000</td>
+<td>The timeout value in milliseconds for Debezium embedded engine to execute a query on a remote database</td>
+</tr>
+<tr>
+<td>synchdb.dbz_skipped_oeprations</td>
+<td>string</td>
+<td>"t"</td>
+<td>A comma-separated list of operations Debezium shall skip when processing change events. "c" is for inserts, "u" is for updates, "d" is for deletes, "t" is for truncates</td>
+</tr>
+<tr>
+<td>synchdb.jvm_max_heap_size</td>
+<td>integer</td>
+<td>1024</td>
+<td>The maximum heap size in MB to be allocated to Java Virtual Machine (JVM) when starting a connector.</td>
+</tr>
+<tr>
+<td>synchdb.dbz_snapshot_thread_num</td>
+<td>integer</td>
+<td>2</td>
+<td>The number of threads Debezium embedded connector should spawn during initial snapshot. Please note that according to Debezium, multi-threaded snapshot is an <code>incubating feature</code></td>
+</tr>
+<tr>
+<td>synchdb.dbz_snapshot_fetch_size</td>
+<td>integer</td>
+<td>0</td>
+<td>The number of rows Debezium embedded connector should fetch at a time during initial snapshot. Set it to 0 to let the engine choose automatically</td>
+</tr>
+<tr>
+<td>synchdb.<br>dbz_snapshot_min_row_<br>to_stream_results</td>
+<td>integer</td>
+<td>0</td>
+<td>The minimum number of rows a remote table should contain before Debezium embedded engine will switch to streaming mode during initial snapshot. Set it to 0 to always switching to stream mode</td>
+</tr>
+<tr>
+<td>synchdb.<br>dbz_incremental_<br>snapshot_chunk_size</td>
+<td>integer</td>
+<td>2048</td>
+<td>The maximum number of change events produced by Debezium embedded engine for SynchDB to process during incremental snapshot</td>
+</tr>
+<tr>
+<td>synchdb.<br>dbz_incremental_<br>snapshot_watermarking_strategy</td>
+<td>string</td>
+<td>"insert-insert</td>
+<td>The watermarking strategy used by Debezium embedded engine to resolve potential conflicts during incremental snapshot. Possible values are "insert-insert" and "insert-delete"</td>
+</tr>
+<tr>
+<td>synchdb.dbz_offset_flush_interval_ms</td>
+<td>integer</td>
+<td>60000</td>
+<td>The interval in milliseconds that Debezium embedded engine flushes offset data to disk</td>
+</tr>
+<tr>
+<td>synchdb.<br>dbz_capture_only_selected_table_ddl</td>
+<td>boolean</td>
+<td>true</td>
+<td>whether or not Debezium embedded engine should capture the schema of all tables (false) or selected tables(true) during initial snapshot</td>
+</tr>
+<tr>
+<td>synchdb.max_connector_workers</td>
+<td>integer</td>
+<td>30</td>
+<td>the maximum number of connector workers that can be running at a time</td>
+</tr>
+<tr>
+<td>synchdb.error_handling_strategy</td>
+<td>enum</td>
+<td>"exit"</td>
+<td>configures the error handling strategy of a connector worker. Possible values are "exit" for exiting on error, "skip" for continuing on error, "retry" for retrying on error</td>
+</tr>
+<tr>
+<td>synchdb.dbz_log_level</td>
+<td>enum</td>
+<td>"warn"</td>
+<td>the log level setting for Debezium Runner. Possible values are "debug", "info", "warn", "error", "all", "fatal", "off", "trace"</td>
+</tr>
+<tr>
+<td>synchdb.log_change_on_error</td>
+<td>boolean</td>
+<td>true</td>
+<td>whether the connector should log the original JSON change event in case of error</td>
+</tr>
+<tr>
+<td>synchdb.jvm_max_direct_buffer_size</td>
+<td>integer</td>
+<td>1024</td>
+<td>The maximum direct buffer size in MB to be allocated to hold JSON change events</td>
+</tr>
+<tr>
+<td>synchdb.dbz_logminer_stream_mode</td>
+<td>enum</td>
+<td>"uncommitted"</td>
+<td>The streaming mode for Debezium based Oracle connector. The default is uncommitted, which means all the changes streamed from Oracle via Debezium is uncommitted. This indicates Debezium has to do some work to ensure the integrity of transactions and all associated changes. Setting to "committed" shifts this work on Oralce side</td>
+</tr>
+<tr>
+<td>synchdb.olr_connect_timeout_ms</td>
+<td>integer</td>
+<td>5000</td>
+<td>(affects OLR connector only) the connect timeout in milliseconds when connecting to openlog replicator service</td>
+</tr>
+<tr>
+<td>synchdb.olr_read_timeout_m</td>
+<td>integer</td>
+<td>5000</td>
+<td>(affects OLR connector only) the read timeout in milliseconds when reading from a socket</td>
+</tr>
+<tr>
+<td>synchdb.olr_snapshot_engine</td>
+<td>enum</td>
+<td>"debezium"</td>
+<td>(affects OLR connector only) the underlining engine to complete the initial snapshot process. Could be "debezium" or "fdw". If "fdw" is selected, you need to ensure "oracle_fdw" is installed prior</td>
+</tr>
+<tr>
+<td>synchdb.cdc_start_delay_ms</td>
+<td>integer</td>
+<td>0</td>
+<td>a delay waited after initial snapshot completes and before CDC streaming begins.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="technical-notes"><strong>Technical Notes</strong><a class="headerlink" href="#technical-notes" title="Permanent link">&para;</a></h2>
+<ul>
+<li>GUC (Grand Unified Configuration) variables are global configuration parameters in PostgreSQL</li>
+<li>Values are set in the <code>postgresql.conf</code> file</li>
+<li>Changes require a server restart to take effect</li>
+<li><code>shared_preload_library</code> is a critical system configuration that determines which libraries are loaded at startup, synchdb must be put here to enable <a href="https://docs.synchdb.com/user-guide/connector_auto_launcher/">connector auto launcher</a></li>
+</ul>
+<h2 id="configuration-examples"><strong>Configuration Examples</strong><a class="headerlink" href="#configuration-examples" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code># Example configuration in postgresql.conf
+synchdb.naptime = 1000                                                  # Increase wait time to 1 second
+synchdb.dml_use_spi = true                                              # Enable SPI usage for DML operations
+synchdb.synchdb_auto_launcher = true                                    # Enable automatic connector startup
+synchdb.dbz_batch_size=4096                                             # Each batch can have at most 4096 change events
+synchdb.dbz_queue_size=8192                                             # Debezium will use 8192 change event queue size
+synchdb.jvm_max_heap_size=2048                                          # 2GB heap memory to be allocated to a connector
+synchdb.dbz_snapshot_fetch_size=0                                       # Let Debezium figure out the optimal number of rows to fetch during initial snapshot
+synchdb.dbz_min_row_to_stream_results=0                                 # Always stream the results during initial snapshot
+synchdb.dbz_snapshot_thread_num=1                                       # Single thread during Debezium&#39;s initial snapshot
+synchdb.dbz_incremental_snapshot_chunk_size=4096                        # Incremental snapshot produces change events in batches of 4096 max
+synchdb.dbz_incremental_snapshot_watermarking_strategy=&#39;insert_insert&#39;  # Use insert_insert watermarking strategy
+synchdb.dbz_offset_flush_interval_ms=60000                              # Flush offset data to disk every minute if needed    
+synchdb.dbz_capture_only_selected_table_ddl=false                       # Debezium will only capture the schema of selected tables rather than all tables
+synchdb.max_connector_workers=10                                        # 10 connector workers can be run at a time
+synchdb.error_handling_strategy=&#39;retry&#39;                                 # connector should retry on error
+synchdb.dbz_log_leve=&#39;error&#39;                                            # Debezium Runner should log error messages only
+synchdb.log_change_on_error=true                                        # log JSON change event on error
+</code></pre></div>
+<h2 id="usage-recommendations"><strong>Usage Recommendations</strong><a class="headerlink" href="#usage-recommendations" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>synchdb.naptime</strong></p>
+<ul>
+<li>Lower values: Higher update frequency but more system load</li>
+<li>Higher values: Lower system load but less frequent updates</li>
+<li>Adjust based on data latency requirements</li>
+</ul>
+</li>
+<li>
+<p><strong>synchdb.dml_use_spi</strong></p>
+<ul>
+<li>Enable if specific SPI integration is needed</li>
+<li>Keep <code>false</code> for standard DML operations</li>
+</ul>
+</li>
+<li>
+<p><strong>synchdb.synchdb_auto_launcher</strong></p>
+<ul>
+<li>Recommended to keep <code>true</code> for automatic connector resume upon PostgreSQL restarts</li>
+<li>Change to <code>false</code> only if manual connector control is required</li>
+</ul>
+</li>
+<li>
+<p><strong>synchdb.dbz_batch_size</strong></p>
+<ul>
+<li>Lower values: Slower processing of change events at lower JVM memory usage</li>
+<li>Higher values: Faster processing of change events at higher JVM memory usage</li>
+<li>Adjust based on resource requirements</li>
+</ul>
+</li>
+<li>
+<p><strong>synchdb.dbz_queue_size</strong></p>
+<ul>
+<li>Lower values: Smaller Debezium queue to hold change events</li>
+<li>Higher values: Larger Debezium queue to hold change events</li>
+<li>Need to be set at least twice of <code>synchdb.dbz_batch_size</code></li>
+</ul>
+</li>
+<li>
+<p><strong>synchdb.jvm_max_heap_size</strong></p>
+<ul>
+<li>Lower values: Smaller heap memory allocated to JVM</li>
+<li>Higher values: Larger heap memory allocated to JVM</li>
+<li>Adjust based on system resource and workload requirements</li>
+<li>Needs increase when working with large number of tables</li>
+</ul>
+</li>
+<li>
+<p><strong>synchdb.dbz_snapshot_fetch_size</strong></p>
+<ul>
+<li>Lower values: Less rows to be fetched from a table during snapshot</li>
+<li>Higher values: More rows to be fetched from a table during snapshot</li>
+<li>Recommended to keep it 0 to let Debezium figure out an optimal value</li>
+</ul>
+</li>
+<li>
+<p><strong>synchdb.dbz_min_row_to_stream_results</strong></p>
+<ul>
+<li>Lower values: Less JVM memory requirement, slower processing of change events</li>
+<li>Higher values: More JVM memory requirement, faster processing of change events</li>
+<li>Recommended to keep it 0 to let Debezium use streaming mode always to reduce memory usage</li>
+</ul>
+</li>
+<li>
+<p><strong>synchdb.dbz_snapshot_thread_num</strong></p>
+<ul>
+<li>Lower values: Slower data export to SynchDB for processing </li>
+<li>Higher values: Faster data export to SyncDB for processing</li>
+<li>Recommended to set it to the same number of CPU cores</li>
+</ul>
+</li>
+<li>
+<p><strong>synchdb.dbz_incremental_snapshot_chunk_size</strong></p>
+<ul>
+<li>Lower values: Slower processing of change events at lower JVM memory usage during incremental snapshot</li>
+<li>Higher values: Faster processing of change events at higher JVM memory usage during incremental snapshot</li>
+<li>Recommended to set it the same as <code>synchdb.dbz_batch_size</code> and adjust Adjust based on resource requirements</li>
+</ul>
+</li>
+<li>
+<p><strong>synchdb.dbz_offset_flush_interval_ms</strong></p>
+<ul>
+<li>Lower values: More frequent update to offset file, more IO, less old batches to re-preocess after fault restored</li>
+<li>Higher values: Less frequent update to offset file, less IO, more old batches to re-preocess after fault restored</li>
+<li>Recommended to set it to 60000 as Debezium's recommendation</li>
+</ul>
+</li>
+<li>
+<p><strong>synchdb.max_connector_workers</strong></p>
+<ul>
+<li>Lower values: less connector workers can be run at a time, less shared memory requirement</li>
+<li>Higher values: more connector workers can be run at a time, more shared memory requirement</li>
+</ul>
+</li>
+</ol>
+<h2 id="performance-considerations"><strong>Performance Considerations</strong><a class="headerlink" href="#performance-considerations" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Adjust <code>synchdb.naptime</code> based on system load and latency requirements</li>
+<li>Adjust <code>synchdb.dbz_batch_size</code> and <code>synchdb.dbz_queue_size</code> higher to increase processing throughput</li>
+<li>Adjust <code>synchdb.jvm_max_heap_size</code> based on workload<ul>
+<li>Smaller number of tables (10k or less) + large amount of data per table: 512MB ~ 1024MB should suffice</li>
+<li>Larger number of tables (100k or more) + moderate amount of data per table: consider increasing to 2048MB or above</li>
+</ul>
+</li>
+<li>Set <code>synchdb.dbz_snapshot_fetch_size</code> to 0 to let Debezium pick optimal fetch value</li>
+<li>Set <code>synchdb.dbz_snapshot_thread_num</code> to match number of CPU cores</li>
+<li>Set <code>synchdb.dbz_min_row_to_stream_results</code> to 0 to always use stream mode to reduce memory usage</li>
+</ul>
+<h2 id="common-use-cases"><strong>Common Use Cases</strong><a class="headerlink" href="#common-use-cases" title="Permanent link">&para;</a></h2>
+<h3 id="high-throughput-systems"><strong>High-Throughput Systems</strong><a class="headerlink" href="#high-throughput-systems" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>synchdb.naptime = 10            # Faster polling for real-time updates
+synchdb.dml_use_spi = false     # Standard DML for better performance
+synchdb.dbz_batch_size = 16384
+synchdb.dbz_queue_size = 32768
+synchdb.jvm_max_heap_size = 2048
+synchdb.dbz_snapshot_thread_num = 4
+synchdb.dbz_snapshot_fetch_size = 0
+synchdb.dbz_min_row_to_stream_results = 0
+</code></pre></div>
+<h3 id="resource-constrained-systems"><strong>Resource-Constrained Systems</strong><a class="headerlink" href="#resource-constrained-systems" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>synchdb.naptime = 1000          # Reduced polling frequency
+synchdb.dml_use_spi = false     # Minimize additional overhead
+synchdb.dbz_batch_size = 1024
+synchdb.dbz_queue_size = 2048
+synchdb.jvm_max_heap_size = 512
+synchdb.dbz_snapshot_thread_num = 1
+synchdb.dbz_snapshot_fetch_size = 0
+synchdb.dbz_min_row_to_stream_results = 0
+</code></pre></div>
+<h3 id="developmenttesting"><strong>Development/Testing</strong><a class="headerlink" href="#developmenttesting" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>synchdb.naptime = 500           # Default polling
+synchdb.dml_use_spi = true      # Enable advanced features for testing
+synchdb.dbz_batch_size = 2048
+synchdb.dbz_queue_size = 4096
+synchdb.jvm_max_heap_size = 1024
+synchdb.dbz_snapshot_thread_num = 2
+synchdb.dbz_snapshot_fetch_size = 0
+synchdb.dbz_min_row_to_stream_results = 0
+</code></pre></div>
+<h2 id="troubleshooting"><strong>Troubleshooting</strong><a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>High CPU Usage</strong></p>
+<ul>
+<li>Increase <code>synchdb.naptime</code></li>
+<li>Review DML operation patterns</li>
+<li>Reduce <code>synchdb.dbz_batch_size</code> and <code>synchdb.dbz_queue_size</code></li>
+<li>Increase <code>synchdb.dbz_snapshot_thread_num</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Data Latency Issues</strong></p>
+<ul>
+<li>Decrease <code>synchdb.naptime</code></li>
+<li>Increase <code>synchdb.dbz_batch_size</code> and <code>synchdb.dbz_queue_size</code></li>
+<li>Check network connectivity</li>
+<li>Increase <code>shared_buffers</code></li>
+<li>Split workload to more connectors rather than just one</li>
+<li>Start the connector with <code>no_data</code> mode to obtain schema only and begin CDC rather than <code>initial</code> mode which capture both schema and initial data before CDC begins.</li>
+</ul>
+</li>
+<li>
+<p><strong>Startup Problems</strong></p>
+<ul>
+<li>Verify <code>shared_preload_library</code> configuration</li>
+<li>Check error messages from <code>synchdb_get_state()</code></li>
+<li>Check connector worker status</li>
+</ul>
+</li>
+<li>
+<p><strong>Out of Memory Problems</strong></p>
+<ul>
+<li>Increase <code>synchdb.jvm_max_heap_size</code></li>
+<li>Increase <code>shared_buffers</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="best-practices"><strong>Best Practices</strong><a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
+<ol>
+<li>
+<p><strong>Initial Setup</strong></p>
+<ul>
+<li>Start with default values</li>
+<li>Monitor system performance</li>
+<li>Adjust gradually based on requirements</li>
+</ul>
+</li>
+<li>
+<p><strong>Production Environment</strong></p>
+<ul>
+<li>Document all configuration changes</li>
+<li>Test changes in staging first</li>
+<li>Maintain backup of working configurations</li>
+</ul>
+</li>
+<li>
+<p><strong>Monitoring</strong></p>
+<ul>
+<li>Track system resource usage</li>
+<li>Monitor data synchronization latency</li>
+<li>Log configuration changes</li>
+</ul>
+</li>
+</ol>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 Maintained by <a href="https://github.com/hornetlabs">Hornetlabs Technology </a>. <a href="https://www.netlify.com/"><img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deployed by Netlify" width="114" height="51"></a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../js/print-site.js"></script>
+      
+        <script src="../../../js/print-site.js"></script>
+      
+    
+  </body>
+</html>

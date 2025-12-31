@@ -1,0 +1,2686 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="SynchDB is a PostgreSQL extension for synchronizing data from different database sources..">
+      
+      
+        <meta name="author" content="Hornetlabs Technology Inc.">
+      
+      
+        <link rel="canonical" href="https://docs.synchdb.com/latest/es/getting-started/remote_database_setups/">
+      
+      
+        <link rel="prev" href="../installation/">
+      
+      
+        <link rel="next" href="../configuration/">
+      
+      
+        
+          <link rel="alternate" href="../../../getting-started/remote_database_setups/" hreflang="en">
+        
+          <link rel="alternate" href="./" hreflang="es">
+        
+          <link rel="alternate" href="../../../zh/getting-started/remote_database_setups/" hreflang="zh">
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>configuración de base de datos remota - Documentación de SynchDB</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-material.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#source-database-setups" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../" title="Documentación de SynchDB" class="md-header__button md-logo" aria-label="Documentación de SynchDB" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentación de SynchDB
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              configuración de base de datos remota
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Seleccionar idioma">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../getting-started/remote_database_setups/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="es" class="md-select__link">
+              Español
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../../zh/getting-started/remote_database_setups/" hreflang="zh" class="md-select__link">
+              中文
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Hornetlabs/synchdb" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/architecture/" class="md-tabs__link">
+          
+  
+  
+  Arquitectura
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../installation/" class="md-tabs__link">
+          
+  
+  
+  Empezando
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../monitoring/stats_view/" class="md-tabs__link">
+          
+  
+  
+  escucha
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tutorial/mysql_cdc_to_postgresql/" class="md-tabs__link">
+          
+  
+  
+  Tutorial
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../user-guide/create_a_connector/" class="md-tabs__link">
+          
+  
+  
+  Guía del usuario
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../changelog/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Registro de Cambios
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="Documentación de SynchDB" class="md-nav__button md-logo" aria-label="Documentación de SynchDB" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Documentación de SynchDB
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Hornetlabs/synchdb" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arquitectura
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descripción general de la arquitectura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/debezium_event_processor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debezium Event Processor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/debezium_runner_components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura de componentes de Debezium Runner
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/openlog_replicator_event_processor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Procesador de eventos del replicador Openlog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/batch_change_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manejo de Cambios por Lotes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/non_native_datatype_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Procesamiento de tipos de datos no nativos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/native_datatype_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Procesamiento de tipos de datos nativos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/metadata_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debezium Archivos de Metadatos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/ddl_replication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Replicación DDL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/fdw_based_snapshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instantánea basada en FDW
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Empezando
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Empezando
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    configuración de base de datos remota
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    configuración de base de datos remota
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#set-up-mysql-for-synchdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set up MySQL for SynchDB
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Set up MySQL for SynchDB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a User
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-binlog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enable binlog
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-gtids-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enable GTIDs (Optional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-session-timeout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure Session Timeout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-query-log-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enable Query Log Events
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate-binlog-row-value-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validate Binlog Row Value Options
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-up-sqlserver-for-synchdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set up SQLServer for SynchDB
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Set up SQLServer for SynchDB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enable-cdc-on-the-sqlserver-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enable CDC on the SQLServer Database
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-cdc-on-a-sqlserver-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enable CDC on a SQLServer Table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-user-permission-for-cdc-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify User Permission for CDC Tables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-table-schema-changed-while-cdc-is-enabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When Table Schema Changed While CDC is Enabled
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-up-oracle-for-synchdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set up Oracle for SynchDB
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Set up Oracle for SynchDB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-a-password-for-sys-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set a Password for Sys User
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-logminer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure logminer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-logminer-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a logminer User
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-supplemental-log-data-for-tables-designated-for-capture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enable Supplemental Log Data for Tables Designated for Capture
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-oracle-setups-for-openlog-replicator-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional Oracle Setups for Openlog Replicator Support
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SynchDB Configuración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quick_start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    escucha
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    escucha
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/stats_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vista de estadísticas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/state_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vista de estado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/attr_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vista de atributos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/jvm_mem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Uso de memoria de JVM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/jmx_monitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración del monitor JMX
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/jmx_exporter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración del exportador JMX
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/mysql_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CDC de MySQL a PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/sqlserver_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CDC de SQL Server a PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/oracle_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CDC de Oracle a PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/selective_table_sync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sincronización Selectiva de Tablas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/table_snapshot_resnapshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instantánea de tabla y nueva instantánea
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/object_mapping_workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flujo de trabajo de mapeo de objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guía del usuario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guía del usuario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/create_a_connector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crear un conector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/start_stop_connector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iniciar/Detener un conector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/connector_auto_launcher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lanzador Automático de Conectores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/default_datatype_mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mapeo de Tipos de Datos Predeterminado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/object_mapping_rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Personalizar la asignación y transformación de objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/secured_connection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conexión segura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/configure_error_strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurar estrategias de error
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/set_offset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurar el desplazamiento de replicación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/configure_olr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurar Openlog Replicator para Oracle Connector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/configure_infinispan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurar Infinispan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/configure_snapshot_engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurar el motor de instantáneas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registro de Cambios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#set-up-mysql-for-synchdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set up MySQL for SynchDB
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Set up MySQL for SynchDB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a User
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-binlog" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enable binlog
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-gtids-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enable GTIDs (Optional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-session-timeout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure Session Timeout
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-query-log-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enable Query Log Events
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate-binlog-row-value-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validate Binlog Row Value Options
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-up-sqlserver-for-synchdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set up SQLServer for SynchDB
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Set up SQLServer for SynchDB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enable-cdc-on-the-sqlserver-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enable CDC on the SQLServer Database
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-cdc-on-a-sqlserver-table" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enable CDC on a SQLServer Table
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-user-permission-for-cdc-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify User Permission for CDC Tables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#when-table-schema-changed-while-cdc-is-enabled" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When Table Schema Changed While CDC is Enabled
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-up-oracle-for-synchdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set up Oracle for SynchDB
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Set up Oracle for SynchDB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-a-password-for-sys-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set a Password for Sys User
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-logminer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure logminer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-logminer-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a logminer User
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable-supplemental-log-data-for-tables-designated-for-capture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Enable Supplemental Log Data for Tables Designated for Capture
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#additional-oracle-setups-for-openlog-replicator-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional Oracle Setups for Openlog Replicator Support
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="source-database-setups">Source Database Setups<a class="headerlink" href="#source-database-setups" title="Permanent link">&para;</a></h1>
+<p>Before Synchdb can interact with an external, heterogeneous database and start the replication, it needs to be configured according to the procedure below.</p>
+<h2 id="set-up-mysql-for-synchdb"><strong>Set up MySQL for SynchDB</strong><a class="headerlink" href="#set-up-mysql-for-synchdb" title="Permanent link">&para;</a></h2>
+<h3 id="create-a-user"><strong>Create a User</strong><a class="headerlink" href="#create-a-user" title="Permanent link">&para;</a></h3>
+<p>create a user
+<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;password&#39;</span><span class="p">;</span>
+</code></pre></div></p>
+<p>grant required permissions
+<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="n">RELOAD</span><span class="p">,</span><span class="w"> </span><span class="k">SHOW</span><span class="w"> </span><span class="n">DATABASES</span><span class="p">,</span><span class="w"> </span><span class="n">REPLICATION</span><span class="w"> </span><span class="n">SLAVE</span><span class="p">,</span><span class="w"> </span><span class="n">REPLICATION</span><span class="w"> </span><span class="n">CLIENT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;password&#39;</span><span class="p">;</span>
+</code></pre></div></p>
+<p>finalize the user's permission
+<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="n">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span>
+</code></pre></div></p>
+<h3 id="enable-binlog"><strong>Enable binlog</strong><a class="headerlink" href="#enable-binlog" title="Permanent link">&para;</a></h3>
+<p>check if binlog is enabled
+<div class="highlight"><pre><span></span><code><span class="o">//</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">MySQL</span><span class="w"> </span><span class="mi">5</span><span class="p">.</span><span class="n">x</span>
+<span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">variable_value</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="ss">&quot;BINARY LOGGING STATUS (log-bin) ::&quot;</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">global_variables</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">variable_name</span><span class="o">=</span><span class="s1">&#39;log_bin&#39;</span><span class="p">;</span>
+
+<span class="o">//</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">MySQL</span><span class="w"> </span><span class="mi">8</span><span class="p">.</span><span class="n">x</span>
+<span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">variable_value</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="ss">&quot;BINARY LOGGING STATUS (log-bin) ::&quot;</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">performance_schema</span><span class="p">.</span><span class="n">global_variables</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">variable_name</span><span class="o">=</span><span class="s1">&#39;log_bin&#39;</span><span class="p">;</span>
+</code></pre></div></p>
+<p>add the properties below to configuration file if binlog is <code>OFF</code>
+<div class="highlight"><pre><span></span><code>server-id                   = 223344
+log_bin                     = mysql-bin
+binlog_format               = ROW
+binlog_row_image            = FULL
+binlog_expire_logs_seconds  = 864000
+</code></pre></div></p>
+<p>check binlog status again
+<div class="highlight"><pre><span></span><code><span class="o">//</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">MySQL</span><span class="w"> </span><span class="mi">5</span><span class="p">.</span><span class="n">x</span>
+<span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">variable_value</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="ss">&quot;BINARY LOGGING STATUS (log-bin) ::&quot;</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">global_variables</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">variable_name</span><span class="o">=</span><span class="s1">&#39;log_bin&#39;</span><span class="p">;</span>
+
+<span class="o">//</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">MySQL</span><span class="w"> </span><span class="mi">8</span><span class="p">.</span><span class="n">x</span>
+<span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">variable_value</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="ss">&quot;BINARY LOGGING STATUS (log-bin) ::&quot;</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">performance_schema</span><span class="p">.</span><span class="n">global_variables</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">variable_name</span><span class="o">=</span><span class="s1">&#39;log_bin&#39;</span><span class="p">;</span>
+</code></pre></div></p>
+<h3 id="enable-gtids-optional"><strong>Enable GTIDs (Optional)</strong><a class="headerlink" href="#enable-gtids-optional" title="Permanent link">&para;</a></h3>
+<p>Global transaction identifiers (GTIDs) uniquely identify transactions that occur on a server within a cluster. Though not required for SynchDB connector, using GTIDs simplifies replication and enables you to more easily confirm if primary and replica servers are consistent.</p>
+<p>enable <code>gtid_mode</code>
+<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="n">gtid_mode</span><span class="o">=</span><span class="k">ON</span>
+</code></pre></div></p>
+<p>enable <code>enforce_gtid_consistency</code>
+<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="n">enforce_gtid_consistency</span><span class="o">=</span><span class="k">ON</span>
+</code></pre></div></p>
+<p>confirm changes
+<div class="highlight"><pre><span></span><code>mysql&gt; show global variables like &#39;%GTID%&#39;;
++--------------------------+-------+
+| Variable_name            | Value |
++--------------------------+-------+
+| enforce_gtid_consistency | ON    |
+| gtid_mode                | ON    |
++--------------------------+-------+
+</code></pre></div></p>
+<h3 id="configure-session-timeout"><strong>Configure Session Timeout</strong><a class="headerlink" href="#configure-session-timeout" title="Permanent link">&para;</a></h3>
+<p>When an initial consistent snapshot is made for large databases, your established connection could timeout while the tables are being read. You can prevent this behavior by configuring <code>interactive_timeout</code> and <code>wait_timeout</code> in your MySQL configuration file.</p>
+<p>configure <code>interactive_timeout:</code>
+<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="n">interactive_timeout</span><span class="o">=&lt;</span><span class="n">duration</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">seconds</span><span class="o">&gt;</span>
+</code></pre></div></p>
+<p>configure <code>wait_timeout</code>
+<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="n">wait_timeout</span><span class="o">=&lt;</span><span class="n">duration</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">seconds</span><span class="o">&gt;</span>
+</code></pre></div></p>
+<h3 id="enable-query-log-events"><strong>Enable Query Log Events</strong><a class="headerlink" href="#enable-query-log-events" title="Permanent link">&para;</a></h3>
+<p>You might want to see the original SQL statement for each binlog event. Enabling the <code>binlog_rows_query_log_events</code> option in the MySQL configuration file allows you to do this. Currently SynchDB does not process or parse the original SQL statement in anyway even if they are included. These are for reference / debug only.</p>
+<p>enable <code>binlog_rows_query_log_events</code>
+<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="n">binlog_rows_query_log_events</span><span class="o">=</span><span class="k">ON</span>
+</code></pre></div></p>
+<h3 id="validate-binlog-row-value-options"><strong>Validate Binlog Row Value Options</strong><a class="headerlink" href="#validate-binlog-row-value-options" title="Permanent link">&para;</a></h3>
+<p>Verify the setting of the <code>binlog_row_value_options</code> variable in the database. To enable the connector to consume UPDATE events, this variable must be set to a value other than <code>PARTIAL_JSON</code>.</p>
+<p>check current variable value
+<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="k">global</span><span class="w"> </span><span class="n">variables</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">variable_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;binlog_row_value_options&#39;</span><span class="p">;</span>
+<span class="o">+</span><span class="c1">--------------------------+-------+</span>
+<span class="o">|</span><span class="w"> </span><span class="n">Variable_name</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="o">|</span>
+<span class="o">+</span><span class="c1">--------------------------+-------+</span>
+<span class="o">|</span><span class="w"> </span><span class="n">binlog_row_value_options</span><span class="w"> </span><span class="o">|</span><span class="w">       </span><span class="o">|</span>
+<span class="o">+</span><span class="c1">--------------------------+-------+</span>
+</code></pre></div></p>
+<p>if the value of the variable is <code>PARTIAL_JSON</code>, run the following to unset it
+<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="o">@@</span><span class="k">global</span><span class="p">.</span><span class="n">binlog_row_value_options</span><span class="o">=</span><span class="ss">&quot;&quot;</span><span class="w"> </span><span class="p">;</span>
+</code></pre></div></p>
+<h2 id="set-up-sqlserver-for-synchdb"><strong>Set up SQLServer for SynchDB</strong><a class="headerlink" href="#set-up-sqlserver-for-synchdb" title="Permanent link">&para;</a></h2>
+<h3 id="enable-cdc-on-the-sqlserver-database"><strong>Enable CDC on the SQLServer Database</strong><a class="headerlink" href="#enable-cdc-on-the-sqlserver-database" title="Permanent link">&para;</a></h3>
+<p>Before you can enable CDC for a table, you must enable it for the SQL Server database. A SQLServer admin enables CDC by running a system stored procedure. System stored procedures can be run by using SQL Server Management Studio, or by using Transact-SQL.</p>
+<div class="highlight"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">MyDB</span>
+<span class="k">GO</span>
+<span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_db</span>
+<span class="k">GO</span>
+</code></pre></div>
+<h3 id="enable-cdc-on-a-sqlserver-table"><strong>Enable CDC on a SQLServer Table</strong><a class="headerlink" href="#enable-cdc-on-a-sqlserver-table" title="Permanent link">&para;</a></h3>
+<p>SQLServer admin must enable change data capture on the source tables that you want SynchDB to capture. The database must already be enabled for CDC. To enable CDC on a table, a SQLServer administrator runs the stored procedure <code>sys.sp_cdc_enable_table</code> for the table. SQL Server CDC must be enabled for every table that you want to capture.</p>
+<p>enable 3 tables <code>customer</code>, <code>district</code>, and <code>history</code> for SynchDB to capture:</p>
+<div class="highlight"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">MyDB</span>
+<span class="k">GO</span>
+<span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;customer&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">supports_net_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;district&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">supports_net_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;history&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">supports_net_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">GO</span>
+</code></pre></div>
+<h3 id="verify-user-permission-for-cdc-tables"><strong>Verify User Permission for CDC Tables</strong><a class="headerlink" href="#verify-user-permission-for-cdc-tables" title="Permanent link">&para;</a></h3>
+<p>A SQLServer administrator can run a system stored procedure to query a database or table to retrieve its CDC configuration information. </p>
+<p>The query below returns configuration information for each table in the database that is enabled for CDC and that contains change data that the caller is authorized to access. If the result is empty, verify that the user has privileges to access both the capture instance and the CDC tables.</p>
+<div class="highlight"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">MyDB</span><span class="p">;</span>
+<span class="k">GO</span>
+<span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_help_change_data_capture</span>
+<span class="k">GO</span>
+</code></pre></div>
+<h3 id="when-table-schema-changed-while-cdc-is-enabled"><strong>When Table Schema Changed While CDC is Enabled</strong><a class="headerlink" href="#when-table-schema-changed-while-cdc-is-enabled" title="Permanent link">&para;</a></h3>
+<p>If a table has already been added to the CDC capture list and being captured by SynchDB already, any schema change that has happened to this table on SQLServer needs to be re-added back to the CDC capture list to generate a proper DDL ALTER TABLE event to SynchDB. Refer to <a href="https://docs.synchdb.com/architecture/ddl_replication/">DDL Replication</a> page for more information.</p>
+<h2 id="set-up-oracle-for-synchdb"><strong>Set up Oracle for SynchDB</strong><a class="headerlink" href="#set-up-oracle-for-synchdb" title="Permanent link">&para;</a></h2>
+<p>The following examples are based on container database <code>FREE</code> and pluggable database <code>FREEPDB1</code></p>
+<h3 id="set-a-password-for-sys-user"><strong>Set a Password for Sys User</strong><a class="headerlink" href="#set-a-password-for-sys-user" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">sqlplus</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">sysdba</span>
+<span class="w">    </span><span class="k">Alter</span><span class="w"> </span><span class="k">user</span><span class="w"> </span><span class="n">sys</span><span class="w"> </span><span class="n">identified</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">oracle</span><span class="p">;</span>
+<span class="n">Exit</span>
+</code></pre></div>
+<h3 id="configure-logminer"><strong>Configure logminer</strong><a class="headerlink" href="#configure-logminer" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">sqlplus</span><span class="w"> </span><span class="o">/</span><span class="n">nolog</span>
+
+<span class="w">    </span><span class="k">CONNECT</span><span class="w"> </span><span class="n">sys</span><span class="o">/</span><span class="n">oracle</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">sysdba</span><span class="p">;</span>
+<span class="w">    </span><span class="k">alter</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">db_recovery_file_dest_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="k">G</span><span class="p">;</span>
+<span class="w">    </span><span class="k">alter</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">db_recovery_file_dest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/opt/oracle/oradata/recovery_area&#39;</span><span class="w"> </span><span class="k">scope</span><span class="o">=</span><span class="n">spfile</span><span class="p">;</span>
+<span class="w">    </span><span class="n">shutdown</span><span class="w"> </span><span class="k">immediate</span><span class="p">;</span>
+<span class="w">    </span><span class="n">startup</span><span class="w"> </span><span class="n">mount</span><span class="p">;</span>
+<span class="w">    </span><span class="k">alter</span><span class="w"> </span><span class="k">database</span><span class="w"> </span><span class="n">archivelog</span><span class="p">;</span>
+<span class="w">    </span><span class="k">alter</span><span class="w"> </span><span class="k">database</span><span class="w"> </span><span class="k">open</span><span class="p">;</span>
+<span class="w">    </span><span class="n">archive</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="n">list</span><span class="p">;</span>
+<span class="n">exit</span>
+</code></pre></div>
+<h3 id="create-a-logminer-user"><strong>Create a logminer User</strong><a class="headerlink" href="#create-a-logminer-user" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">sqlplus</span><span class="w"> </span><span class="n">sys</span><span class="o">/</span><span class="n">oracle</span><span class="o">@//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">1521</span><span class="o">/</span><span class="k">FREE</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">sysdba</span>
+
+<span class="w">    </span><span class="k">ALTER</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="n">SUPPLEMENTAL</span><span class="w"> </span><span class="n">LOG</span><span class="w"> </span><span class="k">DATA</span><span class="p">;</span>
+<span class="w">    </span><span class="k">ALTER</span><span class="w"> </span><span class="n">PROFILE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="n">FAILED_LOGIN_ATTEMPTS</span><span class="w"> </span><span class="n">UNLIMITED</span><span class="p">;</span>
+<span class="w">    </span><span class="n">exit</span><span class="p">;</span>
+
+<span class="n">sqlplus</span><span class="w"> </span><span class="n">sys</span><span class="o">/</span><span class="n">oracle</span><span class="o">@//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">1521</span><span class="o">/</span><span class="k">FREE</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">sysdba</span>
+
+<span class="w">    </span><span class="k">CREATE</span><span class="w"> </span><span class="n">TABLESPACE</span><span class="w"> </span><span class="n">LOGMINER_TBS</span><span class="w"> </span><span class="n">DATAFILE</span><span class="w"> </span><span class="s1">&#39;/opt/oracle/oradata/FREE/logminer_tbs.dbf&#39;</span><span class="w"> </span><span class="k">SIZE</span><span class="w"> </span><span class="mi">25</span><span class="n">M</span><span class="w"> </span><span class="n">REUSE</span><span class="w"> </span><span class="n">AUTOEXTEND</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">MAXSIZE</span><span class="w"> </span><span class="n">UNLIMITED</span><span class="p">;</span>
+<span class="w">    </span><span class="n">exit</span><span class="p">;</span>
+
+<span class="n">sqlplus</span><span class="w"> </span><span class="n">sys</span><span class="o">/</span><span class="n">oracle</span><span class="o">@//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">1521</span><span class="o">/</span><span class="n">FREEPDB1</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">sysdba</span>
+
+<span class="w">    </span><span class="k">CREATE</span><span class="w"> </span><span class="n">TABLESPACE</span><span class="w"> </span><span class="n">LOGMINER_TBS</span><span class="w"> </span><span class="n">DATAFILE</span><span class="w"> </span><span class="s1">&#39;/opt/oracle/oradata/FREE/FREEPDB1/logminer_tbs.dbf&#39;</span><span class="w"> </span><span class="k">SIZE</span><span class="w"> </span><span class="mi">25</span><span class="n">M</span><span class="w"> </span><span class="n">REUSE</span><span class="w"> </span><span class="n">AUTOEXTEND</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">MAXSIZE</span><span class="w"> </span><span class="n">UNLIMITED</span><span class="p">;</span>
+<span class="w">    </span><span class="n">exit</span><span class="p">;</span>
+
+<span class="n">sqlplus</span><span class="w"> </span><span class="n">sys</span><span class="o">/</span><span class="n">oracle</span><span class="o">@//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">1521</span><span class="o">/</span><span class="k">FREE</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">sysdba</span>
+
+<span class="w">    </span><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">dbz</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">TABLESPACE</span><span class="w"> </span><span class="n">LOGMINER_TBS</span><span class="w"> </span><span class="n">QUOTA</span><span class="w"> </span><span class="n">UNLIMITED</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">LOGMINER_TBS</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">SESSION</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">CONTAINER</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">V_$DATABASE</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="n">FLASHBACK</span><span class="w"> </span><span class="k">ANY</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ANY</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="n">SELECT_CATALOG_ROLE</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="n">EXECUTE_CATALOG_ROLE</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ANY</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="n">LOGMINING</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ANY</span><span class="w"> </span><span class="k">DICTIONARY</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">LOCK</span><span class="w"> </span><span class="k">ANY</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="n">SEQUENCE</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">EXECUTE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">DBMS_LOGMNR</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">EXECUTE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">DBMS_LOGMNR_D</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">V_$LOG</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">V_$LOG_HISTORY</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">V_$LOGMNR_LOGS</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">V_$LOGMNR_CONTENTS</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">V_$LOGMNR_PARAMETERS</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">V_$LOGFILE</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">V_$ARCHIVED_LOG</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">V_$ARCHIVE_DEST_STATUS</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">V_$TRANSACTION</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">V_$MYSTAT</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">V_$STATNAME</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">c</span><span class="o">##</span><span class="n">dbzuser</span><span class="w"> </span><span class="n">CONTAINER</span><span class="o">=</span><span class="k">ALL</span><span class="p">;</span><span class="w"> </span>
+
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">EXECUTE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">DBMS_WORKLOAD_REPOSITORY</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">C</span><span class="o">##</span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">DBA_HIST_SNAPSHOT</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">C</span><span class="o">##</span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="w">    </span><span class="k">GRANT</span><span class="w"> </span><span class="k">EXECUTE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">DBMS_WORKLOAD_REPOSITORY</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="k">PUBLIC</span><span class="p">;</span>
+
+
+<span class="w">    </span><span class="n">Exit</span>
+</code></pre></div>
+<h3 id="enable-supplemental-log-data-for-tables-designated-for-capture"><strong>Enable Supplemental Log Data for Tables Designated for Capture</strong><a class="headerlink" href="#enable-supplemental-log-data-for-tables-designated-for-capture" title="Permanent link">&para;</a></h3>
+<p>This configuration needs to be run on each table designzted for catpure in order to correctly handle the UPDATE and DELETE operations.</p>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">customer</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="n">SUPPLEMENTAL</span><span class="w"> </span><span class="n">LOG</span><span class="w"> </span><span class="k">DATA</span><span class="w"> </span><span class="p">(</span><span class="k">ALL</span><span class="p">)</span><span class="w"> </span><span class="n">COLUMNS</span><span class="p">;</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="n">SUPPLEMENTAL</span><span class="w"> </span><span class="n">LOG</span><span class="w"> </span><span class="k">DATA</span><span class="w"> </span><span class="p">(</span><span class="k">ALL</span><span class="p">)</span><span class="w"> </span><span class="n">COLUMNS</span><span class="p">;</span>
+<span class="p">...</span><span class="w"> </span><span class="n">etc</span>
+</code></pre></div>
+<h2 id="additional-oracle-setups-for-openlog-replicator-support"><strong>Additional Oracle Setups for Openlog Replicator Support</strong><a class="headerlink" href="#additional-oracle-setups-for-openlog-replicator-support" title="Permanent link">&para;</a></h2>
+<p>Openlog Replicator requires additional permissions to stream Oracle changes:</p>
+<div class="highlight"><pre><span></span><code><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="n">FLASHBACK</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">CCOL$</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="n">FLASHBACK</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">CDEF$</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="n">FLASHBACK</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">COL$</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="n">FLASHBACK</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">DEFERRED_STG$</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="n">FLASHBACK</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">ECOL$</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="n">FLASHBACK</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">LOB$</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="n">FLASHBACK</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">LOBCOMPPART$</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="n">FLASHBACK</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">LOBFRAG$</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="n">FLASHBACK</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">OBJ$</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="n">FLASHBACK</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">TAB$</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="n">FLASHBACK</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">TABCOMPART$</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="n">FLASHBACK</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">TABPART$</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="n">FLASHBACK</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">TABSUBPART$</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="n">FLASHBACK</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">TS$</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="n">FLASHBACK</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="k">USER</span><span class="err">$</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="n">FLASHBACK</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">XDB</span><span class="p">.</span><span class="n">XDB$TTSET</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="n">FLASHBACK</span><span class="w"> </span><span class="k">ANY</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">V_$ARCHIVED_LOG</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">V_$DATABASE</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">V_$DATABASE_INCARNATION</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">V_$LOG</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">V_$LOGFILE</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">V_$PARAMETER</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">V_$STANDBY_LOG</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">SYS</span><span class="p">.</span><span class="n">V_$TRANSPORTABLE_PLATFORM</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">DBZUSER</span><span class="p">;</span>
+<span class="k">DECLARE</span>
+<span class="w">    </span><span class="k">CURSOR</span><span class="w"> </span><span class="n">C1</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">TOKSUF</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">XDB</span><span class="p">.</span><span class="n">XDB$TTSET</span><span class="p">;</span>
+<span class="w">    </span><span class="n">CMD</span><span class="w"> </span><span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+<span class="k">BEGIN</span>
+<span class="w">    </span><span class="k">FOR</span><span class="w"> </span><span class="k">C</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="n">C1</span><span class="w"> </span><span class="n">LOOP</span>
+<span class="w">        </span><span class="n">CMD</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;GRANT SELECT, FLASHBACK ON XDB.X$NM&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">C</span><span class="p">.</span><span class="n">TOKSUF</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39; TO DBZUSER&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">EXECUTE</span><span class="w"> </span><span class="k">IMMEDIATE</span><span class="w"> </span><span class="n">CMD</span><span class="p">;</span>
+<span class="w">        </span><span class="n">CMD</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;GRANT SELECT, FLASHBACK ON XDB.X$QN&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">C</span><span class="p">.</span><span class="n">TOKSUF</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39; TO DBZUSER&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">EXECUTE</span><span class="w"> </span><span class="k">IMMEDIATE</span><span class="w"> </span><span class="n">CMD</span><span class="p">;</span>
+<span class="w">        </span><span class="n">CMD</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;GRANT SELECT, FLASHBACK ON XDB.X$PT&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">C</span><span class="p">.</span><span class="n">TOKSUF</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39; TO DBZUSER&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="k">EXECUTE</span><span class="w"> </span><span class="k">IMMEDIATE</span><span class="w"> </span><span class="n">CMD</span><span class="p">;</span>
+<span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="n">LOOP</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+</code></pre></div>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 Maintained by <a href="https://github.com/hornetlabs">Hornetlabs Technology </a>. <a href="https://www.netlify.com/"><img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deployed by Netlify" width="114" height="51"></a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../js/print-site.js"></script>
+      
+        <script src="../../../js/print-site.js"></script>
+      
+    
+  </body>
+</html>

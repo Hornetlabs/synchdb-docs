@@ -1,0 +1,3080 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="SynchDB is a PostgreSQL extension for synchronizing data from different database sources..">
+      
+      
+        <meta name="author" content="Hornetlabs Technology Inc.">
+      
+      
+        <link rel="canonical" href="https://docs.synchdb.com/latest/zh/changelog/">
+      
+      
+        <link rel="prev" href="../user-guide/configure_snapshot_engine/">
+      
+      
+      
+        
+          <link rel="alternate" href="../../changelog/" hreflang="en">
+        
+          <link rel="alternate" href="../../es/changelog/" hreflang="es">
+        
+          <link rel="alternate" href="./" hreflang="zh">
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>变更日志 - SynchDB 文档</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-material.css">
+    
+      <link rel="stylesheet" href="../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-material.css">
+    
+      <link rel="stylesheet" href="../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../" title="SynchDB 文档" class="md-header__button md-logo" aria-label="SynchDB 文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SynchDB 文档
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              变更日志
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="选择当前语言">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../changelog/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../es/changelog/" hreflang="es" class="md-select__link">
+              Español
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="zh" class="md-select__link">
+              中文
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Hornetlabs/synchdb" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../architecture/architecture/" class="md-tabs__link">
+          
+  
+  
+  架构
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../getting-started/installation/" class="md-tabs__link">
+          
+  
+  
+  快速入门
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../monitoring/stats_view/" class="md-tabs__link">
+          
+  
+  
+  监控
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../tutorial/mysql_cdc_to_postgresql/" class="md-tabs__link">
+          
+  
+  
+  教程
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../user-guide/create_a_connector/" class="md-tabs__link">
+          
+  
+  
+  用户指南
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  变更日志
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../" title="SynchDB 文档" class="md-nav__button md-logo" aria-label="SynchDB 文档" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SynchDB 文档
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Hornetlabs/synchdb" title="前往仓库" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    主页
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    架构
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    架构
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    架构概述
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/debezium_event_processor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debezium 事件处理器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/debezium_runner_components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debezium Runner组件架构
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/openlog_replicator_event_processor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Openlog Replicator 事件处理器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/batch_change_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    批量处理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/non_native_datatype_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    非原生数据类型处理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/native_datatype_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    原生数据类型处理
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/metadata_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debezium 元数据文件
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/ddl_replication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DDL复制
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/fdw_based_snapshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    基於FDW的快照
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    快速入门
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    快速入门
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    安装
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/remote_database_setups/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    源数据库设置
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SynchDB 配置
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/quick_start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    快速入门
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    监控
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    监控
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/stats_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    统计视图
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/state_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    状态视图
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/attr_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    属性视图
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/jvm_mem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JVM 内存使用情况
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/jmx_monitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JMX 监视器设置
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/jmx_exporter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JMX exporter 设置
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    教程
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    教程
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/mysql_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MySQL CDC 到 PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/sqlserver_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Server CDC 到 PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/oracle_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle CDC 到 PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/selective_table_sync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    选择性表同步
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/table_snapshot_resnapshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    表快照和重新快照
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/object_mapping_workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    对象映射工作流程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    用户指南
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    用户指南
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/create_a_connector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    创建连接器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/start_stop_connector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    启动/停止连接器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/connector_auto_launcher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    连接器自动启动器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/default_datatype_mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    默认数据类型映射
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/object_mapping_rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    自定义对象映射和转换
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/secured_connection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    安全连接
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/configure_error_strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    配置错误处理策略
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/set_offset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    配置复制偏移
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/configure_olr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    为 Oracle 连接器配置 Openlog Replicator
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/configure_infinispan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    配置 infinispan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/configure_snapshot_engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    配置快照引擎
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    变更日志
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    变更日志
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb-13-2025-11-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 1.3 - 2025-11-25
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 1.3 - 2025-11-25">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        新增
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="新增">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fdw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基於 FDW 的快照引擎
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        改進的統計視圖
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postgresql-18-ivorysql-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PostgreSQL 18 和 IvorySQL 5 相容性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        变更
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        已修復
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        已知問題和其他信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb-12-2025-09-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 1.2 - 2025-09-04
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 1.2 - 2025-09-04">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        新增
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="新增">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#openlog-replicator-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        原生 Openlog Replicator 连接器 - 测试版
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        监控
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ezdeploysh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ezdeploy.sh
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        变更
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        已修复
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        已知问题及其他信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb-11-2025-04-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 1.1 - 2025-04-17
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 1.1 - 2025-04-17">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        添加
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="添加">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        连接器支持
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        对象映射与数据转换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        元数据与监控
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        连接管理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        配置与控制
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性能优化
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        变更
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        修复
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb-10-2024-12-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 1.0 - 2024-12-24
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 1.0 - 2024-12-24">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        添加
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        变更
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        修复
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb-10-beta1-2024-10-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 1.0 Beta1 - 2024-10-23
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 1.0 Beta1 - 2024-10-23">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        新增
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        变更
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        修复
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb-13-2025-11-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 1.3 - 2025-11-25
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 1.3 - 2025-11-25">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        新增
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="新增">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fdw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基於 FDW 的快照引擎
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        改進的統計視圖
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postgresql-18-ivorysql-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PostgreSQL 18 和 IvorySQL 5 相容性
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        变更
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        已修復
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        已知問題和其他信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb-12-2025-09-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 1.2 - 2025-09-04
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 1.2 - 2025-09-04">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        新增
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="新增">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#openlog-replicator-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        原生 Openlog Replicator 连接器 - 测试版
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        监控
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ezdeploysh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ezdeploy.sh
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        变更
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        已修复
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        已知问题及其他信息
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb-11-2025-04-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 1.1 - 2025-04-17
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 1.1 - 2025-04-17">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        添加
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="添加">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        连接器支持
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        对象映射与数据转换
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        元数据与监控
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        连接管理
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        配置与控制
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性能优化
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        变更
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        修复
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb-10-2024-12-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 1.0 - 2024-12-24
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 1.0 - 2024-12-24">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        添加
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        变更
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        修复
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb-10-beta1-2024-10-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 1.0 Beta1 - 2024-10-23
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 1.0 Beta1 - 2024-10-23">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        新增
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        变更
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        修复
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="_1">变更日志<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<p>本项目的所有重要变更都将记录在此文件中。</p>
+<p>本文格式基于 <a href="http://keepachangelog.com/">Keep a Changelog</a>，
+且本项目遵循 <a href="http://semver.org/">语义化版本</a>。</p>
+<h2 id="synchdb-13-2025-11-25"><strong><a href="https://github.com/Hornetlabs/synchdb/releases/tag/v1.3">SynchDB 1.3</a> - 2025-11-25</strong><a class="headerlink" href="#synchdb-13-2025-11-25" title="Permanent link">&para;</a></h2>
+<p>SynchDB 1.3 憑藉全新的基於 FDW 的快照引擎，顯著提升了效能，初始快照速度遠超 Debezium。這項改進使得 OpenLog Replicator (OLR) 連接器成為一個完全原生的快照 + CDC 管線（無需使用 Debezium），從而顯著降低了大型 Oracle 資料集的延遲和開銷。平台支援也得到了擴展。 SynchDB 現在可在 PostgreSQL 18 和 IvorySQL 5 上運行，並針對整個系統進行了一系列效能最佳化和 I/O 改進。</p>
+<h3 id="_2"><strong>新增</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<h4 id="fdw"><a href="https://docs.synchdb.com/architecture/fdw_based_snapshot/">基於 FDW 的快照引擎</a><a class="headerlink" href="#fdw" title="Permanent link">&para;</a></h4>
+<ul>
+<li>基於 FDW 的快照引擎比 Debezium 的初始快照流程速度更快。</li>
+<li>新增 GUC 參數“synchdb.snapshot_engine”，用於選擇快照引擎，可以是“debezium”或“fdw”。</li>
+<li>新增 GUC 參數“synchdb.cdc_start_delay_ms”，用於在初始快照完成後、CDC 啟動前新增毫秒延遲。</li>
+<li>新增 GUC 參數“synchdb.fdw_migrate_with_subtx”，用於在基於 FDW 的快照流程中是否使用子交易遷移每個資料表。</li>
+<li>僅適用於透過 <a href="https://github.com/laurenz/oracle_fdw">oracle_fdw</a> 2.8.0 連接的 Openlog Replicator 和 Oracle 連接器類型。其他連接器類型可能會在未來的版本中得到支援。</li>
+<li>支援重試機制：如果某些表快照失敗，錯誤訊息將保存到 synchdb_fdw_snapshot_errors_xxx 表中，可以透過恢復連接器進行重試。成功快照的表將保留。</li>
+<li>如果使用「schemasync」或「nodata」快照模式，FDW 引擎將僅同步表模式。</li>
+<li>透過 FDW 引擎建立的表格和資料受「synchdb_objmap」中定義的名稱和表達式轉換規則的約束。</li>
+<li>新增函數 synchdb_translate_datatype()，該函數會根據所選連接器類型傳回 SynchDB 的資料類型轉換結果。</li>
+</ul>
+<h4 id="_3"><a href="https://docs.synchdb.com/monitoring/stats_view/">改進的統計視圖</a><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h4>
+<ul>
+<li>改進了統計視圖，將不同的統計資料分組到適當的類別。</li>
+<li>已移除 synchdb_stats_view() 函數。</li>
+<li>新增了 synchdb_genstats 視圖，用於記錄已處理事件批次的統計資料。</li>
+<li>新增了 synchdb_snapstats 視圖，用於記錄初始快照過程的統計資料。</li>
+<li>新增了 synchdb_cdcstats 視圖，用於記錄 CDC 流程的統計資料。</li>
+</ul>
+<h4 id="postgresql-18-ivorysql-5">PostgreSQL 18 和 IvorySQL 5 相容性<a class="headerlink" href="#postgresql-18-ivorysql-5" title="Permanent link">&para;</a></h4>
+<ul>
+<li>SynchDB 與 PostgreSQL 18 和 IvorySQL 5 相容。</li>
+<li>在 IvorySQL 5 下以「oracle」相容模式運行基於 FDW 的快照時，由於 PL/pgSQL 函數是用 PostgreSQL 標準編寫的，因此在快照期間，該模式將切換回「pg」模式。</li>
+<li>SynchDB 將在 SynchDB 工作進程中將“ivorysql.identifier_case_switch”設定設為“normal”，以防止字母大小寫被錯誤地反轉。</li>
+<li>將 liboracle_parser.so 及其內部的 oracle_raw_parser() 符號重新命名為 libsynchdb_oracle_parser.so 和 synchdb_oracle_raw_parser()，以防止符號名稱與 IvorySQL 衝突。</li>
+</ul>
+<h3 id="_4"><strong>变更</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Openlog Replicator 連接器：增強了 Oracle 解析器，以支援更多約束運算子：enable、disable、novalidate 和 validate。</li>
+<li>Openlog Replicator 連接器：增強了 Oracle 解析器，以支援帶有括號和不帶括號的 MODIFY 子句。</li>
+<li>Openlog Replicator 連接器：增強了 Oracle 解析器，以支援 DEFAULT ON NULL 子句。</li>
+<li>Openlog Replicator 連接器：透過移除一個預掃描循環來提高處理效能。</li>
+<li>Openlog Replicator 連接器：最佳化了以 PostgreSQL 文字類型處理非空終止事件的操作，從而減少了一次複製操作。 (PG17+)</li>
+<li>Openlog Replicator 連接器：預設讀取緩衝區大小變更為 128MB</li>
+<li>Openlog Replicator 連接器：新增 GUC 參數“synchdb.olr_read_timeout_ms”，用於設定讀取逾時時間。</li>
+<li>Openlog Replicator 連接器：新增 GUC 參數“synchdb.olr_connect_timeout_ms”，用於設定連線逾時時間。</li>
+<li>Openlog Replicator 連接器：將忽略 Debezium 建立的「log_mining_flush」表。</li>
+<li>更新了所有連接器類型的預設資料類型映射</li>
+<li>更健壯的 JSON 處理：不再因為 JSON 元素查找失敗而崩潰</li>
+</ul>
+<h3 id="_5">已修復<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Openlog Replicator 連接器：修正了在 PostgreSQL 16 下執行時間 Oracle 解析器解析失敗的問題。</li>
+<li>Openlog Replicator 連接器：修正了將包含系統擁有者的意外 DDL 語句錯誤地傳遞給 SynchDB 的問題。</li>
+<li>Openlog Replicator 連接器：調整了 SCN 和 C_SCN 值，使其恢復 CDC 時使用偏移檔案中儲存的值，而不是加 1，從而避免在復原時跳過先前失敗的變更事件。</li>
+<li>SynchDB 現在允許來源表或模式名稱包含空格。</li>
+<li>修正了對負十進制值處理不正確的問題。</li>
+<li>修正了對大十進制溢出值處理不正確的問題。</li>
+<li>修正了 Oracle 預設 NUMBER 資料類型對應中錯誤地省略長度和小數位數的問題。</li>
+<li>修正了 MySQL 連接器中帶有自增屬性的缺失預設資料類型映射</li>
+</ul>
+<h3 id="_6">已知問題和其他信息<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<ul>
+<li>SynchDB 在將傳入的表名、模式名和列名套用到 PostgreSQL 之前，總是會將它們規範化為小寫字母。如果來源表支援名稱相同但大小寫不同的對象，則會出現問題。例如，'mytable' 和 'MYTABLE' 在 MySQL 和 Oracle 中被視為不同的表名。問題連結<a href="https://github.com/Hornetlabs/synchdb/issues/194">此處</a></li>
+<li>目前尚不支援基於 FDW 的 MySQL 和 SQL Server 快照，我們可能會在未來的版本中新增支援。更多資訊<a href="https://github.com/Hornetlabs/synchdb/issues/190">此處</a></li>
+</ul>
+<h2 id="synchdb-12-2025-09-04"><strong><a href="https://github.com/Hornetlabs/synchdb/releases/tag/v1.2">SynchDB 1.2</a> - 2025-09-04</strong><a class="headerlink" href="#synchdb-12-2025-09-04" title="Permanent link">&para;</a></h2>
+<p>SynchDB 1.2 引入了原生 Openlog Replicator 连接器（测试版）、增强的 JMX 和 Grafana 监控功能，以及用于快速部署和测试的全新 ezdeploy.sh 工具。此外，它还增加了快照表选择功能、性能改进和关键修复，同时解决了连接器隔离和稳定性问题。</p>
+<h3 id="_7"><strong>新增</strong><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h4 id="openlog-replicator-"><a href="https://docs.synchdb.com/user-guide/configure_olr/">原生 Openlog Replicator 连接器</a> - 测试版<a class="headerlink" href="#openlog-replicator-" title="Permanent link">&para;</a></h4>
+<ul>
+<li>新增 <code>synchdb_add_olr_conninfo</code> 和 <code>synchdb_del_olr_conninfo</code>，用于启用或禁用基于 Openlog Replicator 的流式传输。</li>
+<li>添加了新的连接器类型“olr”，它是一个原生（非 Debezium）Openlog 复制器客户端，可从外部 Openlog Replicator 服务流式传输 Oracle 数据库更改。</li>
+<li>支持的 DML：插入、更新/删除</li>
+<li>支持的 DDL：创建表、删除表、修改表、添加/删除列、添加/删除约束、截断</li>
+<li>基于 libprotobuf-c 与 Openlog Replicator 和 IvorySQL 的 Oracle 解析器通信，以处理传入的 DDL 查询事件。</li>
+<li>支持的快照模式：initial、initial_only、no_data、always、never</li>
+<li>与其他基于 Debezium 的连接器一样，支持批处理、模式历史记录和偏移量管理。</li>
+<li>除原生连接器外，还支持基于 Debezium 的 Openlog Replicator 连接器。</li>
+</ul>
+<h4 id="_8"><a href="https://docs.synchdb.com/monitoring/jmx_monitor/">监控</a><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h4>
+<ul>
+<li>新增 <code>synchdb_add_jmx_conninfo</code> 和 <code>synchdb_del_jmx_conninfo</code>，用于启用或禁用基于 JMX 的监控。</li>
+<li>新增 <code>synchdb_add_jmx_exporter_conninfo</code> 和 <code>synchdb_del_jmx_exporter_conninfo</code>，用于启用或禁用 Prometheus 和 Grafana 的监控支持。</li>
+<li>新增基于 Grafana 的仪表板模板，用于支持基于 Debezium 的连接器（MySQL、SQL Server 和 Oracle）。</li>
+</ul>
+<h4 id="ezdeploysh"><a href="https://docs.synchdb.com/getting-started/quick_start/">ezdeploy.sh</a><a class="headerlink" href="#ezdeploysh" title="Permanent link">&para;</a></h4>
+<ul>
+<li>新增 <code>ezdeploy.sh</code> 工具，可快速部署预构建的 SynchDB 和所选的源数据库类型，以便快速进行连接器测试。</li>
+<li>支持部署：MySQL、SQL Server、Oracle23ai、Oracle19c、Openlog Replicator 1.3.0</li>
+<li>支持预加载仪表板的 Prometheus 和 Grafana 部署。</li>
+<li>支持预编译的 SynchDB v1.2，以便快速部署和测试。</li>
+</ul>
+<h3 id="_9"><strong>变更</strong><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li>在 <code>synchdb_add_conninfo</code> 中添加了一个名为 <code>snapshot table</code> 的新参数，允许用户在以 <code>always</code> 快照模式启动时选择要重做初始快照的表。</li>
+<li>更新了 pytest 框架，以支持基于 hammerdb 的 Oracle TPC 测试。</li>
+<li>通过使用直接缓冲区代替频繁的 JNI 调用，增强了 Debezium 引擎和 SynchDB 之间事件轮询的性能。</li>
+<li>当连接器通过 <code>synchdb_resume_engine</code> 恢复时，它将始终以 <code>initial</code> 快照模式恢复，而不是首次启动时的模式。</li>
+<li><code>synchdb_state_view</code> 和 <code>synchdb_stats_view</code> 现在仅显示当前 SynchDB 扩展创建的连接器信息。其他 SynchDB 扩展在不同数据库中创建的连接器将不显示。</li>
+</ul>
+<h3 id="_10"><strong>已修复</strong><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<ul>
+<li>修复了 <code>spi_execute_select_one()</code> 函数崩溃的问题，该函数在 SPI 执行成功后会返回一个已被 SPI 内存上下文销毁的引用。</li>
+<li>解决了使用 cassert 构建 PostgreSQL 时 SynchDB 的编译问题。</li>
+<li>修复了多个 SynchDB 扩展（创建于不同数据库中）创建的同名连接器会相互覆盖共享内存数据的问题。</li>
+</ul>
+<h3 id="_11"><strong>已知问题及其他信息</strong><a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<ul>
+<li>原生 Openlog Replicator 连接器目前会流式传输指定数据库下的所有表。表过滤功能需要在 Openlog Replicator 中配置，而不是在 SynchDB 中。</li>
+<li>基于 Prometheus 和 Grafana 的监控需要 JMX Exporter，可以从<a href="https://github.com/prometheus/jmx_exporter">此处</a> 下载</li>
+</ul>
+<h2 id="synchdb-11-2025-04-17"><strong><a href="https://github.com/Hornetlabs/synchdb/releases/tag/v1.1">SynchDB 1.1</a> - 2025-04-17</strong><a class="headerlink" href="#synchdb-11-2025-04-17" title="Permanent link">&para;</a></h2>
+<p>SynchDB 1.1 版本引入了 Oracle 连接器支持，增强了数据类型转换能力，并显著改进了核心数据处理引擎。本次更新通过智能缓存和优化的 JSON 解析，提升了性能表现，同时扩展了与 PostgreSQL 16、17 和 IvorySQL 4.4 的兼容性。</p>
+<h3 id="_12"><strong>添加</strong><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<h4 id="_13"><strong>连接器支持</strong><a class="headerlink" href="#_13" title="Permanent link">&para;</a></h4>
+<ul>
+<li>新增 Oracle 连接器支持</li>
+<li>新增 Oracle 可变大小/精度 NUMBER 数据类型处理支持</li>
+<li>支持 PostgreSQL 16、17 和 IvorySQL 4.4</li>
+</ul>
+<h4 id="_14"><strong>对象映射与数据转换</strong><a class="headerlink" href="#_14" title="Permanent link">&para;</a></h4>
+<ul>
+<li>新增 <code>synchdb_objmap</code> 表存储对象映射条目</li>
+<li>新增 <code>synchdb_add_objamp()</code> 函数添加对象映射，支持表名、列名、数据类型和转换表达式</li>
+<li>新增 <code>synchdb_reload_objmap()</code> 函数强制连接器重新加载对象映射</li>
+<li>新增 <code>synchdb_del_objmap()</code> 函数禁用并删除对象映射条目</li>
+<li>归一化所有数据类型映射条目，使用小写字母</li>
+</ul>
+<h4 id="_15"><strong>元数据与监控</strong><a class="headerlink" href="#_15" title="Permanent link">&para;</a></h4>
+<ul>
+<li>新增 <code>synchdb_attribute</code> 表存储远程表属性信息</li>
+<li>新增 <code>synchdb_att_view</code> 视图显示数据类型、表名和列名映射的并排比较</li>
+<li>在 <code>synchdb_get_stats</code> 中增加源时间戳、DBZ 时间戳和 PG 时间戳信息</li>
+</ul>
+<h4 id="_16"><strong>连接管理</strong><a class="headerlink" href="#_16" title="Permanent link">&para;</a></h4>
+<ul>
+<li>新增 <code>synchdb_add_extra_conninfo()</code> 函数配置额外的 SSL 连接参数</li>
+<li>新增 <code>synchdb_del_extra_conninfo()</code> 函数删除由 <code>synchdb_add_extra_conninfo()</code> 创建的所有额外参数</li>
+<li>新增 <code>synchdb_del_conninfo()</code> 函数删除现有连接器信息</li>
+</ul>
+<h4 id="_17"><strong>配置与控制</strong><a class="headerlink" href="#_17" title="Permanent link">&para;</a></h4>
+<ul>
+<li>新增 <code>synchdb.error_handling_strategy</code> GUC 参数控制错误处理策略（跳过、退出或重试）</li>
+<li>新增 <code>synchdb.dbz_log_level</code> GUC 参数控制 Debezium 运行引擎的日志级别</li>
+<li>新增 <code>schemasync</code> 快照模式</li>
+</ul>
+<h4 id="_18"><strong>性能优化</strong><a class="headerlink" href="#_18" title="Permanent link">&para;</a></h4>
+<ul>
+<li>优化 DML 解析器，使用缓存哈希表而非每次更改事件都访问目录并重建哈希</li>
+<li>DML 解析器现使用更高效的 JSONB API 调用提升性能</li>
+<li>优化 JNI 调用，使用缓存的 JNI 句柄而非每次更改事件都重新创建</li>
+<li>仅标记批次中的第一个和最后一个更改事件，而非所有事件</li>
+<li>重新设计数据处理引擎，采用更模块化的设计，以处理更复杂的数据类型映射</li>
+</ul>
+<h3 id="_19"><strong>变更</strong><a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<ul>
+<li>处理 ALTER TABLE 更改事件时，仅在表本身没有主键时添加主键</li>
+<li>移除在 <code>synchdb_add_conninfo()</code> 中配置连接器连接到安装了 synchdb 以外的目标 PostgreSQL 数据库的功能</li>
+<li>在每个 DDL 更改事件处理结束时，更新新的 <code>synchdb_attribute</code> 表</li>
+<li>连接器将根据配置的对象映射在启动或重新加载时更正表名、列名和数据类型</li>
+<li>规则文件已被 <code>synchdb_add_objmap()</code> 工具替代</li>
+<li>所有基于 ID 的 SQL 函数列定义，数据类型从 TEXT 更改为 NAME</li>
+<li>从 <code>synchdb_add_conninfo()</code> 中移除 rulefile 参数</li>
+<li>非原生数据类型现在基于类别处理，而非全部作为文本处理</li>
+</ul>
+<h3 id="_20"><strong>修复</strong><a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<ul>
+<li>修复 SPI 更新或删除可能因仅在 WHERE 子句中包含主键字段而导致更新或删除失败的问题</li>
+<li>修复 ALTER TABLE 在尝试添加重复主键时出错的问题</li>
+<li>修复 synchdb 偶尔从 JSON 更改事件中错误查找列架构值的问题</li>
+<li>修复"跳过错误"模式下因错误堆栈溢出而导致崩溃的问题</li>
+<li>修复 ALTER TABLE ADD 和 DROP 列操作中未意识到列名可能在 PostgreSQL 中映射到不同值的问题</li>
+</ul>
+<h2 id="synchdb-10-2024-12-24"><strong><a href="https://github.com/Hornetlabs/synchdb/releases/tag/v1.0">SynchDB 1.0</a> - 2024-12-24</strong><a class="headerlink" href="#synchdb-10-2024-12-24" title="Permanent link">&para;</a></h2>
+<p>此版本侧重于 v1.0 Beta1 版本之后的错误修复和性能增强，使其在中高数据负载下更易于使用。更多与 Debezium 调优相关的参数也已作为 PostgreSQL GUC 公开，允许用户使用不同的参数进行测试。</p>
+<h3 id="_21"><strong>添加</strong><a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<ul>
+<li>在 DML 解析阶段添加了数据缓存，以防止频繁访问 PostgreSQL catalog 以获取表的元组描述符结构。</li>
+<li>添加 <code>synchdb_start_engine_bgw(name, mode)</code> 的变体，它接受第二个参数来指示启动连接器时使用的自定义快照模式。<a href="../user-guide/utility_functions">此处</a>有更多详细信息。</li>
+<li>添加多个可以调整 Debezium Runner 性能的 GUC。完整列表请参阅<a href="../user-guide/configuration.md">此处</a>。</li>
+<li>添加一个调试 SQL 函数 <code>synchdb_log_jvm_meminfo(name)</code>，该函数使指定的连接器在 PostgreSQL 日志文件中输出当前 JVM 堆内存使用情况摘要。</li>
+<li>添加一个新视图 <code>synchdb_stats_view</code>，用于打印所有连接器的统计信息。更多详细信息请参阅<a href="../user-guide/utility_functions">此处</a>。</li>
+<li>增加了新的SQL函数 <code>synchdb_reset_stats(name)</code> 来清除指定连接器的统计信息。更多详细信息请参阅<a href="../user-guide/utility_functions">此处</a>。</li>
+<li>添加一个测试数据创建脚本，用于快速生成 MySQL 数据库类型的测试表和数据。</li>
+</ul>
+<h3 id="_22"><strong>变更</strong><a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<ul>
+<li>synchdb_state_view()：添加了一个名为 <code>stage</code> 的新字段，用于标识 connector 的当前阶段（值可以是 <code>Initial Snapshot</code> 或 <code>Change Data Capture</code>）。</li>
+<li>synchdb_state_view()：仅显示有效连接器的状态。</li>
+<li>删除了在发生错误时向 Debezium Runner 发送 “部分批处理完成” 通知，因为批处理现在由一个 PostgreSQL 事务处理，且不允许部分完成。</li>
+<li>现在可以在 <a href="../user-guide/transform_rule_file">规则文件</a> 中指定 connector 所需的 SSL 相关参数。</li>
+<li>现在可以通过 GUC 配置分配给运行 Debezium Runner 的 JVM 的最大堆内存。</li>
+<li>现在可以配置连接器后台进程的最大数量，而不是硬编码的 30。</li>
+</ul>
+<h3 id="_23"><strong>修复</strong><a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<ul>
+<li>在 Debezium runner 内添加节流控制，修复了 Debezium Runner 在数据量大时内存快速积累问题。</li>
+<li>解决了 SynchDB 和 Debezium runner 组件中的大部分内存泄漏问题。</li>
+<li>更正了 SynchDB 中 memory context 的使用，以便在每次更改事件处理结束时正确释放内存。</li>
+<li>通过在单个 PostgreSQL 事务中处理一批改动，显著提高了 SynchDB 的处理速度。</li>
+<li>将 SQLServer 的 <code>char</code> 类型的默认数据类型大小映射从 0 更正为 -1。</li>
+<li>解决了使用 SPI 进行 DML 处理期间内存使用率过高的问题。</li>
+</ul>
+<h2 id="synchdb-10-beta1-2024-10-23"><a href="https://github.com/Hornetlabs/synchdb/releases/tag/v1.0_beta1">SynchDB 1.0 Beta1</a> - 2024-10-23<a class="headerlink" href="#synchdb-10-beta1-2024-10-23" title="Permanent link">&para;</a></h2>
+<p>第一版 SynchDB 软件发布，为从异构数据库到 PostgreSQL 的无缝复制奠定了坚实的基础</p>
+<h3 id="_24"><strong>新增</strong><a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<ul>
+<li>从异构数据库进行逻辑复制：（MySQL 和 SQLServer）。</li>
+<li><a href="../user-guide/ddl_replication">DDL 复制</a> (CREATE TABLE、DROP TABLE、ALTER TABLE ADD COLUMN、ALTER TABLE DROP COLUMN、ALTER TABLE ALTER COLUMN)</li>
+<li>DML 复制（INSERT、UPDATE、DELETE）。</li>
+<li>最多 30 个并发连接器工作器。</li>
+<li>PostgreSQL 启动时 <a href="../user-guide/connector_auto_launcher">自动连接器启动器</a>。</li>
+<li>全局连接器状态和最后错误消息视图。</li>
+<li><a href="../user-guide/selective_table_sync">选择性数据库和表复制</a>。</li>
+<li>批量更改事件。</li>
+<li>连接器以不同的快照模式重新启动。</li>
+<li><a href="../user-guide/set_offset">偏移管理接口</a> 用于选择自定义复制恢复点。</li>
+<li>支持的异构数据库的默认数据类型和对象名称转换规则。</li>
+<li><a href="../user-guide/transform_rule_file">JSON 规则文件</a> 用于定义自定义：（数据类型、列名、表名和数据表达式转换规则）。</li>
+<li>2 种数据应用模式（SPI、HeapAM API）</li>
+<li>新增<a href="../user-guide/utility_functions">实用函数</a> 用于执行连接器操作：（启动、停止、暂停、恢复）。</li>
+</ul>
+<h3 id="_25"><strong>变更</strong><a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<h3 id="_26"><strong>修复</strong><a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  回到页面顶部
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 Maintained by <a href="https://github.com/hornetlabs">Hornetlabs Technology </a>. <a href="https://www.netlify.com/"><img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deployed by Netlify" width="114" height="51"></a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../js/print-site.js"></script>
+      
+        <script src="../../js/print-site.js"></script>
+      
+        <script src="../../js/print-site.js"></script>
+      
+    
+  </body>
+</html>
