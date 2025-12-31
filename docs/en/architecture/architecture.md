@@ -26,10 +26,10 @@ For this reason, SynchDB requires JNI to exchange resources between Debezium run
 
 This is the driver program in Java that utilizes the Debezium Embedded Engine with various `connectors` to different database sources. This is the key underlying components that make logical replication from multiple database vendors possible. Its main responsibility is to connect to the specified remote database and periodically fetch its changes and convert them to a common JSON structure. This JSON structure is then passed down to `SynchDB Extension in C` to process and eventually apply the changes to PostgreSQL.
 
-[Debezium Runner Component Architecture](https://docs.synchdb.com/architecture/debezium_runner_components/)
+[Debezium Runner Component Architecture](architecture/debezium_runner_components/)
 
 ### **SynchDB Extension - C**
 
 This is the main entrypoint that initializes a Java Virtual Machine (JVM) and run Debezium Runner on it. It periodically fetches a batch of JSON change events from Debezium Runner, process the data and apply them to PostgreSQL. It is also responsible for notifying Debezium that it has successfully completed a batch of JSON change events so that both components are synchronized in terms of replication progress. 
 
-[SynchDB Extension Component Architecture](https://docs.synchdb.com/architecture/synchdb_components/)
+[SynchDB Extension Component Architecture](architecture/synchdb_components/)

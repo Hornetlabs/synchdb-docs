@@ -2,7 +2,7 @@
 
 ## **Debezium Runner 组件图**
 
-![img](/images/synchdb-dbzrunner-component2.jpg)
+![img](../../images/synchdb-dbzrunner-component2.jpg)
 
 Debezium Runner 位于部署的 Java 端。它是嵌入式 Debezium 引擎 (Java) 和 SynchDB Worker (C) 之间的主要中介。它提供了一些 Java 方法，SynchDB Worker 可以通过 JNI 库进行交互。这些交互包括初始化 Debezium 引擎、启动或停止引擎、获取一批变更事件以及将一批标记为完成。这些操作对于确保复制一致性至关重要。主要组件包括：
 

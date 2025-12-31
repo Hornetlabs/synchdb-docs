@@ -4,7 +4,7 @@
 
 所有連接器都支援基於 Debezium 的初始快照，該快照可將遠端表格模式移轉到 PostgreSQL，無論是否包含初始資料（取決於所使用的快照模式）。這種方法在大多數情況下都有效，但當需要遷移大量資料表時，可能會出現效能問題，並且會透過 JNI 呼叫引入額外的開銷。如果來源資料庫（例如 Oracle）支援 "FLASHBACK" 查詢，則可以使用外部資料包裝器 (FDW) 實作相同的初始快照。 "FLASHBACK"查詢可以確保快照遷移到某個 "偏移"（Oracle 中的 SCN），從而確保到某個時間點的讀取一致性，然後從該時間點開始 CDC 串流傳輸。
 
-目前，我們僅支援使用 oracle_fdw 作為原生 Openlog Replicator (OLR) 連接器的 Debezium 快照的替代方案。未來，如果可行的話，我們可能會添加對其他連接器的支援。若要使用基於 FDW 的快照，只需將 GUC 參數 `synchdb.olr_snapshot_engin` 設定為 "fdw" 。請參閱[此處](https://docs.synchdb.com/zh/user-guide/configure_snapshot_engine/) 以取得建置和安裝 oracle_fdw 的快速指南。
+目前，我們僅支援使用 oracle_fdw 作為原生 Openlog Replicator (OLR) 連接器的 Debezium 快照的替代方案。未來，如果可行的話，我們可能會添加對其他連接器的支援。若要使用基於 FDW 的快照，只需將 GUC 參數 `synchdb.olr_snapshot_engin` 設定為 "fdw" 。請參閱[此處](user-guide/configure_snapshot_engine/) 以取得建置和安裝 oracle_fdw 的快速指南。
 
 ## **基於 FDW 的快照如何運作**
 

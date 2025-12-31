@@ -191,21 +191,21 @@ SELECT synchdb_add_jmx_conninfo(
 
 When a connector with JMX configuration is started, the JMX service will be running on the designated port number. We can use `jconsole` that comes with Java distribution to connect to JMX server. It is possible to connect locally via the JVM (connector worker) PID or via IP address and port number. If authentication is enabled, username and password are required as well. If no authentication is used, these can be left empty.
 
-![img](/images/jmx.jpg)
+![img](../../images/jmx.jpg)
 
 Once connected, we can view all the details about JVM's operating metrics such as CPU, memory, class utilization, threads...etc. 
 
-![img](/images/jmx2.jpg)
-![img](/images/jmx3.jpg)
-![img](/images/jmx4.jpg)
+![img](../../images/jmx2.jpg)
+![img](../../images/jmx3.jpg)
+![img](../../images/jmx4.jpg)
 
 ## **Visualize Debezium JMX MBeans**
 
 The last tab is MBeans, which contains the Debezium specific metrics for schema history, snapshot and streaming stages.
 
-![img](/images/jmx5.jpg)
-![img](/images/jmx6.jpg)
-![img](/images/jmx7.jpg)
+![img](../../images/jmx5.jpg)
+![img](../../images/jmx6.jpg)
+![img](../../images/jmx7.jpg)
 
 Based on the connector type, the MBean metrics may be different. Refer to Debezium connector documentation on the list of metrics captured:
 

@@ -2,7 +2,7 @@
 
 ## Prepare Oracle Database for SynchDB
 
-Before SynchDB can be used to replicate from Oracle, Oracle needs to be configured according to the procedure outlined [here](https://docs.synchdb.com/getting-started/remote_database_setups/)
+Before SynchDB can be used to replicate from Oracle, Oracle needs to be configured according to the procedure outlined [here](getting-started/remote_database_setups/)
 
 Please ensure that supplemental log data is enabled for all columns for each desired table to be replicated by SynchDB. This is needed for SynchDB to correctly handle UPDATE and DELETE oeprations.
 

@@ -11,7 +11,7 @@ JMX Exporter（也称为 JMX Prometheus Java Agent）是一个 Java 代理，它
 
 此工具可解锁基于 Prometheus + Graphana 的 SynchDB 连接器监控功能
 
-![img](/images/prom.png)
+![img](../../images/prom.png)
 
 ## 获取 JMX 导出器
 

@@ -2,7 +2,7 @@
 
 ## **Debezium 事件处理器组件图**
 
-![img](/images/synchdb-component-diag.jpg)
+![img](../../images/synchdb-component-diag.jpg)
 
 Debezium 事件处理器是由 SynchDB 扩展发起和启动的 PostgreSQL 后台工作进程。它负责初始化 Java 虚拟机 (JVM)，运行 Debezium Runner模块，（它是 SynchDB 的 Java 部分），利用嵌入式 Debezium 引擎从异构数据库源获取更改事件。每个 SynchDB 工作进程都由下面列出的组件和模块组成：
 
@@ -20,21 +20,21 @@ Debezium 事件处理器是由 SynchDB 扩展发起和启动的 PostgreSQL 后�
 
 ### **1) 事件获取器**
 
-事件获取器主要负责从运行在 JVM 中的嵌入式 Debezium Runner 获取一批 JSON 变更事件。此操作通过 Java 接口 (JNI) 库完成，通过定期调用 JAVA 函数返回一个 JAVA `String` 列表，该列表以 JSON 格式表示每个变更请求。此列表 表示一批 JSON 变更事件。再次调用 JNI 库来迭代此 `List`，将内容从 JAVA `String` 转换为 C 字符串，并将其发送到 `4) JSON 解析器` 进行进一步处理。获取频率可通过 [`synchdb.naptime`](https://docs.synchdb.com/zh/user-guide/configuration/) 配置，批次的最大大小可通过 [`synchdb.dbz_batch_size`](https://docs.synchdb.com/zh/user-guide/configuration/) 配置。
+事件获取器主要负责从运行在 JVM 中的嵌入式 Debezium Runner 获取一批 JSON 变更事件。此操作通过 Java 接口 (JNI) 库完成，通过定期调用 JAVA 函数返回一个 JAVA `String` 列表，该列表以 JSON 格式表示每个变更请求。此列表 表示一批 JSON 变更事件。再次调用 JNI 库来迭代此 `List`，将内容从 JAVA `String` 转换为 C 字符串，并将其发送到 `4) JSON 解析器` 进行进一步处理。获取频率可通过 [`synchdb.naptime`](user-guide/configuration/) 配置，批次的最大大小可通过 [`synchdb.dbz_batch_size`](user-guide/configuration/) 配置。
 
-当批次完成时，即其中的所有更改事件都已处理完毕，它将通过 JNI 调用 `markBatchComplete()` JAVA 函数以指示此批次已成功完成。这将导致 Debezium Runner 提交并推进偏移量。有关批次管理的更多信息，请参见[此处](https://docs.synchdb.com/zh/architecture/batch_change_handling/)。
+当批次完成时，即其中的所有更改事件都已处理完毕，它将通过 JNI 调用 `markBatchComplete()` JAVA 函数以指示此批次已成功完成。这将导致 Debezium Runner 提交并推进偏移量。有关批次管理的更多信息，请参见[此处](architecture/batch_change_handling/)。
 
 ### **2) JVM + Debezium (DBZ) 初始化程序**
 
-JVM + DBZ 初始化程序主要负责实例化新的 JVM 环境并在其中运行 Debezium Runner (`dbz-engine-x.x.x.jar`)。此 .jar 文件默认安装在 `pg_config` 返回的 $LIBDIR 中。您也可以通过设置环境变量 `DBZ_ENGINE_DIR` 为 Debezium Runner .jar 文件指定备用路径。SynchDB 当前使用 `JNI_VERSION_10` 作为 JNI 版本，兼容 JAVA v10 至 v18。但是，将来我们可能会升级 JNI 版本以获得 JNI 的最新改进和优势。可以通过 [`synchdb.jvm_max_heap_size`](https://docs.synchdb.com/zh/user-guide/configuration/) 配置分配给 JVM 的最大heap内存。如果设置为零，JVM 将自动分配理想的heap大小。
+JVM + DBZ 初始化程序主要负责实例化新的 JVM 环境并在其中运行 Debezium Runner (`dbz-engine-x.x.x.jar`)。此 .jar 文件默认安装在 `pg_config` 返回的 $LIBDIR 中。您也可以通过设置环境变量 `DBZ_ENGINE_DIR` 为 Debezium Runner .jar 文件指定备用路径。SynchDB 当前使用 `JNI_VERSION_10` 作为 JNI 版本，兼容 JAVA v10 至 v18。但是，将来我们可能会升级 JNI 版本以获得 JNI 的最新改进和优势。可以通过 [`synchdb.jvm_max_heap_size`](user-guide/configuration/) 配置分配给 JVM 的最大heap内存。如果设置为零，JVM 将自动分配理想的heap大小。
 
 请注意，每个 SynchDB 工作进程都会初始化并运行一个 JVM 实例，因此运行的工作进程越多，所需的heap内存就越多。您可以通过调用 `synchdb_log_jvm_meminfo('$connector_name')` 函数查看 SynchDB 工作进程的 JVM 当前heap和非heap内存使用情况，内存摘要将记录在 PostgreSQL 日志文件中。
 
 ### **3) 请求处理器**
 
-请求处理器主要负责检查和处理来自 SynchDB 用户的任何传入状态更改请求。此类状态更改请求的示例包括从“同步”到“暂停”，从“暂停”到“更新偏移”等。以下是 synchdb 的状态图。更多信息可以在 [此处](https://docs.synchdb.com/zh/user-guide/utility_functions/#state-management) 找到。
+请求处理器主要负责检查和处理来自 SynchDB 用户的任何传入状态更改请求。此类状态更改请求的示例包括从“同步”到“暂停”，从“暂停”到“更新偏移”等。以下是 synchdb 的状态图。更多信息可以在 [此处](user-guide/utility_functions/#state-management) 找到。
 
-![img](/images/synchdb-state-diag.jpg)
+![img](../../images/synchdb-state-diag.jpg)
 
 ### **4) JSON 解析器**
 
@@ -204,13 +204,13 @@ DDL 有效负载：
 * 数据类型。
 * 转换表达式。
 
-可以使用`synchdb_add_objmap()` 函数创建映射规则之前将源表名、列名和数据类型映射到不同的目标表名、列名和数据类型，并且可以通过查询`synchdb_objmap` 表来查看所有规则。有关对象映射的更多信息，请参见[此处](https://docs.synchdb.com/zh/user-guide/object_mapping_rules/)。在`synchdb_att_view()` 视图下可以查看哪些内容映射到哪些内容的摘要。
+可以使用`synchdb_add_objmap()` 函数创建映射规则之前将源表名、列名和数据类型映射到不同的目标表名、列名和数据类型，并且可以通过查询`synchdb_objmap` 表来查看所有规则。有关对象映射的更多信息，请参见[此处](user-guide/object_mapping_rules/)。在`synchdb_att_view()` 视图下可以查看哪些内容映射到哪些内容的摘要。
 
-`转换表达式` 是一个 SQL 表达式，将在数据转换完成后、应用数据之前运行（如果指定）。此表达式可以是 PostgreSQL 中可运行的任何表达式，例如调用另一个 SQL 函数或使用运算符。有关对象映射规则的更多信息，请参见[此处](https://docs.synchdb.com/zh/user-guide/object_mapping_rules/)。
+`转换表达式` 是一个 SQL 表达式，将在数据转换完成后、应用数据之前运行（如果指定）。此表达式可以是 PostgreSQL 中可运行的任何表达式，例如调用另一个 SQL 函数或使用运算符。有关对象映射规则的更多信息，请参见[此处](user-guide/object_mapping_rules/)。
 
 ### **6) 统计收集器**
 
-统计收集器负责收集 SynchDB 自操作开始以来的数据处理统计信息。这包括 DDL 和 DML 的数量、已处理的 CREATE、INSERT、UPDATE、DELETE 操作数量、处理的平均批处理大小以及描述数据在源中首次生成时间、Debezium 处理数据的时间以及在 PostgreSQL 中应用数据的时间的几个时间戳。这些指标可以帮助用户了解 SynchDB 的处理行为，以调整和优化设置以提高处理性能。有关统计数据的更多信息，请参见[此处](https://docs.synchdb.com/zh/user-guide/stats)。
+统计收集器负责收集 SynchDB 自操作开始以来的数据处理统计信息。这包括 DDL 和 DML 的数量、已处理的 CREATE、INSERT、UPDATE、DELETE 操作数量、处理的平均批处理大小以及描述数据在源中首次生成时间、Debezium 处理数据的时间以及在 PostgreSQL 中应用数据的时间的几个时间戳。这些指标可以帮助用户了解 SynchDB 的处理行为，以调整和优化设置以提高处理性能。有关统计数据的更多信息，请参见[此处](user-guide/stats)。
 
 ### **7) DDL 转换器**
 
@@ -226,7 +226,7 @@ DDL 转换器负责将“JSON 解析器”生成的 DDL 数据转换为 PostgreS
 * 更改表添加列 ALTER TABLE ADD COLUMN
 * 更改表删除列 ALTER TABLE DROP COLUMN
 
-对于 CREATE 和 DROP，转换器能够从输入的 DDL 数据中为 SPI 创建相应的查询字符串。对于 ALTER、ADD 和 DROP COLUMN，转换器需要访问 PostgreSQL Catalog以了解现有表属性，并确定是否有要添加、删除或更改的列。Debezium 的 JSON 更改事件始终包含整个表的信息，并且不会明确指出已删除或添加的内容。因此，需要 DDL 转换器组件来找出此信息并生成正确的查询字符串。有关 DDL 复制的更多信息，请参见[此处](https://docs.synchdb.com/zh/user-guide/ddl_replication/)
+对于 CREATE 和 DROP，转换器能够从输入的 DDL 数据中为 SPI 创建相应的查询字符串。对于 ALTER、ADD 和 DROP COLUMN，转换器需要访问 PostgreSQL Catalog以了解现有表属性，并确定是否有要添加、删除或更改的列。Debezium 的 JSON 更改事件始终包含整个表的信息，并且不会明确指出已删除或添加的内容。因此，需要 DDL 转换器组件来找出此信息并生成正确的查询字符串。有关 DDL 复制的更多信息，请参见[此处](user-guide/ddl_replication/)
 
 
 ### **8) DML 转换器**
@@ -242,8 +242,8 @@ DML 转换器由几个例程组成，这些例程可以处理特定的输入数�
 
 例程选择首先查看在 PostgreSQL 中创建的数据类型，该数据类型可分为 2 种类型，每种类型的处理技术略有不同：
 
-* [原生数据类型](https://docs.synchdb.com/zh/architecture/native_datatype_handling/)。
-* [非原生数据类型](https://docs.synchdb.com/zh/architecture/non_native_datatype_handling/)。
+* [原生数据类型](architecture/native_datatype_handling/)。
+* [非原生数据类型](architecture/non_native_datatype_handling/)。
 
 #### **数据转换**
 
@@ -253,7 +253,7 @@ DML 转换器由几个例程组成，这些例程可以处理特定的输入数�
 
 ### **9) 错误处理程序**
 
-错误处理程序主要负责处理数据同步各个阶段可能出现的任何错误。格式转换器支持多种错误处理策略，可通过 “synchdb.error_handling_strategy” 参数进行配置。详情请参阅[此处](https://docs.synchdb.com/zh/user-guide/configure_error_strategies/)。
+错误处理程序主要负责处理数据同步各个阶段可能出现的任何错误。格式转换器支持多种错误处理策略，可通过 “synchdb.error_handling_strategy” 参数进行配置。详情请参阅[此处](user-guide/configure_error_strategies/)。
 
 ### **10) SPI Client**
 

@@ -10,7 +10,7 @@ SynchDB 1.3 憑藉全新的基於 FDW 的快照引擎，顯著提升了效能，
 
 ### **新增**
 
-#### [基於 FDW 的快照引擎](https://docs.synchdb.com/architecture/fdw_based_snapshot/)
+#### [基於 FDW 的快照引擎](architecture/fdw_based_snapshot/)
 
 * 基於 FDW 的快照引擎比 Debezium 的初始快照流程速度更快。
 * 新增 GUC 參數“synchdb.snapshot_engine”，用於選擇快照引擎，可以是“debezium”或“fdw”。
@@ -22,7 +22,7 @@ SynchDB 1.3 憑藉全新的基於 FDW 的快照引擎，顯著提升了效能，
 * 透過 FDW 引擎建立的表格和資料受「synchdb_objmap」中定義的名稱和表達式轉換規則的約束。
 * 新增函數 synchdb_translate_datatype()，該函數會根據所選連接器類型傳回 SynchDB 的資料類型轉換結果。
 
-#### [改進的統計視圖](https://docs.synchdb.com/monitoring/stats_view/)
+#### [改進的統計視圖](monitoring/stats_view/)
 
 * 改進了統計視圖，將不同的統計資料分組到適當的類別。
 * 已移除 synchdb_stats_view() 函數。
@@ -73,7 +73,7 @@ SynchDB 1.2 引入了原生 Openlog Replicator 连接器（测试版）、增强
 
 ### **新增**
 
-#### [原生 Openlog Replicator 连接器](https://docs.synchdb.com/user-guide/configure_olr/) - 测试版
+#### [原生 Openlog Replicator 连接器](user-guide/configure_olr/) - 测试版
 * 新增 `synchdb_add_olr_conninfo` 和 `synchdb_del_olr_conninfo`，用于启用或禁用基于 Openlog Replicator 的流式传输。
 * 添加了新的连接器类型“olr”，它是一个原生（非 Debezium）Openlog 复制器客户端，可从外部 Openlog Replicator 服务流式传输 Oracle 数据库更改。
 * 支持的 DML：插入、更新/删除
@@ -83,13 +83,13 @@ SynchDB 1.2 引入了原生 Openlog Replicator 连接器（测试版）、增强
 * 与其他基于 Debezium 的连接器一样，支持批处理、模式历史记录和偏移量管理。
 * 除原生连接器外，还支持基于 Debezium 的 Openlog Replicator 连接器。
 
-#### [监控](https://docs.synchdb.com/monitoring/jmx_monitor/)
+#### [监控](monitoring/jmx_monitor/)
 
 * 新增 `synchdb_add_jmx_conninfo` 和 `synchdb_del_jmx_conninfo`，用于启用或禁用基于 JMX 的监控。
 * 新增 `synchdb_add_jmx_exporter_conninfo` 和 `synchdb_del_jmx_exporter_conninfo`，用于启用或禁用 Prometheus 和 Grafana 的监控支持。
 * 新增基于 Grafana 的仪表板模板，用于支持基于 Debezium 的连接器（MySQL、SQL Server 和 Oracle）。
 
-#### [ezdeploy.sh](https://docs.synchdb.com/getting-started/quick_start/)
+#### [ezdeploy.sh](getting-started/quick_start/)
 * 新增 `ezdeploy.sh` 工具，可快速部署预构建的 SynchDB 和所选的源数据库类型，以便快速进行连接器测试。
 * 支持部署：MySQL、SQL Server、Oracle23ai、Oracle19c、Openlog Replicator 1.3.0
 * 支持预加载仪表板的 Prometheus 和 Grafana 部署。
@@ -186,11 +186,11 @@ SynchDB 1.1 版本引入了 Oracle 连接器支持，增强了数据类型转换
 ### **添加**
 
 * 在 DML 解析阶段添加了数据缓存，以防止频繁访问 PostgreSQL catalog 以获取表的元组描述符结构。
-* 添加 `synchdb_start_engine_bgw(name, mode)` 的变体，它接受第二个参数来指示启动连接器时使用的自定义快照模式。[此处](../user-guide/utility_functions)有更多详细信息。
-* 添加多个可以调整 Debezium Runner 性能的 GUC。完整列表请参阅[此处](../user-guide/configuration.md)。
+* 添加 `synchdb_start_engine_bgw(name, mode)` 的变体，它接受第二个参数来指示启动连接器时使用的自定义快照模式。
+* 添加多个可以调整 Debezium Runner 性能的 GUC。完整列表请参阅[此处](getting-started/configuration)。
 * 添加一个调试 SQL 函数 `synchdb_log_jvm_meminfo(name)`，该函数使指定的连接器在 PostgreSQL 日志文件中输出当前 JVM 堆内存使用情况摘要。
-* 添加一个新视图 `synchdb_stats_view`，用于打印所有连接器的统计信息。更多详细信息请参阅[此处](../user-guide/utility_functions)。
-* 增加了新的SQL函数 `synchdb_reset_stats(name)` 来清除指定连接器的统计信息。更多详细信息请参阅[此处](../user-guide/utility_functions)。
+* 添加一个新视图 `synchdb_stats_view`，用于打印所有连接器的统计信息。
+* 增加了新的SQL函数 `synchdb_reset_stats(name)` 来清除指定连接器的统计信息。
 * 添加一个测试数据创建脚本，用于快速生成 MySQL 数据库类型的测试表和数据。
 
 ### **变更**
@@ -198,7 +198,7 @@ SynchDB 1.1 版本引入了 Oracle 连接器支持，增强了数据类型转换
 * synchdb_state_view()：添加了一个名为 `stage` 的新字段，用于标识 connector 的当前阶段（值可以是 `Initial Snapshot` 或 `Change Data Capture`）。
 * synchdb_state_view()：仅显示有效连接器的状态。
 * 删除了在发生错误时向 Debezium Runner 发送 “部分批处理完成” 通知，因为批处理现在由一个 PostgreSQL 事务处理，且不允许部分完成。
-* 现在可以在 [规则文件](../user-guide/transform_rule_file) 中指定 connector 所需的 SSL 相关参数。
+* 现在可以在规则文件中指定 connector 所需的 SSL 相关参数。
 * 现在可以通过 GUC 配置分配给运行 Debezium Runner 的 JVM 的最大堆内存。
 * 现在可以配置连接器后台进程的最大数量，而不是硬编码的 30。
 
@@ -218,19 +218,19 @@ SynchDB 1.1 版本引入了 Oracle 连接器支持，增强了数据类型转换
 ### **新增**
 
 * 从异构数据库进行逻辑复制：（MySQL 和 SQLServer）。
-* [DDL 复制](../user-guide/ddl_replication) (CREATE TABLE、DROP TABLE、ALTER TABLE ADD COLUMN、ALTER TABLE DROP COLUMN、ALTER TABLE ALTER COLUMN)
+* [DDL 复制](architecture/ddl_replication/) (CREATE TABLE、DROP TABLE、ALTER TABLE ADD COLUMN、ALTER TABLE DROP COLUMN、ALTER TABLE ALTER COLUMN)
 * DML 复制（INSERT、UPDATE、DELETE）。
 * 最多 30 个并发连接器工作器。
-* PostgreSQL 启动时 [自动连接器启动器](../user-guide/connector_auto_launcher)。
+* PostgreSQL 启动时 [自动连接器启动器](user-guide/connector_auto_launcher/)。
 * 全局连接器状态和最后错误消息视图。
-* [选择性数据库和表复制](../user-guide/selective_table_sync)。
+* [选择性数据库和表复制](tutorial/selective_table_sync/)。
 * 批量更改事件。
 * 连接器以不同的快照模式重新启动。
-* [偏移管理接口](../user-guide/set_offset) 用于选择自定义复制恢复点。
+* [偏移管理接口](user-guide/set_offset) 用于选择自定义复制恢复点。
 * 支持的异构数据库的默认数据类型和对象名称转换规则。
-* [JSON 规则文件](../user-guide/transform_rule_file) 用于定义自定义：（数据类型、列名、表名和数据表达式转换规则）。
+* [JSON 规则文件](user-guide/object_mapping_rules) 用于定义自定义：（数据类型、列名、表名和数据表达式转换规则）。
 * 2 种数据应用模式（SPI、HeapAM API）
-* 新增[实用函数](../user-guide/utility_functions) 用于执行连接器操作：（启动、停止、暂停、恢复）。
+* 新增实用函数用于执行连接器操作：（启动、停止、暂停、恢复）。
 
 ### **变更**
 

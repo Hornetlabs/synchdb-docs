@@ -2,7 +2,7 @@
 
 ## 为 SynchDB 准备 Oracle 数据库
 
-在使用 SynchDB 从 Oracle 复制之前，需要按照[此处](https://docs.synchdb.com/zh/getting-started/remote_database_setups/) 概述的步骤配置 Oracle。
+在使用 SynchDB 从 Oracle 复制之前，需要按照[此处](getting-started/remote_database_setups/) 概述的步骤配置 Oracle。
 
 请确保 SynchDB 需要复制的每个表的所有列都启用了补充日志数据。这是 SynchDB 正确处理更新和删除操作所必需的。
 

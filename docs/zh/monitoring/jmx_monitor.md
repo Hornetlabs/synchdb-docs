@@ -188,21 +188,21 @@ SELECT synchdb_add_jmx_conninfo(
 
 当启动一个配置了 JMX 的连接器时，JMX 服务将在指定的端口号上运行。我们可以使用 Java 发行版自带的 jconsole 连接到 JMX 服务器。可以通过 JVM（连接器工作进程）PID 或 IP 地址和端口号进行本地连接。如果启用了身份验证，则还需要用户名和密码。如果不使用身份验证，则这些可以留空。
 
-![img](/images/jmx.jpg)
+![img](../../images/jmx.jpg)
 
 连接成功后，我们可以查看 JVM 运行指标的所有详细信息，例如 CPU、内存、类利用率、线程数等。
 
-![img](/images/jmx2.jpg)
-![img](/images/jmx3.jpg)
-![img](/images/jmx4.jpg)
+![img](../../images/jmx2.jpg)
+![img](../../images/jmx3.jpg)
+![img](../../images/jmx4.jpg)
 
 ## **可视化 Debezium JMX MBean**
 
 最后一个选项卡是 MBean，其中包含 Debezium 针对架构历史记录、快照和流式传输阶段的特定指标。
 
-![img](/images/jmx5.jpg)
-![img](/images/jmx6.jpg)
-![img](/images/jmx7.jpg)
+![img](../../images/jmx5.jpg)
+![img](../../images/jmx6.jpg)
+![img](../../images/jmx7.jpg)
 
 根据连接器类型，MBean 指标可能会有所不同。有关捕获指标列表，请参阅 Debezium 连接器文档：
 

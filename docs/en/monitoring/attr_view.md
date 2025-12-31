@@ -2,7 +2,7 @@
 
 ## **Review Attributes Managed by a Connector**
 
-As a connector completes initial table snapshot, the source tables, columns and data types would have been translated, transformed and created on PostgreSQL side according to the [object mapping rules](https://docs.synchdb.com/user-guide/object_mapping_rules/). SynchDB provides a view that displays a side-by-side view of a connector's data type, name mapping and transform rule relationships between source and destination tables.
+As a connector completes initial table snapshot, the source tables, columns and data types would have been translated, transformed and created on PostgreSQL side according to the [object mapping rules](user-guide/object_mapping_rules/). SynchDB provides a view that displays a side-by-side view of a connector's data type, name mapping and transform rule relationships between source and destination tables.
 
 This view is informational and it intends to show the user the list of tables a connector currently is tracking and the mapping/transform rules it uses per table/column.
 

@@ -168,7 +168,7 @@ GO
 
 ### **当启用 CDC 时表架构发生更改**
 
-如果某个表已添加到 CDC 捕获列表并已被 SynchDB 捕获，则需要将 SQLServer 上此表发生的任何架构更改重新添加回 CDC 捕获列表，以向 SynchDB 生成正确的 DDL ALTER TABLE 事件。有关更多信息，请参阅 [DDL 复制](https://docs.synchdb.com/zh/architecture/ddl_replication/) 页面。
+如果某个表已添加到 CDC 捕获列表并已被 SynchDB 捕获，则需要将 SQLServer 上此表发生的任何架构更改重新添加回 CDC 捕获列表，以向 SynchDB 生成正确的 DDL ALTER TABLE 事件。有关更多信息，请参阅 [DDL 复制](architecture/ddl_replication/) 页面。
 
 ## **为 SynchDB 设置 Oracle**
 

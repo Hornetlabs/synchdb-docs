@@ -179,7 +179,7 @@ SELECT * FROM synchdb_conninfo;
 
 ```
 
-More details on creating a connector can be found [here](https://docs.synchdb.com/user-guide/create_a_connector/)
+More details on creating a connector can be found [here](user-guide/create_a_connector/)
 
 ## **Create Object Mappings**
 
@@ -192,7 +192,7 @@ SELECT synchdb_add_objmap('olrconn','table','free.dbzuser.orders','olr.orders');
 
 ```
 
-More details on creating a object mappings can be found [here](https://docs.synchdb.com/user-guide/object_mapping_rules/)
+More details on creating a object mappings can be found [here](user-guide/object_mapping_rules/)
 
 ## **Create JMX Exporter - Optional**
 
@@ -238,7 +238,7 @@ SELECT synchdb_add_jmx_exporter_conninfo(
 
 ```
 
-More details on creating a JMX Exporter can be found [here](https://docs.synchdb.com/monitoring/jmx_exporter/)
+More details on creating a JMX Exporter can be found [here](monitoring/jmx_exporter/)
 
 ## **Start a Connector**
 
@@ -272,7 +272,7 @@ SELECT synchdb_start_engine_bgw('olrconn');
 
 ```
 
-More details on connector start can be found [here](https://docs.synchdb.com/user-guide/start_stop_connector/)
+More details on connector start can be found [here](user-guide/start_stop_connector/)
 
 ## Check Connector Running State
 
@@ -297,7 +297,7 @@ postgres=# SELECT * FROM synchdb_state_view;
 
 ```
 
-More on running states [here](https://docs.synchdb.com/monitoring/state_view/), and also running statistics [here](https://docs.synchdb.com/monitoring/stats_view/).
+More on running states [here](monitoring/state_view/), and also running statistics [here](monitoring/stats_view/).
 
 
 ## Check the Tables and Data from Initial Snapshot
@@ -489,7 +489,7 @@ postgres=# SELECT * FROM olr.orders;
 
 ## Connector Metrics on Grafana - Optional
 
-![img](/images/grafana-home.jpg)
+![img](../../images/grafana-home.jpg)
 
 Connector metrics will be available on Grafana if you choose to deploy monitoring using `ezdeploy.sh` and have called the optional `synchdb_add_jmx_exporter_conninfo()` before starting the connector. 
 
@@ -497,7 +497,7 @@ Connector metrics will be available on Grafana if you choose to deploy monitorin
 * **Default Login:** admin/admin (You will be required to change password on first time login)
 
 **Nativate to the dashboards menu:**
-![img](/images/grafana-dashboards.jpg)
+![img](../../images/grafana-dashboards.jpg)
 
 **Select desired templates:**
 * Java Virtual Machine - resource information about JVM
@@ -509,19 +509,19 @@ Connector metrics will be available on Grafana if you choose to deploy monitorin
 **Select desired Instance:**
 Each connector with JMX exporter enabled is bound to a dedicated port number so that prometheus can fetch the data from. Use the instance drop-down menu to select a connector by port number.
 
-![img](/images/grafana-instance.jpg)
+![img](../../images/grafana-instance.jpg)
 
 **Java Virtual Machine Dashboard:**
-![img](/images/grafana-jvm.jpg)
+![img](../../images/grafana-jvm.jpg)
 
 **MySQL Dashboard:**
-![img](/images/grafana-mysql.jpg)
+![img](../../images/grafana-mysql.jpg)
 
 **SQLServer Dashboard:**
-![img](/images/grafana-sqlserver.jpg)
+![img](../../images/grafana-sqlserver.jpg)
 
 **Oracle Dashboard:**
-![img](/images/grafana-oracle.jpg)
+![img](../../images/grafana-oracle.jpg)
 
 ## **Stop and Remove a Connector**
 

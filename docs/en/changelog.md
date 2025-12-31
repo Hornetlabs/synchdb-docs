@@ -10,7 +10,7 @@ SynchDB 1.3 delivers a major performance enhancement with the new FDW-based snap
 
 ### Added
 
-#### [FDW-based Snapshot Engine](https://docs.synchdb.com/architecture/fdw_based_snapshot/)
+#### [FDW-based Snapshot Engine](architecture/fdw_based_snapshot/)
 
 * FDW-based snapshot provides a much faster alternative to Debezium's initial snapshot process
 * Added a new GUC parameter "synchdb.snapshot_engine" to select snapshot engine, can be "debezium" or "fdw"
@@ -23,7 +23,7 @@ SynchDB 1.3 delivers a major performance enhancement with the new FDW-based snap
 * Added a new function synchdb_translate_datatype() that returns SynchDB's data type translation results based on selected connector type.
 
 
-#### [Revamped Statistics Views](https://docs.synchdb.com/monitoring/stats_view/)
+#### [Revamped Statistics Views](monitoring/stats_view/)
 
 * Revamped statistics view to group different statistics to proper categories.
 * synchdb_stats_view() has been removed
@@ -74,7 +74,7 @@ SynchDB 1.2 introduces introduces a native Openlog Replicator connector (BETA), 
 
 ### **Added**
 
-#### [Native Openlog Replicator Connector](https://docs.synchdb.com/user-guide/configure_olr/) - BETA
+#### [Native Openlog Replicator Connector](user-guide/configure_olr/) - BETA
 * Added `synchdb_add_olr_conninfo` and `synchdb_del_olr_conninfo` to enable or disable openlog replicator based streaming.
 * Added a new connector type `olr`, which is a native (no Debezium) openlog replicator client that stream Oracle database changes from an external Openlog Replicator service. 
 * Supported DMLs: insert, update delete
@@ -84,13 +84,13 @@ SynchDB 1.2 introduces introduces a native Openlog Replicator connector (BETA), 
 * Supported batching, schema history, and offset management just like other Debezium based connectors.
 * Supported Debezium-based Openlog Replicator connector in addition to native.
 
-#### [Monitoring](https://docs.synchdb.com/monitoring/jmx_monitor/)
+#### [Monitoring](monitoring/jmx_monitor/)
 
 * Added `synchdb_add_jmx_conninfo` and `synchdb_del_jmx_conninfo` to enable or disable JMX based monitoring.
 * Added `synchdb_add_jmx_exporter_conninfo` and `synchdb_del_jmx_exporter_conninfo` to enable and disable monitoring support with Prometheus and Grafana.
 * Added Grafana based dashboard templates for supported Debezium based connectors (MySQL, SQL Server and Oracle).
 
-#### [ezdeploy.sh](https://docs.synchdb.com/getting-started/quick_start/)
+#### [ezdeploy.sh](getting-started/quick_start/)
 * Added `ezdeploy.sh` tool that can quickly deploy a pre-build SynchDB and selected source database types to do quick connector testing.
 * supported deployment: MySQL, SQL Server, Oracle23ai, Oracle19c, Openlog Replicator 1.3.0
 * supported Prometheus and Grafana deployment with preloaded dashboards.
@@ -191,11 +191,11 @@ This release focuses on bug fixes and performance enhancements following the v1.
 ### **Added**
 
 * added a data cache in DML parsing stage to prevent frequent access to PostgreSQL's catalog to obtain a table's tuple descriptor structure.
-* added a variant of `synchdb_start_engine_bgw(name, mode)` that takes a second argument to indicate a custom snapshot mode to start the connector with. More detail [here](../user-guide/utility_functions).
-* added several new GUCs that can be adjusted to tune the performance of Debezium Runner. Refer to [here](../user-guide/configuration.md) for complete list.
+* added a variant of `synchdb_start_engine_bgw(name, mode)` that takes a second argument to indicate a custom snapshot mode to start the connector with.
+* added several new GUCs that can be adjusted to tune the performance of Debezium Runner. Refer to [here](getting-started/configuration/) for complete list.
 * added a debug SQL function `synchdb_log_jvm_meminfo(name)` that causes specified connector to output current JVM heap memory usage summary in PostgreSQL log file.
-* added a new VIEW `synchdb_stats_view` that prints statistic information for all connectors. More detail [here](../user-guide/utility_functions).
-* added a new SQL function `synchdb_reset_stats(name)` to clear statistic information of specified connector. More detail [here](../user-guide/utility_functions).
+* added a new VIEW `synchdb_stats_view` that prints statistic information for all connectors.
+* added a new SQL function `synchdb_reset_stats(name)` to clear statistic information of specified connector.
 * added a mess creation script to quickly generate test tables and data on MySQL database type.
 
 ### **Changed**
@@ -203,7 +203,7 @@ This release focuses on bug fixes and performance enhancements following the v1.
 * synchdb_state_view(): added a new field called `stage` that indicates the current stage of a connector (value can either be `Initial Snapshot` or `Change Data Capture`).
 * synchdb_state_view(): will only show state of valid connectors.
 * removed sending "partial batch completion" notification to Debezium Runner in case of error, because a batch is now handled by one PostgreSQL transaction, and partial completion is not allowed.
-* SSL related parameters per connector can now be specified in the [rule file](../user-guide/transform_rule_file).
+* SSL related parameters per connector can now be specified in the rule file.
 * the maximum heap memory to allocate to JVM that runs the Debezium Runner can now be configured via GUC.
 * max number of connector background worker is now configurable instead of hardcoded 30.
 
@@ -223,19 +223,19 @@ The first SynchDB beta software release that lays a robust foundation for seamle
 ### **Added**
 
 * logical replication from heterogeneous databases: (MySQL and SQLServer).
-* [DDL replication](../user-guide/ddl_replication) (CREATE TABLE, DROP TABLE, ALTER TABLE ADD COLUMN, ALTER TABLE DROP COLUMN, ALTER TABLE ALTER COLUMN).
+* DDL replication (CREATE TABLE, DROP TABLE, ALTER TABLE ADD COLUMN, ALTER TABLE DROP COLUMN, ALTER TABLE ALTER COLUMN).
 * DML replication (INSERT, UPDATE, DELETE).
 * max 30 concurrent connector workers.
-* [automatic connector launcher](../user-guide/connector_auto_launcher) at PostgreSQL startup.
+* [automatic connector launcher](user-guide/connector_auto_launcher) at PostgreSQL startup.
 * global connector state and last error message views.
-* [selective databases and tables replication](../user-guide/selective_table_sync).
+* [selective databases and tables replication](tutorial/selective_table_sync).
 * change events in batches.
 * connector restarts in different snapshot modes.
-* [offset management interfaces](../user-guide/set_offset) to select custom replication resume point.
+* [offset management interfaces](user-guide/set_offset) to select custom replication resume point.
 * default data type and object name transform rules for supported heterogeneous databases.
-* [JSON rule file](../user-guide/transform_rule_file) to define custom: (data type, column name, table name and data expression transform rules).
+* [JSON rule file](user-guide/object_mapping_rules) to define custom: (data type, column name, table name and data expression transform rules).
 * 2 data apply modes (SPI, HeapAM API).
-* several [utility functions](../user-guide/utility_functions) to perform connector operations: (start, stop, pause, resume).
+* several utility functions to perform connector operations: (start, stop, pause, resume).
  
 ### **Changed**
 

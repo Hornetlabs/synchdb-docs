@@ -2,7 +2,7 @@
 
 ## **Debezium Runner Component Diagram**
 
-![img](/images/synchdb-dbzrunner-component2.jpg)
+![img](../../images/synchdb-dbzrunner-component2.jpg)
 
 Debezium Runner resides on Java side of the deployment. It is the main faciliator between embedded Debezium engine (Java) and SynchDB Worker (C). It provides several Java methods that SynchDB worker can interact via JNI library. These interactions include initializing a Debezium engine, start or stop the engine, obtain a batch of change events and mark a batch as done. These operations are essential for ensuring replication consistency. Main components are:
 

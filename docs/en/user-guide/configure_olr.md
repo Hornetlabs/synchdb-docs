@@ -13,7 +13,7 @@ Both require Openlog Replicator to be configured according to the setup example 
 
 - **Openlog Replicator Version**: `1.3.0` (verified compatibility for Debezium 2.7.x)
 - Oracle instance with redo logs accessible to OLR
-- Additional permissions must be granted for OLR.  Refer to [here](https://docs.synchdb.com/getting-started/remote_database_setups/) for exact permission requirement.
+- Additional permissions must be granted for OLR.  Refer to [here](getting-started/remote_database_setups/) for exact permission requirement.
 - Openlog Replicator must be configured and running
 - An existing Oracle connector in SynchDB (created using `synchdb_add_conninfo()`)
 
@@ -176,7 +176,7 @@ SELECT synchdb_add_conninfo('olrconn',
 
 <<<**IMPORTANT**>>> **SynchDB must be compiled and built with flag (WITH_OLR=1) to support native openlog replicator connector.**
 
-More on creating a connector can be found [here](https://docs.synchdb.com/user-guide/create_a_connector/)
+More on creating a connector can be found [here](user-guide/create_a_connector/)
 
 ## **`synchdb_add_olr_conninfo()`**
 

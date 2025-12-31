@@ -2,7 +2,7 @@
 
 ## 为 SynchDB 准备 SQL Server 数据库
 
-在使用 SynchDB 从 SQL Server 进行复制之前，需要按照[此处](https://docs.synchdb.com/zh/getting-started/remote_database_setups/) 概述的步骤配置 SQL Server。
+在使用 SynchDB 从 SQL Server 进行复制之前，需要按照[此处](getting-started/remote_database_setups/) 概述的步骤配置 SQL Server。
 
 请确保所需的表已在 SQL Server 中启用为 CDC 表。您可以在 SQL Server 客户端上运行以下命令，为“dbo.customer”、“dbo.district”和“dbo.history”启用 CDC。您将根据需要继续添加新表。
 

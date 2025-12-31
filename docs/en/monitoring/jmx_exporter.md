@@ -11,7 +11,7 @@ JMX Exporter (also known as the JMX Prometheus Java Agent) is a Java agent that 
 
 This tool unlocks Prometheus + Graphana based monitoring for a SynchDB Connector
 
-![img](/images/prom.png)
+![img](../../images/prom.png)
 
 ## Obtain JMX Exporter
 
