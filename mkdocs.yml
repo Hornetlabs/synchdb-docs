@@ -158,6 +158,10 @@ plugins:
   - awesome-pages
   - print-site
 
+extra:
+  version:
+    provider: mike
+
 nav:
  - Home: index.md
  - Architecture:
