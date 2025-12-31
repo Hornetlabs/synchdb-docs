@@ -35,4 +35,8 @@ jobs:
           #else
           #  mike deploy --push dev
           #fi
+          # enable version control - testing
+          mike deploy --push 1.3
+          mike deploy --update-aliases 1.3 latest
+          mike set-default latest
           mkdocs build
