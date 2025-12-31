@@ -2099,7 +2099,7 @@
 
 <h1 id="oracle-cdc-postgresql">Oracle CDC 到 PostgreSQL<a class="headerlink" href="#oracle-cdc-postgresql" title="Permanent link">&para;</a></h1>
 <h2 id="synchdb-oracle">为 SynchDB 准备 Oracle 数据库<a class="headerlink" href="#synchdb-oracle" title="Permanent link">&para;</a></h2>
-<p>在使用 SynchDB 从 Oracle 复制之前，需要按照<a href="https://docs.synchdb.com/zh/getting-started/remote_database_setups/">此处</a> 概述的步骤配置 Oracle。</p>
+<p>在使用 SynchDB 从 Oracle 复制之前，需要按照<a href="getting-started/remote_database_setups/">此处</a> 概述的步骤配置 Oracle。</p>
 <p>请确保 SynchDB 需要复制的每个表的所有列都启用了补充日志数据。这是 SynchDB 正确处理更新和删除操作所必需的。</p>
 <p>例如，以下命令为“customer”和“products”表的所有列启用了补充日志数据。请根据需要添加更多表。</p>
 <div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">customer</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="n">SUPPLEMENTAL</span><span class="w"> </span><span class="n">LOG</span><span class="w"> </span><span class="k">DATA</span><span class="w"> </span><span class="p">(</span><span class="k">ALL</span><span class="p">)</span><span class="w"> </span><span class="n">COLUMNS</span><span class="p">;</span>

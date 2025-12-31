@@ -2480,7 +2480,7 @@ binlog_expire_logs_seconds  = 864000
 <span class="k">GO</span>
 </code></pre></div>
 <h3 id="when-table-schema-changed-while-cdc-is-enabled"><strong>When Table Schema Changed While CDC is Enabled</strong><a class="headerlink" href="#when-table-schema-changed-while-cdc-is-enabled" title="Permanent link">&para;</a></h3>
-<p>If a table has already been added to the CDC capture list and being captured by SynchDB already, any schema change that has happened to this table on SQLServer needs to be re-added back to the CDC capture list to generate a proper DDL ALTER TABLE event to SynchDB. Refer to <a href="https://docs.synchdb.com/architecture/ddl_replication/">DDL Replication</a> page for more information.</p>
+<p>If a table has already been added to the CDC capture list and being captured by SynchDB already, any schema change that has happened to this table on SQLServer needs to be re-added back to the CDC capture list to generate a proper DDL ALTER TABLE event to SynchDB. Refer to <a href="architecture/ddl_replication/">DDL Replication</a> page for more information.</p>
 <h2 id="set-up-oracle-for-synchdb"><strong>Set up Oracle for SynchDB</strong><a class="headerlink" href="#set-up-oracle-for-synchdb" title="Permanent link">&para;</a></h2>
 <p>The following examples are based on container database <code>FREE</code> and pluggable database <code>FREEPDB1</code></p>
 <h3 id="set-a-password-for-sys-user"><strong>Set a Password for Sys User</strong><a class="headerlink" href="#set-a-password-for-sys-user" title="Permanent link">&para;</a></h3>

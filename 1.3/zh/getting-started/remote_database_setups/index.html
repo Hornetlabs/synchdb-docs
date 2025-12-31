@@ -2484,7 +2484,7 @@ binlog_expire_logs_seconds  = 864000
 <span class="k">GO</span>
 </code></pre></div>
 <h3 id="cdc_1"><strong>当启用 CDC 时表架构发生更改</strong><a class="headerlink" href="#cdc_1" title="Permanent link">&para;</a></h3>
-<p>如果某个表已添加到 CDC 捕获列表并已被 SynchDB 捕获，则需要将 SQLServer 上此表发生的任何架构更改重新添加回 CDC 捕获列表，以向 SynchDB 生成正确的 DDL ALTER TABLE 事件。有关更多信息，请参阅 <a href="https://docs.synchdb.com/zh/architecture/ddl_replication/">DDL 复制</a> 页面。</p>
+<p>如果某个表已添加到 CDC 捕获列表并已被 SynchDB 捕获，则需要将 SQLServer 上此表发生的任何架构更改重新添加回 CDC 捕获列表，以向 SynchDB 生成正确的 DDL ALTER TABLE 事件。有关更多信息，请参阅 <a href="architecture/ddl_replication/">DDL 复制</a> 页面。</p>
 <h2 id="synchdb-oracle"><strong>为 SynchDB 设置 Oracle</strong><a class="headerlink" href="#synchdb-oracle" title="Permanent link">&para;</a></h2>
 <p>以下示例基于容器数据库 <code>FREE</code> 和可插拔数据库 <code>FREEPDB1</code>:</p>
 <h3 id="sys"><strong>为 Sys 用户设置密码</strong><a class="headerlink" href="#sys" title="Permanent link">&para;</a></h3>

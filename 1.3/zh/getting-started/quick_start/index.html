@@ -2347,14 +2347,14 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <p><strong>查看已创建的连接器：</strong></p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_conninfo</span><span class="p">;</span>
 </code></pre></div>
-<p>有关创建连接器的更多详细信息，请参阅<a href="https://docs.synchdb.com/zh/user-guide/create_a_connector/">此处</a></p>
+<p>有关创建连接器的更多详细信息，请参阅<a href="user-guide/create_a_connector/">此处</a></p>
 <h2 id="_4"><strong>创建对象映射</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>默认情况下，源数据库名称将映射到目标数据库中的架构名称。可以使用对象映射来更改此架构名称。让我们从基于 Oracle 的连接器中更改“orders”表的目标架构，其余部分保留默认值。</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;free.c##dbzuser.orders&#39;</span><span class="p">,</span><span class="s1">&#39;oracle23ai.orders&#39;</span><span class="p">);</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;ora19cconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;free.dbzuser.orders&#39;</span><span class="p">,</span><span class="s1">&#39;oracle19c.orders&#39;</span><span class="p">);</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;free.dbzuser.orders&#39;</span><span class="p">,</span><span class="s1">&#39;olr.orders&#39;</span><span class="p">);</span>
 </code></pre></div>
-<p>有关创建对象映射的更多详细信息，请参见[此处]（<a href="https://docs.synchdb.com/zh/user-guide/object_mapping_rules/">https://docs.synchdb.com/zh/user-guide/object_mapping_rules/</a>）</p>
+<p>有关创建对象映射的更多详细信息，请参见<a href="user-guide/object_mapping_rules/">此处</a></p>
 <h2 id="jmx-"><strong>创建 JMX 导出器 - 可选</strong><a class="headerlink" href="#jmx-" title="Permanent link">&para;</a></h2>
 <p>以下是一些启用 JMX 导出器进行监控的示例（如果已通过 <code>ezdeploy.sh</code> 预先部署了 Prometheus + Grafana）：</p>
 <p><strong>MySQL:</strong>
@@ -2385,7 +2385,7 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <span class="w">                            </span><span class="mi">9407</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;/home/ubuntu/jmxexport.conf&#39;</span><span class="p">);</span>
 </code></pre></div></p>
-<p>关于创建 JMX Exporter 的更多详细信息，请参见<a href="https://docs.synchdb.com/zh/monitoring/jmx_exporter/">此处</a></p>
+<p>关于创建 JMX Exporter 的更多详细信息，请参见<a href="monitoring/jmx_exporter/">此处</a></p>
 <h2 id="_5"><strong>启动连接器</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <p><strong>MySQL:</strong>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
@@ -2402,7 +2402,7 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <p><strong>OLR(Oracle19c):</strong>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">);</span>
 </code></pre></div></p>
-<p>有关连接器启动的更多详细信息，请参见[此处]（<a href="https://docs.synchdb.com/zh/user-guide/start_stop_connector/">https://docs.synchdb.com/zh/user-guide/start_stop_connector/</a>）</p>
+<p>有关连接器启动的更多详细信息，请参见<a href="user-guide/start_stop_connector/">此处</a></p>
 <h2 id="_6"><strong>检查连接器运行状态</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>使用“synchdb_state_view()”检查所有连接器的运行状态。</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="p">;</span>
@@ -2418,7 +2418,7 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <span class="w"> </span><span class="n">olrconn</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="mi">601235</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="n">snapshot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">offset</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">flushed</span><span class="w"> </span><span class="n">yet</span>
 <span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
 </code></pre></div></p>
-<p>有关运行状态的更多信息，请参见<a href="https://docs.synchdb.com/zh/monitoring/state_view/">此处</a>，以及运行统计信息，请参见<a href="https://docs.synchdb.com/zh/monitoring/stats_view/">此处</a>。</p>
+<p>有关运行状态的更多信息，请参见<a href="monitoring/state_view/">此处</a>，以及运行统计信息，请参见<a href="monitoring/stats_view/">此处</a>。</p>
 <h2 id="_7">检查初始快照中的表和数据<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p>默认情况下，连接器将执行“初始”快照，以捕获表模式和初始数据，然后转换并将它们应用到不同“模式”下的 PostgreSQL。您应该看到类似以下内容：</p>
 <p><strong>MySQL:</strong>
@@ -2547,14 +2547,14 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="grafana-">Grafana 上的连接器指标 - 可选<a class="headerlink" href="#grafana-" title="Permanent link">&para;</a></h2>
-<p><img alt="img" src="/images/grafana-home.jpg" /></p>
+<p><img alt="img" src="../../../images/grafana-home.jpg" /></p>
 <p>如果您选择使用 <code>ezdeploy.sh</code> 部署监控，并在启动连接器之前调用了可选的 <code>synchdb_add_jmx_exporter_conninfo()</code>，则连接器指标将在 Grafana 上可用。</p>
 <ul>
 <li><strong>访问 Grafana:</strong> <a href="http://localhost:3000/">http://localhost:3000/</a></li>
 <li><strong>默认登录名:</strong> admin/admin (首次登录时需要更改密码)</li>
 </ul>
 <p><strong>导航到仪表板菜单：</strong>
-<img alt="img" src="/images/grafana-dashboards.jpg" /></p>
+<img alt="img" src="../../../images/grafana-dashboards.jpg" /></p>
 <p><strong>选择所需模板：</strong></p>
 <ul>
 <li>Java 虚拟机 - JVM 资源信息</li>
@@ -2564,15 +2564,15 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 </ul>
 <p><strong>选择所需实例：</strong>
 每个启用 JMX 导出器的连接器都绑定到一个专用端口号，以便 Prometheus 可以从中获取数据。使用实例下拉菜单按端口号选择连接器。</p>
-<p><img alt="img" src="/images/grafana-instance.jpg" /></p>
+<p><img alt="img" src="../../../images/grafana-instance.jpg" /></p>
 <p><strong>Java 虚拟机仪表板：</strong>
-<img alt="img" src="/images/grafana-jvm.jpg" /></p>
+<img alt="img" src="../../../images/grafana-jvm.jpg" /></p>
 <p><strong>MySQL 仪表板：</strong>
-<img alt="img" src="/images/grafana-mysql.jpg" /></p>
+<img alt="img" src="../../../images/grafana-mysql.jpg" /></p>
 <p><strong>SQLServer 仪表板：</strong>
-<img alt="img" src="/images/grafana-sqlserver.jpg" /></p>
+<img alt="img" src="../../../images/grafana-sqlserver.jpg" /></p>
 <p><strong>Oracle 仪表板：</strong>
-<img alt="img" src="/images/grafana-oracle.jpg" /></p>
+<img alt="img" src="../../../images/grafana-oracle.jpg" /></p>
 <h2 id="_8"><strong>停止并移除连接器</strong><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p><strong>MySQL:</strong>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_stop_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>

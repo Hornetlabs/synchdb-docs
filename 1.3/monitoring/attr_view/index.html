@@ -1959,7 +1959,7 @@
 
 <h1 id="attribute-view">Attribute View<a class="headerlink" href="#attribute-view" title="Permanent link">&para;</a></h1>
 <h2 id="review-attributes-managed-by-a-connector"><strong>Review Attributes Managed by a Connector</strong><a class="headerlink" href="#review-attributes-managed-by-a-connector" title="Permanent link">&para;</a></h2>
-<p>As a connector completes initial table snapshot, the source tables, columns and data types would have been translated, transformed and created on PostgreSQL side according to the <a href="https://docs.synchdb.com/user-guide/object_mapping_rules/">object mapping rules</a>. SynchDB provides a view that displays a side-by-side view of a connector's data type, name mapping and transform rule relationships between source and destination tables.</p>
+<p>As a connector completes initial table snapshot, the source tables, columns and data types would have been translated, transformed and created on PostgreSQL side according to the <a href="user-guide/object_mapping_rules/">object mapping rules</a>. SynchDB provides a view that displays a side-by-side view of a connector's data type, name mapping and transform rule relationships between source and destination tables.</p>
 <p>This view is informational and it intends to show the user the list of tables a connector currently is tracking and the mapping/transform rules it uses per table/column.</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_att_view</span><span class="p">();</span>
 </code></pre></div>

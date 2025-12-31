@@ -1967,7 +1967,7 @@
 
 <h1 id="_1">属性视图<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <h2 id="_2"><strong>查看连接器管理的属性</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>连接器完成初始表快照后，源表、列和数据类型将根据<a href="https://docs.synchdb.com/zh/user-guide/object_mapping_rules/">对象映射规则</a>在 PostgreSQL 端进行转换和创建。SynchDB 提供了一个视图，可并排显示连接器的数据类型、名称映射以及源表和目标表之间的转换规则关系。</p>
+<p>连接器完成初始表快照后，源表、列和数据类型将根据<a href="user-guide/object_mapping_rules/">对象映射规则</a>在 PostgreSQL 端进行转换和创建。SynchDB 提供了一个视图，可并排显示连接器的数据类型、名称映射以及源表和目标表之间的转换规则关系。</p>
 <p>此视图仅供参考，旨在向用户显示连接器当前正在跟踪的表的列表以及每个表/列使用的映射/转换规则。</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_att_view</span><span class="p">();</span>
 </code></pre></div>

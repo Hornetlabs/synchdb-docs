@@ -2343,14 +2343,14 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <p><strong>View Created Connectors:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_conninfo</span><span class="p">;</span>
 </code></pre></div>
-<p>More details on creating a connector can be found <a href="https://docs.synchdb.com/user-guide/create_a_connector/">here</a></p>
+<p>More details on creating a connector can be found <a href="user-guide/create_a_connector/">here</a></p>
 <h2 id="create-object-mappings"><strong>Create Object Mappings</strong><a class="headerlink" href="#create-object-mappings" title="Permanent link">&para;</a></h2>
 <p>By default, source database names will be mapped to a schema name in destination. Object mappings can be used to change this schema name. Let's change the destination schema for <code>orders</code> table from oracle based connectors and leave the rest as default.</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;free.c##dbzuser.orders&#39;</span><span class="p">,</span><span class="s1">&#39;oracle23ai.orders&#39;</span><span class="p">);</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;ora19cconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;free.dbzuser.orders&#39;</span><span class="p">,</span><span class="s1">&#39;oracle19c.orders&#39;</span><span class="p">);</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;free.dbzuser.orders&#39;</span><span class="p">,</span><span class="s1">&#39;olr.orders&#39;</span><span class="p">);</span>
 </code></pre></div>
-<p>More details on creating a object mappings can be found <a href="https://docs.synchdb.com/user-guide/object_mapping_rules/">here</a></p>
+<p>More details on creating a object mappings can be found <a href="user-guide/object_mapping_rules/">here</a></p>
 <h2 id="create-jmx-exporter-optional"><strong>Create JMX Exporter - Optional</strong><a class="headerlink" href="#create-jmx-exporter-optional" title="Permanent link">&para;</a></h2>
 <p>Here are some examples to enable JMX exporter for monitoring (If Prometheus + Grafana have been pre-deployed by <code>ezdeploy.sh</code>):</p>
 <p><strong>MySQL:</strong>
@@ -2381,7 +2381,7 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <span class="w">                            </span><span class="mi">9407</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;/home/ubuntu/jmxexport.conf&#39;</span><span class="p">);</span>
 </code></pre></div></p>
-<p>More details on creating a JMX Exporter can be found <a href="https://docs.synchdb.com/monitoring/jmx_exporter/">here</a></p>
+<p>More details on creating a JMX Exporter can be found <a href="monitoring/jmx_exporter/">here</a></p>
 <h2 id="start-a-connector"><strong>Start a Connector</strong><a class="headerlink" href="#start-a-connector" title="Permanent link">&para;</a></h2>
 <p><strong>MySQL:</strong>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
@@ -2398,7 +2398,7 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <p><strong>OLR(Oracle19c):</strong>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">);</span>
 </code></pre></div></p>
-<p>More details on connector start can be found <a href="https://docs.synchdb.com/user-guide/start_stop_connector/">here</a></p>
+<p>More details on connector start can be found <a href="user-guide/start_stop_connector/">here</a></p>
 <h2 id="check-connector-running-state">Check Connector Running State<a class="headerlink" href="#check-connector-running-state" title="Permanent link">&para;</a></h2>
 <p>Use <code>synchdb_state_view()</code> to examine all connectors' running states. </p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="p">;</span>
@@ -2414,7 +2414,7 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <span class="w"> </span><span class="n">olrconn</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="mi">601235</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="n">snapshot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">offset</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">flushed</span><span class="w"> </span><span class="n">yet</span>
 <span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
 </code></pre></div></p>
-<p>More on running states <a href="https://docs.synchdb.com/monitoring/state_view/">here</a>, and also running statistics <a href="https://docs.synchdb.com/monitoring/stats_view/">here</a>.</p>
+<p>More on running states <a href="monitoring/state_view/">here</a>, and also running statistics <a href="monitoring/stats_view/">here</a>.</p>
 <h2 id="check-the-tables-and-data-from-initial-snapshot">Check the Tables and Data from Initial Snapshot<a class="headerlink" href="#check-the-tables-and-data-from-initial-snapshot" title="Permanent link">&para;</a></h2>
 <p>By default, the connector will perform a <code>initial</code> snapshot to capture both the table schema and initial data, convert and apply them to PostgreSQL under different <code>schema</code>. You should see something similar to the following:</p>
 <p><strong>MySQL:</strong>
@@ -2543,14 +2543,14 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="connector-metrics-on-grafana-optional">Connector Metrics on Grafana - Optional<a class="headerlink" href="#connector-metrics-on-grafana-optional" title="Permanent link">&para;</a></h2>
-<p><img alt="img" src="/images/grafana-home.jpg" /></p>
+<p><img alt="img" src="../../../images/grafana-home.jpg" /></p>
 <p>Connector metrics will be available on Grafana if you choose to deploy monitoring using <code>ezdeploy.sh</code> and have called the optional <code>synchdb_add_jmx_exporter_conninfo()</code> before starting the connector. </p>
 <ul>
 <li><strong>Access Grafana:</strong> <a href="http://localhost:3000/">http://localhost:3000/</a></li>
 <li><strong>Default Login:</strong> admin/admin (You will be required to change password on first time login)</li>
 </ul>
 <p><strong>Nativate to the dashboards menu:</strong>
-<img alt="img" src="/images/grafana-dashboards.jpg" /></p>
+<img alt="img" src="../../../images/grafana-dashboards.jpg" /></p>
 <p><strong>Select desired templates:</strong>
 * Java Virtual Machine - resource information about JVM
 * SynchDB MySQL Dashboard - information about MySQL connector
@@ -2558,15 +2558,15 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 * SynchDB Oracle Dashboard - information about Oracle connector</p>
 <p><strong>Select desired Instance:</strong>
 Each connector with JMX exporter enabled is bound to a dedicated port number so that prometheus can fetch the data from. Use the instance drop-down menu to select a connector by port number.</p>
-<p><img alt="img" src="/images/grafana-instance.jpg" /></p>
+<p><img alt="img" src="../../../images/grafana-instance.jpg" /></p>
 <p><strong>Java Virtual Machine Dashboard:</strong>
-<img alt="img" src="/images/grafana-jvm.jpg" /></p>
+<img alt="img" src="../../../images/grafana-jvm.jpg" /></p>
 <p><strong>MySQL Dashboard:</strong>
-<img alt="img" src="/images/grafana-mysql.jpg" /></p>
+<img alt="img" src="../../../images/grafana-mysql.jpg" /></p>
 <p><strong>SQLServer Dashboard:</strong>
-<img alt="img" src="/images/grafana-sqlserver.jpg" /></p>
+<img alt="img" src="../../../images/grafana-sqlserver.jpg" /></p>
 <p><strong>Oracle Dashboard:</strong>
-<img alt="img" src="/images/grafana-oracle.jpg" /></p>
+<img alt="img" src="../../../images/grafana-oracle.jpg" /></p>
 <h2 id="stop-and-remove-a-connector"><strong>Stop and Remove a Connector</strong><a class="headerlink" href="#stop-and-remove-a-connector" title="Permanent link">&para;</a></h2>
 <p><strong>MySQL:</strong>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_stop_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>

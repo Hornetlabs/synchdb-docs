@@ -1969,7 +1969,7 @@ use synchdb-sqlserver-withssl-test.yaml file for the SQL Server with SSL certifi
 <div class="highlight"><pre><span></span><code>id=$(docker ps | grep oracle | awk &#39;{print $1}&#39;)
 docker exec -it $id bash
 </code></pre></div></p>
-<p>Follow the procedure described <a href="https://docs.synchdb.com/user-guide/remote_database_setups/">here</a> to set up logminer and logminer user</p>
+<p>Follow the procedure described <a href="user-guide/remote_database_setups/">here</a> to set up logminer and logminer user</p>
 <h2 id="use-ci-script-to-prepare-test-databases"><strong>Use CI Script to Prepare Test Databases</strong><a class="headerlink" href="#use-ci-script-to-prepare-test-databases" title="Permanent link">&para;</a></h2>
 <p>Example MySQL, SQL Server and Oracle databases can also be prepared using a script, located in <code>ci/</code> folder under the source repository. The script requires docker and docker-compose to run and basically follow the same procedures as described above.</p>
 <p>Prepare MySQL database for test:

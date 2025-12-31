@@ -2095,7 +2095,7 @@
 
 <h1 id="mysql-cdc-to-postgresql">MySQL CDC to PostgreSQL<a class="headerlink" href="#mysql-cdc-to-postgresql" title="Permanent link">&para;</a></h1>
 <h2 id="prepare-mysql-database-for-synchdb">Prepare MySQL Database for SynchDB<a class="headerlink" href="#prepare-mysql-database-for-synchdb" title="Permanent link">&para;</a></h2>
-<p>Before SynchDB can be used to replicate from MySQL, MySQL needs to be configured according to the procedure outlined <a href="https://docs.synchdb.com/getting-started/remote_database_setups/">here</a></p>
+<p>Before SynchDB can be used to replicate from MySQL, MySQL needs to be configured according to the procedure outlined <a href="getting-started/remote_database_setups/">here</a></p>
 <h2 id="create-a-mysql-connector">Create a MySQL Connector<a class="headerlink" href="#create-a-mysql-connector" title="Permanent link">&para;</a></h2>
 <p>Create a connector that targets all the tables under <code>inventory</code> database in MySQL.
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>

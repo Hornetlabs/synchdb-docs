@@ -1960,9 +1960,9 @@
 <h1 id="native-data-type-handling">Native Data Type Handling<a class="headerlink" href="#native-data-type-handling" title="Permanent link">&para;</a></h1>
 <h2 id="handling-native-data-types"><strong>Handling Native Data Types</strong><a class="headerlink" href="#handling-native-data-types" title="Permanent link">&para;</a></h2>
 <p>The image below shows the list of supported native data types and how SynchDB groups them together based on their nature (or category). For example, the numeric group contains all integer or float data types that are numeric in nature. An error is raised if a numeric data contains non-numeric characters. Likewise, different groups of data types requires a sepcific format of data in order to apply.</p>
-<p><img alt="img" src="/images/synchdb-native-types5.jpg" /></p>
+<p><img alt="img" src="../../images/synchdb-native-types5.jpg" /></p>
 <p>Now that DML Converter knows how to produce the data for these supported native data types on the PostgreSQL side, it then looks at the DBZ metadata to learn how the source data is represented. This is needed because Debezium engine may encode the payload data to pack more information that requires decoding prior to processing the data, or use a structure to represent complex data types like Geometry. Without knowing how Debezium represents the data, the data processing is likely to produce undesired results, causing PostgreSQL to error during apply. Below is the list of formatting types that Debezium could represent a payload data with:</p>
-<p><img alt="img" src="/images/synchdb-dbztype.jpg" /></p>
+<p><img alt="img" src="../../images/synchdb-dbztype.jpg" /></p>
 <p>With these 2 pieces of information, DML Converter knows what the input looks like and what the output should look like. It will select the best handler from its function matrix to process the data. For example, if destination type is <code>FLOAT4</code>, and source data type is formatted as <code>DBZTYPE_BYTES</code>, the function <code>handle_base64_to_numeric()</code> will be selected to process the data. The selected function is responsible for decode the binary input and compute it as a numeric. </p>
 
 

@@ -2363,16 +2363,16 @@ chown youruser:youruser jmxpwd.file jmxacc.file
 </code></pre></div>
 <h2 id="jconsole-jmx"><strong>使用 jconsole 可视化 JMX 指标</strong><a class="headerlink" href="#jconsole-jmx" title="Permanent link">&para;</a></h2>
 <p>当启动一个配置了 JMX 的连接器时，JMX 服务将在指定的端口号上运行。我们可以使用 Java 发行版自带的 jconsole 连接到 JMX 服务器。可以通过 JVM（连接器工作进程）PID 或 IP 地址和端口号进行本地连接。如果启用了身份验证，则还需要用户名和密码。如果不使用身份验证，则这些可以留空。</p>
-<p><img alt="img" src="/images/jmx.jpg" /></p>
+<p><img alt="img" src="../../../images/jmx.jpg" /></p>
 <p>连接成功后，我们可以查看 JVM 运行指标的所有详细信息，例如 CPU、内存、类利用率、线程数等。</p>
-<p><img alt="img" src="/images/jmx2.jpg" />
-<img alt="img" src="/images/jmx3.jpg" />
-<img alt="img" src="/images/jmx4.jpg" /></p>
+<p><img alt="img" src="../../../images/jmx2.jpg" />
+<img alt="img" src="../../../images/jmx3.jpg" />
+<img alt="img" src="../../../images/jmx4.jpg" /></p>
 <h2 id="debezium-jmx-mbean_1"><strong>可视化 Debezium JMX MBean</strong><a class="headerlink" href="#debezium-jmx-mbean_1" title="Permanent link">&para;</a></h2>
 <p>最后一个选项卡是 MBean，其中包含 Debezium 针对架构历史记录、快照和流式传输阶段的特定指标。</p>
-<p><img alt="img" src="/images/jmx5.jpg" />
-<img alt="img" src="/images/jmx6.jpg" />
-<img alt="img" src="/images/jmx7.jpg" /></p>
+<p><img alt="img" src="../../../images/jmx5.jpg" />
+<img alt="img" src="../../../images/jmx6.jpg" />
+<img alt="img" src="../../../images/jmx7.jpg" /></p>
 <p>根据连接器类型，MBean 指标可能会有所不同。有关捕获指标列表，请参阅 Debezium 连接器文档：</p>
 <ul>
 <li><a href="https://debezium.io/documentation/reference/stable/connectors/mysql.html#mysql-snapshot-metrics">MySQL 的 MBean</a></li>
