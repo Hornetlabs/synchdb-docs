@@ -1977,7 +1977,7 @@
 <div class="highlight"><pre><span></span><code>id=$(docker ps | grep oracle | awk &#39;{print $1}&#39;)
 docker exec -it $id bash
 </code></pre></div></p>
-<p>按照<a href="user-guide/remote_database_setups/">此处</a> 中描述的步骤设置 logminer 和 logminer 用户</p>
+<p>按照<a href="../../user-guide/remote_database_setups/">此处</a> 中描述的步骤设置 logminer 和 logminer 用户</p>
 <h2 id="ci"><strong>使用 CI 脚本准备测试数据库</strong><a class="headerlink" href="#ci" title="Permanent link">&para;</a></h2>
 <p>示例 MySQL、SQL Server 和 Oracle 数据库也可以使用位于源存储库下 <code>ci/</code> 文件夹中的脚本进行准备。该脚本需要 docker 和 docker-compose 才能运行，并且基本上遵循与上述相同的步骤。</p>
 <p>准备 MySQL 数据库进行测试：

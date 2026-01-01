@@ -2091,7 +2091,7 @@
 
 <h1 id="oracle-cdc-to-postgresql">Oracle CDC to PostgreSQL<a class="headerlink" href="#oracle-cdc-to-postgresql" title="Permanent link">&para;</a></h1>
 <h2 id="prepare-oracle-database-for-synchdb">Prepare Oracle Database for SynchDB<a class="headerlink" href="#prepare-oracle-database-for-synchdb" title="Permanent link">&para;</a></h2>
-<p>Before SynchDB can be used to replicate from Oracle, Oracle needs to be configured according to the procedure outlined <a href="getting-started/remote_database_setups/">here</a></p>
+<p>Before SynchDB can be used to replicate from Oracle, Oracle needs to be configured according to the procedure outlined <a href="../../getting-started/remote_database_setups/">here</a></p>
 <p>Please ensure that supplemental log data is enabled for all columns for each desired table to be replicated by SynchDB. This is needed for SynchDB to correctly handle UPDATE and DELETE oeprations.</p>
 <p>For example, the following enables supplemental log data for all columns for <code>customer</code> and <code>products</code> table. Please add more tables as needed.</p>
 <div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">customer</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="n">SUPPLEMENTAL</span><span class="w"> </span><span class="n">LOG</span><span class="w"> </span><span class="k">DATA</span><span class="w"> </span><span class="p">(</span><span class="k">ALL</span><span class="p">)</span><span class="w"> </span><span class="n">COLUMNS</span><span class="p">;</span>

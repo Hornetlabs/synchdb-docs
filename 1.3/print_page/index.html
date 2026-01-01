@@ -2491,10 +2491,10 @@
 <p>因此，SynchDB 需要 JNI 在 Debezium 运行器引擎和 SynchDB PostgreSQL 扩展之间交换资源。JNI 可在 Java 安装（例如 openjdk）中使用。</p>
 <h3 id="zh-architecture-architecture-debezium-runner-java"><strong>Debezium Runner - Java</strong><a class="headerlink" href="#zh-architecture-architecture-debezium-runner-java" title="Permanent link">&para;</a></h3>
 <p>这是一个 Java 驱动程序，它利用 Debezium 嵌入式引擎以及各种连接到不同数据库源的“连接器”。它是实现从多个数据库供应商进行逻辑复制的关键底层组件。它的主要职责是连接到指定的远程数据库，并定期获取其更改并将其转换为通用的 JSON 结构。然后，此 JSON 结构将传递给“C 语言 SynchDB 扩展”进行处理，并最终将更改应用于 PostgreSQL。</p>
-<p><a href="#zh-architecture-architecture-architecture-debezium_runner_components">Debezium Runner 组件架构</a></p>
+<p><a href="#zh-architecture-debezium_runner_components">Debezium Runner 组件架构</a></p>
 <h3 id="zh-architecture-architecture-synchdb-c"><strong>SynchDB 扩展 - C</strong><a class="headerlink" href="#zh-architecture-architecture-synchdb-c" title="Permanent link">&para;</a></h3>
 <p>这是初始化 Java 虚拟机 (JVM) 并在其上运行 Debezium Runner 的主要入口点。它会定期从 Debezium Runner 获取一批 JSON 变更事件，处理这些数据并将其应用到 PostgreSQL。它还负责通知 Debezium 已成功完成一批 JSON 变更事件，以便两个组件在复制进度方面保持同步。</p>
-<p><a href="#zh-architecture-architecture-architecture-synchdb_components">SynchDB 扩展组件架构</a></p></section><section class="print-page" id="zh-architecture-debezium_event_processor" heading-number="2.2"><h1 id="zh-architecture-debezium_event_processor-debezium-c">Debezium 事件处理器 - C<a class="headerlink" href="#zh-architecture-debezium_event_processor-debezium-c" title="Permanent link">&para;</a></h1>
+<p><a href="#zh-architecture-synchdb_components">SynchDB 扩展组件架构</a></p></section><section class="print-page" id="zh-architecture-debezium_event_processor" heading-number="2.2"><h1 id="zh-architecture-debezium_event_processor-debezium-c">Debezium 事件处理器 - C<a class="headerlink" href="#zh-architecture-debezium_event_processor-debezium-c" title="Permanent link">&para;</a></h1>
 <h2 id="zh-architecture-debezium_event_processor-debezium"><strong>Debezium 事件处理器组件图</strong><a class="headerlink" href="#zh-architecture-debezium_event_processor-debezium" title="Permanent link">&para;</a></h2>
 <p><img alt="img" src="../images/synchdb-component-diag.jpg" /></p>
 <p>Debezium 事件处理器是由 SynchDB 扩展发起和启动的 PostgreSQL 后台工作进程。它负责初始化 Java 虚拟机 (JVM)，运行 Debezium Runner模块，（它是 SynchDB 的 Java 部分），利用嵌入式 Debezium 引擎从异构数据库源获取更改事件。每个 SynchDB 工作进程都由下面列出的组件和模块组成：</p>
@@ -2704,14 +2704,14 @@
 <p>DML 转换器由几个例程组成，这些例程可以处理特定的输入数据类型并生成特定的输出类型。为特定转换场景选择正确的例程可能是一个挑战，因为某些数据类型可能是用户定义的，或者由 SynchDB 不太了解的其他扩展创建。SynchDB 必须设计为处理 PostgreSQL 中可能存在的本机和非本机数据类型。</p>
 <p>例程选择首先查看在 PostgreSQL 中创建的数据类型，该数据类型可分为 2 种类型，每种类型的处理技术略有不同：</p>
 <ul>
-<li><a href="#zh-architecture-debezium_event_processor-architecture-native_datatype_handling">原生数据类型</a>。</li>
-<li><a href="#zh-architecture-debezium_event_processor-architecture-non_native_datatype_handling">非原生数据类型</a>。</li>
+<li><a href="#zh-architecture-native_datatype_handling">原生数据类型</a>。</li>
+<li><a href="#zh-architecture-non_native_datatype_handling">非原生数据类型</a>。</li>
 </ul>
 <h4 id="zh-architecture-debezium_event_processor-_1"><strong>数据转换</strong><a class="headerlink" href="#zh-architecture-debezium_event_processor-_1" title="Permanent link">&para;</a></h4>
 <p>在输入数据通过上述逻辑处理后，转换器将检查用户是否已配置“转换表达式”，该表达式应在应用于 PostgreSQL 之前应用于已处理的数据。转换表达式可以是任何可以在 psql 提示符上运行的 PostgreSQL 表达式、命令或 SQL 函数。它使用“%d”作为占位符，在转换期间将替换为已处理的数据。例如，转换表达式“'&gt;&gt;&gt;&gt;&gt;' || '%d' || '&lt;&lt;&lt;&lt;&lt;'”将在已处理的字符串数据前面和后面添加其他字符。</p>
 <p>因此，如果非本地数据类型具有 TYPCATEGORY_USER 类别，DML 转换器没有合适的例程来处理此数据并将保持原样，我们可以定义一个转换表达式来调用自定义 SQL 函数，它知道如何正确处理数据并生成合适的输出。例如，表达式“to_my_composite_type('%d')”将使用数据作为输入来调用用户定义的 SQL 函数“to_my_composite_type”。表达式必须具有返回值，因为它将在应用期间输入到 PostgreSQL 中。</p>
 <h3 id="zh-architecture-debezium_event_processor-9"><strong>9) 错误处理程序</strong><a class="headerlink" href="#zh-architecture-debezium_event_processor-9" title="Permanent link">&para;</a></h3>
-<p>错误处理程序主要负责处理数据同步各个阶段可能出现的任何错误。格式转换器支持多种错误处理策略，可通过 “synchdb.error_handling_strategy” 参数进行配置。详情请参阅<a href="#zh-architecture-debezium_event_processor-user-guide-configure_error_strategies">此处</a>。</p>
+<p>错误处理程序主要负责处理数据同步各个阶段可能出现的任何错误。格式转换器支持多种错误处理策略，可通过 “synchdb.error_handling_strategy” 参数进行配置。详情请参阅<a href="#zh-user-guide-configure_error_strategies">此处</a>。</p>
 <h3 id="zh-architecture-debezium_event_processor-10-spi-client"><strong>10) SPI Client</strong><a class="headerlink" href="#zh-architecture-debezium_event_processor-10-spi-client" title="Permanent link">&para;</a></h3>
 <p>SPI Client 组件存在于 Replication Agent 下，它充当 PostgreSQL 核心和 SynchDB 之间的桥梁。它负责建立与 SPI 服务器的连接、启动事务、获取快照并执行由 <code>DDL Converter</code> 创建的给定 SQL 查询并销毁连接。对于要处理的每个查询，都会创建和销毁 SPI 连接，这似乎效率不高。由于 SPI 仅在 DDL 期间使用，而这通常不太频繁，因此在性能方面应该没问题。</p>
 <h3 id="zh-architecture-debezium_event_processor-11-api"><strong>11) 执行器 API</strong><a class="headerlink" href="#zh-architecture-debezium_event_processor-11-api" title="Permanent link">&para;</a></h3>
@@ -2912,14 +2912,14 @@
 <p>DML 转换器包含多个例程，这些例程可以处理特定的输入数据类型并生成特定的输出类型。为特定的转换场景选择合适的例程可能是一个挑战，因为某些数据类型可能是用户定义的，或者由 SynchDB 不太了解的其他扩展创建。SynchDB 必须设计为能够处理 PostgreSQL 中可能存在的原生和非原生数据类型。</p>
 <p>例程选择首先要查看 PostgreSQL 中创建的数据类型，该数据类型可分为两种类型，每种类型的处理技术略有不同：</p>
 <ul>
-<li><a href="#zh-architecture-openlog_replicator_event_processor-architecture-native_datatype_handling">原生数据类型</a>。</li>
-<li><a href="#zh-architecture-openlog_replicator_event_processor-architecture-non_native_datatype_handling">非原生数据类型</a>。</li>
+<li><a href="#zh-architecture-native_datatype_handling">原生数据类型</a>。</li>
+<li><a href="#zh-architecture-non_native_datatype_handling">非原生数据类型</a>。</li>
 </ul>
 <h4 id="zh-architecture-openlog_replicator_event_processor-_2"><strong>数据转换</strong><a class="headerlink" href="#zh-architecture-openlog_replicator_event_processor-_2" title="Permanent link">&para;</a></h4>
 <p>输入数据按上述逻辑处理后，转换器将检查用户是否配置了“转换表达式”，该表达式应在应用于 PostgreSQL 之前应用于已处理的数据。转换表达式可以是任何可在 psql 提示符下运行的 PostgreSQL 表达式、命令或 SQL 函数。它使用“%d”作为占位符，在转换过程中将替换为已处理的数据。例如，转换表达式“'&gt;&gt;&gt;&gt;&gt;' || '%d' || '&lt;&lt;&lt;&lt;&lt;'”将在已处理的字符串数据前添加和后添加其他字符。</p>
 <p>因此，如果非原生数据类型的类别为 TYPCATEGORY_USER，而 DML 转换器没有合适的例程来处理此类数据，因此会将其保留原样。我们可以定义一个转换表达式来调用自定义 SQL 函数，以便转换器知道如何正确处理数据并生成合适的输出。例如，表达式“to_my_composite_type('%d')”将调用用户定义的 SQL 函数“to_my_composite_type”，并以数据作为输入。该表达式必须有返回值，因为它将在应用期间被输入到 PostgreSQL 中。</p>
 <h3 id="zh-architecture-openlog_replicator_event_processor-8"><strong>8) 错误处理程序</strong><a class="headerlink" href="#zh-architecture-openlog_replicator_event_processor-8" title="Permanent link">&para;</a></h3>
-<p>错误处理程序主要负责处理数据同步各个阶段可能出现的任何错误。格式转换器支持多种错误处理策略，可通过“synchdb.error_handling_strategy”参数进行配置。详细信息请参见<a href="#zh-architecture-openlog_replicator_event_processor-user-guide-configure_error_strategies">此处</a>。</p>
+<p>错误处理程序主要负责处理数据同步各个阶段可能出现的任何错误。格式转换器支持多种错误处理策略，可通过“synchdb.error_handling_strategy”参数进行配置。详细信息请参见<a href="#zh-user-guide-configure_error_strategies">此处</a>。</p>
 <h3 id="zh-architecture-openlog_replicator_event_processor-9-spi"><strong>9) SPI 客户端</strong><a class="headerlink" href="#zh-architecture-openlog_replicator_event_processor-9-spi" title="Permanent link">&para;</a></h3>
 <p>SPI 客户端组件位于复制代理 (Replication Agent) 下，充当 PostgreSQL 核心和 SynchDB 之间的桥梁。它负责与 SPI 服务器建立连接、启动事务、获取快照、执行由“DDL 转换器”创建的 SQL 查询并销毁连接。对于每个要处理的查询，都会创建和销毁 SPI 连接，这看起来效率不高。由于 SPI 仅在 DDL 操作期间使用，而 DDL 通常不太频繁，因此性能方面应该不错。</p>
 <h3 id="zh-architecture-openlog_replicator_event_processor-10-api"><strong>10) 执行器 API</strong><a class="headerlink" href="#zh-architecture-openlog_replicator_event_processor-10-api" title="Permanent link">&para;</a></h3>
@@ -3275,7 +3275,7 @@ sudo<span class="w"> </span>ldconfig
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>dpkg<span class="w"> </span>-i<span class="w"> </span>synchdb-1.1-1.ub22.pg16_x86_64.deb
 </code></pre></div></td></tr></table></div></p>
 </li>
-<li>SynchDB 应该已准备就绪。请参阅 <a href="#zh-getting-started-installation-user-guide-quick_start">快速入门</a> 页面开始使用</li>
+<li>SynchDB 应该已准备就绪。请参阅 <a href="#zh-user-guide-quick_start">快速入门</a> 页面开始使用</li>
 </ol>
 <h3 id="zh-getting-started-installation-rpm"><strong>.rpm 软件包</strong><a class="headerlink" href="#zh-getting-started-installation-rpm" title="Permanent link">&para;</a></h3>
 <ol>
@@ -3310,7 +3310,7 @@ sudo<span class="w"> </span>ldconfig
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>synchdb-1.1-1.el9.pg16.x86_64.rpm
 </code></pre></div></td></tr></table></div></p>
 </li>
-<li>SynchDB 应该已准备就绪。请参阅 <a href="#zh-getting-started-installation-user-guide-quick_start">快速入门</a> 页面开始使用</li>
+<li>SynchDB 应该已准备就绪。请参阅 <a href="#zh-user-guide-quick_start">快速入门</a> 页面开始使用</li>
 </ol>
 <h2 id="zh-getting-started-installation-_3"><strong>从预编译的二进制文件安装</strong><a class="headerlink" href="#zh-getting-started-installation-_3" title="Permanent link">&para;</a></h2>
 <p>访问我们的<a href="https://github.com/Hornetlabs/synchdb/releases">发布页面</a> 下载预编译二进制文件。我们目前支持基于 Debian 的 Linux 系统（如 Ubuntu）系统上的预编译二进制文件。其他平台将在不久的将来得到支持。SynchDB 预编译二进制文件需要先安装 PostgreSQL。它所需的 PostgreSQL 版本在包名称中描述。例如，<code>synchdb-1.1-1.ub22.pg16_x86_64.tar.gz</code> 是在 Ubuntu 22.04 上针对 PostgreSQL 16 编译的二进制文件。</p>
@@ -3354,7 +3354,7 @@ sudo<span class="w"> </span>ldconfig
 </code></pre></div></td></tr></table></div></p>
 </li>
 <li>
-<p>SynchDB 应该已准备就绪。请参阅 <a href="#zh-getting-started-installation-user-guide-quick_start">快速入门</a> 页面开始使用</p>
+<p>SynchDB 应该已准备就绪。请参阅 <a href="#zh-user-guide-quick_start">快速入门</a> 页面开始使用</p>
 </li>
 </ol>
 <h2 id="zh-getting-started-installation-_5"><strong>源代码编译及安装</strong><a class="headerlink" href="#zh-getting-started-installation-_5" title="Permanent link">&para;</a></h2>
@@ -3374,7 +3374,7 @@ sudo<span class="w"> </span>ldconfig
 </ul>
 <p><strong>如果您想使用基於 FDW 的快照，則需要以下內容：</strong></p>
 <ul>
-<li>OCI v23.9.0。更多資訊請參閱<a href="#zh-getting-started-installation-user-guide-configure_snapshot_engine">此處</a>。</li>
+<li>OCI v23.9.0。更多資訊請參閱<a href="#zh-user-guide-configure_snapshot_engine">此處</a>。</li>
 <li>oracle_fdw v2.8.0。如何從原始碼建置？請參閱<a href="https://github.com/laurenz/oracle_fdw">此處</a>。</li>
 </ul>
 <h3 id="zh-getting-started-installation-synchdb-mysqlsql-server-oracle"><strong>預設 SynchDB 建置 - 支援 MySQL、SQL Server 和 Oracle 連接器</strong><a class="headerlink" href="#zh-getting-started-installation-synchdb-mysqlsql-server-oracle" title="Permanent link">&para;</a></h3>
@@ -3894,7 +3894,7 @@ binlog_expire_logs_seconds  = 864000
 <li>GUC（Grand Unified Configuration）是 PostgreSQL 中的全局配置参数</li>
 <li>这些值需要在 <code>postgresql.conf</code> 文件中设置</li>
 <li>修改配置后需要重启服务器才能生效</li>
-<li><code>shared_preload_library</code> 是一个关键的系统配置，它决定了启动时加载哪些库，synchdb 必须放在这里才能启用 <a href="#zh-getting-started-configuration-user-guide-connector_auto_launcher">连接器自动启动器</a></li>
+<li><code>shared_preload_library</code> 是一个关键的系统配置，它决定了启动时加载哪些库，synchdb 必须放在这里才能启用 <a href="#zh-user-guide-connector_auto_launcher">连接器自动启动器</a></li>
 </ul>
 <h2 id="zh-getting-started-configuration-_3"><strong>配置示例</strong><a class="headerlink" href="#zh-getting-started-configuration-_3" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code># postgresql.conf 配置示例
@@ -4285,14 +4285,14 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <p><strong>查看已创建的连接器：</strong></p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_conninfo</span><span class="p">;</span>
 </code></pre></div>
-<p>有关创建连接器的更多详细信息，请参阅<a href="#zh-getting-started-quick_start-user-guide-create_a_connector">此处</a></p>
+<p>有关创建连接器的更多详细信息，请参阅<a href="#zh-user-guide-create_a_connector">此处</a></p>
 <h2 id="zh-getting-started-quick_start-_4"><strong>创建对象映射</strong><a class="headerlink" href="#zh-getting-started-quick_start-_4" title="Permanent link">&para;</a></h2>
 <p>默认情况下，源数据库名称将映射到目标数据库中的架构名称。可以使用对象映射来更改此架构名称。让我们从基于 Oracle 的连接器中更改“orders”表的目标架构，其余部分保留默认值。</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;free.c##dbzuser.orders&#39;</span><span class="p">,</span><span class="s1">&#39;oracle23ai.orders&#39;</span><span class="p">);</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;ora19cconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;free.dbzuser.orders&#39;</span><span class="p">,</span><span class="s1">&#39;oracle19c.orders&#39;</span><span class="p">);</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;free.dbzuser.orders&#39;</span><span class="p">,</span><span class="s1">&#39;olr.orders&#39;</span><span class="p">);</span>
 </code></pre></div>
-<p>有关创建对象映射的更多详细信息，请参见<a href="#zh-getting-started-quick_start-user-guide-object_mapping_rules">此处</a></p>
+<p>有关创建对象映射的更多详细信息，请参见<a href="#zh-user-guide-object_mapping_rules">此处</a></p>
 <h2 id="zh-getting-started-quick_start-jmx-"><strong>创建 JMX 导出器 - 可选</strong><a class="headerlink" href="#zh-getting-started-quick_start-jmx-" title="Permanent link">&para;</a></h2>
 <p>以下是一些启用 JMX 导出器进行监控的示例（如果已通过 <code>ezdeploy.sh</code> 预先部署了 Prometheus + Grafana）：</p>
 <p><strong>MySQL:</strong>
@@ -4323,7 +4323,7 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <span class="w">                            </span><span class="mi">9407</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;/home/ubuntu/jmxexport.conf&#39;</span><span class="p">);</span>
 </code></pre></div></p>
-<p>关于创建 JMX Exporter 的更多详细信息，请参见<a href="#zh-getting-started-quick_start-monitoring-jmx_exporter">此处</a></p>
+<p>关于创建 JMX Exporter 的更多详细信息，请参见<a href="#zh-monitoring-jmx_exporter">此处</a></p>
 <h2 id="zh-getting-started-quick_start-_5"><strong>启动连接器</strong><a class="headerlink" href="#zh-getting-started-quick_start-_5" title="Permanent link">&para;</a></h2>
 <p><strong>MySQL:</strong>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
@@ -4340,7 +4340,7 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <p><strong>OLR(Oracle19c):</strong>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">);</span>
 </code></pre></div></p>
-<p>有关连接器启动的更多详细信息，请参见<a href="#zh-getting-started-quick_start-user-guide-start_stop_connector">此处</a></p>
+<p>有关连接器启动的更多详细信息，请参见<a href="#zh-user-guide-start_stop_connector">此处</a></p>
 <h2 id="zh-getting-started-quick_start-_6"><strong>检查连接器运行状态</strong><a class="headerlink" href="#zh-getting-started-quick_start-_6" title="Permanent link">&para;</a></h2>
 <p>使用“synchdb_state_view()”检查所有连接器的运行状态。</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="p">;</span>
@@ -4356,7 +4356,7 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <span class="w"> </span><span class="n">olrconn</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="mi">601235</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="n">snapshot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">offset</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">flushed</span><span class="w"> </span><span class="n">yet</span>
 <span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
 </code></pre></div></p>
-<p>有关运行状态的更多信息，请参见<a href="#zh-getting-started-quick_start-monitoring-state_view">此处</a>，以及运行统计信息，请参见<a href="#zh-getting-started-quick_start-monitoring-stats_view">此处</a>。</p>
+<p>有关运行状态的更多信息，请参见<a href="#zh-monitoring-state_view">此处</a>，以及运行统计信息，请参见<a href="#zh-monitoring-stats_view">此处</a>。</p>
 <h2 id="zh-getting-started-quick_start-_7">检查初始快照中的表和数据<a class="headerlink" href="#zh-getting-started-quick_start-_7" title="Permanent link">&para;</a></h2>
 <p>默认情况下，连接器将执行“初始”快照，以捕获表模式和初始数据，然后转换并将它们应用到不同“模式”下的 PostgreSQL。您应该看到类似以下内容：</p>
 <p><strong>MySQL:</strong>
@@ -4768,7 +4768,7 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <li><code>schema sync</code> - 连接器仅复制表架构（无数据）</li>
 </ul></section><section class="print-page" id="zh-monitoring-attr_view" heading-number="4.3"><h1 id="zh-monitoring-attr_view-_1">属性视图<a class="headerlink" href="#zh-monitoring-attr_view-_1" title="Permanent link">&para;</a></h1>
 <h2 id="zh-monitoring-attr_view-_2"><strong>查看连接器管理的属性</strong><a class="headerlink" href="#zh-monitoring-attr_view-_2" title="Permanent link">&para;</a></h2>
-<p>连接器完成初始表快照后，源表、列和数据类型将根据<a href="#zh-monitoring-attr_view-user-guide-object_mapping_rules">对象映射规则</a>在 PostgreSQL 端进行转换和创建。SynchDB 提供了一个视图，可并排显示连接器的数据类型、名称映射以及源表和目标表之间的转换规则关系。</p>
+<p>连接器完成初始表快照后，源表、列和数据类型将根据<a href="#zh-user-guide-object_mapping_rules">对象映射规则</a>在 PostgreSQL 端进行转换和创建。SynchDB 提供了一个视图，可并排显示连接器的数据类型、名称映射以及源表和目标表之间的转换规则关系。</p>
 <p>此视图仅供参考，旨在向用户显示连接器当前正在跟踪的表的列表以及每个表/列使用的映射/转换规则。</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_att_view</span><span class="p">();</span>
 </code></pre></div>
@@ -5175,13 +5175,13 @@ debezium_mysql_connector_metrics_connected{context=&quot;streaming&quot;,server=
 </code></pre></div></p>
 <h2 id="zh-monitoring-jmx_exporter-prometheus-graphana">Prometheus 和 Graphana<a class="headerlink" href="#zh-monitoring-jmx_exporter-prometheus-graphana" title="Permanent link">&para;</a></h2>
 <p>一旦我们确认可以通过 HTTP 获取指标，就可以将此端点配置到 Prometheus 系统，并让其“抓取”所有指标。然后，我们可以在 graphana 中创建一个 Prometheus 数据源，并使用它创建一个仪表板。请参阅 Prometheus 和 graphana <a href="https://grafana.com/docs/grafana/latest/getting-started/get-started-grafana-prometheus/">教程</a> 了解如何操作。</p>
-<p>为了快速测试，您还可以使用 <code>ezdeploy</code> 工具快速部署 prometheus 和 grafana，并使用 Synchdb 内置的仪表板模板。有关模式详细信息，请参阅 <a href="#zh-monitoring-jmx_exporter-getting-started-quick_start">快速入门指南</a>。</p></section></section>
+<p>为了快速测试，您还可以使用 <code>ezdeploy</code> 工具快速部署 prometheus 和 grafana，并使用 Synchdb 内置的仪表板模板。有关模式详细信息，请参阅 <a href="#zh-getting-started-quick_start">快速入门指南</a>。</p></section></section>
                     <section class='print-page md-section' id='section-5' heading-number='5'>
                         <h1>教程<a class='headerlink' href='#section-5' title='Permanent link'></a>
                         </h1>
                     <section class="print-page" id="zh-tutorial-mysql_cdc_to_postgresql" heading-number="5.1"><h1 id="zh-tutorial-mysql_cdc_to_postgresql-mysql-cdc-postgresql">MySQL CDC 到 PostgreSQL<a class="headerlink" href="#zh-tutorial-mysql_cdc_to_postgresql-mysql-cdc-postgresql" title="Permanent link">&para;</a></h1>
 <h2 id="zh-tutorial-mysql_cdc_to_postgresql-synchdb-mysql">为 SynchDB 准备 MySQL 数据库<a class="headerlink" href="#zh-tutorial-mysql_cdc_to_postgresql-synchdb-mysql" title="Permanent link">&para;</a></h2>
-<p>在使用 SynchDB 从 MySQL 复制之前，需要按照<a href="#zh-tutorial-mysql_cdc_to_postgresql-getting-started-remote_database_setups">此处</a> 概述的步骤配置 MySQL</p>
+<p>在使用 SynchDB 从 MySQL 复制之前，需要按照<a href="#zh-getting-started-remote_database_setups">此处</a> 概述的步骤配置 MySQL</p>
 <h2 id="zh-tutorial-mysql_cdc_to_postgresql-mysql">创建 MySQL 连接器<a class="headerlink" href="#zh-tutorial-mysql_cdc_to_postgresql-mysql" title="Permanent link">&para;</a></h2>
 <p>创建一个连接器，该连接器指向 MySQL 中 <code>inventory</code> 数据库下的所有表。
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
@@ -5277,7 +5277,7 @@ debezium_mysql_connector_metrics_connected{context=&quot;streaming&quot;,server=
 </code></pre></div></p>
 <p>初始快照完成后，CDC 将开始。在 <code>always</code> 模式下重新启动连接器将重复上述过程。</p></section><section class="print-page" id="zh-tutorial-sqlserver_cdc_to_postgresql" heading-number="5.2"><h1 id="zh-tutorial-sqlserver_cdc_to_postgresql-sql-server-cdc-postgresql">SQL Server CDC 到 PostgreSQL<a class="headerlink" href="#zh-tutorial-sqlserver_cdc_to_postgresql-sql-server-cdc-postgresql" title="Permanent link">&para;</a></h1>
 <h2 id="zh-tutorial-sqlserver_cdc_to_postgresql-synchdb-sql-server">为 SynchDB 准备 SQL Server 数据库<a class="headerlink" href="#zh-tutorial-sqlserver_cdc_to_postgresql-synchdb-sql-server" title="Permanent link">&para;</a></h2>
-<p>在使用 SynchDB 从 SQL Server 进行复制之前，需要按照<a href="#zh-tutorial-sqlserver_cdc_to_postgresql-getting-started-remote_database_setups">此处</a> 概述的步骤配置 SQL Server。</p>
+<p>在使用 SynchDB 从 SQL Server 进行复制之前，需要按照<a href="#zh-getting-started-remote_database_setups">此处</a> 概述的步骤配置 SQL Server。</p>
 <p>请确保所需的表已在 SQL Server 中启用为 CDC 表。您可以在 SQL Server 客户端上运行以下命令，为“dbo.customer”、“dbo.district”和“dbo.history”启用 CDC。您将根据需要继续添加新表。</p>
 <div class="highlight"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">MyDB</span>
 <span class="k">GO</span>
@@ -5369,7 +5369,7 @@ debezium_mysql_connector_metrics_connected{context=&quot;streaming&quot;,server=
 </code></pre></div></p>
 <p>初始快照完成后，CDC 将开始。在 <code>always</code> 模式下重新启动连接器将重复上述过程。</p></section><section class="print-page" id="zh-tutorial-oracle_cdc_to_postgresql" heading-number="5.3"><h1 id="zh-tutorial-oracle_cdc_to_postgresql-oracle-cdc-postgresql">Oracle CDC 到 PostgreSQL<a class="headerlink" href="#zh-tutorial-oracle_cdc_to_postgresql-oracle-cdc-postgresql" title="Permanent link">&para;</a></h1>
 <h2 id="zh-tutorial-oracle_cdc_to_postgresql-synchdb-oracle">为 SynchDB 准备 Oracle 数据库<a class="headerlink" href="#zh-tutorial-oracle_cdc_to_postgresql-synchdb-oracle" title="Permanent link">&para;</a></h2>
-<p>在使用 SynchDB 从 Oracle 复制之前，需要按照<a href="#zh-tutorial-oracle_cdc_to_postgresql-getting-started-remote_database_setups">此处</a> 概述的步骤配置 Oracle。</p>
+<p>在使用 SynchDB 从 Oracle 复制之前，需要按照<a href="#zh-getting-started-remote_database_setups">此处</a> 概述的步骤配置 Oracle。</p>
 <p>请确保 SynchDB 需要复制的每个表的所有列都启用了补充日志数据。这是 SynchDB 正确处理更新和删除操作所必需的。</p>
 <p>例如，以下命令为“customer”和“products”表的所有列启用了补充日志数据。请根据需要添加更多表。</p>
 <div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">customer</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="n">SUPPLEMENTAL</span><span class="w"> </span><span class="n">LOG</span><span class="w"> </span><span class="k">DATA</span><span class="w"> </span><span class="p">(</span><span class="k">ALL</span><span class="p">)</span><span class="w"> </span><span class="n">COLUMNS</span><span class="p">;</span>
@@ -5577,8 +5577,8 @@ debezium_mysql_connector_metrics_connected{context=&quot;streaming&quot;,server=
 </tbody>
 </table></section><section class="print-page" id="zh-tutorial-table_snapshot_resnapshot" heading-number="5.5"><h1 id="zh-tutorial-table_snapshot_resnapshot-_1">表快照和重新快照<a class="headerlink" href="#zh-tutorial-table_snapshot_resnapshot-_1" title="Permanent link">&para;</a></h1>
 <h2 id="zh-tutorial-table_snapshot_resnapshot-_2">初始快照<a class="headerlink" href="#zh-tutorial-table_snapshot_resnapshot-_2" title="Permanent link">&para;</a></h2>
-<p>SynchDB 中的“初始快照”（或表快照）是指复制所有指定表的表结构和初始数据。这类似于 PostgreSQL 逻辑复制中的“表同步”。当使用默认“initial”模式启动连接器时，它将在进入变更数据捕获 (CDC) 阶段之前自动执行初始快照。可以使用“never”模式完全省略此操作，或使用“no_data”模式部分省略此操作。有关所有快照选项，请参阅<a href="#zh-tutorial-table_snapshot_resnapshot-user-guide-start_stop_connector">此处</a>。</p>
-<p>初始快照完成后，连接器在后续重启时将不再执行此操作，而是从上次未完成的偏移量开始继续执行 CDC。此行为由 Debezium 引擎管理的元数据文件控制。有关元数据文件的更多信息，请参阅<a href="#zh-tutorial-table_snapshot_resnapshot-architecture-metadata_files">此处</a>。</p>
+<p>SynchDB 中的“初始快照”（或表快照）是指复制所有指定表的表结构和初始数据。这类似于 PostgreSQL 逻辑复制中的“表同步”。当使用默认“initial”模式启动连接器时，它将在进入变更数据捕获 (CDC) 阶段之前自动执行初始快照。可以使用“never”模式完全省略此操作，或使用“no_data”模式部分省略此操作。有关所有快照选项，请参阅<a href="#zh-user-guide-start_stop_connector">此处</a>。</p>
+<p>初始快照完成后，连接器在后续重启时将不再执行此操作，而是从上次未完成的偏移量开始继续执行 CDC。此行为由 Debezium 引擎管理的元数据文件控制。有关元数据文件的更多信息，请参阅<a href="#zh-architecture-metadata_files">此处</a>。</p>
 <h2 id="zh-tutorial-table_snapshot_resnapshot-_3">重新快照<a class="headerlink" href="#zh-tutorial-table_snapshot_resnapshot-_3" title="Permanent link">&para;</a></h2>
 <p>如果出于任何原因，用户需要再次执行初始快照以重建“所有指定的表”和所有初始数据，我们需要使用“始终”快照模式，这会导致连接器在启动时再次获取架构和初始数据。您可能需要删除所有指定的表或清除其中的所有数据，然后 SynchDB 才会尝试重新创建表并填充初始数据（这些数据可能已经存在）。</p>
 <p>请谨慎操作，因为在您的设置中执行此操作可能过于激进。更好的替代方案是使用选择性快照，在“始终”快照模式下，仅对选定的表进行重新快照。请参见下文。</p>
@@ -5951,7 +5951,7 @@ debezium_mysql_connector_metrics_connected{context=&quot;streaming&quot;,server=
 </tr>
 </tbody>
 </table>
-<p><strong>请参阅<a href="#zh-user-guide-start_stop_connector-tutorial-selective_table_sync">教程</a>，了解何时使用何种模式</strong></p>
+<p><strong>请参阅<a href="#zh-tutorial-selective_table_sync">教程</a>，了解何时使用何种模式</strong></p>
 <h2 id="zh-user-guide-start_stop_connector-_6"><strong>暂停和恢复连接器</strong><a class="headerlink" href="#zh-user-guide-start_stop_connector-_6" title="Permanent link">&para;</a></h2>
 <p>使用 <code>synchdb_pause_engine</code> 暂停连接器，这会暂时停止正在运行的连接器。
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_pause_engine</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
@@ -5993,7 +5993,7 @@ synchdb.synchdb_auto_launcher = true
 * 数据类型：数据类型的字符串表示，如INT、TEXT、NUMERIC
 * 自动增量：表示数据类型是否具有自动增量属性的标志
 * 大小：转换后的大小值。-1：无变化，0：未指定大小</p>
-<p>可以通过定义对象映射规则来覆盖默认的数据类型映射关系。更多信息请参见<a href="#zh-user-guide-default_datatype_mapping-user-guide-object_mapping_rules">转换规则文件</a>。</p>
+<p>可以通过定义对象映射规则来覆盖默认的数据类型映射关系。更多信息请参见<a href="#zh-user-guide-object_mapping_rules">转换规则文件</a>。</p>
 <h2 id="zh-user-guide-default_datatype_mapping-mysql"><strong>MySQL 默认数据类型映射</strong><a class="headerlink" href="#zh-user-guide-default_datatype_mapping-mysql" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="n">DatatypeHashEntry</span><span class="w"> </span><span class="n">mysql_defaultTypeMappings</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span>
 <span class="p">{</span>
@@ -6397,7 +6397,7 @@ synchdb.synchdb_auto_launcher = true
 <ul>
 <li><strong>Openlog Replicator 版本</strong>：<code>1.3.0</code>（已验证与 Debezium 2.7.x 的兼容性）</li>
 <li>具有可供 OLR 访问的重做日志的 Oracle 实例</li>
-<li>必须为 OLR 授予额外权限。有关具体的权限要求，请参阅<a href="#zh-user-guide-configure_olr-getting-started-remote_database_setups">此处</a>。</li>
+<li>必须为 OLR 授予额外权限。有关具体的权限要求，请参阅<a href="#zh-getting-started-remote_database_setups">此处</a>。</li>
 <li>Openlog Replicator 必须已配置并正在运行</li>
 <li>SynchDB 中现有的 Oracle 连接器（使用 <code>synchdb_add_conninfo()</code> 创建）</li>
 </ul>
@@ -6541,7 +6541,7 @@ synchdb.synchdb_auto_launcher = true
 <span class="w">                            </span><span class="s1">&#39;olr&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>&lt;&lt;&lt;<strong>重要</strong>&gt;&gt;&gt; <strong>SynchDB 必须使用标志 (WITH_OLR=1) 进行编译和构建，以支持本机 openlog 复制器连接器。</strong></p>
-<p>更多关于创建连接器的信息，请访问<a href="#zh-user-guide-configure_olr-user-guide-create_a_connector">此处</a></p>
+<p>更多关于创建连接器的信息，请访问<a href="#zh-user-guide-create_a_connector">此处</a></p>
 <h2 id="zh-user-guide-configure_olr-synchdb_add_olr_conninfo"><strong><code>synchdb_add_olr_conninfo()</code></strong><a class="headerlink" href="#zh-user-guide-configure_olr-synchdb_add_olr_conninfo" title="Permanent link">&para;</a></h2>
 <p>创建连接器后，用户可以为现有的 Oracle 连接器注册一个 Openlog Replicator 端点。 </p>
 <p><strong>签名：</strong></p>
@@ -6681,7 +6681,7 @@ synchdb.synchdb_auto_launcher = true
 <li>&rarr; 效率低下 - 因为只有一小部分 JVM heap 空间用作缓存 + 不必要的钝化。</li>
 </ul></section><section class="print-page" id="zh-user-guide-configure_snapshot_engine" heading-number="6.11"><h1 id="zh-user-guide-configure_snapshot_engine-_1">設定快照引擎<a class="headerlink" href="#zh-user-guide-configure_snapshot_engine-_1" title="Permanent link">&para;</a></h1>
 <h2 id="zh-user-guide-configure_snapshot_engine-cdc"><strong>初始快照與變更資料擷取 (CDC)</strong><a class="headerlink" href="#zh-user-guide-configure_snapshot_engine-cdc" title="Permanent link">&para;</a></h2>
-<p>初始快照是指將表格結構和初始資料從遠端資料庫遷移到 SynchDB 的過程。對於大多數連接器類型，此操作僅在首次啟動連接器時透過嵌入式 Debezium 運行器執行一次，因為只有 Debezium 引擎才能執行初始快照。初始快照完成後，變更資料擷取將開始將即時變更串流傳輸到 SynchDB。 「快照模式」可以進一步控制初始快照和 CDC 的行為。更多信息，請參閱<a href="#zh-user-guide-configure_snapshot_engine-user-guide-start_stop_connector">此處</a>。</p>
+<p>初始快照是指將表格結構和初始資料從遠端資料庫遷移到 SynchDB 的過程。對於大多數連接器類型，此操作僅在首次啟動連接器時透過嵌入式 Debezium 運行器執行一次，因為只有 Debezium 引擎才能執行初始快照。初始快照完成後，變更資料擷取將開始將即時變更串流傳輸到 SynchDB。 「快照模式」可以進一步控制初始快照和 CDC 的行為。更多信息，請參閱<a href="#zh-user-guide-start_stop_connector">此處</a>。</p>
 <p>除了基於 Debezium 的初始快照（當表數量眾多時可能會很慢）之外，SynchdB 還提供了另一個基於 FDW 的原生初始快照引擎。目前，只有原生 Openlog Replicator (OLR) 連接器支援基於 FDW 的快照。所有其他連接器仍然依賴 Debezium 來執行快照。</p>
 <h2 id="zh-user-guide-configure_snapshot_engine-fdw"><strong>基於 FDW 的初始快照</strong><a class="headerlink" href="#zh-user-guide-configure_snapshot_engine-fdw" title="Permanent link">&para;</a></h2>
 <ul>

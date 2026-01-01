@@ -2463,14 +2463,14 @@
 <p>DML 转换器由几个例程组成，这些例程可以处理特定的输入数据类型并生成特定的输出类型。为特定转换场景选择正确的例程可能是一个挑战，因为某些数据类型可能是用户定义的，或者由 SynchDB 不太了解的其他扩展创建。SynchDB 必须设计为处理 PostgreSQL 中可能存在的本机和非本机数据类型。</p>
 <p>例程选择首先查看在 PostgreSQL 中创建的数据类型，该数据类型可分为 2 种类型，每种类型的处理技术略有不同：</p>
 <ul>
-<li><a href="architecture/native_datatype_handling/">原生数据类型</a>。</li>
-<li><a href="architecture/non_native_datatype_handling/">非原生数据类型</a>。</li>
+<li><a href="../../architecture/native_datatype_handling/">原生数据类型</a>。</li>
+<li><a href="../../architecture/non_native_datatype_handling/">非原生数据类型</a>。</li>
 </ul>
 <h4 id="_1"><strong>数据转换</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h4>
 <p>在输入数据通过上述逻辑处理后，转换器将检查用户是否已配置“转换表达式”，该表达式应在应用于 PostgreSQL 之前应用于已处理的数据。转换表达式可以是任何可以在 psql 提示符上运行的 PostgreSQL 表达式、命令或 SQL 函数。它使用“%d”作为占位符，在转换期间将替换为已处理的数据。例如，转换表达式“'&gt;&gt;&gt;&gt;&gt;' || '%d' || '&lt;&lt;&lt;&lt;&lt;'”将在已处理的字符串数据前面和后面添加其他字符。</p>
 <p>因此，如果非本地数据类型具有 TYPCATEGORY_USER 类别，DML 转换器没有合适的例程来处理此数据并将保持原样，我们可以定义一个转换表达式来调用自定义 SQL 函数，它知道如何正确处理数据并生成合适的输出。例如，表达式“to_my_composite_type('%d')”将使用数据作为输入来调用用户定义的 SQL 函数“to_my_composite_type”。表达式必须具有返回值，因为它将在应用期间输入到 PostgreSQL 中。</p>
 <h3 id="9"><strong>9) 错误处理程序</strong><a class="headerlink" href="#9" title="Permanent link">&para;</a></h3>
-<p>错误处理程序主要负责处理数据同步各个阶段可能出现的任何错误。格式转换器支持多种错误处理策略，可通过 “synchdb.error_handling_strategy” 参数进行配置。详情请参阅<a href="user-guide/configure_error_strategies/">此处</a>。</p>
+<p>错误处理程序主要负责处理数据同步各个阶段可能出现的任何错误。格式转换器支持多种错误处理策略，可通过 “synchdb.error_handling_strategy” 参数进行配置。详情请参阅<a href="../../user-guide/configure_error_strategies/">此处</a>。</p>
 <h3 id="10-spi-client"><strong>10) SPI Client</strong><a class="headerlink" href="#10-spi-client" title="Permanent link">&para;</a></h3>
 <p>SPI Client 组件存在于 Replication Agent 下，它充当 PostgreSQL 核心和 SynchDB 之间的桥梁。它负责建立与 SPI 服务器的连接、启动事务、获取快照并执行由 <code>DDL Converter</code> 创建的给定 SQL 查询并销毁连接。对于要处理的每个查询，都会创建和销毁 SPI 连接，这似乎效率不高。由于 SPI 仅在 DDL 期间使用，而这通常不太频繁，因此在性能方面应该没问题。</p>
 <h3 id="11-api"><strong>11) 执行器 API</strong><a class="headerlink" href="#11-api" title="Permanent link">&para;</a></h3>
