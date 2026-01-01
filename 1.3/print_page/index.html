@@ -2494,8 +2494,10 @@
 <p><a href="#zh-architecture-debezium_runner_components">Debezium Runner 组件架构</a></p>
 <h3 id="zh-architecture-architecture-synchdb-c"><strong>SynchDB 扩展 - C</strong><a class="headerlink" href="#zh-architecture-architecture-synchdb-c" title="Permanent link">&para;</a></h3>
 <p>这是初始化 Java 虚拟机 (JVM) 并在其上运行 Debezium Runner 的主要入口点。它会定期从 Debezium Runner 获取一批 JSON 变更事件，处理这些数据并将其应用到 PostgreSQL。它还负责通知 Debezium 已成功完成一批 JSON 变更事件，以便两个组件在复制进度方面保持同步。</p>
-<p><a href="#zh-architecture-debezium_event_processor">Debezium 事件处理器架构</a>
-<a href="#zh-architecture-openlog_replicator_event_processor">Openlog Replicator 事件处理器架构</a></p></section><section class="print-page" id="zh-architecture-debezium_event_processor" heading-number="2.2"><h1 id="zh-architecture-debezium_event_processor-debezium-c">Debezium 事件处理器 - C<a class="headerlink" href="#zh-architecture-debezium_event_processor-debezium-c" title="Permanent link">&para;</a></h1>
+<ul>
+<li><a href="#zh-architecture-debezium_event_processor">Debezium 事件处理器架构</a></li>
+<li><a href="#zh-architecture-openlog_replicator_event_processor">Openlog Replicator 事件处理器架构</a></li>
+</ul></section><section class="print-page" id="zh-architecture-debezium_event_processor" heading-number="2.2"><h1 id="zh-architecture-debezium_event_processor-debezium-c">Debezium 事件处理器 - C<a class="headerlink" href="#zh-architecture-debezium_event_processor-debezium-c" title="Permanent link">&para;</a></h1>
 <h2 id="zh-architecture-debezium_event_processor-debezium"><strong>Debezium 事件处理器组件图</strong><a class="headerlink" href="#zh-architecture-debezium_event_processor-debezium" title="Permanent link">&para;</a></h2>
 <p><img alt="img" src="../images/synchdb-component-diag.jpg" /></p>
 <p>Debezium 事件处理器是由 SynchDB 扩展发起和启动的 PostgreSQL 后台工作进程。它负责初始化 Java 虚拟机 (JVM)，运行 Debezium Runner模块，（它是 SynchDB 的 Java 部分），利用嵌入式 Debezium 引擎从异构数据库源获取更改事件。每个 SynchDB 工作进程都由下面列出的组件和模块组成：</p>
