@@ -2045,7 +2045,8 @@
 <p><a href="../../architecture/debezium_runner_components/">Debezium Runner 组件架构</a></p>
 <h3 id="synchdb-c"><strong>SynchDB 扩展 - C</strong><a class="headerlink" href="#synchdb-c" title="Permanent link">&para;</a></h3>
 <p>这是初始化 Java 虚拟机 (JVM) 并在其上运行 Debezium Runner 的主要入口点。它会定期从 Debezium Runner 获取一批 JSON 变更事件，处理这些数据并将其应用到 PostgreSQL。它还负责通知 Debezium 已成功完成一批 JSON 变更事件，以便两个组件在复制进度方面保持同步。</p>
-<p><a href="../../architecture/synchdb_components/">SynchDB 扩展组件架构</a></p>
+<p><a href="../../architecture/debezium_event_processor/">Debezium 事件处理器架构</a>
+<a href="../../architecture/openlog_replicator_event_processor/">Openlog Replicator 事件处理器架构</a></p>
 
 
 

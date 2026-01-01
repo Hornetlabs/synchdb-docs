@@ -2036,7 +2036,8 @@
 <p><a href="../../architecture/debezium_runner_components/">Debezium Runner Component Architecture</a></p>
 <h3 id="synchdb-extension-c"><strong>SynchDB Extension - C</strong><a class="headerlink" href="#synchdb-extension-c" title="Permanent link">&para;</a></h3>
 <p>This is the main entrypoint that initializes a Java Virtual Machine (JVM) and run Debezium Runner on it. It periodically fetches a batch of JSON change events from Debezium Runner, process the data and apply them to PostgreSQL. It is also responsible for notifying Debezium that it has successfully completed a batch of JSON change events so that both components are synchronized in terms of replication progress. </p>
-<p><a href="../../architecture/synchdb_components/">SynchDB Extension Component Architecture</a></p>
+<p><a href="../../architecture/debezium_event_processor/">Debezium Event Processor Architecture</a>
+<a href="../../architecture/openlog_replicator_event_processor/">Openlog Replicator Event Processor Architecture</a></p>
 
 
 
