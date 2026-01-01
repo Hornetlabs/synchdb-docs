@@ -20,19 +20,19 @@ Debezium Event Processor is a PostgreSQL background worker initiated and started
 
 ### **1) Event Fetcher**
 
-The Event Fetcher is primarily responsible for fetching a batch of JSON change events from embedded Debezium Runner running inside JVM. This is done via Java Native Interface (JNI) library by periodically calling a JAVA method that returns a JAVA `List` of `String`, which represents each change request in JSON. This `List` represents a `Batch` of JSON change events. JNI library is invoked again to iterate over this `List`, cast the contents from JAVA `String` to C string and send it to `4) JSON Parser` for further processing. The frequency of fetch is configurable via [`synchdb.naptime`](user-guide/configuration/), and the maximum size of the batch can be configured via [`synchdb.dbz_batch_size`](user-guide/configuration/).
+The Event Fetcher is primarily responsible for fetching a batch of JSON change events from embedded Debezium Runner running inside JVM. This is done via Java Native Interface (JNI) library by periodically calling a JAVA method that returns a JAVA `List` of `String`, which represents each change request in JSON. This `List` represents a `Batch` of JSON change events. JNI library is invoked again to iterate over this `List`, cast the contents from JAVA `String` to C string and send it to `4) JSON Parser` for further processing. The frequency of fetch is configurable via [`synchdb.naptime`](../../user-guide/configuration/), and the maximum size of the batch can be configured via [`synchdb.dbz_batch_size`](../../user-guide/configuration/).
 
-When a batch is completed, meaning all the change events inside have been processed, it will invoke `markBatchComplete()` JAVA method via JNI to indicate that this batch has been completed successfully. This would cause the Debezium Runner to commit and advance the offset. More about batch management can he found [here](architecture/batch_change_handling/).
+When a batch is completed, meaning all the change events inside have been processed, it will invoke `markBatchComplete()` JAVA method via JNI to indicate that this batch has been completed successfully. This would cause the Debezium Runner to commit and advance the offset. More about batch management can he found [here](../../architecture/batch_change_handling/).
 
 ### **2) JVM + Debezium (DBZ) Initializer**
 
-The JVM + DBZ Initializer is primarily responsible for instanitiate a new JVM environment and run Debezium Runner (`dbz-engine-x.x.x.jar`) in it. This .jar file is by default installed in $LIBDIR as returned by `pg_config`. You can specify an alternative path for Debezium Runner .jar file by setting the environment variable `DBZ_ENGINE_DIR`. SynchDB currently uses `JNI_VERSION_10` as the JNI version, which is compatible between JAVA v10 to v18. In the future, however, we may up the JNI version to get the latest improvements and benefits for JNI. The maximum heap memory allocated to JVM can be configured via [`synchdb.jvm_max_heap_size`](user-guide/configuration/). If set to zero, JVM will automatically allocate the ideal heap size. 
+The JVM + DBZ Initializer is primarily responsible for instanitiate a new JVM environment and run Debezium Runner (`dbz-engine-x.x.x.jar`) in it. This .jar file is by default installed in $LIBDIR as returned by `pg_config`. You can specify an alternative path for Debezium Runner .jar file by setting the environment variable `DBZ_ENGINE_DIR`. SynchDB currently uses `JNI_VERSION_10` as the JNI version, which is compatible between JAVA v10 to v18. In the future, however, we may up the JNI version to get the latest improvements and benefits for JNI. The maximum heap memory allocated to JVM can be configured via [`synchdb.jvm_max_heap_size`](../../user-guide/configuration/). If set to zero, JVM will automatically allocate the ideal heap size. 
 
 Please note that each SynchDB worker will initialize and run a JVM instance, so the more workers you run, the more heap memory will be required. You can dump the current heap and non-heap memory usage of JVM of a SynchDB worker by invoking `synchdb_log_jvm_meminfo('$connector_name')` function, a memory summary will be logged in the PostgreSQL log file.
 
 ### **3) Request Handler**
 
-The Request Handler is primarily responsible for checking and handling any incoming state change request from the SynchDB user. Examples of such state change requests include going from "SYNCING" to "PAUSED", from "PAUSED" to "UPDATE OFFSET" ...etc. Below is the state diagram of synchdb. More information can be found [here](user-guide/utility_functions/#state-management).
+The Request Handler is primarily responsible for checking and handling any incoming state change request from the SynchDB user. Examples of such state change requests include going from "SYNCING" to "PAUSED", from "PAUSED" to "UPDATE OFFSET" ...etc. Below is the state diagram of synchdb. More information can be found [here](../../user-guide/utility_functions/#state-management).
 
 ![img](../../images/synchdb-state-diag.jpg)
 
@@ -204,15 +204,15 @@ An object could refer to a:
 * data type.
 * transform expression.
 
-It is possible to map a source table name, column name and data type to a different destination table name, column name an a data type before mapping rules can be created using`synchdb_add_objmap()` function and all rules can be viewed by quering the `synchdb_objmap` table. More on object mapping [here](user-guide/object_mapping_rules/). A summary of what gets mapped to what can be viewed under `synchdb_att_view()` VIEW.
+It is possible to map a source table name, column name and data type to a different destination table name, column name an a data type before mapping rules can be created using`synchdb_add_objmap()` function and all rules can be viewed by quering the `synchdb_objmap` table. More on object mapping [here](../../user-guide/object_mapping_rules/). A summary of what gets mapped to what can be viewed under `synchdb_att_view()` VIEW.
 
 
-The `transform expression` is a SQL expression that will be run (if specified) after the data conversion is finished and before data is applied. This expression can be any expressions runnable in PostgreSQL, such as invoking another SQL function, or using operators. More information on object mapping rule can be found [here](user-guide/object_mapping_rules/).
+The `transform expression` is a SQL expression that will be run (if specified) after the data conversion is finished and before data is applied. This expression can be any expressions runnable in PostgreSQL, such as invoking another SQL function, or using operators. More information on object mapping rule can be found [here](../../user-guide/object_mapping_rules/).
 
 
 ### **6) Stats Collector**
 
-The Stats Collector is responsible for collecting statistic information about SynchDB's data processing since the beginning of the operation. This includes the number of DDLs and DMLs, how many CREATE, INSERT, UPDATE, DELETE operations have been processed, average batch size processed and several timestamps that describe the time when the data is first generated in the source, the time when the data is processed by Debezium and the time when the data is applied in PostgreSQL. These metrics can help user understand the processing behavior of SynchDB to tune and optimize settings to increase the processing performance. More on stats can be found [here](user-guide/stats).
+The Stats Collector is responsible for collecting statistic information about SynchDB's data processing since the beginning of the operation. This includes the number of DDLs and DMLs, how many CREATE, INSERT, UPDATE, DELETE operations have been processed, average batch size processed and several timestamps that describe the time when the data is first generated in the source, the time when the data is processed by Debezium and the time when the data is applied in PostgreSQL. These metrics can help user understand the processing behavior of SynchDB to tune and optimize settings to increase the processing performance. More on stats can be found [here](../../user-guide/stats).
 
 ### **7) DDL Converter**
 
@@ -228,7 +228,7 @@ The converter currently can handle these DDL operations:
 * ALTER TABLE ADD COLUMN
 * ALTER TABLE DROP COLUMN
 
-For CREATE and DROP, the converter is able to create a corresponding query string for SPI from the input DDL data. For ALTER, ADD and DROP COLUMN, the convert requires a visit to PostgreSQL catalog to learn about the existing table properties and will determine if there is a column to be added, dropped or altered. Debezium's JSON change event always contains the entire table's information and does not explicitly indicate what has been dropped or added. Therefore, the DDL Converter component is required to figure this information out and produce a correct query string. More on DDL replication can be found [here](user-guide/ddl_replication/)
+For CREATE and DROP, the converter is able to create a corresponding query string for SPI from the input DDL data. For ALTER, ADD and DROP COLUMN, the convert requires a visit to PostgreSQL catalog to learn about the existing table properties and will determine if there is a column to be added, dropped or altered. Debezium's JSON change event always contains the entire table's information and does not explicitly indicate what has been dropped or added. Therefore, the DDL Converter component is required to figure this information out and produce a correct query string. More on DDL replication can be found [here](../../user-guide/ddl_replication/)
 
 
 ### **8) DML Converter**
@@ -244,8 +244,8 @@ DML Converter consists of several routines that can handle a particular input da
 
 The routine selection starts by looking at the data type created at the PostgreSQL, which can be divided into 2 types, each with slightly different handling techniques:
 
-* [native data types](architecture/native_datatype_handling/).
-* [non-native data types](architecture/non_native_datatype_handling/).
+* [native data types](../../architecture/native_datatype_handling/).
+* [non-native data types](../../architecture/non_native_datatype_handling/).
 
 
 #### **Data Transformation**
@@ -256,7 +256,7 @@ So, if a non-native data type has category TYPCATEGORY_USER, DML Converter does 
 
 ### **9) Error Handler**
 
-The Error Handler is primarily responsible for handling any error that could arise from each stage of data synchronization. Format Converter supports several error handling strategies that can be configured via "synchdb.error_handling_strategy" parameters. Details can be found [here](user-guide/configure_error_strategies/).
+The Error Handler is primarily responsible for handling any error that could arise from each stage of data synchronization. Format Converter supports several error handling strategies that can be configured via "synchdb.error_handling_strategy" parameters. Details can be found [here](../../user-guide/configure_error_strategies/).
 
 
 ### **10) SPI Client**

@@ -38,7 +38,7 @@ SELECT synchdb_start_engine_bgw('mysqlconn', 'always');
 | `schemasync` | Structure only, no data, no CDC | normal operations |
 
 
-**Refer to the [tutorial](tutorial/selective_table_sync/) on when to use what mode**
+**Refer to the [tutorial](../../tutorial/selective_table_sync/) on when to use what mode**
 
 ## **Pause and Resume a Connector**
 

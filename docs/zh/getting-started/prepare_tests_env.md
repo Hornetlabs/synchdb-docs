@@ -78,7 +78,7 @@ id=$(docker ps | grep oracle | awk '{print $1}')
 docker exec -it $id bash
 ```
 
-按照[此处](user-guide/remote_database_setups/) 中描述的步骤设置 logminer 和 logminer 用户
+按照[此处](../../user-guide/remote_database_setups/) 中描述的步骤设置 logminer 和 logminer 用户
 
 ## **使用 CI 脚本准备测试数据库**
 

@@ -13,7 +13,7 @@
 
 - **Openlog Replicator 版本**：`1.3.0`（已验证与 Debezium 2.7.x 的兼容性）
 - 具有可供 OLR 访问的重做日志的 Oracle 实例
-- 必须为 OLR 授予额外权限。有关具体的权限要求，请参阅[此处](getting-started/remote_database_setups/)。
+- 必须为 OLR 授予额外权限。有关具体的权限要求，请参阅[此处](../../getting-started/remote_database_setups/)。
 - Openlog Replicator 必须已配置并正在运行
 - SynchDB 中现有的 Oracle 连接器（使用 `synchdb_add_conninfo()` 创建）
 
@@ -176,7 +176,7 @@ SELECT synchdb_add_conninfo('olrconn',
 
 <<<**重要**>>> **SynchDB 必须使用标志 (WITH_OLR=1) 进行编译和构建，以支持本机 openlog 复制器连接器。**
 
-更多关于创建连接器的信息，请访问[此处](user-guide/create_a_connector/)
+更多关于创建连接器的信息，请访问[此处](../../user-guide/create_a_connector/)
 
 ## **`synchdb_add_olr_conninfo()`**
 

@@ -33,7 +33,7 @@ sudo ldconfig
 ```sh linenums="1"
 dpkg -i synchdb-1.1-1.ub22.pg16_x86_64.deb
 ```
-5. SynchDB 应该已准备就绪。请参阅 [快速入门](user-guide/quick_start/) 页面开始使用
+5. SynchDB 应该已准备就绪。请参阅 [快速入门](../../user-guide/quick_start/) 页面开始使用
 
 ### **.rpm 软件包**
 
@@ -62,7 +62,7 @@ sudo ldconfig
 ```sh linenums="1"
 sudo dnf install -y synchdb-1.1-1.el9.pg16.x86_64.rpm
 ```
-5. SynchDB 应该已准备就绪。请参阅 [快速入门](user-guide/quick_start/) 页面开始使用
+5. SynchDB 应该已准备就绪。请参阅 [快速入门](../../user-guide/quick_start/) 页面开始使用
 
 ## **从预编译的二进制文件安装**
 
@@ -101,7 +101,7 @@ echo "$JRE_LIB_PATH" | sudo tee /etc/ld.so.conf.d/java.conf
 sudo ldconfig
 ```
 
-6. SynchDB 应该已准备就绪。请参阅 [快速入门](user-guide/quick_start/) 页面开始使用
+6. SynchDB 应该已准备就绪。请参阅 [快速入门](../../user-guide/quick_start/) 页面开始使用
 
 ## **源代码编译及安装**
 
@@ -123,7 +123,7 @@ sudo ldconfig
 
 **如果您想使用基於 FDW 的快照，則需要以下內容：**
 
-* OCI v23.9.0。更多資訊請參閱[此處](user-guide/configure_snapshot_engine/)。
+* OCI v23.9.0。更多資訊請參閱[此處](../../user-guide/configure_snapshot_engine/)。
 * oracle_fdw v2.8.0。如何從原始碼建置？請參閱[此處](https://github.com/laurenz/oracle_fdw)。
 
 ### **預設 SynchDB 建置 - 支援 MySQL、SQL Server 和 Oracle 連接器**

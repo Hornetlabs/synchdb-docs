@@ -37,7 +37,7 @@ SELECT synchdb_start_engine_bgw('mysqlconn', 'always');
 | `when_needed` | 条件快照 | 自动恢复 |
 | `schemasync` | 仅结构，无数据，无 CDC | 正常操作 |
 
-**请参阅[教程](tutorial/selective_table_sync/)，了解何时使用何种模式**
+**请参阅[教程](../../tutorial/selective_table_sync/)，了解何时使用何种模式**
 
 ## **暂停和恢复连接器**
 

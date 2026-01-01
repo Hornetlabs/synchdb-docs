@@ -40,7 +40,7 @@ SynchDB supports the following GUC variables in postgresql.conf. These are commo
 - GUC (Grand Unified Configuration) variables are global configuration parameters in PostgreSQL
 - Values are set in the `postgresql.conf` file
 - Changes require a server restart to take effect
-- `shared_preload_library` is a critical system configuration that determines which libraries are loaded at startup, synchdb must be put here to enable [connector auto launcher](user-guide/connector_auto_launcher/)
+- `shared_preload_library` is a critical system configuration that determines which libraries are loaded at startup, synchdb must be put here to enable [connector auto launcher](../../user-guide/connector_auto_launcher/)
 
 ## **Configuration Examples**
 

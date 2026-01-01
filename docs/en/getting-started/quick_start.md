@@ -179,7 +179,7 @@ SELECT * FROM synchdb_conninfo;
 
 ```
 
-More details on creating a connector can be found [here](user-guide/create_a_connector/)
+More details on creating a connector can be found [here](../../user-guide/create_a_connector/)
 
 ## **Create Object Mappings**
 
@@ -192,7 +192,7 @@ SELECT synchdb_add_objmap('olrconn','table','free.dbzuser.orders','olr.orders');
 
 ```
 
-More details on creating a object mappings can be found [here](user-guide/object_mapping_rules/)
+More details on creating a object mappings can be found [here](../../user-guide/object_mapping_rules/)
 
 ## **Create JMX Exporter - Optional**
 
@@ -238,7 +238,7 @@ SELECT synchdb_add_jmx_exporter_conninfo(
 
 ```
 
-More details on creating a JMX Exporter can be found [here](monitoring/jmx_exporter/)
+More details on creating a JMX Exporter can be found [here](../../monitoring/jmx_exporter/)
 
 ## **Start a Connector**
 
@@ -272,7 +272,7 @@ SELECT synchdb_start_engine_bgw('olrconn');
 
 ```
 
-More details on connector start can be found [here](user-guide/start_stop_connector/)
+More details on connector start can be found [here](../../user-guide/start_stop_connector/)
 
 ## Check Connector Running State
 
@@ -297,7 +297,7 @@ postgres=# SELECT * FROM synchdb_state_view;
 
 ```
 
-More on running states [here](monitoring/state_view/), and also running statistics [here](monitoring/stats_view/).
+More on running states [here](../../monitoring/state_view/), and also running statistics [here](../../monitoring/stats_view/).
 
 
 ## Check the Tables and Data from Initial Snapshot

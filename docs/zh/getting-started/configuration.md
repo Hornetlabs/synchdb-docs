@@ -39,7 +39,7 @@ SynchDB 在 postgresql.conf 中支持以下 GUC 变量。这些是适用于 Sync
 - GUC（Grand Unified Configuration）是 PostgreSQL 中的全局配置参数
 - 这些值需要在 `postgresql.conf` 文件中设置
 - 修改配置后需要重启服务器才能生效
-- `shared_preload_library` 是一个关键的系统配置，它决定了启动时加载哪些库，synchdb 必须放在这里才能启用 [连接器自动启动器](user-guide/connector_auto_launcher/)
+- `shared_preload_library` 是一个关键的系统配置，它决定了启动时加载哪些库，synchdb 必须放在这里才能启用 [连接器自动启动器](../../user-guide/connector_auto_launcher/)
 
 ## **配置示例**
 

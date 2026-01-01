@@ -34,7 +34,7 @@ sudo ldconfig
 ```sh linenums="1"
 dpkg -i synchdb-1.1-1.ub22.pg16_x86_64.deb
 ```
-5. SynchDB should be ready to go. Refer to [quick start](user-guide/quick_start/) page to get started
+5. SynchDB should be ready to go. Refer to [quick start](../../user-guide/quick_start/) page to get started
 
 ### **.rpm Packages**
 
@@ -63,7 +63,7 @@ sudo ldconfig
 ```sh linenums="1"
 sudo dnf install -y synchdb-1.1-1.el9.pg16.x86_64.rpm
 ```
-5. SynchDB should be ready to go. Refer to [quick start](user-guide/quick_start/) page to get started
+5. SynchDB should be ready to go. Refer to [quick start](../../user-guide/quick_start/) page to get started
 
 ## **Install from Pre-compiled Binaries**
 visit our release page [here](https://github.com/Hornetlabs/synchdb/releases) to download a pre-compiled binaries on supported platforms. We currently support pre-compiled binaries on Debian-based Linux systems such as Ubuntu. Other platforms will be supported in the near future. SynchDB pre-compiled binaries requires existing PostgreSQL to be installed first. The version of PostgreSQL it requires is described in the package name. For example, `synchdb-1.1-1.ub22.pg16_x86_64.tar.gz` is tar.gz package built on Ubuntu 22.04 against PostgreSQL 16. 
@@ -100,7 +100,7 @@ echo "$JRE_LIB_PATH" | sudo tee /etc/ld.so.conf.d/java.conf
 sudo ldconfig
 ```
 
-6. SynchDB should be ready to go. Refer to [quick start](user-guide/quick_start/) page to get started
+6. SynchDB should be ready to go. Refer to [quick start](../../user-guide/quick_start/) page to get started
 
 ## **Install from Source**
 

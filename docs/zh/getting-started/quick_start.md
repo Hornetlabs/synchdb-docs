@@ -181,7 +181,7 @@ SELECT * FROM synchdb_conninfo;
 
 ```
 
-有关创建连接器的更多详细信息，请参阅[此处](user-guide/create_a_connector/)
+有关创建连接器的更多详细信息，请参阅[此处](../../user-guide/create_a_connector/)
 
 ## **创建对象映射**
 
@@ -194,7 +194,7 @@ SELECT synchdb_add_objmap('olrconn','table','free.dbzuser.orders','olr.orders');
 
 ```
 
-有关创建对象映射的更多详细信息，请参见[此处](user-guide/object_mapping_rules/)
+有关创建对象映射的更多详细信息，请参见[此处](../../user-guide/object_mapping_rules/)
 
 ## **创建 JMX 导出器 - 可选**
 
@@ -240,7 +240,7 @@ SELECT synchdb_add_jmx_exporter_conninfo(
 
 ```
 
-关于创建 JMX Exporter 的更多详细信息，请参见[此处](monitoring/jmx_exporter/)
+关于创建 JMX Exporter 的更多详细信息，请参见[此处](../../monitoring/jmx_exporter/)
 
 ## **启动连接器**
 
@@ -273,7 +273,7 @@ SELECT synchdb_start_engine_bgw('olrconn');
 
 ```
 
-有关连接器启动的更多详细信息，请参见[此处](user-guide/start_stop_connector/)
+有关连接器启动的更多详细信息，请参见[此处](../../user-guide/start_stop_connector/)
 
 ## **检查连接器运行状态**
 
@@ -298,7 +298,7 @@ postgres=# SELECT * FROM synchdb_state_view;
 
 ```
 
-有关运行状态的更多信息，请参见[此处](monitoring/state_view/)，以及运行统计信息，请参见[此处](monitoring/stats_view/)。
+有关运行状态的更多信息，请参见[此处](../../monitoring/state_view/)，以及运行统计信息，请参见[此处](../../monitoring/stats_view/)。
 
 ## 检查初始快照中的表和数据
 默认情况下，连接器将执行“初始”快照，以捕获表模式和初始数据，然后转换并将它们应用到不同“模式”下的 PostgreSQL。您应该看到类似以下内容：

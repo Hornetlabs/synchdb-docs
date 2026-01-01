@@ -77,7 +77,7 @@ id=$(docker ps | grep oracle | awk '{print $1}')
 docker exec -it $id bash
 ```
 
-Follow the procedure described [here](user-guide/remote_database_setups/) to set up logminer and logminer user
+Follow the procedure described [here](../../user-guide/remote_database_setups/) to set up logminer and logminer user
 
 
 ## **Use CI Script to Prepare Test Databases**

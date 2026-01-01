@@ -4,7 +4,7 @@
 
 All the connectors support Debezium based initial snapshot, which migrates remote table schemas to PostgreSQL with or without the initial data (depending on the snapshot mode used). This works mostly, but may suffer from performance issues when there is a large number of tables to migrate and extra overhead is introduced via JNI calls. It is possible to achieve the same initial snapshot using a Foreign Data Wrapper (FDW) if source database can support `FLASHBACK` query, such as Oracle. `FLASHBACK` query can ensure a snapshot to migrate up to a certain `offset` (SCN in Oracle), ensuring read consistency up to a point in time, and then begin the CDC streaming from this point. 
 
-Currently, we support oracle_fdw as an alternative to Debezium based snapshot for native Openlog Replicator (OLR) connector only. In the future, we may add support for other connectors if feasible. To use FDW based snapshot, simply set GUC parameter `synchdb.olr_snapshot_engin` to "fdw". Refer to [here](user-guide/configure_snapshot_engine/) for a quick guide to build and install oracle_fdw.
+Currently, we support oracle_fdw as an alternative to Debezium based snapshot for native Openlog Replicator (OLR) connector only. In the future, we may add support for other connectors if feasible. To use FDW based snapshot, simply set GUC parameter `synchdb.olr_snapshot_engin` to "fdw". Refer to [here](../../user-guide/configure_snapshot_engine/) for a quick guide to build and install oracle_fdw.
 
 
 ## **How does FDW Based Snapshot Work**

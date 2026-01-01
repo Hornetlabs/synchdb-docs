@@ -2,7 +2,7 @@
 
 ## Prepare SQL Server Database for SynchDB
 
-Before SynchDB can be used to replicate from SQL Server, SQL Server needs to be configured according to the procedure outlined [here](getting-started/remote_database_setups/)
+Before SynchDB can be used to replicate from SQL Server, SQL Server needs to be configured according to the procedure outlined [here](../../getting-started/remote_database_setups/)
 
 Please ensure the desired tables have already been enabled as CDC table in SQL Server. The following commands can be run on SQL Server client to enable CDC for `dbo.customer`, `dbo.district`, and `dbo.history`. You will continue to add new tables as needed.
 
