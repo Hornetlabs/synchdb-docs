@@ -33,4 +33,5 @@ SynchDB 扩展包含两个代码空间（Java 和 C），JNI 位于两者之间�
 
 这是初始化 Java 虚拟机 (JVM) 并在其上运行 Debezium Runner 的主要入口点。它会定期从 Debezium Runner 获取一批 JSON 变更事件，处理这些数据并将其应用到 PostgreSQL。它还负责通知 Debezium 已成功完成一批 JSON 变更事件，以便两个组件在复制进度方面保持同步。
 
-[SynchDB 扩展组件架构](../../architecture/synchdb_components/)
+[Debezium 事件处理器架构](../../architecture/debezium_event_processor/)
+[Openlog Replicator 事件处理器架构](../../architecture/openlog_replicator_event_processor/)
