@@ -32,5 +32,5 @@ This is the driver program in Java that utilizes the Debezium Embedded Engine wi
 
 This is the main entrypoint that initializes a Java Virtual Machine (JVM) and run Debezium Runner on it. It periodically fetches a batch of JSON change events from Debezium Runner, process the data and apply them to PostgreSQL. It is also responsible for notifying Debezium that it has successfully completed a batch of JSON change events so that both components are synchronized in terms of replication progress. 
 
-[Debezium Event Processor Architecture](../../architecture/debezium_event_processor/)
-[Openlog Replicator Event Processor Architecture](../../architecture/openlog_replicator_event_processor/)
+* [Debezium Event Processor Architecture](../../architecture/debezium_event_processor/)
+* [Openlog Replicator Event Processor Architecture](../../architecture/openlog_replicator_event_processor/)
