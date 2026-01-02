@@ -1,0 +1,2596 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="SynchDB is a PostgreSQL extension for synchronizing data from different database sources..">
+      
+      
+        <meta name="author" content="Hornetlabs Technology Inc.">
+      
+      
+        <link rel="canonical" href="https://docs.synchdb.com/latest/es/getting-started/installation/">
+      
+      
+        <link rel="prev" href="../../architecture/fdw_based_snapshot/">
+      
+      
+        <link rel="next" href="../remote_database_setups/">
+      
+      
+        
+          <link rel="alternate" href="../../../getting-started/installation/" hreflang="en">
+        
+          <link rel="alternate" href="./" hreflang="es">
+        
+          <link rel="alternate" href="../../../zh/getting-started/installation/" hreflang="zh">
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Instalación - Documentación de SynchDB</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-material.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#installation" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../" title="Documentación de SynchDB" class="md-header__button md-logo" aria-label="Documentación de SynchDB" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentación de SynchDB
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Instalación
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Seleccionar idioma">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../getting-started/installation/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="es" class="md-select__link">
+              Español
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../../zh/getting-started/installation/" hreflang="zh" class="md-select__link">
+              中文
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/hornetlabs/synchdb" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/architecture/" class="md-tabs__link">
+          
+  
+  
+  Arquitectura
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Empezando
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../monitoring/stats_view/" class="md-tabs__link">
+          
+  
+  
+  escucha
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tutorial/mysql_cdc_to_postgresql/" class="md-tabs__link">
+          
+  
+  
+  Tutorial
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../user-guide/create_a_connector/" class="md-tabs__link">
+          
+  
+  
+  Guía del usuario
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../changelog/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Registro de Cambios
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="Documentación de SynchDB" class="md-nav__button md-logo" aria-label="Documentación de SynchDB" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Documentación de SynchDB
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/hornetlabs/synchdb" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arquitectura
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descripción general de la arquitectura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/debezium_event_processor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debezium Event Processor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/debezium_runner_components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura de componentes de Debezium Runner
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/openlog_replicator_event_processor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Procesador de eventos del replicador Openlog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/batch_change_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manejo de Cambios por Lotes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/non_native_datatype_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Procesamiento de tipos de datos no nativos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/native_datatype_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Procesamiento de tipos de datos nativos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/metadata_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debezium Archivos de Metadatos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/ddl_replication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Replicación DDL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/fdw_based_snapshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instantánea basada en FDW
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Empezando
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Empezando
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-from-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install from Packages
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install from Packages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deb-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .deb Packages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rpm-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .rpm Packages
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-from-pre-compiled-binaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install from Pre-compiled Binaries
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install from Pre-compiled Binaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pre-compiled-binaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pre-compiled Binaries
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-from-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install from Source
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install from Source">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#default-synchdb-build-support-mysql-sqlserver-and-oracle-connectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Default SynchDB Build - Support MySQL, SQLServer and Oracle Connectors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-synchdb-with-openlog-replicator-connector-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build SynchDB with Openlog Replicator Connector Support
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Build SynchDB with Openlog Replicator Connector Support">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prepare-source-using-163-as-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prepare Source (Using 16.3 as example)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-and-install-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build and Install PostgreSQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-synchdb-with-additional-openlog-replicator-connector-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build SynchDB with Additional Openlog Replicator Connector Support
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-your-linker-to-find-java-ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure your Linker to find Java (Ubuntu)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../remote_database_setups/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    configuración de base de datos remota
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SynchDB Configuración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quick_start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    escucha
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    escucha
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/stats_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vista de estadísticas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/state_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vista de estado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/attr_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vista de atributos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/jvm_mem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Uso de memoria de JVM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/jmx_monitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración del monitor JMX
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/jmx_exporter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración del exportador JMX
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/mysql_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CDC de MySQL a PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/sqlserver_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CDC de SQL Server a PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/oracle_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CDC de Oracle a PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/selective_table_sync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sincronización Selectiva de Tablas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/table_snapshot_resnapshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instantánea de tabla y nueva instantánea
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/object_mapping_workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flujo de trabajo de mapeo de objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guía del usuario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guía del usuario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/create_a_connector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crear un conector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/start_stop_connector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iniciar/Detener un conector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/connector_auto_launcher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lanzador Automático de Conectores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/default_datatype_mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mapeo de Tipos de Datos Predeterminado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/object_mapping_rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Personalizar la asignación y transformación de objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/secured_connection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conexión segura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/configure_error_strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurar estrategias de error
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/set_offset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurar el desplazamiento de replicación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/configure_olr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurar Openlog Replicator para Oracle Connector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/configure_infinispan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurar Infinispan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/configure_snapshot_engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurar el motor de instantáneas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registro de Cambios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-from-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install from Packages
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install from Packages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deb-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .deb Packages
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rpm-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        .rpm Packages
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-from-pre-compiled-binaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install from Pre-compiled Binaries
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install from Pre-compiled Binaries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pre-compiled-binaries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pre-compiled Binaries
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-from-source" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install from Source
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install from Source">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build Requirements
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#default-synchdb-build-support-mysql-sqlserver-and-oracle-connectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Default SynchDB Build - Support MySQL, SQLServer and Oracle Connectors
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-synchdb-with-openlog-replicator-connector-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build SynchDB with Openlog Replicator Connector Support
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Build SynchDB with Openlog Replicator Connector Support">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prepare-source-using-163-as-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prepare Source (Using 16.3 as example)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-and-install-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build and Install PostgreSQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-synchdb-with-additional-openlog-replicator-connector-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build SynchDB with Additional Openlog Replicator Connector Support
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configure-your-linker-to-find-java-ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure your Linker to find Java (Ubuntu)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h1>
+<h2 id="install-from-packages"><strong>Install from Packages</strong><a class="headerlink" href="#install-from-packages" title="Permanent link">&para;</a></h2>
+<p>visit our release page <a href="https://github.com/Hornetlabs/synchdb/releases">here</a> to download a synchdb packages on supported platforms.</p>
+<h3 id="deb-packages"><strong>.deb Packages</strong><a class="headerlink" href="#deb-packages" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Install PostgreSQL from official apt repository (version 16 as example):
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>postgresql-common
+sudo<span class="w"> </span>/usr/share/postgresql-common/pgdg/apt.postgresql.org.sh
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>postgresql-16
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>Install Java Runtime Environment:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>openjdk-17-jre-headless
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>Update shared library path:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">JAVA_PATH</span><span class="o">=</span><span class="k">$(</span>which<span class="w"> </span>java<span class="k">)</span>
+<span class="nv">JRE_HOME_PATH</span><span class="o">=</span><span class="k">$(</span>readlink<span class="w"> </span>-f<span class="w"> </span><span class="si">${</span><span class="nv">JAVA_PATH</span><span class="si">}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s:/bin/java::&#39;</span><span class="k">)</span>
+<span class="nv">JRE_LIB_PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">JRE_HOME_PATH</span><span class="si">}</span>/lib
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$JRE_LIB_PATH</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/ld.so.conf.d/java.conf
+sudo<span class="w"> </span>ldconfig
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>Install SynchDB:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>dpkg<span class="w"> </span>-i<span class="w"> </span>synchdb-1.1-1.ub22.pg16_x86_64.deb
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>SynchDB should be ready to go. Refer to <a href="../../user-guide/quick_start/">quick start</a> page to get started</li>
+</ol>
+<h3 id="rpm-packages"><strong>.rpm Packages</strong><a class="headerlink" href="#rpm-packages" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Install PostgreSQL from official rpm repository (version 16 as example):
+Refer to official PostgreSQL rpm download instructions for other PostgreSQL versions <a href="https://www.postgresql.org/download/linux/redhat/">here</a>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>https://download.postgresql.org/pub/repos/yum/reporpms/EL-9-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+sudo<span class="w"> </span>dnf<span class="w"> </span>-qy<span class="w"> </span>module<span class="w"> </span>disable<span class="w"> </span>postgresql
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>postgresql16-server<span class="w"> </span>postgresql16-contrib
+</code></pre></div></td></tr></table></div></li>
+<li>
+<p>Install Java Runtime Environment:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>java-17-openjdk
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>Update shared library path:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">JAVA_PATH</span><span class="o">=</span><span class="k">$(</span>which<span class="w"> </span>java<span class="k">)</span>
+<span class="nv">JRE_HOME_PATH</span><span class="o">=</span><span class="k">$(</span>readlink<span class="w"> </span>-f<span class="w"> </span><span class="si">${</span><span class="nv">JAVA_PATH</span><span class="si">}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s:/bin/java::&#39;</span><span class="k">)</span>
+<span class="nv">JRE_LIB_PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">JRE_HOME_PATH</span><span class="si">}</span>/lib
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$JRE_LIB_PATH</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/ld.so.conf.d/java.conf
+sudo<span class="w"> </span>ldconfig
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>Install SynchDB:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>synchdb-1.1-1.el9.pg16.x86_64.rpm
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>SynchDB should be ready to go. Refer to <a href="../../user-guide/quick_start/">quick start</a> page to get started</li>
+</ol>
+<h2 id="install-from-pre-compiled-binaries"><strong>Install from Pre-compiled Binaries</strong><a class="headerlink" href="#install-from-pre-compiled-binaries" title="Permanent link">&para;</a></h2>
+<p>visit our release page <a href="https://github.com/Hornetlabs/synchdb/releases">here</a> to download a pre-compiled binaries on supported platforms. We currently support pre-compiled binaries on Debian-based Linux systems such as Ubuntu. Other platforms will be supported in the near future. SynchDB pre-compiled binaries requires existing PostgreSQL to be installed first. The version of PostgreSQL it requires is described in the package name. For example, <code>synchdb-1.1-1.ub22.pg16_x86_64.tar.gz</code> is tar.gz package built on Ubuntu 22.04 against PostgreSQL 16. </p>
+<h3 id="pre-compiled-binaries"><strong>Pre-compiled Binaries</strong><a class="headerlink" href="#pre-compiled-binaries" title="Permanent link">&para;</a></h3>
+<ol>
+<li>
+<p>Extract the tar.gz package that contains the pre-compiled binaries:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>tar<span class="w"> </span>xzvf<span class="w"> </span>synchdb-1.1-1.ub22.pg16_x86_64.tar.gz<span class="w"> </span>-C<span class="w"> </span>/tmp
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>Find out the lib and share directories of your current PostgreSQL installation
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">LIBDIR</span><span class="o">=</span><span class="k">$(</span>pg_config<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-w<span class="w"> </span>LIBDIR<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-F<span class="w"> </span><span class="s1">&#39; = &#39;</span><span class="w"> </span><span class="s1">&#39;/LIBDIR/ {print $2}&#39;</span><span class="k">)</span>
+<span class="nv">SHAREDIR</span><span class="o">=</span><span class="k">$(</span>pg_config<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-w<span class="w"> </span>SHAREDIR<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-F<span class="w"> </span><span class="s1">&#39; = &#39;</span><span class="w"> </span><span class="s1">&#39;/SHAREDIR/ {print $2}&#39;</span><span class="k">)</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>Copy pre-compiled binaries to the respective directories:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>cp<span class="w"> </span>/tmp/synchdb-1.1-1.ub22.pg16_x86_64/usr/lib/postgresql/16/lib/*<span class="w"> </span><span class="nv">$LIBDIR</span>
+cp<span class="w"> </span>/tmp/synchdb-1.1-1.ub22.pg16_x86_64.tar.gz/usr/share/postgresql/16/extension/*<span class="w"> </span><span class="nv">$SHAREDIR</span>
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>Install Java Runtime Environment:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>openjdk-17-jre-headless
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>Update shared library path:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">JAVA_PATH</span><span class="o">=</span><span class="k">$(</span>which<span class="w"> </span>java<span class="k">)</span>
+<span class="nv">JRE_HOME_PATH</span><span class="o">=</span><span class="k">$(</span>readlink<span class="w"> </span>-f<span class="w"> </span><span class="si">${</span><span class="nv">JAVA_PATH</span><span class="si">}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s:/bin/java::&#39;</span><span class="k">)</span>
+<span class="nv">JRE_LIB_PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">JRE_HOME_PATH</span><span class="si">}</span>/lib
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$JRE_LIB_PATH</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/ld.so.conf.d/java.conf
+sudo<span class="w"> </span>ldconfig
+</code></pre></div></td></tr></table></div></p>
+</li>
+<li>
+<p>SynchDB should be ready to go. Refer to <a href="../../user-guide/quick_start/">quick start</a> page to get started</p>
+</li>
+</ol>
+<h2 id="install-from-source"><strong>Install from Source</strong><a class="headerlink" href="#install-from-source" title="Permanent link">&para;</a></h2>
+<p>This option requires you to build both PostgreSQL and SynchDB from source code.</p>
+<h3 id="build-requirements"><strong>Build Requirements</strong><a class="headerlink" href="#build-requirements" title="Permanent link">&para;</a></h3>
+<p>The following software is required to build and run SynchDB. The versions listed are the versions tested during development. Older versions may still work.</p>
+<ul>
+<li>Java Development Kit 17 or later. Download <a href="https://www.oracle.com/ca-en/java/technologies/downloads/">here</a></li>
+<li>Apache Maven 3.6.3 or later. Download <a href="https://maven.apache.org/download.cgi">here</a></li>
+<li>PostgreSQL Source. Git clone <a href="https://github.com/postgres/postgres">here</a>. Refer to this <a href="https://wiki.postgresql.org/wiki/Compile_and_Install_from_source_code">wiki</a> for PostgreSQL build requirements</li>
+<li>Docker compose 2.28.1 (for testing). Refer to <a href="https://docs.docker.com/compose/install/linux/">here</a></li>
+</ul>
+<p><strong>Additional Requirement for Openlog Replicator Connector Support (if enabled in build)</strong></p>
+<ul>
+<li>libprotobuf-c v1.5.2. Refer to <a href="https://github.com/protobuf-c/protobuf-c.git">here</a> to build from source.</li>
+</ul>
+<p><strong>The following is required if you would like to use FDW based snapshot</strong></p>
+<ul>
+<li>OCI v23.9.0. Refer to here for more information</li>
+<li>oracle_fdw v2.8.0. Refer to here to build from source</li>
+</ul>
+<h3 id="default-synchdb-build-support-mysql-sqlserver-and-oracle-connectors"><strong>Default SynchDB Build - Support MySQL, SQLServer and Oracle Connectors</strong><a class="headerlink" href="#default-synchdb-build-support-mysql-sqlserver-and-oracle-connectors" title="Permanent link">&para;</a></h3>
+<p>If you already have PostgreSQL installed, you can build and install Default SynchDB with PGXS. Please note that your PostgreSQL installation must have pgcrypto extension as required by SynchDB.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">USE_PGXS</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>make<span class="w"> </span><span class="nv">PG_CONFIG</span><span class="o">=</span><span class="k">$(</span>which<span class="w"> </span>pg_config<span class="k">)</span>
+<span class="nv">USE_PGXS</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>make<span class="w"> </span>build_dbz<span class="w"> </span><span class="nv">PG_CONFIG</span><span class="o">=</span><span class="k">$(</span>which<span class="w"> </span>pg_config<span class="k">)</span>
+
+sudo<span class="w"> </span><span class="nv">USE_PGXS</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>make<span class="w"> </span><span class="nv">PG_CONFIG</span><span class="o">=</span><span class="k">$(</span>which<span class="w"> </span>pg_config<span class="k">)</span><span class="w"> </span>install
+sudo<span class="w"> </span><span class="nv">USE_PGXS</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>make<span class="w"> </span>install_dbz<span class="w"> </span><span class="nv">PG_CONFIG</span><span class="o">=</span><span class="k">$(</span>which<span class="w"> </span>pg_config<span class="k">)</span>
+</code></pre></div>
+<h3 id="build-synchdb-with-openlog-replicator-connector-support"><strong>Build SynchDB with Openlog Replicator Connector Support</strong><a class="headerlink" href="#build-synchdb-with-openlog-replicator-connector-support" title="Permanent link">&para;</a></h3>
+<p>To build Synchdb with Openlog Replicator Connector support, an additional Synchdb Oracle Parser component must be built as well. This component is based on IvorySQL's Oracle Parser, modified to suit SynchDB and it requires PostgreSQL backend source codes to build successfully. Here's the procedure:</p>
+<h4 id="prepare-source-using-163-as-example"><strong>Prepare Source (Using 16.3 as example)</strong><a class="headerlink" href="#prepare-source-using-163-as-example" title="Permanent link">&para;</a></h4>
+<p>Clone the PostgreSQL source and switch to 16.3 release tag
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/postgres/postgres.git
+<span class="nb">cd</span><span class="w"> </span>postgres
+git<span class="w"> </span>checkout<span class="w"> </span>REL_16_3
+</code></pre></div></td></tr></table></div></p>
+<p>Clone the SynchDB source from within the extension folder
+Note: Branch <em>(synchdb-devel)[<a href="https://github.com/Hornetlabs/synchdb/tree/synchdb-devel">https://github.com/Hornetlabs/synchdb/tree/synchdb-devel</a>]</em> is used for development so far.
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>contrib/
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Hornetlabs/synchdb.git
+</code></pre></div></td></tr></table></div></p>
+<h4 id="build-and-install-postgresql"><strong>Build and Install PostgreSQL</strong><a class="headerlink" href="#build-and-install-postgresql" title="Permanent link">&para;</a></h4>
+<p>This can be done by following the standard build and install procedure as described <a href="https://www.postgresql.org/docs/current/install-make.html">here</a> </p>
+<p><strong>Warning</strong>: SynchDB depends on pgcrypto to encrypt and decrypt sensitive access information. Please ensure PostgreSQL is built with SSL support.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/home/<span class="nv">$USER</span>/postgres
+./configure<span class="w"> </span>--with-ssl<span class="o">=</span>openssl<span class="w"> </span>--enable-cassert
+make
+sudo<span class="w"> </span>make<span class="w"> </span>install
+</code></pre></div></td></tr></table></div>
+<p>Build the required pgcrypto extension
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/home/<span class="nv">$USER</span>/postgres/contrib/pgcrypto
+make
+sudo<span class="w"> </span>make<span class="w"> </span>install
+</code></pre></div></td></tr></table></div></p>
+<h4 id="build-synchdb-with-additional-openlog-replicator-connector-support">Build SynchDB with Additional Openlog Replicator Connector Support<a class="headerlink" href="#build-synchdb-with-additional-openlog-replicator-connector-support" title="Permanent link">&para;</a></h4>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># build and install debezium runner</span>
+<span class="nb">cd</span><span class="w"> </span>/home/<span class="nv">$USER</span>/postgres/contrib/synchdb
+make<span class="w"> </span>build_dbz
+sudo<span class="w"> </span>make<span class="w"> </span>install_dbz
+
+<span class="c1"># build and install oracle parser</span>
+make<span class="w"> </span>oracle_parser
+sudo<span class="w"> </span>make<span class="w"> </span>install_oracle_parser
+
+<span class="c1"># build and install synchdb</span>
+make<span class="w"> </span><span class="nv">WITH_OLR</span><span class="o">=</span><span class="m">1</span>
+sudo<span class="w"> </span>make<span class="w"> </span><span class="nv">WITH_OLR</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>install
+</code></pre></div></td></tr></table></div>
+<h3 id="configure-your-linker-to-find-java-ubuntu">Configure your Linker to find Java (Ubuntu)<a class="headerlink" href="#configure-your-linker-to-find-java-ubuntu" title="Permanent link">&para;</a></h3>
+<p>Lastly, we also need to tell your system's linker where the newly added Java library (libjvm.so) is located in your system.</p>
+<p><div class="highlight"><pre><span></span><code><span class="c1"># Dynamically set JDK paths</span>
+<span class="nv">JAVA_PATH</span><span class="o">=</span><span class="k">$(</span>which<span class="w"> </span>java<span class="k">)</span>
+<span class="nv">JDK_HOME_PATH</span><span class="o">=</span><span class="k">$(</span>readlink<span class="w"> </span>-f<span class="w"> </span><span class="si">${</span><span class="nv">JAVA_PATH</span><span class="si">}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s:/bin/java::&#39;</span><span class="k">)</span>
+<span class="nv">JDK_LIB_PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">JDK_HOME_PATH</span><span class="si">}</span>/lib
+
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$JDK_LIB_PATH</span>
+<span class="nb">echo</span><span class="w"> </span><span class="nv">$JDK_LIB_PATH</span>/server
+
+sudo<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$JDK_LIB_PATH</span><span class="s2">&quot;</span><span class="w"> </span>｜<span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/ld.so.conf.d/x86_64-linux-gnu.conf
+sudo<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$JDK_LIB_PATH</span><span class="s2">/server&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/ld.so.conf.d/x86_64-linux-gnu.conf
+</code></pre></div>
+Note, for mac with M1/M2 chips, the linker file is located in /etc/ld.so.conf.d/aarch64-linux-gnu.conf</p>
+<p>Run ldconfig to reload:
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>ldconfig
+</code></pre></div></p>
+<p>Ensure synchdo.so extension can link to libjvm Java library on your system:
+<div class="highlight"><pre><span></span><code>ldd<span class="w"> </span>synchdb.so
+<span class="w">        </span>linux-vdso.so.1<span class="w"> </span><span class="o">(</span>0x00007ffeae35a000<span class="o">)</span>
+<span class="w">        </span>libjvm.so<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>/usr/lib/jdk-22.0.1/lib/server/libjvm.so<span class="w"> </span><span class="o">(</span>0x00007fc1276c1000<span class="o">)</span>
+<span class="w">        </span>libc.so.6<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>/lib/x86_64-linux-gnu/libc.so.6<span class="w"> </span><span class="o">(</span>0x00007fc127498000<span class="o">)</span>
+<span class="w">        </span>libdl.so.2<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>/lib/x86_64-linux-gnu/libdl.so.2<span class="w"> </span><span class="o">(</span>0x00007fc127493000<span class="o">)</span>
+<span class="w">        </span>libpthread.so.0<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>/lib/x86_64-linux-gnu/libpthread.so.0<span class="w"> </span><span class="o">(</span>0x00007fc12748e000<span class="o">)</span>
+<span class="w">        </span>librt.so.1<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>/lib/x86_64-linux-gnu/librt.so.1<span class="w"> </span><span class="o">(</span>0x00007fc127489000<span class="o">)</span>
+<span class="w">        </span>libm.so.6<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>/lib/x86_64-linux-gnu/libm.so.6<span class="w"> </span><span class="o">(</span>0x00007fc1273a0000<span class="o">)</span>
+<span class="w">        </span>/lib64/ld-linux-x86-64.so.2<span class="w"> </span><span class="o">(</span>0x00007fc128b81000<span class="o">)</span>
+</code></pre></div></p>
+<p>If SynchDB is built with openlog replicator support, ensure it can link to libprotobuf-c library on your system:
+<div class="highlight"><pre><span></span><code>ldd<span class="w"> </span>synchdb.so
+<span class="w">        </span>linux-vdso.so.1<span class="w"> </span><span class="o">(</span>0x00007ffde6ba5000<span class="o">)</span>
+<span class="w">        </span>libjvm.so<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>/home/ubuntu/java/jdk-22.0.1/lib/server/libjvm.so<span class="w"> </span><span class="o">(</span>0x00007f3c8e191000<span class="o">)</span>
+<span class="w">        </span>libprotobuf-c.so.1<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>/usr/local/lib/libprotobuf-c.so.1<span class="w"> </span><span class="o">(</span>0x00007f3c8e186000<span class="o">)</span>
+<span class="w">        </span>libc.so.6<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>/lib/x86_64-linux-gnu/libc.so.6<span class="w"> </span><span class="o">(</span>0x00007f3c8df5d000<span class="o">)</span>
+<span class="w">        </span>libdl.so.2<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>/lib/x86_64-linux-gnu/libdl.so.2<span class="w"> </span><span class="o">(</span>0x00007f3c8df58000<span class="o">)</span>
+<span class="w">        </span>libpthread.so.0<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>/lib/x86_64-linux-gnu/libpthread.so.0<span class="w"> </span><span class="o">(</span>0x00007f3c8df53000<span class="o">)</span>
+<span class="w">        </span>librt.so.1<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>/lib/x86_64-linux-gnu/librt.so.1<span class="w"> </span><span class="o">(</span>0x00007f3c8df4c000<span class="o">)</span>
+<span class="w">        </span>libm.so.6<span class="w"> </span><span class="o">=</span>&gt;<span class="w"> </span>/lib/x86_64-linux-gnu/libm.so.6<span class="w"> </span><span class="o">(</span>0x00007f3c8de65000<span class="o">)</span>
+<span class="w">        </span>/lib64/ld-linux-x86-64.so.2<span class="w"> </span><span class="o">(</span>0x00007f3c8f69e000<span class="o">)</span>
+</code></pre></div></p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 Maintained by <a href="https://github.com/hornetlabs">Hornetlabs Technology </a>. <a href="https://www.netlify.com/"><img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deployed by Netlify" width="114" height="51"></a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../../js/print-site.js"></script>
+      
+        <script src="../../../js/print-site.js"></script>
+      
+    
+  </body>
+</html>

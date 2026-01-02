@@ -1,0 +1,2858 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="SynchDB is a PostgreSQL extension for synchronizing data from different database sources..">
+      
+      
+        <meta name="author" content="Hornetlabs Technology Inc.">
+      
+      
+        <link rel="canonical" href="https://docs.synchdb.com/latest/user-guide/utility_functions/">
+      
+      
+      
+      
+        
+          <link rel="alternate" href="./" hreflang="en">
+        
+          <link rel="alternate" href="../../es/user-guide/utility_functions/" hreflang="es">
+        
+          <link rel="alternate" href="../../zh/user-guide/utility_functions/" hreflang="zh">
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Function Reference - SynchDB Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#function-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="SynchDB Documentation" class="md-header__button md-logo" aria-label="SynchDB Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SynchDB Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Function Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../es/user-guide/utility_functions/" hreflang="es" class="md-select__link">
+              Español
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../zh/user-guide/utility_functions/" hreflang="zh" class="md-select__link">
+              中文
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/hornetlabs/synchdb" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/architecture/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/installation/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../monitoring/stats_view/" class="md-tabs__link">
+          
+  
+  
+  Monitoring
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../tutorial/mysql_cdc_to_postgresql/" class="md-tabs__link">
+          
+  
+  
+  Tutorial
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../create_a_connector/" class="md-tabs__link">
+          
+  
+  
+  User guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../changelog/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="SynchDB Documentation" class="md-nav__button md-logo" aria-label="SynchDB Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SynchDB Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/hornetlabs/synchdb" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/debezium_event_processor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debezium Event Processor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/debezium_runner_components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debezium Runner Components
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/openlog_replicator_event_processor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Openlog Replicator Event Processor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/batch_change_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Batch Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/non_native_datatype_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Non-Native Data Type Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/native_datatype_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native Data Type Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/metadata_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debezium Metadata Files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/ddl_replication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DDL Replication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/fdw_based_snapshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FDW Based Snapshot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/remote_database_setups/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Source Database Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SynchDB Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/quick_start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitoring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Monitoring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/stats_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Statistic View
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/state_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State View
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/attr_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Attribute View
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/jvm_mem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JVM Memory Usage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/jmx_monitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JMX Monitor Settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/jmx_exporter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JMX Exporter Settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/mysql_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MySQL CDC to PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/sqlserver_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Server CDC to PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/oracle_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle CDC to PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/selective_table_sync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Selective Table Replication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/table_snapshot_resnapshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Table Snapshot and Re-snapshot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/object_mapping_workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Object Mapping Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../create_a_connector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create a Connector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../start_stop_connector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start/Stop a Connector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../connector_auto_launcher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automatic Connector Launcher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../default_datatype_mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Default Data Type Mapping
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../object_mapping_rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Customize Object Mapping and Transformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../secured_connection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secured Connection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configure_error_strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configure Error Strategies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../set_offset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configure Replication Offset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configure_olr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configure Openlog Replicator for Oracle Connector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configure_infinispan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configure Infinispan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configure_snapshot_engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configure Snapshot Engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#connector-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connector Management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Connector Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_add_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_add_conninfo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_add_objmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_add_objmap
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_add_extra_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_add_extra_conninfo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_del_extra_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_del_extra_conninfo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_del_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_del_conninfo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_del_objmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_del_objmap
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-control-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Basic Control Functions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic Control Functions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_start_engine_bgw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_start_engine_bgw
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_pause_engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_pause_engine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_resume_engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_resume_engine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_stop_engine_bgw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_stop_engine_bgw
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_reload_objmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_reload_objmap
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        State Management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="State Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_state_view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_state_view
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_stats_view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_stats_view
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_reset_stats" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_reset_stats
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_set_offset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_set_offset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_log_jvm_meminfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_log_jvm_meminfo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_att_view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_att_view
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snapshot-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Snapshot Management
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Snapshot Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_restart_connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_restart_connector
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="function-reference">Function Reference<a class="headerlink" href="#function-reference" title="Permanent link">&para;</a></h1>
+<p>This page documents all the SQL functions / views added by SynchDB.</p>
+<h2 id="connector-management"><strong>Connector Management</strong><a class="headerlink" href="#connector-management" title="Permanent link">&para;</a></h2>
+<h3 id="synchdb_add_conninfo"><strong>synchdb_add_conninfo</strong><a class="headerlink" href="#synchdb_add_conninfo" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Creates a new connector configuration</p>
+<p><strong>Parameters</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Parameter</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: center;">Required</th>
+<th style="text-align: left;">Example</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>name</code></td>
+<td style="text-align: left;">Unique identifier for this connector</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: left;"><code>'mysqlconn'</code></td>
+<td style="text-align: left;">Must be unique across all connectors</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>hostname</code></td>
+<td style="text-align: left;">IP/hostname of heterogeneous database</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: left;"><code>'127.0.0.1'</code></td>
+<td style="text-align: left;">Support IPv4, IPv6, and hostnames</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>port</code></td>
+<td style="text-align: left;">Port number for database connection</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: left;"><code>3306</code></td>
+<td style="text-align: left;">Default: MySQL(3306), SQLServer(1433)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>username</code></td>
+<td style="text-align: left;">Authentication username</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: left;"><code>'mysqluser'</code></td>
+<td style="text-align: left;">Requires appropriate permissions</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>password</code></td>
+<td style="text-align: left;">Authentication password</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: left;"><code>'mysqlpwd'</code></td>
+<td style="text-align: left;">Stored securely</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>source database</code></td>
+<td style="text-align: left;">Source database name</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: left;"><code>'inventory'</code></td>
+<td style="text-align: left;">Must exist in source system</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>destination database</code></td>
+<td style="text-align: left;">Target PostgreSQL database</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: left;"><code>'postgres'</code></td>
+<td style="text-align: left;">(deprecated) will always be adjusted to the same database where SynchDB is installed</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>table</code></td>
+<td style="text-align: left;">Table specification pattern</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: left;"><code>'[db].[table]'</code></td>
+<td style="text-align: left;">Empty = replicate all tables, support regular expressions (for example, mydb.testtable*), use <code>file:</code> prefix to make connector read table list from a JSON file (for example, file:/path/to/filelist.json). See below for file format</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>connector</code></td>
+<td style="text-align: left;">Connector type (<code>mysql</code>/<code>sqlserver</code>)</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: left;"><code>'mysql'</code></td>
+<td style="text-align: left;">See supported connectors above</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Tablelist File Example</strong>:
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;table_list&quot;</span><span class="p">:</span>
+<span class="w">    </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">&quot;mydb.table1&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;mydb.table2&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;mydb.table3&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">&quot;mydb.table4&quot;</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Example Usage</strong>:
+<div class="highlight"><pre><span></span><code><span class="c1">-- MySQL Example</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w">    </span><span class="c1">-- Connector name</span>
+<span class="w">    </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w">    </span><span class="c1">-- Host</span>
+<span class="w">    </span><span class="mi">3306</span><span class="p">,</span><span class="w">           </span><span class="c1">-- Port</span>
+<span class="w">    </span><span class="s1">&#39;mysqluser&#39;</span><span class="p">,</span><span class="w">    </span><span class="c1">-- Username</span>
+<span class="w">    </span><span class="s1">&#39;mysqlpwd&#39;</span><span class="p">,</span><span class="w">     </span><span class="c1">-- Password</span>
+<span class="w">    </span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span><span class="w">    </span><span class="c1">-- Source DB</span>
+<span class="w">    </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span><span class="w">     </span><span class="c1">-- Target DB</span>
+<span class="w">    </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w">             </span><span class="c1">-- Tables (empty for all)</span>
+<span class="w">    </span><span class="s1">&#39;mysql&#39;</span><span class="w">         </span><span class="c1">-- Connector type</span>
+<span class="p">);</span>
+
+<span class="c1">-- SQL Server Example</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="mi">1433</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;sa&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;MyPassword123&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;testDB&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;dbo.orders&#39;</span><span class="p">,</span><span class="w">   </span><span class="c1">-- Specific table</span>
+<span class="w">    </span><span class="s1">&#39;sqlserver&#39;</span>
+<span class="p">);</span>
+
+<span class="c1">-- Oracle Example</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="mi">1521</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;c##dbzuser&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;dbz&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;mydb&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w">   </span><span class="c1">-- all tables</span>
+<span class="w">    </span><span class="s1">&#39;oracle&#39;</span>
+<span class="p">);</span>
+</code></pre></div></p>
+<h3 id="synchdb_add_objmap"><strong>synchdb_add_objmap</strong><a class="headerlink" href="#synchdb_add_objmap" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Adds an object mapping rule per connector</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Parameter</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: center;">Required</th>
+<th style="text-align: left;">Example</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>name</code></td>
+<td style="text-align: left;">Unique identifier for this connector</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: left;"><code>'mysqlconn'</code></td>
+<td style="text-align: left;">Must be unique across all connectors</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>object type</code></td>
+<td style="text-align: left;">type of object mapping</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: left;"><code>'table'</code></td>
+<td style="text-align: left;">can be <code>table</code> to map a table name, <code>column</code> to map a column name, <code>datatype</code> to map a data type, or <code>transform</code> to run a data transform expression</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>source object</code></td>
+<td style="text-align: left;">source object represented as fully-qualified name</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: left;"><code>inventory.customers</code></td>
+<td style="text-align: left;">the object name as represented in the remote database</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>destination object</code></td>
+<td style="text-align: left;">destination object name</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: left;"><code>'schema1.people'</code></td>
+<td style="text-align: left;">The destination object name in PostgreSQL side. Can be a fully-qualified table name, a column name, a data type or transform expression</td>
+</tr>
+</tbody>
+</table>
+<p><div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;inventory.customers&#39;</span><span class="p">,</span><span class="s1">&#39;schema1.people&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="s1">&#39;column&#39;</span><span class="p">,</span><span class="s1">&#39;inventory.customers.email&#39;</span><span class="p">,</span><span class="s1">&#39;contact&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="s1">&#39;datatype&#39;</span><span class="p">,</span><span class="s1">&#39;point|false&#39;</span><span class="p">,</span><span class="s1">&#39;text|0&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="s1">&#39;datatype&#39;</span><span class="p">,</span><span class="s1">&#39;inventory.geom.g&#39;</span><span class="p">,</span><span class="s1">&#39;geometry|0&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="s1">&#39;transform&#39;</span><span class="p">,</span><span class="s1">&#39;inventory.products.name&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;&#39;&gt;&gt;&gt;&gt;&gt;&#39;&#39; || &#39;&#39;%d&#39;&#39; || &#39;&#39;&lt;&lt;&lt;&lt;&lt;&#39;&#39;&#39;</span><span class="p">);</span>
+</code></pre></div>
+<strong>Ways to represent a <code>table</code> mapping:</strong>
+* <code>source object</code> represents the table in fully-qualified name in remote database
+* <code>destination object</code> represents the table name in PostgreSQL. It can be just a name (default to public schema) or in schema.name format. </p>
+<p><strong>Ways to represent a <code>column</code> mapping:</strong>
+* <code>source object</code> represents the column in fully-qualified name in remote database
+* <code>destination object</code> represents the column name in PostgreSQL. No need to format it as fully-qualified column name.</p>
+<p><strong>Ways to represent a <code>datatype</code> mapping:</strong>
+* <code>source object</code> can be expressed as one of:
+    * a fully-qualified column (inventory.geom.g). This means the data type mapping applies to this particular column only.
+    * a general data type string (int). Use a pipe (|) to add if it is a autoincrement data type (int|true for autoincremented int) or (int|false for a non-autoincremented int). This means data type mapping applies to all data type with the matching condition.</p>
+<ul>
+<li><code>destination object</code> should be expressed as a general data type string that exists in PostgreSQL. Use a pipe (|) to overwrite the size (text|0 to overwrite the size to 0 because text is variable size) or (varchar|-1 to use whatever size that comes with the change event)</li>
+</ul>
+<p><strong>Ways to represent a <code>transform</code> mapping:</strong>
+* <code>source object</code> represents the column to be transformed
+* <code>destination object</code> represents an expression to be run on the column data before it is applied to PostgreSQL. Use %d as a placeholder for input column data. In case of geometry type, use %w for WKB and %s for SRID. </p>
+<h3 id="synchdb_add_extra_conninfo"><strong>synchdb_add_extra_conninfo</strong><a class="headerlink" href="#synchdb_add_extra_conninfo" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Configures extra connector parameters to an existing connector created by <code>synchdb_add_conninfo</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Parameter</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: center;">Required</th>
+<th style="text-align: left;">Example</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>name</code></td>
+<td style="text-align: left;">Unique identifier for this connector</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: left;"><code>'mysqlconn'</code></td>
+<td style="text-align: left;">Must be unique across all connectors</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>ssl_mode</code></td>
+<td style="text-align: left;">SSL mode</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: left;"><code>'verify_ca'</code></td>
+<td style="text-align: left;">can be one of: <br><ul><li> "disabled" - no SSL is used. </li><li> "preferred" - SSL is used if server supports it. </li><li> "required" - SSL must be used to establish a connection. </li><li> "verify_ca" - connector establishes TLS with the server and will also verify server's TLS certificate against configured truststore. </li><li> "verify_identity" - same behavior as verify_ca but it also checks the server certificate's common name to match the hostname of the system.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>ssl_keystore</code></td>
+<td style="text-align: left;">keystore path</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: left;"><code>/path/to/keystore</code></td>
+<td style="text-align: left;">path to the keystore file</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>ssl_keystore_pass</code></td>
+<td style="text-align: left;">keystore password</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: left;"><code>'mykeystorepass'</code></td>
+<td style="text-align: left;">password to access the keystore file</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>ssl_truststore</code></td>
+<td style="text-align: left;">trust store path</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: left;"><code>'/path/to/truststore'</code></td>
+<td style="text-align: left;">path to the truststore file</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>ssl_truststore_pass</code></td>
+<td style="text-align: left;">trust store password</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: left;"><code>'mytruststorepass'</code></td>
+<td style="text-align: left;">password to access the truststore file</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_extra_conninfo</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;verify_ca&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/path/to/keystore&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mykeystorepass&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/path/to/truststore&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mytruststorepass&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="synchdb_del_extra_conninfo"><strong>synchdb_del_extra_conninfo</strong><a class="headerlink" href="#synchdb_del_extra_conninfo" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Deletes extra connector paramters created by <code>synchdb_add_extra_conninfo</code>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_del_extra_conninfo</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<h3 id="synchdb_del_conninfo"><strong>synchdb_del_conninfo</strong><a class="headerlink" href="#synchdb_del_conninfo" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Deletes connector information created by <code>synchdb_add_conninfo</code>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_del_extra_conninfo</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<h3 id="synchdb_del_objmap"><strong>synchdb_del_objmap</strong><a class="headerlink" href="#synchdb_del_objmap" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Disables object mapping records created by <code>synchdb_add_objmap</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Parameter</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: center;">Required</th>
+<th style="text-align: left;">Example</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>name</code></td>
+<td style="text-align: left;">Unique identifier for this connector</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: left;"><code>'mysqlconn'</code></td>
+<td style="text-align: left;">Must be unique across all connectors</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>object type</code></td>
+<td style="text-align: left;">type of object mapping</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: left;"><code>'table'</code></td>
+<td style="text-align: left;">can be <code>table</code> to map a table name, <code>column</code> to map a column name, <code>datatype</code> to map a data type, or <code>transform</code> to run a data transform expression</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>source object</code></td>
+<td style="text-align: left;">source object represented as fully-qualified name</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: left;"><code>inventory.customers</code></td>
+<td style="text-align: left;">the object name as represented in the remote database</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_del_extra_conninfo</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;transform&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;inventory.products.name&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="basic-control-functions"><strong>Basic Control Functions</strong><a class="headerlink" href="#basic-control-functions" title="Permanent link">&para;</a></h2>
+<h3 id="synchdb_start_engine_bgw"><strong>synchdb_start_engine_bgw</strong><a class="headerlink" href="#synchdb_start_engine_bgw" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Starts a connector
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+You may also include snapshot mode to start the connector with, otherwise the <code>initial</code> mode will be used by default. See below for list of different snapshot modes.
+<div class="highlight"><pre><span></span><code><span class="c1">-- capture table schema and proceed to stream new changes</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;no_data&#39;</span><span class="p">);</span>
+
+<span class="c1">-- always re-capture table schema, existing data and proceed to stream new changes</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<h3 id="synchdb_pause_engine"><strong>synchdb_pause_engine</strong><a class="headerlink" href="#synchdb_pause_engine" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Temporarily halts a running connector
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_pause_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<h3 id="synchdb_resume_engine"><strong>synchdb_resume_engine</strong><a class="headerlink" href="#synchdb_resume_engine" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Resumes a paused connector
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_resume_engine</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<h3 id="synchdb_stop_engine_bgw"><strong>synchdb_stop_engine_bgw</strong><a class="headerlink" href="#synchdb_stop_engine_bgw" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Terminates a connector
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_stop_engine</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<h3 id="synchdb_reload_objmap"><strong>synchdb_reload_objmap</strong><a class="headerlink" href="#synchdb_reload_objmap" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Causes a connector to load object mapping rules again
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_reload_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<h2 id="state-management"><strong>State Management</strong><a class="headerlink" href="#state-management" title="Permanent link">&para;</a></h2>
+<h3 id="synchdb_state_view"><strong>synchdb_state_view</strong><a class="headerlink" href="#synchdb_state_view" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Monitors connector states and status</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="p">();</span>
+</code></pre></div>
+<p><strong>Return Fields</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>Associated connector name</td>
+<td>Text</td>
+</tr>
+<tr>
+<td><code>connector_type</code></td>
+<td>Connector type (<code>mysql</code> or <code>sqlserver</code>)</td>
+<td>Text</td>
+</tr>
+<tr>
+<td><code>pid</code></td>
+<td>Worker process ID</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td><code>stage</code></td>
+<td>Current connector stage</td>
+<td>Text</td>
+</tr>
+<tr>
+<td><code>state</code></td>
+<td>Current connector state</td>
+<td>Text</td>
+</tr>
+<tr>
+<td><code>err</code></td>
+<td>Latest error message</td>
+<td>Text</td>
+</tr>
+<tr>
+<td><code>last_dbz_offset</code></td>
+<td>Last recorded Debezium offset</td>
+<td>JSON</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Possible States</strong>:</p>
+<ul>
+<li>🔴 <code>stopped</code> - Inactive</li>
+<li>🟡 <code>initializing</code> - Starting up</li>
+<li>🟠 <code>paused</code> - Temporarily halted</li>
+<li>🟢 <code>syncing</code> - Actively polling</li>
+<li>🔵 <code>parsing</code> - Processing events</li>
+<li>🟣 <code>converting</code> - Transforming data</li>
+<li>⚪ <code>executing</code> - Applying changes</li>
+<li>🟤 <code>updating offset</code> - Updating checkpoint</li>
+<li>🟨 <code>restarting</code> - Reinitializing</li>
+<li>⚪ <code>dumping memory</code> - JVM is prepaaring to dump memory info in log file</li>
+<li>⚫ <code>unknown</code> - Indeterminate state</li>
+</ul>
+<p><strong>Possible Stages</strong>:</p>
+<ul>
+<li><code>initial snapshot</code> - connector is performing initial snapshot (building table schema and optionally the initial data)</li>
+<li><code>change data capture</code> - connector is streaming subsequent table changes (CDC)</li>
+<li><code>schema sync</code> - connector is copying table schema only</li>
+</ul>
+<h3 id="synchdb_stats_view"><strong>synchdb_stats_view</strong><a class="headerlink" href="#synchdb_stats_view" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Collects connector processing statistics cumulatiely</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_stats_view</span><span class="p">();</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>Associated connector name</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>ddls</td>
+<td>Number of DDLs operations completed</td>
+<td>Bigint</td>
+</tr>
+<tr>
+<td>dmls</td>
+<td>Number of DMLs operations completed</td>
+<td>Bigint</td>
+</tr>
+<tr>
+<td>reads</td>
+<td>Number of READ events completed during initial snapshot stage</td>
+<td>Bigint</td>
+</tr>
+<tr>
+<td>creates</td>
+<td>Number of CREATES events completed during CDC stage</td>
+<td>Bigint</td>
+</tr>
+<tr>
+<td>updates</td>
+<td>Number of UPDATES events completed during CDC stage</td>
+<td>Bigint</td>
+</tr>
+<tr>
+<td>deletes</td>
+<td>Number of DELETES events completed during CDC stage</td>
+<td>Bigint</td>
+</tr>
+<tr>
+<td>bad_events</td>
+<td>Number of bad events ignored (such as empty events, unsupported DDL events..etc)</td>
+<td>Bigint</td>
+</tr>
+<tr>
+<td>total_events</td>
+<td>Total number of events processed (including bad_events)</td>
+<td>Bigint</td>
+</tr>
+<tr>
+<td>batches_done</td>
+<td>Number of batches completed</td>
+<td>Bigint</td>
+</tr>
+<tr>
+<td>avg_batch_size</td>
+<td>Average batch size (total_events / batches_done)</td>
+<td>Bigint</td>
+</tr>
+</tbody>
+</table>
+<h3 id="synchdb_reset_stats"><strong>synchdb_reset_stats</strong><a class="headerlink" href="#synchdb_reset_stats" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Resets all statistic information of given connector name</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_reset_stats</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="synchdb_set_offset"><strong>synchdb_set_offset</strong><a class="headerlink" href="#synchdb_set_offset" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Configures custom start position</p>
+<p><strong>Example for MySQL</strong>:
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_set_offset</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;{&quot;ts_sec&quot;:1725644339,&quot;file&quot;:&quot;mysql-bin.000004&quot;,&quot;pos&quot;:138466,&quot;row&quot;:1,&quot;server_id&quot;:223344,&quot;event&quot;:2}&#39;</span>
+<span class="p">);</span>
+</code></pre></div></p>
+<p><strong>Example for SQL Server</strong>:
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_set_offset</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;{&quot;event_serial_no&quot;:1,&quot;commit_lsn&quot;:&quot;00000100:00000c00:0003&quot;,&quot;change_lsn&quot;:&quot;00000100:00000c00:0002&quot;}&#39;</span>
+<span class="p">);</span>
+</code></pre></div></p>
+<h3 id="synchdb_log_jvm_meminfo"><strong>synchdb_log_jvm_meminfo</strong><a class="headerlink" href="#synchdb_log_jvm_meminfo" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Cause the Java Virtual Machine (JVM) to log the current heap and non-heap usages statistics.
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_log_jvm_meminfo</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<p>Check the PostgreSQL log file:
+<div class="highlight"><pre><span></span><code>2024-12-09 14:34:21.910 PST [25491] LOG:  Requesting memdump for mysqlconn connector
+2024-12-09 14:34:21 WARN  DebeziumRunner:297 - Heap Memory:
+2024-12-09 14:34:21 WARN  DebeziumRunner:298 -   Used: 19272600 bytes
+2024-12-09 14:34:21 WARN  DebeziumRunner:299 -   Committed: 67108864 bytes
+2024-12-09 14:34:21 WARN  DebeziumRunner:300 -   Max: 2147483648 bytes
+2024-12-09 14:34:21 WARN  DebeziumRunner:302 - Non-Heap Memory:
+2024-12-09 14:34:21 WARN  DebeziumRunner:303 -   Used: 42198864 bytes
+2024-12-09 14:34:21 WARN  DebeziumRunner:304 -   Committed: 45023232 bytes
+2024-12-09 14:34:21 WARN  DebeziumRunner:305 -   Max: -1 bytes
+</code></pre></div></p>
+<h3 id="synchdb_att_view"><strong>synchdb_att_view</strong><a class="headerlink" href="#synchdb_att_view" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Displays a side-by-side view of a connector's data type, name mapping and transform rule relationships between foreign and local tables.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_att_view</span><span class="p">();</span>
+</code></pre></div>
+<p><strong>Return Fields</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>Connector identifier</td>
+<td>Text</td>
+</tr>
+<tr>
+<td><code>attnum</code></td>
+<td>Attribute number</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td><code>ext_tbname</code></td>
+<td>table name as appeared remotely</td>
+<td>Text</td>
+</tr>
+<tr>
+<td><code>pg_tbname</code></td>
+<td>mapped table name in PostgreSQL</td>
+<td>Text</td>
+</tr>
+<tr>
+<td><code>ext_attname</code></td>
+<td>column name as appeared remotely</td>
+<td>Text</td>
+</tr>
+<tr>
+<td><code>pg_attname</code></td>
+<td>mapped column name in PostgreSQL</td>
+<td>Text</td>
+</tr>
+<tr>
+<td><code>ext_atttypename</code></td>
+<td>data type as appeared remotely</td>
+<td>Text</td>
+</tr>
+<tr>
+<td><code>pg_atttypename</code></td>
+<td>mapped data type in PostgreSQL</td>
+<td>Text</td>
+</tr>
+<tr>
+<td><code>transform</code></td>
+<td>transform expression</td>
+<td>Text</td>
+</tr>
+</tbody>
+</table>
+<h2 id="snapshot-management"><strong>Snapshot Management</strong><a class="headerlink" href="#snapshot-management" title="Permanent link">&para;</a></h2>
+<h3 id="synchdb_restart_connector"><strong>synchdb_restart_connector</strong><a class="headerlink" href="#synchdb_restart_connector" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Reinitializes connector with specified snapshot mode</p>
+<p><strong>Snapshot Modes</strong>:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Mode</th>
+<th>Description</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>always</code></td>
+<td>Full snapshot on every start</td>
+<td>Complete data verification</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>initial</code></td>
+<td>First-time snapshot only</td>
+<td>Normal operations</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>initial_only</code></td>
+<td>One-time snapshot, then stop</td>
+<td>Data migration</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>no_data</code></td>
+<td>Structure only, no data</td>
+<td>Schema synchronization</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>never</code></td>
+<td>Skip snapshot, stream only</td>
+<td>Real-time updates</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>recovery</code></td>
+<td>Rebuilds from source</td>
+<td>Disaster recovery</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>when_needed</code></td>
+<td>Conditional snapshot</td>
+<td>Automatic recovery</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>schemasync</code></td>
+<td>Structure only, no data, no CDC</td>
+<td>normal operations</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong>:
+<div class="highlight"><pre><span></span><code><span class="c1">-- Restart with specific snapshot mode</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_restart_connector</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;initial&#39;</span><span class="p">);</span>
+
+<span class="c1">-- Start with specific snapshot mode</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<hr />
+<p>📝 <strong>Additional Notes</strong>:</p>
+<ul>
+<li>Always validate connector configuration before starting</li>
+<li>Monitor system resources during snapshot operations</li>
+<li>Back up PostgreSQL destination database before major operations</li>
+<li>Test connectivity from PostgreSQL server to source database</li>
+<li>Ensure source database has required permissions configured</li>
+<li>Regular monitoring of error logs recommended</li>
+</ul>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 Maintained by <a href="https://github.com/hornetlabs">Hornetlabs Technology </a>. <a href="https://www.netlify.com/"><img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deployed by Netlify" width="114" height="51"></a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../js/print-site.js"></script>
+      
+    
+  </body>
+</html>

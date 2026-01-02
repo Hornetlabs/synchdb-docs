@@ -1,0 +1,3068 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="SynchDB is a PostgreSQL extension for synchronizing data from different database sources..">
+      
+      
+        <meta name="author" content="Hornetlabs Technology Inc.">
+      
+      
+        <link rel="canonical" href="https://docs.synchdb.com/latest/changelog/">
+      
+      
+        <link rel="prev" href="../user-guide/configure_snapshot_engine/">
+      
+      
+      
+        
+          <link rel="alternate" href="./" hreflang="en">
+        
+          <link rel="alternate" href="../es/changelog/" hreflang="es">
+        
+          <link rel="alternate" href="../zh/changelog/" hreflang="zh">
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Changelog - SynchDB Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../css/print-site.css">
+    
+      <link rel="stylesheet" href="../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#change-log" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="SynchDB Documentation" class="md-header__button md-logo" aria-label="SynchDB Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            SynchDB Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Changelog
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Select language">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../es/changelog/" hreflang="es" class="md-select__link">
+              Español
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../zh/changelog/" hreflang="zh" class="md-select__link">
+              中文
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/hornetlabs/synchdb" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../architecture/architecture/" class="md-tabs__link">
+          
+  
+  
+  Architecture
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../getting-started/installation/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../monitoring/stats_view/" class="md-tabs__link">
+          
+  
+  
+  Monitoring
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../tutorial/mysql_cdc_to_postgresql/" class="md-tabs__link">
+          
+  
+  
+  Tutorial
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../user-guide/create_a_connector/" class="md-tabs__link">
+          
+  
+  
+  User guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="SynchDB Documentation" class="md-nav__button md-logo" aria-label="SynchDB Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    SynchDB Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/hornetlabs/synchdb" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Architecture
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/debezium_event_processor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debezium Event Processor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/debezium_runner_components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debezium Runner Components
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/openlog_replicator_event_processor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Openlog Replicator Event Processor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/batch_change_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Batch Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/non_native_datatype_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Non-Native Data Type Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/native_datatype_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native Data Type Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/metadata_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debezium Metadata Files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/ddl_replication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DDL Replication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/fdw_based_snapshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FDW Based Snapshot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/remote_database_setups/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Source Database Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SynchDB Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../getting-started/quick_start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Monitoring
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Monitoring
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/stats_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Statistic View
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/state_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State View
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/attr_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Attribute View
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/jvm_mem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JVM Memory Usage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/jmx_monitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JMX Monitor Settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../monitoring/jmx_exporter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JMX Exporter Settings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/mysql_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MySQL CDC to PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/sqlserver_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SQL Server CDC to PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/oracle_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Oracle CDC to PostgreSQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/selective_table_sync/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Selective Table Replication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/table_snapshot_resnapshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Table Snapshot and Re-snapshot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/object_mapping_workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Object Mapping Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User guide
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User guide
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/create_a_connector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create a Connector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/start_stop_connector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start/Stop a Connector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/connector_auto_launcher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automatic Connector Launcher
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/default_datatype_mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Default Data Type Mapping
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/object_mapping_rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Customize Object Mapping and Transformation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/secured_connection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secured Connection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/configure_error_strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configure Error Strategies
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/set_offset/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configure Replication Offset
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/configure_olr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configure Openlog Replicator for Oracle Connector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/configure_infinispan/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configure Infinispan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user-guide/configure_snapshot_engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configure Snapshot Engine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Changelog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb-13-2025-11-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 1.3 - 2025-11-25
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 1.3 - 2025-11-25">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Added">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fdw-based-snapshot-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FDW-based Snapshot Engine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#revamped-statistics-views" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revamped Statistics Views
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postgresql-18-and-ivorysql-5-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PostgreSQL 18 and IvorySQL 5 Compatibility
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues-and-additional-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Issues and Additional Info
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb-12-2025-09-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 1.2 - 2025-09-04
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 1.2 - 2025-09-04">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Added">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#native-openlog-replicator-connector-beta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Native Openlog Replicator Connector - BETA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ezdeploysh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ezdeploy.sh
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues-and-additional-info_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Issues and Additional Info
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb-11-2025-04-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 1.1 - 2025-04-17
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 1.1 - 2025-04-17">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Added">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connector-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connector Support
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#object-mapping-data-transformation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Object Mapping &amp; Data Transformation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metadata-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metadata &amp; Monitoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connection-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connection Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration &amp; Control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-optimizations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Optimizations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb-10-2024-12-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 1.0 - 2024-12-24
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 1.0 - 2024-12-24">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb-10-beta1-2024-10-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 1.0 Beta1 - 2024-10-23
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 1.0 Beta1 - 2024-10-23">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb-13-2025-11-25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 1.3 - 2025-11-25
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 1.3 - 2025-11-25">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Added">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fdw-based-snapshot-engine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FDW-based Snapshot Engine
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#revamped-statistics-views" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Revamped Statistics Views
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postgresql-18-and-ivorysql-5-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PostgreSQL 18 and IvorySQL 5 Compatibility
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues-and-additional-info" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Issues and Additional Info
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb-12-2025-09-04" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 1.2 - 2025-09-04
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 1.2 - 2025-09-04">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Added">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#native-openlog-replicator-connector-beta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Native Openlog Replicator Connector - BETA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Monitoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ezdeploysh" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ezdeploy.sh
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#known-issues-and-additional-info_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Known Issues and Additional Info
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb-11-2025-04-17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 1.1 - 2025-04-17
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 1.1 - 2025-04-17">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Added">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#connector-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connector Support
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#object-mapping-data-transformation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Object Mapping &amp; Data Transformation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metadata-monitoring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metadata &amp; Monitoring
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#connection-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Connection Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuration-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration &amp; Control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance-optimizations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Performance Optimizations
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb-10-2024-12-24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 1.0 - 2024-12-24
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 1.0 - 2024-12-24">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchdb-10-beta1-2024-10-23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 1.0 Beta1 - 2024-10-23
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 1.0 Beta1 - 2024-10-23">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#added_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Added
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#changed_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Changed
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fixed_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fixed
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="change-log">Change Log<a class="headerlink" href="#change-log" title="Permanent link">&para;</a></h1>
+<p>All notable changes to this project will be documented in this file.</p>
+<p>The format is based on <a href="http://keepachangelog.com/">Keep a Changelog</a>
+and this project adheres to <a href="http://semver.org/">Semantic Versioning</a>.</p>
+<h2 id="synchdb-13-2025-11-25"><strong><a href="https://github.com/Hornetlabs/synchdb/releases/tag/v1.3">SynchDB 1.3</a> - 2025-11-25</strong><a class="headerlink" href="#synchdb-13-2025-11-25" title="Permanent link">&para;</a></h2>
+<p>SynchDB 1.3 delivers a major performance enhancement with the new FDW-based snapshot engine, offering significantly faster initial snapshot performance over Debezium. This advancement makes OpenLog Replicator (OLR) connector a fully native snapshot + CDC pipeline (no Debezium is used) with significantly reduced latency and overhead for large Oracle datasets. Platform support has been broadened as well. SynchDB now runs on PostgreSQL 18 and IvorySQL 5, accompanied by a series of performance optimizations and I/O improvements across the system.</p>
+<h3 id="added">Added<a class="headerlink" href="#added" title="Permanent link">&para;</a></h3>
+<h4 id="fdw-based-snapshot-engine"><a href="../architecture/fdw_based_snapshot/">FDW-based Snapshot Engine</a><a class="headerlink" href="#fdw-based-snapshot-engine" title="Permanent link">&para;</a></h4>
+<ul>
+<li>FDW-based snapshot provides a much faster alternative to Debezium's initial snapshot process</li>
+<li>Added a new GUC parameter "synchdb.snapshot_engine" to select snapshot engine, can be "debezium" or "fdw"</li>
+<li>Added a new GUC parameter "synchdb.cdc_start_delay_ms" to add a millisecond delay that needs to be waited after initial snapshot is completed and before CDC is started.</li>
+<li>Added a new GUC parameter "synchdb.fdw_migrate_with_subtx" to use sub-transactions to migrate each table or not during FDW-based snapshot process.</li>
+<li>Applicable only to Openlog Replicator and Oracle connector types via <a href="https://github.com/laurenz/oracle_fdw">oracle_fdw</a> 2.8.0. Other connector types may be supported in future releases.</li>
+<li>Supported a retry mechanism: If some tables fail to snapshot, the error messages will be saved to synchdb_fdw_snapshot_errors_xxx table and can be retried by resuming the connector. Tables that succeeded will remain.</li>
+<li>If 'schemasync' or 'nodata' snapshot mode is used, FDW-engine will synchronize table schemas only.</li>
+<li>Tables and data created via FDW-engine are subject to name and expression transformation rules as defined in "synchdb_objmap" </li>
+<li>Added a new function synchdb_translate_datatype() that returns SynchDB's data type translation results based on selected connector type.</li>
+</ul>
+<h4 id="revamped-statistics-views"><a href="../monitoring/stats_view/">Revamped Statistics Views</a><a class="headerlink" href="#revamped-statistics-views" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Revamped statistics view to group different statistics to proper categories.</li>
+<li>synchdb_stats_view() has been removed</li>
+<li>Added a new view called synchdb_genstats that records statistics about batches of events processed</li>
+<li>Added a new view called synchdb_snapstats that records statistics about initial snapshot process</li>
+<li>Added a new view called synchdb_cdcstats that records statistics about CDC process</li>
+</ul>
+<h4 id="postgresql-18-and-ivorysql-5-compatibility">PostgreSQL 18 and IvorySQL 5 Compatibility<a class="headerlink" href="#postgresql-18-and-ivorysql-5-compatibility" title="Permanent link">&para;</a></h4>
+<ul>
+<li>SynchDB is compatible with PostgreSQL 18 and IvorySQL 5.</li>
+<li>When running FDW-based snapshot under IvorySQL 5 in 'oracle' compatible mode, this mode will be switched back to 'pg' mode for the duration of the snapshot because the PL/pgSQL functions are written in PostgreSQL standard.</li>
+<li>Synchdb will set "ivorysql.identifier_case_switch" settings to 'normal' in SynchDB workers to prevent letter casing being reversed undesirably.</li>
+<li>Renamed liboracle_parser.so and oracle_raw_parser() symbol inside to libsynchdb_oracle_parser.so and synchdb_oracle_raw_parser() to prevent symbol name conflicts with IvorySQL.</li>
+</ul>
+<h3 id="changed">Changed<a class="headerlink" href="#changed" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Openlog Replicator Connector: Enhanced Oracle parser to support more contraint operators: enable, disable, novalidate, validate</li>
+<li>Openlog Replicator Connector: Enhanced Oracle parser to support MODIFY clauses with and without paraenthesis</li>
+<li>Openlog Replicator Connector: Enhanced Oracle parser to support DEFAULT ON NULL clauses.</li>
+<li>Openlog Replicator Connector: Improve processing performance by removing one pre-scan loop.</li>
+<li>Openlog Replicator Connector: Optimized non-null terminated event processing as PostgreSQL text type to save one copy operation. (PG17+)</li>
+<li>Openlog Replicator Connector: default read buffer size changed to 128MB</li>
+<li>Openlog Replicator Connector: added a new GUC parameter "synchdb.olr_read_timeout_ms" to configure read timeout.</li>
+<li>Openlog Replicator Connector: added a new GUC parameter "synchdb.olr_connect_timeout_ms" to configure connect timeout.</li>
+<li>Openlog Replicator Connector: will ignore "log_mining_flush" table created by Debezium.</li>
+<li>Updated default data type mappings for all connector types</li>
+<li>More robust JSON processing: no longer crashes when a JSON element fails to look up </li>
+</ul>
+<h3 id="fixed">Fixed<a class="headerlink" href="#fixed" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Openlog Replicator Connector: fixed an issue where Oracle parser fails to parse when running under PostgreSQL 16</li>
+<li>Openlog Replicator Connector: fixed an issue where unexpected DDL statement with system owner get passed to SynchDB by mistake</li>
+<li>Openlog Replicator Connector: Adjusted the SCN and C_SCN values to resume CDC as stored in the offset file rather than adding 1 to them, which could potentially skip a previously failed change event upon resume.</li>
+<li>Synchdb now allows source table or schema names to contain spaces.</li>
+<li>Fixed the incorrect processing of negative decimal values.</li>
+<li>Fixed the incorrect processing of large decimal overflow values. </li>
+<li>Fixed an issue in Oracle's default data type mappings for NUMBER that omits the length and scale by mistake.</li>
+<li>Fixed the missing default data type mappings with auto_increment attributes for mysql connector</li>
+</ul>
+<h3 id="known-issues-and-additional-info">Known Issues and Additional Info<a class="headerlink" href="#known-issues-and-additional-info" title="Permanent link">&para;</a></h3>
+<ul>
+<li>SynchDB always normalize incoming table, schema and column names to lowercase letters before applying them to PostgreSQL, this is a problem if source table supports objects with the same name but in different cases. For example, 'mytable' and 'MYTABLE' are considered different in MySQL and Oracle. Link to the issue <a href="https://github.com/Hornetlabs/synchdb/issues/194">here</a></li>
+<li>FDW-based snapshot for MySQL and SQL server are not supported yet and we may add support for them in future releases. More info <a href="https://github.com/Hornetlabs/synchdb/issues/190">here</a></li>
+</ul>
+<h2 id="synchdb-12-2025-09-04"><strong><a href="https://github.com/Hornetlabs/synchdb/releases/tag/v1.2">SynchDB 1.2</a> - 2025-09-04</strong><a class="headerlink" href="#synchdb-12-2025-09-04" title="Permanent link">&para;</a></h2>
+<p>SynchDB 1.2 introduces introduces a native Openlog Replicator connector (BETA), enhanced monitoring with JMX and Grafana, and a new ezdeploy.sh tool for quick deployments and testing. It also adds snapshot table selection, performance improvements, and key fixes, while addressing connector isolation and stability issues.</p>
+<h3 id="added_1"><strong>Added</strong><a class="headerlink" href="#added_1" title="Permanent link">&para;</a></h3>
+<h4 id="native-openlog-replicator-connector-beta"><a href="../user-guide/configure_olr/">Native Openlog Replicator Connector</a> - BETA<a class="headerlink" href="#native-openlog-replicator-connector-beta" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Added <code>synchdb_add_olr_conninfo</code> and <code>synchdb_del_olr_conninfo</code> to enable or disable openlog replicator based streaming.</li>
+<li>Added a new connector type <code>olr</code>, which is a native (no Debezium) openlog replicator client that stream Oracle database changes from an external Openlog Replicator service. </li>
+<li>Supported DMLs: insert, update delete</li>
+<li>Supported DDLs: CREATE TABLE, DROP TABLE, ALTER TABLE MODIFY, ALTER TABLE ADD/DROP COLUMN, ALTER TABLE ADD/DROP CONSTRAINT, TRUNCATE</li>
+<li>Based on libprotobuf-c to communiate with Openlog Replicator and IvorySQL's Oracle parser to process incoming DDL query events,</li>
+<li>Supported snapshot modes: initial, initial_only, no_data, always, never</li>
+<li>Supported batching, schema history, and offset management just like other Debezium based connectors.</li>
+<li>Supported Debezium-based Openlog Replicator connector in addition to native.</li>
+</ul>
+<h4 id="monitoring"><a href="../monitoring/jmx_monitor/">Monitoring</a><a class="headerlink" href="#monitoring" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Added <code>synchdb_add_jmx_conninfo</code> and <code>synchdb_del_jmx_conninfo</code> to enable or disable JMX based monitoring.</li>
+<li>Added <code>synchdb_add_jmx_exporter_conninfo</code> and <code>synchdb_del_jmx_exporter_conninfo</code> to enable and disable monitoring support with Prometheus and Grafana.</li>
+<li>Added Grafana based dashboard templates for supported Debezium based connectors (MySQL, SQL Server and Oracle).</li>
+</ul>
+<h4 id="ezdeploysh"><a href="../getting-started/quick_start/">ezdeploy.sh</a><a class="headerlink" href="#ezdeploysh" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Added <code>ezdeploy.sh</code> tool that can quickly deploy a pre-build SynchDB and selected source database types to do quick connector testing.</li>
+<li>supported deployment: MySQL, SQL Server, Oracle23ai, Oracle19c, Openlog Replicator 1.3.0</li>
+<li>supported Prometheus and Grafana deployment with preloaded dashboards.</li>
+<li>Supported pre-compiled SynchDB v1.2 for quick deployment + tests</li>
+</ul>
+<h3 id="changed_1"><strong>Changed</strong><a class="headerlink" href="#changed_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Added a new argument called <code>snapshot table</code> in <code>synchdb_add_conninfo</code> to allow users to select which tables to redo initial snapshot when started in <code>always</code> snapshot mode.</li>
+<li>Updated pytest framework to support hammerdb based TPC tests for Oracle.</li>
+<li>Enhanced the performance of event polling between Debezium engine and SynchDB by using direct buffer instead of frequent JNI calls. </li>
+<li>When a connector is resumed via <code>synchdb_resume_engine</code>, it will always resume in <code>initial</code> snapshot mode rather than the mode it was first started with.</li>
+<li><code>synchdb_state_view</code> and <code>synchdb_stats_view</code> will now only display connector information created by the current SynchDB extension. Connectors created by other SynchDB extensions in different databases will not be shown.</li>
+</ul>
+<h3 id="fixed_1"><strong>Fixed</strong><a class="headerlink" href="#fixed_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fixed a crash in <code>spi_execute_select_one()</code> where it would return a reference that has been destroyed by SPI memory context at the end of a successful SPI execution.</li>
+<li>Resolved compilation issues with SynchDB when PostgreSQL is built with cassert.</li>
+<li>Fixed an issue where multiple connectors created with the same name by multiple SynchDB extensions (created in different databases) overwrite each other's shared memory data.</li>
+</ul>
+<h3 id="known-issues-and-additional-info_1"><strong>Known Issues and Additional Info</strong><a class="headerlink" href="#known-issues-and-additional-info_1" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Native Openlog Replicator Connector currently stream all tables under specified database. Table Filtering is to be configured in Openlog Replicator rather than SynchDB.</li>
+<li>Prometheus and Grafana based monitoring require JMX Exporter which can be downloaded <a href="https://github.com/prometheus/jmx_exporter">here</a></li>
+</ul>
+<h2 id="synchdb-11-2025-04-17"><strong><a href="https://github.com/Hornetlabs/synchdb/releases/tag/v1.1">SynchDB 1.1</a> - 2025-04-17</strong><a class="headerlink" href="#synchdb-11-2025-04-17" title="Permanent link">&para;</a></h2>
+<p>SynchDB 1.1 introduces Oracle connector support, enhanced data type transformation capabilities, and significantly improved core data processing engine. This update enhances performance through intelligent caching and optimized JSON parsing, while extending compatibility with PostgreSQL 16, 17, and IvorySQL 4.4.</p>
+<h3 id="added_2"><strong>Added</strong><a class="headerlink" href="#added_2" title="Permanent link">&para;</a></h3>
+<h4 id="connector-support"><strong>Connector Support</strong><a class="headerlink" href="#connector-support" title="Permanent link">&para;</a></h4>
+<ul>
+<li>added Oracle connector support.</li>
+<li>added support for PostgreSQL 16, 17 and IvorySQL 4.4</li>
+<li>added support for Oracle's variable size/scale data type <code>NUMBER</code> processing. </li>
+</ul>
+<h4 id="object-mapping-data-transformation"><strong>Object Mapping &amp; Data Transformation</strong><a class="headerlink" href="#object-mapping-data-transformation" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Added new <code>synchdb_objmap</code> table to store object mapping entries</li>
+<li>Added new <code>synchdb_add_objamp()</code> function to add object mappings for table names, column names, data types, and transform expressions</li>
+<li>Added new <code>synchdb_reload_objmap()</code> function to force connectors to reload object mappings</li>
+<li>Added new <code>synchdb_del_objmap()</code> function to disable and remove object mapping entries</li>
+<li>Normalized all data type mapping entries to use lowercase letters</li>
+</ul>
+<h4 id="metadata-monitoring"><strong>Metadata &amp; Monitoring</strong><a class="headerlink" href="#metadata-monitoring" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Added new <code>synchdb_attribute</code> table that stores remote table attribute information</li>
+<li>Added new <code>synchdb_att_view</code> view showing side-by-side comparison of data type, table and column name mappings</li>
+<li>Added source timestamp, DBZ timestamp and PG timestamp information in <code>synchdb_get_stats</code></li>
+</ul>
+<h4 id="connection-management"><strong>Connection Management</strong><a class="headerlink" href="#connection-management" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Added <code>synchdb_add_extra_conninfo()</code> function to configure extra SSL connection parameters</li>
+<li>Added <code>synchdb_del_extra_conninfo()</code> function to remove all extra parameters created by <code>synchdb_add_extra_conninfo()</code></li>
+<li>Added <code>synchdb_del_conninfo()</code> function to remove existing connector information</li>
+</ul>
+<h4 id="configuration-control"><strong>Configuration &amp; Control</strong><a class="headerlink" href="#configuration-control" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Added new GUC <code>synchdb.error_handling_strategy</code> to control error handling strategy (skip, exit, or retry)</li>
+<li>Added new GUC <code>synchdb.dbz_log_level</code> to control the log level of Debezium runner engine</li>
+<li>Added new <code>schemasync</code> snapshot mode</li>
+</ul>
+<h4 id="performance-optimizations"><strong>Performance Optimizations</strong><a class="headerlink" href="#performance-optimizations" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Optimized DML parser to use cached hash table rather than accessing the catalog and rebuilding the hash at every change event</li>
+<li>DML parser now uses more efficient JSONB API calls for increased performance</li>
+<li>Optimized JNI calls to use cached JNI handle rather than recreating at every change event</li>
+<li>Enhanced batch completion marking by only marking the first and last change events within a batch</li>
+<li>Revamped data processing engine with more modular design to handle complex data type mappings</li>
+</ul>
+<h3 id="changed_2"><strong>Changed</strong><a class="headerlink" href="#changed_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>When processing ALTER TABLE change events, SynchDB now only adds a primary key when the table itself has no primary key</li>
+<li>Removed the ability to configure connectors to connect to PostgreSQL databases other than where SynchDB is installed</li>
+<li>SynchDB now updates the new <code>synchdb_attribute</code> table at the end of every DDL change event processing</li>
+<li>Connectors now correct table names, column names, and data types when configured object mappings differ from current values</li>
+<li>Rule files have been replaced by <code>synchdb_add_objmap()</code> utilities</li>
+<li>All ID-based SQL function column definitions have changed data types from TEXT to NAME</li>
+<li>Removed the rulefile parameter from <code>synchdb_add_conninfo()</code></li>
+<li>Non-native data types are now processed based on their category rather than all being treated as text</li>
+</ul>
+<h3 id="fixed_2"><strong>Fixed</strong><a class="headerlink" href="#fixed_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fixed an issue where SPI update or delete could fail when only including primary key fields in WHERE clause</li>
+<li>Fixed an issue with ALTER TABLE errors when attempting to add duplicate primary keys</li>
+<li>Fixed an issue where SynchDB occasionally incorrectly looks up column schema values from JSON change events</li>
+<li>Fixed an issue in 'skip on error' mode causing panics due to error stack overflow</li>
+<li>Fixed an issue in ALTER TABLE ADD and DROP column operations not recognizing column name mappings in PostgreSQL</li>
+</ul>
+<h2 id="synchdb-10-2024-12-24"><strong><a href="https://github.com/Hornetlabs/synchdb/releases/tag/v1.0">SynchDB 1.0</a> - 2024-12-24</strong><a class="headerlink" href="#synchdb-10-2024-12-24" title="Permanent link">&para;</a></h2>
+<p>This release focuses on bug fixes and performance enhancements following the v1.0 Beta1 release that generally makes it more usable under moderate to high data loads. A lot more Debezium tuning related parameters have also been exposed as PostgreSQL GUCs, allowing user to test with different parameters.</p>
+<h3 id="added_3"><strong>Added</strong><a class="headerlink" href="#added_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>added a data cache in DML parsing stage to prevent frequent access to PostgreSQL's catalog to obtain a table's tuple descriptor structure.</li>
+<li>added a variant of <code>synchdb_start_engine_bgw(name, mode)</code> that takes a second argument to indicate a custom snapshot mode to start the connector with.</li>
+<li>added several new GUCs that can be adjusted to tune the performance of Debezium Runner. Refer to <a href="../getting-started/configuration/">here</a> for complete list.</li>
+<li>added a debug SQL function <code>synchdb_log_jvm_meminfo(name)</code> that causes specified connector to output current JVM heap memory usage summary in PostgreSQL log file.</li>
+<li>added a new VIEW <code>synchdb_stats_view</code> that prints statistic information for all connectors.</li>
+<li>added a new SQL function <code>synchdb_reset_stats(name)</code> to clear statistic information of specified connector.</li>
+<li>added a mess creation script to quickly generate test tables and data on MySQL database type.</li>
+</ul>
+<h3 id="changed_3"><strong>Changed</strong><a class="headerlink" href="#changed_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>synchdb_state_view(): added a new field called <code>stage</code> that indicates the current stage of a connector (value can either be <code>Initial Snapshot</code> or <code>Change Data Capture</code>).</li>
+<li>synchdb_state_view(): will only show state of valid connectors.</li>
+<li>removed sending "partial batch completion" notification to Debezium Runner in case of error, because a batch is now handled by one PostgreSQL transaction, and partial completion is not allowed.</li>
+<li>SSL related parameters per connector can now be specified in the rule file.</li>
+<li>the maximum heap memory to allocate to JVM that runs the Debezium Runner can now be configured via GUC.</li>
+<li>max number of connector background worker is now configurable instead of hardcoded 30.</li>
+</ul>
+<h3 id="fixed_3"><strong>Fixed</strong><a class="headerlink" href="#fixed_3" title="Permanent link">&para;</a></h3>
+<ul>
+<li>fixed rapid memory buildups in Debezium runner in JVM by adding a throttle control in the receiving of change events.</li>
+<li>resolved majority of memory leak in both SynchDB and Debezium runner components.</li>
+<li>corrected the use of memory context in SynchDB such that heap memory can be correctly freed at the end of each change event processing.</li>
+<li>significantly increased the processing speed of SynchDB by processing a batch within a single PostgreSQL transaction rather than multiple.</li>
+<li>corrected SQLServer's default data type size mapping for <code>char</code> type from 0 to -1.</li>
+<li>resolved high memory usage during DML processing using SPI.</li>
+</ul>
+<h2 id="synchdb-10-beta1-2024-10-23"><strong><a href="https://github.com/Hornetlabs/synchdb/releases/tag/v1.0_beta1">SynchDB 1.0 Beta1</a> - 2024-10-23</strong><a class="headerlink" href="#synchdb-10-beta1-2024-10-23" title="Permanent link">&para;</a></h2>
+<p>The first SynchDB beta software release that lays a robust foundation for seamless replication from heterogeneous databases to PostgreSQL.</p>
+<h3 id="added_4"><strong>Added</strong><a class="headerlink" href="#added_4" title="Permanent link">&para;</a></h3>
+<ul>
+<li>logical replication from heterogeneous databases: (MySQL and SQLServer).</li>
+<li>DDL replication (CREATE TABLE, DROP TABLE, ALTER TABLE ADD COLUMN, ALTER TABLE DROP COLUMN, ALTER TABLE ALTER COLUMN).</li>
+<li>DML replication (INSERT, UPDATE, DELETE).</li>
+<li>max 30 concurrent connector workers.</li>
+<li><a href="../user-guide/connector_auto_launcher">automatic connector launcher</a> at PostgreSQL startup.</li>
+<li>global connector state and last error message views.</li>
+<li><a href="../tutorial/selective_table_sync">selective databases and tables replication</a>.</li>
+<li>change events in batches.</li>
+<li>connector restarts in different snapshot modes.</li>
+<li><a href="../user-guide/set_offset">offset management interfaces</a> to select custom replication resume point.</li>
+<li>default data type and object name transform rules for supported heterogeneous databases.</li>
+<li><a href="../user-guide/object_mapping_rules">JSON rule file</a> to define custom: (data type, column name, table name and data expression transform rules).</li>
+<li>2 data apply modes (SPI, HeapAM API).</li>
+<li>several utility functions to perform connector operations: (start, stop, pause, resume).</li>
+</ul>
+<h3 id="changed_4"><strong>Changed</strong><a class="headerlink" href="#changed_4" title="Permanent link">&para;</a></h3>
+<h3 id="fixed_4"><strong>Fixed</strong><a class="headerlink" href="#fixed_4" title="Permanent link">&para;</a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 Maintained by <a href="https://github.com/hornetlabs">Hornetlabs Technology </a>. <a href="https://www.netlify.com/"><img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deployed by Netlify" width="114" height="51"></a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../js/print-site.js"></script>
+      
+    
+  </body>
+</html>
