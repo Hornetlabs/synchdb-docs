@@ -866,6 +866,56 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-synchdb-guarentees-consistency-and-obtains-cut-off-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Synchdb Guarentees Consistency and Obtains Cut-Off Point
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How Synchdb Guarentees Consistency and Obtains Cut-Off Point">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mysql-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MySQL Connector
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postgres-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Postgres Connector
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oracle-and-openlog-replicator-connectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Oracle and Openlog Replicator Connectors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-does-fdw-based-snapshot-work" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -900,10 +950,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-create-a-foreign-table-to-fetch-curretn-scn" class="md-nav__link">
+  <a href="#3-create-a-foreign-table-to-fetch-cut-off-value" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Create a Foreign Table to Fetch Curretn SCN
+        3. Create a Foreign Table to Fetch Cut-Off value
       
     </span>
   </a>
@@ -1472,7 +1522,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL CDC to PostgreSQL
+    MySQL -> PostgreSQL
   
 
     
@@ -1500,7 +1550,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server CDC to PostgreSQL
+    SQL Server -> PostgreSQL
   
 
     
@@ -1528,63 +1578,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle CDC to PostgreSQL
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutorial/selective_table_sync/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Selective Table Replication
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutorial/table_snapshot_resnapshot/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Table Snapshot and Re-snapshot
+    Oracle -> PostgreSQL
   
 
     
@@ -2065,6 +2059,56 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-synchdb-guarentees-consistency-and-obtains-cut-off-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How Synchdb Guarentees Consistency and Obtains Cut-Off Point
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How Synchdb Guarentees Consistency and Obtains Cut-Off Point">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mysql-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MySQL Connector
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postgres-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Postgres Connector
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oracle-and-openlog-replicator-connectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Oracle and Openlog Replicator Connectors
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#how-does-fdw-based-snapshot-work" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2099,10 +2143,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-create-a-foreign-table-to-fetch-curretn-scn" class="md-nav__link">
+  <a href="#3-create-a-foreign-table-to-fetch-cut-off-value" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Create a Foreign Table to Fetch Curretn SCN
+        3. Create a Foreign Table to Fetch Cut-Off value
       
     </span>
   </a>
@@ -2213,8 +2257,42 @@
 
 <h1 id="fdw-based-snapshot">FDW Based Snapshot<a class="headerlink" href="#fdw-based-snapshot" title="Permanent link">&para;</a></h1>
 <h2 id="overview"><strong>Overview</strong><a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
-<p>All the connectors support Debezium based initial snapshot, which migrates remote table schemas to PostgreSQL with or without the initial data (depending on the snapshot mode used). This works mostly, but may suffer from performance issues when there is a large number of tables to migrate and extra overhead is introduced via JNI calls. It is possible to achieve the same initial snapshot using a Foreign Data Wrapper (FDW) if source database can support <code>FLASHBACK</code> query, such as Oracle. <code>FLASHBACK</code> query can ensure a snapshot to migrate up to a certain <code>offset</code> (SCN in Oracle), ensuring read consistency up to a point in time, and then begin the CDC streaming from this point. </p>
-<p>Currently, we support oracle_fdw as an alternative to Debezium based snapshot for native Openlog Replicator (OLR) connector only. In the future, we may add support for other connectors if feasible. To use FDW based snapshot, simply set GUC parameter <code>synchdb.olr_snapshot_engin</code> to "fdw". Refer to <a href="../../user-guide/configure_snapshot_engine/">here</a> for a quick guide to build and install oracle_fdw.</p>
+<p>All the connectors support Debezium based initial snapshot (except for Postgres connector), which migrates remote table schemas to PostgreSQL with or without the initial data (depending on the snapshot mode used). This works mostly, but may suffer from performance issues when there is a large number of tables to migrate and extra overhead is introduced via JNI calls. It is possible to achieve the same initial snapshot using a Foreign Data Wrapper (FDW) as long as we have a way to gurantee consistency and identify a "cut-off" point to allow CDC to resume.</p>
+<p>FDW based snapshot is supported for:</p>
+<ul>
+<li>MySQL Connector</li>
+<li>Postgres Connector</li>
+<li>Oracle and Openlog Replicator Connectors</li>
+</ul>
+<h2 id="how-synchdb-guarentees-consistency-and-obtains-cut-off-point"><strong>How Synchdb Guarentees Consistency and Obtains Cut-Off Point</strong><a class="headerlink" href="#how-synchdb-guarentees-consistency-and-obtains-cut-off-point" title="Permanent link">&para;</a></h2>
+<h3 id="mysql-connector"><strong>MySQL Connector</strong><a class="headerlink" href="#mysql-connector" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Begin a transaction in repeatable read isolation level.</li>
+<li>Temporarily put a table read lock on all desired tables.</li>
+<li>Read <code>binlog_log_file</code>, <code>binlog_pos</code> and <code>server_id</code> from global configuration. These are served as "cut-off" point for the snapshot.</li>
+<li>Release the table locks.</li>
+<li>In the same repeatable read transaction, migrate all desired tables schema and data with proper type translations</li>
+<li>Once done, the CDC can resume from the cut-off point, which will handle the data changes that happened during the snapshot.</li>
+</ul>
+<p>WARNING: <strong>BACKUP_ADMIN permission is required to obtain the "cut-point" parameters.</strong></p>
+<h3 id="postgres-connector"><strong>Postgres Connector</strong><a class="headerlink" href="#postgres-connector" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Begin a transaction in repeatable read isolation level.</li>
+<li>Temporarily put a table read lock on all desired tables.</li>
+<li>Read current LSN, which serves as a "cut-off" point for the snapshot.</li>
+<li>Release the table locks.</li>
+<li>In the same repeatable read transaction, migrate all desired tables schema and data with proper type translations</li>
+<li>Once done, the CDC can resume from the cut-off point, which will handle the data changes that happened during the snapshot.</li>
+</ul>
+<h3 id="oracle-and-openlog-replicator-connectors"><strong>Oracle and Openlog Replicator Connectors</strong><a class="headerlink" href="#oracle-and-openlog-replicator-connectors" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Before snapshot begins, read the current SCN value, which serves as a "cut-off" point for the snapshot</li>
+<li>During foreign table schema migration, extra attribute "AS OF SCN xxx" will be associated with each desired foreign table,causing all the foreign reads to use Oracle's FLASHBACK query</li>
+<li>FLASHBACK query returns the table results as of the SCN specified so consistency is automatically guarenteed. No extra locking needed.</li>
+<li>Migrate all desired tables schema and data with proper type translations with FLASHBACK query.</li>
+<li>Once done, the CDC can resume from the cut-off point, which will handle the data changes that happened during the snapshot.</li>
+</ul>
+<p>WARNING: <strong>FLASHBACK permission is required to obtain the "cut-point" parameters.</strong></p>
 <h2 id="how-does-fdw-based-snapshot-work"><strong>How does FDW Based Snapshot Work</strong><a class="headerlink" href="#how-does-fdw-based-snapshot-work" title="Permanent link">&para;</a></h2>
 <p>FDW based snapshot consists of about 10 steps:</p>
 <h3 id="1-preparation"><strong>1. Preparation</strong><a class="headerlink" href="#1-preparation" title="Permanent link">&para;</a></h3>
@@ -2233,17 +2311,30 @@
 <li>...etc</li>
 </ul>
 <p>SynchDB does not need to account for every single object to complete an initial snapshot; It only accounts for <code>tables</code>, <code>columns</code> and <code>keys</code> objects to construct the tables in PostgreSQL. </p>
-<h3 id="3-create-a-foreign-table-to-fetch-curretn-scn"><strong>3. Create a Foreign Table to Fetch Curretn SCN</strong><a class="headerlink" href="#3-create-a-foreign-table-to-fetch-curretn-scn" title="Permanent link">&para;</a></h3>
-<p>This foreign table will connect to Oracle (when queried) and fetch the current SCN value. This value will serve as a <code>cut-off</code> point for the initial snapshot. New changes after this point will not be considered in the snapshot.</p>
+<h3 id="3-create-a-foreign-table-to-fetch-cut-off-value"><strong>3. Create a Foreign Table to Fetch Cut-Off value</strong><a class="headerlink" href="#3-create-a-foreign-table-to-fetch-cut-off-value" title="Permanent link">&para;</a></h3>
+<p>Foreign tables will be created to read the cut-off value from difference source databases:</p>
+<p><strong>MySQL Connector</strong></p>
+<ul>
+<li>Read <code>binglog_file</code> and <code>binlog_pos</code> from performance_schema.log_status</li>
+<li>Read <code>server_id</code> from performance_schema.global_variables</li>
+</ul>
+<p><strong>Postgres Connector</strong></p>
+<ul>
+<li>Read current <code>LSN</code> from a custom view called public.synchdb_wal_lsn. This must be pre-created as a requirement</li>
+</ul>
+<p><strong>Oracle and Openlog Replicator Connector</strong></p>
+<ul>
+<li>Read current <code>SCN</code> from current_scn table</li>
+</ul>
 <h3 id="4-create-a-list-of-desired-foreign-tables"><strong>4. Create a List of Desired Foreign Tables</strong><a class="headerlink" href="#4-create-a-list-of-desired-foreign-tables" title="Permanent link">&para;</a></h3>
 <p>The goal for this step is to create a new staging schema (ex. ora_stage), and create desired foreign tables for the snapshot based on:</p>
 <ul>
-<li>Oracle object views created from step 2</li>
+<li>object views created from step 2</li>
 <li>SynchDB's <code>data-&gt;'snapshottable'</code> parameter in <code>synchdb_conninfo</code> -&gt; this is a filter of tables that SynchDB needs to do a snapshot. All tables will be considered in snapshot if set to <code>null</code>.</li>
 <li>Extra data type mapping as described in <code>synchdb_objmap</code> </li>
-<li>the cut-off SCN obtained from step 3</li>
+<li>the cut-off SCN obtained from step 3 (Oracle and Openlog Replicator Connectors only)</li>
 </ul>
-<p>At the end of this step, the staging schema will contain foreign tables with <code>AS OF SCN xxx</code> attribute with their data types mapped according to SycnhDB's data type mapping rules. These foreign tables will return the data only up to the SCN set and still require oracle_fdw to connect to Oracle.</p>
+<p>At the end of this step, the staging schema will contain foreign tables with their data types mapped according to SycnhDB's data type mapping rules. For Oracle and Openlog Replicator Connectors, the foreign tables will have <code>AS OF SCN xxx</code> attribute, causing each foreign read to return data only up to specified SCN. For other connector types, the foreign reads return all data at the moment when repeatable transaction starts</p>
 <h3 id="5-materialize-the-schema"><strong>5. Materialize the Schema</strong><a class="headerlink" href="#5-materialize-the-schema" title="Permanent link">&para;</a></h3>
 <p>The goal for this step is to materialize (turn foreign tables into real PostgreSQL tables) only the table schemas created from step 4 and put them in a new destination schema (ex. dst_stage). So, at the end of the step, the destination schema will contain real tables with the same structure as those in staging schema.</p>
 <h3 id="6-migrate-primary-key"><strong>6. Migrate Primary Key</strong><a class="headerlink" href="#6-migrate-primary-key" title="Permanent link">&para;</a></h3>
@@ -2265,7 +2356,6 @@
 <li>drop server and user mapping created from step 1</li>
 <li>drop Oracle object view created from step 2</li>
 <li>drop staging schema created from step 4</li>
-<li>drop the foreign table to return current SCN created from step 3</li>
 </ul>
 <p>The tables that reside in the destination schema created from step 5 is the final result of initial snapshot.</p>
 

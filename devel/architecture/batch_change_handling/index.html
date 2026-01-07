@@ -736,6 +736,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#batch-handling-for-openlog-replicator-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Batch Handling for Openlog Replicator Connector
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1356,7 +1367,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL CDC to PostgreSQL
+    MySQL -> PostgreSQL
   
 
     
@@ -1384,7 +1395,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server CDC to PostgreSQL
+    SQL Server -> PostgreSQL
   
 
     
@@ -1412,63 +1423,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle CDC to PostgreSQL
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutorial/selective_table_sync/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Selective Table Replication
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutorial/table_snapshot_resnapshot/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Table Snapshot and Re-snapshot
+    Oracle -> PostgreSQL
   
 
     
@@ -1959,6 +1914,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#batch-handling-for-openlog-replicator-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Batch Handling for Openlog Replicator Connector
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1985,7 +1951,10 @@
 <h2 id="batch-handling"><strong>Batch Handling</strong><a class="headerlink" href="#batch-handling" title="Permanent link">&para;</a></h2>
 <p>SynchDB processes a batch within one transaction. This means the change events inside a batch are either all or none processed. When all the changes have been successfully processed, SynchDB simply sends a message to Debezium runner engine to mark the batch as processed and completed. This action causes offsets to be committed and eventually flush to disk. An offset represents a logical location during a replication similar to the LSN (Log Seqeuence Number) in PostgreSQL.</p>
 <p><img alt="img" src="../../images/synchdb-batch-new.jpg" /></p>
-<p>If a batch of changes are partially successful on PostgreSQL, it would cause the transaction to rollback and SynchDB will not notify Debezium runner about batch completion. When the connector is restarted, the same batch will resume processing again. </p>
+<p>If a batch of changes are partially successful on PostgreSQL, it would cause the transaction to rollback and SynchDB will not notify Debezium runner about batch completion. When the connector is restarted, the same batch will resume processing again.</p>
+<h2 id="batch-handling-for-openlog-replicator-connector"><strong>Batch Handling for Openlog Replicator Connector</strong><a class="headerlink" href="#batch-handling-for-openlog-replicator-connector" title="Permanent link">&para;</a></h2>
+<p>Since Openlog Replicator Connector does not rely on Debezium to orchestrate batches of change events, its batch processing is determined purely on the OLR client's raw read buffer size (configured by GUC <code>synchdb.olr_read_buffer_size</code>). The client tries to read as much data as possible from the socket, which could compose of multiple change events. However many "complete" change events appear in the read buffer are considered in the same batch and will be executed in the same PostgreSQL transaction. If the read buffer contains incomplete change event, it will not be considered in the current batch. It is expected that in the next read, the remaining data of this incomplete change event will arrive and will be part of the next batch of change events.</p>
+<p>So, increasing the value of <code>synchdb.olr_read_buffer_size</code> increases the batch size.</p>
 
 
 

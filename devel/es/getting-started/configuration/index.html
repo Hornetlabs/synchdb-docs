@@ -1454,7 +1454,7 @@
   <span class="md-ellipsis">
     
   
-    CDC de MySQL a PostgreSQL
+    MySQL -> PostgreSQL
   
 
     
@@ -1482,7 +1482,7 @@
   <span class="md-ellipsis">
     
   
-    CDC de SQL Server a PostgreSQL
+    SQL Server -> PostgreSQL
   
 
     
@@ -1510,63 +1510,7 @@
   <span class="md-ellipsis">
     
   
-    CDC de Oracle a PostgreSQL
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutorial/selective_table_sync/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sincronización Selectiva de Tablas
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutorial/table_snapshot_resnapshot/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Instantánea de tabla y nueva instantánea
+    Oracle -> PostgreSQL
   
 
     
@@ -2331,13 +2275,25 @@
 <td>synchdb.olr_snapshot_engine</td>
 <td>enum</td>
 <td>"debezium"</td>
-<td>(affects OLR connector only) the underlining engine to complete the initial snapshot process. Could be "debezium" or "fdw". If "fdw" is selected, you need to ensure "oracle_fdw" is installed prior</td>
+<td>the underlining engine to complete the initial snapshot process. Could be "debezium" or "fdw". If "fdw" is selected, you need to ensure the corresponding FDW is installed prior. For example, for Oracle connector, ensure "oracle_fdw" is preinstalled.</td>
 </tr>
 <tr>
 <td>synchdb.cdc_start_delay_ms</td>
 <td>integer</td>
 <td>0</td>
 <td>a delay waited after initial snapshot completes and before CDC streaming begins.</td>
+</tr>
+<tr>
+<td>synchdb.fdw_migrate_with_subtx</td>
+<td>boolean</td>
+<td>true</td>
+<td>option to use sub transactions to migrate a table during FDW based snapshot</td>
+</tr>
+<tr>
+<td>synchdb.letter_casing_strategy</td>
+<td>enum</td>
+<td>"lowercase"</td>
+<td>how should synchdb deal with potentially different object letter casings from different database source. Possible values are: "lower" for normalizing the lower case, "upper" to normalize to upper case, or "asis" to preserve whatever letter casing it receives</td>
 </tr>
 </tbody>
 </table>
@@ -2367,6 +2323,9 @@ synchdb.max_connector_workers=10                                        # 10 con
 synchdb.error_handling_strategy=&#39;retry&#39;                                 # connector should retry on error
 synchdb.dbz_log_leve=&#39;error&#39;                                            # Debezium Runner should log error messages only
 synchdb.log_change_on_error=true                                        # log JSON change event on error
+synchdb.cdc_start_delay_ms=30000                                        # wait 30s after snapshot completes and before CDC begins
+synchdb.olr_snapshot_engine=&quot;fdw&quot;                                       # use FDW based snapshot engine to complete the snapshot process
+synchdb.letter_casing_strategy=&quot;asis&quot;                                   # preserve all object letter casings as they appear in the sources
 </code></pre></div>
 <h2 id="usage-recommendations"><strong>Usage Recommendations</strong><a class="headerlink" href="#usage-recommendations" title="Permanent link">&para;</a></h2>
 <ol>

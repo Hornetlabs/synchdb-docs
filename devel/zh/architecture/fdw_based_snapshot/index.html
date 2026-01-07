@@ -874,6 +874,56 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#synchdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 如何保證資料一致性並取得截止點
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 如何保證資料一致性並取得截止點">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MySQL 連接器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postgres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Postgres 連接器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oracle-openlog-replicator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Oracle 和 Openlog Replicator 連接器
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#fdw_1" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -908,10 +958,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-scn" class="md-nav__link">
+  <a href="#3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. 建立外部表以取得目前 SCN
+        3. 建立外部表以取得目前截止点
       
     </span>
   </a>
@@ -1480,7 +1530,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL CDC 到 PostgreSQL
+    MySQL CDC -> PostgreSQL
   
 
     
@@ -1508,7 +1558,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server CDC 到 PostgreSQL
+    SQL Server CDC -> PostgreSQL
   
 
     
@@ -1536,63 +1586,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle CDC 到 PostgreSQL
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutorial/selective_table_sync/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    选择性表同步
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutorial/table_snapshot_resnapshot/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    表快照和重新快照
+    Oracle CDC -> PostgreSQL
   
 
     
@@ -2073,6 +2067,56 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#synchdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SynchDB 如何保證資料一致性並取得截止點
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="SynchDB 如何保證資料一致性並取得截止點">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MySQL 連接器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#postgres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Postgres 連接器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oracle-openlog-replicator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Oracle 和 Openlog Replicator 連接器
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#fdw_1" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2107,10 +2151,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-scn" class="md-nav__link">
+  <a href="#3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. 建立外部表以取得目前 SCN
+        3. 建立外部表以取得目前截止点
       
     </span>
   </a>
@@ -2221,8 +2265,42 @@
 
 <h1 id="fdw">基於 FDW 的快照<a class="headerlink" href="#fdw" title="Permanent link">&para;</a></h1>
 <h2 id="_1"><strong>概述</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>所有連接器都支援基於 Debezium 的初始快照，該快照可將遠端表格模式移轉到 PostgreSQL，無論是否包含初始資料（取決於所使用的快照模式）。這種方法在大多數情況下都有效，但當需要遷移大量資料表時，可能會出現效能問題，並且會透過 JNI 呼叫引入額外的開銷。如果來源資料庫（例如 Oracle）支援 "FLASHBACK" 查詢，則可以使用外部資料包裝器 (FDW) 實作相同的初始快照。 "FLASHBACK"查詢可以確保快照遷移到某個 "偏移"（Oracle 中的 SCN），從而確保到某個時間點的讀取一致性，然後從該時間點開始 CDC 串流傳輸。</p>
-<p>目前，我們僅支援使用 oracle_fdw 作為原生 Openlog Replicator (OLR) 連接器的 Debezium 快照的替代方案。未來，如果可行的話，我們可能會添加對其他連接器的支援。若要使用基於 FDW 的快照，只需將 GUC 參數 <code>synchdb.olr_snapshot_engin</code> 設定為 "fdw" 。請參閱<a href="user-guide/configure_snapshot_engine/">此處</a> 以取得建置和安裝 oracle_fdw 的快速指南。</p>
+<p>所有連接器都支援基於 Debezium 的初始快照（Postgres 連接器除外），該快照會將遠端表模式遷移到 PostgreSQL，並可選擇是否包含初始資料（取決於所使用的快照模式）。雖然這種方法在大多數情況下都能正常運作，但當需要遷移大量資料表且 JNI 呼叫引入額外開銷時，可能會出現效能問題。只要我們能夠保證資料一致性並確定一個允許 CDC 恢復的“截止點”，就可以使用外部資料包裝器 (FDW) 實現相同的初始快照。</p>
+<p>以下連接器支援基於 FDW 的快照：</p>
+<ul>
+<li>MySQL 連接器</li>
+<li>Postgres 連接器</li>
+<li>Oracle 和 Openlog Replicator 連接器</li>
+</ul>
+<h2 id="synchdb"><strong>SynchDB 如何保證資料一致性並取得截止點</strong><a class="headerlink" href="#synchdb" title="Permanent link">&para;</a></h2>
+<h3 id="mysql"><strong>MySQL 連接器</strong><a class="headerlink" href="#mysql" title="Permanent link">&para;</a></h3>
+<ul>
+<li>以 repeatable read 隔離等級啟動事务。</li>
+<li>暫時對所有目標表上锁。</li>
+<li>讀取 <code>binlog_log_file</code>、<code>binlog_pos</code> 和 <code>server_id</code>。這些參數將作為快照的「截止點」。</li>
+<li>釋放表鎖。</li>
+<li>在同一個 repeatable read 事务中，使用正確的類型轉換遷移所有目標表的模式和資料。</li>
+<li>完成後，CDC 可以從截止點恢復，處理快照期間發生的資料變更。</li>
+</ul>
+<p>警告：<strong>需要 BACKUP_ADMIN 權限才能取得「截止點」參數</strong></p>
+<h3 id="postgres"><strong>Postgres 連接器</strong><a class="headerlink" href="#postgres" title="Permanent link">&para;</a></h3>
+<ul>
+<li>以 repeatable read 隔離等級啟動事务。</li>
+<li>暫時對所有目標表上锁。</li>
+<li>讀取目前 LSN，它作為快照的「截止」點。</li>
+<li>釋放表鎖。</li>
+<li>在同一個 repeatable read 事务中，使用正確的類型轉換遷移所有目標表的架構和資料。</li>
+<li>完成後，CDC 可以從截止點恢復，處理快照期間發生的資料變更。</li>
+</ul>
+<h3 id="oracle-openlog-replicator"><strong>Oracle 和 Openlog Replicator 連接器</strong><a class="headerlink" href="#oracle-openlog-replicator" title="Permanent link">&para;</a></h3>
+<ul>
+<li>在快照開始之前，讀取目前 SCN 值，它作為快照的「截止點」。</li>
+<li>在外部表架構遷移期間，每個目標外部表都會關聯一個額外的屬性 “AS OF SCN xxx”，這將導致所有外部讀取操作都使用 Oracle 的 FLASHBACK 查詢。</li>
+<li>FLASHBACK 查詢傳回指定 SCN 下的表結果，因此可以自動保證一致性。無需額外上锁。</li>
+<li>使用 FLASHBACK 查詢遷移所有目標表的架構和數據，並進行正確的類型轉換。</li>
+<li>完成後，CDC 可以從截止點恢復運行，並處理快照期間發生的資料變更。</li>
+</ul>
+<p>警告：<strong>取得「截止點」參數需要 FLASHBACK 權限</strong></p>
 <h2 id="fdw_1"><strong>基於 FDW 的快照如何運作</strong><a class="headerlink" href="#fdw_1" title="Permanent link">&para;</a></h2>
 <p>基於 FDW 的快照大約包含 10 個步驟：</p>
 <h3 id="1"><strong>1. 準備</strong><a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
@@ -2241,17 +2319,30 @@
 <li>等等</li>
 </ul>
 <p>SynchDB 無需考慮每個物件即可完成初始快照；它僅考慮 "表"、 "列" 和 "鍵" 物件來建立 PostgreSQL 中的表。</p>
-<h3 id="3-scn"><strong>3. 建立外部表以取得目前 SCN</strong><a class="headerlink" href="#3-scn" title="Permanent link">&para;</a></h3>
-<p>此外部表（查詢時）將連接到 Oracle 並取得目前 SCN 值。此值將作為初始快照的 "截止" 點。此點之後的新變更將不包含在快照中。</p>
+<h3 id="3"><strong>3. 建立外部表以取得目前截止点</strong><a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>將建立外部表，以便從不同的來源資料庫讀取截止值：</p>
+<p><strong>MySQL 連接器</strong></p>
+<ul>
+<li>從 performance_schema.log_status 表讀取 <code>binlog_file</code> 和 <code>binlog_pos</code> 表</li>
+<li>從 performance_schema.global_variables 表讀取 <code>server_id</code> 表</li>
+</ul>
+<p><strong>Postgres 連接器</strong></p>
+<ul>
+<li>從名為 public.synchdb_wal_lsn 的自訂檢視讀取目前 <code>LSN</code> 值。此視圖必須預先建立。</li>
+</ul>
+<p><strong>Oracle 和 Openlog Replicator 連接器</strong></p>
+<ul>
+<li>從 current_scn 表中讀取目前 <code>SCN</code> 值</li>
+</ul>
 <h3 id="4"><strong>4.建立所需外部表格清單</strong><a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
 <p>此步驟的目標是建立一個新的暫存模式（例如 ora_stage），並基於下列條件為快照建立所需的外部表：</p>
 <ul>
 <li>步驟 2 中建立的 Oracle 物件視圖</li>
 <li>SynchDB 在 <code>synchdb_conninfo</code> 中的 <code>data-&gt;'snapshottable'</code> 參數 -&gt; 這是 SynchDB 執行快照所需的資料表的篩選器。如果設定為 <code>null</code>，則所有表都將被視為快照。</li>
 <li>額外的資料類型映射，如 <code>synchdb_objmap</code> 中所述</li>
-<li>步驟 3 中獲得的截止 SCN</li>
+<li>步驟 3 中獲得的截止 SCN（僅限 Oracle 和 Openlog Replicator 連接器）</li>
 </ul>
-<p>此步驟結束時，暫存模式將包含具有 <code>AS OF SCN xxx</code> 屬性的外部表，其資料類型根據 SynchDB 的資料類型對應規則進行對應。這些外部表將僅傳回 SCN 集之前的數據，並且仍然需要 oracle_fdw 連接到 Oracle。</p>
+<p>在此步驟結束時，暫存模式將包含外部表，其資料類型將根據 SynchDB 的資料類型對應規則進行對應。對於 Oracle 和 Openlog Replicator 連接器，外部表將具有 <code>AS OF SCN xxx</code> 屬性，導致每次外部讀取僅傳回指定 SCN 之前的資料。對於其他連接器類型，外部讀取將傳回可重複事務開始時的所有資料。</p>
 <h3 id="5"><strong>5.物化模式</strong><a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
 <p>此步驟的目標是僅物化步驟 4 中建立的表模式（將外部表轉換為真正的 PostgreSQL 表），並將其放入新的目標模式（例如 dst_stage）。因此，在此步驟結束時，目標模式將包含與暫存模式中結構相同的真實表。</p>
 <h3 id="6"><strong>6. 遷移主鍵</strong><a class="headerlink" href="#6" title="Permanent link">&para;</a></h3>
@@ -2273,7 +2364,6 @@
 <li>刪除步驟 1 中建立的伺服器和使用者映射</li>
 <li>刪除步驟 2 中建立的 Oracle 物件視圖</li>
 <li>刪除步驟 4 中建立的暫存模式</li>
-<li>刪除步驟 3 中建立的外部表以傳回目前 SCN</li>
 </ul>
 <p>步驟 5 中建立的目標模式中的表格是初始快照的最終結果。</p>
 

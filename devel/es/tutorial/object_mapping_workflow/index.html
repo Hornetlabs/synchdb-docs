@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://docs.synchdb.com/latest/es/tutorial/object_mapping_workflow/">
       
       
-        <link rel="prev" href="../table_snapshot_resnapshot/">
+        <link rel="prev" href="../oracle_cdc_to_postgresql/">
       
       
         <link rel="next" href="../../user-guide/create_a_connector/">
@@ -1291,7 +1291,7 @@
   <span class="md-ellipsis">
     
   
-    CDC de MySQL a PostgreSQL
+    MySQL -> PostgreSQL
   
 
     
@@ -1319,7 +1319,7 @@
   <span class="md-ellipsis">
     
   
-    CDC de SQL Server a PostgreSQL
+    SQL Server -> PostgreSQL
   
 
     
@@ -1347,63 +1347,7 @@
   <span class="md-ellipsis">
     
   
-    CDC de Oracle a PostgreSQL
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../selective_table_sync/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sincronización Selectiva de Tablas
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../table_snapshot_resnapshot/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Instantánea de tabla y nueva instantánea
+    Oracle -> PostgreSQL
   
 
     
@@ -2125,8 +2069,8 @@
 <span class="w">    </span><span class="s1">&#39;mysqluser&#39;</span><span class="p">,</span>
 <span class="w">    </span><span class="s1">&#39;mysqlpwd&#39;</span><span class="p">,</span>
 <span class="w">    </span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span>
 <span class="w">    </span><span class="s1">&#39;mysql&#39;</span><span class="p">);</span>
 
 <span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;schemasync&#39;</span><span class="p">);</span>

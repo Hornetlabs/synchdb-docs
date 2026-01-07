@@ -583,7 +583,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        版本历史
+        所需的第三方库和插件
       
     </span>
   </a>
@@ -592,6 +592,28 @@
       
         <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        可選的第三方庫和插件
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        版本历史
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         快速入门
@@ -1412,7 +1434,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL CDC 到 PostgreSQL
+    MySQL CDC -> PostgreSQL
   
 
     
@@ -1440,7 +1462,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server CDC 到 PostgreSQL
+    SQL Server CDC -> PostgreSQL
   
 
     
@@ -1468,63 +1490,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle CDC 到 PostgreSQL
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="tutorial/selective_table_sync/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    选择性表同步
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="tutorial/table_snapshot_resnapshot/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    表快照和重新快照
+    Oracle CDC -> PostgreSQL
   
 
     
@@ -2052,7 +2018,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        版本历史
+        所需的第三方库和插件
       
     </span>
   </a>
@@ -2061,6 +2027,28 @@
       
         <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        可選的第三方庫和插件
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        版本历史
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
         快速入门
@@ -2133,7 +2121,19 @@
 <li>Java Runtime Environment（JRE）17 或更高版本</li>
 <li>libprotobuf-c v1.5.2（如果需要 Openlog Replicator 支持）</li>
 </ul>
-<h2 id="_5"><strong>版本历史</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<h2 id="_5"><strong>所需的第三方库和插件</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Java 執行時期環境 (JRE) 17 或更高版本</li>
+<li>pgcrypto 擴充 - 用於加密和解密憑證</li>
+</ul>
+<h2 id="_6"><strong>可選的第三方庫和插件</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<ul>
+<li>libprotobuf-c v1.5.2（已測試版本）（Openlog Replicator 支援可選）</li>
+<li>oracle_fdw 擴充功能 v2.8.0（已測試版本）（如果您選擇使用基於 fdw 的初始快照來建立 OLR 或 Oracle 連接器，則需要此擴充）</li>
+<li>mysql_fdw 擴充功能 v2.9.3（已測試版本）（如果您選擇使用基於 fdw 的初始快照來建立 MySQL 連接器，則需要此擴充功能）</li>
+<li>postgres_fdw 擴充功能 -（如果您需要為 PostgreSQL 連接器建立初始快照，則需要此擴充功能）</li>
+</ul>
+<h2 id="_7"><strong>版本历史</strong><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://github.com/Hornetlabs/synchdb/releases/tag/v1.3">SynchDB v1.3</a></li>
 <li><a href="https://github.com/Hornetlabs/synchdb/releases/tag/v1.2">SynchDB v1.2</a></li>
@@ -2141,7 +2141,7 @@
 <li><a href="https://github.com/Hornetlabs/synchdb/releases/tag/v1.0">SynchDB v1.0</a></li>
 <li><a href="https://github.com/Hornetlabs/synchdb/releases/tag/v1.0_beta1">SynchDB v1.0 Beta1</a></li>
 </ul>
-<h2 id="_6"><strong>快速入门</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
+<h2 id="_8"><strong>快速入门</strong><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h2>
 <p>开始使用 SynchDB 的最快方法是使用预编译的 Docker 镜像以及源数据库系统（MySQL、SQL Server、Oracle 等）的配套镜像，所有这些镜像均由源存储库中的 <code>ezdeploy.sh</code> 工具驱动。此交互式工具可以启动 SynchDB、一个或多个源数据库，以及可选的 Prometheus + Grafana 用于监控，非常适合进行快速的端到端测试。请参阅 <a href="getting-started/quick_start/">快速入门指南</a>。</p>
 <p>其他实用链接：</p>
 <ul>

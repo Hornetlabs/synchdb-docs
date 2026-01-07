@@ -12,19 +12,15 @@
         <meta name="author" content="Hornetlabs Technology Inc.">
       
       
-        <link rel="canonical" href="https://docs.synchdb.com/latest/zh/tutorial/selective_table_sync/">
+        <link rel="canonical" href="https://docs.synchdb.com/latest/zh/tutorial/postgresql_cdc_to_postgresql/">
       
       
-        <link rel="prev" href="../oracle_cdc_to_postgresql/">
-      
-      
-        <link rel="next" href="../table_snapshot_resnapshot/">
       
       
         
-          <link rel="alternate" href="../../../tutorial/selective_table_sync/" hreflang="en">
+          <link rel="alternate" href="../../../tutorial/postgresql_cdc_to_postgresql/" hreflang="en">
         
-          <link rel="alternate" href="../../../es/tutorial/selective_table_sync/" hreflang="es">
+          <link rel="alternate" href="../../../es/tutorial/postgresql_cdc_to_postgresql/" hreflang="es">
         
           <link rel="alternate" href="./" hreflang="zh">
         
@@ -35,7 +31,7 @@
     
     
       
-        <title>选择性表同步 - SynchDB 文档</title>
+        <title>Postgres -> Postgres - SynchDB 文档</title>
       
     
     
@@ -98,7 +94,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#postgres-postgres" class="md-skip">
           跳转至
         </a>
       
@@ -136,7 +132,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              选择性表同步
+              Postgres -&gt; Postgres
             
           </span>
         </div>
@@ -183,13 +179,13 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../tutorial/selective_table_sync/" hreflang="en" class="md-select__link">
+            <a href="../../../tutorial/postgresql_cdc_to_postgresql/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../es/tutorial/selective_table_sync/" hreflang="es" class="md-select__link">
+            <a href="../../../es/tutorial/postgresql_cdc_to_postgresql/" hreflang="es" class="md-select__link">
               Español
             </a>
           </li>
@@ -358,12 +354,10 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
+      <li class="md-tabs__item">
         <a href="../mysql_cdc_to_postgresql/" class="md-tabs__link">
           
   
@@ -1228,31 +1222,26 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   
@@ -1270,7 +1259,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1295,7 +1284,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL CDC 到 PostgreSQL
+    MySQL CDC -> PostgreSQL
   
 
     
@@ -1323,7 +1312,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server CDC 到 PostgreSQL
+    SQL Server CDC -> PostgreSQL
   
 
     
@@ -1351,177 +1340,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle CDC 到 PostgreSQL
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    选择性表同步
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    选择性表同步
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目录">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目录
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        选择所需表并首次启动
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="选择所需表并首次启动">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        验证连接器状态和表
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        在运行时添加更多要复制的表
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="在运行时添加更多要复制的表">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        验证更新后的表
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        快照模式
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../table_snapshot_resnapshot/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    表快照和重新快照
+    Oracle CDC -> PostgreSQL
   
 
     
@@ -1991,22 +1810,88 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#synchdb-postgresql" class="md-nav__link">
     <span class="md-ellipsis">
       
-        选择所需表并首次启动
+        為 SynchDB 準備 PostgreSQL 資料庫
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="选择所需表并首次启动">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        建立 PostgreSQL 連接器
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        初始快照
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        不同的連接器啟動模式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="不同的連接器啟動模式">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#cdc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        验证连接器状态和表
+        初始快照 + CDC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cdc_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        僅初始快照，不執行 CDC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cdc_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        僅捕獲表架構 + CDC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cdc_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        始終執行初始快照 + CDC
       
     </span>
   </a>
@@ -2019,22 +1904,77 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#postgres" class="md-nav__link">
     <span class="md-ellipsis">
       
-        在运行时添加更多要复制的表
+        Postgres 連接器的可用快照模式
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="在运行时添加更多要复制的表">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schemasync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        使用 schemasync 模式預覽來源表和目標表關係
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        選擇性表同步
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="選擇性表同步">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        選擇所需表並首次啟動
+      
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        验证更新后的表
+        驗證連接器狀態和表格
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        運行時加入更多要複製的表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        驗證更新後的表格
       
     </span>
   </a>
@@ -2043,17 +1983,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        快照模式
-      
-    </span>
-  </a>
   
 </li>
       
@@ -2077,140 +2006,171 @@
   
 
 
-<h1 id="_1">选择性表同步<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
-<p>可以从远程异构数据库中仅选择特定表进行同步，从而避免将资源浪费在复制不需要的表上。</p>
-<h2 id="_2"><strong>选择所需表并首次启动</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>表的选择是在连接器创建阶段通过 <code>synchdb_add_conninfo()</code> 完成的，我们指定一个要从中复制的表列表（以 FQN 表示，以逗号分隔）。</p>
-<p>例如，以下命令创建一个连接器，该连接器仅从远程 MySQL 数据库的 <code>inventory.orders</code> 和 <code>inventory.products</code> 表复制更改。
+<h1 id="postgres-postgres">Postgres -&gt; Postgres<a class="headerlink" href="#postgres-postgres" title="Permanent link">&para;</a></h1>
+<h2 id="synchdb-postgresql"><strong>為 SynchDB 準備 PostgreSQL 資料庫</strong><a class="headerlink" href="#synchdb-postgresql" title="Permanent link">&para;</a></h2>
+<p>在使用 SynchDB 從 PostgreSQL 複製資料之前，需要按照<a href="../../getting-started/remote_database_setups/">此處</a>中概述的步驟設定 PostgreSQL 伺服器。</p>
+<h2 id="postgresql"><strong>建立 PostgreSQL 連接器</strong><a class="headerlink" href="#postgresql" title="Permanent link">&para;</a></h2>
+<p>建立一個連接器，該連接器指向資料庫 <code>postgres</code> 和模式 <code>public</code> 下的所有資料表。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
+<span class="w">  </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;pgconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">5432</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;myuser&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mypass&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;public&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;postgres&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="_1"><strong>初始快照</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>SynchDB 中的「初始快照」（或表快照）是指複製所有指定資料表的表結構及其初始資料。這類似於 PostgreSQL 邏輯複製中的「表同步」。當使用預設的 <code>initial</code> 模式啟動連接器時，它會在進入變更資料擷取 (CDC) 階段之前自動執行初始快照。可以使用 <code>no_data</code> 模式部分省略此步驟。有關所有快照選項，請參閱<a href="../../user-guide/start_stop_connector/">此處</a>。</p>
+<p>初始快照完成後，連接器在後續重新啟動時不會再次執行初始快照，而是直接從上次未完成的偏移量處恢復 CDC。此行為由 Debezium 引擎管理的元資料檔案控制。有關元資料檔案的更多信息，請參閱<a href="../../architecture/metadata_files/">此處</a>。</p>
+<p>PostgreSQL 連接器的初始快照略有不同。與其他連接器不同，Debezium 引擎不會建構初始表結構。這是因為 PostgreSQL 不會明確地發出 DDL WAL 事件。 PostgreSQL 的原生邏輯複製也存在著同樣的問題。使用者必須在啟動邏輯複製之前預先在目標資料庫建立表格模式。因此，首次啟動基於 Debezium 的 PostgreSQL 連接器時，它會假定您已經建立了指定的表模式及其初始數據，並立即進入 CDC 流模式，而無需實際執行初始快照。</p>
+<p>可以透過基於 FDW 的初始快照來解決此問題。該快照使用 <code>postgres_fdw</code> 建立初始表模式和數據，然後再透過 Debezium 切換到 CDC 流模式。若要使用此功能，您必須在啟動連接器之前將 <code>synchdb.olr_snapshot_engine</code> 設定為 <code>fdw</code>。</p>
+<h2 id="_2"><strong>不同的連接器啟動模式</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="cdc"><strong>初始快照 + CDC</strong><a class="headerlink" href="#cdc" title="Permanent link">&para;</a></h3>
+<p><strong>使用 <code>synchdb.olr_snapshot_engine = 'debezium'</code>：</strong></p>
+<p>您需要在目標資料庫建立初始表模式和資料。 Debezium 不會創建它們。</p>
+<p><strong>使用 synchdb.olr_snapshot_engine = 'fdw' 時：</strong></p>
+<p>以 <code>initial</code> 模式啟動連接器將對所有指定的表執行初始快照（透過 postgres_fdw）。完成後，變更資料擷取 (CDC) 流程將開始串流新變更（透過 Debezium）。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;pgconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;initial&#39;</span><span class="p">);</span>
+
+<span class="k">or</span><span class="w"> </span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;pgconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>此連接器首次運作時，其狀態應為「初始快照」：</p>
+<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">name</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">connector_type</span><span class="w"> </span><span class="o">|</span><span class="w">  </span><span class="n">pid</span><span class="w">   </span><span class="o">|</span><span class="w">      </span><span class="n">stage</span><span class="w">       </span><span class="o">|</span><span class="w">  </span><span class="k">state</span><span class="w">  </span><span class="o">|</span><span class="w">   </span><span class="n">err</span><span class="w">    </span><span class="o">|</span><span class="w">       </span><span class="n">last_dbz_offset</span>
+<span class="c1">--------+----------------+--------+------------------+---------+----------+-----------------------------</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="mi">528746</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="n">snapshot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">offset</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">flushed</span><span class="w"> </span><span class="n">yet</span>
+</code></pre></div>
+<p>將建立一個名為「postgres」的新模式，連接器傳輸的所有表都將在該模式下進行複製。</p>
+<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">search_path</span><span class="o">=</span><span class="n">postgres</span><span class="p">;</span>
+<span class="k">SET</span>
+<span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">d</span>
+<span class="w">              </span><span class="n">List</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">relations</span>
+<span class="w">  </span><span class="k">Schema</span><span class="w">  </span><span class="o">|</span><span class="w">        </span><span class="n">Name</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">Type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Owner</span>
+<span class="c1">----------+--------------------+-------+--------</span>
+<span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
+</code></pre></div>
+<p>初始快照完成後，並且至少收到並處理了一個後續更改，連接器階段應從“初始快照”更改為“變更資料擷取”。</p>
+<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;pgconn&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">name</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">connector_type</span><span class="w"> </span><span class="o">|</span><span class="w">   </span><span class="n">pid</span><span class="w">   </span><span class="o">|</span><span class="w">        </span><span class="n">stage</span><span class="w">        </span><span class="o">|</span><span class="w">  </span><span class="k">state</span><span class="w">  </span><span class="o">|</span><span class="w">   </span><span class="n">err</span><span class="w">    </span><span class="o">|</span>
+<span class="w">       </span><span class="n">last_dbz_offset</span>
+<span class="c1">--------+----------------+---------+---------------------+---------+----------+-----------------------------------</span>
+<span class="c1">-----------------------------------------------------------------</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="mi">1604388</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">change</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="n">capture</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;lsn_proc&quot;</span><span class="p">:</span><span class="mi">37396384</span><span class="p">,</span><span class="ss">&quot;messageType&quot;</span>
+<span class="p">:</span><span class="ss">&quot;INSERT&quot;</span><span class="p">,</span><span class="ss">&quot;lsn&quot;</span><span class="p">:</span><span class="mi">37396384</span><span class="p">,</span><span class="ss">&quot;txId&quot;</span><span class="p">:</span><span class="mi">1015</span><span class="p">,</span><span class="ss">&quot;ts_usec&quot;</span><span class="p">:</span><span class="mi">1767740340957961</span><span class="err">}</span>
+</code></pre></div>
+<p>這意味著連接器現在正在串流指定表的新變更。以 <code>initial</code> 模式重新啟動連接器將從上次成功複製點開始繼續複製，並且不會重新執行初始快照。</p>
+<h3 id="cdc_1"><strong>僅初始快照，不執行 CDC</strong><a class="headerlink" href="#cdc_1" title="Permanent link">&para;</a></h3>
+<p><strong>使用 synchdb.olr_snapshot_engine = 'debezium' 時：</strong></p>
+<p>您需要在目標資料庫中建立初始表架構和資料。 Debezium 不會創建它們。</p>
+<p><strong>使用 synchdb.olr_snapshot_engine = 'fdw' 時：</strong></p>
+<p>使用 <code>initial_only</code> 模式啟動連接器將僅對所有指定資料表（在本例中為所有資料表）執行初始快照，且之後不會執行 CDC。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;pgconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;initial_only&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>連接器看起來仍然在輪詢，但由於 Debzium 內部已停止 CDC，因此不會捕獲任何更改。您可以選擇將其關閉。以 <code>initial_only</code> 模式重新啟動連接器不會重建表，因為它們已經建立完成。</p>
+<h3 id="cdc_2"><strong>僅捕獲表架構 + CDC</strong><a class="headerlink" href="#cdc_2" title="Permanent link">&para;</a></h3>
+<p><strong>使用 synchdb.olr_snapshot_engine = 'debezium' 時：</strong></p>
+<p>您需要在目標資料庫中建立初始表架構和資料。 Debezium 不會創建它們。</p>
+<p><strong>使用 synchdb.olr_snapshot_engine = 'fdw' 時：</strong></p>
+<p>使用 <code>no_data</code> 模式啟動連接器將僅執行架構捕獲，並在 PostgreSQL 中建立相應的表，而不會複製現有表資料（跳過初始快照）。架構擷取完成後，連接器將進入 CDC 模式，並開始擷取後續表變更。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;pgconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;no_data&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>以 <code>no_data</code> 模式重新啟動連接器不會重新重建模式，而是從上次成功點恢復 CDC。</p>
+<h3 id="cdc_3"><strong>始終執行初始快照 + CDC</strong><a class="headerlink" href="#cdc_3" title="Permanent link">&para;</a></h3>
+<p><strong>使用 synchdb.olr_snapshot_engine = 'debezium' 時：</strong></p>
+<p>您需要在目標資料庫中建立初始表模式和資料。 Debezium 不會創建它們。</p>
+<p><strong>使用 synchdb.olr_snapshot_engine = 'fdw' 時：</strong></p>
+<p>使用 <code>always</code> 模式啟動連接器將始終擷取擷取表的模式，始終重新執行初始快照，然後進行 CDC。這類似於重置按鈕，因為使用此模式將重建所有內容。請謹慎使用此模式，尤其是在捕獲大量表時，這可能需要很長時間才能完成。重建完成後，CDC 將照常恢復。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;pgconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>但是，可以使用連接器的 <code>snapshottable</code> 選項來選擇部分錶重新建立初始快照。符合 <code>snapshottable</code> 中條件的表將重新建立初始快照；否則，將跳過其初始快照。如果 <code>snapshottable</code> 為空，則預設情況下，連接器的 <code>table</code> 選項中指定的所有表都會以 <code>always</code> 模式重新建立初始快照。</p>
+<p>此範例僅使連接器重新建立 <code>inventory.customers</code> 表的初始快照。所有其他表的快照都將被跳過。</p>
+<div class="highlight"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">synchdb_conninfo</span><span class="w"> </span>
+<span class="k">SET</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonb_set</span><span class="p">(</span><span class="k">data</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{snapshottable}&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&quot;public.customers&quot;&#39;</span><span class="p">)</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;pgconn&#39;</span><span class="p">;</span>
+</code></pre></div>
+<p>初始快照完成後，CDC 將開始運行。以 <code>always</code> 模式重新啟動連接器將重複上述過程。</p>
+<h2 id="postgres"><strong>Postgres 連接器的可用快照模式</strong><a class="headerlink" href="#postgres" title="Permanent link">&para;</a></h2>
+<ul>
+<li>initial（預設）</li>
+<li>initial_only</li>
+<li>no_data</li>
+<li>always</li>
+<li>schemasync</li>
+</ul>
+<h2 id="schemasync"><strong>使用 schemasync 模式預覽來源表和目標表關係</strong><a class="headerlink" href="#schemasync" title="Permanent link">&para;</a></h2>
+<p>在嘗試對當前表和資料（可能非常龐大）進行初始快照之前，可以在實際資料遷移之前「預覽」來源表和目標表之間的所有表和資料類型對應。這使您可以在實際遷移之前修改資料類型對應或物件名稱。這可以透過特殊的「schemasync」初始快照模式來實現。有關詳細範例，請參閱<a href="../../tutorial/object_mapping_workflow/">物件對映工作流程</a>。</p>
+<p>請注意，您必須將 <code>synchdb.olr_snapshot_engine</code> 設定為 'fdw' 才能使用 <code>schemasync</code> 模式預覽表。</p>
+<h2 id="_3"><strong>選擇性表同步</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="_4"><strong>選擇所需表並首次啟動</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>表格選擇在連接器建立階段透過 <code>synchdb_add_conninfo()</code> 函數完成，該函數用於指定要從中複製的表列表（以完全限定名稱 (FQN) 表示，並以逗號分隔）。</p>
+<p>例如，以下命令建立一個連接器，該連接器僅複製遠端 PostgreSQL 資料庫中 <code>public.orders</code> 表的變更。
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
-<span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;192.168.1.86&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="mi">3306</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;mysqluser&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;mysqlpwd&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;pgconn&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="mi">5433</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;pguser&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;pgpass&#39;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;inventory.orders,inventory.products&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;null&#39;</span>
-<span class="w">    </span><span class="s1">&#39;mysql&#39;</span>
+<span class="w">    </span><span class="s1">&#39;public&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;public.orders&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;postgres&#39;</span>
 <span class="p">);</span>
 </code></pre></div></p>
-<p>首次启动此连接器将触发执行初始快照，并将复制选定的 2 个表的模式和数据。</p>
+<p>首次啟動此連接器時，將觸發執行初始快照，並複製所選表的架構和資料。</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
 </code></pre></div>
-<h3 id="_3"><strong>验证连接器状态和表</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
-<p>检查连接器状态和新表：
+<h3 id="_5"><strong>驗證連接器狀態和表格</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>檢查連接器狀態和新表格：
 <div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">Select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">state</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="p">;</span>
-<span class="w">     </span><span class="n">name</span><span class="w">      </span><span class="o">|</span><span class="w">  </span><span class="k">state</span><span class="w">  </span><span class="o">|</span><span class="w">   </span><span class="n">err</span>
-<span class="c1">---------------+---------+----------</span>
-<span class="w"> </span><span class="n">mysqlconn</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span>
-<span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="p">)</span>
+<span class="w">  </span><span class="n">name</span><span class="w">  </span><span class="o">|</span><span class="w">  </span><span class="k">state</span><span class="w">  </span><span class="o">|</span><span class="w">   </span><span class="n">err</span>
+<span class="c1">--------+---------+----------</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span>
 
-<span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">search_path</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">inventory</span><span class="p">;</span>
-<span class="k">SET</span>
-<span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">d</span>
-<span class="w">                 </span><span class="n">List</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">relations</span>
-<span class="w">  </span><span class="k">Schema</span><span class="w">   </span><span class="o">|</span><span class="w">        </span><span class="n">Name</span><span class="w">        </span><span class="o">|</span><span class="w">   </span><span class="k">Type</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">Owner</span>
-<span class="c1">-----------+--------------------+----------+--------</span>
-<span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">products</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
-<span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">products_id_seq</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">sequence</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
-<span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
-<span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">orders_ididid_seq</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">sequence</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
-<span class="w"> </span><span class="k">public</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">synchdb_conninfo</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
-<span class="w"> </span><span class="k">public</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">view</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
-<span class="p">(</span><span class="mi">6</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
 
-<span class="n">postgres</span><span class="o">=#</span>
+<span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="o">*</span>
+<span class="w">           </span><span class="n">List</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">tables</span>
+<span class="w">  </span><span class="k">Schema</span><span class="w">  </span><span class="o">|</span><span class="w">  </span><span class="n">Name</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Owner</span>
+<span class="c1">----------+--------+-------+--------</span>
+<span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">pguser</span>
 </code></pre></div></p>
-<p>快照完成后，<code>mysqlconn</code> 连接器将继续捕获 <code>inventory.orders</code> 和 <code>inventory.products</code> 表的后续更改。</p>
-<h2 id="_4"><strong>在运行时添加更多要复制的表</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<p>上一节中的 <code>mysqlconn</code> 已经完成了初始快照，并获取了所选表的表结构。如果我们想要添加更多要复制的表，则需要将更新的表部分通知给 Debezium 引擎，并再次执行初始快照。操作方法如下：</p>
+<p>快照完成後，連接器將繼續擷取表格的後續變更。</p>
+<h3 id="_6"><strong>運行時加入更多要複製的表</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>上一節中的 <code>mysqlconn</code> 已完成初始快照並取得了所選表格的表格結構。如果我們想要新增更多要複製的表，則需要通知 Debezium 引擎更新了表結構，並再次執行初始快照。具體操作如下：</p>
 <ol>
 <li>更新 <code>synchdb_conninfo</code> 表以包含其他表。</li>
-<li>在此示例中，我们将 <code>inventory.customers</code> 表添加到同步列表：
-<div class="highlight"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">synchdb_conninfo</span>
-<span class="k">SET</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonb_set</span><span class="p">(</span><span class="k">data</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{table}&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&quot;inventory.orders,inventory.products,inventory.customers&quot;&#39;</span><span class="p">)</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">;</span>
+<li>在本例中，我們將 <code>inventory.customers</code> 表加入同步清單：
+<div class="highlight"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">synchdb_conninfo</span><span class="w"> </span>
+<span class="k">SET</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonb_set</span><span class="p">(</span><span class="k">data</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{table}&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&quot;public.orders,public.customers&quot;&#39;</span><span class="p">)</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;pgconn&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>配置快照表参数，使其仅包含新表 <code>inventory.customers</code>，这样 SynchDB 就不会尝试重建已完成快照的两张表。
-<div class="highlight"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">synchdb_conninfo</span>
-<span class="k">SET</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonb_set</span><span class="p">(</span><span class="k">data</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{snapshottable}&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&quot;inventory.customers&quot;&#39;</span><span class="p">)</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">;</span>
+<li>配置快照表參數，使其只包含新表 <code>inventory.customers</code>，這樣 SynchDB 就不會嘗試重建已經完成快照的 2 個表。
+<div class="highlight"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">synchdb_conninfo</span><span class="w"> </span>
+<span class="k">SET</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonb_set</span><span class="p">(</span><span class="k">data</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{snapshottable}&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&quot;public.customers&quot;&#39;</span><span class="p">)</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;pgconn&#39;</span><span class="p">;</span>
 </code></pre></div></li>
-<li>重启连接器，并将快照模式设置为 <code>always</code>，以执行另一次初始快照：
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_restart_connector</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
-</code></pre></div>
-这将强制 Debezium 仅对新表 <code>inventory.customers</code> 重新创建快照，同时保留旧表 <code>inventory.orders</code> 和 <code>inventory.products</code> 不变。快照完成后，所有表的 CDC 将恢复。</li>
+<li>將快照模式設為“始終”，然後重新啟動連接器，以執行另一次初始快照：
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_stop_engine_bgw</span><span class="p">(</span><span class="s1">&#39;pgconn&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;pgconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
+</code></pre></div></li>
 </ol>
-<h3 id="_5"><strong>验证更新后的表</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>现在，我们可以再次检查这些表：
-<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">search_path</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="n">inventory</span><span class="p">;</span>
-<span class="k">SET</span>
-<span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">d</span>
-<span class="w">                 </span><span class="n">List</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">relations</span>
-<span class="w">  </span><span class="k">Schema</span><span class="w">   </span><span class="o">|</span><span class="w">        </span><span class="n">Name</span><span class="w">        </span><span class="o">|</span><span class="w">   </span><span class="k">Type</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">Owner</span>
-<span class="c1">-----------+--------------------+----------+--------</span>
-<span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">products</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
-<span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">products_id_seq</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">sequence</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
-<span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
-<span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">orders_ididid_seq</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">sequence</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
-<span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">customers</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
-<span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">customers_id_seq</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">sequence</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
-<span class="w"> </span><span class="k">public</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">synchdb_conninfo</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
-<span class="w"> </span><span class="k">public</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">view</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
-<span class="p">(</span><span class="mi">8</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
-
-<span class="n">postgres</span><span class="o">=#</span>
+<p><strong>&lt;&lt;重要提示&gt;&gt;</strong> 請注意，此處我們不使用 <code>synchdb_restart_connector</code> 來重啟連接器，因為該函數主要用於以不同的快照模式重新啟動 Debezium 引擎。由於 Postgres 連接器使用 FDW 而非 Debezium 來建立初始表，因此我們必須明確地執行 <code>stop engine</code>，然後再呼叫 <code>start engine</code> 來觸發 FDW 例程再次運行。</p>
+<h3 id="_7"><strong>驗證更新後的表格</strong><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>現在，我們可以再次檢查我們的表：
+<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="o">*</span>
+<span class="w">             </span><span class="n">List</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">tables</span>
+<span class="w">  </span><span class="k">Schema</span><span class="w">   </span><span class="o">|</span><span class="w">   </span><span class="n">Name</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">Type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Owner</span>
+<span class="c1">-----------+-----------+-------+--------</span>
+<span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
+<span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
+<span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">products</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 </code></pre></div></p>
-<h2 id="_6"><strong>快照模式</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
-<p>SynchDB 提供不同的快照模式，具体取决于您的复制需求：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;"><strong>设置</strong></th>
-<th><strong>描述</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">always</td>
-<td>连接器每次启动时都会执行快照。快照包含已捕获表的结构和数据。快照完成后，连接器开始流式传输后续数据库更改的事件记录。</td>
-</tr>
-<tr>
-<td style="text-align: center;">initial（默认）</td>
-<td>如果尚未执行，连接器将执行数据库快照。快照完成后，连接器开始流式传输后续数据库更改的事件记录。</td>
-</tr>
-<tr>
-<td style="text-align: center;">initial_only</td>
-<td>连接器执行数据库快照。快照完成后，连接器将停止，并且不会流式传输后续数据库更改的事件记录。</td>
-</tr>
-<tr>
-<td style="text-align: center;">no_data</td>
-<td>连接器捕获所有相关表的结构，但不捕获它们包含的数据。</td>
-</tr>
-<tr>
-<td style="text-align: center;">never</td>
-<td>连接器启动时，它会立即开始流式传输后续数据库更改的事件记录，而不是执行快照。</td>
-</tr>
-<tr>
-<td style="text-align: center;">recovery</td>
-<td>设置此选项可恢复丢失或损坏的数据库架构历史记录。重启后，连接器将运行快照，从源表重建主题</td>
-</tr>
-<tr>
-<td style="text-align: center;">when_needed</td>
-<td>连接器启动后，仅当检测到以下情况之一时才执行快照：<br><ul><li>无法检测到任何主题偏移量</li><li>先前记录的偏移量指定的日志位置在服务器上不可用</li></ul></td>
-</tr>
-</tbody>
-</table>
 
 
 
 
 
 
-
-  
-  
 
 
 

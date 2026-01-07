@@ -691,15 +691,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#debezium-event-processor-component-diagram" class="md-nav__link">
+  <a href="#openlog-replicator-event-processor-component-diagram" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Debezium Event Processor Component Diagram
+        Openlog Replicator Event Processor Component Diagram
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Debezium Event Processor Component Diagram">
+    <nav class="md-nav" aria-label="Openlog Replicator Event Processor Component Diagram">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1499,7 +1499,7 @@
   <span class="md-ellipsis">
     
   
-    CDC de MySQL a PostgreSQL
+    MySQL -> PostgreSQL
   
 
     
@@ -1527,7 +1527,7 @@
   <span class="md-ellipsis">
     
   
-    CDC de SQL Server a PostgreSQL
+    SQL Server -> PostgreSQL
   
 
     
@@ -1555,63 +1555,7 @@
   <span class="md-ellipsis">
     
   
-    CDC de Oracle a PostgreSQL
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutorial/selective_table_sync/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sincronización Selectiva de Tablas
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutorial/table_snapshot_resnapshot/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Instantánea de tabla y nueva instantánea
+    Oracle -> PostgreSQL
   
 
     
@@ -2081,15 +2025,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#debezium-event-processor-component-diagram" class="md-nav__link">
+  <a href="#openlog-replicator-event-processor-component-diagram" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Debezium Event Processor Component Diagram
+        Openlog Replicator Event Processor Component Diagram
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Debezium Event Processor Component Diagram">
+    <nav class="md-nav" aria-label="Openlog Replicator Event Processor Component Diagram">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2262,7 +2206,7 @@
 
 
 <h1 id="openlog-replicator-event-processor">Openlog Replicator Event Processor<a class="headerlink" href="#openlog-replicator-event-processor" title="Permanent link">&para;</a></h1>
-<h2 id="debezium-event-processor-component-diagram"><strong>Debezium Event Processor Component Diagram</strong><a class="headerlink" href="#debezium-event-processor-component-diagram" title="Permanent link">&para;</a></h2>
+<h2 id="openlog-replicator-event-processor-component-diagram"><strong>Openlog Replicator Event Processor Component Diagram</strong><a class="headerlink" href="#openlog-replicator-event-processor-component-diagram" title="Permanent link">&para;</a></h2>
 <p><img alt="img" src="../../../images/olr-processor.jpg" /></p>
 <p>Openlog Replicator Event Processor is a PostgreSQL background worker initiated and started by the SynchDB extension. It is responsible for connecting to Openlog Replicator, initiate replication, and fetch change events in JSON format. The internal components of this module are listed below:</p>
 <ol>

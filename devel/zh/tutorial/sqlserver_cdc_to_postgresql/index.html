@@ -35,7 +35,7 @@
     
     
       
-        <title>SQL Server CDC 到 PostgreSQL - SynchDB 文档</title>
+        <title>SQL Server CDC -> PostgreSQL - SynchDB 文档</title>
       
     
     
@@ -98,7 +98,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#sql-server-cdc-postgresql" class="md-skip">
+        <a href="#sql-server-postgresql" class="md-skip">
           跳转至
         </a>
       
@@ -136,7 +136,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              SQL Server CDC 到 PostgreSQL
+              SQL Server CDC -> PostgreSQL
             
           </span>
         </div>
@@ -1295,7 +1295,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL CDC 到 PostgreSQL
+    MySQL CDC -> PostgreSQL
   
 
     
@@ -1332,7 +1332,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server CDC 到 PostgreSQL
+    SQL Server CDC -> PostgreSQL
   
 
     
@@ -1350,7 +1350,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server CDC 到 PostgreSQL
+    SQL Server CDC -> PostgreSQL
   
 
     
@@ -1387,6 +1387,29 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        初始快照
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        不同的連接器啟動模式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="不同的連接器啟動模式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#sql-server" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1396,8 +1419,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#cdc" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1407,8 +1430,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#cdc_1" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1418,8 +1441,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#cdc_2" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1429,12 +1452,28 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#cdc_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        仅 CDC
+        始终执行初始快照 + CDC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-server_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL Server 連接器的可用快照模式
       
     </span>
   </a>
@@ -1442,13 +1481,74 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#cdc_4" class="md-nav__link">
+  <a href="#schemasync" class="md-nav__link">
     <span class="md-ellipsis">
       
-        始终执行初始快照 + CDC
+        使用 schemasync 模式預覽來源表和目標表關係
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        選擇性表同步
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="選擇性表同步">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        選擇所需表並首次啟動
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        驗證連接器狀態和表格
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        運行時加入更多要複製的表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        驗證更新後的表格
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1475,63 +1575,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle CDC 到 PostgreSQL
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../selective_table_sync/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    选择性表同步
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../table_snapshot_resnapshot/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    表快照和重新快照
+    Oracle CDC -> PostgreSQL
   
 
     
@@ -2012,6 +2056,29 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        初始快照
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        不同的連接器啟動模式
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="不同的連接器啟動模式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#sql-server" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2021,8 +2088,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#cdc" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2032,8 +2099,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#cdc_1" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2043,8 +2110,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#cdc_2" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2054,12 +2121,28 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#cdc_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        仅 CDC
+        始终执行初始快照 + CDC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sql-server_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SQL Server 連接器的可用快照模式
       
     </span>
   </a>
@@ -2067,13 +2150,74 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#cdc_4" class="md-nav__link">
+  <a href="#schemasync" class="md-nav__link">
     <span class="md-ellipsis">
       
-        始终执行初始快照 + CDC
+        使用 schemasync 模式預覽來源表和目標表關係
       
     </span>
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        選擇性表同步
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="選擇性表同步">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        選擇所需表並首次啟動
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        驗證連接器狀態和表格
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        運行時加入更多要複製的表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        驗證更新後的表格
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2097,18 +2241,22 @@
   
 
 
-<h1 id="sql-server-cdc-postgresql">SQL Server CDC 到 PostgreSQL<a class="headerlink" href="#sql-server-cdc-postgresql" title="Permanent link">&para;</a></h1>
-<h2 id="synchdb-sql-server">为 SynchDB 准备 SQL Server 数据库<a class="headerlink" href="#synchdb-sql-server" title="Permanent link">&para;</a></h2>
+<h1 id="sql-server-postgresql">SQL Server -&gt; PostgreSQL<a class="headerlink" href="#sql-server-postgresql" title="Permanent link">&para;</a></h1>
+<h2 id="synchdb-sql-server"><strong>为 SynchDB 准备 SQL Server 数据库</strong><a class="headerlink" href="#synchdb-sql-server" title="Permanent link">&para;</a></h2>
 <p>在使用 SynchDB 从 SQL Server 进行复制之前，需要按照<a href="../../getting-started/remote_database_setups/">此处</a> 概述的步骤配置 SQL Server。</p>
 <p>请确保所需的表已在 SQL Server 中启用为 CDC 表。您可以在 SQL Server 客户端上运行以下命令，为“dbo.customer”、“dbo.district”和“dbo.history”启用 CDC。您将根据需要继续添加新表。</p>
-<div class="highlight"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">MyDB</span>
+<div class="highlight"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">testDB</span>
 <span class="k">GO</span>
 <span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;customer&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">supports_net_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;district&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">supports_net_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;history&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">supports_net_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="k">GO</span>
 </code></pre></div>
-<h2 id="sql-server">创建 SQL Server 连接器<a class="headerlink" href="#sql-server" title="Permanent link">&para;</a></h2>
+<h2 id="_1"><strong>初始快照</strong><a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<p>SynchDB 中的「初始快照」（或表快照）是指複製所有指定表的表結構和初始資料。這類似於 PostgreSQL 邏輯複製中的「表同步」。當使用預設的 <code>initial</code> 模式啟動連接器時，它會在進入變更資料擷取 (CDC) 階段之前自動執行初始快照。可以使用 <code>no_data</code> 模式部分省略此步驟。有關所有快照選項，請參閱<a href="../../user-guide/start_stop_connector/">此處</a>。</p>
+<p>初始快照完成後，連接器在後續重新啟動時不會再次執行此操作，而是直接從上次未完成的偏移量處恢復 CDC。此行為由 Debezium 引擎管理的元資料檔案控制。有關元資料檔案的更多信息，請參閱<a href="../../architecture/metadata_files/">此處</a>。</p>
+<h2 id="_2"><strong>不同的連接器啟動模式</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h3 id="sql-server"><strong>创建 SQL Server 连接器</strong><a class="headerlink" href="#sql-server" title="Permanent link">&para;</a></h3>
 <p>创建一个连接器，该连接器指向 SQL Server 中 <code>testDB</code> 数据库下的所有表。
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
 <span class="n">synchdb_add_conninfo</span><span class="p">(</span>
@@ -2116,7 +2264,7 @@
 <span class="s1">&#39;sa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Password!&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;testDB&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span>
 <span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;sqlserver&#39;</span><span class="p">);</span>
 </code></pre></div></p>
-<h2 id="cdc">初始快照 + 变更数据捕获 (CDC)<a class="headerlink" href="#cdc" title="Permanent link">&para;</a></h2>
+<h3 id="cdc"><strong>初始快照 + 变更数据捕获 (CDC)</strong><a class="headerlink" href="#cdc" title="Permanent link">&para;</a></h3>
 <p>使用 <code>initial</code> 模式启动连接器将对所有指定的表（在本例中为所有表）执行初始快照。完成后，变更数据捕获 (CDC) 过程将开始流式传输新的变更。</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;initial&#39;</span><span class="p">);</span>
 
@@ -2164,22 +2312,17 @@
 <span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="k">row</span>
 </code></pre></div>
 这意味着连接器现在正在流式传输指定表的新更改。以“initial”模式重启连接器将从上次成功点开始继续复制，并且不会重新运行初始快照。</p>
-<h2 id="cdc_1">仅初始快照，无CDC<a class="headerlink" href="#cdc_1" title="Permanent link">&para;</a></h2>
+<h3 id="cdc_1"><strong>仅初始快照，无CDC</strong><a class="headerlink" href="#cdc_1" title="Permanent link">&para;</a></h3>
 <p>使用“initial_only”模式启动连接器将仅对所有指定表（在本例中为所有表）执行初始快照，之后将不再执行CDC。</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;initial_only&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>连接器仍然会显示正在“轮询”，但由于Debzium内部已停止CDC，因此不会捕获任何更改。您可以选择关闭它。以“initial_only”模式重启连接器不会重建表，因为它们已经构建好了。</p>
-<h2 id="cdc_2">仅捕获表模式 + CDC<a class="headerlink" href="#cdc_2" title="Permanent link">&para;</a></h2>
+<h3 id="cdc_2"><strong>仅捕获表模式 + CDC</strong><a class="headerlink" href="#cdc_2" title="Permanent link">&para;</a></h3>
 <p>使用 <code>no_data</code> 模式启动连接器将仅执行模式捕获，在 PostgreSQL 中构建相应的表，并且不会复制现有表数据（跳过初始快照）。模式捕获完成后，连接器将进入 CDC 模式，并开始捕获对表的后续更改。</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;no_data&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>在 <code>no_data</code> 模式下重新启动连接器将不会再次重建模式，并且它将从上次成功点恢复 CDC。</p>
-<h2 id="cdc_3">仅 CDC<a class="headerlink" href="#cdc_3" title="Permanent link">&para;</a></h2>
-<p>使用 <code>never</code> 模式启动连接器将完全跳过模式捕获和初始快照，并进入 CDC 模式以捕获后续更改。请注意，连接器要求在以 <code>never</code> 模式启动之前，所有捕获表都已在 PostgreSQL 中创建。如果表不存在，连接器在尝试将 CDC 更改应用于不存在的表时将遇到错误。</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;never&#39;</span><span class="p">);</span>
-</code></pre></div>
-<p>以 <code>never</code> 模式重启连接器将从上次成功点开始恢复 CDC。</p>
-<h2 id="cdc_4">始终执行初始快照 + CDC<a class="headerlink" href="#cdc_4" title="Permanent link">&para;</a></h2>
+<h3 id="cdc_3"><strong>始终执行初始快照 + CDC</strong><a class="headerlink" href="#cdc_3" title="Permanent link">&para;</a></h3>
 <p>使用 <code>always</code> 模式启动连接器将始终捕获捕获表的模式，始终重做初始快照，然后转到 CDC。这类似于重置按钮，因为使用此模式将重建所有内容。请谨慎使用此模式，尤其是在捕获大量表时，这可能需要很长时间才能完成。重建后，CDC 将恢复正常。</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
 </code></pre></div>
@@ -2190,6 +2333,80 @@
 <span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">;</span>
 </code></pre></div></p>
 <p>初始快照完成后，CDC 将开始。在 <code>always</code> 模式下重新启动连接器将重复上述过程。</p>
+<h2 id="sql-server_1"><strong>SQL Server 連接器的可用快照模式</strong><a class="headerlink" href="#sql-server_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>initial (default)</li>
+<li>initial_only</li>
+<li>no_data</li>
+<li>always</li>
+<li>schemasync</li>
+</ul>
+<h2 id="schemasync"><strong>使用 schemasync 模式預覽來源表和目標表關係</strong><a class="headerlink" href="#schemasync" title="Permanent link">&para;</a></h2>
+<p>在嘗試對當前表和資料（可能非常龐大）進行初始快照之前，可以在實際資料遷移之前「預覽」來源表和目標表之間的所有表和資料類型對應。這樣，您就有機會在實際遷移之前修改資料類型對應或物件名稱。這可以透過特殊的「schemasync」初始快照模式來實現。有關詳細範例，請參閱<a href="../../tutorial/object_mapping_workflow/">对象映射工作流程</a>。</p>
+<h2 id="_3"><strong>選擇性表同步</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h3 id="_4"><strong>選擇所需表並首次啟動</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>表格選擇在連接器建立階段透過 <code>synchdb_add_conninfo()</code> 函數完成，該函數用於指定要從中複製的表列表（以完全限定名稱 (FQN) 表示，並以逗號分隔）。</p>
+<p>例如，以下命令建立一個連接器，該連接器僅複製遠端 SQL Server 資料庫中 <code>dbo.orders</code> 資料表的變更。
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="mi">1433</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;sa&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;Password!&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;testDB&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;dbo.orders,dbo.products&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;sqlserver&#39;</span>
+<span class="p">);</span>
+</code></pre></div></p>
+<p>首次啟動此連接器時，將觸發執行初始快照，並複製選定的 2 個表的架構和資料。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="_5"><strong>驗證連接器狀態和表格</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>檢查連接器狀態和新表格：
+<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">Select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">state</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="p">;</span>
+<span class="w">     </span><span class="n">name</span><span class="w">      </span><span class="o">|</span><span class="w">  </span><span class="k">state</span><span class="w">  </span><span class="o">|</span><span class="w">   </span><span class="n">err</span>
+<span class="c1">---------------+---------+----------</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span>
+
+<span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="o">*</span>
+<span class="w">           </span><span class="n">List</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">tables</span>
+<span class="w"> </span><span class="k">Schema</span><span class="w"> </span><span class="o">|</span><span class="w">   </span><span class="n">Name</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">Type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Owner</span>
+<span class="c1">--------+----------+-------+--------</span>
+<span class="w"> </span><span class="n">testdb</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
+<span class="w"> </span><span class="n">testdb</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
+</code></pre></div></p>
+<p>預設情況下，來源資料庫名稱會對應到目標資料庫的模式，因此 <code>dbo.orders</code> 在 PostgreSQL 中會變成 <code>testdb.orders</code>。表完成初始快照後，連接器將啟動 CDC 以串流傳輸這些表的後續變更。</p>
+<h3 id="_6"><strong>運行時加入更多要複製的表</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>如果我們想要新增更多要複製的表，需要通知 Debezium 引擎更新了表格部分，並重​​新執行初始快照。具體操作如下：</p>
+<ol>
+<li>
+<p>更新 <code>synchdb_conninfo</code> 表，使其包含其他表格。</p>
+</li>
+<li>
+<p>在本例中，我們將 <code>dbo.customers</code> 表加入同步清單：
+<div class="highlight"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">synchdb_conninfo</span><span class="w"> </span>
+<span class="k">SET</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonb_set</span><span class="p">(</span><span class="k">data</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{table}&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&quot;dbo.orders,dbo.products,dbo.customers&quot;&#39;</span><span class="p">)</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">;</span>
+</code></pre></div></p>
+</li>
+<li>將快照模式設為“始終”，然後重新啟動連接器，以執行另一次初始快照：
+<div class="highlight"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">orders</span><span class="p">,</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">products</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_restart_connector</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
+</code></pre></div></li>
+</ol>
+<p>這迫使 Debezium 重新建立所有表的快照，包括舊表 <code>dbo.orders</code> 和 <code>dbo.products</code>，以及在進行 CDC 串流傳輸之前建立的新表。這意味著，要新增第三個表，必須刪除現有表（以防止重複表和主鍵錯誤），並重新建立整個初始快照。這相當冗餘，Debezium 建議使用增量快照來新增資料表，而無需重新建立快照。一旦我們將增量快照支援新增至 SynchDB，我們將更新此過程。</p>
+<h3 id="_7"><strong>驗證更新後的表格</strong><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>現在，我們可以再次檢查我們的表：
+<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="ss">&quot;testDB&quot;</span><span class="p">.</span><span class="o">*</span>
+<span class="w">           </span><span class="n">List</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">tables</span>
+<span class="w"> </span><span class="k">Schema</span><span class="w"> </span><span class="o">|</span><span class="w">   </span><span class="n">Name</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">Type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Owner</span>
+<span class="c1">--------+-----------+-------+--------</span>
+<span class="w"> </span><span class="n">testDB</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
+<span class="w"> </span><span class="n">testDB</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
+<span class="w"> </span><span class="n">testDB</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">products</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
+</code></pre></div></p>
 
 
 

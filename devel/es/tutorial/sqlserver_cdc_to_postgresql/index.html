@@ -35,7 +35,7 @@
     
     
       
-        <title>CDC de SQL Server a PostgreSQL - Documentación de SynchDB</title>
+        <title>SQL Server -> PostgreSQL - Documentación de SynchDB</title>
       
     
     
@@ -94,7 +94,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#sql-server-cdc-to-postgresql" class="md-skip">
+        <a href="#sql-server-postgresql" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -132,7 +132,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              CDC de SQL Server a PostgreSQL
+              SQL Server -> PostgreSQL
             
           </span>
         </div>
@@ -1291,7 +1291,7 @@
   <span class="md-ellipsis">
     
   
-    CDC de MySQL a PostgreSQL
+    MySQL -> PostgreSQL
   
 
     
@@ -1328,7 +1328,7 @@
   <span class="md-ellipsis">
     
   
-    CDC de SQL Server a PostgreSQL
+    SQL Server -> PostgreSQL
   
 
     
@@ -1346,7 +1346,7 @@
   <span class="md-ellipsis">
     
   
-    CDC de SQL Server a PostgreSQL
+    SQL Server -> PostgreSQL
   
 
     
@@ -1394,6 +1394,29 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#initial-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initial Snapshot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#different-connector-launch-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Different Connector Launch Modes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Different Connector Launch Modes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#initial-snapshot-cdc" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1403,8 +1426,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#initial-snapshot-only-and-no-cdc" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1414,8 +1437,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#capture-table-schema-only-cdc" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1425,19 +1448,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#cdc-only" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        CDC only
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#always-do-initial-snapahot-cdc" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1445,6 +1457,94 @@
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#possible-snapshot-modes-for-sql-server-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Possible Snapshot Modes for SQL Server Connector
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preview-source-and-destination-table-relationships-with-schemasync-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preview Source and Destination Table Relationships with schemasync mode
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selective-table-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Selective Table Sync
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Selective Table Sync">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#select-desired-tables-and-start-it-for-the-first-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Select Desired Tables and Start it for the First Time
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-the-connector-state-and-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify the Connector State and Tables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-more-tables-to-replicate-during-run-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add More Tables to Replicate During Run Time.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-the-updated-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify the Updated Tables
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1471,63 +1571,7 @@
   <span class="md-ellipsis">
     
   
-    CDC de Oracle a PostgreSQL
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../selective_table_sync/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sincronización Selectiva de Tablas
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../table_snapshot_resnapshot/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Instantánea de tabla y nueva instantánea
+    Oracle -> PostgreSQL
   
 
     
@@ -2019,6 +2063,29 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#initial-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initial Snapshot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#different-connector-launch-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Different Connector Launch Modes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Different Connector Launch Modes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#initial-snapshot-cdc" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2028,8 +2095,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#initial-snapshot-only-and-no-cdc" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2039,8 +2106,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#capture-table-schema-only-cdc" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2050,19 +2117,8 @@
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#cdc-only" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        CDC only
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#always-do-initial-snapahot-cdc" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2070,6 +2126,94 @@
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#possible-snapshot-modes-for-sql-server-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Possible Snapshot Modes for SQL Server Connector
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preview-source-and-destination-table-relationships-with-schemasync-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preview Source and Destination Table Relationships with schemasync mode
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selective-table-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Selective Table Sync
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Selective Table Sync">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#select-desired-tables-and-start-it-for-the-first-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Select Desired Tables and Start it for the First Time
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-the-connector-state-and-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify the Connector State and Tables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-more-tables-to-replicate-during-run-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add More Tables to Replicate During Run Time.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-the-updated-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify the Updated Tables
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2093,26 +2237,31 @@
   
 
 
-<h1 id="sql-server-cdc-to-postgresql">SQL Server CDC to PostgreSQL<a class="headerlink" href="#sql-server-cdc-to-postgresql" title="Permanent link">&para;</a></h1>
-<h2 id="prepare-sql-server-database-for-synchdb">Prepare SQL Server Database for SynchDB<a class="headerlink" href="#prepare-sql-server-database-for-synchdb" title="Permanent link">&para;</a></h2>
+<h1 id="sql-server-postgresql">SQL Server -&gt; PostgreSQL<a class="headerlink" href="#sql-server-postgresql" title="Permanent link">&para;</a></h1>
+<h2 id="prepare-sql-server-database-for-synchdb"><strong>Prepare SQL Server Database for SynchDB</strong><a class="headerlink" href="#prepare-sql-server-database-for-synchdb" title="Permanent link">&para;</a></h2>
 <p>Before SynchDB can be used to replicate from SQL Server, SQL Server needs to be configured according to the procedure outlined <a href="../../getting-started/remote_database_setups/">here</a></p>
 <p>Please ensure the desired tables have already been enabled as CDC table in SQL Server. The following commands can be run on SQL Server client to enable CDC for <code>dbo.customer</code>, <code>dbo.district</code>, and <code>dbo.history</code>. You will continue to add new tables as needed.</p>
-<div class="highlight"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">MyDB</span>
+<div class="highlight"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">testDB</span>
 <span class="k">GO</span>
 <span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;customer&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">supports_net_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;district&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">supports_net_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;history&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">supports_net_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="k">GO</span>
 </code></pre></div>
-<h2 id="create-a-sql-server-connector">Create a SQL Server Connector<a class="headerlink" href="#create-a-sql-server-connector" title="Permanent link">&para;</a></h2>
-<p>Create a connector that targets all the tables under <code>testDB</code> database in SQL Server.
+<h2 id="create-a-sql-server-connector"><strong>Create a SQL Server Connector</strong><a class="headerlink" href="#create-a-sql-server-connector" title="Permanent link">&para;</a></h2>
+<p>Create a connector that targets all the tables under <code>testDB</code> database and <code>dbo</code> schema in SQL Server.
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
 <span class="w">  </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
 <span class="w">    </span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1433</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;sa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Password!&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;testDB&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;sa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Password!&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;testDB&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;sqlserver&#39;</span><span class="p">);</span>
 </code></pre></div></p>
-<h2 id="initial-snapshot-cdc">Initial Snapshot + CDC<a class="headerlink" href="#initial-snapshot-cdc" title="Permanent link">&para;</a></h2>
+<h2 id="initial-snapshot"><strong>Initial Snapshot</strong><a class="headerlink" href="#initial-snapshot" title="Permanent link">&para;</a></h2>
+<p>"Initial snapshot" (or table snapshot) in SynchDB means to copy table schema plus initial data for all designated tables. This is similar to the term "table sync" in PostgreSQL logical replication. When a connector is started using the default <code>initial</code> mode, it will automatically perform the initial snapshot before going to Change Data Capture (CDC) stage. This can be partially omitted with mode <code>no_data</code>. See <a href="../../user-guide/start_stop_connector/">here</a> for all snapshot options.</p>
+<p>Once the initial snapshot is completed, the connector will not do it again upon subsequent restarts and will just resume with CDC since the last incomplete offset. This behavior is controled by the metadata files managed by Debezium engine. See <a href="../../architecture/metadata_files/">here</a> for more about metadata files.
+**</p>
+<h2 id="different-connector-launch-modes"><strong>Different Connector Launch Modes</strong><a class="headerlink" href="#different-connector-launch-modes" title="Permanent link">&para;</a></h2>
+<h3 id="initial-snapshot-cdc"><strong>Initial Snapshot + CDC</strong><a class="headerlink" href="#initial-snapshot-cdc" title="Permanent link">&para;</a></h3>
 <p>Start the connector using <code>initial</code> mode will perform the initial snapshot of all designated tables (all in this case). After this is completed, the change data capture (CDC) process will begin to stream for new changes.</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;initial&#39;</span><span class="p">);</span>
 
@@ -2128,18 +2277,12 @@
 <span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="p">)</span>
 </code></pre></div></p>
 <p>A new schema called <code>testdb</code> will be created and all tables streamed by the connector will be replicated under that schema.
-<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">search_path</span><span class="o">=</span><span class="k">public</span><span class="p">,</span><span class="n">testdb</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">search_path</span><span class="o">=</span><span class="n">testdb</span><span class="p">;</span>
 <span class="k">SET</span>
 <span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">d</span>
 <span class="w">                  </span><span class="n">List</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">relations</span>
 <span class="w"> </span><span class="k">Schema</span><span class="w"> </span><span class="o">|</span><span class="w">          </span><span class="n">Name</span><span class="w">           </span><span class="o">|</span><span class="w">   </span><span class="k">Type</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">Owner</span>
 <span class="c1">--------+-------------------------+----------+--------</span>
-<span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">synchdb_att_view</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">view</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
-<span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">synchdb_attribute</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
-<span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">synchdb_conninfo</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
-<span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">synchdb_objmap</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
-<span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="k">view</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
-<span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">synchdb_stats_view</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="k">view</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 <span class="w"> </span><span class="n">testdb</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">customers</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 <span class="w"> </span><span class="n">testdb</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">customers_id_seq</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">sequence</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 <span class="w"> </span><span class="n">testdb</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w">                  </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
@@ -2147,7 +2290,6 @@
 <span class="w"> </span><span class="n">testdb</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">products</span><span class="w">                </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 <span class="w"> </span><span class="n">testdb</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">products_id_seq</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">sequence</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 <span class="w"> </span><span class="n">testdb</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">products_on_hand</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
-<span class="p">(</span><span class="mi">13</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
 </code></pre></div></p>
 <p>After the initial snapshot is completed, and at least one subsequent changes is received and processed, the connector stage shall change from <code>initial snapshot</code> to <code>Change Data Capture</code>.
 <div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">;</span>
@@ -2157,35 +2299,93 @@
 <span class="c1">----------------------------------------------------------------------</span>
 <span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="mi">526290</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">change</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="n">capture</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;event_serial_no&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="ss">&quot;commit</span>
 <span class="ss">_lsn&quot;</span><span class="p">:</span><span class="ss">&quot;0000002b:000004d8:0004&quot;</span><span class="p">,</span><span class="ss">&quot;change_lsn&quot;</span><span class="p">:</span><span class="ss">&quot;0000002b:000004d8:0003&quot;</span><span class="err">}</span>
-<span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="k">row</span>
 </code></pre></div></p>
 <p>This means that the connector is now streaming for new changes of the designated tables. Restarting the connector in <code>initial</code> mode will proceed replication since the last successful point and initial snapshot will not be re-run.</p>
-<h2 id="initial-snapshot-only-and-no-cdc">Initial Snapshot Only and no CDC<a class="headerlink" href="#initial-snapshot-only-and-no-cdc" title="Permanent link">&para;</a></h2>
+<h3 id="initial-snapshot-only-and-no-cdc"><strong>Initial Snapshot Only and no CDC</strong><a class="headerlink" href="#initial-snapshot-only-and-no-cdc" title="Permanent link">&para;</a></h3>
 <p>Start the connector using <code>initial_only</code> mode will perform the initial snapshot of all designated tables (all in this case) only and will not perform CDC after.</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;initial_only&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>The connector would still appear to be <code>polling</code> from the connector but no change will be captured because Debzium internally has stopped the CDC. You have the option to shut it down. Restarting the connector in <code>initial_only</code> mode will not rebuild the tables as they have already been built.</p>
-<h2 id="capture-table-schema-only-cdc">Capture Table Schema Only + CDC<a class="headerlink" href="#capture-table-schema-only-cdc" title="Permanent link">&para;</a></h2>
+<h3 id="capture-table-schema-only-cdc"><strong>Capture Table Schema Only + CDC</strong><a class="headerlink" href="#capture-table-schema-only-cdc" title="Permanent link">&para;</a></h3>
 <p>Start the connector using <code>no_data</code> mode will perform the schema capture only, build the corresponding tables in PostgreSQL and it does not replicate existing table data (skip initial snapshot). After the schema capture is completed, the connector goes into CDC mode and will start capture subsequent changes to the tables.</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;no_data&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>Restarting the connector in <code>no_data</code> mode will not rebuild the schema again, and it will resume CDC since the last successful point.</p>
-<h2 id="cdc-only">CDC only<a class="headerlink" href="#cdc-only" title="Permanent link">&para;</a></h2>
-<p>Start the connector using <code>never</code> will skip schema capture and initial snapshot entirely and will go to CDC mode to capture subsequent changes. Please note that the connector expects all the capture tables have been created in PostgreSQL prior to starting in <code>never</code> mode. If the tables do not exist, the connector will encounter an error when it tries to apply a CDC change to a non-existent table.</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;never&#39;</span><span class="p">);</span>
-</code></pre></div>
-<p>Restarting the connector in <code>never</code> mode will resume CDC since the last successful point.</p>
-<h2 id="always-do-initial-snapahot-cdc">Always do Initial Snapahot + CDC<a class="headerlink" href="#always-do-initial-snapahot-cdc" title="Permanent link">&para;</a></h2>
+<h3 id="always-do-initial-snapahot-cdc"><strong>Always do Initial Snapahot + CDC</strong><a class="headerlink" href="#always-do-initial-snapahot-cdc" title="Permanent link">&para;</a></h3>
 <p>Start the connector using <code>always</code> mode will always capture the schemas of capture tables, always redo the initial snapshot and then go to CDC. This is similar to a reset button because everything will be rebuilt using this mode. Use it with caution especially when you have large number of tables being captured, which could take a long time to finish. After the rebuild, CDC resumes as normal.</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
 </code></pre></div>
-<p>However, it is possible to select partial tables to redo the initial snapshot by using the <code>snapshottable</code> option of the connector. Tables matching the criteria in <code>snapshottable</code> will redo the inital snapshot, if not, their initial snapshot will be skipped. If <code>snapshottable</code> is null or empty, by default, all the tables specified in <code>table</code> option of the connector will redo the initial snapshot under <code>always</code> mode.</p>
-<p>This example makes the connector only redo the initial snapshot of <code>inventory.customers</code> table. All other tables will have their snapshot skipped.
-<div class="highlight"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">synchdb_conninfo</span><span class="w"> </span>
-<span class="k">SET</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonb_set</span><span class="p">(</span><span class="k">data</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{snapshottable}&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&quot;testDB.dbo.customers&quot;&#39;</span><span class="p">)</span><span class="w"> </span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">;</span>
-</code></pre></div></p>
 <p>After the initial snapshot, CDC will begin. Restarting a connector in <code>always</code> mode will repeat the same process described above.</p>
+<h2 id="possible-snapshot-modes-for-sql-server-connector"><strong>Possible Snapshot Modes for SQL Server Connector</strong><a class="headerlink" href="#possible-snapshot-modes-for-sql-server-connector" title="Permanent link">&para;</a></h2>
+<ul>
+<li>initial (default)</li>
+<li>initial_only</li>
+<li>no_data</li>
+<li>always</li>
+<li>schemasync</li>
+</ul>
+<h2 id="preview-source-and-destination-table-relationships-with-schemasync-mode"><strong>Preview Source and Destination Table Relationships with schemasync mode</strong><a class="headerlink" href="#preview-source-and-destination-table-relationships-with-schemasync-mode" title="Permanent link">&para;</a></h2>
+<p>Before attempting to do an initial snapshot of current table and data, which may be huge, it is possible to "preview" all the tables and data type mappings between source and destination tables before the actual data migration. This gives you an opportunity to modify a data type mapping, or an object name before actual migration happens. This can be done with the special "schemasync" initial snapshot mode. Refer to <a href="../../tutorial/object_mapping_workflow/">object mapping workflow</a> for a detailed example.</p>
+<h2 id="selective-table-sync"><strong>Selective Table Sync</strong><a class="headerlink" href="#selective-table-sync" title="Permanent link">&para;</a></h2>
+<h3 id="select-desired-tables-and-start-it-for-the-first-time"><strong>Select Desired Tables and Start it for the First Time</strong><a class="headerlink" href="#select-desired-tables-and-start-it-for-the-first-time" title="Permanent link">&para;</a></h3>
+<p>Table selection is done during connector creation phase via <code>synchdb_add_conninfo()</code> where we specify a list of tables (expressed in FQN, separated by a comma) to replicate from.</p>
+<p>For example, the following command creates a connector that only replicates change from <code>dbo.orders</code> tables from remote SQL Server database.
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="mi">1433</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;sa&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;Password!&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;testDB&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;dbo.orders,dbo.products&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;sqlserver&#39;</span>
+<span class="p">);</span>
+</code></pre></div></p>
+<p>Starting this connector for the very first time will trigger an initial snapshot being performed and selected 2 tables' schema and data will be replicated.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="verify-the-connector-state-and-tables"><strong>Verify the Connector State and Tables</strong><a class="headerlink" href="#verify-the-connector-state-and-tables" title="Permanent link">&para;</a></h3>
+<p>Examine the connector state and the new tables:
+<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">Select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">state</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="p">;</span>
+<span class="w">     </span><span class="n">name</span><span class="w">      </span><span class="o">|</span><span class="w">  </span><span class="k">state</span><span class="w">  </span><span class="o">|</span><span class="w">   </span><span class="n">err</span>
+<span class="c1">---------------+---------+----------</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span>
+
+<span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="o">*</span>
+<span class="w">           </span><span class="n">List</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">tables</span>
+<span class="w"> </span><span class="k">Schema</span><span class="w"> </span><span class="o">|</span><span class="w">   </span><span class="n">Name</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">Type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Owner</span>
+<span class="c1">--------+----------+-------+--------</span>
+<span class="w"> </span><span class="n">testdb</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
+<span class="w"> </span><span class="n">testdb</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
+</code></pre></div></p>
+<p>By default, source database name is mapped to a schema in destination, so <code>dbo.orders</code> becomes <code>testdb.orders</code> in postgreSQL. Once the tables have done the initial snapshot, the connector will start CDC to stream subsequent changes for these tables.</p>
+<h3 id="add-more-tables-to-replicate-during-run-time"><strong>Add More Tables to Replicate During Run Time.</strong><a class="headerlink" href="#add-more-tables-to-replicate-during-run-time" title="Permanent link">&para;</a></h3>
+<p>If we would like to add more tables to replicate from, we will need to notify the Debezium engine about the updated table section and perform the initial snapshot again. Here's how it is done:</p>
+<ol>
+<li>Update the <code>synchdb_conninfo</code> table to include additional tables.</li>
+<li>In this example, we add the <code>dbo.customers</code> table to the sync list:
+<div class="highlight"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">synchdb_conninfo</span><span class="w"> </span>
+<span class="k">SET</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonb_set</span><span class="p">(</span><span class="k">data</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{table}&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&quot;dbo.orders,dbo.products,dbo.customers&quot;&#39;</span><span class="p">)</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">;</span>
+</code></pre></div></li>
+<li>Restart the connector with the snapshot mode set to <code>always</code> to perform another initial snapshot:
+<div class="highlight"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">orders</span><span class="p">,</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">products</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_restart_connector</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
+</code></pre></div>
+This forces Debezium to re-snapshot all the tables again, including the old tables <code>dbo.orders</code> and <code>dbo.products</code> and the new before going to CDC streaming. This means, to add the third table, the existing tables have to be dropped (to prevent duplicate table and primary key errors) and do the entire initial snapshot again. This is quite redundant and Debezium suggests using incremental snasphot to add the addition tables without re-snapshotting. We will update this procedure once we add the incremental snapshot support to SynchDB.</li>
+</ol>
+<h3 id="verify-the-updated-tables"><strong>Verify the Updated Tables</strong><a class="headerlink" href="#verify-the-updated-tables" title="Permanent link">&para;</a></h3>
+<p>Now, we can examine our tables again:
+<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="ss">&quot;testDB&quot;</span><span class="p">.</span><span class="o">*</span>
+<span class="w">           </span><span class="n">List</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">tables</span>
+<span class="w"> </span><span class="k">Schema</span><span class="w"> </span><span class="o">|</span><span class="w">   </span><span class="n">Name</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">Type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Owner</span>
+<span class="c1">--------+-----------+-------+--------</span>
+<span class="w"> </span><span class="n">testDB</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
+<span class="w"> </span><span class="n">testDB</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
+<span class="w"> </span><span class="n">testDB</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">products</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
+</code></pre></div></p>
 
 
 

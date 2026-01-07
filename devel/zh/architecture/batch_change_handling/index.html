@@ -744,6 +744,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#openlog-replicator-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Openlog Replicator Connector 批量处理
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1364,7 +1375,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL CDC 到 PostgreSQL
+    MySQL CDC -> PostgreSQL
   
 
     
@@ -1392,7 +1403,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server CDC 到 PostgreSQL
+    SQL Server CDC -> PostgreSQL
   
 
     
@@ -1420,63 +1431,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle CDC 到 PostgreSQL
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutorial/selective_table_sync/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    选择性表同步
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutorial/table_snapshot_resnapshot/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    表快照和重新快照
+    Oracle CDC -> PostgreSQL
   
 
     
@@ -1967,6 +1922,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#openlog-replicator-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Openlog Replicator Connector 批量处理
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1994,6 +1960,9 @@
 <p>SynchDB 在一个事务内处理一批变更（也叫一个 batch）。这意味着一批内的变更事件要么全部处理，要么全部不处理。当所有更改都成功处理后，SynchDB 会向 Debezium 运行器引擎发送一条消息，将批处理标记为已处理完成。此操作会导致偏移量（offset）被提交并最终刷新到磁盘。偏移量表示复制期间的逻辑位置，类似于 PostgreSQL 中的 LSN（日志序列号）。</p>
 <p><img alt="img" src="../../../images/synchdb-batch-new.jpg" /></p>
 <p>如果一批更改在 PostgreSQL 上部分成功，则会导致事务回滚，并且 SynchDB 不会通知 Debezium 运行器批处理已完成。当连接器重新启动时，同一批将再次恢复处理。</p>
+<h2 id="openlog-replicator-connector"><strong>Openlog Replicator Connector 批量处理</strong><a class="headerlink" href="#openlog-replicator-connector" title="Permanent link">&para;</a></h2>
+<p>由於 Openlog Replicator Connector 不依賴 Debezium 來協調變更事件的批次處理，其批次完全取決於 OLR 用戶端的原始讀取緩衝區大小（由 GUC <code>synchdb.olr_read_buffer_size</code> 配置）。客戶端會嘗試從套接字讀取盡可能多的數據，這些數據可能包含多個變更事件。讀取緩衝區中出現的多個「完整」變更事件將被視為相同批次，並在同一個 PostgreSQL 事務中執行。如果讀取緩衝區包含不完整的變更事件，則該事件不會被計入目前批次。預計下次讀取時，該不完整變更事件的剩餘資料將會到達，並成為下一批變更事件的一部分。</p>
+<p>因此，增加 <code>synchdb.olr_read_buffer_size</code> 的值會增加批次大小。</p>
 
 
 

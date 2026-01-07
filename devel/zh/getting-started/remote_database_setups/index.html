@@ -1193,6 +1193,67 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#synchdb-postgres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        設定 SynchDB 的 Postgres 連接器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="設定 SynchDB 的 Postgres 連接器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#guc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GUC 設定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        權限設定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pg_hba" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pg_hba 設定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ddl-lsn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        安裝 DDL 觸發器和自訂 LSN 視圖
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1558,7 +1619,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL CDC 到 PostgreSQL
+    MySQL CDC -> PostgreSQL
   
 
     
@@ -1586,7 +1647,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server CDC 到 PostgreSQL
+    SQL Server CDC -> PostgreSQL
   
 
     
@@ -1614,63 +1675,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle CDC 到 PostgreSQL
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutorial/selective_table_sync/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    选择性表同步
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutorial/table_snapshot_resnapshot/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    表快照和重新快照
+    Oracle CDC -> PostgreSQL
   
 
     
@@ -2355,6 +2360,67 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#synchdb-postgres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        設定 SynchDB 的 Postgres 連接器
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="設定 SynchDB 的 Postgres 連接器">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#guc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GUC 設定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        權限設定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pg_hba" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pg_hba 設定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ddl-lsn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        安裝 DDL 觸發器和自訂 LSN 視圖
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2611,6 +2677,67 @@ binlog_expire_logs_seconds  = 864000
 <span class="w">        </span><span class="k">EXECUTE</span><span class="w"> </span><span class="k">IMMEDIATE</span><span class="w"> </span><span class="n">CMD</span><span class="p">;</span>
 <span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="n">LOOP</span><span class="p">;</span>
 <span class="k">END</span><span class="p">;</span>
+</code></pre></div>
+<h2 id="synchdb-postgres"><strong>設定 SynchDB 的 Postgres 連接器</strong><a class="headerlink" href="#synchdb-postgres" title="Permanent link">&para;</a></h2>
+<p>需要配置 PostgreSQL 伺服器，使其用作 SynchDB 的資料庫來源。</p>
+<h3 id="guc">GUC 設定<a class="headerlink" href="#guc" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>wal_level = logical
+max_wal_senders = &lt;&lt; 可能需要根據您的需求進行調整 - 預設值為 10 &gt;&gt;
+max_replication_slots = &lt;&lt; 可能需要根據您的需求進行調整 - 預設值為 10 &gt;&gt;
+wal_writer_delay = &lt;&lt; 如果 `synchronous_commit` 的值不是 “on”，建議設定為 10ms。預設值為 200ms &gt;&gt;
+</code></pre></div>
+<h3 id="_7">權限設定<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>建立一個具有複製權限的新使用者：</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">ROLE</span><span class="w"> </span><span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span><span class="w"> </span><span class="n">REPLICATION</span><span class="w"> </span><span class="n">LOGIN</span><span class="p">;</span>
+</code></pre></div>
+<p>SynchDB 從為 PostgreSQL 來源表建立的發布中取得來源表的變更事件流。發布包含從一個或多個表產生的經過篩選的變更事件集。每個發布中的數據都根據發布規範進行過濾。規格可以由 PostgreSQL 資料庫管理員或 Debezium 連接器建立。為了允許 SynchDB Postgres 連接器建立發布並指定要複製到其中的數據，連接器必須以資料庫中的特定權限運行。</p>
+<p>有幾種方法可以確定如何建立發布。通常，最好在設定連接器之前，為要捕獲的表手動建立發布。但是，您可以設定環境，使 SynchDB 自動建立發布並指定要新增到其中的資料。</p>
+<p>SynchDB 使用包含清單屬性（當使用 <code>synchdb_add_conninfo</code> 建立連接器時）來指定如何將資料插入到發布中。</p>
+<p>要使 SynchDB 建立 PostgreSQL 發布，它必須以具有以下權限的使用者身分執行：</p>
+<ul>
+<li>資料庫中的複製權限，用於將表格新增至發布。</li>
+<li>資料庫的 CREATE 權限，用於新增發布。</li>
+<li>需要對錶擁有 SELECT 權限才能複製初始表資料。表所有者自動擁有對錶的 SELECT 權限。</li>
+</ul>
+<p>若要將表格新增至發布中，使用者必須是該表格的擁有者。但由於來源表已存在，因此需要一種機制與原始所有者共享所有權。若要啟用共享所有權，您可以建立 PostgreSQL 複製群組，然後將現有表格擁有者和複製使用者新增至該群組。</p>
+<p>步驟：</p>
+<ul>
+<li>建立複製組。</li>
+</ul>
+<div class="highlight"><pre><span></span><code>CREATE ROLE &lt;replication_group&gt;;
+</code></pre></div>
+<ul>
+<li>將表格的原始擁有者新增至該群組。</li>
+</ul>
+<div class="highlight"><pre><span></span><code>GRANT REPLICATION_GROUP TO &lt;original_owner&gt;;
+</code></pre></div>
+<ul>
+<li>將 Debezium 複製使用者新增至該群組。</li>
+</ul>
+<div class="highlight"><pre><span></span><code>GRANT REPLICATION_GROUP TO &lt;replication_user&gt;;
+</code></pre></div>
+<ul>
+<li>將表格的所有權轉移給 <replication_group>。</li>
+</ul>
+<div class="highlight"><pre><span></span><code>ALTER TABLE &lt;table_name&gt; OWNER TO REPLICATION_GROUP;
+</code></pre></div>
+<h3 id="pg_hba">pg_hba 設定<a class="headerlink" href="#pg_hba" title="Permanent link">&para;</a></h3>
+<p>要使 Debezium 能夠複製 PostgreSQL 數據，您必須配置資料庫以允許與執行 PostgreSQL 連接器的主機進行複製。若要指定允許與資料庫複製的用戶端，請在 PostgreSQL 基於主機的驗證檔案 <code>pg_hba.conf</code> 新增條目。有關 pg_hba.conf 文件的更多信息，請參閱 <a href="https://www.postgresql.org/docs/current/static/datatype-net-types.html">PostgreSQL 文件</a>。</p>
+<div class="highlight"><pre><span></span><code>local replication &lt;youruser&gt; trust
+host replication &lt;youruser&gt; 127.0.0.1/32 trust
+host replication &lt;youruser&gt; ::1/128 trust
+</code></pre></div>
+<h3 id="ddl-lsn">安裝 DDL 觸發器和自訂 LSN 視圖<a class="headerlink" href="#ddl-lsn" title="Permanent link">&para;</a></h3>
+<p>若要將使用者表 DDL 邏輯複製到 SynchDB，您必須在來源 PostgreSQL 資料庫中安裝 DDL 觸發器。此外，您還需要建立自訂視圖，該視圖會傳回來源資料庫中的目前 LSN，以便 SynchDB 可以在快照過程中透過 FDW 檢索它。</p>
+<p>SynchDB 原始碼庫包含一個用於設定的 SQL 腳本和一個用於清理的腳本。請確保在來源 PostgreSQL 資料庫中運行它們：</p>
+<p>通过 psql 會話安裝 DDL 觸發器函數：</p>
+<div class="highlight"><pre><span></span><code>psql -U &lt;user&gt; -d &lt;database&gt; &lt; postgres-connector-src-ddl-setup.sql
+</code></pre></div>
+<p>通过 psql 會話清理 DDL 觸發器函數：</p>
+<div class="highlight"><pre><span></span><code>psql -U &lt;user&gt; -d &lt;database&gt; &lt; postgres-connector-src-ddl-teardown.sql
+</code></pre></div>
+<p>如果您不需要 DDL 複製，則無需在來源資料庫安裝此 DDL 觸發器函數。但是，如果您想要對來源資料庫（目前表格 + 資料）進行目前快照，則需要目前 LSN 視圖。您無需載入上述 SQL 腳本，即可將其新增至來源資料庫。請確保此視圖是在 <code>public</code> 模式下建立的。</p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">synchdb_wal_lsn</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">pg_current_wal_lsn</span><span class="p">()::</span><span class="n">pg_lsn</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">wal_lsn</span><span class="p">;</span>
 </code></pre></div>
 
 

@@ -1469,7 +1469,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL CDC 到 PostgreSQL
+    MySQL CDC -> PostgreSQL
   
 
     
@@ -1497,7 +1497,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server CDC 到 PostgreSQL
+    SQL Server CDC -> PostgreSQL
   
 
     
@@ -1525,63 +1525,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle CDC 到 PostgreSQL
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutorial/selective_table_sync/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    选择性表同步
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../tutorial/table_snapshot_resnapshot/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    表快照和重新快照
+    Oracle CDC -> PostgreSQL
   
 
     
@@ -2365,6 +2309,18 @@
 <td>0</td>
 <td>初始快照完成後、CDC 流開始前等待的延遲時間。</td>
 </tr>
+<tr>
+<td>synchdb.fdw_migrate_with_subtx</td>
+<td>boolean</td>
+<td>true</td>
+<td>在 FDW 的快照期間，是否使用子交易遷移表的選項</td>
+</tr>
+<tr>
+<td>synchdb.letter_casing_strategy</td>
+<td>enum</td>
+<td>"lowercase"</td>
+<td>synchdb 應如何處理來自不同数据库源的物件字母大小寫差異。可選值為："lower"（規範化為小寫）、"upper"（規範化為大寫）或 "asis"（保留接收到的任何字母大小寫）。</td>
+</tr>
 </tbody>
 </table>
 <h2 id="_2"><strong>技术说明</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -2392,6 +2348,9 @@ synchdb.max_connector_workers=false                                     # 最多
 synchdb.error_handling_strategy=&#39;retry&#39;                                 # 连接器应在发生错误时重试
 synchdb.dbz_log_leve=&#39;error&#39;                                            # Debezium Runner 应仅记录错误消息
 synchdb.log_change_on_error=true                                        # 发生错误时记录 JSON 更改事件
+synchdb.cdc_start_delay_ms=30000                                        # 快照完成後等待 30 秒，CDC 開始前等待
+synchdb.olr_snapshot_engine=&quot;fdw&quot;                                       # 使用基於 FDW 的快照引擎完成快照過程
+synchdb.letter_casing_strategy=&quot;asis&quot;                                   # 保留原始檔案中所有物件字母的大小寫。
 </code></pre></div>
 <h2 id="_4"><strong>使用建议</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ol>
