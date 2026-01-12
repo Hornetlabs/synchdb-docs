@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://docs.synchdb.com/latest/es/user-guide/configure_snapshot_engine/">
       
       
-        <link rel="prev" href="../configure_infinispan/">
+        <link rel="prev" href="../configure_error_strategies/">
       
       
         <link rel="next" href="../../changelog/">
@@ -1286,7 +1286,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL -> PostgreSQL
+    Conector MySQL
   
 
     
@@ -1314,7 +1314,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server -> PostgreSQL
+    Conector SQL Server
   
 
     
@@ -1342,7 +1342,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle -> PostgreSQL
+    Conector Oracle
   
 
     
@@ -1363,14 +1363,42 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/object_mapping_workflow/" class="md-nav__link">
+      <a href="../../tutorial/postgresql_cdc_to_postgresql/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Flujo de trabajo de mapeo de objetos
+    Conector Postgres
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/native_olr_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conector nativo de replicador Openlog
   
 
     
@@ -1595,14 +1623,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../secured_connection/" class="md-nav__link">
+      <a href="../letter_casing_strategy/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Conexión segura
+    Estrategia de mayúsculas y minúsculas
   
 
     
@@ -1630,7 +1658,7 @@
   <span class="md-ellipsis">
     
   
-    Configurar estrategias de error
+    estrategias de error
   
 
     
@@ -1651,70 +1679,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../set_offset/" class="md-nav__link">
+      <a href="../../../user-guide/configure_olr.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Configurar el desplazamiento de replicación
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../configure_olr/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Configurar Openlog Replicator para Oracle Connector
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../configure_infinispan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Configurar Infinispan
+    Configurar Openlog Replicator
   
 
     
@@ -1806,6 +1778,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#debezium-based-initial-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debezium Based Initial Snapshot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#fdw-based-initial-snapshot" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1817,15 +1800,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#build-and-install-oracle_fdw" class="md-nav__link">
+  <a href="#fdw-snapshot-for-oracle-and-olr-connectors" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Build and Install oracle_fdw
+        FDW Snapshot for Oracle and OLR Connectors
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Build and Install oracle_fdw">
+    <nav class="md-nav" aria-label="FDW Snapshot for Oracle and OLR Connectors">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1840,10 +1823,77 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#build-oracle_fdw-280" class="md-nav__link">
+  <a href="#build-and-install-oracle_fdw-280" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Build oracle_fdw 2.8.0
+        Build and Install oracle_fdw 2.8.0
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fdw-snapshot-for-mysql-connectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FDW Snapshot for MySQL Connectors
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FDW Snapshot for MySQL Connectors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-mysql-client-development-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install MySQL Client Development Package
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-and-install-mysql_fdw-293" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build and Install mysql_fdw 2.9.3
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fdw-snapshot-for-postgres-connectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FDW Snapshot for Postgres Connectors
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FDW Snapshot for Postgres Connectors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-and-install-postgres_fdw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build and Install postgres_fdw
       
     </span>
   </a>
@@ -1936,6 +1986,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#debezium-based-initial-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debezium Based Initial Snapshot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#fdw-based-initial-snapshot" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1947,15 +2008,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#build-and-install-oracle_fdw" class="md-nav__link">
+  <a href="#fdw-snapshot-for-oracle-and-olr-connectors" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Build and Install oracle_fdw
+        FDW Snapshot for Oracle and OLR Connectors
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Build and Install oracle_fdw">
+    <nav class="md-nav" aria-label="FDW Snapshot for Oracle and OLR Connectors">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1970,10 +2031,77 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#build-oracle_fdw-280" class="md-nav__link">
+  <a href="#build-and-install-oracle_fdw-280" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Build oracle_fdw 2.8.0
+        Build and Install oracle_fdw 2.8.0
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fdw-snapshot-for-mysql-connectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FDW Snapshot for MySQL Connectors
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FDW Snapshot for MySQL Connectors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-mysql-client-development-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install MySQL Client Development Package
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build-and-install-mysql_fdw-293" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build and Install mysql_fdw 2.9.3
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fdw-snapshot-for-postgres-connectors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FDW Snapshot for Postgres Connectors
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FDW Snapshot for Postgres Connectors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-and-install-postgres_fdw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Build and Install postgres_fdw
       
     </span>
   </a>
@@ -2008,22 +2136,32 @@
 <h1 id="configure-snapshot-engine">Configure Snapshot Engine<a class="headerlink" href="#configure-snapshot-engine" title="Permanent link">&para;</a></h1>
 <h2 id="initial-snapshot-vs-change-data-capture-cdc"><strong>Initial Snapshot vs Change Data Capture (CDC)</strong><a class="headerlink" href="#initial-snapshot-vs-change-data-capture-cdc" title="Permanent link">&para;</a></h2>
 <p>Initial snapshot refers to the process of migrating both the table schema and the initial data from remote database to SynchDB. For most connector types, this is done only once on first connector start via embedded Debezium runner as the only engine that can perform initial snapshot. After the initial snapshot completes, the Change Data Capture will begin to stream live changes to SynchDB. The "snapshot modes" can further control the behavior of initial snapshot and CDC. Refer to <a href="../../user-guide/start_stop_connector/">here</a> for more information.</p>
-<p>In addition to Debezium based initial snapshot, which may be slow when there is a huge number of tables, SynchdB provides an alternative FDW-based native initial snapshot engine. FDW based snapshot is only supported in native Openlog Replicator (OLR) connector as of now. All other connectors still rely on debezium to carry out the snapshot.</p>
+<p>SynchDB supports 2 snapshot engines, each supports various connector types:</p>
+<p><strong>Debezium based snapshot：</strong></p>
+<ul>
+<li>MySQL</li>
+<li>SQL Server</li>
+<li>Oracle</li>
+<li>Openlog Replicator</li>
+</ul>
+<p><strong>FDW based snapshot：</strong></p>
+<ul>
+<li>MySQL (uses mysql_fdw)</li>
+<li>Oracle (uses oracle_fdw)</li>
+<li>Openlog Replicator (uses oracle_fdw)</li>
+<li>Postgres (uses postgres_fdw)</li>
+</ul>
+<h2 id="debezium-based-initial-snapshot"><strong>Debezium Based Initial Snapshot</strong><a class="headerlink" href="#debezium-based-initial-snapshot" title="Permanent link">&para;</a></h2>
+<p>This is the default snapshot engine (synchdb.olr_snapshot_engine='debezium') that relies of Debezium engine via JNI to initiate the snapshot process. In most cases, it works fine, but may suffer from performance issues if the number of tables included in snapshot is high (thousands or more). Debezium will first go through an analaysis stage that visits each table once to learn its structure and estimates number of rows to snapshot. This is done entirely by a single worker and during this time, the engine may appear to be "hanging" and will not emit any change events. This process itself could take hours to complete in large number of tables. Once done, it will then start emitting change events to SynchDB.</p>
+<p>Triggered automatically upon <code>synchdb_start_engine_bgw()</code> with a snapshot mode that requires doing a snapshot and will not repeat again if completed.</p>
 <h2 id="fdw-based-initial-snapshot"><strong>FDW Based Initial Snapshot</strong><a class="headerlink" href="#fdw-based-initial-snapshot" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Enabled in <code>postgresql.conf</code> by setting "synchdb.olr_snapshot_engine" to "fdw"</li>
-<li>Start a OLR connector with a snapshot mode that requires doing a snapshot. For example:</li>
+<li>Triggered automatically upon <code>synchdb_start_engine_bgw()</code> with a snapshot mode that requires doing a snapshot and will not repeat again if completed.</li>
+<li>Corresponding FDWs must be available.</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;no_data&#39;</span><span class="p">);</span>
-
-<span class="c1">-- or</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
-
-<span class="c1">-- or</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;schemasync&#39;</span><span class="p">);</span>
-</code></pre></div>
-<h2 id="build-and-install-oracle_fdw"><strong>Build and Install oracle_fdw</strong><a class="headerlink" href="#build-and-install-oracle_fdw" title="Permanent link">&para;</a></h2>
-<p>If "fdw" is selected as snapshot engine, you need to ensure the corresponding Foreign Data Wrapper has been installed or available for synchdb. For your reference, below is a brief procedure to build and install oracle_fdw from source code.</p>
+<h2 id="fdw-snapshot-for-oracle-and-olr-connectors"><strong>FDW Snapshot for Oracle and OLR Connectors</strong><a class="headerlink" href="#fdw-snapshot-for-oracle-and-olr-connectors" title="Permanent link">&para;</a></h2>
+<p>It is possible to use oracle_fdw to perform initial snapshot for Oracle and OLR connectors which is significantly faster than Debezium counterpart. SynchDB integrates with <a href="https://github.com/laurenz/oracle_fdw">oracle_fdw</a> version 2.8.0 with OCI v23.9.0 as its underlying driver. This is just the version tested, older or newer versions may still work.</p>
 <h3 id="install-oci"><strong>Install OCI</strong><a class="headerlink" href="#install-oci" title="Permanent link">&para;</a></h3>
 <p>OCI is required to build and run oracle_fdw. For this example, I am using version 23.9.0:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Get the pre-build packages:</span>
@@ -2044,7 +2182,7 @@ unzip<span class="w"> </span>instantclient-sdk-linux.x64-23.9.0.25.07.zip
 <p>You could add the above commands to the end of <code>~/.bashrc</code> to automatically set the PATHs every time you login to your system.</p>
 <p>You can also add $OCI_HOME to <code>/etc/ld.so.conf.d/x86_64-linux-gnu.conf</code> (ubuntu example), as a new path to find shared libraries.</p>
 <p>You should do a ldconfig so your linker knows where to find shared libraries:</p>
-<h3 id="build-oracle_fdw-280"><strong>Build oracle_fdw 2.8.0</strong><a class="headerlink" href="#build-oracle_fdw-280" title="Permanent link">&para;</a></h3>
+<h3 id="build-and-install-oracle_fdw-280"><strong>Build and Install oracle_fdw 2.8.0</strong><a class="headerlink" href="#build-and-install-oracle_fdw-280" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/laurenz/oracle_fdw.git<span class="w"> </span>--branch<span class="w"> </span>ORACLE_FDW_2_8_0
 </code></pre></div>
 <p>Ensure oracle_fdw's Makefile can find OCI includes and libraries by adjusting these 2 lines in Makefile:</p>
@@ -2055,8 +2193,36 @@ FIND_LIBDIRS<span class="w"> </span>:<span class="o">=</span><span class="w"> </
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span><span class="nv">PG_CONFIG</span><span class="o">=</span>/usr/local/pgsql/bin/pg_config
 sudo<span class="w"> </span>make<span class="w"> </span>install<span class="w"> </span><span class="nv">PG_CONFIG</span><span class="o">=</span>/usr/local/pgsql/bin/pg_config
 </code></pre></div>
-<p>Oralce_fdw is ready to go. </p>
-<p><strong>&lt;<IMPORTANT>&gt;</strong> You do not have to run <code>CREATE EXTENSION oracle_fdw</code> prior to using FDW based initial snapshot, nor do you have to <code>CREATE SERVER</code> or <code>CREATE USER MAPPING</code>. SynchDB takes care of all of these when it performs the snapshot..</p>
+<p>Oralce_fdw is ready to go. Start a connector normally with synchdb.olr_snapshot_engine set to 'fdw'. If a snapshot is required, SynchDB will complete it via FDW. You do not have to run <code>CREATE EXTENSION oracle_fdw</code> prior to using FDW based initial snapshot, nor do you have to <code>CREATE SERVER</code> or <code>CREATE USER MAPPING</code>. SynchDB takes care of all of these when it performs the snapshot..</p>
+<h2 id="fdw-snapshot-for-mysql-connectors"><strong>FDW Snapshot for MySQL Connectors</strong><a class="headerlink" href="#fdw-snapshot-for-mysql-connectors" title="Permanent link">&para;</a></h2>
+<p>It is possible to use mysql_fdw to perform initial snapshot for MySQL connectors which is significantly faster than Debezium counterpart. SynchDB integrates with <a href="https://github.com/EnterpriseDB/mysql_fdw">mysql_fdw</a> version 2.9.3 with libmysqlclient v8 as its underlying driver. This is just the version tested, older or newer versions may still work.</p>
+<h3 id="install-mysql-client-development-package"><strong>Install MySQL Client Development Package</strong><a class="headerlink" href="#install-mysql-client-development-package" title="Permanent link">&para;</a></h3>
+<p>You may download and install MySQL client development package <a href="https://packages.debian.org/sid/libmysqlclient-dev">here</a>. If you are on Ubuntu, it can be installed using package manager:</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libmysqlclient-dev
+</code></pre></div>
+<h3 id="build-and-install-mysql_fdw-293"><strong>Build and Install mysql_fdw 2.9.3</strong><a class="headerlink" href="#build-and-install-mysql_fdw-293" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/EnterpriseDB/mysql_fdw.git<span class="w"> </span>--branch<span class="w"> </span>REL-2_9_3
+</code></pre></div>
+<p>Build and install mysql_fdw:</p>
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span><span class="nv">PG_CONFIG</span><span class="o">=</span>/usr/local/pgsql/bin/pg_config
+sudo<span class="w"> </span>make<span class="w"> </span>install<span class="w"> </span><span class="nv">PG_CONFIG</span><span class="o">=</span>/usr/local/pgsql/bin/pg_config
+</code></pre></div>
+<p>mysql_fdw is ready to go. Start a connector normally with synchdb.olr_snapshot_engine set to 'fdw'. If a snapshot is required, SynchDB will complete it via FDW. You do not have to run <code>CREATE EXTENSION mysql_fdw</code> prior to using FDW based initial snapshot, nor do you have to <code>CREATE SERVER</code> or <code>CREATE USER MAPPING</code>. SynchDB takes care of all of these when it performs the snapshot..</p>
+<h2 id="fdw-snapshot-for-postgres-connectors"><strong>FDW Snapshot for Postgres Connectors</strong><a class="headerlink" href="#fdw-snapshot-for-postgres-connectors" title="Permanent link">&para;</a></h2>
+<p>It is possible to use postgres_fdw to perform initial snapshot for Postgres connectors which is significantly faster than Debezium counterpart. SynchDB integrates with <a href="https://github.com/postgres/postgres/tree/master/contrib/postgres_fdw">postgres_fdw</a> based on postgresql 18. This is just the version tested, older or newer versions may still work.</p>
+<h3 id="build-and-install-postgres_fdw"><strong>Build and Install postgres_fdw</strong><a class="headerlink" href="#build-and-install-postgres_fdw" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/postgres/postgres.git<span class="w"> </span>--branch<span class="w"> </span>REL_18_0
+<span class="nb">cd</span><span class="w"> </span>postgres
+./configure
+make<span class="w"> </span>
+sudo<span class="w"> </span>make<span class="w"> </span>install
+
+<span class="nb">cd</span><span class="w"> </span>contrib/postgres_fdw
+make<span class="w"> </span>
+sudo<span class="w"> </span>make<span class="w"> </span>install
+</code></pre></div>
+<p>postgre is reasdy to go. Start a connector normally with synchdb.olr_snapshot_engine set to 'fdw'. If a snapshot is required, SynchDB will complete it via FDW. You do not have to run <code>CREATE EXTENSION mysql_fdw</code> prior to using FDW based initial snapshot, nor do you have to <code>CREATE SERVER</code> or <code>CREATE USER MAPPING</code>. SynchDB takes care of all of these when it performs the snapshot..</p>
 
 
 

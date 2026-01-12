@@ -15,6 +15,10 @@
         <link rel="canonical" href="https://docs.synchdb.com/latest/es/tutorial/postgresql_cdc_to_postgresql/">
       
       
+        <link rel="prev" href="../oracle_cdc_to_postgresql/">
+      
+      
+        <link rel="next" href="../native_olr_cdc_to_postgresql/">
       
       
         
@@ -31,7 +35,7 @@
     
     
       
-        <title>Postgres -> Postgres - Documentación de SynchDB</title>
+        <title>Conector Postgres - Documentación de SynchDB</title>
       
     
     
@@ -90,7 +94,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#postgres-postgres" class="md-skip">
+        <a href="#postgres-connector" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -128,7 +132,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Postgres -&gt; Postgres
+              Conector Postgres
             
           </span>
         </div>
@@ -350,10 +354,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../mysql_cdc_to_postgresql/" class="md-tabs__link">
           
   
@@ -1218,26 +1224,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
   
   
@@ -1255,7 +1266,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1280,7 +1291,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL -> PostgreSQL
+    Conector MySQL
   
 
     
@@ -1308,7 +1319,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server -> PostgreSQL
+    Conector SQL Server
   
 
     
@@ -1336,7 +1347,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle -> PostgreSQL
+    Conector Oracle
   
 
     
@@ -1354,17 +1365,363 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../object_mapping_workflow/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conector Postgres
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
     
   
-    Flujo de trabajo de mapeo de objetos
+    Conector Postgres
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prepare-postgresql-database-for-synchdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prepare PostgreSQL Database for SynchDB
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-postgresql-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a PostgreSQL Connector
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#initial-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initial Snapshot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#different-connector-launch-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Different Connector Launch Modes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Different Connector Launch Modes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initial-snapshot-cdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initial Snapshot + CDC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initial-snapshot-only-and-no-cdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initial Snapshot Only and no CDC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capture-table-schema-only-cdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capture Table Schema Only + CDC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#always-do-initial-snapahot-cdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Always do Initial Snapahot + CDC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#possible-snapshot-modes-for-postgres-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Possible Snapshot Modes for Postgres Connector
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preview-source-and-destination-table-relationships-with-schemasync-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preview Source and Destination Table Relationships with schemasync mode
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Preview Source and Destination Table Relationships with schemasync mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-connector-and-start-it-in-schemasync-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a Connector and Start it in schemasync Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ensure-the-connector-is-put-to-paused-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ensure the connector is put to paused state
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-the-tables-created-by-default-mapping-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review the Tables Created by Default Mapping Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-custom-mapping-rules-if-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Define Custom Mapping Rules (If Needed)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-all-object-mapping-rules-created-so-far" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review All Object Mapping Rules Created So Far
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reload-the-object-mapping-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reload the Object Mapping Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-synchdb_att_view-again-for-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review synchdb_att_view Again for Changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume-the-connector-or-redo-the-entire-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resume the Connector or Redo the Entire Snapshot
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selective-table-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Selective Table Sync
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Selective Table Sync">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#select-desired-tables-and-start-it-for-the-first-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Select Desired Tables and Start it for the First Time
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-the-connector-state-and-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify the Connector State and Tables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-more-tables-to-replicate-during-run-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add More Tables to Replicate During Run Time.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-the-updated-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify the Updated Tables
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../native_olr_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conector nativo de replicador Openlog
   
 
     
@@ -1584,14 +1941,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../user-guide/secured_connection/" class="md-nav__link">
+      <a href="../../user-guide/letter_casing_strategy/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Conexión segura
+    Estrategia de mayúsculas y minúsculas
   
 
     
@@ -1619,7 +1976,7 @@
   <span class="md-ellipsis">
     
   
-    Configurar estrategias de error
+    estrategias de error
   
 
     
@@ -1640,70 +1997,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../user-guide/set_offset/" class="md-nav__link">
+      <a href="../../../user-guide/configure_olr.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Configurar el desplazamiento de replicación
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../user-guide/configure_olr/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Configurar Openlog Replicator para Oracle Connector
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../user-guide/configure_infinispan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Configurar Infinispan
+    Configurar Openlog Replicator
   
 
     
@@ -1919,6 +2220,100 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Preview Source and Destination Table Relationships with schemasync mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-connector-and-start-it-in-schemasync-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a Connector and Start it in schemasync Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ensure-the-connector-is-put-to-paused-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ensure the connector is put to paused state
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-the-tables-created-by-default-mapping-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review the Tables Created by Default Mapping Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-custom-mapping-rules-if-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Define Custom Mapping Rules (If Needed)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-all-object-mapping-rules-created-so-far" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review All Object Mapping Rules Created So Far
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reload-the-object-mapping-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reload the Object Mapping Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-synchdb_att_view-again-for-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review synchdb_att_view Again for Changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume-the-connector-or-redo-the-entire-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resume the Connector or Redo the Entire Snapshot
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2002,7 +2397,7 @@
   
 
 
-<h1 id="postgres-postgres">Postgres -&gt; Postgres<a class="headerlink" href="#postgres-postgres" title="Permanent link">&para;</a></h1>
+<h1 id="postgres-connector">Postgres Connector<a class="headerlink" href="#postgres-connector" title="Permanent link">&para;</a></h1>
 <h2 id="prepare-postgresql-database-for-synchdb"><strong>Prepare PostgreSQL Database for SynchDB</strong><a class="headerlink" href="#prepare-postgresql-database-for-synchdb" title="Permanent link">&para;</a></h2>
 <p>Before SynchDB can be used to replicate from PotgreSQL, PostgreSQL server needs to be configured according to the procedure outlined <a href="../../getting-started/remote_database_setups/">here</a></p>
 <h2 id="create-a-postgresql-connector"><strong>Create a PostgreSQL Connector</strong><a class="headerlink" href="#create-a-postgresql-connector" title="Permanent link">&para;</a></h2>
@@ -2094,8 +2489,104 @@
 <li>schemasync</li>
 </ul>
 <h2 id="preview-source-and-destination-table-relationships-with-schemasync-mode"><strong>Preview Source and Destination Table Relationships with schemasync mode</strong><a class="headerlink" href="#preview-source-and-destination-table-relationships-with-schemasync-mode" title="Permanent link">&para;</a></h2>
-<p>Before attempting to do an initial snapshot of current table and data, which may be huge, it is possible to "preview" all the tables and data type mappings between source and destination tables before the actual data migration. This gives you an opportunity to modify a data type mapping, or an object name before actual migration happens. This can be done with the special "schemasync" initial snapshot mode. Refer to <a href="../../tutorial/object_mapping_workflow/">object mapping workflow</a> for a detailed example.</p>
+<p>Before attempting to do an initial snapshot of current table and data, which may be huge, it is possible to "preview" all the tables and data type mappings between source and destination tables before the actual data migration. This gives you an opportunity to modify a data type mapping, or an object name before actual migration happens. This can be done with the special "schemasync" initial snapshot mode.</p>
 <p>Please note that you must set <code>synchdb.olr_snapshot_engine</code> to 'fdw' in order to use <code>schemasync</code> mode to preview the tables.</p>
+<h3 id="create-a-connector-and-start-it-in-schemasync-mode"><strong>Create a Connector and Start it in <code>schemasync</code> Mode</strong><a class="headerlink" href="#create-a-connector-and-start-it-in-schemasync-mode" title="Permanent link">&para;</a></h3>
+<p><code>schemasync</code> is a special mode that makes the connector connects to remote database and attempt to sync only the schema of designated tables. After this is done, the connector is put to <code>paused</code> state and user is able to review all the tables and data types created using the default rules and make change if needed.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;pgconn&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="mi">5433</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;pguser&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;pgpass&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;public&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;postgres&#39;</span>
+<span class="p">);</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;pgconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;schemasync&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="ensure-the-connector-is-put-to-paused-state"><strong>Ensure the connector is put to paused state</strong><a class="headerlink" href="#ensure-the-connector-is-put-to-paused-state" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">connector_type</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">stage</span><span class="p">,</span><span class="w"> </span><span class="k">state</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;pgconn&#39;</span><span class="p">;;</span>
+<span class="w">  </span><span class="n">name</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">connector_type</span><span class="w"> </span><span class="o">|</span><span class="w">   </span><span class="n">pid</span><span class="w">   </span><span class="o">|</span><span class="w">        </span><span class="n">stage</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">state</span>
+<span class="c1">--------+----------------+---------+---------------------+--------</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="mi">1643157</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">change</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="n">capture</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">paused</span>
+</code></pre></div>
+<h3 id="review-the-tables-created-by-default-mapping-rules"><strong>Review the Tables Created by Default Mapping Rules</strong><a class="headerlink" href="#review-the-tables-created-by-default-mapping-rules" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_att_view</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;pgconn&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">name</span><span class="w">  </span><span class="o">|</span><span class="w">   </span><span class="k">type</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">attnum</span><span class="w"> </span><span class="o">|</span><span class="w">       </span><span class="n">ext_tbname</span><span class="w">        </span><span class="o">|</span><span class="w">    </span><span class="n">pg_tbname</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">ext_attname</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">pg_attname</span><span class="w"> </span><span class="o">|</span><span class="w">  </span><span class="n">ext_atttypename</span><span class="w">  </span><span class="o">|</span><span class="w">  </span><span class="n">pg_atttypename</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">transform</span>
+<span class="c1">--------+----------+--------+-------------------------+------------------+-------------+------------+-------------------+-------------------+-----------</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">mytble</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">mytble</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">mytble</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">mytble</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">b</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">b</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">mytble</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">mytble</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">c</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="k">c</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">testing</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">testing</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">testing</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">testing</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">b</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">b</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">text</span><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="nb">text</span><span class="w">              </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">testing</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">testing</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">c</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="k">c</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">testing</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">testing</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">d</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">d</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">bigint</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="nb">bigint</span><span class="w">            </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">xyz</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">xyz</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">bbb</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">bbb</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">xyz</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">xyz</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">ccc</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">ccc</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">bytea</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">bytea</span><span class="w">             </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">xyz</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">xyz</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">ddd</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">ddd</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">xyz</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">xyz</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">eee</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">eee</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">5</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">xyz</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">xyz</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">fff</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">fff</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">6</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">xyz</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">xyz</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">ggg</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">ggg</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">bigint</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="nb">bigint</span><span class="w">            </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">7</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">xyz</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">xyz</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">aaa</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">aaa</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+</code></pre></div>
+<h3 id="define-custom-mapping-rules-if-needed"><strong>Define Custom Mapping Rules (If Needed)</strong><a class="headerlink" href="#define-custom-mapping-rules-if-needed" title="Permanent link">&para;</a></h3>
+<p>User can use <code>synchdb_add_objmap</code> function to create custom mapping rules. It can be used to map table name, column name, data types and defines a data transform expression rule</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;pgconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;postgres.public.mytble&#39;</span><span class="p">,</span><span class="s1">&#39;postgres.thetable&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;pgconn&#39;</span><span class="p">,</span><span class="s1">&#39;column&#39;</span><span class="p">,</span><span class="s1">&#39;postgres.public.testing.c&#39;</span><span class="p">,</span><span class="s1">&#39;ccc&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;pgconn&#39;</span><span class="p">,</span><span class="s1">&#39;datatype&#39;</span><span class="p">,</span><span class="s1">&#39;postgres.public.xyz.ggg&#39;</span><span class="p">,</span><span class="s1">&#39;int|0&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;pgconn&#39;</span><span class="p">,</span><span class="s1">&#39;transform&#39;</span><span class="p">,</span><span class="s1">&#39;postgres.public.xyz.bbb&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;&#39;&gt;&gt;&gt;&gt;&gt;&#39;&#39; || &#39;&#39;%d&#39;&#39; || &#39;&#39;&lt;&lt;&lt;&lt;&lt;&#39;&#39;&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>The above means:</p>
+<ul>
+<li>source table 'postgres.public.mytble' will be mapped to 'postgres.thetable' in destination</li>
+<li>source column 'postgres.public.testing.c'will be mapped to 'ccc' in destination</li>
+<li>source data type for column 'postgres.public.xyz.ggg' will be mapped to 'int'</li>
+<li>source column data 'postgres.public.xyz.bbb' will be transformed accoring to the expression where %d is the data placeholder</li>
+</ul>
+<h3 id="review-all-object-mapping-rules-created-so-far"><strong>Review All Object Mapping Rules Created So Far</strong><a class="headerlink" href="#review-all-object-mapping-rules-created-so-far" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_objmap</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;pgconn&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">name</span><span class="w">  </span><span class="o">|</span><span class="w">  </span><span class="n">objtype</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="o">|</span><span class="w">          </span><span class="n">srcobj</span><span class="w">           </span><span class="o">|</span><span class="w">           </span><span class="n">dstobj</span>
+<span class="c1">--------+-----------+---------+---------------------------+----------------------------</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">mytble</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">thetable</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">column</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">testing</span><span class="p">.</span><span class="k">c</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ccc</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">datatype</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">xyz</span><span class="p">.</span><span class="n">ggg</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="o">|</span><span class="mi">0</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">transform</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">xyz</span><span class="p">.</span><span class="n">bbb</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;&gt;&gt;&gt;&gt;&gt;&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;%d&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&lt;&lt;&lt;&lt;&lt;&#39;</span>
+</code></pre></div>
+<h3 id="reload-the-object-mapping-rules"><strong>Reload the Object Mapping Rules</strong><a class="headerlink" href="#reload-the-object-mapping-rules" title="Permanent link">&para;</a></h3>
+<p>Once all custom rules have been defined, we need to signal the connector to load them. This will cause the connector to read and apply the object mapping rules. If it sees a discrepancy between current PostgreSQL values and the object mapping values, it will attempt to correct the mapping.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_reload_objmap</span><span class="p">(</span><span class="s1">&#39;pgconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="review-synchdb_att_view-again-for-changes"><strong>Review <code>synchdb_att_view</code> Again for Changes</strong><a class="headerlink" href="#review-synchdb_att_view-again-for-changes" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_att_view</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;pgconn&#39;</span><span class="p">;;</span>
+<span class="w">  </span><span class="n">name</span><span class="w">  </span><span class="o">|</span><span class="w">   </span><span class="k">type</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">attnum</span><span class="w"> </span><span class="o">|</span><span class="w">       </span><span class="n">ext_tbname</span><span class="w">        </span><span class="o">|</span><span class="w">     </span><span class="n">pg_tbname</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">ext_attname</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">pg_attname</span><span class="w"> </span><span class="o">|</span><span class="w">  </span><span class="n">ext_atttypename</span><span class="w">  </span><span class="o">|</span><span class="w">  </span><span class="n">pg_atttypename</span><span class="w">   </span><span class="o">|</span><span class="w">         </span><span class="k">transform</span>
+<span class="c1">--------+----------+--------+-------------------------+-------------------+-------------+------------+-------------------+-------------------+----------------------------</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">mytble</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">thetable</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">mytble</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">thetable</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">b</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">b</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">mytble</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">thetable</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">c</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="k">c</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">testing</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">testing</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">testing</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">testing</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">b</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">b</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">text</span><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="nb">text</span><span class="w">              </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">testing</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">testing</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">c</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">ccc</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">testing</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">testing</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">d</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">d</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">bigint</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="nb">bigint</span><span class="w">            </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">xyz</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">xyz</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">bbb</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">bbb</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;&gt;&gt;&gt;&gt;&gt;&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;%d&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&lt;&lt;&lt;&lt;&lt;&#39;</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">xyz</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">xyz</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">ccc</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">ccc</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">bytea</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">bytea</span><span class="w">             </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">xyz</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">xyz</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">ddd</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">ddd</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">xyz</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">xyz</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">eee</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">eee</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">5</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">xyz</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">xyz</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">fff</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">fff</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">6</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">xyz</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">xyz</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">ggg</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">ggg</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">bigint</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">pgconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">7</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="k">public</span><span class="p">.</span><span class="n">xyz</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">xyz</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">aaa</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">aaa</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+</code></pre></div>
+<h3 id="resume-the-connector-or-redo-the-entire-snapshot"><strong>Resume the Connector or Redo the Entire Snapshot</strong><a class="headerlink" href="#resume-the-connector-or-redo-the-entire-snapshot" title="Permanent link">&para;</a></h3>
+<p>Once the object mappings have been confirmed correct, we can resume the connector. Please note that, resume will proceed to streaming only the new table changes. The existing data of the tables will not be copied.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_resume_engine</span><span class="p">(</span><span class="s1">&#39;pgconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>To capture the table's existing data, we can also redo the entire snapshot with the new object mapping rules.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_stop_engine_bgw</span><span class="p">(</span><span class="s1">&#39;pgconn&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;pgconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
+</code></pre></div>
 <h2 id="selective-table-sync"><strong>Selective Table Sync</strong><a class="headerlink" href="#selective-table-sync" title="Permanent link">&para;</a></h2>
 <h3 id="select-desired-tables-and-start-it-for-the-first-time"><strong>Select Desired Tables and Start it for the First Time</strong><a class="headerlink" href="#select-desired-tables-and-start-it-for-the-first-time" title="Permanent link">&para;</a></h3>
 <p>Table selection is done during connector creation phase via <code>synchdb_add_conninfo()</code> where we specify a list of tables (expressed in FQN, separated by a comma) to replicate from.</p>

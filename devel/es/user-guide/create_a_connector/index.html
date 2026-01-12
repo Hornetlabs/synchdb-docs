@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://docs.synchdb.com/latest/es/user-guide/create_a_connector/">
       
       
-        <link rel="prev" href="../../tutorial/object_mapping_workflow/">
+        <link rel="prev" href="../../tutorial/native_olr_cdc_to_postgresql/">
       
       
         <link rel="next" href="../start_stop_connector/">
@@ -1286,7 +1286,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL -> PostgreSQL
+    Conector MySQL
   
 
     
@@ -1314,7 +1314,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server -> PostgreSQL
+    Conector SQL Server
   
 
     
@@ -1342,7 +1342,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle -> PostgreSQL
+    Conector Oracle
   
 
     
@@ -1363,14 +1363,42 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/object_mapping_workflow/" class="md-nav__link">
+      <a href="../../tutorial/postgresql_cdc_to_postgresql/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Flujo de trabajo de mapeo de objetos
+    Conector Postgres
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/native_olr_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conector nativo de replicador Openlog
   
 
     
@@ -1730,14 +1758,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../secured_connection/" class="md-nav__link">
+      <a href="../letter_casing_strategy/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Conexión segura
+    Estrategia de mayúsculas y minúsculas
   
 
     
@@ -1765,7 +1793,7 @@
   <span class="md-ellipsis">
     
   
-    Configurar estrategias de error
+    estrategias de error
   
 
     
@@ -1786,70 +1814,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../set_offset/" class="md-nav__link">
+      <a href="../../../user-guide/configure_olr.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Configurar el desplazamiento de replicación
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../configure_olr/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Configurar Openlog Replicator para Oracle Connector
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../configure_infinispan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Configurar Infinispan
+    Configurar Openlog Replicator
   
 
     
@@ -2061,7 +2033,7 @@
 
 <h1 id="create-a-connector">Create a Connector<a class="headerlink" href="#create-a-connector" title="Permanent link">&para;</a></h1>
 <h2 id="create-a-connector_1"><strong>Create a Connector</strong><a class="headerlink" href="#create-a-connector_1" title="Permanent link">&para;</a></h2>
-<p>A connector represents a connection to a particular source database, replicate one set of tables and apply to PostgreSQL. If you have multiple source databases that need replication, multiple connectors are required (one for each). It is also possible to create multiple connectors that connect to the same source database but replicate different sets of tables.</p>
+<p>A connector represents a connection to a particular source database, replicate one set of tables and apply to PostgreSQL. If you have multiple source databases that need replication, multiple connectors are required (one for each). It is also possible to create multiple connectors that connect to the same source database but replicate different or same sets of tables.</p>
 <p>Creating a connector can be done with utility SQL function <code>synchdb_add_conninfo()</code>.</p>
 <p>synchdb_add_conninfo takes these arguments:</p>
 <table>
@@ -2094,19 +2066,19 @@
 </tr>
 <tr>
 <td>source database</td>
-<td>this is the name of source database in heterogeneous database that we want to replicate changes from.</td>
+<td>this is the name of source database that we want to replicate changes from.</td>
 </tr>
 <tr>
-<td>destination database</td>
-<td>(deprecated) always defaults to the same database as where synchDB is installed</td>
+<td>source schema</td>
+<td>this is the name of source schema under source database that we want to replicate changes from</td>
 </tr>
 <tr>
 <td>table</td>
-<td>(optional) - expressed in the form of <code>[database].[table]</code> or <code>[database].[schema].[table]</code> that must exists in heterogeneous database so the engine will only replicate the specified tables. If left empty, all tables are replicated. Alternatively, a table list file can be specified with <code>file:</code> prefix</td>
+<td>(optional) - expressed in the form of <code>[database].[table]</code> or <code>[schema].[table]</code> that must exists in source database / schema so the engine will only replicate the specified tables. If left empty, all tables are replicated. Alternatively, a table list file can be specified with <code>file:</code> prefix</td>
 </tr>
 <tr>
 <td>snapshot table</td>
-<td>(optional) - expressed in the form of <code>[database].[table]</code> or <code>[database].[schema].[table]</code> that must exists in the <code>table</code> setting above, so the engine will only rebuild the snapshot of these tables if snapshot mode is set to <code>always</code>. If left empty or null, all tables specified in <code>table</code> setting above will be rebuilt when snapshot mode is set to <code>always</code>. Alternatively, a snapshot table list file can be specified with <code>file:</code> prefix</td>
+<td>(optional) - expressed in the form of <code>[database].[table]</code> or <code>[schema].[table]</code> that must exists in the <code>table</code> setting above, so the engine will only rebuild the snapshot of these tables if snapshot mode is set to <code>always</code>. If left empty or null, all tables specified in <code>table</code> setting above will be rebuilt when snapshot mode is set to <code>always</code>. Alternatively, a snapshot table list file can be specified with <code>file:</code> prefix</td>
 </tr>
 <tr>
 <td>connector</td>
@@ -2114,14 +2086,15 @@
 </tr>
 </tbody>
 </table>
-<p>&lt;&lt;<strong>Note</strong>&gt;&gt; If connector type is <code>olr</code>, SynchDB will still use Debezium to perform an initial snapshot with tables and snapshot tables as specified in <code>table</code> and <code>snapshot table</code> parameters. After this is done, SynchDB will connect to Openlog Replicator for replication without filtering desired tables specified in <code>table</code> parameter. The table filtering is instead done on the Openlog Replicator's configuration. So, please ensure that both Openlog Replicator and SynchDB connector's <code>table</code> filtering parameters are configured consistently to avoid potential descrepancies</p>
+<p>&lt;&lt;<strong>NOTE</strong>&gt;&gt; <code>source database</code>, <code>source schema</code>, <code>username</code>, <code>password</code>, <code>table</code> and <code>snapshot table</code> are case sensitive, and you must specify the names exactly as appeared in your source database, so keep in mind the letter casing of these names.  </p>
 <h2 id="connector-types"><strong>Connector Types</strong><a class="headerlink" href="#connector-types" title="Permanent link">&para;</a></h2>
 <p>SynchDb supports these connector types:</p>
 <ul>
 <li>mysql         -&gt; MySQL database</li>
 <li>sqlserver     -&gt; Microsoft SQL Server database</li>
 <li>oracle        -&gt; Oracle database</li>
-<li>olr           -&gt; Native Openlog Replicator (BETA)</li>
+<li>olr           -&gt; Native Openlog Replicator</li>
+<li>postgres      -&gt; PostgreSQL database</li>
 </ul>
 <h2 id="check-created-connectors"><strong>Check Created Connectors</strong><a class="headerlink" href="#check-created-connectors" title="Permanent link">&para;</a></h2>
 <p>Created connectors are shown in the table <code>synchdb_conninfo</code>. We are free to view its content and make modification as required. Please note that the password of a user credential is encrypted by pgcrypto using a key only known to synchdb. So please do not modify the password field directly as it will be decrypted incorrectly if tempered. See below for an example output:</p>
@@ -2132,31 +2105,30 @@
 <span class="o">-</span><span class="p">[</span><span class="w"> </span><span class="n">RECORD</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">]</span><span class="c1">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
 <span class="n">name</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserverconn</span>
 <span class="n">isactive</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">t</span>
-<span class="k">data</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;pwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;\\xc30d0407030245ca4a983b6304c079d23a0191c6dabc1683e4f66fc538db65b9ab2788257762438961f8201e6bcefafa60460fbf441e55d844e7f27b31745f04e7251c0123a159540676c4&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1433</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;sa&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;dstdb&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;postgres&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;srcdb&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;testDB&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;null&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;hostname&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;192.168.1.86&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;connector&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;sqlserver&quot;</span><span class="err">}</span>
+<span class="k">data</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;pwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;\\xc30d0407030245ca4a983b6304c079d23a0191c6dabc1683e4f66fc538db65b9ab2788257762438961f8201e6bcefafa60460fbf441e55d844e7f27b31745f04e7251c0123a159540676c4&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1433</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;sa&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;srcschema&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;dbo&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;srcdb&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;testDB&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;snapshottable&quot;</span><span class="p">:</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;hostname&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;192.168.1.86&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;connector&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;sqlserver&quot;</span><span class="err">}</span>
 <span class="o">-</span><span class="p">[</span><span class="w"> </span><span class="n">RECORD</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">]</span><span class="c1">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
 <span class="n">name</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">mysqlconn</span>
 <span class="n">isactive</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">t</span>
-<span class="k">data</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;pwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;\\xc30d04070302986aff858065e96b62d23901b418a1f0bfdf874ea9143ec096cd648a1588090ee840de58fb6ba5a04c6430d8fe7f7d466b70a930597d48b8d31e736e77032cb34c86354e&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3306</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;mysqluser&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;dstdb&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;postgres&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;srcdb&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;inventory&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;null&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;hostname&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;192.168.1.86&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;connector&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;mysql&quot;</span><span class="err">}</span>
+<span class="k">data</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;pwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;\\xc30d04070302986aff858065e96b62d23901b418a1f0bfdf874ea9143ec096cd648a1588090ee840de58fb6ba5a04c6430d8fe7f7d466b70a930597d48b8d31e736e77032cb34c86354e&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3306</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;mysqluser&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;srcschema&quot;</span><span class="p">:</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;srcdb&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;inventory&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;snapshottable&quot;</span><span class="p">:</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;hostname&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;192.168.1.86&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;connector&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;mysql&quot;</span><span class="err">}</span>
 <span class="o">-</span><span class="p">[</span><span class="w"> </span><span class="n">RECORD</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">]</span><span class="c1">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
 <span class="n">name</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">oracleconn</span>
 <span class="n">isactive</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">t</span>
-<span class="k">data</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;pwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;\\xc30d04070302e3baf1293d0d553066d234014f6fc52e6eea425884b1f65f1955bf504b85062dfe538ca2e22bfd6db9916662406fc45a3a530b7bf43ce4cfaa2b049a1c9af8&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1528</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;c##dbzuser&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;dstdb&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;postgres&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;srcdb&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;FREE&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;null&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;hostname&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;192.168.1.86&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;connector&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;oracle&quot;</span><span class="err">}</span>
+<span class="k">data</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;pwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;\\xc30d04070302e3baf1293d0d553066d234014f6fc52e6eea425884b1f65f1955bf504b85062dfe538ca2e22bfd6db9916662406fc45a3a530b7bf43ce4cfaa2b049a1c9af8&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1528</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;DBZUSER&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;srcschema&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;DBZUSER&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;srcdb&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;FREE&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;snapshottable&quot;</span><span class="p">:</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;hostname&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;192.168.1.86&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;connector&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;oracle&quot;</span><span class="err">}</span>
 </code></pre></div>
-<p>&lt;&lt;&lt;<strong>IMPORTANT</strong>&gt;&gt;&gt; Native Openlog Replicator connector currently does not support specifying whitelist tables via <code>table</code> and <code>snapshot tables</code> parameters so the sections below do not apply to Native Openlog Replicator connector.</p>
 <h2 id="use-a-table-list-file-to-specify-tables"><strong>Use a Table List File to Specify Tables</strong><a class="headerlink" href="#use-a-table-list-file-to-specify-tables" title="Permanent link">&para;</a></h2>
 <p>If there is a large number of tables to replicate, it is possible to use a table list file to specifiy the tables. The list must be formatted as JSON like below:</p>
 <p><div class="highlight"><pre><span></span><code>{
     &quot;table_list&quot;:
     [
-        &quot;mydb.myschema.mytable1&quot;,
-        &quot;mydb.myschema.mytable2&quot;,
+        &quot;myschema.mytable1&quot;,
+        &quot;myschema.mytable2&quot;,
         ...
         ...
     ],
     &quot;snapshot_table_list&quot;:
     [
-        &quot;mydb.myschema.mytable1&quot;,
-        &quot;mydb.myschema.mytable2&quot;,
+        &quot;myschema.mytable1&quot;,
+        &quot;myschema.mytable2&quot;,
         ...
         ...
     ]
@@ -2171,45 +2143,45 @@ SynchDB looks for these key JSON arrays by names:
 <h2 id="example-create-a-connector-for-each-supported-source-database-to-replicate-all-tables"><strong>Example: Create a Connector for each Supported Source Database to Replicate All Tables</strong><a class="headerlink" href="#example-create-a-connector-for-each-supported-source-database-to-replicate-all-tables" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
-<p>Create a MySQL connector called <code>mysqlconn</code> to replicate all tables under <code>inventory</code> in MySQL to destination database <code>postgres</code> in PostgreSQL:
+<p>Create a MySQL connector called <code>mysqlconn</code> to replicate all tables under <code>inventory</code> in MySQL. Source schema can be put as 'null' because MySQL does not support it.
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
 <span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">3306</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mysqluser&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;mysqlpwd&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;mysqlpwd&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mysql&#39;</span><span class="p">);</span>
 </code></pre></div></p>
 </li>
 <li>
-<p>Create a SQLServer connector called <code>sqlserverconn</code> to replicate all tables under <code>testDB</code> to destination database 'postgres' in PostgreSQL:
+<p>Create a SQLServer connector called <code>sqlserverconn</code> to replicate all tables under <code>testDB</code> database and <code>dbo</code> schema.
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
 <span class="w">  </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
 <span class="w">    </span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1433</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;sa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Password!&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;testDB&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;sa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Password!&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;testDB&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;sqlserver&#39;</span><span class="p">);</span>
 </code></pre></div></p>
 </li>
 <li>
-<p>Create a Oracle connector called <code>oracleconn</code> to replicate all tables under <code>FREE</code> to destination database 'postgres' in PostgreSQL:
+<p>Create a Oracle connector called <code>oracleconn</code> to replicate all tables under <code>FREE</code> database and <code>DBZUSER</code> schema:
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
 <span class="w">  </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
 <span class="w">    </span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1521</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;c##dbzuser&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dbz&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;FREE&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;DBZUSER&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dbz&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;FREE&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;DBZUSER&#39;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;oracle&#39;</span><span class="p">);</span>
 </code></pre></div></p>
 </li>
 </ol>
 <h2 id="example-create-a-connector-to-replicate-specified-tables"><strong>Example: Create a Connector to Replicate Specified Tables</strong><a class="headerlink" href="#example-create-a-connector-to-replicate-specified-tables" title="Permanent link">&para;</a></h2>
-<p>Note that the tables must be specified in fully-qualified names such as <code>[database].[table]</code> or <code>[database].[schema].[table]</code> and exist in the source database.</p>
+<p>Note that the tables must be specified in fully-qualified names such as <code>[database].[table]</code> or <code>[schema].[table]</code> and exist in the source database.</p>
 <p>Create a MySQL connector called <code>mysqlconn</code> to replicate <code>orders</code> and <code>customers</code> tables under <code>inventory</code> in MySQL to destination database <code>postgres</code> in PostgreSQL:
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
 <span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">3306</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mysqluser&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;mysqlpwd&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;mysqlpwd&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="s1">&#39;inventory.orders,inventory.customers&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mysql&#39;</span><span class="p">);</span>
 </code></pre></div></p>
 <h2 id="example-create-a-connector-to-replicate-specified-tables-using-a-file"><strong>Example: Create a Connector to Replicate Specified Tables Using a File</strong><a class="headerlink" href="#example-create-a-connector-to-replicate-specified-tables-using-a-file" title="Permanent link">&para;</a></h2>
 <p>Create a MySQL connector called <code>mysqlconn</code> to replicate the tables specified in the table file under <code>inventory</code> in MySQL to destination database <code>postgres</code> in PostgreSQL:
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
 <span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">3306</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mysqluser&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;mysqlpwd&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;mysqlpwd&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="s1">&#39;file:/path/to/mytablefile.json&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;file:/path/to/mytablefile.json&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mysql&#39;</span><span class="p">);</span>
 </code></pre></div></p>
 <p>where <code>/path/to/mytablefile.json</code> could be:</p>

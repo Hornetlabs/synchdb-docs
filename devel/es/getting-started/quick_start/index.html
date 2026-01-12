@@ -1470,7 +1470,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL -> PostgreSQL
+    Conector MySQL
   
 
     
@@ -1498,7 +1498,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server -> PostgreSQL
+    Conector SQL Server
   
 
     
@@ -1526,7 +1526,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle -> PostgreSQL
+    Conector Oracle
   
 
     
@@ -1547,14 +1547,42 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/object_mapping_workflow/" class="md-nav__link">
+      <a href="../../tutorial/postgresql_cdc_to_postgresql/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Flujo de trabajo de mapeo de objetos
+    Conector Postgres
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/native_olr_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conector nativo de replicador Openlog
   
 
     
@@ -1774,14 +1802,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../user-guide/secured_connection/" class="md-nav__link">
+      <a href="../../user-guide/letter_casing_strategy/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Conexión segura
+    Estrategia de mayúsculas y minúsculas
   
 
     
@@ -1809,7 +1837,7 @@
   <span class="md-ellipsis">
     
   
-    Configurar estrategias de error
+    estrategias de error
   
 
     
@@ -1830,70 +1858,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../user-guide/set_offset/" class="md-nav__link">
+      <a href="../../../user-guide/configure_olr.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Configurar el desplazamiento de replicación
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../user-guide/configure_olr/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Configurar Openlog Replicator para Oracle Connector
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../user-guide/configure_infinispan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Configurar Infinispan
+    Configurar Openlog Replicator
   
 
     
@@ -2226,7 +2198,7 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <span class="w">                            </span><span class="s1">&#39;mysqluser&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;mysqlpwd&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span>
-<span class="w">                            </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;null&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;null&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;null&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;mysql&#39;</span><span class="p">);</span>
@@ -2238,7 +2210,7 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <span class="w">                            </span><span class="s1">&#39;sa&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;Password!&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;testDB&#39;</span><span class="p">,</span>
-<span class="w">                            </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;null&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;null&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;sqlserver&#39;</span><span class="p">);</span>
@@ -2250,7 +2222,7 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <span class="w">                            </span><span class="s1">&#39;c##dbzuser&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;dbz&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;FREE&#39;</span><span class="p">,</span>
-<span class="w">                            </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;c##dbzuser&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;null&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;null&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;oracle&#39;</span><span class="p">);</span>
@@ -2262,7 +2234,7 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <span class="w">                            </span><span class="s1">&#39;DBZUSER&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;dbz&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;FREE&#39;</span><span class="p">,</span>
-<span class="w">                            </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;DBZUSER&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;null&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;null&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;oracle&#39;</span><span class="p">);</span>
@@ -2274,7 +2246,7 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <span class="w">                            </span><span class="s1">&#39;DBZUSER&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;dbz&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;FREE&#39;</span><span class="p">,</span>
-<span class="w">                            </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;DBZUSER&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;null&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;null&#39;</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;olr&#39;</span><span class="p">);</span>

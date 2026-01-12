@@ -35,7 +35,7 @@
     
     
       
-        <title>SQL Server CDC -> PostgreSQL - SynchDB 文档</title>
+        <title>SQL Server 連接器 - SynchDB 文档</title>
       
     
     
@@ -98,7 +98,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#sql-server-postgresql" class="md-skip">
+        <a href="#sql-server" class="md-skip">
           跳转至
         </a>
       
@@ -136,7 +136,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              SQL Server CDC -> PostgreSQL
+              SQL Server 連接器
             
           </span>
         </div>
@@ -1295,7 +1295,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL CDC -> PostgreSQL
+    MySQL 連接器
   
 
     
@@ -1332,7 +1332,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server CDC -> PostgreSQL
+    SQL Server 連接器
   
 
     
@@ -1350,7 +1350,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server CDC -> PostgreSQL
+    SQL Server 連接器
   
 
     
@@ -1410,7 +1410,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#sql-server" class="md-nav__link">
+  <a href="#sql-server_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         创建 SQL Server 连接器
@@ -1470,7 +1470,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#sql-server_1" class="md-nav__link">
+  <a href="#sql-server_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         SQL Server 連接器的可用快照模式
@@ -1489,10 +1489,104 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="使用 schemasync 模式預覽來源表和目標表關係">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schemasync_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        建立連接器並以 schemasync 模式啟動它
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        確保連接器處於暫停狀態
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        查看預設映射規則所建立的表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定義自訂映射規則（如有需要）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        回顧所有已建立的物件映射規則
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        重新載入物件映射規則
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_att_view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        再次檢查 synchdb_att_view 是否有更改
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        恢復連接器或重新建立整個快照
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         選擇性表同步
@@ -1504,7 +1598,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         選擇所需表並首次啟動
@@ -1515,7 +1609,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         驗證連接器狀態和表格
@@ -1526,7 +1620,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         運行時加入更多要複製的表
@@ -1537,10 +1631,121 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
         驗證更新後的表格
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        安全连接
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="安全连接">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        配置安全连接
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_add_extra_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_add_extra_conninfo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_del_extra_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_del_extra_conninfo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        自定义起始偏移量值
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="自定义起始偏移量值">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        记录可设置的偏移量值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        暂停连接器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        设置新的偏移量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        恢复连接器
       
     </span>
   </a>
@@ -1575,7 +1780,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle CDC -> PostgreSQL
+    Oracle 連接器
   
 
     
@@ -1596,14 +1801,42 @@
   
   
     <li class="md-nav__item">
-      <a href="../object_mapping_workflow/" class="md-nav__link">
+      <a href="../postgresql_cdc_to_postgresql/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    对象映射工作流程
+    Postgres 連接器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../native_olr_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    原生 Openlog Replicator 连接器
   
 
     
@@ -1802,7 +2035,7 @@
   <span class="md-ellipsis">
     
   
-    自定义对象映射和转换
+    对象映射和转换
   
 
     
@@ -1823,14 +2056,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../user-guide/secured_connection/" class="md-nav__link">
+      <a href="../../user-guide/letter_casing_strategy/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    安全连接
+    字母大小寫規則
   
 
     
@@ -1858,7 +2091,7 @@
   <span class="md-ellipsis">
     
   
-    配置错误处理策略
+    错误处理策略
   
 
     
@@ -1879,70 +2112,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../user-guide/set_offset/" class="md-nav__link">
+      <a href="../../../user-guide/configure_olr.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    配置复制偏移
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../user-guide/configure_olr/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    为 Oracle 连接器配置 Openlog Replicator
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../user-guide/configure_infinispan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    配置 infinispan
+    Openlog Replicator 设置
   
 
     
@@ -2079,7 +2256,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#sql-server" class="md-nav__link">
+  <a href="#sql-server_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         创建 SQL Server 连接器
@@ -2139,7 +2316,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#sql-server_1" class="md-nav__link">
+  <a href="#sql-server_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         SQL Server 連接器的可用快照模式
@@ -2158,10 +2335,104 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="使用 schemasync 模式預覽來源表和目標表關係">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schemasync_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        建立連接器並以 schemasync 模式啟動它
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        確保連接器處於暫停狀態
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        查看預設映射規則所建立的表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定義自訂映射規則（如有需要）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        回顧所有已建立的物件映射規則
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        重新載入物件映射規則
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_att_view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        再次檢查 synchdb_att_view 是否有更改
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        恢復連接器或重新建立整個快照
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         選擇性表同步
@@ -2173,7 +2444,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         選擇所需表並首次啟動
@@ -2184,7 +2455,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         驗證連接器狀態和表格
@@ -2195,7 +2466,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         運行時加入更多要複製的表
@@ -2206,10 +2477,121 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
         驗證更新後的表格
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        安全连接
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="安全连接">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        配置安全连接
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_add_extra_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_add_extra_conninfo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_del_extra_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_del_extra_conninfo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        自定义起始偏移量值
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="自定义起始偏移量值">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        记录可设置的偏移量值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        暂停连接器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        设置新的偏移量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        恢复连接器
       
     </span>
   </a>
@@ -2241,7 +2623,7 @@
   
 
 
-<h1 id="sql-server-postgresql">SQL Server -&gt; PostgreSQL<a class="headerlink" href="#sql-server-postgresql" title="Permanent link">&para;</a></h1>
+<h1 id="sql-server">SQL Server 连接器<a class="headerlink" href="#sql-server" title="Permanent link">&para;</a></h1>
 <h2 id="synchdb-sql-server"><strong>为 SynchDB 准备 SQL Server 数据库</strong><a class="headerlink" href="#synchdb-sql-server" title="Permanent link">&para;</a></h2>
 <p>在使用 SynchDB 从 SQL Server 进行复制之前，需要按照<a href="../../getting-started/remote_database_setups/">此处</a> 概述的步骤配置 SQL Server。</p>
 <p>请确保所需的表已在 SQL Server 中启用为 CDC 表。您可以在 SQL Server 客户端上运行以下命令，为“dbo.customer”、“dbo.district”和“dbo.history”启用 CDC。您将根据需要继续添加新表。</p>
@@ -2256,7 +2638,7 @@
 <p>SynchDB 中的「初始快照」（或表快照）是指複製所有指定表的表結構和初始資料。這類似於 PostgreSQL 邏輯複製中的「表同步」。當使用預設的 <code>initial</code> 模式啟動連接器時，它會在進入變更資料擷取 (CDC) 階段之前自動執行初始快照。可以使用 <code>no_data</code> 模式部分省略此步驟。有關所有快照選項，請參閱<a href="../../user-guide/start_stop_connector/">此處</a>。</p>
 <p>初始快照完成後，連接器在後續重新啟動時不會再次執行此操作，而是直接從上次未完成的偏移量處恢復 CDC。此行為由 Debezium 引擎管理的元資料檔案控制。有關元資料檔案的更多信息，請參閱<a href="../../architecture/metadata_files/">此處</a>。</p>
 <h2 id="_2"><strong>不同的連接器啟動模式</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<h3 id="sql-server"><strong>创建 SQL Server 连接器</strong><a class="headerlink" href="#sql-server" title="Permanent link">&para;</a></h3>
+<h3 id="sql-server_1"><strong>创建 SQL Server 连接器</strong><a class="headerlink" href="#sql-server_1" title="Permanent link">&para;</a></h3>
 <p>创建一个连接器，该连接器指向 SQL Server 中 <code>testDB</code> 数据库下的所有表。
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
 <span class="n">synchdb_add_conninfo</span><span class="p">(</span>
@@ -2333,7 +2715,7 @@
 <span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">;</span>
 </code></pre></div></p>
 <p>初始快照完成后，CDC 将开始。在 <code>always</code> 模式下重新启动连接器将重复上述过程。</p>
-<h2 id="sql-server_1"><strong>SQL Server 連接器的可用快照模式</strong><a class="headerlink" href="#sql-server_1" title="Permanent link">&para;</a></h2>
+<h2 id="sql-server_2"><strong>SQL Server 連接器的可用快照模式</strong><a class="headerlink" href="#sql-server_2" title="Permanent link">&para;</a></h2>
 <ul>
 <li>initial (default)</li>
 <li>initial_only</li>
@@ -2342,9 +2724,111 @@
 <li>schemasync</li>
 </ul>
 <h2 id="schemasync"><strong>使用 schemasync 模式預覽來源表和目標表關係</strong><a class="headerlink" href="#schemasync" title="Permanent link">&para;</a></h2>
-<p>在嘗試對當前表和資料（可能非常龐大）進行初始快照之前，可以在實際資料遷移之前「預覽」來源表和目標表之間的所有表和資料類型對應。這樣，您就有機會在實際遷移之前修改資料類型對應或物件名稱。這可以透過特殊的「schemasync」初始快照模式來實現。有關詳細範例，請參閱<a href="../../tutorial/object_mapping_workflow/">对象映射工作流程</a>。</p>
-<h2 id="_3"><strong>選擇性表同步</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<h3 id="_4"><strong>選擇所需表並首次啟動</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>在嘗試對當前表和資料（可能非常龐大）進行初始快照之前，可以在實際資料遷移之前「預覽」來源表和目標表之間的所有表和資料類型對應。這樣，您有機會在實際遷移之前修改資料類型對應或物件名稱。這可以透過特殊的「schemasync」初始快照模式來實現。</p>
+<p>請注意，您必須將 <code>synchdb.olr_snapshot_engine</code> 設定為 'fdw' 才能使用 <code>schemasync</code> 模式預覽表。</p>
+<h3 id="schemasync_1"><strong>建立連接器並以 <code>schemasync</code> 模式啟動它</strong><a class="headerlink" href="#schemasync_1" title="Permanent link">&para;</a></h3>
+<p><code>schemasync</code> 是一種特殊模式，它使連接器連接到遠端資料庫並嘗試僅同步指定表的模式。完成後，連接器將處於「暫停」狀態，使用者可以查看使用預設規則建立的所有資料表和資料類型，並根據需要進行變更。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="mi">1433</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;sa&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;Password!&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;testDB&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;sqlserver&#39;</span>
+<span class="p">);</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;schemasync&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="_3"><strong>確保連接器處於暫停狀態</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">connector_type</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">stage</span><span class="p">,</span><span class="w"> </span><span class="k">state</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">;</span>
+<span class="w">     </span><span class="n">name</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">connector_type</span><span class="w"> </span><span class="o">|</span><span class="w">   </span><span class="n">pid</span><span class="w">   </span><span class="o">|</span><span class="w">        </span><span class="n">stage</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">state</span>
+<span class="c1">---------------+----------------+---------+---------------------+--------</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="mi">1647884</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">change</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="n">capture</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">paused</span>
+</code></pre></div>
+<h3 id="_4"><strong>查看預設映射規則所建立的表</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_att_view</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">;</span>
+<span class="w">     </span><span class="n">name</span><span class="w">      </span><span class="o">|</span><span class="w">   </span><span class="k">type</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">attnum</span><span class="w"> </span><span class="o">|</span><span class="w">         </span><span class="n">ext_tbname</span><span class="w">          </span><span class="o">|</span><span class="w">        </span><span class="n">pg_tbname</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">ext_attname</span><span class="w">  </span><span class="o">|</span><span class="w">  </span><span class="n">pg_attname</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">ext_atttypename</span><span class="w"> </span><span class="o">|</span><span class="w">  </span><span class="n">pg_atttypename</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">transform</span>
+<span class="c1">---------------+-----------+--------+-----------------------------+-------------------------+--------------+--------------+-----------------+-------------------+-----------</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">identity</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">first_name</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">first_name</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">last_name</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">last_name</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">email</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">email</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">order_number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">order_number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">identity</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">order_date</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">order_date</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">date</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="nb">date</span><span class="w">              </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">purchaser</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">purchaser</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">5</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">identity</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">name</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">name</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">description</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">description</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">weight</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">weight</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="nb">float</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">real</span><span class="w">              </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">products_on_hand</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">products_on_hand</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">products_on_hand</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">products_on_hand</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+</code></pre></div>
+<h3 id="_5"><strong>定義自訂映射規則（如有需要）</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>使用者可以使用 <code>synchdb_add_objmap</code> 函數建立自訂映射規則。此函數可用於對應表名、列名、資料類型，並定義資料轉換表達式規則。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;testDB.dbo.products&#39;</span><span class="p">,</span><span class="s1">&#39;testdb.myproducts&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="s1">&#39;column&#39;</span><span class="p">,</span><span class="s1">&#39;testDB.dbo.customers.email&#39;</span><span class="p">,</span><span class="s1">&#39;contact&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="s1">&#39;datatype&#39;</span><span class="p">,</span><span class="s1">&#39;testDB.dbo.products_on_hand.quantity&#39;</span><span class="p">,</span><span class="s1">&#39;bigint|0&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="s1">&#39;transform&#39;</span><span class="p">,</span><span class="s1">&#39;testDB.dbo.products.name&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;&#39;&gt;&gt;&gt;&gt;&gt;&#39;&#39; || &#39;&#39;%d&#39;&#39; || &#39;&#39;&lt;&lt;&lt;&lt;&lt;&#39;&#39;&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>以上內容意味著：</p>
+<ul>
+<li>來源表“testDB.dbo.product”將會對應到目標表“testdb.myproducts”</li>
+<li>來源列“testDB.dbo.customers.email”將會對應到目標表“contact”</li>
+<li>來源列“testDB.dbo.products_on_hand.quantity”的資料型別將會對應到“bigint”</li>
+<li>來源列「testDB.dbo.products.name」的資料將根據表達式進行轉換，其中 %d 為資料佔位符</li>
+</ul>
+<h3 id="_6"><strong>回顧所有已建立的物件映射規則</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_objmap</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">;</span>
+<span class="w">     </span><span class="n">name</span><span class="w">      </span><span class="o">|</span><span class="w">  </span><span class="n">objtype</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="o">|</span><span class="w">                </span><span class="n">srcobj</span><span class="w">                </span><span class="o">|</span><span class="w">           </span><span class="n">dstobj</span>
+<span class="c1">---------------+-----------+---------+--------------------------------------+----------------------------</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">products</span><span class="w">                  </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">myproducts</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">column</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">customers</span><span class="p">.</span><span class="n">email</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">contact</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">datatype</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">products_on_hand</span><span class="p">.</span><span class="n">quantity</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">bigint</span><span class="o">|</span><span class="mi">0</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">transform</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">product</span><span class="p">.</span><span class="n">name</span><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;&gt;&gt;&gt;&gt;&gt;&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;%d&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&lt;&lt;&lt;&lt;&lt;&#39;</span>
+</code></pre></div>
+<h3 id="_7"><strong>重新載入物件映射規則</strong><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>定義完所有自訂規則後，我們需要通知連接器載入這些規則。這將使連接器讀取並應用物件映射規則。如果連接器發現目前 PostgreSQL 值與物件對應值之間存在差異，它將嘗試修正映射。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_reload_objmap</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="synchdb_att_view"><strong>再次檢查 <code>synchdb_att_view</code> 是否有更改</strong><a class="headerlink" href="#synchdb_att_view" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_att_view</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">;</span>
+<span class="w">     </span><span class="n">name</span><span class="w">      </span><span class="o">|</span><span class="w">   </span><span class="k">type</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">attnum</span><span class="w"> </span><span class="o">|</span><span class="w">         </span><span class="n">ext_tbname</span><span class="w">          </span><span class="o">|</span><span class="w">        </span><span class="n">pg_tbname</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">ext_attname</span><span class="w">  </span><span class="o">|</span><span class="w">  </span><span class="n">pg_attname</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">ext_atttypename</span><span class="w"> </span><span class="o">|</span><span class="w">  </span><span class="n">pg_atttypename</span><span class="w">   </span><span class="o">|</span><span class="w">         </span><span class="k">transform</span>
+
+<span class="c1">---------------+-----------+--------+-----------------------------+-------------------------+--------------+--------------+-----------------+-------------------+---------------------</span>
+<span class="c1">-------</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">identity</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">first_name</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">first_name</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">last_name</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">last_name</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">email</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">contact</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">order_number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">order_number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">identity</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">order_date</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">order_date</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">date</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="nb">date</span><span class="w">              </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">purchaser</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">purchaser</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">5</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w"> </span><span class="k">identity</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">name</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">name</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;&gt;&gt;&gt;&gt;&gt;&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;%d&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">&lt;&lt;&lt;&lt;&lt;&#39;</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">description</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">description</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">weight</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">weight</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="nb">float</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">real</span><span class="w">              </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">products_on_hand</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">products_on_hand</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testDB</span><span class="p">.</span><span class="n">dbo</span><span class="p">.</span><span class="n">products_on_hand</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="n">products_on_hand</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">bigint</span><span class="w">            </span><span class="o">|</span>
+</code></pre></div>
+<h3 id="_8"><strong>恢復連接器或重新建立整個快照</strong><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>確認物件映射正確後，我們可以恢復連接器。請注意，復原操作只會傳輸新的表更改，不會複製表中的現有資料。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_resume_engine</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>要擷取表中的現有數據，我們也可以使用新的物件映射規則重新建立整個快照。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_stop_engine_bgw</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="_9"><strong>選擇性表同步</strong><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="_10"><strong>選擇所需表並首次啟動</strong><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>表格選擇在連接器建立階段透過 <code>synchdb_add_conninfo()</code> 函數完成，該函數用於指定要從中複製的表列表（以完全限定名稱 (FQN) 表示，並以逗號分隔）。</p>
 <p>例如，以下命令建立一個連接器，該連接器僅複製遠端 SQL Server 資料庫中 <code>dbo.orders</code> 資料表的變更。
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
@@ -2363,7 +2847,7 @@
 <p>首次啟動此連接器時，將觸發執行初始快照，並複製選定的 2 個表的架構和資料。</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">);</span>
 </code></pre></div>
-<h3 id="_5"><strong>驗證連接器狀態和表格</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<h3 id="_11"><strong>驗證連接器狀態和表格</strong><a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
 <p>檢查連接器狀態和新表格：
 <div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">Select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">state</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="p">;</span>
 <span class="w">     </span><span class="n">name</span><span class="w">      </span><span class="o">|</span><span class="w">  </span><span class="k">state</span><span class="w">  </span><span class="o">|</span><span class="w">   </span><span class="n">err</span>
@@ -2378,7 +2862,7 @@
 <span class="w"> </span><span class="n">testdb</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 </code></pre></div></p>
 <p>預設情況下，來源資料庫名稱會對應到目標資料庫的模式，因此 <code>dbo.orders</code> 在 PostgreSQL 中會變成 <code>testdb.orders</code>。表完成初始快照後，連接器將啟動 CDC 以串流傳輸這些表的後續變更。</p>
-<h3 id="_6"><strong>運行時加入更多要複製的表</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<h3 id="_12"><strong>運行時加入更多要複製的表</strong><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p>如果我們想要新增更多要複製的表，需要通知 Debezium 引擎更新了表格部分，並重​​新執行初始快照。具體操作如下：</p>
 <ol>
 <li>
@@ -2397,7 +2881,7 @@
 </code></pre></div></li>
 </ol>
 <p>這迫使 Debezium 重新建立所有表的快照，包括舊表 <code>dbo.orders</code> 和 <code>dbo.products</code>，以及在進行 CDC 串流傳輸之前建立的新表。這意味著，要新增第三個表，必須刪除現有表（以防止重複表和主鍵錯誤），並重新建立整個初始快照。這相當冗餘，Debezium 建議使用增量快照來新增資料表，而無需重新建立快照。一旦我們將增量快照支援新增至 SynchDB，我們將更新此過程。</p>
-<h3 id="_7"><strong>驗證更新後的表格</strong><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<h3 id="_13"><strong>驗證更新後的表格</strong><a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
 <p>現在，我們可以再次檢查我們的表：
 <div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="ss">&quot;testDB&quot;</span><span class="p">.</span><span class="o">*</span>
 <span class="w">           </span><span class="n">List</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">tables</span>
@@ -2407,6 +2891,98 @@
 <span class="w"> </span><span class="n">testDB</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 <span class="w"> </span><span class="n">testDB</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">products</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 </code></pre></div></p>
+<h2 id="_14">安全连接<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h2>
+<h3 id="_15"><strong>配置安全连接</strong><a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p>为了确保与远程数据库的连接安全，我们需要为 <code>synchdb_add_conninfo</code> 创建的连接器配置额外的 SSL 相关参数。SSL 证书和私钥必须打包为 Java 密钥库文件，并附带密码。这些信息随后会通过 synchdb_add_extra_conninfo() 传递给 SynchDB。</p>
+<h3 id="synchdb_add_extra_conninfo"><strong>synchdb_add_extra_conninfo</strong><a class="headerlink" href="#synchdb_add_extra_conninfo" title="Permanent link">&para;</a></h3>
+<p><strong>用途</strong>：为 <code>synchdb_add_conninfo</code> 创建的现有连接器配置额外的连接器参数</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">参数</th>
+<th style="text-align: left;">描述</th>
+<th style="text-align: center;">必需</th>
+<th style="text-align: left;">示例</th>
+<th style="text-align: left;">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>name</code></td>
+<td style="text-align: left;">此连接器的唯一标识符</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: left;"><code>'mysqlconn'</code></td>
+<td style="text-align: left;">必须在所有连接器中唯一</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>ssl_mode</code></td>
+<td style="text-align: left;">SSL 模式</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: left;"><code>'verify_ca'</code></td>
+<td style="text-align: left;">可以是以下之一：<br><ul><li>“disabled”- 不使用 SSL。</li><li>“preferred”- 如果服务器支持，则使用 SSL。</li><li>“required”- 必须使用 SSL 建立连接。</li><li>“verify_ca”- 连接器与服务器建立 TLS，并将根据配置的信任库验证服务器的 TLS 证书。</li><li>“verify_identity”- 与 verify_ca 行为相同，但它还会检查服务器证书的通用名称以匹配系统的主机名。</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>ssl_keystore</code></td>
+<td style="text-align: left;">密钥库路径</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: left;"><code>/path/to/keystore</code></td>
+<td style="text-align: left;">密钥库文件的路径</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>ssl_keystore_pass</code></td>
+<td style="text-align: left;">密钥库密码</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: left;"><code>'mykeystorepass'</code></td>
+<td style="text-align: left;">访问密钥库文件的密码</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>ssl_truststore</code></td>
+<td style="text-align: left;">信任库路径</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: left;"><code>'/path/to/truststore'</code></td>
+<td style="text-align: left;">信任库文件路径</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>ssl_truststore_pass</code></td>
+<td style="text-align: left;">信任库密码</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: left;"><code>'mytruststorepass'</code></td>
+<td style="text-align: left;">访问信任库文件的密码</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_extra_conninfo</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;verify_ca&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/path/to/keystore&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mykeystorepass&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/path/to/truststore&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mytruststorepass&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="synchdb_del_extra_conninfo"><strong>synchdb_del_extra_conninfo</strong><a class="headerlink" href="#synchdb_del_extra_conninfo" title="Permanent link">&para;</a></h3>
+<p><strong>用途</strong>：删除由 <code>synchdb_add_extra_conninfo</code> 创建的额外连接器参数
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_del_extra_conninfo</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<h2 id="_16">自定义起始偏移量值<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h2>
+<p>起始偏移量值代表开始复制的点，类似于 PostgreSQL 的恢复 LSN。当 Debezium 运行引擎启动时，它将从这个偏移量值开始复制。将此偏移量值设置为较早的值将导致 Debezium 运行引擎从较早的记录开始复制，可能会复制重复的数据记录。在设置 Debezium 的起始偏移量值时，我们应该格外谨慎。</p>
+<h3 id="_17"><strong>记录可设置的偏移量值</strong><a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p>在操作过程中，Debezium 运行引擎将生成新的偏移量并将其刷新到磁盘。最后刷新的偏移量可以通过 <code>synchdb_state_view()</code> 实用命令检索：</p>
+<div class="highlight"><pre><span></span><code>postgres=# select name, last_dbz_offset from synchdb_state_view;
+     name      |                                           last_dbz_offset
+---------------+------------------------------------------------------------------------------------------------------
+ sqlserverconn | {&quot;commit_lsn&quot;:&quot;0000006a:00006608:0003&quot;,&quot;snapshot&quot;:true,&quot;snapshot_completed&quot;:false}
+</code></pre></div>
+<p>我们应该定期保存这些值，这样如果遇到问题，我们就知道过去可以设置的偏移量位置，以恢复复制操作。</p>
+<h3 id="_18"><strong>暂停连接器</strong><a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<p>在设置新的偏移量值之前，连接器必须处于 <code>paused</code>（暂停）状态。</p>
+<p>使用 <code>synchdb_pause_engine()</code> SQL 函数暂停正在运行的连接器。这将停止 Debezium 运行引擎从异构数据库复制。当暂停时，可以使用 <code>synchdb_set_offset()</code> SQL 例程更改 Debezium 连接器的偏移量值，以从过去的特定点开始复制。它以 <code>conninfo_name</code> 作为参数，可以从 <code>synchdb_get_state()</code> 视图的输出中找到。</p>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_pause_engine</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="_19"><strong>设置新的偏移量</strong><a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>使用 <code>synchdb_set_offset()</code> SQL 函数更改连接器工作进程的起始偏移量。只有当连接器处于 <code>paused</code> 状态时才能执行此操作。该函数接受两个参数，<code>conninfo_name</code> 和 <code>有效的偏移量字符串</code>，这两个参数都可以从 <code>synchdb_get_state()</code> 视图的输出中找到。</p>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_set_offset</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{&quot;commit_lsn&quot;:&quot;0000006a:00006608:0003&quot;,&quot;snapshot&quot;:true,&quot;snapshot_completed&quot;:false}&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="_20"><strong>恢复连接器</strong><a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<p>使用 <code>synchdb_resume_engine()</code> SQL 函数从暂停状态恢复 Debezium 操作。此函数以 <code>连接器名称</code> 作为其唯一参数，可以从 <code>synchdb_get_state()</code> 视图的输出中找到。恢复的 Debezium 运行引擎将从新设置的偏移量值开始复制。</p>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_resume_engine</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">);</span>
+</code></pre></div>
 
 
 

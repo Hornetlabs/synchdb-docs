@@ -18,7 +18,7 @@
         <link rel="prev" href="../sqlserver_cdc_to_postgresql/">
       
       
-        <link rel="next" href="../object_mapping_workflow/">
+        <link rel="next" href="../postgresql_cdc_to_postgresql/">
       
       
         
@@ -35,7 +35,7 @@
     
     
       
-        <title>Oracle -> PostgreSQL - SynchDB Documentation</title>
+        <title>Oracle Connector - SynchDB Documentation</title>
       
     
     
@@ -90,7 +90,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#oracle-postgresql" class="md-skip">
+        <a href="#oracle-connector" class="md-skip">
           Skip to content
         </a>
       
@@ -128,7 +128,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Oracle -> PostgreSQL
+              Oracle Connector
             
           </span>
         </div>
@@ -1287,7 +1287,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL -> PostgreSQL
+    MySQL Connector
   
 
     
@@ -1315,7 +1315,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server -> PostgreSQL
+    SQL Server Connector
   
 
     
@@ -1352,7 +1352,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle -> PostgreSQL
+    Oracle Connector
   
 
     
@@ -1370,7 +1370,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle -> PostgreSQL
+    Oracle Connector
   
 
     
@@ -1509,6 +1509,100 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Preview Source and Destination Table Relationships with schemasync mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-connector-and-start-it-in-schemasync-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a Connector and Start it in schemasync Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ensure-the-connector-is-put-to-paused-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ensure the Connector is Put to Paused State
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-the-tables-created-by-default-mapping-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review the Tables Created by Default Mapping Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-custom-mapping-rules-if-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Define Custom Mapping Rules (If Needed)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-all-object-mapping-rules-created-so-far" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review All Object Mapping Rules Created So Far
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reload-the-object-mapping-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reload the Object Mapping Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-synchdb_att_view-again-for-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review synchdb_att_view Again for Changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume-the-connector-or-redo-the-entire-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resume the Connector or Redo the Entire Snapshot
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1572,6 +1666,139 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#configure-infinispan-for-oracle-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure Infinispan for Oracle Connector
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure Infinispan for Oracle Connector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_add_infinispan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_add_infinispan()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_del_infinispan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_del_infinispan()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passivation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-oracle-sqls-to-test-infinispan-with-a-large-transaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Oracle SQLs to test Infinispan with a Large Transaction
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-start-offset-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Start Offset Values
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Custom Start Offset Values">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#record-settable-offset-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Record Settable Offset Values
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pause-the-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pause the Connector
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-the-new-offset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set the new Offset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume-the-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resume the Connector
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-debezium-oracle-connector-to-use-openlog-replicator-non-native" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure Debezium Oracle Connector to Use Openlog Replicator (non-native)
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1588,14 +1815,42 @@
   
   
     <li class="md-nav__item">
-      <a href="../object_mapping_workflow/" class="md-nav__link">
+      <a href="../postgresql_cdc_to_postgresql/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Object Mapping Workflow
+    Postgres Connector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../native_olr_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native Openlog Replicator Connector
   
 
     
@@ -1794,7 +2049,7 @@
   <span class="md-ellipsis">
     
   
-    Customize Object Mapping and Transformation
+    Object Transformation
   
 
     
@@ -1815,14 +2070,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../user-guide/secured_connection/" class="md-nav__link">
+      <a href="../../user-guide/letter_casing_strategy/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Secured Connection
+    Letter Casing Strategy
   
 
     
@@ -1850,7 +2105,7 @@
   <span class="md-ellipsis">
     
   
-    Configure Error Strategies
+    Error Strategies
   
 
     
@@ -1871,70 +2126,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../user-guide/set_offset/" class="md-nav__link">
+      <a href="../../user-guide/configure_olr.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Configure Replication Offset
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../user-guide/configure_olr/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Configure Openlog Replicator for Oracle Connector
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../user-guide/configure_infinispan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Configure Infinispan
+    Openlog Replicator
   
 
     
@@ -1962,7 +2161,7 @@
   <span class="md-ellipsis">
     
   
-    Configure Snapshot Engine
+    Snapshot Engine
   
 
     
@@ -2150,6 +2349,100 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Preview Source and Destination Table Relationships with schemasync mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-connector-and-start-it-in-schemasync-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a Connector and Start it in schemasync Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ensure-the-connector-is-put-to-paused-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ensure the Connector is Put to Paused State
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-the-tables-created-by-default-mapping-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review the Tables Created by Default Mapping Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-custom-mapping-rules-if-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Define Custom Mapping Rules (If Needed)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-all-object-mapping-rules-created-so-far" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review All Object Mapping Rules Created So Far
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reload-the-object-mapping-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reload the Object Mapping Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-synchdb_att_view-again-for-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review synchdb_att_view Again for Changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume-the-connector-or-redo-the-entire-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resume the Connector or Redo the Entire Snapshot
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2213,6 +2506,139 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#configure-infinispan-for-oracle-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure Infinispan for Oracle Connector
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configure Infinispan for Oracle Connector">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_add_infinispan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_add_infinispan()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_del_infinispan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_del_infinispan()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passivation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Passivation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-oracle-sqls-to-test-infinispan-with-a-large-transaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Oracle SQLs to test Infinispan with a Large Transaction
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-start-offset-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Start Offset Values
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Custom Start Offset Values">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#record-settable-offset-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Record Settable Offset Values
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pause-the-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pause the Connector
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-the-new-offset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set the new Offset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume-the-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resume the Connector
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configure-debezium-oracle-connector-to-use-openlog-replicator-non-native" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure Debezium Oracle Connector to Use Openlog Replicator (non-native)
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2233,7 +2659,7 @@
   
 
 
-<h1 id="oracle-postgresql">Oracle -&gt; PostgreSQL<a class="headerlink" href="#oracle-postgresql" title="Permanent link">&para;</a></h1>
+<h1 id="oracle-connector">Oracle Connector<a class="headerlink" href="#oracle-connector" title="Permanent link">&para;</a></h1>
 <h2 id="prepare-oracle-database-for-synchdb"><strong>Prepare Oracle Database for SynchDB</strong><a class="headerlink" href="#prepare-oracle-database-for-synchdb" title="Permanent link">&para;</a></h2>
 <p>Before SynchDB can be used to replicate from Oracle, Oracle needs to be configured according to the procedure outlined <a href="../../getting-started/remote_database_setups/">here</a></p>
 <p>Please ensure that supplemental log data is enabled for all columns for each desired table to be replicated by SynchDB. This is needed for SynchDB to correctly handle UPDATE and DELETE oeprations.</p>
@@ -2311,11 +2737,93 @@
 <li>schemasync</li>
 </ul>
 <h2 id="preview-source-and-destination-table-relationships-with-schemasync-mode"><strong>Preview Source and Destination Table Relationships with schemasync mode</strong><a class="headerlink" href="#preview-source-and-destination-table-relationships-with-schemasync-mode" title="Permanent link">&para;</a></h2>
-<p>Before attempting to do an initial snapshot of current table and data, which may be huge, it is possible to "preview" all the tables and data type mappings between source and destination tables before the actual data migration. This gives you an opportunity to modify a data type mapping, or an object name before actual migration happens. This can be done with the special "schemasync" initial snapshot mode. Refer to <a href="../../tutorial/object_mapping_workflow/">object mapping workflow</a> for a detailed example.</p>
+<p>Before attempting to do an initial snapshot of current table and data, which may be huge, it is possible to "preview" all the tables and data type mappings between source and destination tables before the actual data migration. This gives you an opportunity to modify a data type mapping, or an object name before actual migration happens. This can be done with the special "schemasync" initial snapshot mode.</p>
+<h3 id="create-a-connector-and-start-it-in-schemasync-mode"><strong>Create a Connector and Start it in <code>schemasync</code> Mode</strong><a class="headerlink" href="#create-a-connector-and-start-it-in-schemasync-mode" title="Permanent link">&para;</a></h3>
+<p><code>schemasync</code> is a special mode that makes the connector connects to remote database and attempt to sync only the schema of designated tables. After this is done, the connector is put to <code>paused</code> state and user is able to review all the tables and data types created using the default rules and make change if needed.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="mi">1521</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;DBZUSER&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;dbz&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;FREE&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;DBZUSER&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;oracle&#39;</span>
+<span class="p">);</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;schemasync&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="ensure-the-connector-is-put-to-paused-state"><strong>Ensure the Connector is Put to Paused State</strong><a class="headerlink" href="#ensure-the-connector-is-put-to-paused-state" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">connector_type</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">stage</span><span class="p">,</span><span class="w"> </span><span class="k">state</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;oracleconn&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">name</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">connector_type</span><span class="w"> </span><span class="o">|</span><span class="w">   </span><span class="n">pid</span><span class="w">   </span><span class="o">|</span><span class="w">        </span><span class="n">stage</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">state</span>
+<span class="c1">------------+----------------+---------+---------------------+--------</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="mi">1648935</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">change</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="n">capture</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">paused</span>
+</code></pre></div>
+<h3 id="review-the-tables-created-by-default-mapping-rules"><strong>Review the Tables Created by Default Mapping Rules</strong><a class="headerlink" href="#review-the-tables-created-by-default-mapping-rules" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_att_view</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;oracleconn&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">name</span><span class="w">    </span><span class="o">|</span><span class="w">  </span><span class="k">type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">attnum</span><span class="w"> </span><span class="o">|</span><span class="w">       </span><span class="n">ext_tbname</span><span class="w">       </span><span class="o">|</span><span class="w">   </span><span class="n">pg_tbname</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ext_attname</span><span class="w">  </span><span class="o">|</span><span class="w">  </span><span class="n">pg_attname</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">ext_atttypename</span><span class="w"> </span><span class="o">|</span><span class="w">       </span><span class="n">pg_atttypename</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">transform</span>
+<span class="c1">------------+--------+--------+------------------------+----------------+--------------+--------------+-----------------+-----------------------------+-----------</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">CUSTOMERS</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">customers</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ID</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">CUSTOMERS</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">customers</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">NAME</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">name</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">varchar2</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ORDER_NUMBER</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">order_number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ORDER_DATE</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">order_date</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">date</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="k">timestamp</span><span class="w"> </span><span class="k">without</span><span class="w"> </span><span class="k">time</span><span class="w"> </span><span class="k">zone</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">PURCHASER</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">purchaser</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">QUANTITY</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">5</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">PRODUCT_ID</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+</code></pre></div>
+<h3 id="define-custom-mapping-rules-if-needed"><strong>Define Custom Mapping Rules (If Needed)</strong><a class="headerlink" href="#define-custom-mapping-rules-if-needed" title="Permanent link">&para;</a></h3>
+<p>User can use <code>synchdb_add_objmap</code> function to create custom mapping rules. It can be used to map table name, column name, data types and defines a data transform expression rule</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;FREE.DBZUSER.ORDERS&#39;</span><span class="p">,</span><span class="s1">&#39;free.myorders&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="s1">&#39;column&#39;</span><span class="p">,</span><span class="s1">&#39;FREE.DBZUSER.ORDERS.PURCHASER&#39;</span><span class="p">,</span><span class="s1">&#39;who&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="s1">&#39;datatype&#39;</span><span class="p">,</span><span class="s1">&#39;FREE.DBZUSER.ORDERS.QUANTITY&#39;</span><span class="p">,</span><span class="s1">&#39;bigint|0&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="s1">&#39;transform&#39;</span><span class="p">,</span><span class="s1">&#39;FREE.DBZUSER.CUSTOMERS.NAME&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;&#39;&gt;&gt;&gt;&gt;&gt;&#39;&#39; || &#39;&#39;%d&#39;&#39; || &#39;&#39;&lt;&lt;&lt;&lt;&lt;&#39;&#39;&#39;</span><span class="p">);</span>
+</code></pre></div>
+The above means:</p>
+<ul>
+<li>source table 'FREE.DBZUSER.ORDERS' will be mapped to 'free.myorders' in destination</li>
+<li>source column 'FREE.DBZUSER.ORDERS.PURCHASE' will be mapped to 'who' in destination</li>
+<li>source data type for column 'FREE.DBZUSER.ORDERS.QUANTITY' will be mapped to 'bigint'</li>
+<li>source column data 'FREE.DBZUSER.CUSTOMERS.NAME' will be transformed accoring to the expression where %d is the data placeholder</li>
+</ul>
+<h3 id="review-all-object-mapping-rules-created-so-far"><strong>Review All Object Mapping Rules Created So Far</strong><a class="headerlink" href="#review-all-object-mapping-rules-created-so-far" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_objmap</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;oracleconn&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">name</span><span class="w">    </span><span class="o">|</span><span class="w">  </span><span class="n">objtype</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="o">|</span><span class="w">            </span><span class="n">srcobj</span><span class="w">             </span><span class="o">|</span><span class="w">           </span><span class="n">dstobj</span>
+<span class="c1">------------+-----------+---------+-------------------------------+----------------------------</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">myorders</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">column</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="p">.</span><span class="n">PURCHASER</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">who</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">datatype</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="p">.</span><span class="n">QUANTITY</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="nb">bigint</span><span class="o">|</span><span class="mi">0</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">transform</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">CUSTOMERS</span><span class="p">.</span><span class="n">NAME</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;&gt;&gt;&gt;&gt;&gt;&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;%d&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&lt;&lt;&lt;&lt;&lt;&#39;</span>
+</code></pre></div>
+<h3 id="reload-the-object-mapping-rules"><strong>Reload the Object Mapping Rules</strong><a class="headerlink" href="#reload-the-object-mapping-rules" title="Permanent link">&para;</a></h3>
+<p>Once all custom rules have been defined, we need to signal the connector to load them. This will cause the connector to read and apply the object mapping rules. If it sees a discrepancy between current PostgreSQL values and the object mapping values, it will attempt to correct the mapping.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_reload_objmap</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="review-synchdb_att_view-again-for-changes"><strong>Review <code>synchdb_att_view</code> Again for Changes</strong><a class="headerlink" href="#review-synchdb_att_view-again-for-changes" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_att_view</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;oracleconn&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">name</span><span class="w">    </span><span class="o">|</span><span class="w">  </span><span class="k">type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">attnum</span><span class="w"> </span><span class="o">|</span><span class="w">       </span><span class="n">ext_tbname</span><span class="w">       </span><span class="o">|</span><span class="w">   </span><span class="n">pg_tbname</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ext_attname</span><span class="w">  </span><span class="o">|</span><span class="w">  </span><span class="n">pg_attname</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">ext_atttypename</span><span class="w"> </span><span class="o">|</span><span class="w">       </span><span class="n">pg_atttypename</span><span class="w">        </span><span class="o">|</span><span class="w">         </span><span class="k">transform</span>
+<span class="c1">------------+--------+--------+------------------------+----------------+--------------+--------------+-----------------+-----------------------------+----------------------------</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">CUSTOMERS</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">customers</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ID</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">CUSTOMERS</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">customers</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">NAME</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">name</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">varchar2</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;&gt;&gt;&gt;&gt;&gt;&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;%d&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&lt;&lt;&lt;&lt;&lt;&#39;</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">myorders</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">ORDER_NUMBER</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">order_number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">myorders</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">ORDER_DATE</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">order_date</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">date</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="k">timestamp</span><span class="w"> </span><span class="k">without</span><span class="w"> </span><span class="k">time</span><span class="w"> </span><span class="k">zone</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">myorders</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">PURCHASER</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">who</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">myorders</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">QUANTITY</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">bigint</span><span class="w">                      </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">5</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">myorders</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">PRODUCT_ID</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+</code></pre></div>
+<h3 id="resume-the-connector-or-redo-the-entire-snapshot"><strong>Resume the Connector or Redo the Entire Snapshot</strong><a class="headerlink" href="#resume-the-connector-or-redo-the-entire-snapshot" title="Permanent link">&para;</a></h3>
+<p>Once the object mappings have been confirmed correct, we can resume the connector. Please note that, resume will proceed to streaming only the new table changes. The existing data of the tables will not be copied.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_resume_engine</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>To capture the table's existing data, we can also redo the entire snapshot with the new object mapping rules.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_stop_engine_bgw</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
+</code></pre></div>
 <h2 id="selective-table-sync"><strong>Selective Table Sync</strong><a class="headerlink" href="#selective-table-sync" title="Permanent link">&para;</a></h2>
 <h3 id="select-desired-tables-and-start-it-for-the-first-time"><strong>Select Desired Tables and Start it for the First Time</strong><a class="headerlink" href="#select-desired-tables-and-start-it-for-the-first-time" title="Permanent link">&para;</a></h3>
 <p>Table selection is done during connector creation phase via <code>synchdb_add_conninfo()</code> where we specify a list of tables (expressed in FQN, separated by a comma) to replicate from.</p>
-<p>For example, the following command creates a connector that only replicates change from <code>inventory.orders</code> and <code>inventory.products</code> tables from remote MySQL database.
+<p>For example, the following command creates a connector that only replicates change from <code>FREE.ORDERS</code> tables from Oracle.</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
 <span class="w">    </span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span>
@@ -2328,13 +2836,13 @@
 <span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="s1">&#39;oracle&#39;</span>
 <span class="p">);</span>
-</code></pre></div></p>
+</code></pre></div>
 <p>Starting this connector for the very first time will trigger an initial snapshot being performed and selected tables' schema and data will be replicated.</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="verify-the-connector-state-and-tables"><strong>Verify the Connector State and Tables</strong><a class="headerlink" href="#verify-the-connector-state-and-tables" title="Permanent link">&para;</a></h3>
-<p>Examine the connector state and the new tables:
-<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">Select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">state</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="p">;</span>
+<p>Examine the connector state and the new tables:</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">Select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">state</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="p">;</span>
 <span class="w">    </span><span class="n">name</span><span class="w">    </span><span class="o">|</span><span class="w">  </span><span class="k">state</span><span class="w">  </span><span class="o">|</span><span class="w">   </span><span class="n">err</span>
 <span class="c1">------------+---------+----------</span>
 <span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span>
@@ -2350,26 +2858,194 @@ By default, source database name is mapped to a schema in destination with lette
 <p>The <code>oracleconn</code> from previous section has already completed the initial snapshot and obtained the table schemas of the selected table. If we would like to add more tables to replicate from, we will need to notify the Debezium engine about the updated table section and perform the initial snapshot again. Here's how it is done:</p>
 <ol>
 <li>Update the <code>synchdb_conninfo</code> table to include additional tables.</li>
-<li>In this example, we add the <code>DBZUSER.CUSTOMERS</code> table to the sync list:
+<li>In this example, we add the <code>DBZUSER.CUSTOMERS</code> table to the sync list:</li>
+</ol>
 <div class="highlight"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">synchdb_conninfo</span><span class="w"> </span>
 <span class="k">SET</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonb_set</span><span class="p">(</span><span class="k">data</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{table}&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&quot;DBZUSER.ORDERS,DBZUSER.CUSTOMERS&quot;&#39;</span><span class="p">)</span><span class="w"> </span>
 <span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;oracleconn&#39;</span><span class="p">;</span>
-</code></pre></div></li>
-<li>Restart the connector with the snapshot mode set to <code>always</code> to perform another initial snapshot:
+</code></pre></div>
+<ol>
+<li>Restart the connector with the snapshot mode set to <code>always</code> to perform another initial snapshot:</li>
+</ol>
 <div class="highlight"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">orders</span><span class="p">;</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_restart_connector</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
 </code></pre></div>
-This forces Debezium to re-snapshot all the tables again, including the existing tables <code>free.orders</code> and the new <code>free.customers</code> before going to CDC streaming. This means, to add a new table, the existing tables have to be dropped (to prevent duplicate table and primary key errors) and do the entire initial snapshot again. This is quite redundant and Debezium suggests using incremental snasphot to add the addition tables without re-snapshotting. We will update this procedure once we add the incremental snapshot support to SynchDB.</li>
-</ol>
+<p>This forces Debezium to re-snapshot all the tables again, including the existing tables <code>free.orders</code> and the new <code>free.customers</code> before going to CDC streaming. This means, to add a new table, the existing tables have to be dropped (to prevent duplicate table and primary key errors) and do the entire initial snapshot again. This is quite redundant and Debezium suggests using incremental snasphot to add the addition tables without re-snapshotting. We will update this procedure once we add the incremental snapshot support to SynchDB.</p>
 <h3 id="verify-the-updated-tables"><strong>Verify the Updated Tables</strong><a class="headerlink" href="#verify-the-updated-tables" title="Permanent link">&para;</a></h3>
-<p>Now, we can examine our tables again:
+<p>Now, we can examine our tables again:</p>
 <div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="o">*</span>
 <span class="w">          </span><span class="n">List</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">tables</span>
 <span class="w"> </span><span class="k">Schema</span><span class="w">      </span><span class="o">|</span><span class="w">  </span><span class="n">Name</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Owner</span>
 <span class="c1">-------------+--------+-------+--------</span>
 <span class="w"> </span><span class="k">free</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 <span class="w"> </span><span class="n">customers</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
+</code></pre></div>
+<h2 id="configure-infinispan-for-oracle-connector"><strong>Configure Infinispan for Oracle Connector</strong><a class="headerlink" href="#configure-infinispan-for-oracle-connector" title="Permanent link">&para;</a></h2>
+<p>By default, Debezium's Oracle connector uses the JVM heap to cache incoming change events before passing them to SynchDB for processing. The maximum heap size is controlled via the <code>synchdb.jvm_max_heap_size</code> GUC. When the JVM heap runs out of memory (especially under large transactions or schemas with many columns), the connector may fail with OutOfMemoryError, making heap sizing a critical tuning challenge.</p>
+<p>As an alternative, Debezium can be configured to use Infinispan as its caching layer. Infinispan supports memory storage on both the JVM heap and off-heap (direct memory), offering more flexibility. Additionally, it supports passivation, allowing excess data to be spilled to disk when memory limits are reached. This makes it far more resilient under heavy workloads and ensures large transactions or schema changes can be handled gracefully without running out of memory.</p>
+<h3 id="synchdb_add_infinispan"><strong><code>synchdb_add_infinispan()</code></strong><a class="headerlink" href="#synchdb_add_infinispan" title="Permanent link">&para;</a></h3>
+<p><strong>Signature:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">synchdb_add_infinispan</span><span class="p">(</span>
+<span class="w">    </span><span class="n">connectorName</span><span class="w"> </span><span class="n">NAME</span><span class="p">,</span><span class="w">     </span><span class="c1">-- Name of the connector</span>
+<span class="w">    </span><span class="n">memoryType</span><span class="w"> </span><span class="n">NAME</span><span class="p">,</span><span class="w">        </span><span class="c1">-- memory type, can be &quot;heap&quot; or &quot;off heap&quot;</span>
+<span class="w">    </span><span class="n">memorySize</span><span class="w"> </span><span class="nb">INT</span><span class="w">          </span><span class="c1">-- size of memory in MB to reserve as cache</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Registers an Infinispan-backed caching configuration for a given connector. This allows the connector to use Infinispan for buffering change events, supporting both heap-based and off-heap memory allocation with spill-to-disk (passivation).</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>If called on a connector that is currently running, the setting will take effect on next restart.</li>
+<li>If an Infinispan cache already exists for the connector, it will be replaced.</li>
+<li>memoryType='off_heap' utilizes native (direct) memory and is not limited by JVM heap, but should be sized carefully.</li>
+<li>The cache will automatically support passivation to disk when memory fills.</li>
+</ul>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_infinispan</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;off_heap&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2048</span><span class="p">);</span>
 </code></pre></div></p>
+<h3 id="synchdb_del_infinispan"><strong><code>synchdb_del_infinispan()</code></strong><a class="headerlink" href="#synchdb_del_infinispan" title="Permanent link">&para;</a></h3>
+<p><strong>Signature:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">synchdb_add_infinispan</span><span class="p">(</span>
+<span class="w">    </span><span class="n">connectorName</span><span class="w"> </span><span class="n">NAME</span><span class="w">         </span><span class="c1">-- Name of the connector</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>Removes the Infinispan cache configuration and associated on-disk metadata for a given connector. This operation will delete:</p>
+<ul>
+<li>All cache files</li>
+<li>Any passivated (spilled-to-disk) state</li>
+<li>The associated Infinispan configuration</li>
+</ul>
+<p><strong>Note:</strong></p>
+<ul>
+<li>This function can only be executed when the connector is stopped.</li>
+<li>Attempting to run it while the connector is active will result in an error.</li>
+<li>Use this command to clean up after permanently disabling or reconfiguring a connector’s cache backend.</li>
+</ul>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_del_infinispan</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<h3 id="passivation"><strong><code>Passivation</code></strong><a class="headerlink" href="#passivation" title="Permanent link">&para;</a></h3>
+<p>Passivation simply means infinispan will eject and write data on disk if cache memory is full. As long as there is space in memory to hold change events, disk write will not occur. The data is written to <code>$PGDATA/pg_synchdb/ispn_[connector name]_[destination database name]</code></p>
+<h3 id="example-oracle-sqls-to-test-infinispan-with-a-large-transaction"><strong>Example Oracle SQLs to test Infinispan with a Large Transaction</strong><a class="headerlink" href="#example-oracle-sqls-to-test-infinispan-with-a-large-transaction" title="Permanent link">&para;</a></h3>
+<p><strong>Create a test table in Oracle:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">big_tx_test</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w">       </span><span class="nb">NUMBER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">payload</span><span class="w">  </span><span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">4000</span><span class="p">),</span>
+<span class="w">    </span><span class="n">created</span><span class="w">  </span><span class="nb">DATE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">SYSDATE</span>
+<span class="p">);</span>
+</code></pre></div></p>
+<p><strong>Create a relatively large transaction:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">BEGIN</span>
+<span class="w">  </span><span class="k">FOR</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="mi">1</span><span class="p">..</span><span class="mi">100000</span><span class="w"> </span><span class="n">LOOP</span>
+<span class="w">    </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">big_tx_test</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">payload</span><span class="p">)</span>
+<span class="w">    </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">RPAD</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">4000</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;x&#39;</span><span class="p">));</span>
+<span class="w">  </span><span class="k">END</span><span class="w"> </span><span class="n">LOOP</span><span class="p">;</span>
+<span class="w">  </span><span class="k">COMMIT</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="o">/</span>
+</code></pre></div></p>
+<p><strong>Behaviors Under Large Transaction</strong></p>
+<p>no infinispan setting + low JVM heap (synchdb.jvm_max_heap_size=128)</p>
+<ul>
+<li>&rarr; OutOfMemory error will occur</li>
+</ul>
+<p>low JVM heap (128) + high infinispan off heap (2048)</p>
+<ul>
+<li>&rarr; large transaction handled successfully</li>
+</ul>
+<p>low JVM heap (128) + low infinispan off heap (128)</p>
+<ul>
+<li>&rarr; passivation will occur</li>
+<li>&rarr; <code>ispn_[connector name]_[destination database name]</code> size will grow during processing and reduce once large transaction finished processing</li>
+<li>&rarr; large transaction handled successfully but at slower speed.</li>
+</ul>
+<p>low JVM heap (128) + high infinispan heap (2048)</p>
+<ul>
+<li>&rarr; OutOfMemory error will occur</li>
+<li>&rarr; do not configure infinispan to use more heap memory than JVM max heap.</li>
+</ul>
+<p>low JVM heap (128) + low infinispan heap (64)</p>
+<ul>
+<li>&rarr; passivation will occur</li>
+<li>&rarr; <code>ispn_[connector name]_[destination database name]</code> size will grow during processing and reduce once large transaction finished processing</li>
+<li>&rarr; not recommended as half of the JVM heap can potentially be used by infinispan and may not have enough left for other Debezium operations</li>
+</ul>
+<p>low JVM heap (128) + same infinispan heap (128)</p>
+<ul>
+<li>&rarr; not recommended as all of the JVM heap can potentially be used by infinispan and eventually causing OutOfMemory error</li>
+</ul>
+<p>high JVM heap (2048) + low infinispan heap (128)</p>
+<ul>
+<li>&rarr; passivation will occur</li>
+<li>&rarr; <code>ispn_[connector name]_[destination database name]</code> size will grow during processing and reduce once large transaction finished processing</li>
+<li>&rarr; large transaction handled successfully</li>
+<li>&rarr; not efficient - as only a small portion of JVM heap is used as cache + unnessary passivation.</li>
+</ul>
+<h2 id="custom-start-offset-values">Custom Start Offset Values<a class="headerlink" href="#custom-start-offset-values" title="Permanent link">&para;</a></h2>
+<p>A start offset value represents a point to start replication from in the similar way as PostgreSQL's resume LSN. When Debezium runner engine starts, it will start the replication from this offset value. Setting this offset value to a earlier value will cause Debezium runner engine to start replication from earlier records, possibly replicating duplicate data records. We should be extra cautious when setting start offset values on Debezium.</p>
+<h3 id="record-settable-offset-values"><strong>Record Settable Offset Values</strong><a class="headerlink" href="#record-settable-offset-values" title="Permanent link">&para;</a></h3>
+<p>During operation, new offsets will be generated and flushed to disk by Debezium runner engine. The last flushed offset can be retrieved from <code>synchdb_state_view()</code> utility command:</p>
+<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">last_dbz_offset</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="p">;</span>
+<span class="w">     </span><span class="n">name</span><span class="w">      </span><span class="o">|</span><span class="w">                                           </span><span class="n">last_dbz_offset</span>
+<span class="c1">---------------+------------------------------------------------------------------------------------------------------</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;commit_scn&quot;</span><span class="p">:</span><span class="ss">&quot;2311579&quot;</span><span class="p">,</span><span class="ss">&quot;snapshot_scn&quot;</span><span class="p">:</span><span class="ss">&quot;2311578&quot;</span><span class="p">,</span><span class="ss">&quot;scn&quot;</span><span class="p">:</span><span class="ss">&quot;2311578&quot;</span><span class="err">}</span>
+</code></pre></div>
+<p>We should save this values regularly, so in case we run into a problem, we know the offset location in the past that can be set to resume the replication operation.</p>
+<h3 id="pause-the-connector"><strong>Pause the Connector</strong><a class="headerlink" href="#pause-the-connector" title="Permanent link">&para;</a></h3>
+<p>A connector must be in a <code>paused</code> state before a new offset value can be set.</p>
+<p>Use <code>synchdb_pause_engine()</code> SQL function to pause a runnng connector. This will halt the Debezium runner engine from replicating from the heterogeneous database. When paused, it is possible to alter the Debezium connector's offset value to replicate from a specific point in the past using <code>synchdb_set_offset()</code> SQL routine. It takes <code>conninfo_name</code> as its argument which can be found from the output of <code>synchdb_get_state()</code> view.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_pause_engine</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="set-the-new-offset"><strong>Set the new Offset</strong><a class="headerlink" href="#set-the-new-offset" title="Permanent link">&para;</a></h3>
+<p>Use <code>synchdb_set_offset()</code> SQL function to change a connector worker's starting offset. This can only be done when the connector is put into <code>paused</code> state. The function takes 2 parameters, <code>conninfo_name</code> and <code>a valid offset string</code>, both of which can be found from the output of <code>synchdb_get_state()</code> view.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
+<span class="w">  </span><span class="n">synchdb_set_offset</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{&quot;commit_scn&quot;:&quot;2311579&quot;,&quot;snapshot_scn&quot;:&quot;2311578&quot;,&quot;scn&quot;:&quot;2311578&quot;}&#39;</span>
+<span class="w">  </span><span class="p">);</span>
+</code></pre></div>
+<h3 id="resume-the-connector"><strong>Resume the Connector</strong><a class="headerlink" href="#resume-the-connector" title="Permanent link">&para;</a></h3>
+<p>Use <code>synchdb_resume_engine()</code> SQL function to resume Debezium operation from a paused state. This function takes <code>connector name</code> as its only parameter, which can be found from the output of <code>synchdb_get_state()</code> view. The resumed Debezium runner engine will start the replication from the newly set offset value.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_resume_engine</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="configure-debezium-oracle-connector-to-use-openlog-replicator-non-native">Configure Debezium Oracle Connector to Use Openlog Replicator (non-native)<a class="headerlink" href="#configure-debezium-oracle-connector-to-use-openlog-replicator-non-native" title="Permanent link">&para;</a></h2>
+<p>Though not recommended, it is possible to configure a Debezium based Oracle Connector to stream from Openlog Replicator instead of logminer. It is different from <a href="../../tutorial/native_olr_cdc_to_postgresql">Native Openlog Replicator</a>, which is built natively within SynchDB without the use of Debezium and is the recommended way to use OLR.</p>
+<p>To create a <strong>Debezium-based</strong> OLR connector (use <code>type</code> = 'oracle'):</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;ora19c&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="mi">1521</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;DBZUSER&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;dbz&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;FREE&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;null&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;null&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;oracle&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>Then, attach Openlog Replicator information with <code>synchdb_add_olr_conninfo</code> with signature:</p>
+<div class="highlight"><pre><span></span><code><span class="n">synchdb_add_olr_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="n">conn_name</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span><span class="w">     </span><span class="c1">-- Name of the connector</span>
+<span class="w">    </span><span class="n">olr_host</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span><span class="w">      </span><span class="c1">-- Hostname or IP of the OLR instance</span>
+<span class="w">    </span><span class="n">olr_port</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="w">       </span><span class="c1">-- Port number exposed by OLR (typically 7070)</span>
+<span class="w">    </span><span class="n">olr_source</span><span class="w"> </span><span class="nb">TEXT</span><span class="w">     </span><span class="c1">-- Oracle source name as configured in OLR</span>
+<span class="p">)</span>
+</code></pre></div>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_olr_conninfo</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">7070</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ORACLE&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>To removes the OLR configuration from a specific connector and revert back to Logminer, use <code>synchdb_del_olr_conninfo</code> with signature:</p>
+<div class="highlight"><pre><span></span><code><span class="n">synchdb_del_olr_conninfo</span><span class="p">(</span><span class="n">conn_name</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_del_olr_conninfo</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p><strong>Behavior Notes for Debezium based Openlog Replicator Connector</strong></p>
+<ul>
+<li>When both LogMiner and OLR configurations exist, SynchDB defaults to using Openlog Replicator for change capture.</li>
+<li>If OLR configurations are absent, SynchDB uses logmining strategy to stream changes.</li>
+<li>Restarting the connector is required after modifying its OLR configuration.</li>
+</ul>
 
 
 

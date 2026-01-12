@@ -12,7 +12,7 @@
         <meta name="author" content="Hornetlabs Technology Inc.">
       
       
-        <link rel="canonical" href="https://docs.synchdb.com/latest/es/user-guide/secured_connection/">
+        <link rel="canonical" href="https://docs.synchdb.com/latest/es/user-guide/letter_casing_strategy/">
       
       
         <link rel="prev" href="../object_mapping_rules/">
@@ -22,11 +22,11 @@
       
       
         
-          <link rel="alternate" href="../../../user-guide/secured_connection/" hreflang="en">
+          <link rel="alternate" href="../../../user-guide/letter_casing_strategy/" hreflang="en">
         
           <link rel="alternate" href="./" hreflang="es">
         
-          <link rel="alternate" href="../../../zh/user-guide/secured_connection/" hreflang="zh">
+          <link rel="alternate" href="../../../zh/user-guide/letter_casing_strategy/" hreflang="zh">
         
       
       
@@ -35,7 +35,7 @@
     
     
       
-        <title>Conexión segura - Documentación de SynchDB</title>
+        <title>Estrategia de mayúsculas y minúsculas - Documentación de SynchDB</title>
       
     
     
@@ -94,7 +94,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#secured-connection" class="md-skip">
+        <a href="#letter-casing-strategy" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -132,7 +132,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Conexión segura
+              Estrategia de mayúsculas y minúsculas
             
           </span>
         </div>
@@ -179,7 +179,7 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../user-guide/secured_connection/" hreflang="en" class="md-select__link">
+            <a href="../../../user-guide/letter_casing_strategy/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
@@ -191,7 +191,7 @@
           </li>
         
           <li class="md-select__item">
-            <a href="../../../zh/user-guide/secured_connection/" hreflang="zh" class="md-select__link">
+            <a href="../../../zh/user-guide/letter_casing_strategy/" hreflang="zh" class="md-select__link">
               中文
             </a>
           </li>
@@ -1286,7 +1286,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL -> PostgreSQL
+    Conector MySQL
   
 
     
@@ -1314,7 +1314,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server -> PostgreSQL
+    Conector SQL Server
   
 
     
@@ -1342,7 +1342,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle -> PostgreSQL
+    Conector Oracle
   
 
     
@@ -1363,14 +1363,42 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/object_mapping_workflow/" class="md-nav__link">
+      <a href="../../tutorial/postgresql_cdc_to_postgresql/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Flujo de trabajo de mapeo de objetos
+    Conector Postgres
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/native_olr_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conector nativo de replicador Openlog
   
 
     
@@ -1611,7 +1639,7 @@
   <span class="md-ellipsis">
     
   
-    Conexión segura
+    Estrategia de mayúsculas y minúsculas
   
 
     
@@ -1629,7 +1657,7 @@
   <span class="md-ellipsis">
     
   
-    Conexión segura
+    Estrategia de mayúsculas y minúsculas
   
 
     
@@ -1655,10 +1683,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#configure-secured-connection" class="md-nav__link">
+  <a href="#configure-letter-casing-strategy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configure Secured Connection
+        Configure Letter Casing Strategy
       
     </span>
   </a>
@@ -1666,21 +1694,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#synchdb_add_extra_conninfo" class="md-nav__link">
+  <a href="#how-does-letter-casing-strategy-affect-transformation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        synchdb_add_extra_conninfo
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#synchdb_del_extra_conninfo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        synchdb_del_extra_conninfo
+        How does Letter Casing Strategy Affect Transformation
       
     </span>
   </a>
@@ -1710,7 +1727,7 @@
   <span class="md-ellipsis">
     
   
-    Configurar estrategias de error
+    estrategias de error
   
 
     
@@ -1731,70 +1748,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../set_offset/" class="md-nav__link">
+      <a href="../../../user-guide/configure_olr.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Configurar el desplazamiento de replicación
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../configure_olr/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Configurar Openlog Replicator para Oracle Connector
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../configure_infinispan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Configurar Infinispan
+    Configurar Openlog Replicator
   
 
     
@@ -1897,10 +1858,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#configure-secured-connection" class="md-nav__link">
+  <a href="#configure-letter-casing-strategy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configure Secured Connection
+        Configure Letter Casing Strategy
       
     </span>
   </a>
@@ -1908,21 +1869,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#synchdb_add_extra_conninfo" class="md-nav__link">
+  <a href="#how-does-letter-casing-strategy-affect-transformation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        synchdb_add_extra_conninfo
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#synchdb_del_extra_conninfo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        synchdb_del_extra_conninfo
+        How does Letter Casing Strategy Affect Transformation
       
     </span>
   </a>
@@ -1949,73 +1899,24 @@
   
 
 
-<h1 id="secured-connection">Secured Connection<a class="headerlink" href="#secured-connection" title="Permanent link">&para;</a></h1>
-<h2 id="configure-secured-connection"><strong>Configure Secured Connection</strong><a class="headerlink" href="#configure-secured-connection" title="Permanent link">&para;</a></h2>
-<p>to secure the connection to remote database, we need to configure additional SSL related parameters to a connector that has been created by <code>synchdb_add_conninfo</code>. The SSL certificates and private keys must be packaged as Java keystore file with a passphrase. These information is then passed to SynchDB via synchdb_add_extra_conninfo().</p>
-<p>&lt;&lt;<strong>IMPORTANT</strong>&gt;&gt; Secured connection is not available for Openlog Replicator Connector</p>
-<h2 id="synchdb_add_extra_conninfo"><strong>synchdb_add_extra_conninfo</strong><a class="headerlink" href="#synchdb_add_extra_conninfo" title="Permanent link">&para;</a></h2>
-<p><strong>Purpose</strong>: Configures extra connector parameters to an existing connector created by <code>synchdb_add_conninfo</code></p>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">Parameter</th>
-<th style="text-align: left;">Description</th>
-<th style="text-align: center;">Required</th>
-<th style="text-align: left;">Example</th>
-<th style="text-align: left;">Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;"><code>name</code></td>
-<td style="text-align: left;">Unique identifier for this connector</td>
-<td style="text-align: center;">✓</td>
-<td style="text-align: left;"><code>'mysqlconn'</code></td>
-<td style="text-align: left;">Must be unique across all connectors</td>
-</tr>
-<tr>
-<td style="text-align: center;"><code>ssl_mode</code></td>
-<td style="text-align: left;">SSL mode</td>
-<td style="text-align: center;">☐</td>
-<td style="text-align: left;"><code>'verify_ca'</code></td>
-<td style="text-align: left;">can be one of: <br><ul><li> "disabled" - no SSL is used. </li><li> "preferred" - SSL is used if server supports it. </li><li> "required" - SSL must be used to establish a connection. </li><li> "verify_ca" - connector establishes TLS with the server and will also verify server's TLS certificate against configured truststore. </li><li> "verify_identity" - same behavior as verify_ca but it also checks the server certificate's common name to match the hostname of the system.</td>
-</tr>
-<tr>
-<td style="text-align: center;"><code>ssl_keystore</code></td>
-<td style="text-align: left;">keystore path</td>
-<td style="text-align: center;">☐</td>
-<td style="text-align: left;"><code>/path/to/keystore</code></td>
-<td style="text-align: left;">path to the keystore file</td>
-</tr>
-<tr>
-<td style="text-align: center;"><code>ssl_keystore_pass</code></td>
-<td style="text-align: left;">keystore password</td>
-<td style="text-align: center;">☐</td>
-<td style="text-align: left;"><code>'mykeystorepass'</code></td>
-<td style="text-align: left;">password to access the keystore file</td>
-</tr>
-<tr>
-<td style="text-align: center;"><code>ssl_truststore</code></td>
-<td style="text-align: left;">trust store path</td>
-<td style="text-align: center;">☐</td>
-<td style="text-align: left;"><code>'/path/to/truststore'</code></td>
-<td style="text-align: left;">path to the truststore file</td>
-</tr>
-<tr>
-<td style="text-align: center;"><code>ssl_truststore_pass</code></td>
-<td style="text-align: left;">trust store password</td>
-<td style="text-align: center;">☐</td>
-<td style="text-align: left;"><code>'mytruststorepass'</code></td>
-<td style="text-align: left;">password to access the truststore file</td>
-</tr>
-</tbody>
-</table>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_extra_conninfo</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;verify_ca&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/path/to/keystore&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mykeystorepass&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/path/to/truststore&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mytruststorepass&#39;</span><span class="p">);</span>
+<h1 id="letter-casing-strategy">Letter Casing Strategy<a class="headerlink" href="#letter-casing-strategy" title="Permanent link">&para;</a></h1>
+<h2 id="configure-letter-casing-strategy">Configure Letter Casing Strategy<a class="headerlink" href="#configure-letter-casing-strategy" title="Permanent link">&para;</a></h2>
+<p>Letter casing strategy represents how SynchDB should normalize source object names before applying them to destination. MySQL, SQL Server and PostgreSQL default all object names to lower case letters while Oracle defaults to upper case.  MySQL, Oracle and PostgreSQL allow object names to contain a mixture of upper and lower case letters, and consider each variant different while SQL Server treats them as all the same. </p>
+<p>It is possible to tell SynchDB how to handle the object names using <code>synchdb.letter_casing_strategy</code> GUC parameter with these possible values:</p>
+<ul>
+<li>lowercase: normalize all object names (table and column names) to lower case letters</li>
+<li>uppercase: normalize all object names (table and column names) to upper case letters</li>
+<li>asis: do not normalize, keep object names(table and column names) as is.</li>
+</ul>
+<p>&lt;<IMPORTANT>&gt; synchdb.letter_casing_strategy does not affect data type names. It is always normalized to lower case in SynchDB. Connectors like SQL Server and Oracle express data type in upper case letters, so these are stored and displayed as lower case in SynchDB.</p>
+<h2 id="how-does-letter-casing-strategy-affect-transformation">How does Letter Casing Strategy Affect Transformation<a class="headerlink" href="#how-does-letter-casing-strategy-affect-transformation" title="Permanent link">&para;</a></h2>
+<p>You may wonder if SynchDB normalizes object names according to <code>synchdb.letter_casing_strategy</code>, how shall <a href="../../user-guide/object_mapping_rules/">object transformation</a> be configured correctly to identify a foreign table or column to transform?</p>
+<p>Object transformation identifies the original name from source database for transformation, so you have to configure the object name exactly as they appear in the source database, not the one normalized by SynchDB. </p>
+<p>If a match is found, SynchDB will prioritize the new value as identified by the object transformation and will not proceed to normalize it according to the letter casing strategy. Normalization occurs when there is no particular transformation rule defined for an object</p>
+<p>For example, for an Oracle table 'TEST_TABLE' under database 'FREE' and schema 'DBZUSER', let's say we want to map it to "MY_TEST_TABLE" (all capital) in PostgreSQL and current synchdb.letter_casing_strategy is 'lowercase'. You will write the transform rule like this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;FREE.DBZUSER.TEST_TABLE&#39;</span><span class="p">,</span><span class="s1">&#39;MY_TEST_TABLE&#39;</span><span class="p">);</span>
 </code></pre></div>
-<h2 id="synchdb_del_extra_conninfo"><strong>synchdb_del_extra_conninfo</strong><a class="headerlink" href="#synchdb_del_extra_conninfo" title="Permanent link">&para;</a></h2>
-<p><strong>Purpose</strong>: Deletes extra connector paramters created by <code>synchdb_add_extra_conninfo</code>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_del_extra_conninfo</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
-</code></pre></div></p>
+<p>Since we have transformation rule specifically for "FREE.DBZUSER.TEST_TABLE", this transformation will take precedence and transform it to 'MY_TEST_TABLE` as instructed. The letter casing strategy (lowercase) will not normalize it to lowercase.</p>
 
 
 

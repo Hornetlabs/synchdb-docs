@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://docs.synchdb.com/latest/zh/user-guide/create_a_connector/">
       
       
-        <link rel="prev" href="../../tutorial/object_mapping_workflow/">
+        <link rel="prev" href="../../tutorial/native_olr_cdc_to_postgresql/">
       
       
         <link rel="next" href="../start_stop_connector/">
@@ -1290,7 +1290,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL CDC -> PostgreSQL
+    MySQL 連接器
   
 
     
@@ -1318,7 +1318,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server CDC -> PostgreSQL
+    SQL Server 連接器
   
 
     
@@ -1346,7 +1346,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle CDC -> PostgreSQL
+    Oracle 連接器
   
 
     
@@ -1367,14 +1367,42 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/object_mapping_workflow/" class="md-nav__link">
+      <a href="../../tutorial/postgresql_cdc_to_postgresql/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    对象映射工作流程
+    Postgres 連接器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/native_olr_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    原生 Openlog Replicator 连接器
   
 
     
@@ -1713,7 +1741,7 @@
   <span class="md-ellipsis">
     
   
-    自定义对象映射和转换
+    对象映射和转换
   
 
     
@@ -1734,14 +1762,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../secured_connection/" class="md-nav__link">
+      <a href="../letter_casing_strategy/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    安全连接
+    字母大小寫規則
   
 
     
@@ -1769,7 +1797,7 @@
   <span class="md-ellipsis">
     
   
-    配置错误处理策略
+    错误处理策略
   
 
     
@@ -1790,70 +1818,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../set_offset/" class="md-nav__link">
+      <a href="../../../user-guide/configure_olr.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    配置复制偏移
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../configure_olr/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    为 Oracle 连接器配置 Openlog Replicator
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../configure_infinispan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    配置 infinispan
+    Openlog Replicator 设置
   
 
     
@@ -2065,7 +2037,7 @@
 
 <h1 id="_1">创建连接器<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <h2 id="_2"><strong>创建连接器</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
-<p>连接器代表与特定源数据库的连接，复制一组表并应用于 PostgreSQL。如果您有多个需要复制的源数据库，则需要多个连接器（每个连接器一个）。也可以创建多个连接到同一源数据库但复制不同表集的连接器。</p>
+<p>连接器代表与特定源数据库的连接，复制一组表并应用于 PostgreSQL。如果您有多个需要复制的源数据库，则需要多个连接器（每个连接器一个）。也可以创建多个连接到同一源数据库但复制不同或相同表集的连接器。</p>
 <p>可以使用实用 SQL 函数 <code>synchdb_add_conninfo()</code> 创建连接器。</p>
 <p>synchdb_add_conninfo 接受以下参数：</p>
 <table>
@@ -2097,35 +2069,36 @@
 <td>用于验证用户名的密码</td>
 </tr>
 <tr>
-<td>源数据库</td>
+<td>source database</td>
 <td>这是我们要从中复制更改的异构数据库中的源数据库的名称。</td>
 </tr>
 <tr>
-<td>目标数据库</td>
-<td>（已弃用）始终默认使用与 synchDB 安装位置相同的数据库</td>
+<td>source schema</td>
+<td>這是來源資料庫中來源模式的名稱，我們要從中複製變更。</td>
 </tr>
 <tr>
-<td>表</td>
+<td>table</td>
 <td>（可选）- 以 <code>[database].[table]</code> 或 <code>[database].[schema].[table]</code> 的形式表示，该参数必须存在于异构数据库中，因此引擎将仅复制指定的表。如果留空，则复制所有表。或者，可以使用 <code>file:</code> 前缀指定表列表文件</td>
 </tr>
 <tr>
-<td>快照表</td>
+<td>snapshot table</td>
 <td>（可选）- 以 <code>[database].[table]</code> 或 <code>[database].[schema].[table]</code> 的形式表示，该参数必须存在于上述 <code>table</code> 设置中，因此引擎仅在快照模式设置为 <code>always</code> 时才会重建这些表的快照。如果留空或为 null，则当快照模式设置为 <code>always</code> 时，将重建上述 <code>table</code> 设置中指定的所有表。或者，可以使用 <code>file:</code> 前缀指定快照表列表文件</td>
 </tr>
 <tr>
-<td>连接器</td>
+<td>connector</td>
 <td>要使用的连接器类型（如下）。</td>
 </tr>
 </tbody>
 </table>
-<p>&lt;&lt;<strong>注意</strong>&gt;&gt; 如果連接器類型為“olr”，SynchDB 仍將使用 Debezium 執行初始快照，初始快照包含“table”和“snapshot table”參數中指定的表和快照表。完成後，SynchDB 將連接到 Openlog Replicator 進行複製，而不會過濾「table」參數中指定的所需表。表過濾是在 Openlog Replicator 的配置中完成的。因此，請確保 Openlog Replicator 和 SynchDB 連接器的「table」過濾參數配置一致，以避免潛在的差異。</p>
+<p>&lt;&lt;<strong>注意</strong>&gt;&gt; <code>來源資料庫</code>、<code>來源模式</code>、<code>使用者名稱</code>、<code>密碼</code>、<code>表</code>和<code>快照表</code>區分大小寫，您必須按照來源資料庫中的名稱準確指定它們，因此請記住這些名稱的字母大小寫。</p>
 <h2 id="_3"><strong>连接器类型</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>SynchDb 支持以下连接器类型：</p>
 <ul>
-<li>mysql -&gt; MySQL 数据库</li>
-<li>sqlserver -&gt; Microsoft SQL Server 数据库</li>
-<li>oracle -&gt; Oracle 数据库</li>
-<li>olr -&gt; 原生 Openlog Replicator (BETA)</li>
+<li>mysql             -&gt; MySQL 数据库</li>
+<li>sqlserver         -&gt; Microsoft SQL Server 数据库</li>
+<li>oracle            -&gt; Oracle 数据库</li>
+<li>olr               -&gt; 原生 Openlog Replicator</li>
+<li>postgres          -&gt; PostgreSQL 数据库</li>
 </ul>
 <h2 id="_4"><strong>检查已创建的连接器</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>已创建的连接器显示在 <code>synchdb_conninfo</code> 表中。我们可以查看其内容并根据需要进行修改。请注意，用户凭证的密码由 pgcrypto 使用只有 synchdb 知道的密钥加密。因此，请勿直接修改密码字段，因为如果被篡改，可能会被错误解密。以下是示例输出：</p>
@@ -2136,15 +2109,15 @@
 <span class="o">-</span><span class="p">[</span><span class="w"> </span><span class="n">RECORD</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">]</span><span class="c1">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
 <span class="n">name</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserverconn</span>
 <span class="n">isactive</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">t</span>
-<span class="k">data</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;pwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;\\xc30d0407030245ca4a983b6304c079d23a0191c6dabc1683e4f66fc538db65b9ab2788257762438961f8201e6bcefafa60460fbf441e55d844e7f27b31745f04e7251c0123a159540676c4&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1433</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;sa&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;dstdb&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;postgres&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;srcdb&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;testDB&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;null&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;hostname&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;192.168.1.86&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;connector&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;sqlserver&quot;</span><span class="err">}</span>
+<span class="k">data</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;pwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;\\xc30d0407030245ca4a983b6304c079d23a0191c6dabc1683e4f66fc538db65b9ab2788257762438961f8201e6bcefafa60460fbf441e55d844e7f27b31745f04e7251c0123a159540676c4&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1433</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;sa&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;srcschema&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;dbo&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;srcdb&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;testDB&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;snapshottable&quot;</span><span class="p">:</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;hostname&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;192.168.1.86&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;connector&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;sqlserver&quot;</span><span class="err">}</span>
 <span class="o">-</span><span class="p">[</span><span class="w"> </span><span class="n">RECORD</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">]</span><span class="c1">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
 <span class="n">name</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">mysqlconn</span>
 <span class="n">isactive</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">t</span>
-<span class="k">data</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;pwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;\\xc30d04070302986aff858065e96b62d23901b418a1f0bfdf874ea9143ec096cd648a1588090ee840de58fb6ba5a04c6430d8fe7f7d466b70a930597d48b8d31e736e77032cb34c86354e&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3306</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;mysqluser&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;dstdb&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;postgres&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;srcdb&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;inventory&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;null&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;hostname&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;192.168.1.86&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;connector&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;mysql&quot;</span><span class="err">}</span>
+<span class="k">data</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;pwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;\\xc30d04070302986aff858065e96b62d23901b418a1f0bfdf874ea9143ec096cd648a1588090ee840de58fb6ba5a04c6430d8fe7f7d466b70a930597d48b8d31e736e77032cb34c86354e&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3306</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;mysqluser&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;srcschema&quot;</span><span class="p">:</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;srcdb&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;inventory&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;snapshottable&quot;</span><span class="p">:</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;hostname&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;192.168.1.86&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;connector&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;mysql&quot;</span><span class="err">}</span>
 <span class="o">-</span><span class="p">[</span><span class="w"> </span><span class="n">RECORD</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">]</span><span class="c1">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
 <span class="n">name</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">oracleconn</span>
 <span class="n">isactive</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">t</span>
-<span class="k">data</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;pwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;\\xc30d04070302e3baf1293d0d553066d234014f6fc52e6eea425884b1f65f1955bf504b85062dfe538ca2e22bfd6db9916662406fc45a3a530b7bf43ce4cfaa2b049a1c9af8&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1528</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;c##dbzuser&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;dstdb&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;postgres&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;srcdb&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;FREE&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;null&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;hostname&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;192.168.1.86&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;connector&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;oracle&quot;</span><span class="err">}</span>
+<span class="k">data</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;pwd&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;\\xc30d04070302e3baf1293d0d553066d234014f6fc52e6eea425884b1f65f1955bf504b85062dfe538ca2e22bfd6db9916662406fc45a3a530b7bf43ce4cfaa2b049a1c9af8&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1528</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;DBZUSER&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;srcschema&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;DBZUSER&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;srcdb&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;FREE&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;snapshottable&quot;</span><span class="p">:</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;hostname&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;192.168.1.86&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;connector&quot;</span><span class="p">:</span><span class="w"> </span><span class="ss">&quot;oracle&quot;</span><span class="err">}</span>
 </code></pre></div>
 <p>&lt;&lt;&lt;<strong>重要</strong>&gt;&gt;&gt; 本机 Openlog Replicator 连接器当前不支持通过“table”和“snapshot table”参数指定白名单表，因此以下部分不适用于本机 Openlog Replicator 连接器。</p>
 <h2 id="_5"><strong>使用表列表文件指定表</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
@@ -2152,15 +2125,15 @@
 <div class="highlight"><pre><span></span><code>{
     &quot;table_list&quot;:
     [
-        &quot;mydb.myschema.mytable1&quot;,
-        &quot;mydb.myschema.mytable2&quot;,
+        &quot;myschema.mytable1&quot;,
+        &quot;myschema.mytable2&quot;,
         ...
         ...
     ],
     &quot;snapshot_table_list&quot;:
     [
-        &quot;mydb.myschema.mytable1&quot;,
-        &quot;mydb.myschema.mytable2&quot;,
+        &quot;myschema.mytable1&quot;,
+        &quot;myschema.mytable2&quot;,
         ...
         ...
     ]
@@ -2175,28 +2148,28 @@
 <h2 id="_7"><strong>示例：为每个支持的源数据库创建一个连接器以复制所有表</strong><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <ol>
 <li>
-<p>创建一个名为“mysqlconn”的 MySQL 连接器，将 MySQL 中“inventory”下的所有表复制到 PostgreSQL 中目标数据库“postgres”：
+<p>建立一個名為 <code>mysqlconn</code> 的 MySQL 連接器，用於複製 MySQL 中 <code>inventory</code> 下的所有表。來源模式可以設定為 'null'，因為 MySQL 不支援空值。
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
 <span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">3306</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mysqluser&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;mysqlpwd&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;mysqlpwd&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mysql&#39;</span><span class="p">);</span>
 </code></pre></div></p>
 </li>
 <li>
-<p>创建一个名为“sqlserverconn”的SQLServer连接器，将“testDB”下的所有表复制到PostgreSQL中的目标数据库“postgres”：
+<p>建立一個名為 <code>sqlserver conn</code> 的 SQL Server 連接器，以複製 <code>testDB</code> 資料庫和 <code>dbo</code> 架構下的所有資料表。
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
 <span class="w">  </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
 <span class="w">    </span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1433</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;sa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Password!&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;testDB&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;sa&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Password!&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;testDB&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;sqlserver&#39;</span><span class="p">);</span>
 </code></pre></div></p>
 </li>
 <li>
-<p>创建一个名为“oracleconn”的 Oracle 连接器，将“FREE”下的所有表复制到 PostgreSQL 中的目标数据库“postgres”：
+<p>建立一個名為 <code>oracleconn</code> 的 Oracle 連接器，用於複製 <code>FREE</code> 資料庫和 <code>DBZUSER</code> 模式下的所有表：
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
 <span class="w">  </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
 <span class="w">    </span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1521</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;c##dbzuser&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dbz&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;FREE&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;DBZUSER&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;dbz&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;FREE&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;DBZUSER&#39;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;oracle&#39;</span><span class="p">);</span>
 </code></pre></div></p>
 </li>
@@ -2206,14 +2179,14 @@
 <p>创建一个名为“mysqlconn”的 MySQL 连接器，将 MySQL 中“inventory”下的“orders”和“customers”表复制到 PostgreSQL 中的目标数据库“postgres”：
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
 <span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">3306</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mysqluser&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;mysqlpwd&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;mysqlpwd&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="s1">&#39;inventory.orders,inventory.customers&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mysql&#39;</span><span class="p">);</span>
 </code></pre></div></p>
 <h2 id="_9"><strong>示例：创建连接器以使用文件复制指定的表</strong><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <p>创建一个名为“mysqlconn”的 MySQL 连接器，将 MySQL 中“inventory”下表文件中指定的表复制到 PostgreSQL 中的目标数据库“postgres”：
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
 <span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">3306</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mysqluser&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;mysqlpwd&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;mysqlpwd&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="s1">&#39;file:/path/to/mytablefile.json&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;file:/path/to/mytablefile.json&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mysql&#39;</span><span class="p">);</span>
 </code></pre></div></p>
 <p>其中 <code>/path/to/mytablefile.json</code> 可以是：

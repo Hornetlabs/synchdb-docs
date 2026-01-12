@@ -35,7 +35,7 @@
     
     
       
-        <title>MySQL -> PostgreSQL - Documentación de SynchDB</title>
+        <title>Conector MySQL - Documentación de SynchDB</title>
       
     
     
@@ -94,7 +94,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mysql-postgresql" class="md-skip">
+        <a href="#mysql-connector" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -132,7 +132,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              MySQL -> PostgreSQL
+              Conector MySQL
             
           </span>
         </div>
@@ -1300,7 +1300,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL -> PostgreSQL
+    Conector MySQL
   
 
     
@@ -1318,7 +1318,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL -> PostgreSQL
+    Conector MySQL
   
 
     
@@ -1468,6 +1468,100 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Preview Source and Destination Table Relationships with schemasync mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-connector-and-start-it-in-schemasync-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a Connector and Start it in schemasync Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ensure-the-connector-is-put-to-paused-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ensure the connector is put to paused state
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-the-tables-created-by-default-mapping-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review the Tables Created by Default Mapping Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-custom-mapping-if-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Define Custom Mapping (If Needed)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-all-object-mapping-rules-created-so-far" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review All Object Mapping Rules Created So Far
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reload-the-object-mapping-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reload the Object Mapping Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-synchdb_att_view-again-for-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review synchdb_att_view Again for Changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume-the-connector-or-redo-the-entire-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resume the Connector or Redo the Entire Snapshot
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -1531,6 +1625,117 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#secured-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secured Connection
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Secured Connection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configure-secured-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure Secured Connection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_add_extra_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_add_extra_conninfo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_del_extra_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_del_extra_conninfo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-start-offset-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Start Offset Values
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Custom Start Offset Values">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#record-settable-offset-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Record Settable Offset Values
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pause-the-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pause the Connector
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-the-new-offset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set the new Offset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume-the-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resume the Connector
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1554,7 +1759,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server -> PostgreSQL
+    Conector SQL Server
   
 
     
@@ -1582,7 +1787,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle -> PostgreSQL
+    Conector Oracle
   
 
     
@@ -1603,14 +1808,42 @@
   
   
     <li class="md-nav__item">
-      <a href="../object_mapping_workflow/" class="md-nav__link">
+      <a href="../postgresql_cdc_to_postgresql/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Flujo de trabajo de mapeo de objetos
+    Conector Postgres
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../native_olr_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conector nativo de replicador Openlog
   
 
     
@@ -1830,14 +2063,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../user-guide/secured_connection/" class="md-nav__link">
+      <a href="../../user-guide/letter_casing_strategy/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Conexión segura
+    Estrategia de mayúsculas y minúsculas
   
 
     
@@ -1865,7 +2098,7 @@
   <span class="md-ellipsis">
     
   
-    Configurar estrategias de error
+    estrategias de error
   
 
     
@@ -1886,70 +2119,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../user-guide/set_offset/" class="md-nav__link">
+      <a href="../../../user-guide/configure_olr.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Configurar el desplazamiento de replicación
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../user-guide/configure_olr/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Configurar Openlog Replicator para Oracle Connector
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../user-guide/configure_infinispan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Configurar Infinispan
+    Configurar Openlog Replicator
   
 
     
@@ -2176,6 +2353,100 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Preview Source and Destination Table Relationships with schemasync mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-connector-and-start-it-in-schemasync-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a Connector and Start it in schemasync Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ensure-the-connector-is-put-to-paused-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ensure the connector is put to paused state
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-the-tables-created-by-default-mapping-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review the Tables Created by Default Mapping Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-custom-mapping-if-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Define Custom Mapping (If Needed)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-all-object-mapping-rules-created-so-far" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review All Object Mapping Rules Created So Far
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reload-the-object-mapping-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reload the Object Mapping Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-synchdb_att_view-again-for-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review synchdb_att_view Again for Changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume-the-connector-or-redo-the-entire-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resume the Connector or Redo the Entire Snapshot
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -2239,6 +2510,117 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#secured-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secured Connection
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Secured Connection">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configure-secured-connection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configure Secured Connection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_add_extra_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_add_extra_conninfo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_del_extra_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_del_extra_conninfo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-start-offset-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Start Offset Values
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Custom Start Offset Values">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#record-settable-offset-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Record Settable Offset Values
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pause-the-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pause the Connector
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-the-new-offset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set the new Offset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume-the-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resume the Connector
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2259,7 +2641,7 @@
   
 
 
-<h1 id="mysql-postgresql">MySQL -&gt; PostgreSQL<a class="headerlink" href="#mysql-postgresql" title="Permanent link">&para;</a></h1>
+<h1 id="mysql-connector">MySQL Connector<a class="headerlink" href="#mysql-connector" title="Permanent link">&para;</a></h1>
 <h2 id="prepare-mysql-database-for-synchdb"><strong>Prepare MySQL Database for SynchDB</strong><a class="headerlink" href="#prepare-mysql-database-for-synchdb" title="Permanent link">&para;</a></h2>
 <p>Before SynchDB can be used to replicate from MySQL, MySQL needs to be configured according to the procedure outlined <a href="../../getting-started/remote_database_setups/">here</a></p>
 <h2 id="create-a-mysql-connector"><strong>Create a MySQL Connector</strong><a class="headerlink" href="#create-a-mysql-connector" title="Permanent link">&para;</a></h2>
@@ -2361,7 +2743,128 @@
 <li>schemasync</li>
 </ul>
 <h2 id="preview-source-and-destination-table-relationships-with-schemasync-mode"><strong>Preview Source and Destination Table Relationships with schemasync mode</strong><a class="headerlink" href="#preview-source-and-destination-table-relationships-with-schemasync-mode" title="Permanent link">&para;</a></h2>
-<p>Before attempting to do an initial snapshot of current table and data, which may be huge, it is possible to "preview" all the tables and data type mappings between source and destination tables before the actual data migration. This gives you an opportunity to modify a data type mapping, or an object name before actual migration happens. This can be done with the special "schemasync" initial snapshot mode. Refer to <a href="../../tutorial/object_mapping_workflow/">object mapping workflow</a> for a detailed example.</p>
+<p>Before attempting to do an initial snapshot of current table and data, which may be huge, it is possible to "preview" all the tables and data type mappings between source and destination tables before the actual data migration. This gives you an opportunity to modify a data type mapping, or an object name before actual migration happens. This can be done with the special "schemasync" initial snapshot mode.</p>
+<p>Please note that you must set <code>synchdb.olr_snapshot_engine</code> to 'fdw' in order to use <code>schemasync</code> mode to preview the tables.</p>
+<h3 id="create-a-connector-and-start-it-in-schemasync-mode"><strong>Create a Connector and Start it in <code>schemasync</code> Mode</strong><a class="headerlink" href="#create-a-connector-and-start-it-in-schemasync-mode" title="Permanent link">&para;</a></h3>
+<p><code>schemasync</code> is a special mode that makes the connector connects to remote database and attempt to sync only the schema of designated tables. After this is done, the connector is put to <code>paused</code> state and user is able to review all the tables and data types created using the default rules and make change if needed.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="mi">3306</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;mysqluser&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;mysqlpwd&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;mysql&#39;</span>
+<span class="p">);</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;schemasync&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="ensure-the-connector-is-put-to-paused-state"><strong>Ensure the connector is put to paused state</strong><a class="headerlink" href="#ensure-the-connector-is-put-to-paused-state" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">connector_type</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">stage</span><span class="p">,</span><span class="w"> </span><span class="k">state</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">name</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">connector_type</span><span class="w"> </span><span class="o">|</span><span class="w">   </span><span class="n">pid</span><span class="w">   </span><span class="o">|</span><span class="w">        </span><span class="n">stage</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">state</span>
+<span class="c1">-----------+----------------+---------+---------------------+--------</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="mi">1644218</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">change</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="n">capture</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">paused</span>
+</code></pre></div>
+<h3 id="review-the-tables-created-by-default-mapping-rules"><strong>Review the Tables Created by Default Mapping Rules</strong><a class="headerlink" href="#review-the-tables-created-by-default-mapping-rules" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_att_view</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">name</span><span class="w">    </span><span class="o">|</span><span class="w">   </span><span class="k">type</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">attnum</span><span class="w"> </span><span class="o">|</span><span class="w">         </span><span class="n">ext_tbname</span><span class="w">         </span><span class="o">|</span><span class="w">         </span><span class="n">pg_tbname</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">ext_attname</span><span class="w">  </span><span class="o">|</span><span class="w">  </span><span class="n">pg_attname</span><span class="w">  </span><span class="o">|</span><span class="w">  </span><span class="n">ext_atttypename</span><span class="w">  </span><span class="o">|</span><span class="w">  </span><span class="n">pg_atttypename</span><span class="w">   </span><span class="o">|</span><span class="w">         </span><span class="k">transform</span>
+
+<span class="c1">-----------+----------+--------+----------------------------+----------------------------+--------------+--------------+-------------------+-------------------+----------------------</span>
+<span class="c1">------</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">customer_id</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">customer_id</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">street</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">street</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">city</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">city</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">5</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">state</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">state</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">6</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">zip</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">zip</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">7</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">type</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="k">type</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">enum</span><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="nb">text</span><span class="w">              </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">first_name</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">first_name</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">last_name</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">last_name</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">email</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">email</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">geom</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">geom</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">geom</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">geom</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="k">g</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="k">g</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">geometry</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">text</span><span class="w">              </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">geom</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">geom</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">h</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">h</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">geometry</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">text</span><span class="w">              </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">order_number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">order_number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">order_date</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">order_date</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">date</span><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="nb">date</span><span class="w">              </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">purchaser</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">purchaser</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">5</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">name</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">name</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">description</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">description</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">weight</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">weight</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="nb">float</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">real</span><span class="w">              </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products_on_hand</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products_on_hand</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">    </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products_on_hand</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products_on_hand</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">               </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+</code></pre></div>
+<h3 id="define-custom-mapping-if-needed"><strong>Define Custom Mapping (If Needed)</strong><a class="headerlink" href="#define-custom-mapping-if-needed" title="Permanent link">&para;</a></h3>
+<p><div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;inventory.products&#39;</span><span class="p">,</span><span class="s1">&#39;inventory.myproducts&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="s1">&#39;column&#39;</span><span class="p">,</span><span class="s1">&#39;inventory.customers.email&#39;</span><span class="p">,</span><span class="s1">&#39;contact&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="s1">&#39;datatype&#39;</span><span class="p">,</span><span class="s1">&#39;inventory.orders.quantity&#39;</span><span class="p">,</span><span class="s1">&#39;bigint|0&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="s1">&#39;transform&#39;</span><span class="p">,</span><span class="s1">&#39;inventory.products.name&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;&#39;&gt;&gt;&gt;&gt;&gt;&#39;&#39; || &#39;&#39;%d&#39;&#39; || &#39;&#39;&lt;&lt;&lt;&lt;&lt;&#39;&#39;&#39;</span><span class="p">);</span>
+</code></pre></div>
+The above means:</p>
+<ul>
+<li>source table 'inventory.products' will be mapped to 'inventory.myproducts' in destination</li>
+<li>source column 'inventory.customers.email' will be mapped to 'contact' in destination</li>
+<li>source data type for column 'inventory.orders.quantity' will be mapped to 'bigint'</li>
+<li>source column data 'inventory.products.name' will be transformed accoring to the expression where %d is the data placeholder</li>
+</ul>
+<h3 id="review-all-object-mapping-rules-created-so-far"><strong>Review All Object Mapping Rules Created So Far</strong><a class="headerlink" href="#review-all-object-mapping-rules-created-so-far" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_objmap</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">;</span>
+<span class="w">   </span><span class="n">name</span><span class="w">    </span><span class="o">|</span><span class="w">  </span><span class="n">objtype</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="o">|</span><span class="w">          </span><span class="n">srcobj</span><span class="w">           </span><span class="o">|</span><span class="w">           </span><span class="n">dstobj</span>
+<span class="c1">-----------+-----------+---------+---------------------------+----------------------------</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">myproducts</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">column</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">customers</span><span class="p">.</span><span class="n">email</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">contact</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">datatype</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">orders</span><span class="p">.</span><span class="n">quantity</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">bigint</span><span class="o">|</span><span class="mi">0</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">transform</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products</span><span class="p">.</span><span class="n">name</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;&gt;&gt;&gt;&gt;&gt;&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;%d&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&lt;&lt;&lt;&lt;&lt;&#39;</span>
+</code></pre></div>
+<h3 id="reload-the-object-mapping-rules"><strong>Reload the Object Mapping Rules</strong><a class="headerlink" href="#reload-the-object-mapping-rules" title="Permanent link">&para;</a></h3>
+<p>Once all custom rules have been defined, we need to signal the connector to load them. This will cause the connector to read and apply the object mapping rules. If it sees a discrepancy between current PostgreSQL values and the object mapping values, it will attempt to correct the mapping.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_reload_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="review-synchdb_att_view-again-for-changes"><strong>Review <code>synchdb_att_view</code> Again for Changes</strong><a class="headerlink" href="#review-synchdb_att_view-again-for-changes" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="w">   </span><span class="n">name</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">attnum</span><span class="w"> </span><span class="o">|</span><span class="w">         </span><span class="n">ext_tbname</span><span class="w">         </span><span class="o">|</span><span class="w">         </span><span class="n">pg_tbname</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">ext_attname</span><span class="w">  </span><span class="o">|</span><span class="w">  </span><span class="n">pg_attname</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">ext_atttypename</span><span class="w"> </span><span class="o">|</span><span class="w">  </span><span class="n">pg_atttypename</span><span class="w">   </span><span class="o">|</span><span class="w">         </span><span class="k">transform</span>
+
+<span class="c1">-----------+-------+--------+----------------------------+----------------------------+--------------+--------------+-----------------+-------------------+---------------------------</span>
+<span class="o">-</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">customer_id</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">customer_id</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">street</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">street</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">city</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">city</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">5</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">state</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">state</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">6</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">zip</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="n">zip</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">7</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">addresses</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">type</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="k">type</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">enum</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="nb">text</span><span class="w">              </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">first_name</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">first_name</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">last_name</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">last_name</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">customers</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">email</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">contact</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">geom</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">geom</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">geom</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">geom</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="k">g</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="k">g</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">geometry</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">text</span><span class="w">              </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">geom</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">geom</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="n">h</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">h</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">geometry</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">text</span><span class="w">              </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">order_number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">order_number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">order_date</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">order_date</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">date</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="nb">date</span><span class="w">              </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">purchaser</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">purchaser</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">bigint</span><span class="w">            </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">5</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">orders</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">myproducts</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">myproducts</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">name</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">name</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;&gt;&gt;&gt;&gt;&gt;&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;%d&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&lt;&lt;&lt;&lt;&lt;&#39;</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">myproducts</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">description</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">description</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="nb">varchar</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">myproducts</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">weight</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">weight</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="nb">float</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">real</span><span class="w">              </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products_on_hand</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products_on_hand</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products_on_hand</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="n">products_on_hand</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="nb">int</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="nb">integer</span><span class="w">           </span><span class="o">|</span>
+</code></pre></div>
+<h3 id="resume-the-connector-or-redo-the-entire-snapshot"><strong>Resume the Connector or Redo the Entire Snapshot</strong><a class="headerlink" href="#resume-the-connector-or-redo-the-entire-snapshot" title="Permanent link">&para;</a></h3>
+<p>Once the object mappings have been confirmed correct, we can resume the connector. Please note that, resume will proceed to streaming only the new table changes. The existing data of the tables will not be copied.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_resume_engine</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>To capture the table's existing data, we can also redo the entire snapshot with the new object mapping rules.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_stop_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
+</code></pre></div>
 <h2 id="selective-table-sync"><strong>Selective Table Sync</strong><a class="headerlink" href="#selective-table-sync" title="Permanent link">&para;</a></h2>
 <h3 id="select-desired-tables-and-start-it-for-the-first-time"><strong>Select Desired Tables and Start it for the First Time</strong><a class="headerlink" href="#select-desired-tables-and-start-it-for-the-first-time" title="Permanent link">&para;</a></h3>
 <p>Table selection is done during connector creation phase via <code>synchdb_add_conninfo()</code> where we specify a list of tables (expressed in FQN, separated by a comma) to replicate from.</p>
@@ -2427,6 +2930,102 @@ This forces Debezium to re-snapshot only the new table <code>inventory.customers
 <span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 <span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">products</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 </code></pre></div></p>
+<h2 id="secured-connection">Secured Connection<a class="headerlink" href="#secured-connection" title="Permanent link">&para;</a></h2>
+<h3 id="configure-secured-connection"><strong>Configure Secured Connection</strong><a class="headerlink" href="#configure-secured-connection" title="Permanent link">&para;</a></h3>
+<p>to secure the connection to remote database, we need to configure additional SSL related parameters to a connector that has been created by <code>synchdb_add_conninfo</code>. The SSL certificates and private keys must be packaged as Java keystore file with a passphrase. These information is then passed to SynchDB via synchdb_add_extra_conninfo().</p>
+<h3 id="synchdb_add_extra_conninfo"><strong>synchdb_add_extra_conninfo</strong><a class="headerlink" href="#synchdb_add_extra_conninfo" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Configures extra connector parameters to an existing connector created by <code>synchdb_add_conninfo</code></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Parameter</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: center;">Required</th>
+<th style="text-align: left;">Example</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>name</code></td>
+<td style="text-align: left;">Unique identifier for this connector</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: left;"><code>'mysqlconn'</code></td>
+<td style="text-align: left;">Must be unique across all connectors</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>ssl_mode</code></td>
+<td style="text-align: left;">SSL mode</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: left;"><code>'verify_ca'</code></td>
+<td style="text-align: left;">can be one of: <br><ul><li> "disabled" - no SSL is used. </li><li> "preferred" - SSL is used if server supports it. </li><li> "required" - SSL must be used to establish a connection. </li><li> "verify_ca" - connector establishes TLS with the server and will also verify server's TLS certificate against configured truststore. </li><li> "verify_identity" - same behavior as verify_ca but it also checks the server certificate's common name to match the hostname of the system.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>ssl_keystore</code></td>
+<td style="text-align: left;">keystore path</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: left;"><code>/path/to/keystore</code></td>
+<td style="text-align: left;">path to the keystore file</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>ssl_keystore_pass</code></td>
+<td style="text-align: left;">keystore password</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: left;"><code>'mykeystorepass'</code></td>
+<td style="text-align: left;">password to access the keystore file</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>ssl_truststore</code></td>
+<td style="text-align: left;">trust store path</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: left;"><code>'/path/to/truststore'</code></td>
+<td style="text-align: left;">path to the truststore file</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>ssl_truststore_pass</code></td>
+<td style="text-align: left;">trust store password</td>
+<td style="text-align: center;">☐</td>
+<td style="text-align: left;"><code>'mytruststorepass'</code></td>
+<td style="text-align: left;">password to access the truststore file</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_extra_conninfo</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;verify_ca&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/path/to/keystore&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mykeystorepass&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/path/to/truststore&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;mytruststorepass&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="synchdb_del_extra_conninfo"><strong>synchdb_del_extra_conninfo</strong><a class="headerlink" href="#synchdb_del_extra_conninfo" title="Permanent link">&para;</a></h3>
+<p><strong>Purpose</strong>: Deletes extra connector paramters created by <code>synchdb_add_extra_conninfo</code>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_del_extra_conninfo</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<h2 id="custom-start-offset-values">Custom Start Offset Values<a class="headerlink" href="#custom-start-offset-values" title="Permanent link">&para;</a></h2>
+<p>A start offset value represents a point to start replication from in the similar way as PostgreSQL's resume LSN. When Debezium runner engine starts, it will start the replication from this offset value. Setting this offset value to a earlier value will cause Debezium runner engine to start replication from earlier records, possibly replicating duplicate data records. We should be extra cautious when setting start offset values on Debezium.</p>
+<h3 id="record-settable-offset-values"><strong>Record Settable Offset Values</strong><a class="headerlink" href="#record-settable-offset-values" title="Permanent link">&para;</a></h3>
+<p>During operation, new offsets will be generated nd flushed to disk by Debezium runner engine. The last flushed offset can be retrieved from <code>synchdb_state_view()</code> utility command:</p>
+<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">last_dbz_offset</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="p">;</span>
+<span class="w">     </span><span class="n">name</span><span class="w">      </span><span class="o">|</span><span class="w">                                           </span><span class="n">last_dbz_offset</span>
+<span class="c1">---------------+------------------------------------------------------------------------------------------------------</span>
+<span class="w"> </span><span class="n">mysqlconn</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;ts_sec&quot;</span><span class="p">:</span><span class="mi">1741301103</span><span class="p">,</span><span class="ss">&quot;file&quot;</span><span class="p">:</span><span class="ss">&quot;mysql-bin.000009&quot;</span><span class="p">,</span><span class="ss">&quot;pos&quot;</span><span class="p">:</span><span class="mi">574318212</span><span class="p">,</span><span class="ss">&quot;row&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="ss">&quot;server_id&quot;</span><span class="p">:</span><span class="mi">223344</span><span class="p">,</span><span class="ss">&quot;event&quot;</span><span class="p">:</span><span class="mi">2</span><span class="err">}</span>
+</code></pre></div>
+<p>Depending on the connector type, this offset value differs. From the example above, the <code>mysql</code> connector's last flushed offset is <code>{"ts_sec":1741301103,"file":"mysql-bin.000009","pos":574318212,"row":1,"server_id":223344,"event":2}</code> and <code>sqlserver</code>'s last flushed offset is <code>{"commit_lsn":"0000006a:00006608:0003","snapshot":true,"snapshot_completed":false}</code>. </p>
+<p>We should save this values regularly, so in case we run into a problem, we know the offset location in the past that can be set to resume the replication operation.</p>
+<h3 id="pause-the-connector"><strong>Pause the Connector</strong><a class="headerlink" href="#pause-the-connector" title="Permanent link">&para;</a></h3>
+<p>A connector must be in a <code>paused</code> state before a new offset value can be set.</p>
+<p>Use <code>synchdb_pause_engine()</code> SQL function to pause a runnng connector. This will halt the Debezium runner engine from replicating from the heterogeneous database. When paused, it is possible to alter the Debezium connector's offset value to replicate from a specific point in the past using <code>synchdb_set_offset()</code> SQL routine. It takes <code>conninfo_name</code> as its argument which can be found from the output of <code>synchdb_get_state()</code> view.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_pause_engine</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="set-the-new-offset"><strong>Set the new Offset</strong><a class="headerlink" href="#set-the-new-offset" title="Permanent link">&para;</a></h3>
+<p>Use <code>synchdb_set_offset()</code> SQL function to change a connector worker's starting offset. This can only be done when the connector is put into <code>paused</code> state. The function takes 2 parameters, <code>conninfo_name</code> and <code>a valid offset string</code>, both of which can be found from the output of <code>synchdb_get_state()</code> view.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
+<span class="w">  </span><span class="n">synchdb_set_offset</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{&quot;ts_sec&quot;:1741301103,&quot;file&quot;:&quot;mysql-bin.000009&quot;,&quot;pos&quot;:574318212,&quot;row&quot;:1,&quot;server_id&quot;:223344,&quot;event&quot;:2}&#39;</span>
+<span class="w">  </span><span class="p">);</span>
+</code></pre></div>
+<h3 id="resume-the-connector"><strong>Resume the Connector</strong><a class="headerlink" href="#resume-the-connector" title="Permanent link">&para;</a></h3>
+<p>Use <code>synchdb_resume_engine()</code> SQL function to resume Debezium operation from a paused state. This function takes <code>connector name</code> as its only parameter, which can be found from the output of <code>synchdb_get_state()</code> view. The resumed Debezium runner engine will start the replication from the newly set offset value.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_resume_engine</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+</code></pre></div>
 
 
 

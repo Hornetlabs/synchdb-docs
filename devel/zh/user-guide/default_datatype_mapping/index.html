@@ -1290,7 +1290,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL CDC -> PostgreSQL
+    MySQL 連接器
   
 
     
@@ -1318,7 +1318,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server CDC -> PostgreSQL
+    SQL Server 連接器
   
 
     
@@ -1346,7 +1346,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle CDC -> PostgreSQL
+    Oracle 連接器
   
 
     
@@ -1367,14 +1367,42 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/object_mapping_workflow/" class="md-nav__link">
+      <a href="../../tutorial/postgresql_cdc_to_postgresql/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    对象映射工作流程
+    Postgres 連接器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/native_olr_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    原生 Openlog Replicator 连接器
   
 
     
@@ -1635,6 +1663,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#postgres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Postgres 默认数据类型映射
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1658,7 +1697,7 @@
   <span class="md-ellipsis">
     
   
-    自定义对象映射和转换
+    对象映射和转换
   
 
     
@@ -1679,14 +1718,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../secured_connection/" class="md-nav__link">
+      <a href="../letter_casing_strategy/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    安全连接
+    字母大小寫規則
   
 
     
@@ -1714,7 +1753,7 @@
   <span class="md-ellipsis">
     
   
-    配置错误处理策略
+    错误处理策略
   
 
     
@@ -1735,70 +1774,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../set_offset/" class="md-nav__link">
+      <a href="../../../user-guide/configure_olr.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    配置复制偏移
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../configure_olr/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    为 Oracle 连接器配置 Openlog Replicator
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../configure_infinispan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    配置 infinispan
+    Openlog Replicator 设置
   
 
     
@@ -1933,6 +1916,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#postgres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Postgres 默认数据类型映射
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1966,9 +1960,15 @@
 <div class="highlight"><pre><span></span><code><span class="n">DatatypeHashEntry</span><span class="w"> </span><span class="n">mysql_defaultTypeMappings</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="p">{{</span><span class="s">&quot;int&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;serial&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;int unsigned&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;serial&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
 <span class="w">    </span><span class="p">{{</span><span class="s">&quot;bigint&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;bigserial&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;bigint unsigned&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;bigserial&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
 <span class="w">    </span><span class="p">{{</span><span class="s">&quot;smallint&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;smallserial&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;smallint unsigned&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;smallserial&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
 <span class="w">    </span><span class="p">{{</span><span class="s">&quot;mediumint&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;serial&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;mediumint unsigned&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;serial&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;tinyint&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;smallserial&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;tinyint unsigned&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;smallserial&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
 <span class="w">    </span><span class="p">{{</span><span class="s">&quot;enum&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
 <span class="w">    </span><span class="p">{{</span><span class="s">&quot;set&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
 <span class="w">    </span><span class="p">{{</span><span class="s">&quot;bigint&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;bigint&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
@@ -2009,20 +2009,20 @@
 <span class="w">    </span><span class="p">{{</span><span class="s">&quot;mediumblob&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;bytea&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
 <span class="w">    </span><span class="p">{{</span><span class="s">&quot;longblob&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;bytea&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
 <span class="w">    </span><span class="p">{{</span><span class="s">&quot;tinyblob&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;bytea&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
-<span class="w">    </span><span class="p">{{</span><span class="s">&quot;long varchar&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
-<span class="w">    </span><span class="p">{{</span><span class="s">&quot;longtext&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
-<span class="w">    </span><span class="p">{{</span><span class="s">&quot;mediumtext&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
-<span class="w">    </span><span class="p">{{</span><span class="s">&quot;tinytext&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;long varchar&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;longtext&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;mediumtext&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;tinytext&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
 <span class="w">    </span><span class="p">{{</span><span class="s">&quot;json&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;jsonb&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
-<span class="w">    </span><span class="p">{{</span><span class="s">&quot;geometry&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
-<span class="w">    </span><span class="p">{{</span><span class="s">&quot;geometrycollection&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
-<span class="w">    </span><span class="p">{{</span><span class="s">&quot;geomcollection&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
-<span class="w">    </span><span class="p">{{</span><span class="s">&quot;linestring&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
-<span class="w">    </span><span class="p">{{</span><span class="s">&quot;multilinestring&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
-<span class="w">    </span><span class="p">{{</span><span class="s">&quot;multipoint&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
-<span class="w">    </span><span class="p">{{</span><span class="s">&quot;multipolygon&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
-<span class="w">    </span><span class="p">{{</span><span class="s">&quot;point&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
-<span class="w">    </span><span class="p">{{</span><span class="s">&quot;polygon&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">}</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;geometry&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;geometrycollection&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;geomcollection&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;linestring&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;multilinestring&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;multipoint&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;multipolygon&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;point&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;polygon&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">}</span>
 <span class="p">};</span>
 </code></pre></div>
 <h2 id="sql-server"><strong>SQL Server 默认数据类型映射</strong><a class="headerlink" href="#sql-server" title="Permanent link">&para;</a></h2>
@@ -2145,6 +2145,80 @@
 <span class="w">    </span><span class="p">{{</span><span class="s">&quot;anytype&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
 <span class="w">    </span><span class="p">{{</span><span class="s">&quot;anydata&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
 <span class="w">    </span><span class="p">{{</span><span class="s">&quot;anydataset&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div>
+<h2 id="postgres"><strong>Postgres 默认数据类型映射</strong><a class="headerlink" href="#postgres" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="n">DatatypeHashEntry</span><span class="w"> </span><span class="n">postgres_defaultTypeMappings</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;bigint&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;bigint&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;bigserial&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;bigserial&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;bigserial&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;bigserial&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;bit&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;bit&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;bit varying&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;bit varying&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;bool&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;bool&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;boolean&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;boolean&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;box&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;box&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;bytea&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;bytea&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;char&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;char&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;character&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;character&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;character varying&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;character varying&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;cidr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;cidr&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;circle&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;circle&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;date&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;date&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;decimal&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;dedcimal&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;double precision&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;double precision&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;float&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;float&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;float4&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;float4&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;float8&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;float8&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;inet&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;inet&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;int&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;int&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;int2&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;int2&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;int4&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;int4&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;int8&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;int8&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;integer&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;integer&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;interval&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;interval&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;json&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;json&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;jsonb&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;jsonb&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;line&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;line&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;lseg&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;lseg&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;macaddr&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;macaddr&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;macaddr8&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;macaddr8&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;money&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;money&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;numeric&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;numeric&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;path&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;path&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;pg_lsn&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;pg_lsn&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;pg_snapshot&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;pg_snapshot&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;point&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;point&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;polygon&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;polygon&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;real&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;real&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;smallint&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;smallint&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;smallserial&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;smallserial&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;smallserial&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;smallserial&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;serial&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;serial&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;serial&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;serial&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;serial2&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;serial2&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;serial2&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;serial2&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;serial4&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;serial4&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;serial4&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;serial4&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;serial8&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;serial8&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;serial8&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;serial8&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;text&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;time without time zone&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;time without time zone&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;time with time zone&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;time with time zone&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;time&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;timetz&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;timetz&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;timestamp without time zone&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;timestamp without time zone&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;timestamp with time zone&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;timestamp with time zone&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;timestamp&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;timestamp&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;timestamptz&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;timestamptz&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;tsquery&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;tsquery&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;tsvector&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;tsvector&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;txid_snapshot&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;txid_snapshot&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;uuid&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;uuid&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;varbit&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;varbit&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;varchar&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;varchar&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{{</span><span class="s">&quot;xml&quot;</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">},</span><span class="w"> </span><span class="s">&quot;xml&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">},</span>
+<span class="w">    </span><span class="cm">/* ... */</span>
 <span class="p">};</span>
 </code></pre></div>
 

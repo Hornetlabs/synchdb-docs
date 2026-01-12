@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://docs.synchdb.com/latest/zh/user-guide/configure_snapshot_engine/">
       
       
-        <link rel="prev" href="../configure_infinispan/">
+        <link rel="prev" href="../configure_error_strategies/">
       
       
         <link rel="next" href="../../changelog/">
@@ -1290,7 +1290,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL CDC -> PostgreSQL
+    MySQL 連接器
   
 
     
@@ -1318,7 +1318,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server CDC -> PostgreSQL
+    SQL Server 連接器
   
 
     
@@ -1346,7 +1346,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle CDC -> PostgreSQL
+    Oracle 連接器
   
 
     
@@ -1367,14 +1367,42 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/object_mapping_workflow/" class="md-nav__link">
+      <a href="../../tutorial/postgresql_cdc_to_postgresql/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    对象映射工作流程
+    Postgres 連接器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/native_olr_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    原生 Openlog Replicator 连接器
   
 
     
@@ -1578,7 +1606,7 @@
   <span class="md-ellipsis">
     
   
-    自定义对象映射和转换
+    对象映射和转换
   
 
     
@@ -1599,14 +1627,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../secured_connection/" class="md-nav__link">
+      <a href="../letter_casing_strategy/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    安全连接
+    字母大小寫規則
   
 
     
@@ -1634,7 +1662,7 @@
   <span class="md-ellipsis">
     
   
-    配置错误处理策略
+    错误处理策略
   
 
     
@@ -1655,70 +1683,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../set_offset/" class="md-nav__link">
+      <a href="../../../user-guide/configure_olr.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    配置复制偏移
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../configure_olr/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    为 Oracle 连接器配置 Openlog Replicator
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../configure_infinispan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    配置 infinispan
+    Openlog Replicator 设置
   
 
     
@@ -1810,6 +1782,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#debezium" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基於 Debezium 的初始快照
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#fdw" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1821,15 +1804,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#oracle_fdw" class="md-nav__link">
+  <a href="#oracle-olr-fdw" class="md-nav__link">
     <span class="md-ellipsis">
       
-        编译並安裝 oracle_fdw
+        Oracle 和 OLR 連接器的 FDW 快照
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="编译並安裝 oracle_fdw">
+    <nav class="md-nav" aria-label="Oracle 和 OLR 連接器的 FDW 快照">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1847,7 +1830,74 @@
   <a href="#oracle_fdw-280" class="md-nav__link">
     <span class="md-ellipsis">
       
-        建置 oracle_fdw 2.8.0
+        建置並安裝 oracle_fdw 2.8.0
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mysql-fdw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MySQL 連接器的 FDW 快照
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MySQL 連接器的 FDW 快照">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        安裝 MySQL 用戶端開發套件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mysql_fdw-293" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        建置並安裝 mysql_fdw 2.9.3
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#postgres-fdw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Postgres 連接器的 FDW 快照
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Postgres 連接器的 FDW 快照">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#postgres_fdw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        建置與安裝 postgres_fdw
       
     </span>
   </a>
@@ -1940,6 +1990,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#debezium" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        基於 Debezium 的初始快照
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#fdw" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1951,15 +2012,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#oracle_fdw" class="md-nav__link">
+  <a href="#oracle-olr-fdw" class="md-nav__link">
     <span class="md-ellipsis">
       
-        编译並安裝 oracle_fdw
+        Oracle 和 OLR 連接器的 FDW 快照
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="编译並安裝 oracle_fdw">
+    <nav class="md-nav" aria-label="Oracle 和 OLR 連接器的 FDW 快照">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1977,7 +2038,74 @@
   <a href="#oracle_fdw-280" class="md-nav__link">
     <span class="md-ellipsis">
       
-        建置 oracle_fdw 2.8.0
+        建置並安裝 oracle_fdw 2.8.0
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mysql-fdw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MySQL 連接器的 FDW 快照
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="MySQL 連接器的 FDW 快照">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        安裝 MySQL 用戶端開發套件
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mysql_fdw-293" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        建置並安裝 mysql_fdw 2.9.3
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#postgres-fdw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Postgres 連接器的 FDW 快照
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Postgres 連接器的 FDW 快照">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#postgres_fdw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        建置與安裝 postgres_fdw
       
     </span>
   </a>
@@ -2011,56 +2139,94 @@
 
 <h1 id="_1">設定快照引擎<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
 <h2 id="cdc"><strong>初始快照與變更資料擷取 (CDC)</strong><a class="headerlink" href="#cdc" title="Permanent link">&para;</a></h2>
-<p>初始快照是指將表格結構和初始資料從遠端資料庫遷移到 SynchDB 的過程。對於大多數連接器類型，此操作僅在首次啟動連接器時透過嵌入式 Debezium 運行器執行一次，因為只有 Debezium 引擎才能執行初始快照。初始快照完成後，變更資料擷取將開始將即時變更串流傳輸到 SynchDB。 「快照模式」可以進一步控制初始快照和 CDC 的行為。更多信息，請參閱<a href="../../user-guide/start_stop_connector/">此處</a>。</p>
-<p>除了基於 Debezium 的初始快照（當表數量眾多時可能會很慢）之外，SynchdB 還提供了另一個基於 FDW 的原生初始快照引擎。目前，只有原生 Openlog Replicator (OLR) 連接器支援基於 FDW 的快照。所有其他連接器仍然依賴 Debezium 來執行快照。</p>
+<p>初始快照是指將表格結構和初始資料從遠端資料庫遷移到 SynchDB 的過程。對於大多數連接器類型，此程序僅在首次啟動連接器時透過嵌入式 Debezium 運行器執行一次，因為只有 Debezium 運行器才能執行初始快照。初始快照完成後，變更資料擷取將開始向 SynchDB 即時傳輸變更。 「快照模式」可以進一步控制初始快照和 CDC 的行為。有關更多信息，請參閱<a href="../../user-guide/start_stop_connector/">此處</a>。</p>
+<p>SynchDB 支援兩種快照引擎，每種引擎支援多種連接器類型：</p>
+<p><strong>基於 Debezium 的快照：</strong></p>
+<ul>
+<li>MySQL</li>
+<li>SQL Server</li>
+<li>Oracle</li>
+<li>Openlog Replicator</li>
+</ul>
+<p><strong>基於 FDW 的快照：</strong></p>
+<ul>
+<li>MySQL（使用 mysql_fdw）</li>
+<li>Oracle（使用 oracle_fdw）</li>
+<li>Openlog Replicator（使用 oracle_fdw）</li>
+<li>Postgres（使用 postgres_fdw）</li>
+</ul>
+<h2 id="debezium"><strong>基於 Debezium 的初始快照</strong><a class="headerlink" href="#debezium" title="Permanent link">&para;</a></h2>
+<p>這是預設的快照引擎（synchdb.olr_snapshot_engine='debezium'），它透過 JNI 依賴 Debezium 引擎來啟動快照過程。在大多數情況下，它都能正常工作，但如果快照中包含的表數量很多（數千個或更多），則可能會出現效能問題。 Debezium 首先會進行分析，存取每個表格一次以了解其結構並估算要快照的行數。此過程完全由單一工作流程完成，在此期間，引擎可能看似“掛起”，不會發出任何變更事件。對於大量表，此過程本身可能需要數小時才能完成。完成後，它將開始向 SynchDB 發送變更事件。</p>
+<p>在呼叫 <code>synchdb_start_engine_bgw()</code> 時自動觸發，快照模式要求執行快照，完成後不會再執行。</p>
 <h2 id="fdw"><strong>基於 FDW 的初始快照</strong><a class="headerlink" href="#fdw" title="Permanent link">&para;</a></h2>
 <ul>
-<li>在 <code>postgresql.conf</code> 中將 "synchdb.olr_snapshot_engine" 設為 "fdw" 即可啟用。</li>
-<li>啟動需要快照的 OLR 連接器，並設定為快照模式。例如：</li>
+<li>在 <code>postgresql.conf</code> 中透過將「synchdb.olr_snapshot_engine」設為「fdw」來啟用。</li>
+<li>在呼叫 <code>synchdb_start_engine_bgw()</code> 時自動觸發，快照模式要求執行快照，完成後不會再執行。</li>
+<li>必須有對應的 FDW 可用。</li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;no_data&#39;</span><span class="p">);</span>
-
-<span class="c1">-- 或</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
-
-<span class="c1">-- 或</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;schemasync&#39;</span><span class="p">);</span>
-</code></pre></div>
-<h2 id="oracle_fdw"><strong>编译並安裝 oracle_fdw</strong><a class="headerlink" href="#oracle_fdw" title="Permanent link">&para;</a></h2>
-<p>如果選擇 "fdw" 作為快照引擎，您需要確保相應的外部資料包裝器已安裝或可用於 synchdb。以下是從原始碼建置並安裝 oracle_fdw 的簡要步驟供您參考。</p>
+<h2 id="oracle-olr-fdw"><strong>Oracle 和 OLR 連接器的 FDW 快照</strong><a class="headerlink" href="#oracle-olr-fdw" title="Permanent link">&para;</a></h2>
+<p>可以使用 oracle_fdw 為 Oracle 和 OLR 連接器執行初始快照，速度比 Debezium 的同類工具快得多。 SynchDB 整合了 <a href="https://github.com/laurenz/oracle_fdw">oracle_fdw</a> 2.8.0 版本，其底層驅動程式為 OCI v23.9.0。這只是測試版本，更舊或更新的版本可能也適用。</p>
 <h3 id="oci"><strong>安裝 OCI</strong><a class="headerlink" href="#oci" title="Permanent link">&para;</a></h3>
-<p>建置和運行 oracle_fdw 需要 OCI。在此範例中，我使用的是 23.9.0 版本：</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># 取得預編譯軟體包：</span>
+<p>建置和運行 oracle_fdw 需要 OCI。本範例使用的是 23.9.0 版本：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Get the pre-build packages:</span>
 wget<span class="w"> </span>https://download.oracle.com/otn_software/linux/instantclient/2390000/instantclient-basic-linux.x64-23.9.0.25.07.zip
 wget<span class="w"> </span>https://download.oracle.com/otn_software/linux/instantclient/2390000/instantclient-sdk-linux.x64-23.9.0.25.07.zip
 
-<span class="c1"># 解壓縮：選擇「Y」以覆寫元資料文件</span>
+<span class="c1"># unzip them: Select &#39;Y&#39; to overwrite metadata files</span>
 unzip<span class="w"> </span>instantclient-basic-linux.x64-23.9.0.25.07.zip
 unzip<span class="w"> </span>instantclient-sdk-linux.x64-23.9.0.25.07.zip
 </code></pre></div>
-<p>更新環境變量，以便系統知道在哪裡找到 OCI 頭檔和庫。</p>
+<p>更新環境變量，以便系統知道在哪裡可以找到 OCI 頭檔和庫。</p>
 <div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">OCI_HOME</span><span class="o">=</span>/home/<span class="nv">$USER</span>/instantclient_23_9
 <span class="nb">export</span><span class="w"> </span><span class="nv">OCI_LIB_DIR</span><span class="o">=</span><span class="nv">$OCI_HOME</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">OCI_INC_DIR</span><span class="o">=</span><span class="nv">$OCI_HOME</span>/sdk/include
 <span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$OCI_HOME</span>:<span class="si">${</span><span class="nv">LD_LIBRARY_PATH</span><span class="si">}</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$OCI_HOME</span>:<span class="nv">$PATH</span>
 </code></pre></div>
-<p>您可以將上述命令新增至 <code>~/.bashrc</code> 的末尾，以便每次登入系統時自動設定 PATH。</p>
-<p>您也可以將 $OCI_HOME 新增至 <code>/etc/ld.so.conf.d/x86_64-linux-gnu.conf</code>（以 Ubuntu 為例），作為尋找共用程式庫的新路徑。</p>
-<p>您應該執行 ldconfig 命令，以便連結器知道在哪裡找到共用程式庫：</p>
-<h3 id="oracle_fdw-280"><strong>建置 oracle_fdw 2.8.0</strong><a class="headerlink" href="#oracle_fdw-280" title="Permanent link">&para;</a></h3>
+<p>您可以將上述命令新增至 <code>~/.bashrc</code> 檔案的末尾，以便在每次登入系統時自動設定 PATH 環境變數。</p>
+<p>您也可以將 <code>$OCI_HOME</code> 新增至 <code>/etc/ld.so.conf.d/x86_64-linux-gnu.conf</code> 檔案（以 Ubuntu 為例），作為尋找共享庫的新路徑。</p>
+<p>您應該執行 <code>ldconfig</code> 命令，以便連結器知道在哪裡可以找到共用程式庫：</p>
+<h3 id="oracle_fdw-280"><strong>建置並安裝 oracle_fdw 2.8.0</strong><a class="headerlink" href="#oracle_fdw-280" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/laurenz/oracle_fdw.git<span class="w"> </span>--branch<span class="w"> </span>ORACLE_FDW_2_8_0
 </code></pre></div>
-<p>透過調整 Makefile 中的以下兩行，確保 oracle_fdw 的 Makefile 能夠找到 OCI 包含檔案和函式庫：</p>
+<p>請確保 oracle_fdw 的 Makefile 可以找到 OCI 頭檔和函式庫，方法是調整 Makefile 中的這兩行：</p>
 <div class="highlight"><pre><span></span><code>FIND_INCLUDE<span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">$(</span>wildcard<span class="w"> </span>/usr/include/oracle/*/client64<span class="w"> </span>/usr/include/oracle/*/client<span class="w"> </span>/home/<span class="nv">$USER</span>/instantclient_23_9/sdk/include<span class="k">)</span>
 FIND_LIBDIRS<span class="w"> </span>:<span class="o">=</span><span class="w"> </span><span class="k">$(</span>wildcard<span class="w"> </span>/usr/lib/oracle/*/client64/lib<span class="w"> </span>/usr/lib/oracle/*/client/lib<span class="w"> </span>/home/<span class="nv">$USER</span>/instantclient_23_9<span class="k">)</span>
 </code></pre></div>
-<p>建置並安裝 oracle_fdw：</p>
+<p>建置並安裝oracle_fdw：</p>
 <div class="highlight"><pre><span></span><code>make<span class="w"> </span><span class="nv">PG_CONFIG</span><span class="o">=</span>/usr/local/pgsql/bin/pg_config
 sudo<span class="w"> </span>make<span class="w"> </span>install<span class="w"> </span><span class="nv">PG_CONFIG</span><span class="o">=</span>/usr/local/pgsql/bin/pg_config
 </code></pre></div>
-<p>Oralce_fdw 已準備就緒。</p>
-<p><strong>&lt;&lt;重要&gt;&gt;</strong> 在使用基於 FDW 的初始快照之前，您無需執行“CREATE EXTENSION oracle_fdw”，也無需執行“CREATE SERVER”或“CREATE USER MAPPING”。 SynchDB 在執行快照時會處理所有這些操作。</p>
+<p>oracle_fdw 已準備就緒。正常啟動連接器，並將 synchdb.olr_snapshot_engine 設定為 'fdw'。如果需要快照，SynchDB 將透過 FDW 完成。您無需在使用基於 FDW 的初始快照之前執行 <code>CREATE EXTENSION oracle_fdw</code>，也無需執行 <code>CREATE SERVER</code> 或 <code>CREATE USER MAPPING</code>。 SynchDB 在執行快照時會自動處理所有這些操作。</p>
+<h2 id="mysql-fdw"><strong>MySQL 連接器的 FDW 快照</strong><a class="headerlink" href="#mysql-fdw" title="Permanent link">&para;</a></h2>
+<p>可以使用 mysql_fdw 為 MySQL 連接器執行初始快照，其速度遠遠超過 Debezium 的同類工具。 SynchDB 整合了 <a href="https://github.com/EnterpriseDB/mysql_fdw">mysql_fdw</a> 2.9.3 版本，並以 libmysqlclient v8 作為其底層驅動程式。這只是經過測試的版本，更舊或更新的版本可能也適用。</p>
+<h3 id="mysql"><strong>安裝 MySQL 用戶端開發套件</strong><a class="headerlink" href="#mysql" title="Permanent link">&para;</a></h3>
+<p>您可以從<a href="https://packages.debian.org/sid/libmysqlclient-dev">此處</a>下載並安裝 MySQL 用戶端開發套件。如果您使用的是 Ubuntu 系統，則可以使用套件管理器進行安裝：</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>libmysqlclient-dev
+</code></pre></div>
+<h3 id="mysql_fdw-293"><strong>建置並安裝 mysql_fdw 2.9.3</strong><a class="headerlink" href="#mysql_fdw-293" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/EnterpriseDB/mysql_fdw.git<span class="w"> </span>--branch<span class="w"> </span>REL-2_9_3
+</code></pre></div>
+<p>建置並安裝 mysql_fdw：</p>
+<div class="highlight"><pre><span></span><code>make<span class="w"> </span><span class="nv">PG_CONFIG</span><span class="o">=</span>/usr/local/pgsql/bin/pg_config
+sudo<span class="w"> </span>make<span class="w"> </span>install<span class="w"> </span><span class="nv">PG_CONFIG</span><span class="o">=</span>/usr/local/pgsql/bin/pg_config
+</code></pre></div>
+<p>mysql_fdw 已準備就緒。正常啟動連接器，並將 synchdb.olr_snapshot_engine 設定為 'fdw'。如果需要快照，SynchDB 將透過 FDW 完成。您無需在使用基於 FDW 的初始快照之前執行 <code>CREATE EXTENSION mysql_fdw</code>，也無需執行 <code>CREATE SERVER</code> 或 <code>CREATE USER MAPPING</code>。 SynchDB 會在執行快照時處理所有這些操作。</p>
+<h2 id="postgres-fdw"><strong>Postgres 連接器的 FDW 快照</strong><a class="headerlink" href="#postgres-fdw" title="Permanent link">&para;</a></h2>
+<p>可以使用 postgres_fdw 為 Postgres 連接器執行初始快照，這比 Debezium 的同類方法速度快得多。 SynchDB 與基於 PostgreSQL 18 的 <a href="https://github.com/postgres/postgres/tree/master/contrib/postgres_fdw">postgres_fdw</a> 整合。這只是經過測試的版本，更舊或更新的版本可能也適用。</p>
+<h3 id="postgres_fdw"><strong>建置與安裝 postgres_fdw</strong><a class="headerlink" href="#postgres_fdw" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/postgres/postgres.git<span class="w"> </span>--branch<span class="w"> </span>REL_18_0
+<span class="nb">cd</span><span class="w"> </span>postgres
+./configure
+make<span class="w"> </span>
+sudo<span class="w"> </span>make<span class="w"> </span>install
+
+<span class="nb">cd</span><span class="w"> </span>contrib/postgres_fdw
+make<span class="w"> </span>
+sudo<span class="w"> </span>make<span class="w"> </span>install
+</code></pre></div>
+<p>postgres_fdw 已準備就緒。正常啟動連接器，並將 synchdb.olr_snapshot_engine 設定為 'fdw'。如果需要快照，SynchDB 將透過 FDW 完成。您無需在使用基於 FDW 的初始快照之前執行 <code>CREATE EXTENSION postgres_fdw</code>，也無需執行 <code>CREATE SERVER</code> 或 <code>CREATE USER MAPPING</code>。 SynchDB 在執行快照時會自動處理所有這些操作。</p>
 
 
 

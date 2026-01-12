@@ -18,7 +18,7 @@
         <link rel="prev" href="../sqlserver_cdc_to_postgresql/">
       
       
-        <link rel="next" href="../object_mapping_workflow/">
+        <link rel="next" href="../postgresql_cdc_to_postgresql/">
       
       
         
@@ -35,7 +35,7 @@
     
     
       
-        <title>Oracle CDC -> PostgreSQL - SynchDB 文档</title>
+        <title>Oracle 連接器 - SynchDB 文档</title>
       
     
     
@@ -98,7 +98,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#oracle-postgresql" class="md-skip">
+        <a href="#oracle" class="md-skip">
           跳转至
         </a>
       
@@ -136,7 +136,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Oracle CDC -> PostgreSQL
+              Oracle 連接器
             
           </span>
         </div>
@@ -1295,7 +1295,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL CDC -> PostgreSQL
+    MySQL 連接器
   
 
     
@@ -1323,7 +1323,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server CDC -> PostgreSQL
+    SQL Server 連接器
   
 
     
@@ -1360,7 +1360,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle CDC -> PostgreSQL
+    Oracle 連接器
   
 
     
@@ -1378,7 +1378,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle CDC -> PostgreSQL
+    Oracle 連接器
   
 
     
@@ -1415,7 +1415,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#oracle" class="md-nav__link">
+  <a href="#oracle_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         创建 Oracle 连接器
@@ -1498,7 +1498,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#oracle_1" class="md-nav__link">
+  <a href="#oracle_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         Oracle 連接器的可用快照模式
@@ -1517,10 +1517,104 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="使用 schemasync 模式預覽來源表和目標表關係">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schemasync_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        建立連接器並以 schemasync 模式啟動它
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        確保連接器處於暫停狀態
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        查看預設映射規則所建立的表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定義自訂映射規則（如有需要）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        回顧所有已建立的物件映射規則
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        重新載入物件映射規則
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_att_view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        再次檢查 synchdb_att_view 是否有更改
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        恢復連接器或重新建立整個快照
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         選擇性表同步
@@ -1532,7 +1626,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         選擇所需表並首次啟動同步
@@ -1543,7 +1637,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         驗證連接器狀態和表格
@@ -1554,7 +1648,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         運行時加入更多要複製的表
@@ -1565,7 +1659,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
         驗證更新後的表格
@@ -1577,6 +1671,139 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#infinispan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        配置 Infinispan功能
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="配置 Infinispan功能">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_add_infinispan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_add_infinispan()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_del_infinispan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_del_infinispan()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        钝化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infinispan-oracle-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        用于测试 Infinispan 大型事务的 Oracle SQL 示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        自定义起始偏移量值
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="自定义起始偏移量值">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        记录可设置的偏移量值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        暂停连接器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        设置新的偏移量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        恢复连接器
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debezium-oracle-openlog-replicator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        設定 Debezium Oracle 連接器以使用 Openlog Replicator（非原生）
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1596,14 +1823,42 @@
   
   
     <li class="md-nav__item">
-      <a href="../object_mapping_workflow/" class="md-nav__link">
+      <a href="../postgresql_cdc_to_postgresql/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    对象映射工作流程
+    Postgres 連接器
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../native_olr_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    原生 Openlog Replicator 连接器
   
 
     
@@ -1802,7 +2057,7 @@
   <span class="md-ellipsis">
     
   
-    自定义对象映射和转换
+    对象映射和转换
   
 
     
@@ -1823,14 +2078,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../user-guide/secured_connection/" class="md-nav__link">
+      <a href="../../user-guide/letter_casing_strategy/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    安全连接
+    字母大小寫規則
   
 
     
@@ -1858,7 +2113,7 @@
   <span class="md-ellipsis">
     
   
-    配置错误处理策略
+    错误处理策略
   
 
     
@@ -1879,70 +2134,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../user-guide/set_offset/" class="md-nav__link">
+      <a href="../../../user-guide/configure_olr.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    配置复制偏移
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../user-guide/configure_olr/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    为 Oracle 连接器配置 Openlog Replicator
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../user-guide/configure_infinispan/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    配置 infinispan
+    Openlog Replicator 设置
   
 
     
@@ -2056,7 +2255,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#oracle" class="md-nav__link">
+  <a href="#oracle_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         创建 Oracle 连接器
@@ -2139,7 +2338,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#oracle_1" class="md-nav__link">
+  <a href="#oracle_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         Oracle 連接器的可用快照模式
@@ -2158,10 +2357,104 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="使用 schemasync 模式預覽來源表和目標表關係">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schemasync_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        建立連接器並以 schemasync 模式啟動它
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        確保連接器處於暫停狀態
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        查看預設映射規則所建立的表
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        定義自訂映射規則（如有需要）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        回顧所有已建立的物件映射規則
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        重新載入物件映射規則
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_att_view" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        再次檢查 synchdb_att_view 是否有更改
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        恢復連接器或重新建立整個快照
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#_9" class="md-nav__link">
     <span class="md-ellipsis">
       
         選擇性表同步
@@ -2173,7 +2466,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         選擇所需表並首次啟動同步
@@ -2184,7 +2477,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         驗證連接器狀態和表格
@@ -2195,7 +2488,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
+  <a href="#_12" class="md-nav__link">
     <span class="md-ellipsis">
       
         運行時加入更多要複製的表
@@ -2206,7 +2499,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
+  <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
         驗證更新後的表格
@@ -2218,6 +2511,139 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#infinispan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        配置 Infinispan功能
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="配置 Infinispan功能">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_add_infinispan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_add_infinispan()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_del_infinispan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_del_infinispan()
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        钝化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#infinispan-oracle-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        用于测试 Infinispan 大型事务的 Oracle SQL 示例
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        自定义起始偏移量值
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="自定义起始偏移量值">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        记录可设置的偏移量值
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        暂停连接器
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        设置新的偏移量
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        恢复连接器
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#debezium-oracle-openlog-replicator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        設定 Debezium Oracle 連接器以使用 Openlog Replicator（非原生）
+      
+    </span>
+  </a>
   
 </li>
       
@@ -2241,7 +2667,7 @@
   
 
 
-<h1 id="oracle-postgresql">Oracle -&gt; PostgreSQL<a class="headerlink" href="#oracle-postgresql" title="Permanent link">&para;</a></h1>
+<h1 id="oracle">Oracle 连接器<a class="headerlink" href="#oracle" title="Permanent link">&para;</a></h1>
 <h2 id="synchdb-oracle"><strong>为 SynchDB 准备 Oracle 数据库</strong><a class="headerlink" href="#synchdb-oracle" title="Permanent link">&para;</a></h2>
 <p>在使用 SynchDB 从 Oracle 复制之前，需要按照<a href="../../getting-started/remote_database_setups/">此处</a> 概述的步骤配置 Oracle。</p>
 <p>请确保 SynchDB 需要复制的每个表的所有列都启用了补充日志数据。这是 SynchDB 正确处理更新和删除操作所必需的。</p>
@@ -2250,7 +2676,7 @@
 <span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">products</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="n">SUPPLEMENTAL</span><span class="w"> </span><span class="n">LOG</span><span class="w"> </span><span class="k">DATA</span><span class="w"> </span><span class="p">(</span><span class="k">ALL</span><span class="p">)</span><span class="w"> </span><span class="n">COLUMNS</span><span class="p">;</span>
 <span class="p">...</span><span class="w"> </span><span class="n">etc</span>
 </code></pre></div>
-<h2 id="oracle"><strong>创建 Oracle 连接器</strong><a class="headerlink" href="#oracle" title="Permanent link">&para;</a></h2>
+<h2 id="oracle_1"><strong>创建 Oracle 连接器</strong><a class="headerlink" href="#oracle_1" title="Permanent link">&para;</a></h2>
 <p>创建一个连接器，指向 Oracle 中 <code>FREE</code> 数据库和 <code>DBZUSER</code> schema 下的所有表。
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span>
 <span class="n">synchdb_add_conninfo</span><span class="p">(</span>
@@ -2311,7 +2737,7 @@
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>初始快照完成后，持续数据捕获 (CDC) 将开始。在 <code>always</code> 模式下重新启动连接器将重复上述过程。</p>
-<h2 id="oracle_1"><strong>Oracle 連接器的可用快照模式</strong><a class="headerlink" href="#oracle_1" title="Permanent link">&para;</a></h2>
+<h2 id="oracle_2"><strong>Oracle 連接器的可用快照模式</strong><a class="headerlink" href="#oracle_2" title="Permanent link">&para;</a></h2>
 <ul>
 <li>initial (default)</li>
 <li>initial_only</li>
@@ -2320,11 +2746,93 @@
 <li>schemasync</li>
 </ul>
 <h2 id="schemasync"><strong>使用 schemasync 模式預覽來源表和目標表關係</strong><a class="headerlink" href="#schemasync" title="Permanent link">&para;</a></h2>
-<p>在嘗試對當前表和資料（可能非常龐大）進行初始快照之前，可以在實際資料遷移之前「預覽」來源表和目標表之間的所有表和資料類型對應。這樣，您就有機會在實際遷移之前修改資料類型對應或物件名稱。這可以透過特殊的「schemasync」初始快照模式來實現。有關詳細範例，請參閱<a href="../../tutorial/object_mapping_workflow/">对象映射工作流程</a>。</p>
-<h2 id="_3"><strong>選擇性表同步</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<h3 id="_4"><strong>選擇所需表並首次啟動同步</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>在嘗試對當前表和資料（可能非常龐大）進行初始快照之前，可以在實際資料遷移之前「預覽」來源表和目標表之間的所有表和資料類型對應。這樣，您有機會在實際遷移之前修改資料類型對應或物件名稱。這可以透過特殊的「schemasync」初始快照模式來實現。</p>
+<h3 id="schemasync_1"><strong>建立連接器並以 <code>schemasync</code> 模式啟動它</strong><a class="headerlink" href="#schemasync_1" title="Permanent link">&para;</a></h3>
+<p><code>schemasync</code> 是一種特殊模式，它使連接器連接到遠端資料庫並嘗試僅同步指定表的模式。完成後，連接器將處於「暫停」狀態，使用者可以查看使用預設規則建立的所有資料表和資料類型，並根據需要進行變更。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="mi">1521</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;DBZUSER&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;dbz&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;FREE&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;DBZUSER&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;oracle&#39;</span>
+<span class="p">);</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;schemasync&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="_3"><strong>確保連接器處於暫停狀態</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">connector_type</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">stage</span><span class="p">,</span><span class="w"> </span><span class="k">state</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;oracleconn&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">name</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">connector_type</span><span class="w"> </span><span class="o">|</span><span class="w">   </span><span class="n">pid</span><span class="w">   </span><span class="o">|</span><span class="w">        </span><span class="n">stage</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">state</span>
+<span class="c1">------------+----------------+---------+---------------------+--------</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="mi">1648935</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">change</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="n">capture</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">paused</span>
+</code></pre></div>
+<h3 id="_4"><strong>查看預設映射規則所建立的表</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_att_view</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;oracleconn&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">name</span><span class="w">    </span><span class="o">|</span><span class="w">  </span><span class="k">type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">attnum</span><span class="w"> </span><span class="o">|</span><span class="w">       </span><span class="n">ext_tbname</span><span class="w">       </span><span class="o">|</span><span class="w">   </span><span class="n">pg_tbname</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ext_attname</span><span class="w">  </span><span class="o">|</span><span class="w">  </span><span class="n">pg_attname</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">ext_atttypename</span><span class="w"> </span><span class="o">|</span><span class="w">       </span><span class="n">pg_atttypename</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">transform</span>
+<span class="c1">------------+--------+--------+------------------------+----------------+--------------+--------------+-----------------+-----------------------------+-----------</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">CUSTOMERS</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">customers</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ID</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">CUSTOMERS</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">customers</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">NAME</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">name</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">varchar2</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ORDER_NUMBER</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">order_number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ORDER_DATE</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">order_date</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">date</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="k">timestamp</span><span class="w"> </span><span class="k">without</span><span class="w"> </span><span class="k">time</span><span class="w"> </span><span class="k">zone</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">PURCHASER</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">purchaser</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">QUANTITY</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">5</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">PRODUCT_ID</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+</code></pre></div>
+<h3 id="_5"><strong>定義自訂映射規則（如有需要）</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p>使用者可以使用 <code>synchdb_add_objmap</code> 函數建立自訂映射規則。此函數可用於對應表名、列名、資料類型，並定義資料轉換表達式規則。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;FREE.DBZUSER.ORDERS&#39;</span><span class="p">,</span><span class="s1">&#39;free.myorders&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="s1">&#39;column&#39;</span><span class="p">,</span><span class="s1">&#39;FREE.DBZUSER.ORDERS.PURCHASER&#39;</span><span class="p">,</span><span class="s1">&#39;who&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="s1">&#39;datatype&#39;</span><span class="p">,</span><span class="s1">&#39;FREE.DBZUSER.ORDERS.QUANTITY&#39;</span><span class="p">,</span><span class="s1">&#39;bigint|0&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="s1">&#39;transform&#39;</span><span class="p">,</span><span class="s1">&#39;FREE.DBZUSER.CUSTOMERS.NAME&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;&#39;&gt;&gt;&gt;&gt;&gt;&#39;&#39; || &#39;&#39;%d&#39;&#39; || &#39;&#39;&lt;&lt;&lt;&lt;&lt;&#39;&#39;&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>以上內容意味著：</p>
+<ul>
+<li>來源表“FREE.DBZUSER.ORDERS”將對應到目標表“free.myorders”</li>
+<li>來源列“FREE.DBZUSER.ORDERS.PURCHASE”將對應到目標表“who”</li>
+<li>來源列“FREE.DBZUSER.ORDERS.QUANTITY”的資料類型將會對應到“bigint”</li>
+<li>來源列「FREE.DBZUSER.CUSTOMERS.NAME」的資料將根據表達式進行轉換，其中 %d 為資料佔位符</li>
+</ul>
+<h3 id="_6"><strong>回顧所有已建立的物件映射規則</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_objmap</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;oracleconn&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">name</span><span class="w">    </span><span class="o">|</span><span class="w">  </span><span class="n">objtype</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="o">|</span><span class="w">            </span><span class="n">srcobj</span><span class="w">             </span><span class="o">|</span><span class="w">           </span><span class="n">dstobj</span>
+<span class="c1">------------+-----------+---------+-------------------------------+----------------------------</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">myorders</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">column</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="p">.</span><span class="n">PURCHASER</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">who</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">datatype</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="p">.</span><span class="n">QUANTITY</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="nb">bigint</span><span class="o">|</span><span class="mi">0</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">transform</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">CUSTOMERS</span><span class="p">.</span><span class="n">NAME</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;&gt;&gt;&gt;&gt;&gt;&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;%d&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&lt;&lt;&lt;&lt;&lt;&#39;</span>
+</code></pre></div>
+<h3 id="_7"><strong>重新載入物件映射規則</strong><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>定義完所有自訂規則後，我們需要通知連接器載入這些規則。這將使連接器讀取並應用物件映射規則。如果連接器發現目前 PostgreSQL 值與物件對應值之間存在差異，它將嘗試修正映射。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_reload_objmap</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="synchdb_att_view"><strong>再次檢查 <code>synchdb_att_view</code> 是否有更改</strong><a class="headerlink" href="#synchdb_att_view" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_att_view</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;oracleconn&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="n">name</span><span class="w">    </span><span class="o">|</span><span class="w">  </span><span class="k">type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">attnum</span><span class="w"> </span><span class="o">|</span><span class="w">       </span><span class="n">ext_tbname</span><span class="w">       </span><span class="o">|</span><span class="w">   </span><span class="n">pg_tbname</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ext_attname</span><span class="w">  </span><span class="o">|</span><span class="w">  </span><span class="n">pg_attname</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">ext_atttypename</span><span class="w"> </span><span class="o">|</span><span class="w">       </span><span class="n">pg_atttypename</span><span class="w">        </span><span class="o">|</span><span class="w">         </span><span class="k">transform</span>
+<span class="c1">------------+--------+--------+------------------------+----------------+--------------+--------------+-----------------+-----------------------------+----------------------------</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">CUSTOMERS</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">customers</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ID</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">CUSTOMERS</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">customers</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">NAME</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">name</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">varchar2</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;&gt;&gt;&gt;&gt;&gt;&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;%d&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&lt;&lt;&lt;&lt;&lt;&#39;</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">myorders</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">ORDER_NUMBER</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">order_number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">myorders</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">ORDER_DATE</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">order_date</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">date</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="k">timestamp</span><span class="w"> </span><span class="k">without</span><span class="w"> </span><span class="k">time</span><span class="w"> </span><span class="k">zone</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">myorders</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">PURCHASER</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">who</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">myorders</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">QUANTITY</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">bigint</span><span class="w">                      </span><span class="o">|</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">5</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">myorders</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">PRODUCT_ID</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+</code></pre></div>
+<h3 id="_8"><strong>恢復連接器或重新建立整個快照</strong><a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<p>確認物件映射正確後，我們可以恢復連接器。請注意，復原操作只會傳輸新的表更改，不會複製表中的現有資料。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_resume_engine</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>要擷取表中的現有數據，我們也可以使用新的物件映射規則重新建立整個快照。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_stop_engine_bgw</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="_9"><strong>選擇性表同步</strong><a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
+<h3 id="_10"><strong>選擇所需表並首次啟動同步</strong><a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
 <p>表格選擇在連接器建立階段透過 <code>synchdb_add_conninfo()</code> 函數完成，該函數用於指定要從中複製的表列表（以完全限定名稱 (FQN) 表示，並以逗號分隔）。</p>
-<p>例如，以下命令建立一個連接器，該連接器僅從遠端 MySQL 資料庫複製 <code>inventory.orders</code> 和 <code>inventory.products</code> 表中的變更。
+<p>例如，以下命令建立一個連接器，該連接器僅從遠端 Oracle 資料庫複製 <code>FREE.ORDERS</code> 表中的變更。
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
 <span class="w">    </span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span>
@@ -2341,8 +2849,8 @@
 <p>首次啟動此連接器時，將觸發執行初始快照，並複製選定的表的架構和資料。</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">);</span>
 </code></pre></div>
-<h3 id="_5"><strong>驗證連接器狀態和表格</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<p>檢查連接器狀態和新表格：
+<h3 id="_11"><strong>驗證連接器狀態和表格</strong><a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>檢查連接器狀態和新表格：</p>
 <div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">Select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">state</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="p">;</span>
 <span class="w">    </span><span class="n">name</span><span class="w">    </span><span class="o">|</span><span class="w">  </span><span class="k">state</span><span class="w">  </span><span class="o">|</span><span class="w">   </span><span class="n">err</span>
 <span class="c1">------------+---------+----------</span>
@@ -2353,36 +2861,199 @@
 <span class="w"> </span><span class="k">Schema</span><span class="w"> </span><span class="o">|</span><span class="w">  </span><span class="n">Name</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Owner</span>
 <span class="c1">--------+--------+-------+--------</span>
 <span class="w"> </span><span class="k">free</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
-</code></pre></div></p>
+</code></pre></div>
 <p>預設情況下，來源資料庫名稱會對應到目標資料庫的模式，並且字母大小寫策略為小寫，因此 <code>FREE.ORDERS</code> 在 PostgreSQL 中會變成 <code>free.orders</code>。表完成初始快照後，連接器將啟動 CDC 以串流傳輸這些表的後續變更。</p>
-<h3 id="_6"><strong>運行時加入更多要複製的表</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<h3 id="_12"><strong>運行時加入更多要複製的表</strong><a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p>上一節中的 <code>oracleconn</code> 已完成初始快照並取得了所選表格的表格模式。如果我們想要新增更多要複製的表，則需要通知 Debezium 引擎更新後的表格部分，並再次執行初始快照。具體操作如下：</p>
 <ol>
 <li>
 <p>更新 <code>synchdb_conninfo</code> 表以包含其他表。</p>
 </li>
 <li>
-<p>在本例中，我們將 <code>DBZUSER.CUSTOMERS</code> 表加入同步清單：
-<div class="highlight"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">synchdb_conninfo</span><span class="w"> </span>
+<p>在本例中，我們將 <code>DBZUSER.CUSTOMERS</code> 表加入同步清單：</p>
+</li>
+</ol>
+<p><div class="highlight"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">synchdb_conninfo</span><span class="w"> </span>
 <span class="k">SET</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonb_set</span><span class="p">(</span><span class="k">data</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{table}&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&quot;DBZUSER.ORDERS,DBZUSER.CUSTOMERS&quot;&#39;</span><span class="p">)</span><span class="w"> </span>
 <span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;oracleconn&#39;</span><span class="p">;</span>
-</code></pre></div></p>
-</li>
-<li>將快照模式設為“始終”，然後重新啟動連接器，以執行另一次初始快照：
+</code></pre></div>
+3. 將快照模式設為“始終”，然後重新啟動連接器，以執行另一次初始快照：</p>
 <div class="highlight"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">orders</span><span class="p">;</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_restart_connector</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
 </code></pre></div>
-這迫使 Debezium 在進行 CDC 串流之前，重新建立所有表格的快照，包括現有的 <code>free.orders</code> 表和新的 <code>free.customers</code> 表。這意味著，要新增表，必須刪除現有表（以防止重複表和主鍵錯誤），並重新建立整個初始快照。這相當冗餘，Debezium 建議使用增量快照來新增資料表，而無需重新建立快照。一旦我們將增量快照支援新增至 SynchDB，我們將更新此流程。</li>
-</ol>
-<h3 id="_7"><strong>驗證更新後的表格</strong><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
-<p>現在，我們可以再次檢查我們的表：
+<p>這迫使 Debezium 在進行 CDC 串流之前，重新建立所有表格的快照，包括現有的 <code>free.orders</code> 表和新的 <code>free.customers</code> 表。這意味著，要新增表，必須刪除現有表（以防止重複表和主鍵錯誤），並重新建立整個初始快照。這相當冗餘，Debezium 建議使用增量快照來新增資料表，而無需重新建立快照。一旦我們將增量快照支援新增至 SynchDB，我們將更新此流程。</p>
+<h3 id="_13"><strong>驗證更新後的表格</strong><a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>現在，我們可以再次檢查我們的表：</p>
 <div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="o">*</span>
 <span class="w">          </span><span class="n">List</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">tables</span>
 <span class="w"> </span><span class="k">Schema</span><span class="w">      </span><span class="o">|</span><span class="w">  </span><span class="n">Name</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Owner</span>
 <span class="c1">-------------+--------+-------+--------</span>
 <span class="w"> </span><span class="k">free</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 <span class="w"> </span><span class="n">customers</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
+</code></pre></div>
+<h2 id="infinispan"><strong>配置 Infinispan功能</strong><a class="headerlink" href="#infinispan" title="Permanent link">&para;</a></h2>
+<p>默认情况下，Debezium 的 Oracle 连接器使用 JVM 堆缓存传入的变更事件，然后再将它们传递给 SynchDB 进行处理。最大堆大小通过 <code>synchdb.jvm_max_heap_size</code> GUC 控制。当 JVM 堆内存不足时（尤其是在处理大型事务或包含大量列的模式时），连接器可能会出现 OutOfMemoryError 错误，这使得堆大小调整成为一项关键的调优挑战。</p>
+<p>作为替代方案，Debezium 可以配置使用 Infinispan 作为其缓存层。Infinispan 支持 JVM 堆和堆外（直接内存）的内存存储，从而提供更大的灵活性。此外，它还支持钝化功能，允许在达到内存限制时将多余的数据溢出到磁盘。这使得它在高负载下更具弹性，并确保能够优雅地处理大型事务或模式变更，而不会耗尽内存。</p>
+<h3 id="synchdb_add_infinispan"><strong><code>synchdb_add_infinispan()</code></strong><a class="headerlink" href="#synchdb_add_infinispan" title="Permanent link">&para;</a></h3>
+<p><strong>签名：</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">synchdb_add_infinispan</span><span class="p">(</span>
+<span class="w">    </span><span class="n">connectorName</span><span class="w"> </span><span class="n">NAME</span><span class="p">,</span><span class="w">         </span><span class="c1">-- 连接器名称</span>
+<span class="w">    </span><span class="n">memoryType</span><span class="w"> </span><span class="n">NAME</span><span class="p">,</span><span class="w">            </span><span class="c1">-- 内存类型，可以是“堆”或“非堆”</span>
+<span class="w">    </span><span class="n">memorySize</span><span class="w"> </span><span class="nb">INT</span><span class="w">              </span><span class="c1">-- 预留为缓存的内存大小（以 MB 为单位）</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>为给定的连接器注册一个由 Infinispan 支持的缓存配置。这允许连接器使用 Infinispan 缓冲更改事件，并支持基于堆和堆外内存分配以及溢出到磁盘（钝化）。</p>
+<p><strong>注意：</strong></p>
+<ul>
+<li>如果在当前正在运行的连接器上调用，则该设置将在下次重启时生效。</li>
+<li>如果连接器已存在 Infinispan 缓存，它将被替换。</li>
+<li>memoryType='off_heap' 使用本机（直接）内存，不受 JVM 堆限制，但应谨慎调整大小。</li>
+<li>当内存填满时，缓存将自动支持钝化到磁盘。</li>
+</ul>
+<p><strong>示例：</strong>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_infinispan</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;off_heap&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2048</span><span class="p">);</span>
 </code></pre></div></p>
+<h3 id="synchdb_del_infinispan"><strong><code>synchdb_del_infinispan()</code></strong><a class="headerlink" href="#synchdb_del_infinispan" title="Permanent link">&para;</a></h3>
+<p><strong>签名：</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">synchdb_add_infinispan</span><span class="p">(</span>
+<span class="w">    </span><span class="n">connectorName</span><span class="w"> </span><span class="n">NAME</span><span class="w">          </span><span class="c1">-- 连接器名称</span>
+<span class="p">)</span>
+</code></pre></div>
+<p>删除指定连接器的 Infinispan 缓存配置及其相关的磁盘元数据。此操作将删除：</p>
+<ul>
+<li>所有缓存文件</li>
+<li>所有钝化（溢出到磁盘）状态</li>
+<li>相关的 Infinispan 配置</li>
+</ul>
+<p><strong>注意：</strong></p>
+<ul>
+<li>此函数只能在连接器停止时执行。</li>
+<li>在连接器处于活动状态时尝试运行此函数将导致错误。</li>
+<li>永久禁用或重新配置连接器的缓存后端后，使用此命令进行清理。</li>
+</ul>
+<p><strong>Example:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_del_infinispan</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<h3 id="_14"><strong><code>钝化</code></strong><a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>钝化简单来说就是，如果缓存已满，infinispan 会弹出并将数据写入磁盘。只要内存中有足够的空间来保存更改事件，就不会发生磁盘写入。数据将写入 <code>$PGDATA/pg_synchdb/ispn_[连接器名称]_[目标数据库名称]</code></p>
+<h3 id="infinispan-oracle-sql"><strong>用于测试 Infinispan 大型事务的 Oracle SQL 示例</strong><a class="headerlink" href="#infinispan-oracle-sql" title="Permanent link">&para;</a></h3>
+<p><strong>在 Oracle 中创建测试表：</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">big_tx_test</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w">       </span><span class="nb">NUMBER</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
+<span class="w">    </span><span class="n">payload</span><span class="w">  </span><span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">4000</span><span class="p">),</span>
+<span class="w">    </span><span class="n">created</span><span class="w">  </span><span class="nb">DATE</span><span class="w"> </span><span class="k">DEFAULT</span><span class="w"> </span><span class="n">SYSDATE</span>
+<span class="p">);</span>
+</code></pre></div>
+<p><strong>创建一个相对较大的交易：</strong>
+<div class="highlight"><pre><span></span><code><span class="k">BEGIN</span>
+<span class="w">  </span><span class="k">FOR</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="mi">1</span><span class="p">..</span><span class="mi">100000</span><span class="w"> </span><span class="n">LOOP</span>
+<span class="w">    </span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">big_tx_test</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">payload</span><span class="p">)</span>
+<span class="w">    </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">RPAD</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">4000</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;x&#39;</span><span class="p">));</span>
+<span class="w">  </span><span class="k">END</span><span class="w"> </span><span class="n">LOOP</span><span class="p">;</span>
+<span class="w">  </span><span class="k">COMMIT</span><span class="p">;</span>
+<span class="k">END</span><span class="p">;</span>
+<span class="o">/</span>
+</code></pre></div></p>
+<p><strong>大事务下的行为</strong></p>
+<p>未设置 infinispan + 低 JVM heap size (128)</p>
+<ul>
+<li>&rarr; 将发生 OutOfMemory 错误</li>
+</ul>
+<p>低 JVM heap size (128) + 高 infinispan heap size (2048)</p>
+<ul>
+<li>&rarr; 大型事务成功处理</li>
+</ul>
+<p>低 JVM heap size (128) + 低 infinispan heap size (128)</p>
+<ul>
+<li>&rarr; 将发生钝化</li>
+<li>&rarr; <code>ispn_[连接器名称]_[目标数据库名称]</code> 大小在处理过程中会增加，大型事务处理完成后会减小</li>
+<li>&rarr; 大型事务已成功处理，但速度较慢。</li>
+</ul>
+<p>低 JVM heap size (128) + 高 infinispan heap size (2048)</p>
+<ul>
+<li>&rarr; 将发生 OutOfMemory 错误</li>
+<li>&rarr; 请勿将 infinispan 配置 heap size 超过 JVM 最大 heap 内存</li>
+</ul>
+<p>较低的 JVM heap size (128) + 较低的 infinispan heap size (64)</p>
+<ul>
+<li>&rarr; 将发生钝化</li>
+<li>&rarr; <code>ispn_[连接器名称]_[目标数据库名称]</code> 的大小将在处理过程中增加，并在大型事务处理完成后减小。</li>
+<li>&rarr; 不建议使用，因为 infinispan 可能会占用一半的 JVM heap，而剩余空间可能不足以用于其他 Debezium 操作。</li>
+</ul>
+<p>低 JVM heap size (128) + 相同的 infinispan heap size (128)</p>
+<ul>
+<li>&rarr; 不建议使用，因为 infinispan 可能会占用所有 JVM 堆空间，最终导致 OutOfMemory 错误。</li>
+</ul>
+<p>高 JVM heap size (2048) + 低 infinispan heap size (128)</p>
+<ul>
+<li>&rarr; 将发生钝化。</li>
+<li>&rarr; <code>ispn_[连接器名称]_[目标数据库名称]</code> 的大小在处理过程中会增加，并在大型事务处理完成后减小。</li>
+<li>&rarr; 大型事务处理成功。</li>
+<li>&rarr; 效率低下 - 因为只有一小部分 JVM heap 空间用作缓存 + 不必要的钝化。</li>
+</ul>
+<h2 id="_15">自定义起始偏移量值<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h2>
+<p>起始偏移量值代表开始复制的点，类似于 PostgreSQL 的恢复 LSN。当 Debezium 运行引擎启动时，它将从这个偏移量值开始复制。将此偏移量值设置为较早的值将导致 Debezium 运行引擎从较早的记录开始复制，可能会复制重复的数据记录。在设置 Debezium 的起始偏移量值时，我们应该格外谨慎。</p>
+<h3 id="_16"><strong>记录可设置的偏移量值</strong><a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p>在操作过程中，Debezium 运行引擎将生成新的偏移量并将其刷新到磁盘。最后刷新的偏移量可以通过 <code>synchdb_state_view()</code> 实用命令检索：</p>
+<div class="highlight"><pre><span></span><code>postgres=# select name, last_dbz_offset from synchdb_state_view;
+     name      |                                           last_dbz_offset
+---------------+------------------------------------------------------------------------------------------------------
+ oracleconn    | {&quot;commit_scn&quot;:&quot;2311579&quot;,&quot;snapshot_scn&quot;:&quot;2311578&quot;,&quot;scn&quot;:&quot;2311578&quot;}
+</code></pre></div>
+<p>我们应该定期保存这些值，这样如果遇到问题，我们就知道过去可以设置的偏移量位置，以恢复复制操作。</p>
+<h3 id="_17"><strong>暂停连接器</strong><a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p>在设置新的偏移量值之前，连接器必须处于 <code>paused</code>（暂停）状态。</p>
+<p>使用 <code>synchdb_pause_engine()</code> SQL 函数暂停正在运行的连接器。这将停止 Debezium 运行引擎从异构数据库复制。当暂停时，可以使用 <code>synchdb_set_offset()</code> SQL 例程更改 Debezium 连接器的偏移量值，以从过去的特定点开始复制。它以 <code>conninfo_name</code> 作为参数，可以从 <code>synchdb_get_state()</code> 视图的输出中找到。</p>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_pause_engine</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="_18"><strong>设置新的偏移量</strong><a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<p>使用 <code>synchdb_set_offset()</code> SQL 函数更改连接器工作进程的起始偏移量。只有当连接器处于 <code>paused</code> 状态时才能执行此操作。该函数接受两个参数，<code>conninfo_name</code> 和 <code>有效的偏移量字符串</code>，这两个参数都可以从 <code>synchdb_get_state()</code> 视图的输出中找到。</p>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_set_offset</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{&quot;commit_scn&quot;:&quot;2311579&quot;,&quot;snapshot_scn&quot;:&quot;2311578&quot;,&quot;scn&quot;:&quot;2311578&quot;}&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="_19"><strong>恢复连接器</strong><a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>使用 <code>synchdb_resume_engine()</code> SQL 函数从暂停状态恢复 Debezium 操作。此函数以 <code>连接器名称</code> 作为其唯一参数，可以从 <code>synchdb_get_state()</code> 视图的输出中找到。恢复的 Debezium 运行引擎将从新设置的偏移量值开始复制。</p>
+<p>例如：</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_resume_engine</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="debezium-oracle-openlog-replicator">設定 Debezium Oracle 連接器以使用 Openlog Replicator（非原生）<a class="headerlink" href="#debezium-oracle-openlog-replicator" title="Permanent link">&para;</a></h2>
+<p>雖然不建議，但可以配置基於 Debezium 的 Oracle 連接器，使其從 Openlog Replicator 而非 Logminer 串流傳輸資料。這與 <a href="../../tutorial/native_olr_cdc_to_postgresql">原生 Openlog Replicator</a> 不同，後者是 SynchDB 內部原生建構的，無需使用 Debezium，也是使用 OLR 的建議方式。</p>
+<p>要建立<strong>基於 Debezium</strong>的 OLR 連接器（使用 <code>type</code> = 'oracle'）：</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;ora19c&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="mi">1521</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;DBZUSER&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;dbz&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;FREE&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;null&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;null&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;oracle&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>然後，使用帶有簽署的 <code>synchdb_add_olr_conninfo</code> 函數附加 Openlog Replicator 資訊：</p>
+<div class="highlight"><pre><span></span><code><span class="n">synchdb_add_olr_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="n">conn_name</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span><span class="w">     </span><span class="c1">-- Name of the connector</span>
+<span class="w">    </span><span class="n">olr_host</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">,</span><span class="w">      </span><span class="c1">-- Hostname or IP of the OLR instance</span>
+<span class="w">    </span><span class="n">olr_port</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="w">       </span><span class="c1">-- Port number exposed by OLR (typically 7070)</span>
+<span class="w">    </span><span class="n">olr_source</span><span class="w"> </span><span class="nb">TEXT</span><span class="w">     </span><span class="c1">-- Oracle source name as configured in OLR</span>
+<span class="p">)</span>
+</code></pre></div>
+<p><strong>範例：</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_olr_conninfo</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">7070</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ORACLE&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>若要從特定連接器移除 OLR 設定並還原至 Logminer，請使用具有下列簽章的 <code>synchdb_del_olr_conninfo</code> 函數：</p>
+<div class="highlight"><pre><span></span><code><span class="n">synchdb_del_olr_conninfo</span><span class="p">(</span><span class="n">conn_name</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>範例：</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_del_olr_conninfo</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p><strong>基於 Debezium 的 Openlog Replicator 連接器的行為說明</strong></p>
+<ul>
+<li>當 LogMiner 和 OLR 配置同時存在時，SynchDB 預設使用 Openlog Replicator 進行變更擷取。</li>
+<li>如果 OLR 設定缺失，SynchDB 將使用日誌原則來傳輸變更。</li>
+<li>修改 OLR 配置後，需要重新啟動連接器。</li>
+</ul>
 
 
 

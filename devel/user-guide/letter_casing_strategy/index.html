@@ -12,21 +12,21 @@
         <meta name="author" content="Hornetlabs Technology Inc.">
       
       
-        <link rel="canonical" href="https://docs.synchdb.com/latest/user-guide/set_offset/">
+        <link rel="canonical" href="https://docs.synchdb.com/latest/user-guide/letter_casing_strategy/">
       
       
-        <link rel="prev" href="../configure_error_strategies/">
+        <link rel="prev" href="../object_mapping_rules/">
       
       
-        <link rel="next" href="../configure_olr/">
+        <link rel="next" href="../configure_error_strategies/">
       
       
         
           <link rel="alternate" href="./" hreflang="en">
         
-          <link rel="alternate" href="../../es/user-guide/set_offset/" hreflang="es">
+          <link rel="alternate" href="../../es/user-guide/letter_casing_strategy/" hreflang="es">
         
-          <link rel="alternate" href="../../zh/user-guide/set_offset/" hreflang="zh">
+          <link rel="alternate" href="../../zh/user-guide/letter_casing_strategy/" hreflang="zh">
         
       
       
@@ -35,7 +35,7 @@
     
     
       
-        <title>Configure Replication Offset - SynchDB Documentation</title>
+        <title>Letter Casing Strategy - SynchDB Documentation</title>
       
     
     
@@ -90,7 +90,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#custom-start-offset-values" class="md-skip">
+        <a href="#letter-casing-strategy" class="md-skip">
           Skip to content
         </a>
       
@@ -128,7 +128,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Configure Replication Offset
+              Letter Casing Strategy
             
           </span>
         </div>
@@ -181,13 +181,13 @@
           </li>
         
           <li class="md-select__item">
-            <a href="../../es/user-guide/set_offset/" hreflang="es" class="md-select__link">
+            <a href="../../es/user-guide/letter_casing_strategy/" hreflang="es" class="md-select__link">
               Español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../zh/user-guide/set_offset/" hreflang="zh" class="md-select__link">
+            <a href="../../zh/user-guide/letter_casing_strategy/" hreflang="zh" class="md-select__link">
               中文
             </a>
           </li>
@@ -1282,7 +1282,7 @@
   <span class="md-ellipsis">
     
   
-    MySQL -> PostgreSQL
+    MySQL Connector
   
 
     
@@ -1310,7 +1310,7 @@
   <span class="md-ellipsis">
     
   
-    SQL Server -> PostgreSQL
+    SQL Server Connector
   
 
     
@@ -1338,7 +1338,7 @@
   <span class="md-ellipsis">
     
   
-    Oracle -> PostgreSQL
+    Oracle Connector
   
 
     
@@ -1359,14 +1359,42 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorial/object_mapping_workflow/" class="md-nav__link">
+      <a href="../../tutorial/postgresql_cdc_to_postgresql/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Object Mapping Workflow
+    Postgres Connector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/native_olr_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native Openlog Replicator Connector
   
 
     
@@ -1570,63 +1598,7 @@
   <span class="md-ellipsis">
     
   
-    Customize Object Mapping and Transformation
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../secured_connection/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Secured Connection
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../configure_error_strategies/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Configure Error Strategies
+    Object Transformation
   
 
     
@@ -1663,7 +1635,7 @@
   <span class="md-ellipsis">
     
   
-    Configure Replication Offset
+    Letter Casing Strategy
   
 
     
@@ -1681,7 +1653,7 @@
   <span class="md-ellipsis">
     
   
-    Configure Replication Offset
+    Letter Casing Strategy
   
 
     
@@ -1707,10 +1679,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#record-settable-offset-values" class="md-nav__link">
+  <a href="#configure-letter-casing-strategy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Record Settable Offset Values
+        Configure Letter Casing Strategy
       
     </span>
   </a>
@@ -1718,32 +1690,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pause-the-connector" class="md-nav__link">
+  <a href="#how-does-letter-casing-strategy-affect-transformation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pause the Connector
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#set-the-new-offset" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Set the new Offset
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#resume-the-connector" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Resume the Connector
+        How does Letter Casing Strategy Affect Transformation
       
     </span>
   </a>
@@ -1766,14 +1716,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../configure_olr/" class="md-nav__link">
+      <a href="../configure_error_strategies/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Configure Openlog Replicator for Oracle Connector
+    Error Strategies
   
 
     
@@ -1794,14 +1744,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../configure_infinispan/" class="md-nav__link">
+      <a href="../configure_olr.md" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Configure Infinispan
+    Openlog Replicator
   
 
     
@@ -1829,7 +1779,7 @@
   <span class="md-ellipsis">
     
   
-    Configure Snapshot Engine
+    Snapshot Engine
   
 
     
@@ -1904,10 +1854,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#record-settable-offset-values" class="md-nav__link">
+  <a href="#configure-letter-casing-strategy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Record Settable Offset Values
+        Configure Letter Casing Strategy
       
     </span>
   </a>
@@ -1915,32 +1865,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#pause-the-connector" class="md-nav__link">
+  <a href="#how-does-letter-casing-strategy-affect-transformation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pause the Connector
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#set-the-new-offset" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Set the new Offset
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#resume-the-connector" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Resume the Connector
+        How does Letter Casing Strategy Affect Transformation
       
     </span>
   </a>
@@ -1967,48 +1895,30 @@
   
 
 
-<h1 id="custom-start-offset-values">Custom Start Offset Values<a class="headerlink" href="#custom-start-offset-values" title="Permanent link">&para;</a></h1>
-<p>A start offset value represents a point to start replication from in the similar way as PostgreSQL's resume LSN. When Debezium runner engine starts, it will start the replication from this offset value. Setting this offset value to a earlier value will cause Debezium runner engine to start replication from earlier records, possibly replicating duplicate data records. We should be extra cautious when setting start offset values on Debezium.</p>
-<h2 id="record-settable-offset-values"><strong>Record Settable Offset Values</strong><a class="headerlink" href="#record-settable-offset-values" title="Permanent link">&para;</a></h2>
-<p>During operation, new offsets will be generated nd flushed to disk by Debezium runner engine. The last flushed offset can be retrieved from <code>synchdb_state_view()</code> utility command:</p>
-<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">last_dbz_offset</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="p">;</span>
-<span class="w">     </span><span class="n">name</span><span class="w">      </span><span class="o">|</span><span class="w">                                           </span><span class="n">last_dbz_offset</span>
-<span class="c1">---------------+------------------------------------------------------------------------------------------------------</span>
-<span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;commit_lsn&quot;</span><span class="p">:</span><span class="ss">&quot;0000006a:00006608:0003&quot;</span><span class="p">,</span><span class="ss">&quot;snapshot&quot;</span><span class="p">:</span><span class="k">true</span><span class="p">,</span><span class="ss">&quot;snapshot_completed&quot;</span><span class="p">:</span><span class="k">false</span><span class="err">}</span>
-<span class="w"> </span><span class="n">mysqlconn</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;ts_sec&quot;</span><span class="p">:</span><span class="mi">1741301103</span><span class="p">,</span><span class="ss">&quot;file&quot;</span><span class="p">:</span><span class="ss">&quot;mysql-bin.000009&quot;</span><span class="p">,</span><span class="ss">&quot;pos&quot;</span><span class="p">:</span><span class="mi">574318212</span><span class="p">,</span><span class="ss">&quot;row&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="ss">&quot;server_id&quot;</span><span class="p">:</span><span class="mi">223344</span><span class="p">,</span><span class="ss">&quot;event&quot;</span><span class="p">:</span><span class="mi">2</span><span class="err">}</span>
-<span class="w"> </span><span class="n">oracleconn</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;commit_scn&quot;</span><span class="p">:</span><span class="ss">&quot;2311579&quot;</span><span class="p">,</span><span class="ss">&quot;snapshot_scn&quot;</span><span class="p">:</span><span class="ss">&quot;2311578&quot;</span><span class="p">,</span><span class="ss">&quot;scn&quot;</span><span class="p">:</span><span class="ss">&quot;2311578&quot;</span><span class="err">}</span>
-<span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
+<h1 id="letter-casing-strategy">Letter Casing Strategy<a class="headerlink" href="#letter-casing-strategy" title="Permanent link">&para;</a></h1>
+<h2 id="configure-letter-casing-strategy">Configure Letter Casing Strategy<a class="headerlink" href="#configure-letter-casing-strategy" title="Permanent link">&para;</a></h2>
+<p>Letter casing strategy represents how SynchDB should normalize source object names before applying them to destination. MySQL, SQL Server and PostgreSQL default all object names to lower case letters while Oracle defaults to upper case.  MySQL, Oracle and PostgreSQL allow object names to contain a mixture of upper and lower case letters, and consider each variant different while SQL Server treats them as all the same. </p>
+<p>It is possible to tell SynchDB how to handle the object names using <code>synchdb.letter_casing_strategy</code> GUC parameter with these possible values:</p>
+<ul>
+<li>lowercase: normalize all object names (table and column names) to lower case letters</li>
+<li>uppercase: normalize all object names (table and column names) to upper case letters</li>
+<li>asis: do not normalize, keep object names(table and column names) as is.</li>
+</ul>
+<p>&lt;<IMPORTANT>&gt; synchdb.letter_casing_strategy does not affect data type names. It is always normalized to lower case in SynchDB. Connectors like SQL Server and Oracle express data type in upper case letters, so these are stored and displayed as lower case in SynchDB.</p>
+<h2 id="how-does-letter-casing-strategy-affect-transformation">How does Letter Casing Strategy Affect Transformation<a class="headerlink" href="#how-does-letter-casing-strategy-affect-transformation" title="Permanent link">&para;</a></h2>
+<p>You may wonder if SynchDB normalizes object names according to <code>synchdb.letter_casing_strategy</code>, how shall <a href="../../user-guide/object_mapping_rules/">object transformation</a> be configured correctly to identify a foreign table or column to transform?</p>
+<p>Object transformation identifies the original name from source database for transformation, so you have to configure the object name exactly as they appear in the source database, not the one normalized by SynchDB. </p>
+<p>If a match is found, SynchDB will prioritize the new value as identified by the object transformation and will not proceed to normalize it according to the letter casing strategy. Normalization occurs when there is no particular transformation rule defined for an object</p>
+<p>For example, for an Oracle table 'TEST_TABLE' under database 'FREE' and schema 'DBZUSER', let's say we want to map it to "MY_TEST_TABLE" (all capital) in PostgreSQL and current synchdb.letter_casing_strategy is 'lowercase'. You will write the transform rule like this:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;FREE.DBZUSER.TEST_TABLE&#39;</span><span class="p">,</span><span class="s1">&#39;MY_TEST_TABLE&#39;</span><span class="p">);</span>
 </code></pre></div>
-<p>Depending on the connector type, this offset value differs. From the example above, the <code>mysql</code> connector's last flushed offset is <code>{"ts_sec":1741301103,"file":"mysql-bin.000009","pos":574318212,"row":1,"server_id":223344,"event":2}</code> and <code>sqlserver</code>'s last flushed offset is <code>{"commit_lsn":"0000006a:00006608:0003","snapshot":true,"snapshot_completed":false}</code>. </p>
-<p>We should save this values regularly, so in case we run into a problem, we know the offset location in the past that can be set to resume the replication operation.</p>
-<h2 id="pause-the-connector"><strong>Pause the Connector</strong><a class="headerlink" href="#pause-the-connector" title="Permanent link">&para;</a></h2>
-<p>A connector must be in a <code>paused</code> state before a new offset value can be set.</p>
-<p>Use <code>synchdb_pause_engine()</code> SQL function to pause a runnng connector. This will halt the Debezium runner engine from replicating from the heterogeneous database. When paused, it is possible to alter the Debezium connector's offset value to replicate from a specific point in the past using <code>synchdb_set_offset()</code> SQL routine. It takes <code>conninfo_name</code> as its argument which can be found from the output of <code>synchdb_get_state()</code> view.</p>
-<p>For example:
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_pause_engine</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
-</code></pre></div></p>
-<h2 id="set-the-new-offset"><strong>Set the new Offset</strong><a class="headerlink" href="#set-the-new-offset" title="Permanent link">&para;</a></h2>
-<p>Use <code>synchdb_set_offset()</code> SQL function to change a connector worker's starting offset. This can only be done when the connector is put into <code>paused</code> state. The function takes 2 parameters, <code>conninfo_name</code> and <code>a valid offset string</code>, both of which can be found from the output of <code>synchdb_get_state()</code> view.</p>
-<p>For example:
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
-<span class="w">  </span><span class="n">synchdb_set_offset</span><span class="p">(</span>
-<span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{&quot;ts_sec&quot;:1741301103,&quot;file&quot;:&quot;mysql-bin.000009&quot;,&quot;pos&quot;:574318212,&quot;row&quot;:1,&quot;server_id&quot;:223344,&quot;event&quot;:2}&#39;</span>
-<span class="w">  </span><span class="p">);</span>
-</code></pre></div></p>
-<h2 id="resume-the-connector"><strong>Resume the Connector</strong><a class="headerlink" href="#resume-the-connector" title="Permanent link">&para;</a></h2>
-<p>Use <code>synchdb_resume_engine()</code> SQL function to resume Debezium operation from a paused state. This function takes <code>connector name</code> as its only parameter, which can be found from the output of <code>synchdb_get_state()</code> view. The resumed Debezium runner engine will start the replication from the newly set offset value.</p>
-<p>For example:
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_resume_engine</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
-</code></pre></div></p>
+<p>Since we have transformation rule specifically for "FREE.DBZUSER.TEST_TABLE", this transformation will take precedence and transform it to 'MY_TEST_TABLE` as instructed. The letter casing strategy (lowercase) will not normalize it to lowercase.</p>
 
 
 
 
 
 
-
-  
-  
 
 
 
