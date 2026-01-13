@@ -1678,34 +1678,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/configure_olr.md" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Openlog Replicator 设置
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../zh/user-guide/configure_snapshot_engine/" class="md-nav__link">
         
   
@@ -2232,7 +2204,7 @@
   <a href="#zh-user-guide-configure_snapshot_engine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6.9 配置快照引擎
+        6.8 配置快照引擎
       
     </span>
   </a>
@@ -4297,19 +4269,20 @@ please<span class="w"> </span><span class="k">select</span><span class="w"> </sp
 <span class="w">         </span><span class="m">4</span><span class="o">)</span><span class="w"> </span>synchdb<span class="w"> </span>+<span class="w"> </span>oracle23ai
 <span class="w">         </span><span class="m">5</span><span class="o">)</span><span class="w"> </span>synchdb<span class="w"> </span>+<span class="w"> </span>oracle19c
 <span class="w">         </span><span class="m">6</span><span class="o">)</span><span class="w"> </span>synchdb<span class="w"> </span>+<span class="w"> </span>olr<span class="o">(</span>oracle19c<span class="o">)</span>
-<span class="w">         </span><span class="m">7</span><span class="o">)</span><span class="w"> </span>synchdb<span class="w"> </span>+<span class="w"> </span>all<span class="w"> </span><span class="nb">source</span><span class="w"> </span>databases
-<span class="w">         </span><span class="m">8</span><span class="o">)</span><span class="w"> </span>custom<span class="w"> </span>deployment
-<span class="w">         </span><span class="m">9</span><span class="o">)</span><span class="w"> </span>deploy<span class="w"> </span>monitoring
-<span class="w">        </span><span class="m">10</span><span class="o">)</span><span class="w"> </span>teardown<span class="w"> </span>deployment
+<span class="w">         </span><span class="m">7</span><span class="o">)</span><span class="w"> </span>synchdb<span class="w"> </span>+<span class="w"> </span>postgres18
+<span class="w">         </span><span class="m">8</span><span class="o">)</span><span class="w"> </span>synchdb<span class="w"> </span>+<span class="w"> </span>all<span class="w"> </span><span class="nb">source</span><span class="w"> </span>databases
+<span class="w">         </span><span class="m">9</span><span class="o">)</span><span class="w"> </span>custom<span class="w"> </span>deployment
+<span class="w">        </span><span class="m">10</span><span class="o">)</span><span class="w"> </span>deploy<span class="w"> </span>monitoring
+<span class="w">        </span><span class="m">11</span><span class="o">)</span><span class="w"> </span>teardown<span class="w"> </span>deployment
 enter<span class="w"> </span>your<span class="w"> </span>selection:
 </code></pre></div>
 <ul>
 <li>仅对于 synchdb 部署，请使用选项 <code>1)</code>。</li>
 <li>对于 synchdb + 1 个源数据库，请使用选项 <code>2)</code> 至 <code>6)</code>。</li>
-<li>对于 synchdb + 所有源数据库，请使用选项 <code>7)</code>。</li>
-<li>对于 synchdb + 自定义源数据库，请使用选项 <code>8)</code>。</li>
-<li>对于 prometheus 和 grafana 监控部署，请使用选项 <code>9)</code>。</li>
-<li>要拆除所有部署，请使用选项 <code>10)</code>。</li>
+<li>对于 synchdb + 所有源数据库，请使用选项 <code>8)</code>。</li>
+<li>对于 synchdb + 自定义源数据库，请使用选项 <code>9)</code>。</li>
+<li>对于 prometheus 和 grafana 监控部署，请使用选项 <code>10)</code>。</li>
+<li>要拆除所有部署，请使用选项 <code>11)</code>。</li>
 </ul>
 <h2 id="zh-getting-started-quick_start-_2"><strong>测试源数据库访问详情</strong><a class="headerlink" href="#zh-getting-started-quick_start-_2" title="Permanent link">&para;</a></h2>
 <p><strong>MySQL:</strong></p>
@@ -4343,6 +4316,13 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <p><strong>Openlog Replicator (OLR)：</strong></p>
 <ul>
 <li>服务名称：ORACLE</li>
+</ul>
+<p><strong>Postgres:</strong></p>
+<ul>
+<li>数据库：postgres</li>
+<li>模式：public</li>
+<li>用户: postgres</li>
+<li>密码: pass</li>
 </ul>
 <h2 id="zh-getting-started-quick_start-psql-synchdb"><strong>使用 psql 访问 Synchdb</strong><a class="headerlink" href="#zh-getting-started-quick_start-psql-synchdb" title="Permanent link">&para;</a></h2>
 <p>部署完成后，可以通过以下方式访问 synchdb：</p>
@@ -4418,15 +4398,27 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <span class="w">                                </span><span class="mi">7070</span><span class="p">,</span>
 <span class="w">                                </span><span class="s1">&#39;ORACLE&#39;</span><span class="p">);</span>
 </code></pre></div></p>
+<p><strong>Postgres:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span><span class="s1">&#39;postgresconn&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="mi">5432</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;pass&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;public&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;null&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;null&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;postgres&#39;</span><span class="p">);</span>
+</code></pre></div></p>
 <p><strong>查看已创建的连接器：</strong></p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_conninfo</span><span class="p">;</span>
 </code></pre></div>
 <p>有关创建连接器的更多详细信息，请参阅<a href="#zh-user-guide-create_a_connector">此处</a></p>
 <h2 id="zh-getting-started-quick_start-_4"><strong>创建对象映射</strong><a class="headerlink" href="#zh-getting-started-quick_start-_4" title="Permanent link">&para;</a></h2>
 <p>默认情况下，源数据库名称将映射到目标数据库中的架构名称。可以使用对象映射来更改此架构名称。让我们从基于 Oracle 的连接器中更改“orders”表的目标架构，其余部分保留默认值。</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;free.c##dbzuser.orders&#39;</span><span class="p">,</span><span class="s1">&#39;oracle23ai.orders&#39;</span><span class="p">);</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;ora19cconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;free.dbzuser.orders&#39;</span><span class="p">,</span><span class="s1">&#39;oracle19c.orders&#39;</span><span class="p">);</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;free.dbzuser.orders&#39;</span><span class="p">,</span><span class="s1">&#39;olr.orders&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;FREE.C##DBZUSER.ORDERS&#39;</span><span class="p">,</span><span class="s1">&#39;oracle23ai.orders&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;ora19cconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;FREE.DBZUSER.ORDERS&#39;</span><span class="p">,</span><span class="s1">&#39;oracle19c.orders&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;FREE.DBZUSER.ORDERS&#39;</span><span class="p">,</span><span class="s1">&#39;olr.orders&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>有关创建对象映射的更多详细信息，请参见<a href="#zh-user-guide-object_mapping_rules">此处</a></p>
 <h2 id="zh-getting-started-quick_start-jmx-"><strong>创建 JMX 导出器 - 可选</strong><a class="headerlink" href="#zh-getting-started-quick_start-jmx-" title="Permanent link">&para;</a></h2>
@@ -4459,25 +4451,80 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <span class="w">                            </span><span class="mi">9407</span><span class="p">,</span>
 <span class="w">                            </span><span class="s1">&#39;/home/ubuntu/jmxexport.conf&#39;</span><span class="p">);</span>
 </code></pre></div></p>
+<p><strong>Postgres:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_jmx_exporter_conninfo</span><span class="p">(</span>
+<span class="w">                            </span><span class="s1">&#39;postgresconn&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;/home/ubuntu/jmx_prometheus_javaagent-1.3.0.jar&#39;</span><span class="p">,</span>
+<span class="w">                            </span><span class="mi">9408</span><span class="p">,</span>
+<span class="w">                            </span><span class="s1">&#39;/home/ubuntu/jmxexport.conf&#39;</span><span class="p">);</span>
+</code></pre></div></p>
 <p>关于创建 JMX Exporter 的更多详细信息，请参见<a href="#zh-monitoring-jmx_exporter">此处</a></p>
-<h2 id="zh-getting-started-quick_start-_5"><strong>启动连接器</strong><a class="headerlink" href="#zh-getting-started-quick_start-_5" title="Permanent link">&para;</a></h2>
+<h2 id="zh-getting-started-quick_start--debezium"><strong>启动连接器 - 默认 debezium 快照引擎</strong><a class="headerlink" href="#zh-getting-started-quick_start--debezium" title="Permanent link">&para;</a></h2>
 <p><strong>MySQL:</strong>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">synchdb</span><span class="p">.</span><span class="n">snapshot_engine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;debezium&#39;</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">pg_reload_conf</span><span class="p">();</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
 </code></pre></div></p>
 <p><strong>Sqlserver:</strong>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">synchdb</span><span class="p">.</span><span class="n">snapshot_engine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;debezium&#39;</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">pg_reload_conf</span><span class="p">();</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">);</span>
 </code></pre></div></p>
 <p><strong>Oracle23ai:</strong>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">synchdb</span><span class="p">.</span><span class="n">snapshot_engine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;debezium&#39;</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">pg_reload_conf</span><span class="p">();</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">);</span>
 </code></pre></div></p>
 <p><strong>Oracle19c:</strong>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;ora19cconn&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">synchdb</span><span class="p">.</span><span class="n">snapshot_engine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;debezium&#39;</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">pg_reload_conf</span><span class="p">();</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;ora19cconn&#39;</span><span class="p">);</span>
 </code></pre></div></p>
 <p><strong>OLR(Oracle19c):</strong>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">synchdb</span><span class="p">.</span><span class="n">snapshot_engine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;debezium&#39;</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">pg_reload_conf</span><span class="p">();</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<p><strong>Postgres:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Requires user to pre-create schemas and tables:</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">SCHEMA</span><span class="w"> </span><span class="n">postgres</span><span class="p">;</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">orders</span><span class="w"> </span><span class="p">(</span><span class="n">order_number</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span><span class="w"> </span><span class="n">order_date</span><span class="w"> </span><span class="k">TIMESTAMP</span><span class="w"> </span><span class="k">WITHOUT</span><span class="w"> </span><span class="k">TIME</span><span class="w"> </span><span class="k">ZONE</span><span class="p">,</span><span class="w"> </span><span class="n">purchaser</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="w"> </span><span class="n">quantity</span><span class="w"> </span><span class="nb">INT</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">product_id</span><span class="w"> </span><span class="nb">INT</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;postgresconn&#39;</span><span class="p">);</span>
 </code></pre></div></p>
 <p>有关连接器启动的更多详细信息，请参见<a href="#zh-user-guide-start_stop_connector">此处</a></p>
-<h2 id="zh-getting-started-quick_start-_6"><strong>检查连接器运行状态</strong><a class="headerlink" href="#zh-getting-started-quick_start-_6" title="Permanent link">&para;</a></h2>
+<h2 id="zh-getting-started-quick_start--fdw"><strong>启动连接器 - 使用 fdw 快照引擎</strong><a class="headerlink" href="#zh-getting-started-quick_start--fdw" title="Permanent link">&para;</a></h2>
+<p><strong>MySQL:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">synchdb</span><span class="p">.</span><span class="n">snapshot_engine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;fdw&#39;</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">pg_reload_conf</span><span class="p">();</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<p><strong>Sqlserver:</strong>
+<div class="highlight"><pre><span></span><code><span class="c1">-- not supported yet. Connector will default to debezium when started</span>
+<span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">synchdb</span><span class="p">.</span><span class="n">snapshot_engine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;fdw&#39;</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">pg_reload_conf</span><span class="p">();</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<p><strong>Oracle23ai:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">synchdb</span><span class="p">.</span><span class="n">snapshot_engine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;fdw&#39;</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">pg_reload_conf</span><span class="p">();</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<p><strong>Oracle19c:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">synchdb</span><span class="p">.</span><span class="n">snapshot_engine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;fdw&#39;</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">pg_reload_conf</span><span class="p">();</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;ora19cconn&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<p><strong>OLR(Oracle19c):</strong>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">synchdb</span><span class="p">.</span><span class="n">snapshot_engine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;fdw&#39;</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">pg_reload_conf</span><span class="p">();</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<p><strong>Postgres:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">ALTER</span><span class="w"> </span><span class="k">SYSTEM</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">synchdb</span><span class="p">.</span><span class="n">snapshot_engine</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;fdw&#39;</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">pg_reload_conf</span><span class="p">();</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;postgresconn&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<h2 id="zh-getting-started-quick_start-_5"><strong>检查连接器运行状态</strong><a class="headerlink" href="#zh-getting-started-quick_start-_5" title="Permanent link">&para;</a></h2>
 <p>使用“synchdb_state_view()”检查所有连接器的运行状态。</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="p">;</span>
 </code></pre></div>
@@ -4487,17 +4534,16 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <span class="c1">---------------+----------------+--------+------------------+---------+----------+------------------------------------------------------------------------------------------------------</span>
 <span class="w"> </span><span class="n">sqlserverconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">sqlserver</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="mi">579820</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="n">snapshot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;commit_lsn&quot;</span><span class="p">:</span><span class="ss">&quot;0000006a:00006608:0003&quot;</span><span class="p">,</span><span class="ss">&quot;snapshot&quot;</span><span class="p">:</span><span class="k">true</span><span class="p">,</span><span class="ss">&quot;snapshot_completed&quot;</span><span class="p">:</span><span class="k">false</span><span class="err">}</span>
 <span class="w"> </span><span class="n">mysqlconn</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="mi">579845</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="n">snapshot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;ts_sec&quot;</span><span class="p">:</span><span class="mi">1741301103</span><span class="p">,</span><span class="ss">&quot;file&quot;</span><span class="p">:</span><span class="ss">&quot;mysql-bin.000009&quot;</span><span class="p">,</span><span class="ss">&quot;pos&quot;</span><span class="p">:</span><span class="mi">574318212</span><span class="p">,</span><span class="ss">&quot;row&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="ss">&quot;server_id&quot;</span><span class="p">:</span><span class="mi">223344</span><span class="p">,</span><span class="ss">&quot;event&quot;</span><span class="p">:</span><span class="mi">2</span><span class="err">}</span>
-<span class="w"> </span><span class="n">oracleconn</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="mi">580053</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="n">snapshot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">offset</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">flushed</span><span class="w"> </span><span class="n">yet</span>
-<span class="w"> </span><span class="n">ora19cconn</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="mi">593421</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="n">snapshot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">offset</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">flushed</span><span class="w"> </span><span class="n">yet</span>
-<span class="w"> </span><span class="n">olrconn</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="mi">601235</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="n">snapshot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">offset</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">flushed</span><span class="w"> </span><span class="n">yet</span>
-<span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
+<span class="w"> </span><span class="n">oracleconn</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="mi">580053</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="n">snapshot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;commit_scn&quot;</span><span class="p">:</span><span class="ss">&quot;3118146:1:02001f00c0020000&quot;</span><span class="p">,</span><span class="ss">&quot;snapshot_scn&quot;</span><span class="p">:</span><span class="ss">&quot;3081987&quot;</span><span class="p">,</span><span class="ss">&quot;scn&quot;</span><span class="p">:</span><span class="ss">&quot;3118125&quot;</span><span class="err">}</span>
+<span class="w"> </span><span class="n">ora19cconn</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="mi">593421</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="n">snapshot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;commit_scn&quot;</span><span class="p">:</span><span class="ss">&quot;3118146:1:02001f00c0020000&quot;</span><span class="p">,</span><span class="ss">&quot;snapshot_scn&quot;</span><span class="p">:</span><span class="ss">&quot;3081987&quot;</span><span class="p">,</span><span class="ss">&quot;scn&quot;</span><span class="p">:</span><span class="ss">&quot;3118125&quot;</span><span class="err">}</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="mi">601235</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="n">snapshot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;scn&quot;</span><span class="p">:</span><span class="mi">5031082</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;c_scn&quot;</span><span class="p">:</span><span class="mi">5031085</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;c_idx&quot;</span><span class="p">:</span><span class="mi">3</span><span class="err">}</span>
+<span class="w"> </span><span class="n">postgresconn</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">postgres</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="mi">631565</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="n">snapshot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;lsn_proc&quot;</span><span class="p">:</span><span class="mi">37396384</span><span class="p">,</span><span class="ss">&quot;messageType&quot;</span><span class="p">:</span><span class="ss">&quot;INSERT&quot;</span><span class="p">,</span><span class="ss">&quot;lsn&quot;</span><span class="p">:</span><span class="mi">37396384</span><span class="p">,</span><span class="ss">&quot;txId&quot;</span><span class="p">:</span><span class="mi">1015</span><span class="p">,</span><span class="ss">&quot;ts_usec&quot;</span><span class="p">:</span><span class="mi">1767740340957961</span><span class="err">}</span>
+<span class="p">(</span><span class="mi">6</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
 </code></pre></div></p>
 <p>有关运行状态的更多信息，请参见<a href="#zh-monitoring-state_view">此处</a>，以及运行统计信息，请参见<a href="#zh-monitoring-stats_view">此处</a>。</p>
-<h2 id="zh-getting-started-quick_start-_7">检查初始快照中的表和数据<a class="headerlink" href="#zh-getting-started-quick_start-_7" title="Permanent link">&para;</a></h2>
+<h2 id="zh-getting-started-quick_start-_6">检查初始快照中的表和数据<a class="headerlink" href="#zh-getting-started-quick_start-_6" title="Permanent link">&para;</a></h2>
 <p>默认情况下，连接器将执行“初始”快照，以捕获表模式和初始数据，然后转换并将它们应用到不同“模式”下的 PostgreSQL。您应该看到类似以下内容：</p>
 <p><strong>MySQL:</strong>
-<div class="highlight"><pre><span></span><code><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="o">*</span>
-</code></pre></div></p>
 <div class="highlight"><pre><span></span><code><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="n">inventory</span><span class="p">.</span><span class="o">*</span>
 <span class="w">               </span><span class="n">List</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">relations</span>
 <span class="w">  </span><span class="k">Schema</span><span class="w">   </span><span class="o">|</span><span class="w">       </span><span class="n">Name</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="k">Type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Owner</span>
@@ -4509,10 +4555,8 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 <span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">products_on_hand</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 <span class="p">(</span><span class="mi">6</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
-</code></pre></div>
-<p><strong>Sqlserver:</strong>
-<div class="highlight"><pre><span></span><code><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="o">*</span>
 </code></pre></div></p>
+<p><strong>Sqlserver:</strong>
 <div class="highlight"><pre><span></span><code><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="n">testdb</span><span class="p">.</span><span class="o">*</span>
 <span class="w">             </span><span class="n">List</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">relations</span>
 <span class="w"> </span><span class="k">Schema</span><span class="w"> </span><span class="o">|</span><span class="w">       </span><span class="n">Name</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="k">Type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Owner</span>
@@ -4522,37 +4566,39 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <span class="w"> </span><span class="n">testdb</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">products</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 <span class="w"> </span><span class="n">testdb</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">products_on_hand</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 <span class="p">(</span><span class="mi">4</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
-</code></pre></div>
-<p><strong>Oracle23ai</strong>
-<div class="highlight"><pre><span></span><code><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="n">oracle23ai</span><span class="p">.</span><span class="o">*</span>
 </code></pre></div></p>
+<p><strong>Oracle23ai</strong>
 <div class="highlight"><pre><span></span><code><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="n">oracle23ai</span><span class="p">.</span><span class="o">*</span>
 <span class="w">          </span><span class="n">List</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">relations</span>
 <span class="w">   </span><span class="k">Schema</span><span class="w">   </span><span class="o">|</span><span class="w">  </span><span class="n">Name</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Owner</span>
 <span class="c1">------------+--------+-------+--------</span>
 <span class="w"> </span><span class="n">oracle23ai</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 <span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="p">)</span>
-</code></pre></div>
-<p><strong>Oracle19c</strong>
-<div class="highlight"><pre><span></span><code><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="n">oracle19c</span><span class="p">.</span><span class="o">*</span>
 </code></pre></div></p>
+<p><strong>Oracle19c</strong>
 <div class="highlight"><pre><span></span><code><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="n">oracle19c</span><span class="p">.</span><span class="o">*</span>
 <span class="w">          </span><span class="n">List</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">relations</span>
 <span class="w">  </span><span class="k">Schema</span><span class="w">   </span><span class="o">|</span><span class="w">  </span><span class="n">Name</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Owner</span>
 <span class="c1">-----------+--------+-------+--------</span>
 <span class="w"> </span><span class="n">oracle19c</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 <span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="p">)</span>
-</code></pre></div>
-<p><strong>OLR</strong>
-<div class="highlight"><pre><span></span><code><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="n">olr</span><span class="p">.</span><span class="o">*</span>
 </code></pre></div></p>
+<p><strong>OLR</strong>
 <div class="highlight"><pre><span></span><code><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="n">olr</span><span class="p">.</span><span class="o">*</span>
 <span class="w">        </span><span class="n">List</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">relations</span>
 <span class="w"> </span><span class="k">Schema</span><span class="w"> </span><span class="o">|</span><span class="w">  </span><span class="n">Name</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Owner</span>
 <span class="c1">--------+--------+-------+--------</span>
 <span class="w"> </span><span class="n">olr</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 <span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="p">)</span>
-</code></pre></div>
+</code></pre></div></p>
+<p><strong>Postgres</strong>
+<div class="highlight"><pre><span></span><code><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="o">*</span>
+<span class="w">          </span><span class="n">List</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">relations</span>
+<span class="w">  </span><span class="k">Schema</span><span class="w">  </span><span class="o">|</span><span class="w">  </span><span class="n">Name</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Owner</span>
+<span class="c1">----------+--------+-------+--------</span>
+<span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
+<span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="p">)</span>
+</code></pre></div></p>
 <h2 id="zh-getting-started-quick_start-insert-cdc">模拟 INSERT 事件并观察变更数据捕获 (CDC)<a class="headerlink" href="#zh-getting-started-quick_start-insert-cdc" title="Permanent link">&para;</a></h2>
 <p>我们可以使用 <code>docker exec</code> 为每种连接器类型模拟一次 INSERT 操作，并观察变更数据捕获 (CDC)。</p>
 <p><strong>MySQL:</strong>
@@ -4620,6 +4666,19 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <span class="w">        </span><span class="mi">10005</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">2025</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">12</span><span class="w"> </span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1002</span><span class="w"> </span><span class="o">|</span><span class="w">    </span><span class="mi">10000</span><span class="w"> </span><span class="o">|</span><span class="w">        </span><span class="mi">102</span>
 <span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
 </code></pre></div>
+<p><strong>Postgres:</strong>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span>postgres<span class="w"> </span>psql<span class="w"> </span>-U<span class="w"> </span>postgres<span class="w"> </span>-d<span class="w"> </span>postgres<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;INSERT INTO orders(order_number, order_date, purchaser, quantity, product_id) VALUES (10005, &#39;2026-01-01&#39;, 1003, 10000, 102)&quot;</span>
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">postgres</span><span class="p">.</span><span class="n">orders</span><span class="p">;</span>
+<span class="w"> </span><span class="n">order_number</span><span class="w"> </span><span class="o">|</span><span class="w">     </span><span class="n">order_date</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="n">purchaser</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span>
+<span class="c1">--------------+---------------------+-----------+----------+------------</span>
+<span class="w">        </span><span class="mi">10001</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">2024</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span><span class="w"> </span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1003</span><span class="w"> </span><span class="o">|</span><span class="w">        </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w">        </span><span class="mi">107</span>
+<span class="w">        </span><span class="mi">10002</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">2024</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span><span class="w"> </span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1003</span><span class="w"> </span><span class="o">|</span><span class="w">        </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w">        </span><span class="mi">107</span>
+<span class="w">        </span><span class="mi">10003</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">2024</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span><span class="w"> </span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1003</span><span class="w"> </span><span class="o">|</span><span class="w">        </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w">        </span><span class="mi">107</span>
+<span class="w">        </span><span class="mi">10004</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">2024</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span><span class="w"> </span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1003</span><span class="w"> </span><span class="o">|</span><span class="w">        </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w">        </span><span class="mi">107</span>
+<span class="w">        </span><span class="mi">10005</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">2026</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span><span class="w"> </span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1003</span><span class="w"> </span><span class="o">|</span><span class="w">    </span><span class="mi">10000</span><span class="w"> </span><span class="o">|</span><span class="w">        </span><span class="mi">102</span>
+<span class="p">(</span><span class="mi">5</span><span class="w"> </span><span class="k">rows</span><span class="p">)</span>
+</code></pre></div>
 <h2 id="zh-getting-started-quick_start-grafana-">Grafana 上的连接器指标 - 可选<a class="headerlink" href="#zh-getting-started-quick_start-grafana-" title="Permanent link">&para;</a></h2>
 <p><img alt="img" src="../images/grafana-home.jpg" /></p>
 <p>如果您选择使用 <code>ezdeploy.sh</code> 部署监控，并在启动连接器之前调用了可选的 <code>synchdb_add_jmx_exporter_conninfo()</code>，则连接器指标将在 Grafana 上可用。</p>
@@ -4647,7 +4706,7 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <img alt="img" src="../images/grafana-sqlserver.jpg" /></p>
 <p><strong>Oracle 仪表板：</strong>
 <img alt="img" src="../images/grafana-oracle.jpg" /></p>
-<h2 id="zh-getting-started-quick_start-_8"><strong>停止并移除连接器</strong><a class="headerlink" href="#zh-getting-started-quick_start-_8" title="Permanent link">&para;</a></h2>
+<h2 id="zh-getting-started-quick_start-_7"><strong>停止并移除连接器</strong><a class="headerlink" href="#zh-getting-started-quick_start-_7" title="Permanent link">&para;</a></h2>
 <p><strong>MySQL:</strong>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_stop_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_del_conninfo</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
@@ -4667,6 +4726,10 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <p><strong>OLR(Oracle19c):</strong>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_stop_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">);</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_del_conninfo</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<p><strong>Postgres</strong>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_stop_engine_bgw</span><span class="p">(</span><span class="s1">&#39;postgresconn&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_del_conninfo</span><span class="p">(</span><span class="s1">&#39;postgresconn&#39;</span><span class="p">);</span>
 </code></pre></div></p></section></section>
                     <section class='print-page md-section' id='section-4' heading-number='4'>
                         <h1>监控<a class='headerlink' href='#section-4' title='Permanent link'></a>
@@ -7609,7 +7672,7 @@ synchdb.synchdb_auto_launcher = true
 <span class="w"> </span><span class="n">mysqlconn</span><span class="w"> </span><span class="o">|</span><span class="w">  </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">Connector</span><span class="w"> </span><span class="n">configuration</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">valid</span><span class="p">.</span><span class="w"> </span><span class="n">Unable</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">connect</span><span class="p">:</span><span class="w"> </span><span class="n">Communications</span><span class="w"> </span><span class="n">link</span><span class="w"> </span><span class="n">failure</span><span class="w">  </span><span class="n">The</span><span class="w"> </span><span class="k">last</span><span class="w"> </span><span class="n">packet</span><span class="w"> </span><span class="n">sent</span><span class="w"> </span><span class="n">successfully</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">server</span><span class="w"> </span><span class="n">was</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">milliseconds</span><span class="w"> </span><span class="n">ago</span><span class="p">.</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">driver</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">received</span><span class="w"> </span><span class="k">any</span><span class="w"> </span><span class="n">packets</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">server</span><span class="p">.</span>
 <span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="p">)</span>
 </code></pre></div>
-<p>如果在处理 JSON 事件时发生错误，并且 GUC 参数 <code>synchdb.log_change_on_error</code> 设置为 true，SynchDB 还会在 PostgreSQL 日志文件中输出导致错误的 JSON 变化事件，以便进行故障排除。</p></section><section class="print-page" id="zh-user-guide-configure_snapshot_engine" heading-number="6.9"><h1 id="zh-user-guide-configure_snapshot_engine-_1">設定快照引擎<a class="headerlink" href="#zh-user-guide-configure_snapshot_engine-_1" title="Permanent link">&para;</a></h1>
+<p>如果在处理 JSON 事件时发生错误，并且 GUC 参数 <code>synchdb.log_change_on_error</code> 设置为 true，SynchDB 还会在 PostgreSQL 日志文件中输出导致错误的 JSON 变化事件，以便进行故障排除。</p></section><section class="print-page" id="zh-user-guide-configure_snapshot_engine" heading-number="6.8"><h1 id="zh-user-guide-configure_snapshot_engine-_1">設定快照引擎<a class="headerlink" href="#zh-user-guide-configure_snapshot_engine-_1" title="Permanent link">&para;</a></h1>
 <h2 id="zh-user-guide-configure_snapshot_engine-cdc"><strong>初始快照與變更資料擷取 (CDC)</strong><a class="headerlink" href="#zh-user-guide-configure_snapshot_engine-cdc" title="Permanent link">&para;</a></h2>
 <p>初始快照是指將表格結構和初始資料從遠端資料庫遷移到 SynchDB 的過程。對於大多數連接器類型，此程序僅在首次啟動連接器時透過嵌入式 Debezium 運行器執行一次，因為只有 Debezium 運行器才能執行初始快照。初始快照完成後，變更資料擷取將開始向 SynchDB 即時傳輸變更。 「快照模式」可以進一步控制初始快照和 CDC 的行為。有關更多信息，請參閱<a href="#zh-user-guide-start_stop_connector">此處</a>。</p>
 <p>SynchDB 支援兩種快照引擎，每種引擎支援多種連接器類型：</p>
@@ -8093,9 +8156,9 @@ sudo<span class="w"> </span>make<span class="w"> </span>install
                 .print-site-enumerate-headings #zh-user-guide-configure_error_strategies h2:before { content: '6.7.' counter(counter-zh-user-guide-configure_error_strategies-2) ' ' }
                 .print-site-enumerate-headings #zh-user-guide-configure_error_strategies h2 {  counter-increment: counter-zh-user-guide-configure_error_strategies-2 }
             
-.print-site-enumerate-headings #zh-user-guide-configure_snapshot_engine > h1:before { content: '6.9 ' }
+.print-site-enumerate-headings #zh-user-guide-configure_snapshot_engine > h1:before { content: '6.8 ' }
 
-                .print-site-enumerate-headings #zh-user-guide-configure_snapshot_engine h2:before { content: '6.9.' counter(counter-zh-user-guide-configure_snapshot_engine-2) ' ' }
+                .print-site-enumerate-headings #zh-user-guide-configure_snapshot_engine h2:before { content: '6.8.' counter(counter-zh-user-guide-configure_snapshot_engine-2) ' ' }
                 .print-site-enumerate-headings #zh-user-guide-configure_snapshot_engine h2 {  counter-increment: counter-zh-user-guide-configure_snapshot_engine-2 }
             
 .print-site-enumerate-headings #zh-changelog > h1:before { content: '7 ' }
