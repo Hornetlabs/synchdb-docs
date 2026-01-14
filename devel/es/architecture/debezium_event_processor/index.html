@@ -2358,7 +2358,7 @@
 <h3 id="10-spi-client"><strong>10) SPI Client</strong><a class="headerlink" href="#10-spi-client" title="Permanent link">&para;</a></h3>
 <p>the SPI Client component exists under the Replication Agent, which serves as a bridge between PostgreSQL core and SynchDB. It is responsible for establishing a connection to SPI server, start a transaction, obtain a snapshot and execute a given SQL query created by the <code>DDL Converter</code> and destroy the connection. For each query to process, the SPI connection is created and destroyed, which may seem inefficient. Since the SPI is only used during DDL, which is normally not very frequent, it should be fine in terms of performance.</p>
 <h3 id="11-executor-apis"><strong>11) Executor APIs</strong><a class="headerlink" href="#11-executor-apis" title="Permanent link">&para;</a></h3>
-<p>Also residing in the Replication Agent. This component is responsible for initialize a executor context, open the table, acquire proper locks, create TupleTableSlot (TTS) from the output of DML Converter, call the executor API to execute INSERT, UPDATE, DELETE operations and do resource cleanup. This is generally a much faster approach to do data operations than SPI because it does not need to parse an input query string likst SPI does.</p>
+<p>Also residing in the Replication Agent. This component is responsible for initialize a executor context, open the table, acquire proper locks, create TupleTableSlot (TTS) from the output of DML Converter, call the executor API to execute INSERT, UPDATE, DELETE operations and do resource cleanup. This is generally a much faster approach to do data operations than SPI because it does not need to parse an input query string like SPI does.</p>
 
 
 

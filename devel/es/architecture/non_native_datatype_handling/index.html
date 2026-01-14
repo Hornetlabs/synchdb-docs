@@ -1851,7 +1851,7 @@
 
 <h1 id="none-native-data-type-handling">None-native Data Type Handling<a class="headerlink" href="#none-native-data-type-handling" title="Permanent link">&para;</a></h1>
 <h2 id="handling-non-native-data-types"><strong>Handling Non-Native Data Types</strong><a class="headerlink" href="#handling-non-native-data-types" title="Permanent link">&para;</a></h2>
-<p>It is possible that a table contains a column data type that is custom created by the user or created by another installed extension. In this case, it cannot be processed using tradition native data type handling becasue the type is most likely not supported natively. Instead, the DML Converter accesses the catalog, obtains the OID of the non-native data type, and looks up its "category" as defined in PostgreSQL. Below is a list of category supported by PostgreSQL as of version 17:</p>
+<p>It is possible that a table contains a column data type that is custom created by the user or created by another installed extension. In this case, it cannot be processed using tradition native data type handling because the type is most likely not supported natively. Instead, the DML Converter accesses the catalog, obtains the OID of the non-native data type, and looks up its "category" as defined in PostgreSQL. Below is a list of category supported by PostgreSQL as of version 17:</p>
 <div class="highlight"><pre><span></span><code>#define  TYPCATEGORY_INVALID    &#39;\0&#39;
 #define  TYPCATEGORY_ARRAY      &#39;A&#39;
 #define  TYPCATEGORY_BOOLEAN    &#39;B&#39;

@@ -2462,7 +2462,7 @@ enter<span class="w"> </span>your<span class="w"> </span>selection:
 <span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="k">row</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="simulate-an-insert-event-and-observe-cdc">Simulate an INSERT Event and Observe CDC<a class="headerlink" href="#simulate-an-insert-event-and-observe-cdc" title="Permanent link">&para;</a></h2>
-<p>We can use <code>docker exec</code> to similate an INSERT for each connector type and observe the Change Data Capture (CDC).</p>
+<p>We can use <code>docker exec</code> to simulate an INSERT for each connector type and observe the Change Data Capture (CDC).</p>
 <p><strong>MySQL:</strong>
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-i<span class="w"> </span>mysql<span class="w"> </span>mysql<span class="w"> </span>-D<span class="w"> </span>inventory<span class="w"> </span>-umysqluser<span class="w"> </span>-pmysqlpwd<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;INSERT INTO orders(order_date, purchaser, quantity, product_id) VALUES (&#39;2025-12-12&#39;, 1002, 10000, 102)&quot;</span>
 </code></pre></div></p>

@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
         <loc>https://docs.synchdb.com/latest/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/"/>
@@ -10,7 +10,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/changelog/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/changelog/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/changelog/"/>
@@ -18,7 +18,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/architecture/architecture/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/architecture/architecture/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/architecture/architecture/"/>
@@ -26,7 +26,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/architecture/batch_change_handling/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/architecture/batch_change_handling/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/architecture/batch_change_handling/"/>
@@ -34,7 +34,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/architecture/ddl_replication/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/architecture/ddl_replication/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/architecture/ddl_replication/"/>
@@ -42,7 +42,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/architecture/debezium_event_processor/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/architecture/debezium_event_processor/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/architecture/debezium_event_processor/"/>
@@ -50,7 +50,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/architecture/debezium_runner_components/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/architecture/debezium_runner_components/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/architecture/debezium_runner_components/"/>
@@ -58,7 +58,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/architecture/fdw_based_snapshot/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/architecture/fdw_based_snapshot/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/architecture/fdw_based_snapshot/"/>
@@ -66,7 +66,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/architecture/metadata_files/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/architecture/metadata_files/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/architecture/metadata_files/"/>
@@ -74,7 +74,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/architecture/native_datatype_handling/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/architecture/native_datatype_handling/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/architecture/native_datatype_handling/"/>
@@ -82,7 +82,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/architecture/non_native_datatype_handling/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/architecture/non_native_datatype_handling/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/architecture/non_native_datatype_handling/"/>
@@ -90,7 +90,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/architecture/openlog_replicator_event_processor/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/architecture/openlog_replicator_event_processor/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/architecture/openlog_replicator_event_processor/"/>
@@ -98,7 +98,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/getting-started/configuration/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/getting-started/configuration/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/getting-started/configuration/"/>
@@ -106,7 +106,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/getting-started/installation/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/getting-started/installation/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/getting-started/installation/"/>
@@ -114,7 +114,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/getting-started/prepare_tests_env/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/getting-started/prepare_tests_env/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/getting-started/prepare_tests_env/"/>
@@ -122,7 +122,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/getting-started/quick_start/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/getting-started/quick_start/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/getting-started/quick_start/"/>
@@ -130,7 +130,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/getting-started/remote_database_setups/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/getting-started/remote_database_setups/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/getting-started/remote_database_setups/"/>
@@ -138,7 +138,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/monitoring/attr_view/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/monitoring/attr_view/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/monitoring/attr_view/"/>
@@ -146,7 +146,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/monitoring/jmx_exporter/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/monitoring/jmx_exporter/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/monitoring/jmx_exporter/"/>
@@ -154,7 +154,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/monitoring/jmx_monitor/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/monitoring/jmx_monitor/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/monitoring/jmx_monitor/"/>
@@ -162,7 +162,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/monitoring/jvm_mem/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/monitoring/jvm_mem/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/monitoring/jvm_mem/"/>
@@ -170,7 +170,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/monitoring/state_view/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/monitoring/state_view/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/monitoring/state_view/"/>
@@ -178,7 +178,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/monitoring/stats_view/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/monitoring/stats_view/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/monitoring/stats_view/"/>
@@ -186,7 +186,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/tutorial/mysql_cdc_to_postgresql/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/tutorial/mysql_cdc_to_postgresql/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/tutorial/mysql_cdc_to_postgresql/"/>
@@ -194,7 +194,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/tutorial/native_olr_cdc_to_postgresql/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/tutorial/native_olr_cdc_to_postgresql/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/tutorial/native_olr_cdc_to_postgresql/"/>
@@ -202,7 +202,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/tutorial/oracle_cdc_to_postgresql/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/tutorial/oracle_cdc_to_postgresql/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/tutorial/oracle_cdc_to_postgresql/"/>
@@ -210,7 +210,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/tutorial/postgresql_cdc_to_postgresql/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/tutorial/postgresql_cdc_to_postgresql/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/tutorial/postgresql_cdc_to_postgresql/"/>
@@ -218,7 +218,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/tutorial/sqlserver_cdc_to_postgresql/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/tutorial/sqlserver_cdc_to_postgresql/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/tutorial/sqlserver_cdc_to_postgresql/"/>
@@ -226,7 +226,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/user-guide/configure_error_strategies/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/user-guide/configure_error_strategies/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/user-guide/configure_error_strategies/"/>
@@ -234,7 +234,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/user-guide/configure_snapshot_engine/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/user-guide/configure_snapshot_engine/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/user-guide/configure_snapshot_engine/"/>
@@ -242,7 +242,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/user-guide/connector_auto_launcher/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/user-guide/connector_auto_launcher/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/user-guide/connector_auto_launcher/"/>
@@ -250,7 +250,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/user-guide/create_a_connector/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/user-guide/create_a_connector/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/user-guide/create_a_connector/"/>
@@ -258,7 +258,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/user-guide/default_datatype_mapping/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/user-guide/default_datatype_mapping/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/user-guide/default_datatype_mapping/"/>
@@ -266,7 +266,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/user-guide/letter_casing_strategy/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/user-guide/letter_casing_strategy/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/user-guide/letter_casing_strategy/"/>
@@ -274,7 +274,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/user-guide/object_mapping_rules/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/user-guide/object_mapping_rules/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/user-guide/object_mapping_rules/"/>
@@ -282,7 +282,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/user-guide/start_stop_connector/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest/user-guide/start_stop_connector/"/>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latestes/user-guide/start_stop_connector/"/>
@@ -290,7 +290,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest"/>
@@ -298,7 +298,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/changelog/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/changelog/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestchangelog/"/>
@@ -306,7 +306,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/architecture/architecture/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/architecture/architecture/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestarchitecture/architecture/"/>
@@ -314,7 +314,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/architecture/batch_change_handling/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/architecture/batch_change_handling/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestarchitecture/batch_change_handling/"/>
@@ -322,7 +322,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/architecture/ddl_replication/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/architecture/ddl_replication/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestarchitecture/ddl_replication/"/>
@@ -330,7 +330,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/architecture/debezium_event_processor/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/architecture/debezium_event_processor/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestarchitecture/debezium_event_processor/"/>
@@ -338,7 +338,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/architecture/debezium_runner_components/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/architecture/debezium_runner_components/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestarchitecture/debezium_runner_components/"/>
@@ -346,7 +346,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/architecture/fdw_based_snapshot/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/architecture/fdw_based_snapshot/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestarchitecture/fdw_based_snapshot/"/>
@@ -354,7 +354,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/architecture/metadata_files/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/architecture/metadata_files/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestarchitecture/metadata_files/"/>
@@ -362,7 +362,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/architecture/native_datatype_handling/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/architecture/native_datatype_handling/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestarchitecture/native_datatype_handling/"/>
@@ -370,7 +370,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/architecture/non_native_datatype_handling/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/architecture/non_native_datatype_handling/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestarchitecture/non_native_datatype_handling/"/>
@@ -378,7 +378,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/architecture/openlog_replicator_event_processor/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/architecture/openlog_replicator_event_processor/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestarchitecture/openlog_replicator_event_processor/"/>
@@ -386,7 +386,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/getting-started/configuration/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/getting-started/configuration/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestgetting-started/configuration/"/>
@@ -394,7 +394,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/getting-started/installation/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/getting-started/installation/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestgetting-started/installation/"/>
@@ -402,7 +402,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/getting-started/prepare_tests_env/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/getting-started/prepare_tests_env/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestgetting-started/prepare_tests_env/"/>
@@ -410,7 +410,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/getting-started/quick_start/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/getting-started/quick_start/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestgetting-started/quick_start/"/>
@@ -418,7 +418,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/getting-started/remote_database_setups/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/getting-started/remote_database_setups/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestgetting-started/remote_database_setups/"/>
@@ -426,7 +426,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/monitoring/attr_view/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/monitoring/attr_view/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestmonitoring/attr_view/"/>
@@ -434,7 +434,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/monitoring/jmx_exporter/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/monitoring/jmx_exporter/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestmonitoring/jmx_exporter/"/>
@@ -442,7 +442,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/monitoring/jmx_monitor/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/monitoring/jmx_monitor/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestmonitoring/jmx_monitor/"/>
@@ -450,7 +450,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/monitoring/jvm_mem/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/monitoring/jvm_mem/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestmonitoring/jvm_mem/"/>
@@ -458,7 +458,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/monitoring/state_view/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/monitoring/state_view/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestmonitoring/state_view/"/>
@@ -466,7 +466,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/monitoring/stats_view/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/monitoring/stats_view/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestmonitoring/stats_view/"/>
@@ -474,7 +474,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/tutorial/mysql_cdc_to_postgresql/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/tutorial/mysql_cdc_to_postgresql/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latesttutorial/mysql_cdc_to_postgresql/"/>
@@ -482,7 +482,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/tutorial/native_olr_cdc_to_postgresql/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/tutorial/native_olr_cdc_to_postgresql/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latesttutorial/native_olr_cdc_to_postgresql/"/>
@@ -490,7 +490,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/tutorial/oracle_cdc_to_postgresql/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/tutorial/oracle_cdc_to_postgresql/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latesttutorial/oracle_cdc_to_postgresql/"/>
@@ -498,7 +498,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/tutorial/postgresql_cdc_to_postgresql/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/tutorial/postgresql_cdc_to_postgresql/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latesttutorial/postgresql_cdc_to_postgresql/"/>
@@ -506,7 +506,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/tutorial/sqlserver_cdc_to_postgresql/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/tutorial/sqlserver_cdc_to_postgresql/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latesttutorial/sqlserver_cdc_to_postgresql/"/>
@@ -514,7 +514,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/user-guide/configure_error_strategies/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/user-guide/configure_error_strategies/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestuser-guide/configure_error_strategies/"/>
@@ -522,7 +522,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/user-guide/configure_snapshot_engine/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/user-guide/configure_snapshot_engine/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestuser-guide/configure_snapshot_engine/"/>
@@ -530,7 +530,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/user-guide/connector_auto_launcher/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/user-guide/connector_auto_launcher/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestuser-guide/connector_auto_launcher/"/>
@@ -538,7 +538,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/user-guide/create_a_connector/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/user-guide/create_a_connector/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestuser-guide/create_a_connector/"/>
@@ -546,7 +546,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/user-guide/default_datatype_mapping/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/user-guide/default_datatype_mapping/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestuser-guide/default_datatype_mapping/"/>
@@ -554,7 +554,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/user-guide/letter_casing_strategy/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/user-guide/letter_casing_strategy/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestuser-guide/letter_casing_strategy/"/>
@@ -562,7 +562,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/user-guide/object_mapping_rules/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/user-guide/object_mapping_rules/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestuser-guide/object_mapping_rules/"/>
@@ -570,7 +570,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/user-guide/start_stop_connector/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/user-guide/start_stop_connector/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestuser-guide/start_stop_connector/"/>
@@ -578,61 +578,61 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/user-guide/configuration/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/user-guide/configuration/"/>
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/user-guide/ddl_replication/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/user-guide/ddl_replication/"/>
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/user-guide/installation/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/user-guide/installation/"/>
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/user-guide/prepare_tests_env/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/user-guide/prepare_tests_env/"/>
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/user-guide/quick_start/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/user-guide/quick_start/"/>
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/user-guide/selective_table_sync/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/user-guide/selective_table_sync/"/>
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/user-guide/set_offset/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/user-guide/set_offset/"/>
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/user-guide/transform_rule_file/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/user-guide/transform_rule_file/"/>
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/es/user-guide/utility_functions/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="es" href="https://docs.synchdb.com/latest/es/user-guide/utility_functions/"/>
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latest"/>
@@ -640,7 +640,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/changelog/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/changelog/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestchangelog/"/>
@@ -648,7 +648,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/architecture/architecture/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/architecture/architecture/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestarchitecture/architecture/"/>
@@ -656,7 +656,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/architecture/batch_change_handling/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/architecture/batch_change_handling/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestarchitecture/batch_change_handling/"/>
@@ -664,7 +664,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/architecture/ddl_replication/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/architecture/ddl_replication/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestarchitecture/ddl_replication/"/>
@@ -672,7 +672,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/architecture/debezium_event_processor/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/architecture/debezium_event_processor/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestarchitecture/debezium_event_processor/"/>
@@ -680,7 +680,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/architecture/debezium_runner_components/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/architecture/debezium_runner_components/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestarchitecture/debezium_runner_components/"/>
@@ -688,7 +688,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/architecture/fdw_based_snapshot/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/architecture/fdw_based_snapshot/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestarchitecture/fdw_based_snapshot/"/>
@@ -696,7 +696,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/architecture/metadata_files/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/architecture/metadata_files/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestarchitecture/metadata_files/"/>
@@ -704,7 +704,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/architecture/native_datatype_handling/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/architecture/native_datatype_handling/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestarchitecture/native_datatype_handling/"/>
@@ -712,7 +712,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/architecture/non_native_datatype_handling/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/architecture/non_native_datatype_handling/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestarchitecture/non_native_datatype_handling/"/>
@@ -720,7 +720,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/architecture/openlog_replicator_event_processor/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/architecture/openlog_replicator_event_processor/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestarchitecture/openlog_replicator_event_processor/"/>
@@ -728,7 +728,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/getting-started/configuration/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/getting-started/configuration/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestgetting-started/configuration/"/>
@@ -736,7 +736,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/getting-started/installation/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/getting-started/installation/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestgetting-started/installation/"/>
@@ -744,7 +744,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/getting-started/prepare_tests_env/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/getting-started/prepare_tests_env/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestgetting-started/prepare_tests_env/"/>
@@ -752,7 +752,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/getting-started/quick_start/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/getting-started/quick_start/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestgetting-started/quick_start/"/>
@@ -760,7 +760,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/getting-started/remote_database_setups/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/getting-started/remote_database_setups/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestgetting-started/remote_database_setups/"/>
@@ -768,7 +768,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/monitoring/attr_view/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/monitoring/attr_view/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestmonitoring/attr_view/"/>
@@ -776,7 +776,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/monitoring/jmx_exporter/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/monitoring/jmx_exporter/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestmonitoring/jmx_exporter/"/>
@@ -784,7 +784,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/monitoring/jmx_monitor/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/monitoring/jmx_monitor/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestmonitoring/jmx_monitor/"/>
@@ -792,7 +792,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/monitoring/jvm_mem/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/monitoring/jvm_mem/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestmonitoring/jvm_mem/"/>
@@ -800,7 +800,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/monitoring/state_view/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/monitoring/state_view/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestmonitoring/state_view/"/>
@@ -808,7 +808,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/monitoring/stats_view/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/monitoring/stats_view/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestmonitoring/stats_view/"/>
@@ -816,7 +816,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/tutorial/mysql_cdc_to_postgresql/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/tutorial/mysql_cdc_to_postgresql/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latesttutorial/mysql_cdc_to_postgresql/"/>
@@ -824,7 +824,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/tutorial/native_olr_cdc_to_postgresql/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/tutorial/native_olr_cdc_to_postgresql/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latesttutorial/native_olr_cdc_to_postgresql/"/>
@@ -832,7 +832,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/tutorial/oracle_cdc_to_postgresql/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/tutorial/oracle_cdc_to_postgresql/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latesttutorial/oracle_cdc_to_postgresql/"/>
@@ -840,7 +840,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/tutorial/postgresql_cdc_to_postgresql/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/tutorial/postgresql_cdc_to_postgresql/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latesttutorial/postgresql_cdc_to_postgresql/"/>
@@ -848,7 +848,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/tutorial/sqlserver_cdc_to_postgresql/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/tutorial/sqlserver_cdc_to_postgresql/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latesttutorial/sqlserver_cdc_to_postgresql/"/>
@@ -856,7 +856,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/user-guide/configure_error_strategies/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/user-guide/configure_error_strategies/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestuser-guide/configure_error_strategies/"/>
@@ -864,7 +864,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/user-guide/configure_snapshot_engine/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/user-guide/configure_snapshot_engine/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestuser-guide/configure_snapshot_engine/"/>
@@ -872,7 +872,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/user-guide/connector_auto_launcher/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/user-guide/connector_auto_launcher/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestuser-guide/connector_auto_launcher/"/>
@@ -880,7 +880,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/user-guide/create_a_connector/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/user-guide/create_a_connector/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestuser-guide/create_a_connector/"/>
@@ -888,7 +888,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/user-guide/default_datatype_mapping/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/user-guide/default_datatype_mapping/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestuser-guide/default_datatype_mapping/"/>
@@ -896,7 +896,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/user-guide/letter_casing_strategy/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/user-guide/letter_casing_strategy/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestuser-guide/letter_casing_strategy/"/>
@@ -904,7 +904,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/user-guide/object_mapping_rules/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/user-guide/object_mapping_rules/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestuser-guide/object_mapping_rules/"/>
@@ -912,7 +912,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/user-guide/start_stop_connector/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/user-guide/start_stop_connector/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://docs.synchdb.com/latestuser-guide/start_stop_connector/"/>
@@ -920,7 +920,7 @@
     </url>
     <url>
         <loc>https://docs.synchdb.com/latest/zh/architecture/nom_native_datatype_handling/</loc>
-        <lastmod>2026-01-13</lastmod>
+        <lastmod>2026-01-14</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="zh" href="https://docs.synchdb.com/latest/zh/architecture/nom_native_datatype_handling/"/>
     </url>
