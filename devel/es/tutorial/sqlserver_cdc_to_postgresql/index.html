@@ -31,7 +31,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -1450,10 +1450,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#always-do-initial-snapahot-cdc" class="md-nav__link">
+  <a href="#always-do-initial-snapshot-cdc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Always do Initial Snapahot + CDC
+        Always do Initial Snapshot + CDC
       
     </span>
   </a>
@@ -2268,10 +2268,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#always-do-initial-snapahot-cdc" class="md-nav__link">
+  <a href="#always-do-initial-snapshot-cdc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Always do Initial Snapahot + CDC
+        Always do Initial Snapshot + CDC
       
     </span>
   </a>
@@ -2612,8 +2612,7 @@
 </code></pre></div></p>
 <h2 id="initial-snapshot"><strong>Initial Snapshot</strong><a class="headerlink" href="#initial-snapshot" title="Permanent link">&para;</a></h2>
 <p>"Initial snapshot" (or table snapshot) in SynchDB means to copy table schema plus initial data for all designated tables. This is similar to the term "table sync" in PostgreSQL logical replication. When a connector is started using the default <code>initial</code> mode, it will automatically perform the initial snapshot before going to Change Data Capture (CDC) stage. This can be partially omitted with mode <code>no_data</code>. See <a href="../../user-guide/start_stop_connector/">here</a> for all snapshot options.</p>
-<p>Once the initial snapshot is completed, the connector will not do it again upon subsequent restarts and will just resume with CDC since the last incomplete offset. This behavior is controled by the metadata files managed by Debezium engine. See <a href="../../architecture/metadata_files/">here</a> for more about metadata files.
-**</p>
+<p>Once the initial snapshot is completed, the connector will not do it again upon subsequent restarts and will just resume with CDC since the last incomplete offset. This behavior is controlled by the metadata files managed by Debezium engine. See <a href="../../architecture/metadata_files/">here</a> for more about metadata files.</p>
 <h2 id="different-connector-launch-modes"><strong>Different Connector Launch Modes</strong><a class="headerlink" href="#different-connector-launch-modes" title="Permanent link">&para;</a></h2>
 <h3 id="initial-snapshot-cdc"><strong>Initial Snapshot + CDC</strong><a class="headerlink" href="#initial-snapshot-cdc" title="Permanent link">&para;</a></h3>
 <p>Start the connector using <code>initial</code> mode will perform the initial snapshot of all designated tables (all in this case). After this is completed, the change data capture (CDC) process will begin to stream for new changes.</p>
@@ -2665,7 +2664,7 @@
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;no_data&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>Restarting the connector in <code>no_data</code> mode will not rebuild the schema again, and it will resume CDC since the last successful point.</p>
-<h3 id="always-do-initial-snapahot-cdc"><strong>Always do Initial Snapahot + CDC</strong><a class="headerlink" href="#always-do-initial-snapahot-cdc" title="Permanent link">&para;</a></h3>
+<h3 id="always-do-initial-snapshot-cdc"><strong>Always do Initial Snapshot + CDC</strong><a class="headerlink" href="#always-do-initial-snapshot-cdc" title="Permanent link">&para;</a></h3>
 <p>Start the connector using <code>always</code> mode will always capture the schemas of capture tables, always redo the initial snapshot and then go to CDC. This is similar to a reset button because everything will be rebuilt using this mode. Use it with caution especially when you have large number of tables being captured, which could take a long time to finish. After the rebuild, CDC resumes as normal.</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
 </code></pre></div>

@@ -31,7 +31,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -2372,7 +2372,7 @@ sudo<span class="w"> </span>make<span class="w"> </span><span class="nv">WITH_OL
 <span class="nb">echo</span><span class="w"> </span><span class="nv">$JDK_LIB_PATH</span>
 <span class="nb">echo</span><span class="w"> </span><span class="nv">$JDK_LIB_PATH</span>/server
 
-sudo<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$JDK_LIB_PATH</span><span class="s2">&quot;</span><span class="w"> </span>｜<span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/ld.so.conf.d/x86_64-linux-gnu.conf
+sudo<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$JDK_LIB_PATH</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/ld.so.conf.d/x86_64-linux-gnu.conf
 sudo<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$JDK_LIB_PATH</span><span class="s2">/server&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/ld.so.conf.d/x86_64-linux-gnu.conf
 </code></pre></div>
 Note, for mac with M1/M2 chips, the linker file is located in /etc/ld.so.conf.d/aarch64-linux-gnu.conf</p>

@@ -31,7 +31,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -2291,7 +2291,7 @@
 </tbody>
 </table>
 <p>Other properties that can be specified during ALTER TABLE ALTER COLUMN  are not supported at the moment.</p>
-<p>Please note that SynchDB only supports basic data type change on an existing column. For example, <code>INT</code> → <code>BIGINT</code> or <code>VARCHAR</code> → <code>TEXT</code>. Complex data type changes such as  <code>TEXT</code> → <code>INT</code> or <code>INT</code> → <code>TIMESTAMP</code> are not currently supported. This is because PostgreSQL requires the user to additioanlly supply a type casting function to perform the type casting as the result of complex data type change. SynchDB currently has to knowledge what type casting functions to use for specific type conversion. In the future, We may allow user to supply his or her own casting functions to use for specific type conversions via the rule file, but for now, it is not supported.</p>
+<p>Please note that SynchDB only supports basic data type change on an existing column. For example, <code>INT</code> → <code>BIGINT</code> or <code>VARCHAR</code> → <code>TEXT</code>. Complex data type changes such as  <code>TEXT</code> → <code>INT</code> or <code>INT</code> → <code>TIMESTAMP</code> are not currently supported. This is because PostgreSQL requires the user to additionally supply a type casting function to perform the type casting as the result of complex data type change. SynchDB currently has limited knowledge what type casting functions to use for specific type conversion. In the future, We may allow user to supply his or her own casting functions to use for specific type conversions via the rule file, but for now, it is not supported.</p>
 <h2 id="database-specific-behavior"><strong>Database-Specific Behavior</strong><a class="headerlink" href="#database-specific-behavior" title="Permanent link">&para;</a></h2>
 <h3 id="mysql-and-oracle-ddl-change-events"><strong>MySQL and Oracle DDL Change Events</strong><a class="headerlink" href="#mysql-and-oracle-ddl-change-events" title="Permanent link">&para;</a></h3>
 <p>Since MySQL logs both DDL and DML operations in the binlog and Oracles logs the same to logminer, SynchDB is able to replicate both DDLs and DMLs as they happen. No special actions are needed on MySQL or Oracle side to enable DDLs replication.</p>

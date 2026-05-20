@@ -31,7 +31,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -2017,7 +2017,7 @@
 <li><code>source object</code> represents the column in fully-qualified name in remote database</li>
 <li><code>destination object</code> represents the column name in PostgreSQL. No need to format it as fully-qualified column name.</li>
 </ul>
-<p>This example maps <code>inventory.customers.emaiL</code> column in the source table to <code>contact</code> in PostgreSQL.
+<p>This example maps <code>inventory.customers.email</code> column in the source table to <code>contact</code> in PostgreSQL.
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="s1">&#39;column&#39;</span><span class="p">,</span><span class="s1">&#39;inventory.customers.email&#39;</span><span class="p">,</span><span class="s1">&#39;contact&#39;</span><span class="p">);</span>
 </code></pre></div></p>
 <h2 id="configure-data-type-mappings"><strong>Configure Data Type Mappings</strong><a class="headerlink" href="#configure-data-type-mappings" title="Permanent link">&para;</a></h2>
