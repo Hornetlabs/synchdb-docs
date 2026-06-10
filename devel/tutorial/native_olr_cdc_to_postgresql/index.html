@@ -1541,17 +1541,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cdc-only" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        CDC only
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#always-do-initial-snapshot-cdc" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2247,17 +2236,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cdc-only" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        CDC only
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#always-do-initial-snapshot-cdc" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2597,11 +2575,6 @@
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;no_data&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>Restarting the connector in <code>no_data</code> mode will not rebuild the schema again, and it will resume CDC since the last successful point.</p>
-<h3 id="cdc-only"><strong>CDC only</strong><a class="headerlink" href="#cdc-only" title="Permanent link">&para;</a></h3>
-<p>Start the connector using <code>never</code> will skip schema capture and initial snapshot entirely and will go to CDC mode to capture subsequent changes. Please note that the connector expects all the capture tables have been created in PostgreSQL prior to starting in <code>never</code> mode. If the tables do not exist, the connector will encounter an error when it tries to apply a CDC change to a non-existent table.</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;never&#39;</span><span class="p">);</span>
-</code></pre></div>
-<p>Restarting the connector in <code>never</code> mode will resume CDC since the last successful point.</p>
 <h3 id="always-do-initial-snapshot-cdc"><strong>Always do Initial Snapshot + CDC</strong><a class="headerlink" href="#always-do-initial-snapshot-cdc" title="Permanent link">&para;</a></h3>
 <p>Start the connector using <code>always</code> mode will always capture the schemas of capture tables, always redo the initial snapshot and then go to CDC. This is similar to a reset button because everything will be rebuilt using this mode. Use it with caution especially when you have large number of tables being captured, which could take a long time to finish. After the rebuild, CDC resumes as normal.</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
@@ -2612,7 +2585,6 @@
 <li>initial (default)</li>
 <li>initial_only</li>
 <li>no_data</li>
-<li>never</li>
 <li>always</li>
 <li>schemasync</li>
 </ul>

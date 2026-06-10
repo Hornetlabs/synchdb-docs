@@ -1460,10 +1460,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#synchdb-mysql" class="md-nav__link">
+  <a href="#synchdb-oracle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        準備用於 SynchDB 的 MySQL 資料庫
+        準備用於 SynchDB 的 Oracle 資料庫
       
     </span>
   </a>
@@ -1552,17 +1552,6 @@
   <a href="#cdc_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        僅 CDC
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cdc_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
         始終執行初始快照 + CDC
       
     </span>
@@ -1576,10 +1565,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mysql" class="md-nav__link">
+  <a href="#oracle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        MySQL 連接器的可用快照模式
+        Oracle 連接器的可用快照模式
       
     </span>
   </a>
@@ -2116,10 +2105,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#synchdb-mysql" class="md-nav__link">
+  <a href="#synchdb-oracle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        準備用於 SynchDB 的 MySQL 資料庫
+        準備用於 SynchDB 的 Oracle 資料庫
       
     </span>
   </a>
@@ -2208,17 +2197,6 @@
   <a href="#cdc_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        僅 CDC
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cdc_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
         始終執行初始快照 + CDC
       
     </span>
@@ -2232,10 +2210,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mysql" class="md-nav__link">
+  <a href="#oracle" class="md-nav__link">
     <span class="md-ellipsis">
       
-        MySQL 連接器的可用快照模式
+        Oracle 連接器的可用快照模式
       
     </span>
   </a>
@@ -2440,7 +2418,7 @@
 
 
 <h1 id="openlog-replicator">原生 Openlog Replicator 連接器<a class="headerlink" href="#openlog-replicator" title="Permanent link">&para;</a></h1>
-<h2 id="synchdb-mysql"><strong>準備用於 SynchDB 的 MySQL 資料庫</strong><a class="headerlink" href="#synchdb-mysql" title="Permanent link">&para;</a></h2>
+<h2 id="synchdb-oracle"><strong>準備用於 SynchDB 的 Oracle 資料庫</strong><a class="headerlink" href="#synchdb-oracle" title="Permanent link">&para;</a></h2>
 <p>在使用 SynchDB 透過原生 Openlog Replicator (OLR) 連接器進行複製之前，OLR 和 Oracle 資料庫本身都需要按照<a href="../../getting-started/remote_database_setups/">此處</a>中概述的步驟進行設定。</p>
 <h2 id="openlog-replicator_1"><strong>原生的 Openlog Replicator 连接器的行为说明</strong><a class="headerlink" href="#openlog-replicator_1" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2506,22 +2484,16 @@
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;no_data&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>以 <code>no_data</code> 模式重新啟動連接器不會再次重建架構，而是從上次成功捕獲的位置繼續 CDC 擷取。</p>
-<h3 id="cdc_3"><strong>僅 CDC</strong><a class="headerlink" href="#cdc_3" title="Permanent link">&para;</a></h3>
-<p>使用 <code>never</code> 模式啟動連接器將完全跳過架構擷取和初始快照，直接進入 CDC 模式擷取後續變更。請注意，連接器要求所有擷取表在以 <code>never</code> 模式啟動之前已在 PostgreSQL 中建立。如果表不存在，連接器在嘗試將 CDC 變更套用到不存在的表時會遇到錯誤。</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;never&#39;</span><span class="p">);</span>
-</code></pre></div>
-<p>以 <code>never</code> 模式重新啟動連接器將從上次成功點恢復 CDC。</p>
-<h3 id="cdc_4"><strong>始終執行初始快照 + CDC</strong><a class="headerlink" href="#cdc_4" title="Permanent link">&para;</a></h3>
+<h3 id="cdc_3"><strong>始終執行初始快照 + CDC</strong><a class="headerlink" href="#cdc_3" title="Permanent link">&para;</a></h3>
 <p>使用 <code>always</code> 模式啟動連接器將始終擷取擷取表的模式，始終重新執行初始快照，然後再進行 CDC。這類似於重置按鈕，因為使用此模式將重建所有內容。請謹慎使用此模式，尤其是在捕獲大量表時，這可能需要很長時間才能完成。重建完成後，CDC 將照常恢復。</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>初始快照完成後，CDC 將開始。在 <code>always</code> 模式下重新啟動連接器將重複上述過程。</p>
-<h2 id="mysql"><strong>MySQL 連接器的可用快照模式</strong><a class="headerlink" href="#mysql" title="Permanent link">&para;</a></h2>
+<h2 id="oracle"><strong>Oracle 連接器的可用快照模式</strong><a class="headerlink" href="#oracle" title="Permanent link">&para;</a></h2>
 <ul>
 <li>initial（預設）</li>
 <li>initial_only</li>
 <li>no_data</li>
-<li>never</li>
 <li>always</li>
 <li>schemasync</li>
 </ul>

@@ -6761,7 +6761,7 @@ debezium_mysql_connector_metrics_connected{context=&quot;streaming&quot;,server=
 <span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 <span class="w"> </span><span class="n">inventory</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">products</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
 </code></pre></div></p></section><section class="print-page" id="zh-tutorial-native_olr_cdc_to_postgresql" heading-number="5.5"><h1 id="zh-tutorial-native_olr_cdc_to_postgresql-openlog-replicator">原生 Openlog Replicator 連接器<a class="headerlink" href="#zh-tutorial-native_olr_cdc_to_postgresql-openlog-replicator" title="Permanent link">&para;</a></h1>
-<h2 id="zh-tutorial-native_olr_cdc_to_postgresql-synchdb-mysql"><strong>準備用於 SynchDB 的 MySQL 資料庫</strong><a class="headerlink" href="#zh-tutorial-native_olr_cdc_to_postgresql-synchdb-mysql" title="Permanent link">&para;</a></h2>
+<h2 id="zh-tutorial-native_olr_cdc_to_postgresql-synchdb-oracle"><strong>準備用於 SynchDB 的 Oracle 資料庫</strong><a class="headerlink" href="#zh-tutorial-native_olr_cdc_to_postgresql-synchdb-oracle" title="Permanent link">&para;</a></h2>
 <p>在使用 SynchDB 透過原生 Openlog Replicator (OLR) 連接器進行複製之前，OLR 和 Oracle 資料庫本身都需要按照<a href="#zh-getting-started-remote_database_setups">此處</a>中概述的步驟進行設定。</p>
 <h2 id="zh-tutorial-native_olr_cdc_to_postgresql-openlog-replicator_1"><strong>原生的 Openlog Replicator 连接器的行为说明</strong><a class="headerlink" href="#zh-tutorial-native_olr_cdc_to_postgresql-openlog-replicator_1" title="Permanent link">&para;</a></h2>
 <ul>
@@ -6827,22 +6827,16 @@ debezium_mysql_connector_metrics_connected{context=&quot;streaming&quot;,server=
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;no_data&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>以 <code>no_data</code> 模式重新啟動連接器不會再次重建架構，而是從上次成功捕獲的位置繼續 CDC 擷取。</p>
-<h3 id="zh-tutorial-native_olr_cdc_to_postgresql-cdc_3"><strong>僅 CDC</strong><a class="headerlink" href="#zh-tutorial-native_olr_cdc_to_postgresql-cdc_3" title="Permanent link">&para;</a></h3>
-<p>使用 <code>never</code> 模式啟動連接器將完全跳過架構擷取和初始快照，直接進入 CDC 模式擷取後續變更。請注意，連接器要求所有擷取表在以 <code>never</code> 模式啟動之前已在 PostgreSQL 中建立。如果表不存在，連接器在嘗試將 CDC 變更套用到不存在的表時會遇到錯誤。</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;never&#39;</span><span class="p">);</span>
-</code></pre></div>
-<p>以 <code>never</code> 模式重新啟動連接器將從上次成功點恢復 CDC。</p>
-<h3 id="zh-tutorial-native_olr_cdc_to_postgresql-cdc_4"><strong>始終執行初始快照 + CDC</strong><a class="headerlink" href="#zh-tutorial-native_olr_cdc_to_postgresql-cdc_4" title="Permanent link">&para;</a></h3>
+<h3 id="zh-tutorial-native_olr_cdc_to_postgresql-cdc_3"><strong>始終執行初始快照 + CDC</strong><a class="headerlink" href="#zh-tutorial-native_olr_cdc_to_postgresql-cdc_3" title="Permanent link">&para;</a></h3>
 <p>使用 <code>always</code> 模式啟動連接器將始終擷取擷取表的模式，始終重新執行初始快照，然後再進行 CDC。這類似於重置按鈕，因為使用此模式將重建所有內容。請謹慎使用此模式，尤其是在捕獲大量表時，這可能需要很長時間才能完成。重建完成後，CDC 將照常恢復。</p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
 </code></pre></div>
 <p>初始快照完成後，CDC 將開始。在 <code>always</code> 模式下重新啟動連接器將重複上述過程。</p>
-<h2 id="zh-tutorial-native_olr_cdc_to_postgresql-mysql"><strong>MySQL 連接器的可用快照模式</strong><a class="headerlink" href="#zh-tutorial-native_olr_cdc_to_postgresql-mysql" title="Permanent link">&para;</a></h2>
+<h2 id="zh-tutorial-native_olr_cdc_to_postgresql-oracle"><strong>Oracle 連接器的可用快照模式</strong><a class="headerlink" href="#zh-tutorial-native_olr_cdc_to_postgresql-oracle" title="Permanent link">&para;</a></h2>
 <ul>
 <li>initial（預設）</li>
 <li>initial_only</li>
 <li>no_data</li>
-<li>never</li>
 <li>always</li>
 <li>schemasync</li>
 </ul>
@@ -7220,12 +7214,12 @@ debezium_mysql_connector_metrics_connected{context=&quot;streaming&quot;,server=
 </tr>
 <tr>
 <td style="text-align: center;"><code>never</code></td>
-<td>跳过快照，仅流式传输</td>
+<td>跳过快照，仅流式传输（仅MySQL）</td>
 <td>实时更新</td>
 </tr>
 <tr>
 <td style="text-align: center;"><code>schemasync</code></td>
-<td>仅结构，无数据，无 CDC</td>
+<td>同<code>no_data</code></td>
 <td>正常操作</td>
 </tr>
 </tbody>
@@ -7835,7 +7829,7 @@ sudo<span class="w"> </span>make<span class="w"> </span>install
 <li>支持的 DML：插入、更新/删除</li>
 <li>支持的 DDL：创建表、删除表、修改表、添加/删除列、添加/删除约束、截断</li>
 <li>基于 libprotobuf-c 与 Openlog Replicator 和 IvorySQL 的 Oracle 解析器通信，以处理传入的 DDL 查询事件。</li>
-<li>支持的快照模式：initial、initial_only、no_data、always、never</li>
+<li>支持的快照模式：initial、initial_only、no_data、always</li>
 <li>与其他基于 Debezium 的连接器一样，支持批处理、模式历史记录和偏移量管理。</li>
 <li>除原生连接器外，还支持基于 Debezium 的 Openlog Replicator 连接器。</li>
 </ul>
