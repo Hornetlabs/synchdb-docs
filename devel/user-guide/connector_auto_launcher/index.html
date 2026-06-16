@@ -1605,17 +1605,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#known-issue" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Known Issue
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1836,17 +1825,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#known-issue" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Known Issue
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1880,12 +1858,8 @@
 <div class="highlight"><pre><span></span><code>shared_preload_libraries = &#39;synchdb&#39;
 synchdb.synchdb_auto_launcher = true
 </code></pre></div></p>
-<p>At startup, SynchDB extension will be preloaded very early. With <code>synchdb.synchdb_auto_launcher</code> set to true, SynchDB will spawn a <code>synchdb_auto_launcher</code> background worker that will retrieve all the conninfos in <code>synchdb_conninfo</code> table that is marked as <code>active</code> (has <code>isactive</code> flag set to <code>true</code>). Then, it will start them automatically as a separate background worker in the same way as when <code>synchdb_start_engine_bgw()</code> is called. <code>synchdb_auto_launcher</code> will exit after.</p>
-<h2 id="known-issue"><strong>Known Issue</strong><a class="headerlink" href="#known-issue" title="Permanent link">&para;</a></h2>
-<p><code>synchdb_auto_launcher</code> worker will login to the default <code>postgres</code> database and try to find active connectors from <code>synchdb_conninfo</code> table. </p>
-<p>If SynchDB has been installed from non-default database, then <code>synchdb_auto_launcher</code> will fail to find the table, and thus not automatically starting the connector worker. </p>
-<p>In the future, we will make <code>synchdb_auto_launcher</code> check for all the databases and automatically start connector workers based on every database's <code>synchdb_conninfo</code> tables.</p>
-<p>Ref <a href="https://github.com/Hornetlabs/synchdb/issues/71">[Issue #71]</a> for detail and updates.</p>
+<p>At startup, the SynchDB extension is preloaded early. With <code>synchdb.synchdb_auto_launcher</code> set to true, SynchDB spawns a <code>synchdb_auto_launcher</code> background worker, which in turn spawns one
+<code>synchdb_db_launcher</code> worker for every connectable, non-template database. Each <code>synchdb_db_launcher</code> retrieves all the conninfos in the <code>synchdb_conninfo</code> table (if it exists) that are marked as <code>active</code> (i.e., with the <code>isactive</code> flag set to <code>true</code>), and then starts them automatically as separate background workers, in the same way as when <code>synchdb_start_engine_bgw()</code> is called. The <code>synchdb_auto_launcher</code> worker exits after every <code>synchdb_db_launcher</code> finishes its job.</p>
 
 
 

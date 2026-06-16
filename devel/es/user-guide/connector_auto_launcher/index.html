@@ -1609,17 +1609,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#problema-conocido" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Problema Conocido
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1840,17 +1829,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#problema-conocido" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Problema Conocido
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1884,10 +1862,7 @@
 <div class="highlight"><pre><span></span><code>shared_preload_libraries = &#39;synchdb&#39;
 synchdb.synchdb_auto_launcher = true
 </code></pre></div></p>
-<p>Al inicio, la extensión SynchDB se precargará muy temprano. Con <code>synchdb.synchdb_auto_launcher</code> establecido en true, SynchDB generará un trabajador en segundo plano <code>synchdb_auto_launcher</code> que recuperará todas las conexiones en la tabla <code>synchdb_conninfo</code> marcadas como <code>active</code> (tiene la bandera <code>isactive</code> establecida en <code>true</code>). Luego, los iniciará automáticamente como un trabajador en segundo plano separado de la misma manera que cuando se llama a <code>synchdb_start_engine_bgw()</code>. <code>synchdb_auto_launcher</code> saldrá después.</p>
-<h2 id="problema-conocido">Problema Conocido<a class="headerlink" href="#problema-conocido" title="Permanent link">&para;</a></h2>
-<p>El trabajador <code>synchdb_auto_launcher</code> iniciará sesión en la base de datos <code>postgres</code> predeterminada e intentará encontrar conectores activos en la tabla <code>synchdb_conninfo</code>. Si SynchDB se ha instalado desde una base de datos no predeterminada, entonces <code>synchdb_auto_launcher</code> no podrá encontrar la tabla y, por lo tanto, no iniciará automáticamente el trabajador del conector. En el futuro, haremos que <code>synchdb_auto_launcher</code> verifique todas las bases de datos e inicie automáticamente los trabajadores del conector basándose en las tablas <code>synchdb_conninfo</code> de cada base de datos.</p>
-<p>Para más información y actualizaciones, consulte <a href="https://github.com/Hornetlabs/synchdb/issues/71">[Issue #71]</a>.</p>
+<p>Durante el arranque, la extensión SynchDB se precarga en una etapa temprana. Con <code>synchdb.synchdb_auto_launcher</code> configurado en true, SynchDB lanza un proceso de trabajo en segundo plano (background worker) llamado <code>synchdb_auto_launcher</code>, el cual a su vez genera un proceso <code>synchdb_db_launcher</code> por cada base de datos conectable y no plantilla. Cada <code>synchdb_db_launcher</code> recupera todos los conninfos de la tabla <code>synchdb_conninfo</code> (si existe) que estén marcados como <code>active</code> (es decir, con el indicador <code>isactive</code> establecido en <code>true</code>), y luego los inicia automáticamente como procesos de trabajo en segundo plano independientes, de la misma manera que cuando se llama a <code>synchdb_start_engine_bgw()</code>. El proceso <code>synchdb_auto_launcher</code> finaliza una vez que todos los <code>synchdb_db_launcher</code> han terminado su trabajo.</p>
 
 
 
