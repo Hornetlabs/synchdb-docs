@@ -2867,18 +2867,18 @@ and this project adheres to <a href="http://semver.org/">Semantic Versioning</a>
 <h2 id="synchdb-14-2026-08-04"><strong><a href="https://github.com/Hornetlabs/synchdb/releases/tag/v1.4">SynchDB 1.4</a> - 2026-08-04</strong><a class="headerlink" href="#synchdb-14-2026-08-04" title="Permanent link">&para;</a></h2>
 <p>SynchDB 1.4 extends Oracle Container Database (CDB/PDB) support across the Debezium, oracle_fdw and OLR execution paths, adds TLS-secured connections for the MySQL and PostgreSQL connectors (with Oracle Wallet support for Oracle/OLR), and allows the Debezium runner's log level to be changed at runtime without a restart. This release also includes a round of stability fixes (JNI reference leaks, a double-free in the format converter, a symbol collision under IvorySQL) and broadens CI coverage to build and test against IvorySQL as the host platform.</p>
 <h3 id="added"><strong>Added</strong><a class="headerlink" href="#added" title="Permanent link">&para;</a></h3>
-<h4 id="oracle-container-database-cdbpdb-support"><a href="(https://docs.synchdb.com/user-guide/create_a_connector/#create-a-connector_1)">Oracle Container Database (CDB/PDB) Support</a><a class="headerlink" href="#oracle-container-database-cdbpdb-support" title="Permanent link">&para;</a></h4>
+<h4 id="oracle-container-database-cdbpdb-support"><a href="../user-guide/create_a_connector/">Oracle Container Database (CDB/PDB) Support</a><a class="headerlink" href="#oracle-container-database-cdbpdb-support" title="Permanent link">&para;</a></h4>
 <ul>
 <li>The Debezium-based Oracle connector now accepts a <code>CDB/PDB</code> formatted database name and automatically maps it to Debezium's <code>database.dbname</code> and <code>database.pdb.name</code> properties.</li>
 <li><a href="https://github.com/laurenz/oracle_fdw">oracle_fdw</a> based FDW snapshot path now supports Oracle Container Database architecture.</li>
 <li>Added dedicated CDB/PDB test coverage against Oracle 23ai (Free PDB1).</li>
 </ul>
-<h4 id="tls-secure-connections"><a href="https://docs.synchdb.com/user-guide/configure_snapshot_engine/#synchdb_add_fdw_conninfo">TLS / Secure Connections</a><a class="headerlink" href="#tls-secure-connections" title="Permanent link">&para;</a></h4>
+<h4 id="tls-secure-connections"><a href="../user-guide/configure_snapshot_engine/">TLS / Secure Connections</a><a class="headerlink" href="#tls-secure-connections" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Added TLS connection support for MySQL and PostgreSQL connectors via extra conninfo parameters.</li>
 <li>Oracle and OLR connectors now use Oracle Wallet for secure connections instead of standard TLS parameters.</li>
 </ul>
-<h4 id="runtime-adjustable-debezium-log-level"><a href="https://docs.synchdb.com/getting-started/configuration/#synchdb-configuration">Runtime-Adjustable Debezium Log Level</a><a class="headerlink" href="#runtime-adjustable-debezium-log-level" title="Permanent link">&para;</a></h4>
+<h4 id="runtime-adjustable-debezium-log-level"><a href="../getting-started/configuration/">Runtime-Adjustable Debezium Log Level</a><a class="headerlink" href="#runtime-adjustable-debezium-log-level" title="Permanent link">&para;</a></h4>
 <ul>
 <li>The Debezium runner's log level can now be changed while a connector is running, without requiring a restart. (<a href="https://github.com/Hornetlabs/synchdb/issues/106">#106</a>)</li>
 </ul>
