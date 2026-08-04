@@ -1,0 +1,2846 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="SynchDB is a PostgreSQL extension for synchronizing data from different database sources..">
+      
+      
+        <meta name="author" content="Hornetlabs Technology Inc.">
+      
+      
+        <link rel="canonical" href="https://docs.synchdb.com/latest/es/tutorial/native_olr_cdc_to_postgresql/">
+      
+      
+        <link rel="prev" href="../postgresql_cdc_to_postgresql/">
+      
+      
+        <link rel="next" href="../../user-guide/create_a_connector/">
+      
+      
+        
+          <link rel="alternate" href="../../../tutorial/native_olr_cdc_to_postgresql/" hreflang="en">
+        
+          <link rel="alternate" href="./" hreflang="es">
+        
+          <link rel="alternate" href="../../../zh/tutorial/native_olr_cdc_to_postgresql/" hreflang="zh">
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Conector nativo de replicador Openlog - Documentación de SynchDB</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-material.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site.css">
+    
+      <link rel="stylesheet" href="../../../css/print-site-material.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#native-openlog-replicator-connector" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../../" title="Documentación de SynchDB" class="md-header__button md-logo" aria-label="Documentación de SynchDB" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentación de SynchDB
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Conector nativo de replicador Openlog
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Seleccionar idioma">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="../../../tutorial/native_olr_cdc_to_postgresql/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="./" hreflang="es" class="md-select__link">
+              Español
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="../../../zh/tutorial/native_olr_cdc_to_postgresql/" hreflang="zh" class="md-select__link">
+              中文
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/hornetlabs/synchdb" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Inicio
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../architecture/architecture/" class="md-tabs__link">
+          
+  
+  
+  Arquitectura
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../getting-started/installation/" class="md-tabs__link">
+          
+  
+  
+  Empezando
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../monitoring/stats_view/" class="md-tabs__link">
+          
+  
+  
+  escucha
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../mysql_cdc_to_postgresql/" class="md-tabs__link">
+          
+  
+  
+  Tutorial
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../user-guide/create_a_connector/" class="md-tabs__link">
+          
+  
+  
+  Guía del usuario
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../changelog/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Registro de Cambios
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../" title="Documentación de SynchDB" class="md-nav__button md-logo" aria-label="Documentación de SynchDB" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Documentación de SynchDB
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/hornetlabs/synchdb" title="Ir al repositorio" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Arquitectura
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descripción general de la arquitectura
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/debezium_event_processor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debezium Event Processor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/debezium_runner_components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Arquitectura de componentes de Debezium Runner
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/openlog_replicator_event_processor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Procesador de eventos del replicador Openlog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/batch_change_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manejo de Cambios por Lotes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/non_native_datatype_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Procesamiento de tipos de datos no nativos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/native_datatype_handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Procesamiento de tipos de datos nativos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/metadata_files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debezium Archivos de Metadatos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/ddl_replication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Replicación DDL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/fdw_based_snapshot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instantánea basada en FDW
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Empezando
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Empezando
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Instalación
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/remote_database_setups/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    configuración de base de datos remota
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SynchDB Configuración
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../getting-started/quick_start/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio Rápido
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    escucha
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    escucha
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/stats_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vista de estadísticas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/state_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vista de estado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/attr_view/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vista de atributos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/jvm_mem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Uso de memoria de JVM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/jmx_monitor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración del monitor JMX
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../monitoring/jmx_exporter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuración del exportador JMX
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorial
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mysql_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conector MySQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sqlserver_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conector SQL Server
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oracle_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conector Oracle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../postgresql_cdc_to_postgresql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conector Postgres
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conector nativo de replicador Openlog
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Conector nativo de replicador Openlog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prepare-oracle-database-for-synchdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prepare Oracle Database for SynchDB
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#behavior-notes-for-native-based-openlog-replicator-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavior Notes for Native based Openlog Replicator Connector
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-native-openlog-replicator-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a Native Openlog Replicator Connector
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#initial-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initial Snapshot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#different-connector-launch-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Different Connector Launch Modes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Different Connector Launch Modes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initial-snapshot-cdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initial Snapshot + CDC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initial-snapshot-only-and-no-cdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initial Snapshot Only and no CDC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capture-table-schema-only-cdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capture Table Schema Only + CDC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#always-do-initial-snapshot-cdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Always do Initial Snapshot + CDC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#possible-snapshot-modes-for-openlog-replicator-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Possible Snapshot Modes for Openlog Replicator Connector
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preview-source-and-destination-table-relationships-with-schemasync-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preview Source and Destination Table Relationships with schemasync mode
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Preview Source and Destination Table Relationships with schemasync mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-connector-and-start-it-in-schemasync-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a Connector and Start it in schemasync Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ensure-the-connector-is-put-to-paused-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ensure the Connector is Put to Paused State
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-the-tables-created-by-default-mapping-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review the Tables Created by Default Mapping Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-custom-mapping-rules-if-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Define Custom Mapping Rules (If Needed)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-all-object-mapping-rules-created-so-far" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review All Object Mapping Rules Created So Far
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reload-the-object-mapping-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reload the Object Mapping Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-synchdb_att_view-again-for-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review synchdb_att_view Again for Changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume-the-connector-or-redo-the-entire-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resume the Connector or Redo the Entire Snapshot
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selective-table-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Selective Table Sync
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Selective Table Sync">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#select-desired-tables-and-start-it-for-the-first-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Select Desired Tables and Start it for the First Time
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-the-connector-state-and-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify the Connector State and Tables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-more-tables-to-replicate-during-run-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add More Tables to Replicate During Run Time.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filter-openlog-replicator-tables-important" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filter Openlog Replicator Tables (IMPORTANT)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-start-offset-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Start Offset Values
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Custom Start Offset Values">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#record-settable-offset-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Record Settable Offset Values
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pause-the-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pause the Connector
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-the-new-offset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set the new Offset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume-the-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resume the Connector
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guía del usuario
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guía del usuario
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/create_a_connector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Crear un conector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/start_stop_connector/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Iniciar/Detener un conector
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/connector_auto_launcher/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Lanzador Automático de Conectores
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/default_datatype_mapping/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mapeo de Tipos de Datos Predeterminado
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/object_mapping_rules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Personalizar la asignación y transformación de objetos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/letter_casing_strategy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Estrategia de mayúsculas y minúsculas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/configure_error_strategies/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    estrategias de error
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/configure_snapshot_engine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurar el motor de instantáneas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registro de Cambios
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prepare-oracle-database-for-synchdb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prepare Oracle Database for SynchDB
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#behavior-notes-for-native-based-openlog-replicator-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Behavior Notes for Native based Openlog Replicator Connector
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-native-openlog-replicator-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a Native Openlog Replicator Connector
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#initial-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initial Snapshot
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#different-connector-launch-modes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Different Connector Launch Modes
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Different Connector Launch Modes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initial-snapshot-cdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initial Snapshot + CDC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initial-snapshot-only-and-no-cdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initial Snapshot Only and no CDC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capture-table-schema-only-cdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capture Table Schema Only + CDC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#always-do-initial-snapshot-cdc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Always do Initial Snapshot + CDC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#possible-snapshot-modes-for-openlog-replicator-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Possible Snapshot Modes for Openlog Replicator Connector
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preview-source-and-destination-table-relationships-with-schemasync-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preview Source and Destination Table Relationships with schemasync mode
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Preview Source and Destination Table Relationships with schemasync mode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-connector-and-start-it-in-schemasync-mode" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a Connector and Start it in schemasync Mode
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ensure-the-connector-is-put-to-paused-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ensure the Connector is Put to Paused State
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-the-tables-created-by-default-mapping-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review the Tables Created by Default Mapping Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#define-custom-mapping-rules-if-needed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Define Custom Mapping Rules (If Needed)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-all-object-mapping-rules-created-so-far" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review All Object Mapping Rules Created So Far
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reload-the-object-mapping-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reload the Object Mapping Rules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#review-synchdb_att_view-again-for-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Review synchdb_att_view Again for Changes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume-the-connector-or-redo-the-entire-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resume the Connector or Redo the Entire Snapshot
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selective-table-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Selective Table Sync
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Selective Table Sync">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#select-desired-tables-and-start-it-for-the-first-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Select Desired Tables and Start it for the First Time
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verify-the-connector-state-and-tables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verify the Connector State and Tables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-more-tables-to-replicate-during-run-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add More Tables to Replicate During Run Time.
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filter-openlog-replicator-tables-important" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filter Openlog Replicator Tables (IMPORTANT)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-start-offset-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom Start Offset Values
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Custom Start Offset Values">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#record-settable-offset-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Record Settable Offset Values
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pause-the-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pause the Connector
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-the-new-offset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Set the new Offset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume-the-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resume the Connector
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="native-openlog-replicator-connector">Native Openlog Replicator Connector<a class="headerlink" href="#native-openlog-replicator-connector" title="Permanent link">&para;</a></h1>
+<h2 id="prepare-oracle-database-for-synchdb"><strong>Prepare Oracle Database for SynchDB</strong><a class="headerlink" href="#prepare-oracle-database-for-synchdb" title="Permanent link">&para;</a></h2>
+<p>Before SynchDB can be used to replicate from Native Openlog Replicator (OLR) Connector, Both OLR and Oracle database itself need to be configured according to the procedure outlined <a href="../../getting-started/remote_database_setups/">here</a></p>
+<h2 id="behavior-notes-for-native-based-openlog-replicator-connector"><strong>Behavior Notes for Native based Openlog Replicator Connector</strong><a class="headerlink" href="#behavior-notes-for-native-based-openlog-replicator-connector" title="Permanent link">&para;</a></h2>
+<ul>
+<li>SynchDB manages connections to Openlog Replicator and streams changes without using Debezium.</li>
+<li>Requires OLR configuration or connector will error on startup.</li>
+<li>Relies on Debezium's oracle connector to complete initial snapshot and shuts down when done, subsequent CDC is done natively within SynchDB against Openlog Replicator.</li>
+<li>Relies on IvorySQL's oracle parser to handle DDL events. This must be compiled and installed prior to using native openlog replicator connector.</li>
+<li>Visit <a href="https://github.com/bersler/OpenLogReplicator">here</a> for more information about Openlog Replicator.</li>
+</ul>
+<h2 id="create-a-native-openlog-replicator-connector"><strong>Create a Native Openlog Replicator Connector</strong><a class="headerlink" href="#create-a-native-openlog-replicator-connector" title="Permanent link">&para;</a></h2>
+<p>Create a connector that targets all the tables under <code>FREE</code> database and schema <code>DBZUSER</code> via native Openlog Replicator Connector.
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1521</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;DBZUSER&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;dbz&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;FREE&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;DBZUSER&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;olr&#39;</span><span class="p">);</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_olr_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="mi">7070</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;ORACLE&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<h2 id="initial-snapshot"><strong>Initial Snapshot</strong><a class="headerlink" href="#initial-snapshot" title="Permanent link">&para;</a></h2>
+<p>"Initial snapshot" (or table snapshot) in SynchDB means to copy table schema plus initial data for all designated tables. This is similar to the term "table sync" in PostgreSQL logical replication. When a connector is started using the default <code>initial</code> mode, it will automatically perform the initial snapshot before going to Change Data Capture (CDC) stage. This can be partially omitted with mode <code>no_data</code>. See <a href="../../user-guide/start_stop_connector/">here</a> for all snapshot options.</p>
+<p>Once the initial snapshot is completed, the connector will not do it again upon subsequent restarts and will just resume with CDC since the last incomplete offset. This behavior is controlled by the metadata files managed by Debezium engine. See <a href="../../architecture/metadata_files/">here</a> for more about metadata files.</p>
+<h2 id="different-connector-launch-modes"><strong>Different Connector Launch Modes</strong><a class="headerlink" href="#different-connector-launch-modes" title="Permanent link">&para;</a></h2>
+<h3 id="initial-snapshot-cdc"><strong>Initial Snapshot + CDC</strong><a class="headerlink" href="#initial-snapshot-cdc" title="Permanent link">&para;</a></h3>
+<p>Start the connector using <code>initial</code> mode will perform the initial snapshot of all designated tables (all in this case). After this is completed, the change data capture (CDC) process will begin to stream for new changes.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;initial&#39;</span><span class="p">);</span>
+
+<span class="k">or</span><span class="w"> </span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>The stage of this connector should be in <code>initial snapshot</code> or <code>change data capture</code> if it has processed at least one change event in CDC</p>
+<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="p">;</span>
+<span class="w">  </span><span class="n">name</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">connector_type</span><span class="w"> </span><span class="o">|</span><span class="w">   </span><span class="n">pid</span><span class="w">   </span><span class="o">|</span><span class="w">       </span><span class="n">stage</span><span class="w">      </span><span class="o">|</span><span class="w">  </span><span class="k">state</span><span class="w">  </span><span class="o">|</span><span class="w">   </span><span class="n">err</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">last_dbz_offset</span>
+<span class="c1">---------+----------------+---------+------------------+---------+----------+-----------------</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">olr</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="mi">1702522</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="n">snapshot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="k">offset</span>
+</code></pre></div>
+<p>A new schema called <code>free</code> will be created and all tables streamed by the connector will be replicated under that schema.
+<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="o">*</span>
+<span class="w">           </span><span class="n">List</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">tables</span>
+<span class="w"> </span><span class="k">Schema</span><span class="w"> </span><span class="o">|</span><span class="w">   </span><span class="n">Name</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">Type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Owner</span>
+<span class="c1">--------+-----------+-------+--------</span>
+<span class="w"> </span><span class="k">free</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
+<span class="w"> </span><span class="k">free</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
+</code></pre></div></p>
+<p>After the initial snapshot is completed, and at least one subsequent changes is received and processed, the connector stage shall change from <code>initial snapshot</code> to <code>Change Data Capture</code>.
+<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="p">;</span>
+<span class="w">  </span><span class="n">name</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">connector_type</span><span class="w"> </span><span class="o">|</span><span class="w">   </span><span class="n">pid</span><span class="w">   </span><span class="o">|</span><span class="w">        </span><span class="n">stage</span><span class="w">        </span><span class="o">|</span><span class="w">  </span><span class="k">state</span><span class="w">  </span><span class="o">|</span><span class="w">   </span><span class="n">err</span><span class="w">    </span><span class="o">|</span><span class="w">               </span><span class="n">last_dbz_offset</span>
+<span class="c1">---------+----------------+---------+---------------------+---------+----------+---------------------------------------------</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">olr</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="mi">1702522</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">change</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="n">capture</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;scn&quot;</span><span class="p">:</span><span class="mi">5031082</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;c_scn&quot;</span><span class="p">:</span><span class="mi">5031085</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;c_idx&quot;</span><span class="p">:</span><span class="mi">3</span><span class="err">}</span>
+</code></pre></div></p>
+<p>This means that the connector is now streaming for new changes of the designated tables. Restarting the connector in <code>initial</code> mode will proceed replication since the last successful point and initial snapshot will not be re-run.</p>
+<h3 id="initial-snapshot-only-and-no-cdc"><strong>Initial Snapshot Only and no CDC</strong><a class="headerlink" href="#initial-snapshot-only-and-no-cdc" title="Permanent link">&para;</a></h3>
+<p>Start the connector using <code>initial_only</code> mode will perform the initial snapshot of all designated tables (all in this case) only and will not perform CDC after.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;initial_only&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="capture-table-schema-only-cdc"><strong>Capture Table Schema Only + CDC</strong><a class="headerlink" href="#capture-table-schema-only-cdc" title="Permanent link">&para;</a></h3>
+<p>Start the connector using <code>no_data</code> mode will perform the schema capture only, build the corresponding tables in PostgreSQL and it does not replicate existing table data (skip initial snapshot). After the schema capture is completed, the connector goes into CDC mode and will start capture subsequent changes to the tables.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;no_data&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>Restarting the connector in <code>no_data</code> mode will not rebuild the schema again, and it will resume CDC since the last successful point.</p>
+<h3 id="always-do-initial-snapshot-cdc"><strong>Always do Initial Snapshot + CDC</strong><a class="headerlink" href="#always-do-initial-snapshot-cdc" title="Permanent link">&para;</a></h3>
+<p>Start the connector using <code>always</code> mode will always capture the schemas of capture tables, always redo the initial snapshot and then go to CDC. This is similar to a reset button because everything will be rebuilt using this mode. Use it with caution especially when you have large number of tables being captured, which could take a long time to finish. After the rebuild, CDC resumes as normal.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>After the initial snapshot, CDC will begin. Restarting a connector in <code>always</code> mode will repeat the same process described above.</p>
+<h2 id="possible-snapshot-modes-for-openlog-replicator-connector"><strong>Possible Snapshot Modes for Openlog Replicator Connector</strong><a class="headerlink" href="#possible-snapshot-modes-for-openlog-replicator-connector" title="Permanent link">&para;</a></h2>
+<ul>
+<li>initial (default)</li>
+<li>initial_only</li>
+<li>no_data</li>
+<li>always</li>
+<li>schemasync</li>
+</ul>
+<h2 id="preview-source-and-destination-table-relationships-with-schemasync-mode"><strong>Preview Source and Destination Table Relationships with schemasync mode</strong><a class="headerlink" href="#preview-source-and-destination-table-relationships-with-schemasync-mode" title="Permanent link">&para;</a></h2>
+<p>Before attempting to do an initial snapshot of current table and data, which may be huge, it is possible to "preview" all the tables and data type mappings between source and destination tables before the actual data migration. This gives you an opportunity to modify a data type mapping, or an object name before actual migration happens. This can be done with the special "schemasync" initial snapshot mode.</p>
+<p>Please note that you must set <code>synchdb.olr_snapshot_engine</code> to 'fdw' in order to use <code>schemasync</code> mode to preview the tables.</p>
+<h3 id="create-a-connector-and-start-it-in-schemasync-mode"><strong>Create a Connector and Start it in <code>schemasync</code> Mode</strong><a class="headerlink" href="#create-a-connector-and-start-it-in-schemasync-mode" title="Permanent link">&para;</a></h3>
+<p><code>schemasync</code> is a special mode that makes the connector connects to remote database and attempt to sync only the schema of designated tables. After this is done, the connector is put to <code>paused</code> state and user is able to review all the tables and data types created using the default rules and make change if needed.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="mi">1521</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;DBZUSER&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;dbz&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;FREE&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;DBZUSER&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;oracle&#39;</span>
+<span class="p">);</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_olr_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="mi">7070</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;ORACLE&#39;</span><span class="p">);</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;schemasync&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="ensure-the-connector-is-put-to-paused-state"><strong>Ensure the Connector is Put to Paused State</strong><a class="headerlink" href="#ensure-the-connector-is-put-to-paused-state" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">connector_type</span><span class="p">,</span><span class="w"> </span><span class="n">pid</span><span class="p">,</span><span class="w"> </span><span class="n">stage</span><span class="p">,</span><span class="w"> </span><span class="k">state</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;olrconn&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">name</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">connector_type</span><span class="w"> </span><span class="o">|</span><span class="w">   </span><span class="n">pid</span><span class="w">   </span><span class="o">|</span><span class="w">        </span><span class="n">stage</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">state</span>
+<span class="c1">---------+----------------+---------+---------------------+--------</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">olr</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="mi">1703430</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">change</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="n">capture</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">paused</span>
+</code></pre></div>
+<h3 id="review-the-tables-created-by-default-mapping-rules"><strong>Review the Tables Created by Default Mapping Rules</strong><a class="headerlink" href="#review-the-tables-created-by-default-mapping-rules" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_att_view</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;olrconn&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">name</span><span class="w">   </span><span class="o">|</span><span class="w">  </span><span class="k">type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">attnum</span><span class="w"> </span><span class="o">|</span><span class="w">       </span><span class="n">ext_tbname</span><span class="w">       </span><span class="o">|</span><span class="w">   </span><span class="n">pg_tbname</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ext_attname</span><span class="w">  </span><span class="o">|</span><span class="w">  </span><span class="n">pg_attname</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">ext_atttypename</span><span class="w"> </span><span class="o">|</span><span class="w">       </span><span class="n">pg_atttypename</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="k">transform</span>
+<span class="c1">---------+--------+--------+------------------------+----------------+--------------+--------------+-----------------+-----------------------------+-----------</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">CUSTOMERS</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">customers</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ID</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">CUSTOMERS</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">customers</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">NAME</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">name</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">varchar2</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w">           </span><span class="o">|</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ORDER_NUMBER</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">order_number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ORDER_DATE</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">order_date</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">date</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="k">timestamp</span><span class="w"> </span><span class="k">without</span><span class="w"> </span><span class="k">time</span><span class="w"> </span><span class="k">zone</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">PURCHASER</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">purchaser</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">QUANTITY</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">oracle</span><span class="w"> </span><span class="o">|</span><span class="w">      </span><span class="mi">5</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">orders</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">PRODUCT_ID</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+</code></pre></div>
+<h3 id="define-custom-mapping-rules-if-needed"><strong>Define Custom Mapping Rules (If Needed)</strong><a class="headerlink" href="#define-custom-mapping-rules-if-needed" title="Permanent link">&para;</a></h3>
+<p>User can use <code>synchdb_add_objmap</code> function to create custom mapping rules. It can be used to map table name, column name, data types and defines a data transform expression rule</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;FREE.DBZUSER.ORDERS&#39;</span><span class="p">,</span><span class="s1">&#39;free.myorders&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="s1">&#39;column&#39;</span><span class="p">,</span><span class="s1">&#39;FREE.DBZUSER.ORDERS.PURCHASER&#39;</span><span class="p">,</span><span class="s1">&#39;who&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="s1">&#39;datatype&#39;</span><span class="p">,</span><span class="s1">&#39;FREE.DBZUSER.ORDERS.QUANTITY&#39;</span><span class="p">,</span><span class="s1">&#39;bigint|0&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="s1">&#39;transform&#39;</span><span class="p">,</span><span class="s1">&#39;FREE.DBZUSER.CUSTOMERS.NAME&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;&#39;&gt;&gt;&gt;&gt;&gt;&#39;&#39; || &#39;&#39;%d&#39;&#39; || &#39;&#39;&lt;&lt;&lt;&lt;&lt;&#39;&#39;&#39;</span><span class="p">);</span>
+</code></pre></div>
+The above means:</p>
+<ul>
+<li>source table 'FREE.DBZUSER.ORDERS' will be mapped to 'free.myorders' in destination</li>
+<li>source column 'FREE.DBZUSER.ORDERS.PURCHASE' will be mapped to 'who' in destination</li>
+<li>source data type for column 'FREE.DBZUSER.ORDERS.QUANTITY' will be mapped to 'bigint'</li>
+<li>source column data 'FREE.DBZUSER.CUSTOMERS.NAME' will be transformed accoring to the expression where %d is the data placeholder</li>
+</ul>
+<h3 id="review-all-object-mapping-rules-created-so-far"><strong>Review All Object Mapping Rules Created So Far</strong><a class="headerlink" href="#review-all-object-mapping-rules-created-so-far" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_objmap</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;olrconn&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">name</span><span class="w">   </span><span class="o">|</span><span class="w">  </span><span class="n">objtype</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">enabled</span><span class="w"> </span><span class="o">|</span><span class="w">            </span><span class="n">srcobj</span><span class="w">             </span><span class="o">|</span><span class="w">           </span><span class="n">dstobj</span>
+<span class="c1">---------+-----------+---------+-------------------------------+----------------------------</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">myorders</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">column</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="p">.</span><span class="n">PURCHASER</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">who</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">datatype</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="p">.</span><span class="n">QUANTITY</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="nb">bigint</span><span class="o">|</span><span class="mi">0</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">transform</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">t</span><span class="w">       </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">CUSTOMERS</span><span class="p">.</span><span class="n">NAME</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;&gt;&gt;&gt;&gt;&gt;&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;%d&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&lt;&lt;&lt;&lt;&lt;&#39;</span>
+</code></pre></div>
+<h3 id="reload-the-object-mapping-rules"><strong>Reload the Object Mapping Rules</strong><a class="headerlink" href="#reload-the-object-mapping-rules" title="Permanent link">&para;</a></h3>
+<p>Once all custom rules have been defined, we need to signal the connector to load them. This will cause the connector to read and apply the object mapping rules. If it sees a discrepancy between current PostgreSQL values and the object mapping values, it will attempt to correct the mapping.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_reload_objmap</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="review-synchdb_att_view-again-for-changes"><strong>Review <code>synchdb_att_view</code> Again for Changes</strong><a class="headerlink" href="#review-synchdb_att_view-again-for-changes" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_att_view</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;olrconn&#39;</span><span class="p">;</span>
+<span class="w">  </span><span class="n">name</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">attnum</span><span class="w"> </span><span class="o">|</span><span class="w">       </span><span class="n">ext_tbname</span><span class="w">       </span><span class="o">|</span><span class="w">   </span><span class="n">pg_tbname</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">ext_attname</span><span class="w">  </span><span class="o">|</span><span class="w">  </span><span class="n">pg_attname</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">ext_atttypename</span><span class="w"> </span><span class="o">|</span><span class="w">       </span><span class="n">pg_atttypename</span><span class="w">        </span><span class="o">|</span><span class="w">         </span><span class="k">transform</span>
+<span class="c1">---------+------+--------+------------------------+----------------+--------------+--------------+-----------------+-----------------------------+----------------------------</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">olr</span><span class="w">  </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">CUSTOMERS</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">customers</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ID</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="n">id</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">olr</span><span class="w">  </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">CUSTOMERS</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">customers</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">NAME</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">name</span><span class="w">         </span><span class="o">|</span><span class="w"> </span><span class="n">varchar2</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="nb">character</span><span class="w"> </span><span class="nb">varying</span><span class="w">           </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;&gt;&gt;&gt;&gt;&gt;&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;%d&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39;&lt;&lt;&lt;&lt;&lt;&#39;</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">olr</span><span class="w">  </span><span class="o">|</span><span class="w">      </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">myorders</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">ORDER_NUMBER</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">order_number</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">olr</span><span class="w">  </span><span class="o">|</span><span class="w">      </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">myorders</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">ORDER_DATE</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">order_date</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">date</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="k">timestamp</span><span class="w"> </span><span class="k">without</span><span class="w"> </span><span class="k">time</span><span class="w"> </span><span class="k">zone</span><span class="w"> </span><span class="o">|</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">olr</span><span class="w">  </span><span class="o">|</span><span class="w">      </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">myorders</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">PURCHASER</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">who</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">olr</span><span class="w">  </span><span class="o">|</span><span class="w">      </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">myorders</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">QUANTITY</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">quantity</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">bigint</span><span class="w">                      </span><span class="o">|</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">olr</span><span class="w">  </span><span class="o">|</span><span class="w">      </span><span class="mi">5</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">FREE</span><span class="p">.</span><span class="n">DBZUSER</span><span class="p">.</span><span class="n">ORDERS</span><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">myorders</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="n">PRODUCT_ID</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">product_id</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="nb">number</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nb">numeric</span><span class="w">                     </span><span class="o">|</span>
+</code></pre></div>
+<h3 id="resume-the-connector-or-redo-the-entire-snapshot"><strong>Resume the Connector or Redo the Entire Snapshot</strong><a class="headerlink" href="#resume-the-connector-or-redo-the-entire-snapshot" title="Permanent link">&para;</a></h3>
+<p>Once the object mappings have been confirmed correct, we can resume the connector. Please note that, resume will proceed to streaming only the new table changes. The existing data of the tables will not be copied.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_resume_engine</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>To capture the table's existing data, we can also redo the entire snapshot with the new object mapping rules.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_stop_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="selective-table-sync"><strong>Selective Table Sync</strong><a class="headerlink" href="#selective-table-sync" title="Permanent link">&para;</a></h2>
+<h3 id="select-desired-tables-and-start-it-for-the-first-time"><strong>Select Desired Tables and Start it for the First Time</strong><a class="headerlink" href="#select-desired-tables-and-start-it-for-the-first-time" title="Permanent link">&para;</a></h3>
+<p>Table selection is done during connector creation phase via <code>synchdb_add_conninfo()</code> where we specify a list of tables (expressed in FQN, separated by a comma) to replicate from.</p>
+<p>For example, the following command creates a connector that only replicates change from <code>FREE.ORDERS</code> tables from Oracle.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="mi">1521</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;DBZUSER&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;dbz&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;FREE&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;DBZUSER&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;DBZUSER.ORDERS&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">&#39;oracle&#39;</span>
+<span class="p">);</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_olr_conninfo</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="mi">7070</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">&#39;ORACLE&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>Starting this connector for the very first time will trigger an initial snapshot being performed and selected tables' schema and data will be replicated.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="verify-the-connector-state-and-tables"><strong>Verify the Connector State and Tables</strong><a class="headerlink" href="#verify-the-connector-state-and-tables" title="Permanent link">&para;</a></h3>
+<p>Examine the connector state and the new tables:</p>
+<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">Select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="k">state</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="p">;</span>
+<span class="w">   </span><span class="n">name</span><span class="w">  </span><span class="o">|</span><span class="w">  </span><span class="k">state</span><span class="w">  </span><span class="o">|</span><span class="w">   </span><span class="n">err</span>
+<span class="c1">---------+---------+----------</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">polling</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span>
+
+<span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="err">\</span><span class="n">dt</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="o">*</span>
+<span class="w">          </span><span class="n">List</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">tables</span>
+<span class="w"> </span><span class="k">Schema</span><span class="w"> </span><span class="o">|</span><span class="w">  </span><span class="n">Name</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Type</span><span class="w">  </span><span class="o">|</span><span class="w"> </span><span class="k">Owner</span>
+<span class="c1">--------+--------+-------+--------</span>
+<span class="w"> </span><span class="k">free</span><span class="w">   </span><span class="o">|</span><span class="w"> </span><span class="n">orders</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">ubuntu</span>
+</code></pre></div>
+<p>By default, source database name is mapped to a schema in destination with letter casing strategy = lowercase, so <code>FREE.ORDERS</code> becomes <code>free.orders</code> in postgreSQL. Once the tables have done the initial snapshot, the connector will start CDC to stream subsequent changes for these tables.</p>
+<h3 id="add-more-tables-to-replicate-during-run-time"><strong>Add More Tables to Replicate During Run Time.</strong><a class="headerlink" href="#add-more-tables-to-replicate-during-run-time" title="Permanent link">&para;</a></h3>
+<p>The <code>olrconn</code> from previous section has already completed the initial snapshot and obtained the table schemas of the selected table. If we would like to add more tables to replicate from, we will need to notify the Debezium engine about the updated table section and perform the initial snapshot again. Here's how it is done:</p>
+<ol>
+<li>Update the <code>synchdb_conninfo</code> table to include additional tables.</li>
+<li>In this example, we add the <code>DBZUSER.CUSTOMERS</code> table to the sync list:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">synchdb_conninfo</span><span class="w"> </span>
+<span class="k">SET</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonb_set</span><span class="p">(</span><span class="k">data</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{table}&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&quot;DBZUSER.ORDERS,DBZUSER.CUSTOMERS&quot;&#39;</span><span class="p">)</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;olrconn&#39;</span><span class="p">;</span>
+</code></pre></div>
+<ol>
+<li>Restart the connector with the snapshot mode set to <code>always</code> to perform another initial snapshot:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="k">DROP</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">free</span><span class="p">.</span><span class="n">orders</span><span class="p">;</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_restart_connector</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>This forces Debezium to re-snapshot all the tables again, including the existing tables <code>free.orders</code> and the new <code>free.customers</code> before going to CDC streaming. This means, to add a new table, the existing tables have to be dropped (to prevent duplicate table and primary key errors) and do the entire initial snapshot again. This is quite redundant and Debezium suggests using incremental snasphot to add the addition tables without re-snapshotting. We will update this procedure once we add the incremental snapshot support to SynchDB.</p>
+<h3 id="filter-openlog-replicator-tables-important"><strong>Filter Openlog Replicator Tables (IMPORTANT)</strong><a class="headerlink" href="#filter-openlog-replicator-tables-important" title="Permanent link">&para;</a></h3>
+<p>For initial snapshot (via Debezium or FDW), we are able to select desired tables to replicate, but once the connector enters CDC stage via Openlog Replicator, the selected table filter does not automatically apply to Openlog Replicator. The user is required to configure Openlog Replicator service to output change events only for selected tables. If there is a discrepancy between SynchDB and Openlog Replicator's table filter, it is possible for SynchDB to receive a change event that it has not created a table for, causing an error. Therefore, it is a good practice to configure both SynchDB and Openlog Replicator to the same table filters.</p>
+<h2 id="custom-start-offset-values">Custom Start Offset Values<a class="headerlink" href="#custom-start-offset-values" title="Permanent link">&para;</a></h2>
+<p>A start offset value represents a point to start replication from in the similar way as PostgreSQL's resume LSN. When Debezium runner engine starts, it will start the replication from this offset value. Setting this offset value to a earlier value will cause Debezium runner engine to start replication from earlier records, possibly replicating duplicate data records. We should be extra cautious when setting start offset values on Debezium.</p>
+<h3 id="record-settable-offset-values"><strong>Record Settable Offset Values</strong><a class="headerlink" href="#record-settable-offset-values" title="Permanent link">&para;</a></h3>
+<p>During operation, new offsets will be generated and flushed to disk by Debezium runner engine. The last flushed offset can be retrieved from <code>synchdb_state_view()</code> utility command:</p>
+<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">last_dbz_offset</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="p">;</span>
+<span class="w">  </span><span class="n">name</span><span class="w">   </span><span class="o">|</span><span class="w">               </span><span class="n">last_dbz_offset</span>
+<span class="c1">---------+---------------------------------------------</span>
+<span class="w"> </span><span class="n">olrconn</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="err">{</span><span class="ss">&quot;scn&quot;</span><span class="p">:</span><span class="mi">5044305</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;c_scn&quot;</span><span class="p">:</span><span class="mi">5044300</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;c_idx&quot;</span><span class="p">:</span><span class="mi">3</span><span class="err">}</span>
+</code></pre></div>
+<p>We should save this values regularly, so in case we run into a problem, we know the offset location in the past that can be set to resume the replication operation.</p>
+<h3 id="pause-the-connector"><strong>Pause the Connector</strong><a class="headerlink" href="#pause-the-connector" title="Permanent link">&para;</a></h3>
+<p>A connector must be in a <code>paused</code> state before a new offset value can be set.</p>
+<p>Use <code>synchdb_pause_engine()</code> SQL function to pause a runnng connector. This will halt the Debezium runner engine from replicating from the heterogeneous database. When paused, it is possible to alter the Debezium connector's offset value to replicate from a specific point in the past using <code>synchdb_set_offset()</code> SQL routine. It takes <code>conninfo_name</code> as its argument which can be found from the output of <code>synchdb_get_state()</code> view.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_pause_engine</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="set-the-new-offset"><strong>Set the new Offset</strong><a class="headerlink" href="#set-the-new-offset" title="Permanent link">&para;</a></h3>
+<p>Use <code>synchdb_set_offset()</code> SQL function to change a connector worker's starting offset. This can only be done when the connector is put into <code>paused</code> state. The function takes 2 parameters, <code>conninfo_name</code> and <code>a valid offset string</code>, both of which can be found from the output of <code>synchdb_get_state()</code> view.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span>
+<span class="w">  </span><span class="n">synchdb_set_offset</span><span class="p">(</span>
+<span class="w">    </span><span class="s1">&#39;olrconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{&quot;scn&quot;:5044305, &quot;c_scn&quot;:5044300, &quot;c_idx&quot;:3}&#39;</span>
+<span class="w">  </span><span class="p">);</span>
+</code></pre></div>
+<h3 id="resume-the-connector"><strong>Resume the Connector</strong><a class="headerlink" href="#resume-the-connector" title="Permanent link">&para;</a></h3>
+<p>Use <code>synchdb_resume_engine()</code> SQL function to resume Debezium operation from a paused state. This function takes <code>connector name</code> as its only parameter, which can be found from the output of <code>synchdb_get_state()</code> view. The resumed Debezium runner engine will start the replication from the newly set offset value.</p>
+<p>For example:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_resume_engine</span><span class="p">(</span><span class="s1">&#39;olrconn&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 Maintained by <a href="https://github.com/hornetlabs">Hornetlabs Technology </a>. <a href="https://www.netlify.com/"><img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deployed by Netlify" width="114" height="51"></a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="../../../js/print-site.js"></script>
+      
+        <script src="../../../js/print-site.js"></script>
+      
+    
+  </body>
+</html>
