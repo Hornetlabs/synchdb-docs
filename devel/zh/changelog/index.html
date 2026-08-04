@@ -2875,18 +2875,18 @@
 <h2 id="synchdb-14-2026-08-04"><strong><a href="https://github.com/Hornetlabs/synchdb/releases/tag/v1.4">SynchDB 1.4</a> - 2026-08-04</strong><a class="headerlink" href="#synchdb-14-2026-08-04" title="Permanent link">&para;</a></h2>
 <p>SynchDB 1.4 将 Oracle 容器数据库（CDB/PDB）支持扩展到了 Debezium、oracle_fdw 与 OLR 三条执行路径；为 MySQL 和 PostgreSQL 连接器新增了 TLS 安全连接支持（Oracle/OLR 连接器则使用 Oracle Wallet）；并支持在连接器运行期间动态调整 Debezium 运行器的日志级别，无需重启。此版本还包含一轮稳定性修复（JNI 引用泄漏、format converter 中的二次释放问题、IvorySQL 下的符号冲突），并将 CI 构建与测试矩阵扩展到以 IvorySQL 作为宿主平台。</p>
 <h3 id="_2"><strong>新增</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
-<h4 id="oracle-cdbpdb">Oracle 容器数据库（CDB/PDB）支持<a class="headerlink" href="#oracle-cdbpdb" title="Permanent link">&para;</a></h4>
+<h4 id="oracle-cdbpdb"><a href="https://docs.synchdb.com/user-guide/create_a_connector/#create-a-connector_1">Oracle 容器数据库（CDB/PDB）支持</a><a class="headerlink" href="#oracle-cdbpdb" title="Permanent link">&para;</a></h4>
 <ul>
 <li>基于 Debezium 的 Oracle 连接器现在可以接受 <code>CDB/PDB</code> 格式的数据库名，并自动映射为 Debezium 的 <code>database.dbname</code> 与 <code>database.pdb.name</code> 属性。</li>
 <li>基于 <a href="https://github.com/laurenz/oracle_fdw">oracle_fdw</a> 的 FDW 快照路径现已支持 Oracle 容器数据库架构。</li>
 <li>新增了针对 Oracle 23ai（Free PDB1）的 CDB/PDB 专项测试覆盖。</li>
 </ul>
-<h4 id="tls">TLS / 安全连接<a class="headerlink" href="#tls" title="Permanent link">&para;</a></h4>
+<h4 id="tls"><a href="https://docs.synchdb.com/user-guide/configure_snapshot_engine/#synchdb_add_fdw_conninfo">TLS / 安全连接</a><a class="headerlink" href="#tls" title="Permanent link">&para;</a></h4>
 <ul>
 <li>通过 extra conninfo 参数为 MySQL 和 PostgreSQL 连接器新增了 TLS 连接支持。</li>
 <li>Oracle 与 OLR 连接器改为使用 Oracle Wallet 实现安全连接，而非标准 TLS 参数。</li>
 </ul>
-<h4 id="debezium">运行时动态调整 Debezium 日志级别<a class="headerlink" href="#debezium" title="Permanent link">&para;</a></h4>
+<h4 id="debezium"><a href="https://docs.synchdb.com/getting-started/configuration/#synchdb-configuration">运行时动态调整 Debezium 日志级别</a><a class="headerlink" href="#debezium" title="Permanent link">&para;</a></h4>
 <ul>
 <li>现在可以在连接器运行期间调整 Debezium 运行器的日志级别，无需重启连接器。（<a href="https://github.com/Hornetlabs/synchdb/issues/106">#106</a>）</li>
 </ul>
