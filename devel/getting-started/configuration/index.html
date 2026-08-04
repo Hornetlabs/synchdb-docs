@@ -31,7 +31,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -39,7 +39,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -2179,7 +2179,7 @@
 <td>synchdb.dbz_log_level</td>
 <td>enum</td>
 <td>"warn"</td>
-<td>the log level setting for Debezium Runner. Possible values are "debug", "info", "warn", "error", "all", "fatal", "off", "trace"</td>
+<td>the log level setting for Debezium Runner. Possible values are "debug", "info", "warn", "error", "all", "fatal", "off", "trace". This GUC only determines the initial log level when a connector <strong>starts</strong>; to change the log level of a running connector at runtime without restarting it, use the <code>synchdb_set_dbz_loglevel(name, level)</code> function instead, e.g. <code>SELECT synchdb_set_dbz_loglevel('mysqlconn', 'debug');</code></td>
 </tr>
 <tr>
 <td>synchdb.log_change_on_error</td>
@@ -2540,7 +2540,7 @@ synchdb.dbz_min_row_to_stream_results = 0
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../js/print-site.js"></script>
       

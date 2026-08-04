@@ -31,7 +31,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -39,7 +39,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -2232,6 +2232,7 @@
 <li>In the same repeatable read transaction, migrate all desired tables schema and data with proper type translations</li>
 <li>Once done, the CDC can resume from the cut-off point, which will handle the data changes that happened during the snapshot.</li>
 </ul>
+<p>&lt;<strong>NOTE</strong>&gt; Because the FDW snapshot engine writes an offset file before the replication slot exists, this conflicts with the <code>validateLogPosition()</code> check introduced in Debezium 3.x. This is currently worked around by setting <code>offset.mismatch.strategy</code> to <code>trust_slot</code>, which restores the pre-3.x (e.g. 2.6) startup behavior. This is a temporary workaround pending a more complete fix — see <a href="https://github.com/Hornetlabs/synchdb/issues/256">Issue #256</a>.</p>
 <h3 id="oracle-and-openlog-replicator-connectors"><strong>Oracle and Openlog Replicator Connectors</strong><a class="headerlink" href="#oracle-and-openlog-replicator-connectors" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Before snapshot begins, read the current SCN value, which serves as a "cut-off" point for the snapshot</li>
@@ -2240,7 +2241,8 @@
 <li>Migrate all desired tables schema and data with proper type translations with FLASHBACK query.</li>
 <li>Once done, the CDC can resume from the cut-off point, which will handle the data changes that happened during the snapshot.</li>
 </ul>
-<p>WARNING: <strong>FLASHBACK permission is required to obtain the "cut-point" parameters.</strong></p>
+<p>&lt;<strong>WARNING</strong>&gt; <strong>FLASHBACK permission is required to obtain the "cut-point" parameters.</strong></p>
+<p>&lt;<strong>NOTE</strong>&gt; Oracle and Openlog Replicator connectors now support Container Database (CDB/PDB) architecture: as long as the source database is specified in the <code>CDB/PDB</code> format (e.g. <code>FREE/FREEPDB1</code>) when creating the connector, the FDW-based snapshot will automatically connect to the corresponding PDB service name.</p>
 <h2 id="how-does-fdw-based-snapshot-work"><strong>How does FDW Based Snapshot Work</strong><a class="headerlink" href="#how-does-fdw-based-snapshot-work" title="Permanent link">&para;</a></h2>
 <p>FDW based snapshot consists of about 10 steps:</p>
 <h3 id="1-preparation"><strong>1. Preparation</strong><a class="headerlink" href="#1-preparation" title="Permanent link">&para;</a></h3>
@@ -2370,7 +2372,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../js/print-site.js"></script>
       

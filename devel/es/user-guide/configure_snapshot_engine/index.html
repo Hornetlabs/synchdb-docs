@@ -31,7 +31,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -39,7 +39,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1877,6 +1877,45 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#tls-secure-connections-for-fdw-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TLS Secure Connections for FDW Snapshot
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TLS Secure Connections for FDW Snapshot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_add_fdw_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_add_fdw_conninfo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_del_fdw_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_del_fdw_conninfo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2085,6 +2124,45 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#tls-secure-connections-for-fdw-snapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TLS Secure Connections for FDW Snapshot
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="TLS Secure Connections for FDW Snapshot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_add_fdw_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_add_fdw_conninfo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_del_fdw_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_del_fdw_conninfo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2167,6 +2245,7 @@ FIND_LIBDIRS<span class="w"> </span>:<span class="o">=</span><span class="w"> </
 sudo<span class="w"> </span>make<span class="w"> </span>install<span class="w"> </span><span class="nv">PG_CONFIG</span><span class="o">=</span>/usr/local/pgsql/bin/pg_config
 </code></pre></div>
 <p>Oralce_fdw is ready to go. Start a connector normally with synchdb.olr_snapshot_engine set to 'fdw'. If a snapshot is required, SynchDB will complete it via FDW. You do not have to run <code>CREATE EXTENSION oracle_fdw</code> prior to using FDW based initial snapshot, nor do you have to <code>CREATE SERVER</code> or <code>CREATE USER MAPPING</code>. SynchDB takes care of all of these when it performs the snapshot..</p>
+<p>&lt;<strong>NOTE</strong>&gt; If the target is an Oracle Container Database (CDB/PDB), specify the source database (srcdb) in the <code>CDB/PDB</code> format (e.g. <code>FREE/FREEPDB1</code>) when creating the connector with <code>synchdb_add_conninfo()</code>, and SynchDB will automatically connect to the corresponding PDB service.</p>
 <h2 id="fdw-snapshot-for-mysql-connectors"><strong>FDW Snapshot for MySQL Connectors</strong><a class="headerlink" href="#fdw-snapshot-for-mysql-connectors" title="Permanent link">&para;</a></h2>
 <p>It is possible to use mysql_fdw to perform initial snapshot for MySQL connectors which is significantly faster than Debezium counterpart. SynchDB integrates with <a href="https://github.com/EnterpriseDB/mysql_fdw">mysql_fdw</a> version 2.9.3 with libmysqlclient v8 as its underlying driver. This is just the version tested, older or newer versions may still work.</p>
 <h3 id="install-mysql-client-development-package"><strong>Install MySQL Client Development Package</strong><a class="headerlink" href="#install-mysql-client-development-package" title="Permanent link">&para;</a></h3>
@@ -2196,6 +2275,54 @@ make<span class="w"> </span>
 sudo<span class="w"> </span>make<span class="w"> </span>install
 </code></pre></div>
 <p>postgres is ready to go. Start a connector normally with synchdb.olr_snapshot_engine set to 'fdw'. If a snapshot is required, SynchDB will complete it via FDW. You do not have to run <code>CREATE EXTENSION mysql_fdw</code> prior to using FDW based initial snapshot, nor do you have to <code>CREATE SERVER</code> or <code>CREATE USER MAPPING</code>. SynchDB takes care of all of these when it performs the snapshot..</p>
+<h2 id="tls-secure-connections-for-fdw-snapshot"><strong>TLS Secure Connections for FDW Snapshot</strong><a class="headerlink" href="#tls-secure-connections-for-fdw-snapshot" title="Permanent link">&para;</a></h2>
+<p>FDW-based snapshots can be secured with TLS (MySQL, Postgres) or an Oracle Wallet (Oracle, OLR) depending on the connector type. This is a separate mechanism from <a href="../../tutorial/mysql_cdc_to_postgresql/#synchdb_add_extra_conninfo"><code>synchdb_add_extra_conninfo()</code></a>, which configures the Java Keystore/Truststore used for the Debezium JDBC connection.</p>
+<h3 id="synchdb_add_fdw_conninfo"><strong>synchdb_add_fdw_conninfo</strong><a class="headerlink" href="#synchdb_add_fdw_conninfo" title="Permanent link">&para;</a></h3>
+<p>Purpose: configure the TLS certificate file paths (client certificate, private key, CA/root certificate) and an optional cipher list used by the FDW connection for the specified connector.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_fdw_conninfo</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">ssl_cert</span><span class="p">,</span><span class="w"> </span><span class="n">ssl_key</span><span class="p">,</span><span class="w"> </span><span class="n">ssl_rootcert</span><span class="p">,</span><span class="w"> </span><span class="n">ssl_cipher</span><span class="p">);</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>argument</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ssl_cert</code></td>
+<td>Client certificate file path (PEM format). Leave as an empty string <code>''</code> if not needed</td>
+</tr>
+<tr>
+<td><code>ssl_key</code></td>
+<td>Client private key file path (PEM format). Leave as an empty string <code>''</code> if not needed</td>
+</tr>
+<tr>
+<td><code>ssl_rootcert</code></td>
+<td>CA / root certificate file path (PEM format). <strong>For Oracle and OLR connectors, this is instead the directory path of the Oracle Wallet</strong>. Leave as an empty string <code>''</code> if not needed</td>
+</tr>
+<tr>
+<td><code>ssl_cipher</code></td>
+<td>Cipher suite list (mysql_fdw only). Leave as an empty string <code>''</code> if not needed</td>
+</tr>
+</tbody>
+</table>
+<p>Actual behavior per connector type:</p>
+<ul>
+<li><strong>MySQL (mysql_fdw)</strong>: <code>ssl_cert</code>, <code>ssl_key</code>, <code>ssl_rootcert</code> (mapped to mysql_fdw's <code>ssl_ca</code>), and <code>ssl_cipher</code> are applied directly to <code>CREATE SERVER ... OPTIONS (...)</code>.</li>
+<li><strong>Postgres (postgres_fdw)</strong>: <code>ssl_cert</code>, <code>ssl_key</code>, and <code>ssl_rootcert</code> map to postgres_fdw's <code>sslcert</code>, <code>sslkey</code>, and <code>sslrootcert</code> options respectively; <code>sslmode</code> is instead configured via <a href="../../tutorial/mysql_cdc_to_postgresql/#synchdb_add_extra_conninfo"><code>synchdb_add_extra_conninfo()</code></a> (the keystore/truststore arguments can be left empty in this case).</li>
+<li><strong>Oracle and OLR (oracle_fdw)</strong>: only <code>ssl_rootcert</code> is used, and its value is the directory path of the Oracle Wallet. SynchDB automatically switches the connection string to Easy Connect Plus format (<code>tcps://host:port/service?wallet_location=...&amp;ssl_server_dn_match=yes</code>). <code>ssl_cert</code>/<code>ssl_key</code> have no effect for oracle_fdw — if a client certificate is required, it must be imported into the specified Wallet directory beforehand using <code>orapki</code> or <code>openssl pkcs12</code>.</li>
+</ul>
+<p>Example (MySQL):
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_fdw_conninfo</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/path/to/client-cert.pem&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/path/to/client-key.pem&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/path/to/ca.pem&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<p>Example (Oracle / OLR, using an Oracle Wallet):
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_fdw_conninfo</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/path/to/wallet_dir&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<h3 id="synchdb_del_fdw_conninfo"><strong>synchdb_del_fdw_conninfo</strong><a class="headerlink" href="#synchdb_del_fdw_conninfo" title="Permanent link">&para;</a></h3>
+<p>Purpose: remove all TLS certificate paths configured by <code>synchdb_add_fdw_conninfo</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_del_fdw_conninfo</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+</code></pre></div>
 
 
 
@@ -2260,7 +2387,7 @@ sudo<span class="w"> </span>make<span class="w"> </span>install
       <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../js/print-site.js"></script>
       

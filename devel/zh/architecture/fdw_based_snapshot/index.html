@@ -31,7 +31,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -39,7 +39,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -2236,6 +2236,7 @@
 <li>在同一個 repeatable read 事务中，使用正確的類型轉換遷移所有目標表的架構和資料。</li>
 <li>完成後，CDC 可以從截止點恢復，處理快照期間發生的資料變更。</li>
 </ul>
+<p>&lt;<strong>注意</strong>&gt; 由於 FDW 快照引擎會在複寫槽（replication slot）建立之前先寫入 offset 檔案，這與 Debezium 3.x 新增的 <code>validateLogPosition()</code> 檢查衝突。目前透過將 <code>offset.mismatch.strategy</code> 設為 <code>trust_slot</code> 繞過此檢查，恢復 Debezium 3.x 之前（如 2.6）的啟動行為。這是暫時的因應措施，後續會有更完整的修復，詳見 <a href="https://github.com/Hornetlabs/synchdb/issues/256">Issue #256</a>。</p>
 <h3 id="oracle-openlog-replicator"><strong>Oracle 和 Openlog Replicator 連接器</strong><a class="headerlink" href="#oracle-openlog-replicator" title="Permanent link">&para;</a></h3>
 <ul>
 <li>在快照開始之前，讀取目前 SCN 值，它作為快照的「截止點」。</li>
@@ -2245,6 +2246,7 @@
 <li>完成後，CDC 可以從截止點恢復運行，並處理快照期間發生的資料變更。</li>
 </ul>
 <p>警告：<strong>取得「截止點」參數需要 FLASHBACK 權限</strong></p>
+<p>&lt;<strong>注意</strong>&gt; Oracle 和 Openlog Replicator 連接器現已支援容器資料庫（CDB/PDB）架構：只要在建立連接器時將來源資料庫指定為 <code>CDB/PDB</code> 格式（例如 <code>FREE/FREEPDB1</code>），基於 FDW 的快照將自動連線到對應的 PDB 服務名稱。</p>
 <h2 id="fdw_1"><strong>基於 FDW 的快照如何運作</strong><a class="headerlink" href="#fdw_1" title="Permanent link">&para;</a></h2>
 <p>基於 FDW 的快照大約包含 10 個步驟：</p>
 <h3 id="1"><strong>1. 準備</strong><a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
@@ -2374,7 +2376,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../js/print-site.js"></script>
       

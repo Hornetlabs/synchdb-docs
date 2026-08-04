@@ -31,7 +31,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -39,7 +39,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1881,6 +1881,45 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#fdw-tls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FDW 快照的 TLS 安全連接
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FDW 快照的 TLS 安全連接">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_add_fdw_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_add_fdw_conninfo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_del_fdw_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_del_fdw_conninfo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2089,6 +2128,45 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#fdw-tls" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FDW 快照的 TLS 安全連接
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="FDW 快照的 TLS 安全連接">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_add_fdw_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_add_fdw_conninfo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchdb_del_fdw_conninfo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        synchdb_del_fdw_conninfo
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2171,6 +2249,7 @@ FIND_LIBDIRS<span class="w"> </span>:<span class="o">=</span><span class="w"> </
 sudo<span class="w"> </span>make<span class="w"> </span>install<span class="w"> </span><span class="nv">PG_CONFIG</span><span class="o">=</span>/usr/local/pgsql/bin/pg_config
 </code></pre></div>
 <p>oracle_fdw 已準備就緒。正常啟動連接器，並將 synchdb.olr_snapshot_engine 設定為 'fdw'。如果需要快照，SynchDB 將透過 FDW 完成。您無需在使用基於 FDW 的初始快照之前執行 <code>CREATE EXTENSION oracle_fdw</code>，也無需執行 <code>CREATE SERVER</code> 或 <code>CREATE USER MAPPING</code>。 SynchDB 在執行快照時會自動處理所有這些操作。</p>
+<p>&lt;<strong>注意</strong>&gt; 若目標為 Oracle 容器資料庫（CDB/PDB），在 <code>synchdb_add_conninfo()</code> 建立連接器時，將來源資料庫（srcdb）指定為 <code>CDB/PDB</code> 格式（例如 <code>FREE/FREEPDB1</code>）即可，SynchDB 會自動連線到對應的 PDB 服務。</p>
 <h2 id="mysql-fdw"><strong>MySQL 連接器的 FDW 快照</strong><a class="headerlink" href="#mysql-fdw" title="Permanent link">&para;</a></h2>
 <p>可以使用 mysql_fdw 為 MySQL 連接器執行初始快照，其速度遠遠超過 Debezium 的同類工具。 SynchDB 整合了 <a href="https://github.com/EnterpriseDB/mysql_fdw">mysql_fdw</a> 2.9.3 版本，並以 libmysqlclient v8 作為其底層驅動程式。這只是經過測試的版本，更舊或更新的版本可能也適用。</p>
 <h3 id="mysql"><strong>安裝 MySQL 用戶端開發套件</strong><a class="headerlink" href="#mysql" title="Permanent link">&para;</a></h3>
@@ -2200,6 +2279,54 @@ make<span class="w"> </span>
 sudo<span class="w"> </span>make<span class="w"> </span>install
 </code></pre></div>
 <p>postgres_fdw 已準備就緒。正常啟動連接器，並將 synchdb.olr_snapshot_engine 設定為 'fdw'。如果需要快照，SynchDB 將透過 FDW 完成。您無需在使用基於 FDW 的初始快照之前執行 <code>CREATE EXTENSION postgres_fdw</code>，也無需執行 <code>CREATE SERVER</code> 或 <code>CREATE USER MAPPING</code>。 SynchDB 在執行快照時會自動處理所有這些操作。</p>
+<h2 id="fdw-tls"><strong>FDW 快照的 TLS 安全連接</strong><a class="headerlink" href="#fdw-tls" title="Permanent link">&para;</a></h2>
+<p>基於 FDW 的快照在連線遠端資料庫時，可以依連接器類型設定 TLS（MySQL、Postgres）或 Oracle Wallet（Oracle、OLR）以確保連線安全。這與 <a href="../../tutorial/mysql_cdc_to_postgresql/#synchdb_add_extra_conninfo"><code>synchdb_add_extra_conninfo()</code></a> 為 Debezium JDBC 連線設定的 Java Keystore/Truststore 是相互獨立的兩套機制。</p>
+<h3 id="synchdb_add_fdw_conninfo"><strong>synchdb_add_fdw_conninfo</strong><a class="headerlink" href="#synchdb_add_fdw_conninfo" title="Permanent link">&para;</a></h3>
+<p>用途：為指定連接器設定 FDW 連線所需的 TLS 憑證檔案路徑（客戶端憑證、私鑰、CA/根憑證）以及可選的加密套件清單。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_fdw_conninfo</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">ssl_cert</span><span class="p">,</span><span class="w"> </span><span class="n">ssl_key</span><span class="p">,</span><span class="w"> </span><span class="n">ssl_rootcert</span><span class="p">,</span><span class="w"> </span><span class="n">ssl_cipher</span><span class="p">);</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>參數</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ssl_cert</code></td>
+<td>客戶端憑證檔案路徑（PEM 格式）。不需要時可留空字串 <code>''</code></td>
+</tr>
+<tr>
+<td><code>ssl_key</code></td>
+<td>客戶端私鑰檔案路徑（PEM 格式）。不需要時可留空字串 <code>''</code></td>
+</tr>
+<tr>
+<td><code>ssl_rootcert</code></td>
+<td>CA / 根憑證檔案路徑（PEM 格式）。<strong>對 Oracle 和 OLR 連接器而言，此參數改為 Oracle Wallet 所在的目錄路徑</strong>。不需要時可留空字串 <code>''</code></td>
+</tr>
+<tr>
+<td><code>ssl_cipher</code></td>
+<td>加密套件清單（僅 mysql_fdw 支援）。不需要時可留空字串 <code>''</code></td>
+</tr>
+</tbody>
+</table>
+<p>各連接器類型的實際行為：</p>
+<ul>
+<li><strong>MySQL（mysql_fdw）</strong>：<code>ssl_cert</code>、<code>ssl_key</code>、<code>ssl_rootcert</code>（對應 mysql_fdw 的 <code>ssl_ca</code>）、<code>ssl_cipher</code> 會直接套用到 <code>CREATE SERVER ... OPTIONS (...)</code> 中。</li>
+<li><strong>Postgres（postgres_fdw）</strong>：<code>ssl_cert</code>、<code>ssl_key</code>、<code>ssl_rootcert</code> 分別對應 postgres_fdw 的 <code>sslcert</code>、<code>sslkey</code>、<code>sslrootcert</code> 選項；<code>sslmode</code> 則透過 <a href="../../tutorial/mysql_cdc_to_postgresql/#synchdb_add_extra_conninfo"><code>synchdb_add_extra_conninfo()</code></a> 設定（keystore/truststore 相關參數在此情況下可留空）。</li>
+<li><strong>Oracle 和 OLR（oracle_fdw）</strong>：僅使用 <code>ssl_rootcert</code>，其值為 Oracle Wallet 所在的目錄路徑；SynchDB 會自動將連線字串切換為 Easy Connect Plus 格式（<code>tcps://host:port/service?wallet_location=...&amp;ssl_server_dn_match=yes</code>）。<code>ssl_cert</code>／<code>ssl_key</code> 對 oracle_fdw 無效——若需要用戶端憑證，須事先透過 <code>orapki</code> 或 <code>openssl pkcs12</code> 將其匯入到指定的 Wallet 目錄中。</li>
+</ul>
+<p>範例（MySQL）：
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_fdw_conninfo</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/path/to/client-cert.pem&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/path/to/client-key.pem&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/path/to/ca.pem&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<p>範例（Oracle / OLR，使用 Oracle Wallet）：
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_fdw_conninfo</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/path/to/wallet_dir&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+</code></pre></div></p>
+<h3 id="synchdb_del_fdw_conninfo"><strong>synchdb_del_fdw_conninfo</strong><a class="headerlink" href="#synchdb_del_fdw_conninfo" title="Permanent link">&para;</a></h3>
+<p>用途：刪除由 <code>synchdb_add_fdw_conninfo</code> 設定的所有 TLS 憑證路徑。</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_del_fdw_conninfo</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+</code></pre></div>
 
 
 
@@ -2264,7 +2391,7 @@ sudo<span class="w"> </span>make<span class="w"> </span>install
       <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../js/print-site.js"></script>
       
