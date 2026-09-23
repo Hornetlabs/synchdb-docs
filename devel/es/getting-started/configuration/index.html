@@ -2258,18 +2258,18 @@ synchdb.dbz_queue_size=8192                                             # Debezi
 synchdb.jvm_max_heap_size=2048                                          # 2GB heap memory to be allocated to a connector
 synchdb.dbz_snapshot_fetch_size=0                                       # Let Debezium figure out the optimal number of rows to fetch during initial snapshot
 synchdb.dbz_min_row_to_stream_results=0                                 # Always stream the results during initial snapshot
-synchdb.dbz_snapshot_thread_num=1                                       # Single thread during Debezium&#39;s initial snapshot
+synchdb.dbz_snapshot_thread_num=1                                       # Single thread during Debezium's initial snapshot
 synchdb.dbz_incremental_snapshot_chunk_size=4096                        # Incremental snapshot produces change events in batches of 4096 max
-synchdb.dbz_incremental_snapshot_watermarking_strategy=&#39;insert_insert&#39;  # Use insert_insert watermarking strategy
+synchdb.dbz_incremental_snapshot_watermarking_strategy='insert_insert'  # Use insert_insert watermarking strategy
 synchdb.dbz_offset_flush_interval_ms=60000                              # Flush offset data to disk every minute if needed    
 synchdb.dbz_capture_only_selected_table_ddl=false                       # Debezium will only capture the schema of selected tables rather than all tables
 synchdb.max_connector_workers=10                                        # 10 connector workers can be run at a time
-synchdb.error_handling_strategy=&#39;retry&#39;                                 # connector should retry on error
-synchdb.dbz_log_level=&#39;error&#39;                                            # Debezium Runner should log error messages only
+synchdb.error_handling_strategy='retry'                                 # connector should retry on error
+synchdb.dbz_log_level='error'                                            # Debezium Runner should log error messages only
 synchdb.log_change_on_error=true                                        # log JSON change event on error
 synchdb.cdc_start_delay_ms=30000                                        # wait 30s after snapshot completes and before CDC begins
-synchdb.olr_snapshot_engine=&quot;fdw&quot;                                       # use FDW based snapshot engine to complete the snapshot process
-synchdb.letter_casing_strategy=&quot;asis&quot;                                   # preserve all object letter casings as they appear in the sources
+synchdb.olr_snapshot_engine="fdw"                                       # use FDW based snapshot engine to complete the snapshot process
+synchdb.letter_casing_strategy="asis"                                   # preserve all object letter casings as they appear in the sources
 </code></pre></div>
 <h2 id="usage-recommendations"><strong>Usage Recommendations</strong><a class="headerlink" href="#usage-recommendations" title="Permanent link">&para;</a></h2>
 <ol>

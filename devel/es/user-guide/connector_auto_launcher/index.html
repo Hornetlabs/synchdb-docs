@@ -1859,7 +1859,7 @@
 <li>Reiniciar el servidor PostgreSQL para que los cambios surtan efecto</li>
 </ul>
 <p>Por ejemplo:
-<div class="highlight"><pre><span></span><code>shared_preload_libraries = &#39;synchdb&#39;
+<div class="highlight"><pre><span></span><code>shared_preload_libraries = 'synchdb'
 synchdb.synchdb_auto_launcher = true
 </code></pre></div></p>
 <p>Durante el arranque, la extensión SynchDB se precarga en una etapa temprana. Con <code>synchdb.synchdb_auto_launcher</code> configurado en true, SynchDB lanza un proceso de trabajo en segundo plano (background worker) llamado <code>synchdb_auto_launcher</code>, el cual a su vez genera un proceso <code>synchdb_db_launcher</code> por cada base de datos conectable y no plantilla. Cada <code>synchdb_db_launcher</code> recupera todos los conninfos de la tabla <code>synchdb_conninfo</code> (si existe) que estén marcados como <code>active</code> (es decir, con el indicador <code>isactive</code> establecido en <code>true</code>), y luego los inicia automáticamente como procesos de trabajo en segundo plano independientes, de la misma manera que cuando se llama a <code>synchdb_start_engine_bgw()</code>. El proceso <code>synchdb_auto_launcher</code> finaliza una vez que todos los <code>synchdb_db_launcher</code> han terminado su trabajo.</p>

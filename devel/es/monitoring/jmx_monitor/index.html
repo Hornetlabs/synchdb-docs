@@ -2184,67 +2184,67 @@ chown youruser:youruser jmxpwd.file jmxacc.file
 <h2 id="synchdb_add_jmx_conninfo-examples"><strong>synchdb_add_jmx_conninfo Examples</strong><a class="headerlink" href="#synchdb_add_jmx_conninfo-examples" title="Permanent link">&para;</a></h2>
 <p><strong>Enable JMX MBean with no authentication and no SSL:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_jmx_conninfo</span><span class="p">(</span>
-<span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w">    </span><span class="c1">-- existing connector name</span>
-<span class="w">    </span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span><span class="w">      </span><span class="c1">-- JMX listen address</span>
+<span class="w">    </span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="w">    </span><span class="c1">-- existing connector name</span>
+<span class="w">    </span><span class="s1">'0.0.0.0'</span><span class="p">,</span><span class="w">      </span><span class="c1">-- JMX listen address</span>
 <span class="w">    </span><span class="mi">9010</span><span class="p">,</span><span class="w">           </span><span class="c1">-- JMX listen port</span>
-<span class="w">    </span><span class="s1">&#39;10.55.13.17&#39;</span><span class="p">,</span><span class="w">  </span><span class="c1">-- JMX RMI server address - for remote client connect</span>
+<span class="w">    </span><span class="s1">'10.55.13.17'</span><span class="p">,</span><span class="w">  </span><span class="c1">-- JMX RMI server address - for remote client connect</span>
 <span class="w">    </span><span class="mi">9010</span><span class="p">,</span><span class="w">           </span><span class="c1">-- JMX RMI server port - for remoet client connect</span>
 <span class="w">    </span><span class="k">false</span><span class="p">,</span><span class="w">          </span><span class="c1">-- use authentication?</span>
-<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- password file for authentication</span>
-<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- access file for authentication</span>
+<span class="w">    </span><span class="s1">'null'</span><span class="p">,</span><span class="w">         </span><span class="c1">-- password file for authentication</span>
+<span class="w">    </span><span class="s1">'null'</span><span class="p">,</span><span class="w">         </span><span class="c1">-- access file for authentication</span>
 <span class="w">    </span><span class="k">false</span><span class="p">,</span><span class="w">          </span><span class="c1">-- use SSL?</span>
-<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL keystore path</span>
-<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL keystore password</span>
-<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL trust store</span>
-<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">);</span><span class="w">        </span><span class="c1">-- SSL trust store password</span>
+<span class="w">    </span><span class="s1">'null'</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL keystore path</span>
+<span class="w">    </span><span class="s1">'null'</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL keystore password</span>
+<span class="w">    </span><span class="s1">'null'</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL trust store</span>
+<span class="w">    </span><span class="s1">'null'</span><span class="p">);</span><span class="w">        </span><span class="c1">-- SSL trust store password</span>
 </code></pre></div>
 <p><strong>Enable JMX MBean with authentication</strong></p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_jmx_conninfo</span><span class="p">(</span>
-<span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w">    </span><span class="c1">-- existing connector name</span>
-<span class="w">    </span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span><span class="w">      </span><span class="c1">-- JMX listen address</span>
+<span class="w">    </span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="w">    </span><span class="c1">-- existing connector name</span>
+<span class="w">    </span><span class="s1">'0.0.0.0'</span><span class="p">,</span><span class="w">      </span><span class="c1">-- JMX listen address</span>
 <span class="w">    </span><span class="mi">9010</span><span class="p">,</span><span class="w">           </span><span class="c1">-- JMX listen port</span>
-<span class="w">    </span><span class="s1">&#39;10.55.13.17&#39;</span><span class="p">,</span><span class="w">  </span><span class="c1">-- JMX RMI server address - for remote client connect</span>
+<span class="w">    </span><span class="s1">'10.55.13.17'</span><span class="p">,</span><span class="w">  </span><span class="c1">-- JMX RMI server address - for remote client connect</span>
 <span class="w">    </span><span class="mi">9010</span><span class="p">,</span><span class="w">           </span><span class="c1">-- JMX RMI server port - for remoet client connect</span>
 <span class="w">    </span><span class="k">true</span><span class="p">,</span><span class="w">           </span><span class="c1">-- use authentication?</span>
-<span class="w">    </span><span class="s1">&#39;/path/to/passwd.file&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- password file for authentication</span>
-<span class="w">    </span><span class="s1">&#39;/path/to/access.file&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- access file for authentication</span>
+<span class="w">    </span><span class="s1">'/path/to/passwd.file'</span><span class="p">,</span><span class="w">         </span><span class="c1">-- password file for authentication</span>
+<span class="w">    </span><span class="s1">'/path/to/access.file'</span><span class="p">,</span><span class="w">         </span><span class="c1">-- access file for authentication</span>
 <span class="w">    </span><span class="k">false</span><span class="p">,</span><span class="w">          </span><span class="c1">-- use SSL?</span>
-<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL keystore path</span>
-<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL keystore password</span>
-<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL trust store</span>
-<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">);</span><span class="w">        </span><span class="c1">-- SSL trust store password</span>
+<span class="w">    </span><span class="s1">'null'</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL keystore path</span>
+<span class="w">    </span><span class="s1">'null'</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL keystore password</span>
+<span class="w">    </span><span class="s1">'null'</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL trust store</span>
+<span class="w">    </span><span class="s1">'null'</span><span class="p">);</span><span class="w">        </span><span class="c1">-- SSL trust store password</span>
 </code></pre></div>
 <p><strong>Enable JMX MBean with authentication and SSL without SSL client verify</strong></p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_jmx_conninfo</span><span class="p">(</span>
-<span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w">    </span><span class="c1">-- existing connector name</span>
-<span class="w">    </span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span><span class="w">      </span><span class="c1">-- JMX listen address</span>
+<span class="w">    </span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="w">    </span><span class="c1">-- existing connector name</span>
+<span class="w">    </span><span class="s1">'0.0.0.0'</span><span class="p">,</span><span class="w">      </span><span class="c1">-- JMX listen address</span>
 <span class="w">    </span><span class="mi">9010</span><span class="p">,</span><span class="w">           </span><span class="c1">-- JMX listen port</span>
-<span class="w">    </span><span class="s1">&#39;10.55.13.17&#39;</span><span class="p">,</span><span class="w">  </span><span class="c1">-- JMX RMI server address - for remote client connect</span>
+<span class="w">    </span><span class="s1">'10.55.13.17'</span><span class="p">,</span><span class="w">  </span><span class="c1">-- JMX RMI server address - for remote client connect</span>
 <span class="w">    </span><span class="mi">9010</span><span class="p">,</span><span class="w">           </span><span class="c1">-- JMX RMI server port - for remoet client connect</span>
 <span class="w">    </span><span class="k">true</span><span class="p">,</span><span class="w">           </span><span class="c1">-- use authentication?</span>
-<span class="w">    </span><span class="s1">&#39;/path/to/passwd.file&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- password file for authentication</span>
-<span class="w">    </span><span class="s1">&#39;/path/to/access.file&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- access file for authentication</span>
+<span class="w">    </span><span class="s1">'/path/to/passwd.file'</span><span class="p">,</span><span class="w">         </span><span class="c1">-- password file for authentication</span>
+<span class="w">    </span><span class="s1">'/path/to/access.file'</span><span class="p">,</span><span class="w">         </span><span class="c1">-- access file for authentication</span>
 <span class="w">    </span><span class="k">true</span><span class="p">,</span><span class="w">           </span><span class="c1">-- use SSL?</span>
-<span class="w">    </span><span class="s1">&#39;/path/to/keystore&#39;</span><span class="p">,</span><span class="w">            </span><span class="c1">-- SSL keystore path</span>
-<span class="w">    </span><span class="s1">&#39;keystorepass&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL keystore password</span>
-<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL trust store</span>
-<span class="w">    </span><span class="s1">&#39;null&#39;</span><span class="p">);</span><span class="w">        </span><span class="c1">-- SSL trust store password</span>
+<span class="w">    </span><span class="s1">'/path/to/keystore'</span><span class="p">,</span><span class="w">            </span><span class="c1">-- SSL keystore path</span>
+<span class="w">    </span><span class="s1">'keystorepass'</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL keystore password</span>
+<span class="w">    </span><span class="s1">'null'</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL trust store</span>
+<span class="w">    </span><span class="s1">'null'</span><span class="p">);</span><span class="w">        </span><span class="c1">-- SSL trust store password</span>
 </code></pre></div>
 <p><strong>Enable JMX MBean with authentication and SSL + SSL client verify</strong></p>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_jmx_conninfo</span><span class="p">(</span>
-<span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w">    </span><span class="c1">-- existing connector name</span>
-<span class="w">    </span><span class="s1">&#39;0.0.0.0&#39;</span><span class="p">,</span><span class="w">      </span><span class="c1">-- JMX listen address</span>
+<span class="w">    </span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="w">    </span><span class="c1">-- existing connector name</span>
+<span class="w">    </span><span class="s1">'0.0.0.0'</span><span class="p">,</span><span class="w">      </span><span class="c1">-- JMX listen address</span>
 <span class="w">    </span><span class="mi">9010</span><span class="p">,</span><span class="w">           </span><span class="c1">-- JMX listen port</span>
-<span class="w">    </span><span class="s1">&#39;10.55.13.17&#39;</span><span class="p">,</span><span class="w">  </span><span class="c1">-- JMX RMI server address - for remote client connect</span>
+<span class="w">    </span><span class="s1">'10.55.13.17'</span><span class="p">,</span><span class="w">  </span><span class="c1">-- JMX RMI server address - for remote client connect</span>
 <span class="w">    </span><span class="mi">9010</span><span class="p">,</span><span class="w">           </span><span class="c1">-- JMX RMI server port - for remoet client connect</span>
 <span class="w">    </span><span class="k">true</span><span class="p">,</span><span class="w">           </span><span class="c1">-- use authentication?</span>
-<span class="w">    </span><span class="s1">&#39;/path/to/passwd.file&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- password file for authentication</span>
-<span class="w">    </span><span class="s1">&#39;/path/to/access.file&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- access file for authentication</span>
+<span class="w">    </span><span class="s1">'/path/to/passwd.file'</span><span class="p">,</span><span class="w">         </span><span class="c1">-- password file for authentication</span>
+<span class="w">    </span><span class="s1">'/path/to/access.file'</span><span class="p">,</span><span class="w">         </span><span class="c1">-- access file for authentication</span>
 <span class="w">    </span><span class="k">true</span><span class="p">,</span><span class="w">           </span><span class="c1">-- use SSL?</span>
-<span class="w">    </span><span class="s1">&#39;/path/to/keystore&#39;</span><span class="p">,</span><span class="w">            </span><span class="c1">-- SSL keystore path</span>
-<span class="w">    </span><span class="s1">&#39;keystorepass&#39;</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL keystore password</span>
-<span class="w">    </span><span class="s1">&#39;/path/to/truststore&#39;</span><span class="p">,</span><span class="w">          </span><span class="c1">-- SSL trust store</span>
-<span class="w">    </span><span class="s1">&#39;truststorepass&#39;</span><span class="p">);</span><span class="w">      </span><span class="c1">-- SSL trust store password</span>
+<span class="w">    </span><span class="s1">'/path/to/keystore'</span><span class="p">,</span><span class="w">            </span><span class="c1">-- SSL keystore path</span>
+<span class="w">    </span><span class="s1">'keystorepass'</span><span class="p">,</span><span class="w">         </span><span class="c1">-- SSL keystore password</span>
+<span class="w">    </span><span class="s1">'/path/to/truststore'</span><span class="p">,</span><span class="w">          </span><span class="c1">-- SSL trust store</span>
+<span class="w">    </span><span class="s1">'truststorepass'</span><span class="p">);</span><span class="w">      </span><span class="c1">-- SSL trust store password</span>
 </code></pre></div>
 <h2 id="visualize-jmx-metrics-with-jconsole"><strong>Visualize JMX metrics with jconsole</strong><a class="headerlink" href="#visualize-jmx-metrics-with-jconsole" title="Permanent link">&para;</a></h2>
 <p>When a connector with JMX configuration is started, the JMX service will be running on the designated port number. We can use <code>jconsole</code> that comes with Java distribution to connect to JMX server. It is possible to connect locally via the JVM (connector worker) PID or via IP address and port number. If authentication is enabled, username and password are required as well. If no authentication is used, these can be left empty.</p>

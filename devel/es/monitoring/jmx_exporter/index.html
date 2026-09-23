@@ -1983,7 +1983,7 @@ lowercaseOutputName: true
 lowercaseOutputLabelNames: true
 
 rules:
-  - pattern: &quot;.*&quot;
+  - pattern: ".*"
 </code></pre></div>
 <p>Refer to the <a href="https://prometheus.github.io/jmx_exporter/1.3.0/http-mode/rules/">official prometheus documentation</a> for more advanced configuration parameters and their usage.</p>
 <h2 id="configure-jmx-exporter-to-a-synchdb-connector">Configure JMX Exporter to a SynchDB Connector<a class="headerlink" href="#configure-jmx-exporter-to-a-synchdb-connector" title="Permanent link">&para;</a></h2>
@@ -2032,10 +2032,10 @@ synchdb_del_jmx_exporter_conninfo(
 </tbody>
 </table>
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_jmx_exporter_conninfo</span><span class="p">(</span>
-<span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w">    </span><span class="c1">-- existing connector name</span>
-<span class="w">    </span><span class="s1">&#39;/path/to/jmx_exporter/jar&#39;</span><span class="p">,</span><span class="w">        </span><span class="c1">-- path to JMX exporter java agent jar</span>
+<span class="w">    </span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="w">    </span><span class="c1">-- existing connector name</span>
+<span class="w">    </span><span class="s1">'/path/to/jmx_exporter/jar'</span><span class="p">,</span><span class="w">        </span><span class="c1">-- path to JMX exporter java agent jar</span>
 <span class="w">    </span><span class="mi">9404</span><span class="p">,</span><span class="w">           </span><span class="c1">-- JMX exporter running port</span>
-<span class="w">    </span><span class="s1">&#39;/path/to/jmx/conf&#39;</span><span class="p">);</span><span class="w">       </span><span class="c1">-- path to JMX exporter conf file</span>
+<span class="w">    </span><span class="s1">'/path/to/jmx/conf'</span><span class="p">);</span><span class="w">       </span><span class="c1">-- path to JMX exporter conf file</span>
 </code></pre></div>
 <h2 id="obtain-metrics-via-http">Obtain Metrics via HTTP<a class="headerlink" href="#obtain-metrics-via-http" title="Permanent link">&para;</a></h2>
 <p>when the connector starts with JMX exporter settings, it will expose metrics at:</p>
@@ -2046,16 +2046,16 @@ synchdb_del_jmx_exporter_conninfo(
 
 # HELP debezium_mysql_connector_metrics_binlogposition debezium.mysql:name=null,type=connector-metrics,attribute=BinlogPosition
 # TYPE debezium_mysql_connector_metrics_binlogposition untyped
-debezium_mysql_connector_metrics_binlogposition{context=&quot;streaming&quot;,server=&quot;synchdb-connector&quot;} 1500.0
+debezium_mysql_connector_metrics_binlogposition{context="streaming",server="synchdb-connector"} 1500.0
 # HELP debezium_mysql_connector_metrics_changesapplied debezium.mysql:name=null,type=connector-metrics,attribute=ChangesApplied
 # TYPE debezium_mysql_connector_metrics_changesapplied untyped
-debezium_mysql_connector_metrics_changesapplied{context=&quot;schema-history&quot;,server=&quot;synchdb-connector&quot;} 39.0
+debezium_mysql_connector_metrics_changesapplied{context="schema-history",server="synchdb-connector"} 39.0
 # HELP debezium_mysql_connector_metrics_changesrecovered debezium.mysql:name=null,type=connector-metrics,attribute=ChangesRecovered
 # TYPE debezium_mysql_connector_metrics_changesrecovered untyped
-debezium_mysql_connector_metrics_changesrecovered{context=&quot;schema-history&quot;,server=&quot;synchdb-connector&quot;} 26.0
+debezium_mysql_connector_metrics_changesrecovered{context="schema-history",server="synchdb-connector"} 26.0
 # HELP debezium_mysql_connector_metrics_connected debezium.mysql:name=null,type=connector-metrics,attribute=Connected
 # TYPE debezium_mysql_connector_metrics_connected untyped
-debezium_mysql_connector_metrics_connected{context=&quot;streaming&quot;,server=&quot;synchdb-connector&quot;} 1.0
+debezium_mysql_connector_metrics_connected{context="streaming",server="synchdb-connector"} 1.0
 
 ...
 ...

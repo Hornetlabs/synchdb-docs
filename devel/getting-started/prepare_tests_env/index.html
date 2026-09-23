@@ -1820,7 +1820,7 @@
 
 <span class="k">GRANT</span><span class="w"> </span><span class="n">replication</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">mysqluser</span><span class="p">;</span>
 <span class="k">GRANT</span><span class="w"> </span><span class="n">replication</span><span class="w"> </span><span class="n">slave</span><span class="w">  </span><span class="k">on</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">mysqluser</span><span class="p">;</span>
-<span class="k">GRANT</span><span class="w"> </span><span class="n">RELOAD</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;mysqluser&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="n">RELOAD</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">'mysqluser'</span><span class="o">@</span><span class="s1">'%'</span><span class="p">;</span>
 <span class="n">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span>
 </code></pre></div></p>
 <p>Exit mysql client tool:
@@ -1833,7 +1833,7 @@
 use synchdb-sqlserver-withssl-test.yaml file for the SQL Server with SSL certificate enabled.</p>
 <p>You may not have SQL Server client tool installed, you could login to SQL Server container to access its client tool.</p>
 <p>Find out the container ID for SQL server:
-<div class="highlight"><pre><span></span><code>id=$(docker ps | grep sqlserver | awk &#39;{print $1}&#39;)
+<div class="highlight"><pre><span></span><code>id=$(docker ps | grep sqlserver | awk '{print $1}')
 </code></pre></div></p>
 <p>Copy the database schema into SQL Server container:
 <div class="highlight"><pre><span></span><code>docker cp inventory.sql $id:/
@@ -1845,16 +1845,16 @@ use synchdb-sqlserver-withssl-test.yaml file for the SQL Server with SSL certifi
 <div class="highlight"><pre><span></span><code>/opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD -i /inventory.sql
 </code></pre></div></p>
 <p>Run some simple queries (add -N -C if you are using SSL enabled SQL Server):
-<div class="highlight"><pre><span></span><code>/opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD -d testDB -Q &quot;insert into orders(order_date, purchaser, quantity, product_id) values( &#39;2024-01-01&#39;, 1003, 2, 107)&quot;
+<div class="highlight"><pre><span></span><code>/opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD -d testDB -Q "insert into orders(order_date, purchaser, quantity, product_id) values( '2024-01-01', 1003, 2, 107)"
 
-/opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD -d testDB -Q &quot;select * from orders&quot;
+/opt/mssql-tools/bin/sqlcmd -U sa -P $SA_PASSWORD -d testDB -Q "select * from orders"
 </code></pre></div></p>
 <h2 id="prepare-a-sample-oracle-database"><strong>Prepare a Sample Oracle Database</strong><a class="headerlink" href="#prepare-a-sample-oracle-database" title="Permanent link">&para;</a></h2>
 <p>We can use the free Oracle database docker image provided by Oracle for testing and evaluation of SynchDB. It comes with a free container database <code>FREE</code> and a pluggable database <code>FREEPDB1</code>
 <div class="highlight"><pre><span></span><code>docker run -d -p 1521:1521 container-registry.oracle.com/database/free:latest
 </code></pre></div></p>
 <p>Find out the container ID and login to it:
-<div class="highlight"><pre><span></span><code>id=$(docker ps | grep oracle | awk &#39;{print $1}&#39;)
+<div class="highlight"><pre><span></span><code>id=$(docker ps | grep oracle | awk '{print $1}')
 docker exec -it $id bash
 </code></pre></div></p>
 <p>Follow the procedure described <a href="../../user-guide/remote_database_setups/">here</a> to set up logminer and logminer user</p>

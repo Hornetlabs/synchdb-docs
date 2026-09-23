@@ -2301,11 +2301,11 @@
 <span class="w">    </span><span class="p">);</span>
 <span class="k">GO</span>
 
-<span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;altertest&#39;</span><span class="p">,</span>
+<span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'dbo'</span><span class="p">,</span>
+<span class="w">    </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'altertest'</span><span class="p">,</span>
 <span class="w">    </span><span class="o">@</span><span class="n">role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
 <span class="w">    </span><span class="o">@</span><span class="n">supports_net_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="o">@</span><span class="n">capture_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo_altertest_1&#39;</span>
+<span class="w">    </span><span class="o">@</span><span class="n">capture_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'dbo_altertest_1'</span>
 <span class="k">GO</span>
 </code></pre></div></p>
 <p>The command adds the table <code>dbo.altertest</code> to the CDC table list and would cause SynchDB to receive a CREATE TABLE DDL change event.</p>
@@ -2324,21 +2324,21 @@
 <span class="k">GO</span>
 </code></pre></div></p>
 <p>Disable the old capture instance:
-<div class="highlight"><pre><span></span><code><span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_disable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;altertest&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="o">@</span><span class="n">capture_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo_altertest_1&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_disable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'dbo'</span><span class="p">,</span>
+<span class="w">    </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'altertest'</span><span class="p">,</span>
+<span class="w">    </span><span class="o">@</span><span class="n">capture_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'dbo_altertest_1'</span><span class="p">;</span>
 <span class="k">GO</span>
 </code></pre></div></p>
 <p>Enable as a new capture intance:
-<div class="highlight"><pre><span></span><code><span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;altertest&#39;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'dbo'</span><span class="p">,</span>
+<span class="w">    </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'altertest'</span><span class="p">,</span>
 <span class="w">    </span><span class="o">@</span><span class="n">role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
 <span class="w">    </span><span class="o">@</span><span class="n">supports_net_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="o">@</span><span class="n">capture_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo_altertest_2&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="o">@</span><span class="n">capture_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'dbo_altertest_2'</span><span class="p">;</span>
 <span class="k">GO</span>
 </code></pre></div></p>
 <p>Add new record:
-<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">altertest</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;v&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">altertest</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">'s'</span><span class="p">,</span><span class="w"> </span><span class="s1">'c'</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">'v'</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
 <span class="k">GO</span>
 </code></pre></div></p>
 <p>The above example should allow SynchDB to receive an ALTER TABLE ADD COLUMN and an INSERT events. There is no need to restart both SQL Server or SynchDB to capture such events. The same apply to ALTER TABLE DROP COLUMN and ALTER TABLE ALTER COLUMN events as well.</p>

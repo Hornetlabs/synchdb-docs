@@ -2169,145 +2169,145 @@
 <p>Based on the nature of operation, the produced C structure data is then sent to <code>DDL Converter</code> for DDL requests or <code>DML Converter</code> for DML requests for next stage of processing. Below are examples of DDL and DML "payload" from a JSON event:</p>
 <p>DML payload:
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;before&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;after&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;g&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;wkb&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AQMAAAABAAAABQAAAAAAAAAAAAAAAAAAAAAAFEAAAAAAAAAAQAAAAAAAABRAAAAAAAAAAEAAAAAAAAAcQAAAAAAAAAAAAAAAAAAAHEAAAAAAAAAAAAAAAAAAABRA&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;srid&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">  </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"before"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"after"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"g"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"wkb"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AQMAAAABAAAABQAAAAAAAAAAAAAAAAAAAAAAFEAAAAAAAAAAQAAAAAAAABRAAAAAAAAAAEAAAAAAAAAcQAAAAAAAAAAAAAAAAAAAHEAAAAAAAAAAAAAAAAAAABRA"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"srid"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;h&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">      </span><span class="nt">"h"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.6.2.Final&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;connector&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mysql&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;synchdb-connector&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;ts_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1743631156000</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;snapshot&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;last&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;db&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inventory&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;sequence&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;ts_us&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1743631156000000</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;ts_ns&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1743631156000000000</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;geom&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;server_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;gtid&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mysql-bin.000009&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;pos&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1026620577</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;row&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;thread&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;query&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.6.2.Final"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"connector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mysql"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"synchdb-connector"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"ts_ms"</span><span class="p">:</span><span class="w"> </span><span class="mi">1743631156000</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"snapshot"</span><span class="p">:</span><span class="w"> </span><span class="s2">"last"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"db"</span><span class="p">:</span><span class="w"> </span><span class="s2">"inventory"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"ts_us"</span><span class="p">:</span><span class="w"> </span><span class="mi">1743631156000000</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"ts_ns"</span><span class="p">:</span><span class="w"> </span><span class="mi">1743631156000000000</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="s2">"geom"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"server_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"gtid"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"file"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mysql-bin.000009"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"pos"</span><span class="p">:</span><span class="w"> </span><span class="mi">1026620577</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"row"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"thread"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"query"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;r&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;ts_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1743631156410</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;ts_us&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1743631156410423</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;ts_ns&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1743631156410423395</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;transaction&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">    </span><span class="nt">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"r"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"ts_ms"</span><span class="p">:</span><span class="w"> </span><span class="mi">1743631156410</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"ts_us"</span><span class="p">:</span><span class="w"> </span><span class="mi">1743631156410423</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"ts_ns"</span><span class="p">:</span><span class="w"> </span><span class="mi">1743631156410423395</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"transaction"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></p>
 <p>DDL payload:
-<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.6.2.Final&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;connector&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sqlserver&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;synchdb-connector&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;ts_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1728337635149</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;snapshot&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;true&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;db&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;testDB&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;sequence&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;ts_us&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1728337635149000</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;ts_ns&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1728337635149000000</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dbo&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;customers&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;change_lsn&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;commit_lsn&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;00000195:000010a0:0003&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;event_serial_no&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.6.2.Final"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"connector"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sqlserver"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"synchdb-connector"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"ts_ms"</span><span class="p">:</span><span class="w"> </span><span class="mi">1728337635149</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"snapshot"</span><span class="p">:</span><span class="w"> </span><span class="s2">"true"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"db"</span><span class="p">:</span><span class="w"> </span><span class="s2">"testDB"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"ts_us"</span><span class="p">:</span><span class="w"> </span><span class="mi">1728337635149000</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"ts_ns"</span><span class="p">:</span><span class="w"> </span><span class="mi">1728337635149000000</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dbo"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="s2">"customers"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"change_lsn"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"commit_lsn"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000195:000010a0:0003"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"event_serial_no"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;ts_ms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1728337635150</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;databaseName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;testDB&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;schemaName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dbo&quot;</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;ddl&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;tableChanges&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="nt">"ts_ms"</span><span class="p">:</span><span class="w"> </span><span class="mi">1728337635150</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"databaseName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"testDB"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"schemaName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dbo"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"ddl"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"tableChanges"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">      </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CREATE&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;\&quot;testDB\&quot;.\&quot;dbo\&quot;.\&quot;customers\&quot;&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">          </span><span class="nt">&quot;defaultCharsetName&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">          </span><span class="nt">&quot;primaryKeyColumnNames&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">            </span><span class="s2">&quot;id&quot;</span>
+<span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CREATE"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"\"testDB\".\"dbo\".\"customers\""</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">"defaultCharsetName"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">"primaryKeyColumnNames"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="s2">"id"</span>
 <span class="w">          </span><span class="p">],</span>
-<span class="w">          </span><span class="nt">&quot;columns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="nt">"columns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">            </span><span class="p">{</span>
-<span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;id&quot;</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;jdbcType&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;nativeType&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;typeName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;int identity&quot;</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;typeExpression&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;int identity&quot;</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;charsetName&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;length&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;scale&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;optional&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;autoIncremented&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;generated&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;defaultValueExpression&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;enumValues&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">              </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id"</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"jdbcType"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"nativeType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"typeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"int identity"</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"typeExpression"</span><span class="p">:</span><span class="w"> </span><span class="s2">"int identity"</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"charsetName"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"length"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"optional"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"autoIncremented"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"generated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"defaultValueExpression"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"enumValues"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="p">{</span>
-<span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;first_name&quot;</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;jdbcType&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;nativeType&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;typeName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;varchar&quot;</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;typeExpression&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;varchar&quot;</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;charsetName&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;length&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;scale&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;optional&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;autoIncremented&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;generated&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;defaultValueExpression&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;enumValues&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">              </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"first_name"</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"jdbcType"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"nativeType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"typeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"typeExpression"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"charsetName"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"length"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"scale"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"optional"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"autoIncremented"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"generated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"defaultValueExpression"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"enumValues"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="p">{</span>
-<span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;last_name&quot;</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;jdbcType&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;nativeType&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;typeName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;varchar&quot;</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;typeExpression&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;varchar&quot;</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;charsetName&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;length&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;scale&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;optional&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;autoIncremented&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;generated&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;defaultValueExpression&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;enumValues&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">              </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"last_name"</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"jdbcType"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"nativeType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"typeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"typeExpression"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"charsetName"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"length"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"scale"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"optional"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"autoIncremented"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"generated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"defaultValueExpression"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"enumValues"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="w">            </span><span class="p">},</span>
 <span class="w">            </span><span class="p">{</span>
-<span class="w">              </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;email&quot;</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;jdbcType&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;nativeType&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;typeName&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;varchar&quot;</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;typeExpression&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;varchar&quot;</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;charsetName&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;length&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;scale&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;position&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;optional&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;autoIncremented&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;generated&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;defaultValueExpression&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">              </span><span class="nt">&quot;enumValues&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">              </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email"</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"jdbcType"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"nativeType"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"typeName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"typeExpression"</span><span class="p">:</span><span class="w"> </span><span class="s2">"varchar"</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"charsetName"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"length"</span><span class="p">:</span><span class="w"> </span><span class="mi">255</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"scale"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"optional"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"autoIncremented"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"generated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"defaultValueExpression"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"enumValues"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="w">            </span><span class="p">}</span>
 <span class="w">          </span><span class="p">],</span>
-<span class="w">          </span><span class="nt">&quot;comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="w">          </span><span class="nt">"comment"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">]</span>

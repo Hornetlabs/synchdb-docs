@@ -1842,24 +1842,24 @@
 <p>La selección de tablas se realiza durante la fase de creación del conector a través de <code>synchdb_add_conninfo()</code>, donde especificamos una lista de tablas (expresadas en FQN, separadas por una coma) para replicar desde.</p>
 <p>Por ejemplo, el siguiente comando crea un conector que solo replica los cambios de las tablas <code>inventory.orders</code> e <code>inventory.products</code> de la base de datos remota MySQL:
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
-<span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;192.168.1.86&#39;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">'192.168.1.86'</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="mi">3306</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;mysqluser&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;mysqlpwd&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;inventory.orders,inventory.products&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;mysql&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;myrule.json&#39;</span>
+<span class="w">    </span><span class="s1">'mysqluser'</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">'mysqlpwd'</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">'inventory'</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">'postgres'</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">'inventory.orders,inventory.products'</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">'mysql'</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">'myrule.json'</span>
 <span class="p">);</span>
 </code></pre></div></p>
 <p>Iniciar este conector por primera vez activará una instantánea inicial y se replicarán el esquema y los datos de las 2 tablas seleccionadas.</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">);</span>
 </code></pre></div>
 <h3 id="verifique-el-estado-del-conector-y-las-tablas">Verifique el estado del conector y las tablas<a class="headerlink" href="#verifique-el-estado-del-conector-y-las-tablas" title="Permanent link">&para;</a></h3>
 <p>Examine el estado del conector y las nuevas tablas:
-<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">conninfo_name</span><span class="o">=</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="n">postgres</span><span class="o">=#</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">synchdb_state_view</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">conninfo_name</span><span class="o">=</span><span class="s1">'mysqlconn'</span><span class="p">;</span>
 <span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">connector</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">conninfo_name</span><span class="w"> </span><span class="o">|</span><span class="w">  </span><span class="n">pid</span><span class="w">   </span><span class="o">|</span><span class="w">  </span><span class="k">state</span><span class="w">  </span><span class="o">|</span><span class="w">   </span><span class="n">err</span><span class="w">    </span><span class="o">|</span><span class="w">       </span><span class="n">last_dbz_offset</span>
 <span class="c1">----+-----------+---------------+--------+---------+----------+-----------------------------</span>
 <span class="w">  </span><span class="mi">0</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">mysql</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="n">mysqlconn</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="mi">807536</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">syncing</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="k">offset</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="n">flushed</span><span class="w"> </span><span class="n">yet</span>
@@ -1888,11 +1888,11 @@
 <li>Actualice la tabla <code>synchdb_conninfo</code> para incluir tablas adicionales.</li>
 <li>En este ejemplo, agregamos la tabla inventory.customers a la lista de sincronización:
 <div class="highlight"><pre><span></span><code><span class="k">UPDATE</span><span class="w"> </span><span class="n">synchdb_conninfo</span><span class="w"> </span>
-<span class="k">SET</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonb_set</span><span class="p">(</span><span class="k">data</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;{table}&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&quot;inventory.orders,inventory.products,inventory.customers&quot;&#39;</span><span class="p">)</span><span class="w"> </span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">;</span>
+<span class="k">SET</span><span class="w"> </span><span class="k">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonb_set</span><span class="p">(</span><span class="k">data</span><span class="p">,</span><span class="w"> </span><span class="s1">'{table}'</span><span class="p">,</span><span class="w"> </span><span class="s1">'"inventory.orders,inventory.products,inventory.customers"'</span><span class="p">)</span><span class="w"> </span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'mysqlconn'</span><span class="p">;</span>
 </code></pre></div></li>
 <li>Reinicie el conector con el modo de instantánea establecido en always para realizar otra instantánea inicial:
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_restart_connector</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_restart_connector</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="w"> </span><span class="s1">'always'</span><span class="p">);</span>
 </code></pre></div>
 Esto obliga a Debezium a volver a realizar una instantánea de todas las tablas especificadas, incluso si dos de ellas ya tienen los datos.</li>
 </ol>

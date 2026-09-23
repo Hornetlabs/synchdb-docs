@@ -1896,7 +1896,7 @@
 <p>物件轉換會識別來源資料庫中用於轉換的原始名稱，因此您必須按照來源資料庫中的名稱配置物件名稱，而不是 SynchDB 規範化後的名稱。</p>
 <p>如果找到匹配項，SynchDB 將優先使用物件轉換識別出的新值，而不會根據字母大小寫策略對其進行規範化。當沒有為物件定義特定的轉換規則時，就會發生規範化。</p>
 <p>例如，對於 Oracle 資料庫“FREE”下模式“DBZUSER”中的表“TEST_TABLE”，假設我們要將其對應到 PostgreSQL 中的“MY_TEST_TABLE”（全部大寫），而目前的 synchdb.letter_casing_strategy 設定為“lowercase”。您可以這樣寫轉換規則：</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;FREE.DBZUSER.TEST_TABLE&#39;</span><span class="p">,</span><span class="s1">&#39;MY_TEST_TABLE&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="s1">'table'</span><span class="p">,</span><span class="s1">'FREE.DBZUSER.TEST_TABLE'</span><span class="p">,</span><span class="s1">'MY_TEST_TABLE'</span><span class="p">);</span>
 </code></pre></div>
 <p>由於我們已經為「FREE.DBZUSER.TEST_TABLE」定義了轉換規則，因此該轉換規則將優先執行，並按照指示將其轉換為「MY_TEST_TABLE」。字母大小寫策略（lowercase）不會將其標準化為小寫。</p>
 

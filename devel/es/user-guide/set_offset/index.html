@@ -1820,8 +1820,8 @@
 <div class="highlight"><pre><span></span><code>postgres=# select * from synchdb_state_view;
  id | connector | conninfo_name  |  pid   |  state  |   err    |                                          last_dbz_offset
 ----+-----------+----------------+--------+---------+----------+---------------------------------------------------------------------------------------------------
-  0 | mysql     | mysqlconn      | 461696 | syncing | no error | {&quot;ts_sec&quot;:1725644339,&quot;file&quot;:&quot;mysql-bin.000004&quot;,&quot;pos&quot;:138466,&quot;row&quot;:1,&quot;server_id&quot;:223344,&quot;event&quot;:2}
-  1 | sqlserver | sqlserverconn  | 461739 | syncing | no error | {&quot;event_serial_no&quot;:1,&quot;commit_lsn&quot;:&quot;00000100:00000c00:0003&quot;,&quot;change_lsn&quot;:&quot;00000100:00000c00:0002&quot;}
+  0 | mysql     | mysqlconn      | 461696 | syncing | no error | {"ts_sec":1725644339,"file":"mysql-bin.000004","pos":138466,"row":1,"server_id":223344,"event":2}
+  1 | sqlserver | sqlserverconn  | 461739 | syncing | no error | {"event_serial_no":1,"commit_lsn":"00000100:00000c00:0003","change_lsn":"00000100:00000c00:0002"}
   3 | null      |                |     -1 | stopped | no error | no offset
   [... el resto de las filas ...]
 </code></pre></div>
@@ -1831,17 +1831,17 @@
 <p>Un conector debe estar en estado <code>paused</code> antes de que se pueda establecer un nuevo valor de offset.</p>
 <p>Use la función SQL <code>synchdb_pause_engine()</code> para pausar un conector en ejecución. Esto detendrá el motor Debezium runner de replicar desde la base de datos heterogénea. Cuando está pausado, es posible alterar el valor de offset del conector Debezium para replicar desde un punto específico en el pasado usando la rutina SQL <code>synchdb_set_offset()</code>. Toma <code>conninfo_name</code> como su argumento, que se puede encontrar en la salida de la vista <code>synchdb_get_state()</code>.</p>
 <p>Por ejemplo:
-<div class="highlight"><pre><span></span><code>SELECT synchdb_pause_engine(&#39;mysqlconn&#39;);
+<div class="highlight"><pre><span></span><code>SELECT synchdb_pause_engine('mysqlconn');
 </code></pre></div></p>
 <h2 id="establecer-el-nuevo-offset">Establecer el nuevo Offset<a class="headerlink" href="#establecer-el-nuevo-offset" title="Permanent link">&para;</a></h2>
 <p>Use la función SQL <code>synchdb_set_offset()</code> para cambiar el offset de inicio de un trabajador del conector. Esto solo se puede hacer cuando el conector está en estado <code>paused</code>. La función toma 2 parámetros, <code>conninfo_name</code> y <code>una cadena de offset válida</code>, ambos se pueden encontrar en la salida de la vista <code>synchdb_get_state()</code>.</p>
 <p>Por ejemplo:
-<div class="highlight"><pre><span></span><code>SELECT synchdb_set_offset(&#39;mysqlconn&#39;, &#39;{&quot;ts_sec&quot;:1725644339,&quot;file&quot;:&quot;mysql-bin.000004&quot;,&quot;pos&quot;:138466,&quot;row&quot;:1,&quot;server_id&quot;:223344,&quot;event&quot;:2}&#39;);
+<div class="highlight"><pre><span></span><code>SELECT synchdb_set_offset('mysqlconn', '{"ts_sec":1725644339,"file":"mysql-bin.000004","pos":138466,"row":1,"server_id":223344,"event":2}');
 </code></pre></div></p>
 <h2 id="reanudar-el-conector">Reanudar el Conector<a class="headerlink" href="#reanudar-el-conector" title="Permanent link">&para;</a></h2>
 <p>Use la función SQL <code>synchdb_resume_engine()</code> para reanudar la operación de Debezium desde un estado pausado. Esta función toma <code>connector name</code> como su único parámetro, que se puede encontrar en la salida de la vista <code>synchdb_get_state()</code>. El motor Debezium runner reanudado comenzará la replicación desde el valor de offset recién establecido.</p>
 <p>Por ejemplo:
-<div class="highlight"><pre><span></span><code>SELECT synchdb_resume_engine(&#39;mysqlconn&#39;);
+<div class="highlight"><pre><span></span><code>SELECT synchdb_resume_engine('mysqlconn');
 </code></pre></div></p>
 
 

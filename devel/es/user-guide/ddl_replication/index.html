@@ -2078,11 +2078,11 @@
 <span class="w">    </span><span class="p">);</span>
 <span class="k">GO</span>
 
-<span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;altertest&#39;</span><span class="p">,</span>
+<span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'dbo'</span><span class="p">,</span>
+<span class="w">    </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'altertest'</span><span class="p">,</span>
 <span class="w">    </span><span class="o">@</span><span class="n">role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
 <span class="w">    </span><span class="o">@</span><span class="n">supports_net_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="o">@</span><span class="n">capture_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo_altertest_1&#39;</span>
+<span class="w">    </span><span class="o">@</span><span class="n">capture_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'dbo_altertest_1'</span>
 <span class="k">GO</span>
 </code></pre></div></p>
 <p>El comando agrega la tabla <code>dbo.altertest</code> a la lista de tablas CDC y causará que SynchDB reciba un evento DDL CREATE TABLE.</p>
@@ -2101,21 +2101,21 @@
 <span class="k">GO</span>
 </code></pre></div></p>
 <p>Deshabilitar la instancia de captura anterior:
-<div class="highlight"><pre><span></span><code><span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_disable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;altertest&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="o">@</span><span class="n">capture_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo_altertest_1&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_disable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'dbo'</span><span class="p">,</span>
+<span class="w">    </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'altertest'</span><span class="p">,</span>
+<span class="w">    </span><span class="o">@</span><span class="n">capture_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'dbo_altertest_1'</span><span class="p">;</span>
 <span class="k">GO</span>
 </code></pre></div></p>
 <p>Habilitar como una nueva instancia de captura:
-<div class="highlight"><pre><span></span><code><span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;altertest&#39;</span><span class="p">,</span>
+<div class="highlight"><pre><span></span><code><span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'dbo'</span><span class="p">,</span>
+<span class="w">    </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'altertest'</span><span class="p">,</span>
 <span class="w">    </span><span class="o">@</span><span class="n">role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
 <span class="w">    </span><span class="o">@</span><span class="n">supports_net_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">    </span><span class="o">@</span><span class="n">capture_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo_altertest_2&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="o">@</span><span class="n">capture_instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'dbo_altertest_2'</span><span class="p">;</span>
 <span class="k">GO</span>
 </code></pre></div></p>
 <p>Agregar nuevo registro:
-<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">altertest</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;s&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;v&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">altertest</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">'s'</span><span class="p">,</span><span class="w"> </span><span class="s1">'c'</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">'v'</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">);</span>
 <span class="k">GO</span>
 </code></pre></div></p>
 <p>El ejemplo anterior debería permitir que SynchDB reciba un evento ALTER TABLE ADD COLUMN y un evento INSERT. No es necesario reiniciar SQL Server ni SynchDB para capturar estos eventos. Lo mismo aplica para los eventos ALTER TABLE DROP COLUMN y ALTER TABLE ALTER COLUMN también.</p>

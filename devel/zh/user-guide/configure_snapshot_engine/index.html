@@ -2223,7 +2223,7 @@
 wget<span class="w"> </span>https://download.oracle.com/otn_software/linux/instantclient/2390000/instantclient-basic-linux.x64-23.9.0.25.07.zip
 wget<span class="w"> </span>https://download.oracle.com/otn_software/linux/instantclient/2390000/instantclient-sdk-linux.x64-23.9.0.25.07.zip
 
-<span class="c1"># unzip them: Select &#39;Y&#39; to overwrite metadata files</span>
+<span class="c1"># unzip them: Select 'Y' to overwrite metadata files</span>
 unzip<span class="w"> </span>instantclient-basic-linux.x64-23.9.0.25.07.zip
 unzip<span class="w"> </span>instantclient-sdk-linux.x64-23.9.0.25.07.zip
 </code></pre></div>
@@ -2318,14 +2318,14 @@ sudo<span class="w"> </span>make<span class="w"> </span>install
 <li><strong>Oracle 和 OLR（oracle_fdw）</strong>：僅使用 <code>ssl_rootcert</code>，其值為 Oracle Wallet 所在的目錄路徑；SynchDB 會自動將連線字串切換為 Easy Connect Plus 格式（<code>tcps://host:port/service?wallet_location=...&amp;ssl_server_dn_match=yes</code>）。<code>ssl_cert</code>／<code>ssl_key</code> 對 oracle_fdw 無效——若需要用戶端憑證，須事先透過 <code>orapki</code> 或 <code>openssl pkcs12</code> 將其匯入到指定的 Wallet 目錄中。</li>
 </ul>
 <p>範例（MySQL）：
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_fdw_conninfo</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/path/to/client-cert.pem&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/path/to/client-key.pem&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/path/to/ca.pem&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_fdw_conninfo</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="w"> </span><span class="s1">'/path/to/client-cert.pem'</span><span class="p">,</span><span class="w"> </span><span class="s1">'/path/to/client-key.pem'</span><span class="p">,</span><span class="w"> </span><span class="s1">'/path/to/ca.pem'</span><span class="p">,</span><span class="w"> </span><span class="s1">''</span><span class="p">);</span>
 </code></pre></div></p>
 <p>範例（Oracle / OLR，使用 Oracle Wallet）：
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_fdw_conninfo</span><span class="p">(</span><span class="s1">&#39;oracleconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;/path/to/wallet_dir&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_fdw_conninfo</span><span class="p">(</span><span class="s1">'oracleconn'</span><span class="p">,</span><span class="w"> </span><span class="s1">''</span><span class="p">,</span><span class="w"> </span><span class="s1">''</span><span class="p">,</span><span class="w"> </span><span class="s1">'/path/to/wallet_dir'</span><span class="p">,</span><span class="w"> </span><span class="s1">''</span><span class="p">);</span>
 </code></pre></div></p>
 <h3 id="synchdb_del_fdw_conninfo"><strong>synchdb_del_fdw_conninfo</strong><a class="headerlink" href="#synchdb_del_fdw_conninfo" title="Permanent link">&para;</a></h3>
 <p>用途：刪除由 <code>synchdb_add_fdw_conninfo</code> 設定的所有 TLS 憑證路徑。</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_del_fdw_conninfo</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_del_fdw_conninfo</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">);</span>
 </code></pre></div>
 
 

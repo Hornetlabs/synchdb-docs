@@ -2178,63 +2178,63 @@
 <p>如果将 DDL 事件与 Debezium 解除关联，Openlog Replicator 的 DDL 事件将包含原始的 Oracle DDL 查询，而不是分解后的结构。这意味着需要一个 <code>2) Oracle 解析器</code> 来进一步解析此 DDL 查询，以了解其预期操作。</p>
 <p><strong>DML 负载：</strong>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;scn&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3531590</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;tm&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1752686342000000000</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;c_scn&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3531691</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;c_idx&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;xid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x0007.01a.000004a1&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;db&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FREE&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="nt">"scn"</span><span class="p">:</span><span class="w"> </span><span class="mi">3531590</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"tm"</span><span class="p">:</span><span class="w"> </span><span class="mi">1752686342000000000</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"c_scn"</span><span class="p">:</span><span class="w"> </span><span class="mi">3531691</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"c_idx"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"xid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x0007.01a.000004a1"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"db"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FREE"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;c&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;owner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DBZUSER&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ORDERS&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;obj&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">73406</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;columns&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="nt">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"c"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"schema"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DBZUSER"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ORDERS"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"obj"</span><span class="p">:</span><span class="w"> </span><span class="mi">73406</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"columns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">          </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ORDER_NUMBER&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;precision&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;scale&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;nullable&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ORDER_NUMBER"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"precision"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"nullable"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
 <span class="w">          </span><span class="p">},</span>
 <span class="w">          </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ORDER_DATE&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;date&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;nullable&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ORDER_DATE"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"date"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"nullable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">          </span><span class="p">},</span>
 <span class="w">          </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PURCHASER&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;precision&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;scale&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;nullable&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PURCHASER"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"precision"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"nullable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">          </span><span class="p">},</span>
 <span class="w">          </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;QUANTITY&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;precision&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;scale&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;nullable&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"QUANTITY"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"precision"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"nullable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">          </span><span class="p">},</span>
 <span class="w">          </span><span class="p">{</span>
-<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PRODUCT_ID&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;precision&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;scale&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span>
-<span class="w">            </span><span class="nt">&quot;nullable&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PRODUCT_ID"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"precision"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"nullable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
 <span class="w">          </span><span class="p">}</span>
 <span class="w">        </span><span class="p">]</span>
 <span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;num&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;rid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AAAR6+AAFAAAACGAAA&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;after&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;ORDER_NUMBER&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10013</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;ORDER_DATE&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1704067200000000000</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;PURCHASER&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1003</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;QUANTITY&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;PRODUCT_ID&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">107</span>
+<span class="w">      </span><span class="nt">"num"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"rid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"AAAR6+AAFAAAACGAAA"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"after"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"ORDER_NUMBER"</span><span class="p">:</span><span class="w"> </span><span class="mi">10013</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"ORDER_DATE"</span><span class="p">:</span><span class="w"> </span><span class="mi">1704067200000000000</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"PURCHASER"</span><span class="p">:</span><span class="w"> </span><span class="mi">1003</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"QUANTITY"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"PRODUCT_ID"</span><span class="p">:</span><span class="w"> </span><span class="mi">107</span>
 <span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">]</span>
@@ -2242,21 +2242,21 @@
 </code></pre></div></p>
 <p><strong>DDL 负载：</strong>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;scn&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2930816</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;tm&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1753384727000000000</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;c_scn&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2930820</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;c_idx&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;xid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0x0008.011.000004c7&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;db&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;FREE&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;payload&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="nt">"scn"</span><span class="p">:</span><span class="w"> </span><span class="mi">2930816</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"tm"</span><span class="p">:</span><span class="w"> </span><span class="mi">1753384727000000000</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"c_scn"</span><span class="p">:</span><span class="w"> </span><span class="mi">2930820</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"c_idx"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"xid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0x0008.011.000004c7"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"db"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FREE"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"payload"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ddl&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;owner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DBZUSER&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;TEST_TABLE&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;obj&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">74234</span>
+<span class="w">      </span><span class="nt">"op"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ddl"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"schema"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DBZUSER"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="s2">"TEST_TABLE"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"obj"</span><span class="p">:</span><span class="w"> </span><span class="mi">74234</span>
 <span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;sql&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CREATE TABLE test_table (\n    id NUMBER PRIMARY KEY,\n    binary_double_col BINARY_DOUBLE,\n    binary_float_col BINARY_FLOAT,\n    float_col FLOAT(10),\n    number_col NUMBER(10,2),\n    long_col LONG,\n    date_col DATE,\n    interval_ds_col INTERVAL DAY TO SECOND,\n    interval_ym_col INTERVAL YEAR TO MONTH,\n    timestamp_col TIMESTAMP,\n    timestamp_tz_col TIMESTAMP WITH TIME ZONE,\n    timestamp_ltz_col TIMESTAMP WITH LOCAL TIME ZONE,\n    char_col CHAR(10),\n    nchar_col NCHAR(10),\n    nvarchar2_col NVARCHAR2(50),\n    varchar_col VARCHAR(50),\n    varchar2_col VARCHAR2(50),\n    raw_col RAW(100),\n    bfile_col BFILE,\n    blob_col BLOB,\n    clob_col CLOB,\n    nclob_col NCLOB,\n    rowid_col ROWID,\n    urowid_col UROWID\n)&quot;</span>
+<span class="w">      </span><span class="nt">"sql"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CREATE TABLE test_table (\n    id NUMBER PRIMARY KEY,\n    binary_double_col BINARY_DOUBLE,\n    binary_float_col BINARY_FLOAT,\n    float_col FLOAT(10),\n    number_col NUMBER(10,2),\n    long_col LONG,\n    date_col DATE,\n    interval_ds_col INTERVAL DAY TO SECOND,\n    interval_ym_col INTERVAL YEAR TO MONTH,\n    timestamp_col TIMESTAMP,\n    timestamp_tz_col TIMESTAMP WITH TIME ZONE,\n    timestamp_ltz_col TIMESTAMP WITH LOCAL TIME ZONE,\n    char_col CHAR(10),\n    nchar_col NCHAR(10),\n    nvarchar2_col NVARCHAR2(50),\n    varchar_col VARCHAR(50),\n    varchar2_col VARCHAR2(50),\n    raw_col RAW(100),\n    bfile_col BFILE,\n    blob_col BLOB,\n    clob_col CLOB,\n    nclob_col NCLOB,\n    rowid_col ROWID,\n    urowid_col UROWID\n)"</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>

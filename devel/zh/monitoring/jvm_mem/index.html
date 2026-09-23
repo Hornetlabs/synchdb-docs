@@ -1856,7 +1856,7 @@
 <h1 id="jvm">JVM 内存使用情况<a class="headerlink" href="#jvm" title="Permanent link">&para;</a></h1>
 <h2 id="jvm_1"><strong>转储 JVM 内存使用情况</strong><a class="headerlink" href="#jvm_1" title="Permanent link">&para;</a></h2>
 <p>我们可以使用实用函数 <code>synchdb_log_jvm_meminfo</code> 将当前 JVM 的堆内存和非堆内存使用情况转储到日志文件中。这纯粹是提供信息，旨在让用户了解不同工作负载的内存使用情况，这对于为连接器的 JVM 配置合适的最大堆内存值可能很重要。
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_log_jvm_meminfo</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_log_jvm_meminfo</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">);</span>
 </code></pre></div></p>
 <p>检查 PostgreSQL 日志文件：
 <div class="highlight"><pre><span></span><code>2024-12-09 14:34:21.910 PST [25491] LOG:  Requesting memdump for mysqlconn connector

@@ -914,6 +914,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#microsoft-sql-server-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Microsoft SQL Server Connector
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2051,6 +2062,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#microsoft-sql-server-connector" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Microsoft SQL Server Connector
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2211,6 +2233,7 @@
 <li>MySQL Connector</li>
 <li>Postgres Connector</li>
 <li>Oracle and Openlog Replicator Connectors</li>
+<li>Microsoft SQL Server Connector</li>
 </ul>
 <h2 id="how-synchdb-guarentees-consistency-and-obtains-cut-off-point"><strong>How Synchdb Guarentees Consistency and Obtains Cut-Off Point</strong><a class="headerlink" href="#how-synchdb-guarentees-consistency-and-obtains-cut-off-point" title="Permanent link">&para;</a></h2>
 <h3 id="mysql-connector"><strong>MySQL Connector</strong><a class="headerlink" href="#mysql-connector" title="Permanent link">&para;</a></h3>
@@ -2243,6 +2266,13 @@
 </ul>
 <p>&lt;<strong>WARNING</strong>&gt; <strong>FLASHBACK permission is required to obtain the "cut-point" parameters.</strong></p>
 <p>&lt;<strong>NOTE</strong>&gt; Oracle and Openlog Replicator connectors now support Container Database (CDB/PDB) architecture: as long as the source database is specified in the <code>CDB/PDB</code> format (e.g. <code>FREE/FREEPDB1</code>) when creating the connector, the FDW-based snapshot will automatically connect to the corresponding PDB service name.</p>
+<h3 id="microsoft-sql-server-connector"><strong>Microsoft SQL Server Connector</strong><a class="headerlink" href="#microsoft-sql-server-connector" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Before the snapshot begins, read <code>sys.fn_cdc_get_max_lsn()</code>, which serves as the snapshot cut-off point. SQL Server Change Data Capture (CDC) must already be enabled on the source database and desired tables, as required by the Debezium SQL Server connector.</li>
+<li>Migrate all desired tables' schema and data through ordinary (autocommit) <code>tds_fdw</code> foreign-table reads. No table locks or special transaction isolation level is used.</li>
+<li>Once done, Debezium recovery mode rebuilds SQL Server schema history without taking another data snapshot, then CDC resumes from the cut-off <code>commit_lsn</code>.</li>
+</ul>
+<p>&lt;<strong>NOTE</strong>&gt; Unlike Oracle's Flashback query or a held-open repeatable-read transaction, <code>tds_fdw</code> does not manage one remote transaction across all foreign-table reads. Changes committed after the cut-off can therefore appear in both the FDW copy and CDC replay. SynchDB makes replayed SQL Server create events idempotent by checking the destination primary key (or replica identity) and skipping rows already copied. Tables used with FDW snapshot plus CDC should therefore have a primary key; without one, overlap cannot be de-duplicated reliably.</p>
 <h2 id="how-does-fdw-based-snapshot-work"><strong>How does FDW Based Snapshot Work</strong><a class="headerlink" href="#how-does-fdw-based-snapshot-work" title="Permanent link">&para;</a></h2>
 <p>FDW based snapshot consists of about 10 steps:</p>
 <h3 id="1-preparation"><strong>1. Preparation</strong><a class="headerlink" href="#1-preparation" title="Permanent link">&para;</a></h3>
@@ -2276,6 +2306,10 @@
 <ul>
 <li>Read current <code>SCN</code> from current_scn table</li>
 </ul>
+<p><strong>Microsoft SQL Server Connector</strong></p>
+<ul>
+<li>Read the current <code>commit_lsn</code> (formatted as a Debezium Lsn string, for example <code>0000006a:00006608:0003</code>) from a foreign table backed by <code>sys.fn_cdc_get_max_lsn()</code>.</li>
+</ul>
 <h3 id="4-create-a-list-of-desired-foreign-tables"><strong>4. Create a List of Desired Foreign Tables</strong><a class="headerlink" href="#4-create-a-list-of-desired-foreign-tables" title="Permanent link">&para;</a></h3>
 <p>The goal for this step is to create a new staging schema (ex. ora_stage), and create desired foreign tables for the snapshot based on:</p>
 <ul>
@@ -2284,7 +2318,7 @@
 <li>Extra data type mapping as described in <code>synchdb_objmap</code> </li>
 <li>the cut-off SCN obtained from step 3 (Oracle and Openlog Replicator Connectors only)</li>
 </ul>
-<p>At the end of this step, the staging schema will contain foreign tables with their data types mapped according to SycnhDB's data type mapping rules. For Oracle and Openlog Replicator Connectors, the foreign tables will have <code>AS OF SCN xxx</code> attribute, causing each foreign read to return data only up to specified SCN. For other connector types, the foreign reads return all data at the moment when repeatable transaction starts</p>
+<p>At the end of this step, the staging schema will contain foreign tables with their data types mapped according to SycnhDB's data type mapping rules. For Oracle and Openlog Replicator Connectors, the foreign tables will have an <code>AS OF SCN xxx</code> attribute, causing each foreign read to return data only up to the specified SCN. MySQL and Postgres use their snapshot transaction semantics; SQL Server uses ordinary <code>tds_fdw</code> reads plus idempotent CDC overlap handling.</p>
 <h3 id="5-materialize-the-schema"><strong>5. Materialize the Schema</strong><a class="headerlink" href="#5-materialize-the-schema" title="Permanent link">&para;</a></h3>
 <p>The goal for this step is to materialize (turn foreign tables into real PostgreSQL tables) only the table schemas created from step 4 and put them in a new destination schema (ex. dst_stage). So, at the end of the step, the destination schema will contain real tables with the same structure as those in staging schema.</p>
 <h3 id="6-migrate-primary-key"><strong>6. Migrate Primary Key</strong><a class="headerlink" href="#6-migrate-primary-key" title="Permanent link">&para;</a></h3>

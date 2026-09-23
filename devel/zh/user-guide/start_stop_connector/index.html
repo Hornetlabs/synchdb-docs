@@ -1968,15 +1968,15 @@
 <p>SynchDB 提供了几个实用函数来控制已创建连接器的行为和生命周期。</p>
 <h2 id="_3"><strong>以默认快照模式启动连接器</strong><a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <p>synchdb_start_engine_bgw() 可用于以名为“initial”的默认快照模式启动连接器。</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="_4"><strong>以自定义快照模式启动连接器</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <p>使用相同的函数 synchdb_start_engine_bgw()，可以包含快照模式来启动连接器，否则将默认使用“initial”模式。</p>
 <div class="highlight"><pre><span></span><code><span class="c1">-- 捕获表结构并继续流式传输新的更改</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;no_data&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="w"> </span><span class="s1">'no_data'</span><span class="p">);</span>
 
 <span class="c1">-- 始终重建表结构和现有数据，并继续流式传输新的更改</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="w"> </span><span class="s1">'always'</span><span class="p">);</span>
 </code></pre></div>
 <h2 id="_5"><strong>支持的快照模式</strong><a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <table>
@@ -2023,21 +2023,21 @@
 <p><strong>请参阅<a href="../../tutorial/selective_table_sync/">教程</a>，了解何时使用何种模式</strong></p>
 <h2 id="_6"><strong>暂停和恢复连接器</strong><a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <p>使用 <code>synchdb_pause_engine</code> 暂停连接器，这会暂时停止正在运行的连接器。
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_pause_engine</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_pause_engine</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">);</span>
 </code></pre></div></p>
 <p>使用 <code>synchdb_resume_engine</code> 恢复已暂停的连接器。
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_resume_engine</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_resume_engine</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">);</span>
 </code></pre></div></p>
 <h2 id="_7"><strong>停止或重启正在运行的连接器</strong><a class="headerlink" href="#_7" title="Permanent link">&para;</a></h2>
 <p>使用 <code>synchdb_stop_engine_bgw</code> 停止正在运行的连接器。
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_stop_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_stop_engine_bgw</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">);</span>
 </code></pre></div></p>
 <p>使用 <code>synchdb_restart_connector</code> 以不同的快照模式重启正在运行的连接器。
 <div class="highlight"><pre><span></span><code><span class="c1">-- 使用特定快照模式重启</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_restart_connector</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;initial&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_restart_connector</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="w"> </span><span class="s1">'initial'</span><span class="p">);</span>
 
 <span class="c1">-- 使用特定快照模式启动</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;always&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="w"> </span><span class="s1">'always'</span><span class="p">);</span>
 </code></pre></div></p>
 
 

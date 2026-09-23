@@ -1848,7 +1848,7 @@
 <h1 id="jvm-memory-usage">JVM Memory Usage<a class="headerlink" href="#jvm-memory-usage" title="Permanent link">&para;</a></h1>
 <h2 id="dump-jvm-memory-usage"><strong>Dump JVM Memory Usage</strong><a class="headerlink" href="#dump-jvm-memory-usage" title="Permanent link">&para;</a></h2>
 <p>We can use an utility function <code>synchdb_log_jvm_meminfo</code> to dump current JVM's current heap and non-heap memory usage in the logfile. This is purely informational and is intended to give user an idea the memory usage of different workload, which may be important to configure a suitable value for max heap memory to be allocated to JVM of a connector.
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_log_jvm_meminfo</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_log_jvm_meminfo</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">);</span>
 </code></pre></div></p>
 <p>Check the PostgreSQL log file:
 <div class="highlight"><pre><span></span><code>2024-12-09 14:34:21.910 PST [25491] LOG:  Requesting memdump for mysqlconn connector

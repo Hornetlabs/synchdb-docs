@@ -2016,48 +2016,48 @@
 <p><strong>Ejemplos de Uso</strong>:
 <div class="highlight"><pre><span></span><code><span class="c1">-- Ejemplo MySQL</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
-<span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w">    </span><span class="c1">-- Nombre del conector</span>
-<span class="w">    </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="w">    </span><span class="c1">-- Host</span>
+<span class="w">    </span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="w">    </span><span class="c1">-- Nombre del conector</span>
+<span class="w">    </span><span class="s1">'127.0.0.1'</span><span class="p">,</span><span class="w">    </span><span class="c1">-- Host</span>
 <span class="w">    </span><span class="mi">3306</span><span class="p">,</span><span class="w">           </span><span class="c1">-- Puerto</span>
-<span class="w">    </span><span class="s1">&#39;mysqluser&#39;</span><span class="p">,</span><span class="w">    </span><span class="c1">-- Usuario</span>
-<span class="w">    </span><span class="s1">&#39;mysqlpwd&#39;</span><span class="p">,</span><span class="w">     </span><span class="c1">-- Contraseña</span>
-<span class="w">    </span><span class="s1">&#39;inventory&#39;</span><span class="p">,</span><span class="w">    </span><span class="c1">-- BD origen</span>
-<span class="w">    </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span><span class="w">     </span><span class="c1">-- BD destino</span>
-<span class="w">    </span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="w">             </span><span class="c1">-- Tablas (vacío para todas)</span>
-<span class="w">    </span><span class="s1">&#39;mysql&#39;</span><span class="p">,</span><span class="w">        </span><span class="c1">-- Tipo de conector</span>
-<span class="w">    </span><span class="s1">&#39;myrule.json&#39;</span><span class="w">   </span><span class="c1">-- Archivo de reglas</span>
+<span class="w">    </span><span class="s1">'mysqluser'</span><span class="p">,</span><span class="w">    </span><span class="c1">-- Usuario</span>
+<span class="w">    </span><span class="s1">'mysqlpwd'</span><span class="p">,</span><span class="w">     </span><span class="c1">-- Contraseña</span>
+<span class="w">    </span><span class="s1">'inventory'</span><span class="p">,</span><span class="w">    </span><span class="c1">-- BD origen</span>
+<span class="w">    </span><span class="s1">'postgres'</span><span class="p">,</span><span class="w">     </span><span class="c1">-- BD destino</span>
+<span class="w">    </span><span class="s1">''</span><span class="p">,</span><span class="w">             </span><span class="c1">-- Tablas (vacío para todas)</span>
+<span class="w">    </span><span class="s1">'mysql'</span><span class="p">,</span><span class="w">        </span><span class="c1">-- Tipo de conector</span>
+<span class="w">    </span><span class="s1">'myrule.json'</span><span class="w">   </span><span class="c1">-- Archivo de reglas</span>
 <span class="p">);</span>
 
 <span class="c1">-- Ejemplo SQL Server</span>
 <span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_conninfo</span><span class="p">(</span>
-<span class="w">    </span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">'sqlserverconn'</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">'127.0.0.1'</span><span class="p">,</span>
 <span class="w">    </span><span class="mi">1433</span><span class="p">,</span>
-<span class="w">    </span><span class="s1">&#39;sa&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="s1">&#39;MyPassword123&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="s1">&#39;testDB&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="s1">&#39;postgres&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="s1">&#39;dbo.orders&#39;</span><span class="p">,</span><span class="w">   </span><span class="c1">-- Tabla específica</span>
-<span class="w">    </span><span class="s1">&#39;sqlserver&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="s1">&#39;mssql_rules.json&#39;</span>
+<span class="w">    </span><span class="s1">'sa'</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">'MyPassword123'</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">'testDB'</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">'postgres'</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">'dbo.orders'</span><span class="p">,</span><span class="w">   </span><span class="c1">-- Tabla específica</span>
+<span class="w">    </span><span class="s1">'sqlserver'</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">'mssql_rules.json'</span>
 <span class="p">);</span>
 </code></pre></div></p>
 <h3 id="funciones-basicas-de-control">Funciones Básicas de Control<a class="headerlink" href="#funciones-basicas-de-control" title="Permanent link">&para;</a></h3>
 <h4 id="synchdb_start_engine_bgw">synchdb_start_engine_bgw<a class="headerlink" href="#synchdb_start_engine_bgw" title="Permanent link">&para;</a></h4>
 <p><strong>Propósito</strong>: Inicia un conector
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_start_engine_bgw</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">);</span>
 </code></pre></div></p>
 <h4 id="synchdb_pause_engine">synchdb_pause_engine<a class="headerlink" href="#synchdb_pause_engine" title="Permanent link">&para;</a></h4>
 <p><strong>Propósito</strong>: Detiene temporalmente un conector en ejecución
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_pause_engine_bgw</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_pause_engine_bgw</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">);</span>
 </code></pre></div></p>
 <h4 id="synchdb_resume_engine">synchdb_resume_engine<a class="headerlink" href="#synchdb_resume_engine" title="Permanent link">&para;</a></h4>
 <p><strong>Propósito</strong>: Reanuda un conector pausado
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_resume_engine</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_resume_engine</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">);</span>
 </code></pre></div></p>
 <h4 id="synchdb_stop_engine_bgw">synchdb_stop_engine_bgw<a class="headerlink" href="#synchdb_stop_engine_bgw" title="Permanent link">&para;</a></h4>
 <p><strong>Propósito</strong>: Termina un conector
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_stop_engine</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_stop_engine</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">);</span>
 </code></pre></div></p>
 <h2 id="gestion-de-estado">Gestión de Estado<a class="headerlink" href="#gestion-de-estado" title="Permanent link">&para;</a></h2>
 <h3 id="synchdb_state_view">synchdb_state_view<a class="headerlink" href="#synchdb_state_view" title="Permanent link">&para;</a></h3>
@@ -2128,14 +2128,14 @@
 <p><strong>Propósito</strong>: Configura una posición de inicio personalizada</p>
 <p><strong>Ejemplo para MySQL</strong>:
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_set_offset</span><span class="p">(</span>
-<span class="w">    </span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span>
-<span class="w">    </span><span class="s1">&#39;{&quot;ts_sec&quot;:1725644339,&quot;file&quot;:&quot;mysql-bin.000004&quot;,&quot;pos&quot;:138466,&quot;row&quot;:1,&quot;server_id&quot;:223344,&quot;event&quot;:2}&#39;</span>
+<span class="w">    </span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s1">'{"ts_sec":1725644339,"file":"mysql-bin.000004","pos":138466,"row":1,"server_id":223344,"event":2}'</span>
 <span class="p">);</span>
 </code></pre></div></p>
 <p><strong>Ejemplo para SQL Server</strong>:
 <div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_set_offset</span><span class="p">(</span>
-<span class="w">    </span><span class="s1">&#39;sqlserverconn&#39;</span><span class="p">,</span>
-<span class="w">    </span><span class="s1">&#39;{&quot;event_serial_no&quot;:1,&quot;commit_lsn&quot;:&quot;00000100:00000c00:0003&quot;,&quot;change_lsn&quot;:&quot;00000100:00000c00:0002&quot;}&#39;</span>
+<span class="w">    </span><span class="s1">'sqlserverconn'</span><span class="p">,</span>
+<span class="w">    </span><span class="s1">'{"event_serial_no":1,"commit_lsn":"00000100:00000c00:0003","change_lsn":"00000100:00000c00:0002"}'</span>
 <span class="p">);</span>
 </code></pre></div></p>
 <h2 id="gestion-de-instantaneas">Gestión de Instantáneas<a class="headerlink" href="#gestion-de-instantaneas" title="Permanent link">&para;</a></h2>
@@ -2185,7 +2185,7 @@
 </table>
 <p><strong>Ejemplo</strong>:
 <div class="highlight"><pre><span></span><code><span class="c1">-- Reiniciar con modo de instantánea específico</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_restart_connector</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;initial&#39;</span><span class="p">);</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_restart_connector</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="w"> </span><span class="s1">'initial'</span><span class="p">);</span>
 </code></pre></div></p>
 <hr />
 <p>📝 <strong>Notas Adicionales</strong>:</p>

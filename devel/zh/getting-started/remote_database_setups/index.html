@@ -2468,10 +2468,10 @@
 <h2 id="synchdb-mysql"><strong>为 SynchDB 设置 MySQL</strong><a class="headerlink" href="#synchdb-mysql" title="Permanent link">&para;</a></h2>
 <h3 id="_2"><strong>创建用户</strong><a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
 <p>创建用户
-<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;password&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">'user'</span><span class="o">@</span><span class="s1">'localhost'</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">'password'</span><span class="p">;</span>
 </code></pre></div></p>
 <p>授予所需权限
-<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="n">RELOAD</span><span class="p">,</span><span class="w"> </span><span class="k">SHOW</span><span class="w"> </span><span class="n">DATABASES</span><span class="p">,</span><span class="w"> </span><span class="n">REPLICATION</span><span class="w"> </span><span class="n">SLAVE</span><span class="p">,</span><span class="w"> </span><span class="n">REPLICATION</span><span class="w"> </span><span class="n">CLIENT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;password&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">GRANT</span><span class="w"> </span><span class="k">SELECT</span><span class="p">,</span><span class="w"> </span><span class="n">RELOAD</span><span class="p">,</span><span class="w"> </span><span class="k">SHOW</span><span class="w"> </span><span class="n">DATABASES</span><span class="p">,</span><span class="w"> </span><span class="n">REPLICATION</span><span class="w"> </span><span class="n">SLAVE</span><span class="p">,</span><span class="w"> </span><span class="n">REPLICATION</span><span class="w"> </span><span class="n">CLIENT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="o">*</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">'user'</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">'password'</span><span class="p">;</span>
 </code></pre></div></p>
 <p>确定用户的权限
 <div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="n">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span>
@@ -2479,12 +2479,12 @@
 <h3 id="binlog"><strong>启用 binlog</strong><a class="headerlink" href="#binlog" title="Permanent link">&para;</a></h3>
 <p>检查 binlog 是否启用
 <div class="highlight"><pre><span></span><code><span class="o">//</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">MySQL</span><span class="w"> </span><span class="mi">5</span><span class="p">.</span><span class="n">x</span>
-<span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">variable_value</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="ss">&quot;BINARY LOGGING STATUS (log-bin) ::&quot;</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">global_variables</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">variable_name</span><span class="o">=</span><span class="s1">&#39;log_bin&#39;</span><span class="p">;</span>
+<span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">variable_value</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="ss">"BINARY LOGGING STATUS (log-bin) ::"</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">global_variables</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">variable_name</span><span class="o">=</span><span class="s1">'log_bin'</span><span class="p">;</span>
 
 <span class="o">//</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">MySQL</span><span class="w"> </span><span class="mi">8</span><span class="p">.</span><span class="n">x</span>
-<span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">variable_value</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="ss">&quot;BINARY LOGGING STATUS (log-bin) ::&quot;</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">performance_schema</span><span class="p">.</span><span class="n">global_variables</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">variable_name</span><span class="o">=</span><span class="s1">&#39;log_bin&#39;</span><span class="p">;</span>
+<span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">variable_value</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="ss">"BINARY LOGGING STATUS (log-bin) ::"</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">performance_schema</span><span class="p">.</span><span class="n">global_variables</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">variable_name</span><span class="o">=</span><span class="s1">'log_bin'</span><span class="p">;</span>
 </code></pre></div></p>
 <p>如果 binlog 处于“OFF”状态，则将以下属性添加到配置文件中
 <div class="highlight"><pre><span></span><code>server-id                   = 223344
@@ -2495,12 +2495,12 @@ binlog_expire_logs_seconds  = 864000
 </code></pre></div></p>
 <p>再次检查binlog状态
 <div class="highlight"><pre><span></span><code><span class="o">//</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">MySQL</span><span class="w"> </span><span class="mi">5</span><span class="p">.</span><span class="n">x</span>
-<span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">variable_value</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="ss">&quot;BINARY LOGGING STATUS (log-bin) ::&quot;</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">global_variables</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">variable_name</span><span class="o">=</span><span class="s1">&#39;log_bin&#39;</span><span class="p">;</span>
+<span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">variable_value</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="ss">"BINARY LOGGING STATUS (log-bin) ::"</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">information_schema</span><span class="p">.</span><span class="n">global_variables</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">variable_name</span><span class="o">=</span><span class="s1">'log_bin'</span><span class="p">;</span>
 
 <span class="o">//</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">MySQL</span><span class="w"> </span><span class="mi">8</span><span class="p">.</span><span class="n">x</span>
-<span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">variable_value</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="ss">&quot;BINARY LOGGING STATUS (log-bin) ::&quot;</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">performance_schema</span><span class="p">.</span><span class="n">global_variables</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">variable_name</span><span class="o">=</span><span class="s1">&#39;log_bin&#39;</span><span class="p">;</span>
+<span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">variable_value</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="ss">"BINARY LOGGING STATUS (log-bin) ::"</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">performance_schema</span><span class="p">.</span><span class="n">global_variables</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">variable_name</span><span class="o">=</span><span class="s1">'log_bin'</span><span class="p">;</span>
 </code></pre></div></p>
 <h3 id="gtid"><strong>启用 GTID（可选）</strong><a class="headerlink" href="#gtid" title="Permanent link">&para;</a></h3>
 <p>全局事务标识符 (GTID) 唯一地标识集群内服务器上发生的事务。虽然 SynchDB 连接器不强制需要，但使用 GTID 可以简化复制，并使您能够更轻松地确认主服务器和副本服务器是否一致。</p>
@@ -2511,7 +2511,7 @@ binlog_expire_logs_seconds  = 864000
 <div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="n">enforce_gtid_consistency</span><span class="o">=</span><span class="k">ON</span>
 </code></pre></div></p>
 <p>确认更改
-<div class="highlight"><pre><span></span><code>mysql&gt; show global variables like &#39;%GTID%&#39;;
+<div class="highlight"><pre><span></span><code>mysql&gt; show global variables like '%GTID%';
 +--------------------------+-------+
 | Variable_name            | Value |
 +--------------------------+-------+
@@ -2535,7 +2535,7 @@ binlog_expire_logs_seconds  = 864000
 <h3 id="binlog_1"><strong>验证 Binlog 行值选项</strong><a class="headerlink" href="#binlog_1" title="Permanent link">&para;</a></h3>
 <p>验证数据库中 <code>binlog_row_value_options</code> 变量的设置。要使连接器能够使用 UPDATE 事件，必须将此变量设置为除 <code>PARTIAL_JSON</code> 以外的值。</p>
 <p>check current variable value
-<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="k">global</span><span class="w"> </span><span class="n">variables</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">variable_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;binlog_row_value_options&#39;</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="k">global</span><span class="w"> </span><span class="n">variables</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">variable_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'binlog_row_value_options'</span><span class="p">;</span>
 <span class="o">+</span><span class="c1">--------------------------+-------+</span>
 <span class="o">|</span><span class="w"> </span><span class="n">Variable_name</span><span class="w">            </span><span class="o">|</span><span class="w"> </span><span class="n">Value</span><span class="w"> </span><span class="o">|</span>
 <span class="o">+</span><span class="c1">--------------------------+-------+</span>
@@ -2543,7 +2543,7 @@ binlog_expire_logs_seconds  = 864000
 <span class="o">+</span><span class="c1">--------------------------+-------+</span>
 </code></pre></div></p>
 <p>如果变量的值为“PARTIAL_JSON”，请运行以下命令取消设置它
-<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="o">@@</span><span class="k">global</span><span class="p">.</span><span class="n">binlog_row_value_options</span><span class="o">=</span><span class="ss">&quot;&quot;</span><span class="w"> </span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="n">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="o">@@</span><span class="k">global</span><span class="p">.</span><span class="n">binlog_row_value_options</span><span class="o">=</span><span class="ss">""</span><span class="w"> </span><span class="p">;</span>
 </code></pre></div></p>
 <h2 id="synchdb-sqlserver"><strong>为 SynchDB 设置 SQLServer</strong><a class="headerlink" href="#synchdb-sqlserver" title="Permanent link">&para;</a></h2>
 <h3 id="sqlserver-cdc"><strong>在 SQLServer 数据库上启用 CDC</strong><a class="headerlink" href="#sqlserver-cdc" title="Permanent link">&para;</a></h3>
@@ -2558,9 +2558,9 @@ binlog_expire_logs_seconds  = 864000
 <p>为 SynchDB 启用 3 个表<code>customer</code>、<code>district</code> 和 <code>history</code> 以进行捕获：</p>
 <div class="highlight"><pre><span></span><code><span class="n">USE</span><span class="w"> </span><span class="n">MyDB</span>
 <span class="k">GO</span>
-<span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;customer&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">supports_net_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;district&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">supports_net_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;dbo&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;history&#39;</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">supports_net_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'dbo'</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'customer'</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">supports_net_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'dbo'</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'district'</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">supports_net_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">EXEC</span><span class="w"> </span><span class="n">sys</span><span class="p">.</span><span class="n">sp_cdc_enable_table</span><span class="w"> </span><span class="o">@</span><span class="n">source_schema</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'dbo'</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">source_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'history'</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">role_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">@</span><span class="n">supports_net_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="k">GO</span>
 </code></pre></div>
 <h3 id="cdc"><strong>验证用户对 CDC 表的权限</strong><a class="headerlink" href="#cdc" title="Permanent link">&para;</a></h3>
@@ -2585,7 +2585,7 @@ binlog_expire_logs_seconds  = 864000
 
 <span class="w">    </span><span class="k">CONNECT</span><span class="w"> </span><span class="n">sys</span><span class="o">/</span><span class="n">oracle</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">sysdba</span><span class="p">;</span>
 <span class="w">    </span><span class="k">alter</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">db_recovery_file_dest_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="k">G</span><span class="p">;</span>
-<span class="w">    </span><span class="k">alter</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">db_recovery_file_dest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;/opt/oracle/oradata/recovery_area&#39;</span><span class="w"> </span><span class="k">scope</span><span class="o">=</span><span class="n">spfile</span><span class="p">;</span>
+<span class="w">    </span><span class="k">alter</span><span class="w"> </span><span class="k">system</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">db_recovery_file_dest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'/opt/oracle/oradata/recovery_area'</span><span class="w"> </span><span class="k">scope</span><span class="o">=</span><span class="n">spfile</span><span class="p">;</span>
 <span class="w">    </span><span class="n">shutdown</span><span class="w"> </span><span class="k">immediate</span><span class="p">;</span>
 <span class="w">    </span><span class="n">startup</span><span class="w"> </span><span class="n">mount</span><span class="p">;</span>
 <span class="w">    </span><span class="k">alter</span><span class="w"> </span><span class="k">database</span><span class="w"> </span><span class="n">archivelog</span><span class="p">;</span>
@@ -2602,12 +2602,12 @@ binlog_expire_logs_seconds  = 864000
 
 <span class="n">sqlplus</span><span class="w"> </span><span class="n">sys</span><span class="o">/</span><span class="n">oracle</span><span class="o">@//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">1521</span><span class="o">/</span><span class="k">FREE</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">sysdba</span>
 
-<span class="w">    </span><span class="k">CREATE</span><span class="w"> </span><span class="n">TABLESPACE</span><span class="w"> </span><span class="n">LOGMINER_TBS</span><span class="w"> </span><span class="n">DATAFILE</span><span class="w"> </span><span class="s1">&#39;/opt/oracle/oradata/FREE/logminer_tbs.dbf&#39;</span><span class="w"> </span><span class="k">SIZE</span><span class="w"> </span><span class="mi">25</span><span class="n">M</span><span class="w"> </span><span class="n">REUSE</span><span class="w"> </span><span class="n">AUTOEXTEND</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">MAXSIZE</span><span class="w"> </span><span class="n">UNLIMITED</span><span class="p">;</span>
+<span class="w">    </span><span class="k">CREATE</span><span class="w"> </span><span class="n">TABLESPACE</span><span class="w"> </span><span class="n">LOGMINER_TBS</span><span class="w"> </span><span class="n">DATAFILE</span><span class="w"> </span><span class="s1">'/opt/oracle/oradata/FREE/logminer_tbs.dbf'</span><span class="w"> </span><span class="k">SIZE</span><span class="w"> </span><span class="mi">25</span><span class="n">M</span><span class="w"> </span><span class="n">REUSE</span><span class="w"> </span><span class="n">AUTOEXTEND</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">MAXSIZE</span><span class="w"> </span><span class="n">UNLIMITED</span><span class="p">;</span>
 <span class="w">    </span><span class="n">exit</span><span class="p">;</span>
 
 <span class="n">sqlplus</span><span class="w"> </span><span class="n">sys</span><span class="o">/</span><span class="n">oracle</span><span class="o">@//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">1521</span><span class="o">/</span><span class="n">FREEPDB1</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">sysdba</span>
 
-<span class="w">    </span><span class="k">CREATE</span><span class="w"> </span><span class="n">TABLESPACE</span><span class="w"> </span><span class="n">LOGMINER_TBS</span><span class="w"> </span><span class="n">DATAFILE</span><span class="w"> </span><span class="s1">&#39;/opt/oracle/oradata/FREE/FREEPDB1/logminer_tbs.dbf&#39;</span><span class="w"> </span><span class="k">SIZE</span><span class="w"> </span><span class="mi">25</span><span class="n">M</span><span class="w"> </span><span class="n">REUSE</span><span class="w"> </span><span class="n">AUTOEXTEND</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">MAXSIZE</span><span class="w"> </span><span class="n">UNLIMITED</span><span class="p">;</span>
+<span class="w">    </span><span class="k">CREATE</span><span class="w"> </span><span class="n">TABLESPACE</span><span class="w"> </span><span class="n">LOGMINER_TBS</span><span class="w"> </span><span class="n">DATAFILE</span><span class="w"> </span><span class="s1">'/opt/oracle/oradata/FREE/FREEPDB1/logminer_tbs.dbf'</span><span class="w"> </span><span class="k">SIZE</span><span class="w"> </span><span class="mi">25</span><span class="n">M</span><span class="w"> </span><span class="n">REUSE</span><span class="w"> </span><span class="n">AUTOEXTEND</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">MAXSIZE</span><span class="w"> </span><span class="n">UNLIMITED</span><span class="p">;</span>
 <span class="w">    </span><span class="n">exit</span><span class="p">;</span>
 
 <span class="n">sqlplus</span><span class="w"> </span><span class="n">sys</span><span class="o">/</span><span class="n">oracle</span><span class="o">@//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">1521</span><span class="o">/</span><span class="k">FREE</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">sysdba</span>
@@ -2702,11 +2702,11 @@ binlog_expire_logs_seconds  = 864000
 <span class="w">    </span><span class="n">CMD</span><span class="w"> </span><span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
 <span class="k">BEGIN</span>
 <span class="w">    </span><span class="k">FOR</span><span class="w"> </span><span class="k">C</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="n">C1</span><span class="w"> </span><span class="n">LOOP</span>
-<span class="w">        </span><span class="n">CMD</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;GRANT SELECT, FLASHBACK ON XDB.X$NM&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">C</span><span class="p">.</span><span class="n">TOKSUF</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39; TO DBZUSER&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">CMD</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">'GRANT SELECT, FLASHBACK ON XDB.X$NM'</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">C</span><span class="p">.</span><span class="n">TOKSUF</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">' TO DBZUSER'</span><span class="p">;</span>
 <span class="w">        </span><span class="k">EXECUTE</span><span class="w"> </span><span class="k">IMMEDIATE</span><span class="w"> </span><span class="n">CMD</span><span class="p">;</span>
-<span class="w">        </span><span class="n">CMD</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;GRANT SELECT, FLASHBACK ON XDB.X$QN&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">C</span><span class="p">.</span><span class="n">TOKSUF</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39; TO DBZUSER&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">CMD</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">'GRANT SELECT, FLASHBACK ON XDB.X$QN'</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">C</span><span class="p">.</span><span class="n">TOKSUF</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">' TO DBZUSER'</span><span class="p">;</span>
 <span class="w">        </span><span class="k">EXECUTE</span><span class="w"> </span><span class="k">IMMEDIATE</span><span class="w"> </span><span class="n">CMD</span><span class="p">;</span>
-<span class="w">        </span><span class="n">CMD</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;GRANT SELECT, FLASHBACK ON XDB.X$PT&#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">C</span><span class="p">.</span><span class="n">TOKSUF</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39; TO DBZUSER&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">CMD</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">'GRANT SELECT, FLASHBACK ON XDB.X$PT'</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">C</span><span class="p">.</span><span class="n">TOKSUF</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">' TO DBZUSER'</span><span class="p">;</span>
 <span class="w">        </span><span class="k">EXECUTE</span><span class="w"> </span><span class="k">IMMEDIATE</span><span class="w"> </span><span class="n">CMD</span><span class="p">;</span>
 <span class="w">    </span><span class="k">END</span><span class="w"> </span><span class="n">LOOP</span><span class="p">;</span>
 <span class="k">END</span><span class="p">;</span>
@@ -2715,48 +2715,48 @@ binlog_expire_logs_seconds  = 864000
 <p>SynchDB 的 OLR 支援基於以下組態範例建置。</p>
 <p><strong>Version 1.3.0</strong>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.3.0&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.3.0"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;alias&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SOURCE&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ORACLE&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;reader&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;online&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DBZUSER&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dbz&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;//ora19c:1521/FREE&quot;</span>
+<span class="w">      </span><span class="nt">"alias"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOURCE"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ORACLE"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"reader"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"online"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DBZUSER"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dbz"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"server"</span><span class="p">:</span><span class="w"> </span><span class="s2">"//ora19c:1521/FREE"</span>
 <span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;json&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;column&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;db&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;interval-dts&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;interval-ytm&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;rid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;timestamp-all&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;scn-all&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">      </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"json"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"column"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"db"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"interval-dts"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"interval-ytm"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"rid"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"schema"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"timestamp-all"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"scn-all"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
 <span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;memory&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;min-mb&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;max-mb&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1024</span>
+<span class="w">      </span><span class="nt">"memory"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"min-mb"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"max-mb"</span><span class="p">:</span><span class="w"> </span><span class="mi">1024</span>
 <span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;filter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">          </span><span class="p">{</span><span class="nt">&quot;owner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DBZUSER&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;.*&quot;</span><span class="p">}</span>
+<span class="w">      </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span><span class="nt">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DBZUSER"</span><span class="p">,</span><span class="w"> </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="s2">".*"</span><span class="p">}</span>
 <span class="w">        </span><span class="p">]</span>
 <span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span>
+<span class="w">      </span><span class="nt">"flags"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">],</span>
-<span class="w">  </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;alias&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SYNCHDB&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SOURCE&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;writer&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;network&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;uri&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.0.0.0:7070&quot;</span>
+<span class="w">      </span><span class="nt">"alias"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SYNCHDB"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOURCE"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"writer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"network"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0.0.0:7070"</span>
 <span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">]</span>
@@ -2764,49 +2764,49 @@ binlog_expire_logs_seconds  = 864000
 </code></pre></div></p>
 <p><strong>Version 1.8.5</strong>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.8.5&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.8.5"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;alias&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SOURCE&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ORACLE&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;reader&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;online&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;user&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DBZUSER&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;password&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dbz&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;server&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;//ora19c:1521/FREE&quot;</span>
+<span class="w">      </span><span class="nt">"alias"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOURCE"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ORACLE"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"reader"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"online"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DBZUSER"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"dbz"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"server"</span><span class="p">:</span><span class="w"> </span><span class="s2">"//ora19c:1521/FREE"</span>
 <span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;json&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;column&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;db&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;interval-dts&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;interval-ytm&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;message&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;rid&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;schema&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;timestamp-all&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;scn-type&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">      </span><span class="nt">"format"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"json"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"column"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"db"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"interval-dts"</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"interval-ytm"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"rid"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"schema"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"timestamp-all"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"scn-type"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
 <span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;memory&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;min-mb&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;max-mb&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;swap-path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;/opt/OpenLogReplicator/olrswap&quot;</span>
+<span class="w">      </span><span class="nt">"memory"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"min-mb"</span><span class="p">:</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"max-mb"</span><span class="p">:</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"swap-path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/opt/OpenLogReplicator/olrswap"</span>
 <span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;filter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">          </span><span class="p">{</span><span class="nt">&quot;owner&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DBZUSER&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;table&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;.*&quot;</span><span class="p">}</span>
+<span class="w">      </span><span class="nt">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span><span class="nt">"owner"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DBZUSER"</span><span class="p">,</span><span class="w"> </span><span class="nt">"table"</span><span class="p">:</span><span class="w"> </span><span class="s2">".*"</span><span class="p">}</span>
 <span class="w">        </span><span class="p">]</span>
 <span class="w">      </span><span class="p">},</span>
-<span class="w">      </span><span class="nt">&quot;flags&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span>
+<span class="w">      </span><span class="nt">"flags"</span><span class="p">:</span><span class="w"> </span><span class="mi">32</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">],</span>
-<span class="w">  </span><span class="nt">&quot;target&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="nt">"target"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;alias&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DEBEZIUM&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SOURCE&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;writer&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;network&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;uri&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0.0.0.0:7070&quot;</span>
+<span class="w">      </span><span class="nt">"alias"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DEBEZIUM"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SOURCE"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"writer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"network"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0.0.0:7070"</span>
 <span class="w">      </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">]</span>

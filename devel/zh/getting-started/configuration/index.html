@@ -2285,16 +2285,16 @@ synchdb.dbz_snapshot_fetch_size=0                                       # 让 De
 synchdb.dbz_min_row_to_stream_results=0                                 # 始终在初始快照期间流式传输结果
 synchdb.dbz_snapshot_thread_num=1                                       # Debezium 初始快照期间的单个线程
 synchdb.dbz_incremental_snapshot_chunk_size=4096                        # 增量快照以 4096 个批次生成更改事件max
-synchdb.dbz_incremental_snapshot_watermarking_strategy=&#39;insert_insert&#39;  # 使用 insert_insert 水印策略
+synchdb.dbz_incremental_snapshot_watermarking_strategy='insert_insert'  # 使用 insert_insert 水印策略
 synchdb.dbz_offset_flush_interval_ms=60000                              # 如果需要，每分钟将偏移数据刷新到磁盘
 synchdb.dbz_capture_only_selected_table_ddl=false                       # Debezium 将仅捕获选定表的模式，而不是所有表
 synchdb.max_connector_workers=false                                     # 最多允许 10 个连接器
-synchdb.error_handling_strategy=&#39;retry&#39;                                 # 连接器应在发生错误时重试
-synchdb.dbz_log_leve=&#39;error&#39;                                            # Debezium Runner 应仅记录错误消息
+synchdb.error_handling_strategy='retry'                                 # 连接器应在发生错误时重试
+synchdb.dbz_log_leve='error'                                            # Debezium Runner 应仅记录错误消息
 synchdb.log_change_on_error=true                                        # 发生错误时记录 JSON 更改事件
 synchdb.cdc_start_delay_ms=30000                                        # 快照完成後等待 30 秒，CDC 開始前等待
-synchdb.olr_snapshot_engine=&quot;fdw&quot;                                       # 使用基於 FDW 的快照引擎完成快照過程
-synchdb.letter_casing_strategy=&quot;asis&quot;                                   # 保留原始檔案中所有物件字母的大小寫。
+synchdb.olr_snapshot_engine="fdw"                                       # 使用基於 FDW 的快照引擎完成快照過程
+synchdb.letter_casing_strategy="asis"                                   # 保留原始檔案中所有物件字母的大小寫。
 </code></pre></div>
 <h2 id="_4"><strong>使用建议</strong><a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <ol>

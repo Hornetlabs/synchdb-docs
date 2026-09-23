@@ -1855,7 +1855,7 @@
 <li>Restart the PostgreSQL server for the changes to take effect</li>
 </ul>
 <p>For example:
-<div class="highlight"><pre><span></span><code>shared_preload_libraries = &#39;synchdb&#39;
+<div class="highlight"><pre><span></span><code>shared_preload_libraries = 'synchdb'
 synchdb.synchdb_auto_launcher = true
 </code></pre></div></p>
 <p>At startup, the SynchDB extension is preloaded early. With <code>synchdb.synchdb_auto_launcher</code> set to true, SynchDB spawns a <code>synchdb_auto_launcher</code> background worker, which in turn spawns one

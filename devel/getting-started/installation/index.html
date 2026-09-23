@@ -2183,9 +2183,9 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">JAVA_PATH</span><span class="o">=</span><span class="k">$(</span>which<span class="w"> </span>java<span class="k">)</span>
-<span class="nv">JRE_HOME_PATH</span><span class="o">=</span><span class="k">$(</span>readlink<span class="w"> </span>-f<span class="w"> </span><span class="si">${</span><span class="nv">JAVA_PATH</span><span class="si">}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s:/bin/java::&#39;</span><span class="k">)</span>
+<span class="nv">JRE_HOME_PATH</span><span class="o">=</span><span class="k">$(</span>readlink<span class="w"> </span>-f<span class="w"> </span><span class="si">${</span><span class="nv">JAVA_PATH</span><span class="si">}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">'s:/bin/java::'</span><span class="k">)</span>
 <span class="nv">JRE_LIB_PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">JRE_HOME_PATH</span><span class="si">}</span>/lib
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$JRE_LIB_PATH</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/ld.so.conf.d/java.conf
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$JRE_LIB_PATH</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/ld.so.conf.d/java.conf
 sudo<span class="w"> </span>ldconfig
 </code></pre></div></td></tr></table></div></p>
 </li>
@@ -2218,9 +2218,9 @@ sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> <
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">JAVA_PATH</span><span class="o">=</span><span class="k">$(</span>which<span class="w"> </span>java<span class="k">)</span>
-<span class="nv">JRE_HOME_PATH</span><span class="o">=</span><span class="k">$(</span>readlink<span class="w"> </span>-f<span class="w"> </span><span class="si">${</span><span class="nv">JAVA_PATH</span><span class="si">}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s:/bin/java::&#39;</span><span class="k">)</span>
+<span class="nv">JRE_HOME_PATH</span><span class="o">=</span><span class="k">$(</span>readlink<span class="w"> </span>-f<span class="w"> </span><span class="si">${</span><span class="nv">JAVA_PATH</span><span class="si">}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">'s:/bin/java::'</span><span class="k">)</span>
 <span class="nv">JRE_LIB_PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">JRE_HOME_PATH</span><span class="si">}</span>/lib
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$JRE_LIB_PATH</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/ld.so.conf.d/java.conf
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$JRE_LIB_PATH</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/ld.so.conf.d/java.conf
 sudo<span class="w"> </span>ldconfig
 </code></pre></div></td></tr></table></div></p>
 </li>
@@ -2243,8 +2243,8 @@ sudo<span class="w"> </span>ldconfig
 <li>
 <p>Find out the lib and share directories of your current PostgreSQL installation
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">LIBDIR</span><span class="o">=</span><span class="k">$(</span>pg_config<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-w<span class="w"> </span>LIBDIR<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-F<span class="w"> </span><span class="s1">&#39; = &#39;</span><span class="w"> </span><span class="s1">&#39;/LIBDIR/ {print $2}&#39;</span><span class="k">)</span>
-<span class="nv">SHAREDIR</span><span class="o">=</span><span class="k">$(</span>pg_config<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-w<span class="w"> </span>SHAREDIR<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-F<span class="w"> </span><span class="s1">&#39; = &#39;</span><span class="w"> </span><span class="s1">&#39;/SHAREDIR/ {print $2}&#39;</span><span class="k">)</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">LIBDIR</span><span class="o">=</span><span class="k">$(</span>pg_config<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-w<span class="w"> </span>LIBDIR<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-F<span class="w"> </span><span class="s1">' = '</span><span class="w"> </span><span class="s1">'/LIBDIR/ {print $2}'</span><span class="k">)</span>
+<span class="nv">SHAREDIR</span><span class="o">=</span><span class="k">$(</span>pg_config<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-w<span class="w"> </span>SHAREDIR<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span>-F<span class="w"> </span><span class="s1">' = '</span><span class="w"> </span><span class="s1">'/SHAREDIR/ {print $2}'</span><span class="k">)</span>
 </code></pre></div></td></tr></table></div></p>
 </li>
 <li>
@@ -2266,9 +2266,9 @@ cp<span class="w"> </span>/tmp/synchdb-1.1-1.ub22.pg16_x86_64.tar.gz/usr/share/p
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nv">JAVA_PATH</span><span class="o">=</span><span class="k">$(</span>which<span class="w"> </span>java<span class="k">)</span>
-<span class="nv">JRE_HOME_PATH</span><span class="o">=</span><span class="k">$(</span>readlink<span class="w"> </span>-f<span class="w"> </span><span class="si">${</span><span class="nv">JAVA_PATH</span><span class="si">}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s:/bin/java::&#39;</span><span class="k">)</span>
+<span class="nv">JRE_HOME_PATH</span><span class="o">=</span><span class="k">$(</span>readlink<span class="w"> </span>-f<span class="w"> </span><span class="si">${</span><span class="nv">JAVA_PATH</span><span class="si">}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">'s:/bin/java::'</span><span class="k">)</span>
 <span class="nv">JRE_LIB_PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">JRE_HOME_PATH</span><span class="si">}</span>/lib
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$JRE_LIB_PATH</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/ld.so.conf.d/java.conf
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$JRE_LIB_PATH</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/ld.so.conf.d/java.conf
 sudo<span class="w"> </span>ldconfig
 </code></pre></div></td></tr></table></div></p>
 </li>
@@ -2366,14 +2366,14 @@ sudo<span class="w"> </span>make<span class="w"> </span><span class="nv">WITH_OL
 <p>Lastly, we also need to tell your system's linker where the newly added Java library (libjvm.so) is located in your system.</p>
 <p><div class="highlight"><pre><span></span><code><span class="c1"># Dynamically set JDK paths</span>
 <span class="nv">JAVA_PATH</span><span class="o">=</span><span class="k">$(</span>which<span class="w"> </span>java<span class="k">)</span>
-<span class="nv">JDK_HOME_PATH</span><span class="o">=</span><span class="k">$(</span>readlink<span class="w"> </span>-f<span class="w"> </span><span class="si">${</span><span class="nv">JAVA_PATH</span><span class="si">}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s:/bin/java::&#39;</span><span class="k">)</span>
+<span class="nv">JDK_HOME_PATH</span><span class="o">=</span><span class="k">$(</span>readlink<span class="w"> </span>-f<span class="w"> </span><span class="si">${</span><span class="nv">JAVA_PATH</span><span class="si">}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">'s:/bin/java::'</span><span class="k">)</span>
 <span class="nv">JDK_LIB_PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">JDK_HOME_PATH</span><span class="si">}</span>/lib
 
 <span class="nb">echo</span><span class="w"> </span><span class="nv">$JDK_LIB_PATH</span>
 <span class="nb">echo</span><span class="w"> </span><span class="nv">$JDK_LIB_PATH</span>/server
 
-sudo<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$JDK_LIB_PATH</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/ld.so.conf.d/x86_64-linux-gnu.conf
-sudo<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$JDK_LIB_PATH</span><span class="s2">/server&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/ld.so.conf.d/x86_64-linux-gnu.conf
+sudo<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$JDK_LIB_PATH</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/ld.so.conf.d/x86_64-linux-gnu.conf
+sudo<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$JDK_LIB_PATH</span><span class="s2">/server"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>-a<span class="w"> </span>/etc/ld.so.conf.d/x86_64-linux-gnu.conf
 </code></pre></div>
 Note, for mac with M1/M2 chips, the linker file is located in /etc/ld.so.conf.d/aarch64-linux-gnu.conf</p>
 <p>Run ldconfig to reload:

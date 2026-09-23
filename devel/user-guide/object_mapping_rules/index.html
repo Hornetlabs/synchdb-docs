@@ -2006,7 +2006,7 @@
 <li><code>destination object</code> represents the table name in PostgreSQL. It can be just a name (default to public schema) or in schema.name format. </li>
 </ul>
 <p>This example maps <code>inventory.customers</code> table in the source database to <code>schema1.people</code> in PostgreSQL.
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="s1">&#39;table&#39;</span><span class="p">,</span><span class="s1">&#39;inventory.customers&#39;</span><span class="p">,</span><span class="s1">&#39;schema1.people&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="s1">'table'</span><span class="p">,</span><span class="s1">'inventory.customers'</span><span class="p">,</span><span class="s1">'schema1.people'</span><span class="p">);</span>
 </code></pre></div></p>
 <h2 id="configure-column-name-mappings"><strong>Configure Column Name Mappings</strong><a class="headerlink" href="#configure-column-name-mappings" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2014,7 +2014,7 @@
 <li><code>destination object</code> represents the column name in PostgreSQL. No need to format it as fully-qualified column name.</li>
 </ul>
 <p>This example maps <code>inventory.customers.email</code> column in the source table to <code>contact</code> in PostgreSQL.
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="s1">&#39;column&#39;</span><span class="p">,</span><span class="s1">&#39;inventory.customers.email&#39;</span><span class="p">,</span><span class="s1">&#39;contact&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="s1">'column'</span><span class="p">,</span><span class="s1">'inventory.customers.email'</span><span class="p">,</span><span class="s1">'contact'</span><span class="p">);</span>
 </code></pre></div></p>
 <h2 id="configure-data-type-mappings"><strong>Configure Data Type Mappings</strong><a class="headerlink" href="#configure-data-type-mappings" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2030,10 +2030,10 @@
 </li>
 </ul>
 <p>This example maps all non-autoincrement <code>point</code> data type to <code>text</code> data type in PostgreSQL.
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="s1">&#39;datatype&#39;</span><span class="p">,</span><span class="s1">&#39;point|false&#39;</span><span class="p">,</span><span class="s1">&#39;text|0&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="s1">'datatype'</span><span class="p">,</span><span class="s1">'point|false'</span><span class="p">,</span><span class="s1">'text|0'</span><span class="p">);</span>
 </code></pre></div></p>
 <p>This example maps the table <code>inventory.geom</code>'s column <code>g</code>'s data type to <code>geometry</code> in PostgreSQL.
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="s1">&#39;datatype&#39;</span><span class="p">,</span><span class="s1">&#39;inventory.geom.g&#39;</span><span class="p">,</span><span class="s1">&#39;geometry|0&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="s1">'datatype'</span><span class="p">,</span><span class="s1">'inventory.geom.g'</span><span class="p">,</span><span class="s1">'geometry|0'</span><span class="p">);</span>
 </code></pre></div></p>
 <h2 id="configure-transform-rules"><strong>Configure Transform Rules</strong><a class="headerlink" href="#configure-transform-rules" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2041,15 +2041,15 @@
 <li><code>destination object</code> represents an expression to be run on the column data before it is applied to PostgreSQL. Use %d as a placeholder for input column data. In case of geometry type, use %w for WKB and %s for SRID. </li>
 </ul>
 <p>This example will prepend '&gt;&gt;&gt;&gt;&gt;' and append '&lt;&lt;&lt;&lt;&lt;' to whatever value SynchDB receives for column 'inventory.products.name'
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="s1">&#39;transform&#39;</span><span class="p">,</span><span class="s1">&#39;inventory.products.name&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;&#39;&gt;&gt;&gt;&gt;&gt;&#39;&#39; || &#39;&#39;%d&#39;&#39; || &#39;&#39;&lt;&lt;&lt;&lt;&lt;&#39;&#39;&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="s1">'transform'</span><span class="p">,</span><span class="s1">'inventory.products.name'</span><span class="p">,</span><span class="s1">'''&gt;&gt;&gt;&gt;&gt;'' || ''%d'' || ''&lt;&lt;&lt;&lt;&lt;'''</span><span class="p">);</span>
 </code></pre></div></p>
 <p>This example will always add 500 to whatever value SynchDB receives for column 'inventory.orders.quantity':
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">,</span><span class="s1">&#39;transform&#39;</span><span class="p">,</span><span class="s1">&#39;inventory.orders.quantity&#39;</span><span class="p">,</span><span class="s1">&#39;%d + 500&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_add_objmap</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">,</span><span class="s1">'transform'</span><span class="p">,</span><span class="s1">'inventory.orders.quantity'</span><span class="p">,</span><span class="s1">'%d + 500'</span><span class="p">);</span>
 </code></pre></div></p>
 <h2 id="apply-the-rules"><strong>Apply the Rules</strong><a class="headerlink" href="#apply-the-rules" title="Permanent link">&para;</a></h2>
 <p>If the connector is not running, the rules are automatically applied at the next startup via <code>synchdb_start_engine_bgw</code>.</p>
 <p>If the connector is already running, the rules are not automatically applied, we have to tell the connector to reload the object mapping rules and apply using utility function <code>synchdb_reload_objmap</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_reload_objmap</span><span class="p">(</span><span class="s1">&#39;mysqlconn&#39;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">synchdb_reload_objmap</span><span class="p">(</span><span class="s1">'mysqlconn'</span><span class="p">);</span>
 </code></pre></div>
 
 
